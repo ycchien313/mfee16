@@ -13,23 +13,6 @@ $en-itim: 'Itim', cursive;
 $en-open-sans: 'Open Sans', sans-serif;
 $box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
 
-:root {
-  --primary-lightpink: #{$primary-lightpink};
-  --primary-lightgreen: #{$primary-lightgreen};
-  --primary-lightgray: #{$primary-lightgray};
-  --primary-lightbrown: #{$primary-lightbrown};
-  --secondary-lightyellow: #{$secondary-lightyellow};
-  --secondary-green: #{$secondary-green};
-  --secondary-green-dark: #{$secondary-green-dark};
-  --accent-red: #{$accent-red};
-  --accent-orange: #{$accent-orange};
-  --zh-tw-maru: #{$zh-tw-maru};
-  --zh-tw-noto: #{$zh-tw-noto};
-  --en-itim: #{$en-itim};
-  --en-open-sans: #{$en-open-sans};
-  --box-shadow: #{$box-shadow};
-}
-
 h1,
 h2,
 h3,
@@ -121,11 +104,6 @@ textarea,
     background-color: darken($accent-orange, 10%);
   }
 }
-
-// @font-face {
-//   font-family: A-OTF Maru Folk Pro;
-//   src: url(../../../public/fonts/A-OTF-MaruFoPro-Regular.otf);
-// }
 
 ul {
   padding-left: 0;

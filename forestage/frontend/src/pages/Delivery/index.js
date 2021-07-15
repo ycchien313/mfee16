@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Delivery() {
-  return <></>
+  return <>123</>
 }
 
 export default Delivery

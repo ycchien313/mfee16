@@ -10,7 +10,7 @@ const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
 const db = require('./utils/db');
 const connection = db.connection;
-const port = 3000;
+const port = 3001;
 
 app.use('/auth', authApi);
 app.use('/comment', commentApi);

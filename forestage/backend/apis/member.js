@@ -19,12 +19,54 @@ const conn = db.connection;
 //         .withMessage('密碼不同，請重新輸入'),
 // ];
 
-/********** 更新密碼 **********/
-router.put('/password/:id', async (req, res) => {
+/********** 查詢詳細訂位資料 **********/
+router.get('/reservation/detail/:id', (req, res) => {});
+
+/********** 查詢訂位資料 **********/
+// router.get('/reservation/:id', async (req, res) => {
+//     console.log('URL:', req.url);
+//     console.log('METHOD:', req.method);
+
+//     const resJson = { status: '失敗', msg: '未輸入訂位代號' };
+
+//     res.status(404).json(resJson);
+//     console.log(resData);
+// });
+
+/********** 查詢訂位資料(未帶有 reservation_id 參數狀況) **********/
+router.get('/reservation/:memberId', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
 
-    const memberId = req.params.id;
+    let resData = null;
+    let dbReservation = null;
+    const memberId = req.params.memberId;
+    const sql =
+        'SELECT res.member_id, reservation_id, DATE_FORMAT(res.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
+        'FROM reservation AS res, seat, singer_calendar, singer ' +
+        'WHERE res.member_id = ? AND res.seat_id = seat.seat_id AND res.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id';
+    await conn
+        .queryAsync(sql, memberId)
+        .then((result) => {
+            dbReservation = result;
+            resData = { status: '成功', data: dbReservation };
+            res.statusCode = 200;
+        })
+        .catch((error) => {
+            res.statusCode = 500;
+            resData = { status: '失敗', msg: error };
+        });
+
+    console.log(resData);
+    res.status(res.statusCode).json(resData);
+});
+
+/********** 更新密碼 **********/
+router.put('/password/:memberId', async (req, res) => {
+    console.log('URL:', req.url);
+    console.log('METHOD:', req.method);
+
+    const memberId = req.params.memberId;
     const reqData = {
         password: '456',
         newPassword: '123',
@@ -34,7 +76,7 @@ router.put('/password/:id', async (req, res) => {
 
     // 新密碼與確認密碼不同
     if (newPassword !== confirmPassword) {
-        resData = "{status: 'fail', msg: '新密碼與確認密碼不一致' }";
+        resData = "{status: '失敗', msg: '新密碼與確認密碼不一致' }";
         console.log(resData);
         res.status(400).send(resData);
     } else {
@@ -60,7 +102,7 @@ router.put('/password/:id', async (req, res) => {
                         .queryAsync(sql, [hash, memberId])
                         .then(() => {
                             resData = {
-                                status: 'success',
+                                status: '成功',
                                 msg: '更新成功',
                             };
                             res.status(200).send(resData);
@@ -72,7 +114,7 @@ router.put('/password/:id', async (req, res) => {
                 }
                 // 輸入密碼與資料庫密碼不一樣
                 else {
-                    resData = "{status: 'fail', msg: '密碼輸入錯誤' }";
+                    resData = "{status: '失敗', msg: '密碼輸入錯誤' }";
                     res.status(400).send();
                 }
                 console.log(resData);
@@ -82,7 +124,7 @@ router.put('/password/:id', async (req, res) => {
 });
 
 /********** 更新會員資料 **********/
-router.put('/profile/:id', async (req, res) => {
+router.put('/profile/:memberId', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
 
@@ -91,7 +133,7 @@ router.put('/profile/:id', async (req, res) => {
 
     let resData = null;
     let sql = null;
-    const memberId = req.params.id;
+    const memberId = req.params.memberId;
     const reqData = {
         name: '鄒安琪',
         birthday: '2000.06.12',
@@ -116,11 +158,11 @@ router.put('/profile/:id', async (req, res) => {
             memberId,
         ])
         .then(() => {
-            resData = { status: 'success', msg: '更新成功' };
+            resData = { status: '成功', msg: '更新成功' };
             res.status(200).send(resData);
         })
         .catch((error) => {
-            resData = { status: 'fail', msg: error };
+            resData = { status: '失敗', msg: error };
             res.status(500).send(resData);
         });
 
@@ -128,36 +170,39 @@ router.put('/profile/:id', async (req, res) => {
 });
 
 /**********  查詢會員資料 **********/
-router.get('/profile/:id', async (req, res) => {
+router.get('/profile/:memberId', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
 
-    const memberId = req.params.id;
+    let resData = null;
+    let dbMember = null;
+    const memberId = req.params.memberId;
     const sql =
-        'SELECT `member_id`, `name`, DATE_FORMAT(birthday, "%Y.%m.%d") AS birthday, `email`, `password`, `mobile`, `address`, `gender`, `vote_valid`, `like_valid`, `avatar`, `valid` FROM `member` WHERE member_id = ?';
-    const dbMember = await conn
+        'SELECT `member_id`, `nam1e`, DATE_FORMAT(birthday, "%Y.%m.%d") AS birthday, `email`, `password`, `mobile`, `address`, `gender`, `vote_valid`, `like_valid`, `avatar`, `valid` FROM `member` WHERE member_id = ?';
+    await conn
         .queryAsync(sql, memberId)
-        .then(() => {
-            resData = { status: 'success', msg: '更新成功' };
-            res.status(200).send(resData);
+        .then((result) => {
+            dbMember = result;
+            resData = { status: '成功', data: dbMember };
+            res.statusCode = 500;
         })
         .catch((error) => {
-            resData = { status: 'fail', msg: error };
-            res.status(500).send(resData);
+            resData = { status: '失敗', msg: error };
+            res.statusCode = 500;
         });
-    const resData = dbMember[0];
 
-    res.status(200).json(resData);
+    res.status(res.statusCode).json(resData);
     console.log(resData);
 });
 
 /********** 查詢會員資料(未帶有 member_id 參數狀況) **********/
 router.get('/profile', (req, res) => {
-    console.log('目前位置:', req.url);
+    console.log('URL:', req.url);
+    console.log('METHOD:', req.method);
 
-    const resJson = { error: '未輸入會員代號' };
+    const resJson = { status: '失敗', msg: '未輸入會員代號' };
 
-    res.status(200).json(resJson);
+    res.status(404).json(resJson);
     console.log(resData);
 });
 

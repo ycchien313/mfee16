@@ -4,6 +4,7 @@ const router = express.Router();
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt'));
 const db = require('../utils/db');
+const { method } = require('bluebird');
 
 const conn = db.connection;
 
@@ -20,31 +21,60 @@ const conn = db.connection;
 // ];
 
 /********** 查詢詳細訂位資料 **********/
-router.get('/reservation/detail/:id', (req, res) => {});
+router.get('/reservation/detail/:memberId/:reservationId', async (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
 
-/********** 查詢訂位資料 **********/
-// router.get('/reservation/:id', async (req, res) => {
-//     console.log('URL:', req.url);
-//     console.log('METHOD:', req.method);
+    let dbReservationDetail = null;
+    const memberId = req.params.memberId;
+    const reservationId = req.params.reservationId;
 
-//     const resJson = { status: '失敗', msg: '未輸入訂位代號' };
+    // 執行 SQL，查詢會員的所有「詳細」訂位資料
+    const sql =
+        'SELECT `member_id`, RES.`reservation_id`, `status`, RES.`date`, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+        'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
+        'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id GROUP BY RDM.dish_id';
+    await conn
+        .queryAsync(sql, [memberId, reservationId])
+        .then((result) => {
+            dbReservationDetail = result;
+            resData = { status: 'success', data: dbReservationDetail };
+            res.statusCode = 200;
+        })
+        .catch((error) => {
+            resData = { status: 'fail', msg: error };
+            res.statusCode = 500;
+        });
 
-//     res.status(404).json(resJson);
-//     console.log(resData);
-// });
+    console.log(resData);
+    res.status(res.statusCode).json(resData);
+});
 
-/********** 查詢訂位資料(未帶有 reservation_id 參數狀況) **********/
-router.get('/reservation/:memberId', async (req, res) => {
+/********** 查詢詳細訂位資料(未帶有 member_id、reservation_id 參數狀況) **********/
+router.get('/reservation/detail', (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
+    resData = { status: '失敗', msg: '未輸入會員及訂位代號' };
+
+    console.log(resData);
+    res.status(400).json(resData);
+});
+
+/********** 查詢近期訂位資料 **********/
+router.get('/reservation/recent/:memberId', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
 
     let resData = null;
     let dbReservation = null;
     const memberId = req.params.memberId;
+
+    // 執行 SQL，查詢近期(今天以後)會員的所有訂位資料
     const sql =
-        'SELECT res.member_id, reservation_id, DATE_FORMAT(res.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
-        'FROM reservation AS res, seat, singer_calendar, singer ' +
-        'WHERE res.member_id = ? AND res.seat_id = seat.seat_id AND res.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id';
+        'SELECT res.member_id, reservation_id, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
+        'FROM reservation AS RES, seat, singer_calendar, singer ' +
+        'WHERE res.member_id = ? AND RES.seat_id = seat.seat_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.date > NOW()';
     await conn
         .queryAsync(sql, memberId)
         .then((result) => {
@@ -59,6 +89,17 @@ router.get('/reservation/:memberId', async (req, res) => {
 
     console.log(resData);
     res.status(res.statusCode).json(resData);
+});
+
+/********** 查詢訂位資料(未帶有 reservation_id 參數狀況) **********/
+router.get('/reservation/recent', async (req, res) => {
+    console.log('URL:', req.url);
+    console.log('METHOD:', req.method);
+
+    const resData = { status: '失敗', msg: '未輸入訂位代號' };
+
+    console.log(resData);
+    res.status(400).json(resData);
 });
 
 /********** 更新密碼 **********/
@@ -202,8 +243,8 @@ router.get('/profile', (req, res) => {
 
     const resJson = { status: '失敗', msg: '未輸入會員代號' };
 
-    res.status(404).json(resJson);
     console.log(resData);
+    res.status(404).json(resJson);
 });
 
 module.exports = router;

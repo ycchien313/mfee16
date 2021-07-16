@@ -266,7 +266,7 @@ button {
 
 #secondScreen h2 {
   text-align: center;
-  font-family: Maru;
+  font-family: $zh-tw-maru;
   padding-top: 45px;
   margin-top: 0;
   margin-bottom: 73px;
@@ -303,7 +303,9 @@ button {
   align-items: center;
 }
 
-.guide-li a {
+.guide-li button {
+  background: none;
+  border: none;
   display: block;
   height: 100px;
   text-decoration: none;
@@ -316,8 +318,8 @@ button {
   transition: 0.3s;
   margin-bottom: 5px;
 }
-.guide-li a h3 {
-  margin-top: 5px;
+.guide-li button h3 {
+  // margin-top: 5px;
   color: $primary-lightbrown;
 }
 .guide-li .li-inner {

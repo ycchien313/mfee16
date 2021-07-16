@@ -1,8 +1,16 @@
 import React from 'react'
-
+import $ from 'jquery'
 function FirstScreen(props) {
-  let LogoBrown = 'http://localhost:3000/images/common/BrownLogo.png'
-  console.log(LogoBrown)
+  // 請求資料
+  $.ajax({
+    url: 'http://localhost:3001/home/singer',
+    method: 'GET',
+    dataType: 'JSON',
+  }).done(function (result) {
+    console.log(result)
+  })
+  //
+
   let FirstScreen = (
     <div id="firstScreen">
       <div className="mask"></div>
@@ -10,10 +18,13 @@ function FirstScreen(props) {
       <div className="mobile-card">
         <div className="mobile-card-title">
           <h1 className="h1">
-            在&ensp;
-            <img className="sloganLogo" src={LogoBrown} alt="Brown" />
+            在
+            <img
+              className="sloganLogo"
+              src="http://localhost:3000/images/common/BrownLogo.png"
+              alt="Brown"
+            />
             來一場
-            <br />
             <span className="spanRed h1">音樂</span>與
             <span className="spanRed h1">美食</span>的饗宴
           </h1>

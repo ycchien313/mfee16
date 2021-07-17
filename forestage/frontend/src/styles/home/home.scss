@@ -130,7 +130,7 @@ button {
   }
   .mobile-card-singer figure img {
     width: 100%;
-    height: center;
+    height: 100%;
     object-fit: cover;
   }
   .today-info {
@@ -176,7 +176,7 @@ button {
 
 .cardBody .singer img {
   width: 100%;
-  height: center;
+  height: 100%;
   object-fit: cover;
 }
 .cardBody .cardInfo {
@@ -656,6 +656,7 @@ button {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 @media screen and (max-width: 768px) {
   .audienceComment {
@@ -666,6 +667,8 @@ button {
   width: 80%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  padding: 10px;
 }
 .commentSide .card-ul {
   width: 100%;
@@ -674,12 +677,13 @@ button {
   padding: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin-bottom: 45px;
 }
 @media screen and (max-width: 768px) {
   .commentSide {
     display: flex;
+    overflow: unset;
   }
   .commentSide .card-ul {
     justify-content: flex-start;
@@ -711,6 +715,7 @@ button {
   height: 344px;
   box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
   border-radius: 25px;
+  margin-right: 25px;
 }
 @media screen and (max-width: 768px) {
   .commentCard {
@@ -776,8 +781,16 @@ button {
   line-height: 30px;
   color: $primary-lightbrown;
 }
+.comment p {
+  height: 20vh;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
 .seeMore {
-  align-self: flex-end;
+  align-self: center;
   /* margin-right: 10%; */
 }
 /* thirdScreen end */

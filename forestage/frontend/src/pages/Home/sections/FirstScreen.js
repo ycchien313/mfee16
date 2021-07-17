@@ -1,16 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
-function FirstScreen(props) {
-  // 請求資料
-  $.ajax({
-    url: 'http://localhost:3001/home/singer',
-    method: 'GET',
-    dataType: 'JSON',
-  }).done(function (result) {
-    console.log(result)
-  })
-  //
 
+function FirstScreen(props) {
+  let { singerName, singerImg } = props
   let FirstScreen = (
     <div id="firstScreen">
       <div className="mask"></div>
@@ -31,13 +23,10 @@ function FirstScreen(props) {
         </div>
         <div className="mobile-card-singer">
           <figure>
-            <img
-              src="http://localhost:3000/images/home/歌手/蕭敬騰.jpg"
-              alt=""
-            />
+            <img src={singerImg} alt="" />
           </figure>
           <div className="today-info">
-            <h3>蕭敬騰</h3>
+            <h3>{singerName}</h3>
             <hr />
             <h4>
               表演時間
@@ -53,13 +42,10 @@ function FirstScreen(props) {
         <div className="cardTitle h2">本日歌手</div>
         <div className="cardBody">
           <figure className="singer">
-            <img
-              src="http://localhost:3000/images/home/歌手/蕭敬騰.jpg"
-              alt=""
-            />
+            <img src={singerImg} alt="" />
           </figure>
           <div className="cardInfo">
-            <h3 className="cardInfoTitle">蕭敬騰</h3>
+            <h3 className="cardInfoTitle">{singerName}</h3>
             <hr />
             <h4 className="cardInfoContent">
               表演時間

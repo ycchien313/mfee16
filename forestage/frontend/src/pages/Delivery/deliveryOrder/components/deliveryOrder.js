@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
+import $ from 'jquery'
 
 function deliveryOrder(props) {
   //折價卷選擇
@@ -17,8 +18,20 @@ function deliveryOrder(props) {
         <div className="top-wave">
           <h1 className="h1 title">外送訂餐</h1>
           <h3 className="h3 title">確認訂單</h3>
-          <img className="wave-1" src="images/top-wave.svg" alt="" />
-          <img className="elfin" src="images/elfin-green.png" alt="" />
+          <img
+            className="wave-1"
+            src={
+              'http://localhost:3000/images/delivery/deliveryOrder/top-wave.svg'
+            }
+            alt=""
+          />
+          <img
+            className="elfin"
+            src={
+              'http://localhost:3000/images/delivery/deliveryOrder/elfin-green.png'
+            }
+            alt=""
+          />
         </div>
       </div>
       <div className="res-check">
@@ -27,7 +40,7 @@ function deliveryOrder(props) {
             <a href="#/" className="prev span">
               外送訂餐
             </a>
-            &nbsp/ &nbsp
+            &nbsp; / &nbsp;
             <a href="#/" className="active span">
               確認訂單
             </a>
@@ -49,7 +62,12 @@ function deliveryOrder(props) {
               <div className="detail">
                 <div className="dish">
                   <figure className="dish-pic">
-                    <img src="images/菜單-瑪格莉特大pizza.jpg" alt="" />
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
+                      }
+                      alt=""
+                    />
                   </figure>
                   <span className="dish-name h4">碳烤豬肋排</span>
                 </div>
@@ -60,7 +78,12 @@ function deliveryOrder(props) {
               <div className="detail">
                 <div className="dish">
                   <figure className="dish-pic">
-                    <img src="images/菜單-瑪格莉特大pizza.jpg" alt="" />
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
+                      }
+                      alt=""
+                    />
                   </figure>
                   <span className="dish-name h4">爆米花</span>
                 </div>
@@ -71,7 +94,12 @@ function deliveryOrder(props) {
               <div className="detail">
                 <div className="dish">
                   <figure className="dish-pic">
-                    <img src="images/菜單-瑪格莉特大pizza.jpg" alt="" />
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
+                      }
+                      alt=""
+                    />
                   </figure>
                   <span className="dish-name h4">瑪格麗特大披薩</span>
                 </div>
@@ -82,7 +110,12 @@ function deliveryOrder(props) {
               <div className="detail">
                 <div className="dish">
                   <figure className="dish-pic">
-                    <img src="images/菜單-瑪格莉特大pizza.jpg" alt="" />
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
+                      }
+                      alt=""
+                    />
                   </figure>
                   <span className="dish-name h4">總匯潛艇堡</span>
                 </div>
@@ -196,12 +229,22 @@ function deliveryOrder(props) {
             </span>
             <div className="buttons">
               <button className="guide-button back">
-                <img src="requireimages/arrow-circle-left-solid.svg" alt="" />
+                <img
+                  src={
+                    'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-left-solid.svg'
+                  }
+                  alt=""
+                />
                 修改訂位
               </button>
-              <button className="guide-button pink">
+              <button className="pink-guide-button">
                 確認送出
-                <img src="images/arrow-circle-right-solid.svg" alt="" />
+                <img
+                  src={
+                    'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
+                  }
+                  alt=""
+                />
               </button>
             </div>
           </div>

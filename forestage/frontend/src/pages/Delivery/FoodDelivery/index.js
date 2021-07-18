@@ -1,10 +1,12 @@
 import React from 'react'
-import Delivery from './components/Delivery'
+import '../../styles/delivery/foodDelivery/order.scss'
+import '../../styles/delivery/foodDelivery/banner.scss'
+import Delivery from './FoodDelivery/components/Delivery'
 
 function index() {
   return (
     <>
-      <Delivery />s
+      <Delivery />
     </>
   )
 }

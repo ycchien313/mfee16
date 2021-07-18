@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
-const moment = require('moment')
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order FROM seat'
@@ -16,12 +15,17 @@ router.get('/singer-calendar', async(req, res)=>{
 })
 
 router.get('/:date', async(req, res)=>{
-    let getReservationSeatTotal = 'SELECT seat_id, attendance FROM reservation WHERE date=? GROUP BY seat_id'
-    let reservationSeatTotal = await db.connection.queryAsync(getReservationSeatTotal,[req.params.date])
+    // let getReservationSeatTotal = 'SELECT seat_id, attendance FROM reservation WHERE date=? GROUP BY seat_id'
+    let getRemainingSeatsSql = 'SELECT s.name, s.seat_number-SUM(r.attendance) AS remainingSeats, s.seat_id FROM reservation r, seat s WHERE date=? AND s.seat_id = r.seat_id GROUP BY seat_id'
+
+    let RemainingSeats = await db.connection.queryAsync(getRemainingSeatsSql,[req.params.date])
     
-    res.send(reservationSeatTotal)
+    res.send(RemainingSeats)
     // console.log(req.params.date)
 })
 
+router.get('/seat', async(req, res)=> {
+    let getSeatInfoSql = ''
+})
 
 module.exports = router;

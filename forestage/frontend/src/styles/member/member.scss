@@ -1,0 +1,554 @@
+@import '../common/global.scss';
+
+header {
+  /* 使header靠上對齊用 */
+  width: 100%;
+  height: 5vw;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/********** 主視覺 **********/
+.hero-section {
+  width: 100%;
+  height: 26.04vw;
+  background-image: url(http://127.0.0.1:3000/images/member/banner-background.svg);
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  /* 波浪靠下對齊用 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+@media screen and (max-width: 768px) {
+  .hero-section {
+    display: none;
+  }
+}
+.hero-section .top-wave {
+  height: 9.9vw;
+  background-image: url('http://127.0.0.1:3000/images/member/banner-wave.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* padding-left: 365px; */
+  padding-left: 19.1vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.hero-section .title {
+  height: 4.5vw;
+  margin-right: 4.16vw;
+  font-family: $zh-tw-maru;
+  color: $primary-lightbrown;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.hero-section .main-title {
+  margin: 0;
+}
+.hero-section .sub-title {
+  margin: 0;
+}
+.hero-section .elfin {
+  width: 5.2vw;
+}
+
+/********** 手機版主視覺 **********/
+.hero-section-md {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .hero-section-md {
+    min-height: 210px;
+    background-image: url(http://127.0.0.1:3000/images/member/banner-background.svg);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .hero-section-md > .hero-container {
+    width: 60vw;
+    min-width: 330px;
+    height: 130px;
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-section-md .hero-content {
+    width: 30vw;
+    min-width: 170px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hero-section-md .elfin {
+    width: 60px;
+    height: 90px;
+  }
+  .hero-section-md .title {
+    color: $primary-lightbrown;
+    font-family: $zh-tw-maru;
+  }
+}
+
+/********** 主畫面 **********/
+.main {
+  width: 100%;
+}
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+@media screen and (max-width: 768px) {
+  .main-container {
+    width: unset;
+    padding: 0 30px;
+    flex-direction: column;
+  }
+}
+
+/********** 左側：導覽列 *********/
+.main .left-side {
+  width: 16.66vw;
+  min-height: 100vh;
+  background-color: #b2d297;
+}
+@media screen and (max-width: 768px) {
+  .main .left-side {
+    display: none;
+  }
+}
+
+.main .left-side .nav {
+  width: 13.02vw;
+  height: 16.66vw;
+  background-color: rgba(255, 255, 255, 80%);
+  border-radius: 1.56vw;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
+  margin: 0 1.82vw;
+  margin-top: 2.6vw;
+  position: sticky;
+  top: 2.6vw;
+  left: 0;
+}
+.main .left-side .nav .nav-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.main .left-side .nav .nav-row a,
+.main .left-side .nav .nav-row .nav-link {
+  margin-left: 2.7vw;
+  text-decoration: none;
+  color: $primary-lightbrown;
+  display: flex;
+  align-items: center;
+}
+.main .left-side .nav .nav-row a.active,
+.main .left-side .nav .nav-row .nav-link.active {
+  color: $secondary-green;
+  cursor: default;
+  pointer-events: none;
+}
+.main .left-side .nav .nav-row a.active path,
+.main .left-side .nav .nav-row .nav-link.active path {
+  fill: $secondary-green;
+}
+.main .left-side .nav .nav-row a:hover,
+.main .left-side .nav .nav-row .nav-link:hover {
+  color: $secondary-green;
+}
+.main .left-side .nav .nav-row a:hover path,
+.main .left-side .nav .nav-row a:active path,
+.main .left-side .nav .nav-row .nav-link:hover path,
+.main .left-side .nav .nav-row .nav-link:active path {
+  fill: $secondary-green;
+}
+.main .left-side .nav .nav-icon {
+  width: 3vw;
+  height: 3vw;
+}
+.main .left-side .nav .nav-title-box {
+  width: 100%;
+  height: 2vw;
+  margin-left: 1vw;
+  border-bottom: 1px solid $primary-lightbrown;
+}
+.main .left-side .nav .nav-title {
+  margin: 0;
+  font-family: $zh-tw-maru;
+}
+@media screen and (max-width: 1200px) {
+  .main .left-side .nav .nav-title {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .main .left-side .nav .nav-title {
+    font-size: 0.8rem;
+  }
+}
+
+/********** 手機版導覽列 **********/
+.nav-md {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .nav-md {
+    display: unset;
+  }
+  .nav-md > .container-md {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav-md ul {
+    margin: 0;
+    padding: 0;
+  }
+  .nav-md a {
+    text-decoration: none;
+  }
+  .nav-md h4 {
+    margin: 22px 0;
+    padding: 10px 5px;
+    color: $primary-lightbrown;
+    font-family: $zh-tw-maru;
+    transition: 0.3s;
+  }
+  .nav-md h4:hover,
+  .nav-md .active {
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
+    color: $primary-lightgreen;
+  }
+}
+
+/********** 右側 *********/
+.right-side {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-right: 8.33vw;
+}
+@media screen and (max-width: 768px) {
+  .right-side {
+    width: unset;
+    padding: 0;
+  }
+}
+
+/********** 右側：麵包屑 *********/
+.right-side .breadcrumb {
+  /* padding: 40px 0 35px 45px; */
+  padding: 2.08vw 0 1.82vw 2.34vw;
+}
+@media screen and (max-width: 768px) {
+  .right-side .breadcrumb {
+    display: none;
+  }
+}
+.right-side .breadcrumb .breadcrumb-list {
+  font-family: $zh-tw-noto;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+}
+.right-side .breadcrumb .list-item {
+  list-style: none;
+}
+.right-side .breadcrumb .list-item:nth-child(1) {
+  color: #ccc;
+}
+.right-side .breadcrumb .list-item:nth-child(1)::after {
+  content: '/';
+  margin: 0 0.52vw;
+}
+.right-side .breadcrumb .list-item:nth-child(2) {
+  color: $secondary-green;
+}
+
+/********** 右側：內容 *********/
+/** 共用部分開始 **/
+.edit-btn,
+.cancel-edit-btn {
+  width: 2.3vw;
+  height: 2.3vw;
+  line-height: 10px;
+  border-radius: 50%;
+  text-align: center;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .edit-btn,
+  .cancel-edit-btn {
+    width: 4vw;
+    height: 4vw;
+    line-height: clamp(24px, 4vw, none);
+    min-width: 24px;
+    min-height: 24px;
+  }
+}
+.edit-pen,
+.cancel-edit {
+  font-size: clamp(16px, 1.5vw, 1.5vw);
+}
+/* table 共同設定開始 */
+.d-none {
+  display: none !important;
+}
+.right-side .table-container {
+  width: 27.86vw;
+  background-color: #fff;
+  border-radius: 1vw;
+}
+@media screen and (max-width: 768px) {
+  .right-side .table-container {
+    width: 100%;
+    border-radius: 10px;
+  }
+}
+.right-side .table-container .info-row:nth-child(1) {
+  height: 45px;
+  background-color: $primary-lightgreen;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.2vw;
+  border-radius: 1vw 1vw 0 0;
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .right-side .table-container .info-row:nth-child(1) {
+    border-radius: 10px 10px 0 0;
+    padding: 0 15px;
+  }
+}
+.right-side .table-container .info-row:not(:nth-child(1)) {
+  color: $primary-lightbrown;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.2vw;
+}
+@media screen and (max-width: 1000px) {
+  .right-side .table-container .info-row:not(:nth-child(1)) {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .right-side .table-container .info-row:not(:nth-child(1)) {
+    font-size: 1rem;
+    padding: 0 15px;
+  }
+}
+.right-side
+  .table-container
+  .info-row:not(:nth-child(1))
+  .info-col:nth-child(1) {
+  /* width: 190px; */
+  width: 18vw;
+}
+@media screen and (max-width: 768px) {
+  .right-side
+    .table-container
+    .info-row:not(:nth-child(1))
+    .info-col:nth-child(1) {
+    width: 200px;
+  }
+}
+.right-side .table-container .info-col:nth-child(2) {
+  /* max-width: 350px; */
+  width: 100%;
+}
+.right-side .table-container input {
+  width: 100%;
+  padding: 5px;
+  margin: 5px 0;
+  border: none;
+  outline: none;
+  text-align: right;
+  font-size: 1rem;
+}
+.right-side .table-container input.active,
+.right-side .table-container textarea.active {
+  border: 1px solid $primary-lightbrown;
+}
+/* table 共同設定結束 */
+/**共用部分結束 **/
+
+.right-side > .content {
+  padding-left: 4.95vw;
+  height: 100%;
+  font-family: $zh-tw-noto;
+}
+@media screen and (max-width: 768px) {
+  .right-side > .content {
+    padding-left: unset;
+  }
+}
+.right-side .content-container {
+  border-radius: 1.56vw;
+  background-color: $primary-lightgray;
+  padding: 3.65vw 2.6vw 4.3vw 2.6vw;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  .right-side .content-container {
+    border-radius: 15px;
+    padding: 20px 10px;
+  }
+}
+.right-side .info-container {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .right-side .info-container {
+    flex-direction: column;
+  }
+}
+/********** 左側：會員照片、個人資料、儲存按鈕 *********/
+.right-side .personal-info-container {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between;  */
+  /* align-items: center; */
+}
+/* 會員照片 */
+.right-side .avatar-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.right-side .content .photo-box {
+  /* width: 240px;
+    height: 300px; */
+  width: 12.5vw;
+  height: 15.63vw;
+  border-radius: 0.52vw;
+  background-color: $primary-lightbrown;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  .right-side .content .photo-box {
+    width: 20vw;
+    height: 25vw;
+    min-width: 96px;
+    min-height: 121px;
+    border-radius: 10px;
+  }
+}
+.right-side .edit-btn,
+.right-side .cancel-edit-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.right-side .photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.right-side .name {
+  margin: 0.52vw 0 1.04vw 0;
+  text-align: center;
+  color: $primary-lightbrown;
+}
+/* 個人資料 */
+.right-side .personal-info-container .table-container .info-row:nth-child(6) {
+  margin: 8px 0;
+  padding-bottom: 15px;
+}
+.right-side .table-container .textarea-container {
+  text-align: right;
+  padding: 8px 5px 8px 1px;
+  word-break: break-all;
+  position: relative;
+  font-size: 1rem;
+}
+.right-side .table-container .textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: right;
+  box-sizing: border-box;
+  resize: none;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  font-size: 1rem;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 8px 5px 8px 1px;
+}
+/* 儲存按鈕 */
+.right-side .save-btn-container {
+  height: 0;
+  position: relative;
+  top: 0.5vw;
+  margin: 0 auto;
+}
+
+/********** 中間分隔線 *********/
+.right-side .vertical-line {
+  width: 2px;
+  line-height: 100%;
+  background-color: #fff;
+}
+/********** 右側登入資料 *********/
+.right-side .signin-info-container {
+  display: flex;
+  flex-direction: column;
+}
+.right-side .signin-info-container::before {
+  content: '';
+  height: calc(15.63vw + 0.52vw + 1.04vw + 1rem + 0.45vw);
+}
+@media screen and (max-width: 768px) {
+  .right-side .signin-info-container::before {
+    height: 50px;
+  }
+}
+.right-side .signin-info-container .table-container .info-row:nth-child(2) {
+  margin: 5px 0;
+  padding-bottom: 15px;
+}
+
+/* 重設密碼、儲存按鈕樣式 */
+.right-side .reset-btn,
+.right-side .save-btn {
+  width: 80px;
+  height: clamp(26px, 1.5vw, 1.5vw);
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .right-side .reset-btn,
+  .right-side .save-btn {
+    width: 60px;
+    font-size: 12px;
+  }
+}
+/********** 不同部份結束 **********/

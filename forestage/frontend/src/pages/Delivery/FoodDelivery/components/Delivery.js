@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import MainMealBox from './MainMealBox'
+import SideBox from './SideBox'
+import DessertBox from './DessertBox'
+import $ from 'jquery'
 
 function Delivery(props) {
   //請選擇送餐時間time
@@ -9,25 +13,54 @@ function Delivery(props) {
   const [dist, inputDist] = useState('')
   //請輸入要外送地址路~號
   const [rd, inputRd] = useState('')
-  //設定餐點狀態
-  const [data, setdata] = useState('')
 
-
+  // 主餐
+  const [main, inputMain] = useState([])
+  // 副餐
+  const [side, inputSide] = useState([])
+  // 甜點
+  const [dessert, inputDessert] = useState([])
   useEffect(() => {
     $.ajax({
-      url: 'http://localhost:3001/delivery/dish',
+      url: 'http://localhost:3001/delivery/dish/main',
       method: 'GET',
       dataType: 'json',
     })
       .then(function (result) {
-        console.log(result)
+        // console.log(result)
         // 抓
-        setdata(result[0].name)
+        // setdata(result[0].name)
+        inputMain(result)
+        // console.log(main)
       })
       .catch(function (err) {
         console.log(err)
       })
-  }, [])
+    //
+    $.ajax({
+      url: 'http://localhost:3001/delivery/dish/side',
+      method: 'GET',
+      dataType: 'json',
+    })
+      .then(function (result) {
+        inputSide(result)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+    //
+    $.ajax({
+      url: 'http://localhost:3001/delivery/dish/dessert',
+      method: 'GET',
+      dataType: 'json',
+    })
+      .then(function (result) {
+        inputDessert(result)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  }, [main, side, dessert])
 
   return (
     <>
@@ -156,93 +189,16 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  <div className="MainMealBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
+                  {main.map(function (v, i) {
+                    return (
+                      <MainMealBox
+                        key={v.dish_id}
+                        name={v.name}
+                        price={v.price}
+                        image_realistic={v.image_realistic}
                       />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="MainMealBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="MainMealBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -256,93 +212,16 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  <div className="SideBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
+                  {side.map(function (v, i) {
+                    return (
+                      <SideBox
+                        key={v.dish_id}
+                        name={v.name}
+                        price={v.price}
+                        image_realistic={v.image_realistic}
                       />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="SideBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="SideBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -356,93 +235,16 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  <div className="DessertBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
+                  {dessert.map(function (v, i) {
+                    return (
+                      <DessertBox
+                        key={v.dish_id}
+                        name={v.name}
+                        price={v.price}
+                        image_realistic={v.image_realistic}
                       />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="DessertBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
-                  <div className="DessertBox">
-                    <img src=" images/sub.png" alt="" className="sub" />
-                    <form
-                      id="myform"
-                      method="POST"
-                      action="#/"
-                      className="button-group"
-                    >
-                      <input
-                        type="button"
-                        value=""
-                        className="minus"
-                        field="quantity"
-                      />
-                      <input
-                        type="text"
-                        name="quantity"
-                        value="0"
-                        className="num"
-                      />
-                      <input
-                        type="button"
-                        value=""
-                        className="plus"
-                        field="quantity"
-                      />
-                    </form>
-                    <p className="food">食物 300$</p>
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
             </div>

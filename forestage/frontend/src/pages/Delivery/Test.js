@@ -3,8 +3,8 @@ import $ from 'jquery'
 
 function Test() {
   // 設定狀態
-  const [data,setdata] = useState()
-  
+  const [data, setdata] = useState()
+
   useEffect(() => {
     $.ajax({
       url: 'http://localhost:3001/delivery/dish',

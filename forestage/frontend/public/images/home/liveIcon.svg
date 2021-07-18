@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="98.525" height="82.566" viewBox="0 0 98.525 82.566">
+  <g id="Group_770" data-name="Group 770" transform="translate(-153 -2162.434)">
+    <path id="Path_11" data-name="Path 11" d="M25.359,5.213c21.833-7.335,44.9-8.464,61.194,6.771S99.775,52.893,93.317,63.9s-22.755,20.6-47.048,18.338S5.986,68.41,1.373,54.021,3.526,12.548,25.359,5.213Z" transform="translate(251.525 2245) rotate(180)" fill="#97bc78"/>
+    <path id="desktop-solid" d="M50.912,0H4.628A4.63,4.63,0,0,0,0,4.628V35.484a4.63,4.63,0,0,0,4.628,4.628H23.142L21.6,44.741H14.656a2.314,2.314,0,1,0,0,4.628H40.884a2.314,2.314,0,1,0,0-4.628H33.941L32.4,40.112H50.912a4.63,4.63,0,0,0,4.628-4.628V4.628A4.63,4.63,0,0,0,50.912,0ZM49.369,33.941H6.171V6.171h43.2Z" transform="translate(174.493 2179.032)" fill="#fff"/>
+    <text id="LIVE" transform="translate(186 2203.683)" fill="#fff" font-size="16" font-family="OpenSans-Regular, Open Sans"><tspan x="0" y="0">LIVE</tspan></text>
+  </g>
+</svg>

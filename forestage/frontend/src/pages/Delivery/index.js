@@ -1,7 +1,12 @@
 import React from 'react'
+import Test from './Test'
 
-function Delivery() {
-  return <>123</>
+function index() {
+  return (
+    <>
+      <Test />
+    </>
+  )
 }
 
-export default Delivery
+export default index

@@ -10,7 +10,10 @@ const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
 const db = require('./utils/db');
 const connection = db.connection;
-const port = 3000;
+const port = 3001;
+// 解決跨域問題，瀏覽器預設會擋住
+const cors = require("cors");
+app.use(cors());
 
 app.use('/auth', authApi);
 app.use('/comment', commentApi);

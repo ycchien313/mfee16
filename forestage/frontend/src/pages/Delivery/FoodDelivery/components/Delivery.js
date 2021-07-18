@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import MainMealBox from './MainMealBox'
-import SideBox from './SideBox'
-import DessertBox from './DessertBox'
+import MainMealBox from '../components/MainMealBox'
+import SideBox from '../components/SideBox'
+import DessertBox from '../components/DessertBox'
+
 import $ from 'jquery'
 
 function Delivery(props) {
@@ -60,7 +61,7 @@ function Delivery(props) {
       .catch(function (err) {
         console.log(err)
       })
-  }, [main, side, dessert])
+  }, [main])
 
   return (
     <>
@@ -100,21 +101,53 @@ function Delivery(props) {
               </div>
             </div>
           </div>
-          <img className="wave-1" src=" images/top-wave.svg" alt="" />
-          <img className="elfin" src=" images/YellowElfin.png" alt="" />
-          <img className="path" src=" images/Path .png" alt="" />
+          <img
+            className="wave-1"
+            src={
+              'http://localhost:3000/images/delivery/FoodDelivery/top-wave.svg'
+            }
+            alt=""
+          />
+          <img
+            className="elfin"
+            src={
+              'http://localhost:3000/images/delivery/FoodDelivery/YellowElfin.png'
+            }
+            alt=""
+          />
+          <img
+            className="path"
+            src={'http://localhost:3000/images/delivery/FoodDelivery/Path .png'}
+            alt=""
+          />
         </div>
         <div className="left-div">
           <div className="map">
             <div className="banner-DialogBox">
               <h3 className="banner-text">請選擇你的位置 !</h3>
             </div>
-            <img src=" images/Taoyuan.png" alt="" className="Taoyuan" />
-            <img src=" images/pin.png" alt="" className="pin" />
+            <img
+              src={
+                'http://localhost:3000/images/delivery/FoodDelivery/Taoyuan.png'
+              }
+              alt=""
+              className="Taoyuan"
+            />
+            <img
+              src={'http://localhost:3000/images/delivery/FoodDelivery/pin.png'}
+              alt=""
+              className="pin"
+            />
           </div>
         </div>
         <div className="right-div">
-          <img className="pinkElfin" src=" images/PinkElfin.png" alt="" />
+          <img
+            className="pinkElfin"
+            src={
+              'http://localhost:3000/images/delivery/FoodDelivery/PinkElfin.png'
+            }
+            alt=""
+          />
           <div className="takeout">
             <div className="takeoutDiv">
               <h3>請輸入您要外送的地址</h3>
@@ -263,7 +296,12 @@ function Delivery(props) {
                 <hr />
               </ul>
             </div>
-            <img src=" images/menu.png" alt="" />
+            <img
+              src={
+                'http://localhost:3000/images/delivery/FoodDelivery/menu.png'
+              }
+              alt=""
+            />
             <input
               type="button"
               value="送出訂單"

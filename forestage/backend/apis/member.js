@@ -4,7 +4,6 @@ const router = express.Router();
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt'));
 const db = require('../utils/db');
-const { method } = require('bluebird');
 
 const conn = db.connection;
 
@@ -20,29 +19,152 @@ const conn = db.connection;
 //         .withMessage('密碼不同，請重新輸入'),
 // ];
 
-/********** 查詢詳細訂位資料 **********/
-router.get('/reservation/detail/:memberId/:reservationId', async (req, res) => {
+/********** 查詢近期外送訂單 **********/
+router.get('/delivery/recent/:memberId', async (req, res, next) => {
+    console.log('URL :', req.url);
+    console.log('METHOD: ', req.method);
+
+    const memberId = req.params.memberId;
+
+    try {
+        // 執行 SQL，查詢該會員近期的外送訂單
+        const sql =
+            'SELECT `member_id`, delivery.`delivery_id`, `delivey_time`, dish_name, COUNT(dish_id) AS dish_count, `total`, delivery.`name`, `address`, `mobile`, `note` ' +
+            'FROM `delivery` ' +
+            'JOIN (SELECT `delivery_id`, dish.name AS dish_name, delivery_dish_mapping.`dish_id`' +
+            'FROM `delivery_dish_mapping` ' +
+            'JOIN dish ' +
+            'ON delivery_dish_mapping.dish_id = dish.dish_id) AS dishToDDM ' +
+            'ON delivery.delivery_id = dishToDDM.delivery_id ' +
+            'WHERE member_id = ? AND delivey_time > NOW() ' +
+            'GROUP BY dish_id';
+        const dbDelivery = await conn.queryAsync(sql, [memberId]);
+        const resData = { status: '成功', data: dbDelivery };
+
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        const resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
+});
+
+/********** 更新(取消)訂位資料 **********/
+router.put('/reservation/cancel/:memberId/:reservationId', async (req, res) => {
     console.log('URL: ', req.url);
     console.log('METHOD: ', req.method);
 
-    let dbReservationDetail = null;
-    const memberId = req.params.memberId;
-    const reservationId = req.params.reservationId;
+    let resData = null;
+    const { memberId, reservationId } = req.params;
 
-    // 執行 SQL，查詢會員的所有「詳細」訂位資料
+    try {
+        // 執行 SQL，更新(取消)訂位資料
+        const sql =
+            'UPDATE `reservation` SET `status`= ? WHERE member_id = ? AND reservation_id = ?';
+        const dbResult = await conn.queryAsync(sql, [
+            '已取消',
+            memberId,
+            reservationId,
+        ]);
+        resData = { status: '成功', msg: '取消訂位成功' };
+
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
+});
+
+/********** 查詢取消訂位需要資料 **********/
+router.get('/reservation/cancel/:memberId/:reservationId', async (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
+    let resData = null;
+    let dbReservationCancel;
+    const { memberId, reservationId } = req.params;
+
+    try {
+        // 執行 SQL，查詢取消訂位需要資料
+        const sql =
+            'SELECT `member_id`, `reservation_id`, `date`, seat.name AS seat_name, attendance ' +
+            'FROM `reservation` AS RES, seat ' +
+            'WHERE member_id = ? AND reservation_id = ? AND RES.seat_id = seat.seat_id';
+        const dbReservationCancel = await conn.queryAsync(sql, [
+            memberId,
+            reservationId,
+        ]);
+
+        resData = { status: '成功', data: dbReservationCancel };
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
+});
+
+/********** 查詢詳細歷史訂位資料 **********/
+router.get(
+    '/reservation/history/detail/:memberId/:reservationId',
+    async (req, res) => {
+        console.log('URL: ', req.url);
+        console.log('METHOD: ', req.method);
+
+        let dbReservationDetail = null;
+        const memberId = req.params.memberId;
+        const reservationId = req.params.reservationId;
+
+        // 執行 SQL，查詢會員的「詳細」訂位資料
+        const sql =
+            'SELECT `member_id`, RES.`reservation_id`, `status`, RES.`date`, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+            'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
+            'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id AND RES.date < NOW() GROUP BY RDM.dish_id';
+        await conn
+            .queryAsync(sql, [memberId, reservationId])
+            .then((result) => {
+                dbReservationDetail = result;
+                resData = { status: '成功', data: dbReservationDetail };
+                res.statusCode = 200;
+            })
+            .catch((error) => {
+                resData = { status: '失敗', msg: error };
+                res.statusCode = 500;
+            });
+
+        console.log(resData);
+        res.status(res.statusCode).json(resData);
+    }
+);
+
+/********** 查詢歷史訂位資料 **********/
+router.get('/reservation/history/:memberId?', async (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
+    let dbReservation = null;
+    let resData = null;
+    const memberId = req.params.memberId;
+
+    // 執行 SQL，查詢歷史(今天以前)訂位資料
     const sql =
-        'SELECT `member_id`, RES.`reservation_id`, `status`, RES.`date`, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
-        'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
-        'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id GROUP BY RDM.dish_id';
+        'SELECT `member_id`, `reservation_id`, `date`, `status` FROM `reservation` WHERE member_id = ? AND date < NOW() ORDER BY date';
     await conn
-        .queryAsync(sql, [memberId, reservationId])
+        .queryAsync(sql, memberId)
         .then((result) => {
-            dbReservationDetail = result;
-            resData = { status: 'success', data: dbReservationDetail };
+            dbReservation = result;
+            resData = { status: '成功', data: dbReservation };
             res.statusCode = 200;
         })
         .catch((error) => {
-            resData = { status: 'fail', msg: error };
+            resData = { status: '失敗', msg: '請確認輸入格式' };
+            console.log('錯誤訊息: ', error);
             res.statusCode = 500;
         });
 
@@ -50,8 +172,41 @@ router.get('/reservation/detail/:memberId/:reservationId', async (req, res) => {
     res.status(res.statusCode).json(resData);
 });
 
-/********** 查詢詳細訂位資料(未帶有 member_id、reservation_id 參數狀況) **********/
-router.get('/reservation/detail', (req, res) => {
+/********** 查詢詳細近期訂位資料 **********/
+router.get(
+    '/reservation/recent/detail/:memberId/:reservationId',
+    async (req, res) => {
+        console.log('URL: ', req.url);
+        console.log('METHOD: ', req.method);
+
+        let dbReservationDetail = null;
+        const memberId = req.params.memberId;
+        const reservationId = req.params.reservationId;
+
+        // 執行 SQL，查詢會員的「詳細」訂位資料
+        const sql =
+            'SELECT `member_id`, RES.`reservation_id`, `status`, RES.`date`, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+            'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
+            'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id AND RES.date > NOW() GROUP BY RDM.dish_id';
+        await conn
+            .queryAsync(sql, [memberId, reservationId])
+            .then((result) => {
+                dbReservationDetail = result;
+                resData = { status: 'success', data: dbReservationDetail };
+                res.statusCode = 200;
+            })
+            .catch((error) => {
+                resData = { status: 'fail', msg: error };
+                res.statusCode = 500;
+            });
+
+        console.log(resData);
+        res.status(res.statusCode).json(resData);
+    }
+);
+
+/********** 查詢詳細近期訂位資料(未帶有 member_id、reservation_id 參數狀況) **********/
+router.get('/reservation/recent/detail', (req, res) => {
     console.log('URL: ', req.url);
     console.log('METHOD: ', req.method);
 
@@ -91,7 +246,7 @@ router.get('/reservation/recent/:memberId', async (req, res) => {
     res.status(res.statusCode).json(resData);
 });
 
-/********** 查詢訂位資料(未帶有 reservation_id 參數狀況) **********/
+/********** 查詢近期訂位資料(未帶有 member_id 參數狀況) **********/
 router.get('/reservation/recent', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
@@ -216,35 +371,24 @@ router.get('/profile/:memberId', async (req, res) => {
     console.log('METHOD:', req.method);
 
     let resData = null;
-    let dbMember = null;
     const memberId = req.params.memberId;
+
     const sql =
-        'SELECT `member_id`, `nam1e`, DATE_FORMAT(birthday, "%Y.%m.%d") AS birthday, `email`, `password`, `mobile`, `address`, `gender`, `vote_valid`, `like_valid`, `avatar`, `valid` FROM `member` WHERE member_id = ?';
-    await conn
-        .queryAsync(sql, memberId)
-        .then((result) => {
-            dbMember = result;
-            resData = { status: '成功', data: dbMember };
-            res.statusCode = 500;
-        })
-        .catch((error) => {
-            resData = { status: '失敗', msg: error };
-            res.statusCode = 500;
-        });
+        'SELECT `member_id`, `name`, DATE_FORMAT(birthday, "%Y.%m.%d") AS birthday, `email`, `password`, `mobile`, `address`, `gender`, `vote_valid`, `like_valid`, `avatar`, `valid` FROM `member` WHERE member_id = ?';
 
-    res.status(res.statusCode).json(resData);
-    console.log(resData);
-});
+    try {
+        // 執行 SQL，查詢會員資料
+        const dbMember = await conn.queryAsync(sql, [memberId]);
+        resData = { status: '成功', data: dbMember };
+        console.log(dbMember);
 
-/********** 查詢會員資料(未帶有 member_id 參數狀況) **********/
-router.get('/profile', (req, res) => {
-    console.log('URL:', req.url);
-    console.log('METHOD:', req.method);
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
 
-    const resJson = { status: '失敗', msg: '未輸入會員代號' };
-
-    console.log(resData);
-    res.status(404).json(resJson);
+        res.status(500).json(resData);
+    }
 });
 
 module.exports = router;

@@ -4,7 +4,7 @@ const db = require('../utils/db')
 const moment = require('moment')
 
 router.get('/seat', async (req, res)=>{
-    let getSeatSql = 'SELECT * FROM seat'
+    let getSeatSql = 'SELECT seat_id, name, minimum_order FROM seat'
     let result = await db.connection.queryAsync(getSeatSql)
     res.json(result)
 })

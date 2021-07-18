@@ -44,15 +44,15 @@ function Main() {
       total,
       note,
       member_id,
-      coupon_id,
+      mcm_id,
       stauts,
     ] = reservationInfo
 
     axios({
       method: 'post',
-      url: 'http://127.0.0.1:3001/reservation/checkout/send/',
+      url: 'http://127.0.0.1:3001/reservation/checkout/send',
       data: {
-        reservationInfo: [
+        reservationInfo: {
           date,
           seat_id,
           attendance,
@@ -61,9 +61,9 @@ function Main() {
           total,
           note,
           member_id,
-          coupon_id,
+          mcm_id,
           stauts,
-        ],
+      },
       },
     }).then(() => {
       console.log('aaa')

@@ -33,11 +33,21 @@ router.get('/checkout/memberInfo', async(req, res)=>{
     res.send(memberInfo)
 })
 
-router.get('/checkout/send', async(req, res)=>{
-
-    let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status) VALUES ("2021-07-31",1,2,"王曉華","0912344455",2000,"我是測試用的備註",1,1,"未完成"); SET last_id_reservation = LAST_INSERT_ID(); INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES (last_id_reservation, 8),(last_id_reservation, 7);'
+router.post('/checkout/send', async(req, res)=>{
+    console.log(req.body.reservationInfo.mcm_id)
+    let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status) VALUES ("2021-07-31",1,2,"王曉華","0912344455",2000,"我是測試用的備註",1,1,"未完成")'
     let reservation = await db.connection.queryAsync(insertReservationSql)
     console.log(reservation)
+
+    let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES (${reservation.insertId}, 8),(${reservation.insertId}, 7)`
+    let insertDish = await db.connection.queryAsync(insertDishSql)
+    console.log(insertDish)
+
+    // 更新mcm表格中，哪一筆訂單使用此折價券
+    let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
+    let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.reservationInfo.mcm_id])
+    console.log(updateMCM)
+
 })
 
 router.get('/:date', async(req, res)=>{

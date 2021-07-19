@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import MainMealBox from '../components/MainMealBox'
 import SideBox from '../components/SideBox'
 import DessertBox from '../components/DessertBox'
+import moment from 'moment'
 
 import $ from 'jquery'
 
@@ -186,7 +187,8 @@ function Delivery(props) {
                   type="date"
                   value={date}
                   className="input"
-                  disableDate
+                  min={moment().format('YYYY-MM-DD')}
+                  // min="2021-07-19"
                   onChange={(event) => {
                     setDate(event.target.value)
                   }}
@@ -198,6 +200,8 @@ function Delivery(props) {
                   type="time"
                   value={time}
                   className="input"
+                  min={moment().format('hh:MM')}
+                  // min="10:00:00"
                   onChange={(event) => {
                     setTime(event.target.value)
                   }}

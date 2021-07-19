@@ -13,8 +13,9 @@ function SideBox(props) {
           <input type="text" name="quantity" value="0" className="num" />
           <input type="button" value="" className="plus" field="quantity" />
         </form>
-        <p className="food">{name}</p>
-        <p className="food">{price}</p>
+        <p className="food">
+          {name}${price}
+        </p>
       </div>
     </>
   )

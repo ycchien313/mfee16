@@ -55,8 +55,8 @@ router.get('/:date', async(req, res)=>{
 
     let remainingSeats = await db.connection.queryAsync(getRemainingSeatsSql,[req.params.date])
     
-    res.send(remainingSeats)
-    // console.log(req.params.date)
+    res.json(remainingSeats)
+    console.log(req.params.date)
 })
 
 

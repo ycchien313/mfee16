@@ -14,12 +14,12 @@ function MealCard(props) {
             alt=""
           />
         </div>
-        <div class="illu-image">
+        {/* <div class="illu-image">
           <img
             src="http://localhost:3000/images/reservation/瑪格莉特大pizza.png"
             alt=""
           />
-        </div>
+        </div> */}
         <div className="button-group">
           <div
             className="minus-button"

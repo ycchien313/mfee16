@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CalendarBig from './Calendar'
 import CalendarSmall from './CalendarSmall'
+import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
-function ChooseDate() {
+function ChooseDate(props) {
+  const { remainingSeat, setRemainingSeat, seatInfo } = props
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
@@ -21,38 +23,22 @@ function ChooseDate() {
           <h3 className="step">選擇餐點</h3>
         </div>
         <div className="weeks">
-          {isTabletOrMobile ? <CalendarSmall /> : <CalendarBig />}
-          <div className="left-seat">
-            <div className="bar-background">
-              <div className="rock-bar"></div>
-              <div className="rock-bar-end"></div>
-              <div className="middle-bar"></div>
-              <div className="middle-bar-end"></div>
-              <div className="back-bar"></div>
-              <div className="back-bar-end"></div>
-            </div>
-            <div className="bar-info">
-              <span className="title">剩餘座位</span>
-              <div className="rock">
-                <div className="circle"></div>
-                <p>
-                  搖滾區 <span>5</span> 席
-                </p>
-              </div>
-              <div className="middle">
-                <div className="circle"></div>
-                <p>
-                  中區 <span>5</span> 席
-                </p>
-              </div>
-              <div className="back">
-                <div className="circle"></div>
-                <p>
-                  後區 <span>5</span> 席
-                </p>
-              </div>
-            </div>
-          </div>
+          {isTabletOrMobile ? (
+            <CalendarSmall
+              remainingSeat={remainingSeat}
+              setRemainingSeat={setRemainingSeat}
+            />
+          ) : (
+            <CalendarBig
+              remainingSeat={remainingSeat}
+              setRemainingSeat={setRemainingSeat}
+            />
+          )}
+          <SeatsBar
+            remainingSeat={remainingSeat}
+            setRemainingSeat={setRemainingSeat}
+            seatInfo={seatInfo}
+          />
         </div>
       </section>
       {/* 滑鼠滾輪 */}

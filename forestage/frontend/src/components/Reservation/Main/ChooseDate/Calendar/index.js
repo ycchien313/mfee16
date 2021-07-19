@@ -1,82 +1,60 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import '../../../../../styles/reservation/res/reservation-date.scss'
+import Day from './day'
 
-function CalendarBig() {
+function CalendarBig(props) {
+  const { remainingSeat, setRemainingSeat } = props
+
+  const [singerCalendar, setSingerCalendar] = useState([])
+
+  function getSingerCalendar() {
+    axios
+      .get('http://127.0.0.1:3001/reservation/singer-calendar')
+      .then((result) => {
+        // console.log(result.data)
+
+        setSingerCalendar(result.data)
+      })
+  }
+
+  useEffect(() => {
+    getSingerCalendar()
+  }, [])
+
   return (
     <>
       <div className="week">
-        <div className="day active">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
+        {singerCalendar.map((v, i) => {
+          if (i < 5) {
+            return (
+              <Day
+                key={v.date}
+                date={v.date}
+                name={v.name}
+                picture={v.picture}
+                remainingSeat={remainingSeat}
+                setRemainingSeat={setRemainingSeat}
+              />
+            )
+          }
+        })}
       </div>
       <div className="week">
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
-        <div className="day">
-          <span className="h4 date">8/10</span>
-          <a href="">
-            <div className="singer-pic"></div>
-          </a>
-          <span className="h4 name">劉德華</span>
-        </div>
+        {singerCalendar.map((v, i) => {
+          if (i >= 5) {
+            return (
+              <Day
+                key={v.date}
+                date={v.date}
+                name={v.name}
+                picture={v.picture}
+                remainingSeat={remainingSeat}
+                setRemainingSeat={setRemainingSeat}
+              />
+            )
+          }
+        })}
       </div>
     </>
   )

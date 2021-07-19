@@ -3,6 +3,7 @@ import '../../styles/reservation/res/reservation.scss'
 import Hero from '../../components/Reservation/Hero'
 import Main from '../../components/Reservation/Main/'
 import Header from '../../components/Header'
+// import Footer from '../../components/Footer'
 
 function Reservation() {
   return (

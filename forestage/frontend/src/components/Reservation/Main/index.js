@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ChooseDate from './ChooseDate'
 import ChooseSeat from './ChooseSeat'
@@ -6,22 +6,13 @@ import ChooseMeal from './ChooseMeal'
 import CheckList from './CheckList'
 
 function Main() {
+  const [seatInfo, setSeatInfo] = useState({})
+  const [remainingSeat, setRemainingSeat] = useState()
   useEffect(() => {
-    // axios
-    //   .get('http://localhost:3001/reservation/2021-07-18', {
-    //     params: {
-    //       ID: 12345,
-    //     },
-    //   })
-    //   .then(function (response) {
-    //     console.log(response)
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error)
-    //   })
-    //   .then(function () {
-    //     // always executed
-    //   })
+    axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
+      console.log(result.data)
+      setSeatInfo(result.data)
+    })
 
     let reservationInfo = [
       '2021-07-31',
@@ -48,33 +39,37 @@ function Main() {
       stauts,
     ] = reservationInfo
 
-    axios({
-      method: 'post',
-      url: 'http://127.0.0.1:3001/reservation/checkout/send',
-      data: {
-        reservationInfo: {
-          date,
-          seat_id,
-          attendance,
-          name,
-          mobile,
-          total,
-          note,
-          member_id,
-          mcm_id,
-          stauts,
-      },
-      },
-    }).then(() => {
-      console.log('aaa')
-    })
+    // axios({
+    //   method: 'post',
+    //   url: 'http://127.0.0.1:3001/reservation/checkout/send',
+    //   data: {
+    //     reservationInfo: {
+    //       date,
+    //       seat_id,
+    //       attendance,
+    //       name,
+    //       mobile,
+    //       total,
+    //       note,
+    //       member_id,
+    //       mcm_id,
+    //       stauts,
+    //   },
+    //   },
+    // }).then(() => {
+    //   console.log('aaa')
+    // })
   }, [])
   return (
     <>
       <main>
         <div class="container-big">
           <article class="main-article">
-            <ChooseDate />
+            <ChooseDate
+              remainingSeat={remainingSeat}
+              setRemainingSeat={setRemainingSeat}
+              seatInfo={seatInfo}
+            />
             <ChooseSeat />
             <ChooseMeal />
           </article>

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../styles/member/member.scss'
+import '../../../styles/member/profile.scss'
 import Banner from './Banner'
 import Main from './Main/'
 

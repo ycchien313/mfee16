@@ -48,7 +48,6 @@ function Aside() {
             inlineSvg.getAttribute('height') &&
             inlineSvg.getAttribute('width')
           ) {
-            console.log(1)
             inlineSvg.setAttribute(
               'viewBox',
               '0 0 ' +
@@ -61,7 +60,7 @@ function Aside() {
           // 將新的 svg 取代原本的 img
           img.parentNode.replaceChild(inlineSvg, img)
 
-          console.log(inlineSvg)
+          // console.log(inlineSvg)
         })
     })
   }
@@ -151,24 +150,24 @@ function Aside() {
       <nav className="nav-md">
         <ul className="container-md">
           <li>
-            <a href={''}>
+            <Link to={''} class="nav-link">
               <h4 className="active">會員資料</h4>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href={''}>
+            <Link to={''} class="nav-link">
               <h4>我的訂位</h4>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href={''}>
+            <Link to={''} class="nav-link">
               <h4>外送訂單</h4>
-            </a>
+            </Link>
           </li>
           <li>
-            <a href={''}>
+            <Link to={''} class="nav-link">
               <h4>折價券</h4>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

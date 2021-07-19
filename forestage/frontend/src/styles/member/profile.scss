@@ -1,5 +1,26 @@
 @import '../common/global.scss';
 
+@keyframes slidein-hero-section {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slidein-main {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 header {
   /* 使header靠上對齊用 */
   width: 100%;
@@ -20,6 +41,8 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
+  animation: slidein-hero-section 1s;
 }
 @media screen and (max-width: 768px) {
   .hero-section {
@@ -104,6 +127,8 @@ header {
 /********** 主畫面 **********/
 .main {
   width: 100%;
+
+  animation: slidein-main 1s;
 }
 .main-container {
   width: 100%;
@@ -218,7 +243,7 @@ header {
     margin: 0;
     padding: 0;
   }
-  .nav-md a {
+  .nav-md .nav-link {
     text-decoration: none;
   }
   .nav-md h4 {
@@ -226,7 +251,7 @@ header {
     padding: 10px 5px;
     color: $primary-lightbrown;
     font-family: $zh-tw-maru;
-    transition: 0.3s;
+    transition: 0.2s;
   }
   .nav-md h4:hover,
   .nav-md .active {
@@ -284,7 +309,7 @@ header {
 /********** 右側：內容 *********/
 /** 共用部分開始 **/
 .edit-btn,
-.cancel-edit-btn {
+.cancel-btn {
   width: 2.3vw;
   height: 2.3vw;
   line-height: 10px;
@@ -294,7 +319,7 @@ header {
 }
 @media screen and (max-width: 768px) {
   .edit-btn,
-  .cancel-edit-btn {
+  .cancel-btn {
     width: 4vw;
     height: 4vw;
     line-height: clamp(24px, 4vw, none);
@@ -457,7 +482,7 @@ header {
   }
 }
 .right-side .edit-btn,
-.right-side .cancel-edit-btn {
+.right-side .cancel-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -479,6 +504,7 @@ header {
 }
 .right-side .table-container .textarea-container {
   text-align: right;
+  border: 1px solid transparent;
   padding: 8px 5px 8px 1px;
   word-break: break-all;
   position: relative;

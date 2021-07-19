@@ -21,7 +21,7 @@ function SigninInfo() {
                 {taContainerText}
                 <textarea
                   className="textarea"
-                  readOnly
+                  disabled
                   defaultValue={taValue}
                   onInput={(e) => {
                     setTaValue(e.target.value)
@@ -33,7 +33,7 @@ function SigninInfo() {
             <div className="info-row">
               <div className="info-col">密碼</div>
               <div className="info-col">
-                <input type="text" value="********" readOnly />
+                <input type="text" value="********" disabled />
               </div>
             </div>
           </div>

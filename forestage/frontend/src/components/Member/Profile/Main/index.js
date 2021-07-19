@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
-import '../../../../styles/member/member.scss'
+import React from 'react'
 import Aside from '../Main/Aside'
 import Breadcrumb from './Breadcrumb'
 import PersonalInfo from './PersonalInfo'
 import SigninInfo from './SigninInfo'
 
 function Main() {
-
-  
   return (
     <>
       <main className="main">

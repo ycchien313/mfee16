@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function SigninInfo() {
+  const [taValue, setTaValue] = useState('elfin@elfin.com')
+  const [taContainerText, setTaContainerText] = useState('elfin@elfin.com')
+
   return (
     <>
       <div className="signin-info-container">
@@ -15,10 +18,15 @@ function SigninInfo() {
             <div className="info-row">
               <div className="info-col">帳號 / 電子郵件</div>
               <div className="info-col textarea-container">
+                {taContainerText}
                 <textarea
                   className="textarea"
                   readOnly
-                  defaultValue="elfin@elfin.com"
+                  defaultValue={taValue}
+                  onInput={(e) => {
+                    setTaValue(e.target.value)
+                    setTaContainerText(e.target.value)
+                  }}
                 ></textarea>
               </div>
             </div>

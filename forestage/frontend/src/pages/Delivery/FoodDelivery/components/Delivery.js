@@ -186,6 +186,8 @@ function Delivery(props) {
                   type="date"
                   value={date}
                   className="input"
+                  // DatePicker
+                  // disabledDate={(date) => dateFns.isBefore(date, new Date())}
                   onChange={(event) => {
                     setDate(event.target.value)
                   }}

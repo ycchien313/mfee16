@@ -1,9 +1,7 @@
 @import '../../common/normalize.scss';
 @import '../../common/global.scss';
-/* <!--banner===================================================================================== --> */
 
 .hero-section {
-  // background-image: url(../images/WallPaper.png);
   background-image: url('http://localhost:3000/images/delivery/FoodDelivery/WallPaper.png');
   background-size: cover;
   height: 100vh;
@@ -64,16 +62,12 @@
 
     h3 {
       margin: 0;
-
-      /* padding: 10px; */
       padding: 0.2vw;
       color: $secondary-green-dark;
     }
 
     .input {
       width: 18vw;
-
-      /* height: 34px; */
       height: 2.7vw;
       border: transparent;
     }
@@ -81,13 +75,10 @@
 
   .bottom-wave {
     width: 100%;
-    // background: url(../images/Maskpink.svg) no-repeat;
     background: url('http://localhost:3000/images/delivery/FoodDelivery/Maskpink.svg')
       no-repeat;
     height: 13.43vw;
     background-size: cover;
-
-    /* display: inline-block; */
   }
 
   .h2.title {
@@ -133,10 +124,7 @@
   margin: 0;
   top: 0;
 
-  /* top: calc(1077px - 75vw); */
-
   .Taoyuan {
-    /* width: 462px; */
     width: 42.89vw;
     position: absolute;
     top: 18vh;
@@ -144,7 +132,6 @@
   }
 
   .pin {
-    /* width: 15px; */
     width: 2.69vw;
     position: absolute;
     top: 16.42vw;
@@ -182,25 +169,17 @@
     border-color: #fff #fff transparent transparent;
     border-style: solid solid solid solid;
     transform: rotateY(180deg);
-
-    /* 水平镜像翻转 */
-    /* 設定邊框大小可拼湊出任意形狀的三角形 */
     border-width: 20px 20px;
     bottom: -29px;
-
-    /* 必須指定，才能顯示內容 */
     content: '';
     height: 0px;
     left: 29px;
-
-    /* 必須指定，否則會變梯形 */
     position: absolute;
     width: 0px;
   }
 }
 
 .banner-text {
-  /* padding: 12px 0px 0px 17px; */
   text-align: center;
   color: $secondary-green-dark;
 }
@@ -226,16 +205,9 @@
   position: relative;
   margin: 0;
 
-  /* top: 50vw; */
-  /* top: calc(1077px - 35vw); */
-
   .pinkElfin {
     width: 5.2vw;
     position: absolute;
-
-    /* left: 81.35vw;
-      top: -35.5vw; */
-    /* bottom: 19.5vw; */
     top: 15vh;
     right: 10vw;
   }
@@ -313,7 +285,6 @@
   display: flex;
 
   p {
-    /* padding: 12px 0px 0px 13px; */
     color: $secondary-green-dark;
   }
 }
@@ -341,7 +312,6 @@
 
 @media screen and (max-width: 1400px) and (min-width: 1200px) {
   .slogan .h2.title {
-    /* width: 500px; */
     line-height: 64px;
     right: 8vw;
     top: 2vw;
@@ -356,19 +326,12 @@
     position: relative;
     top: 0px;
 
-    /* height: 0px; */
-
     .takeout {
       display: flex;
       width: 85vw;
-
-      /* width: 600px; */
-      /* height:200px; */
       height: 35vh;
       align-items: center;
       justify-content: center;
-
-      /* padding: 10px; */
       margin: 0px 0px 0 50px;
     }
   }
@@ -379,7 +342,6 @@
     position: absolute;
 
     p {
-      /* font-size: 1px; */
       padding-top: 0px;
     }
   }
@@ -414,17 +376,13 @@
     position: absolute;
     top: -630px;
     left: 25vw;
-
-    /* right: -10px; */
     z-index: 5;
   }
 
   .slogan {
-    /* position: static; */
     display: block;
 
     .bottom-wave {
-      // background: url(../images/rwd-wave.svg) no-repeat;
       background: url('http://localhost:3000/images/delivery/FoodDelivery/rwd-wave.svg')
         no-repeat;
       background-size: 100%;
@@ -437,8 +395,6 @@
 
   .hero-section {
     position: relative;
-
-    /* height: 100vh; */
   }
 
   .top-wave {
@@ -474,5 +430,3 @@
     top: 1vw;
   }
 }
-
-/* <!--banner===================================================================================== --> */

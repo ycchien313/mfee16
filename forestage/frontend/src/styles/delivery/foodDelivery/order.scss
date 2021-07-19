@@ -1,14 +1,9 @@
 @import '../../common/normalize.scss';
 @import '../../common/global.scss';
 /* <!--order===================================================================================== --> */
-
-/* general setting */
-
-
 /*  */
 
 .order {
-  /* height: 380px; */
   display: flex;
 }
 
@@ -38,8 +33,6 @@
 
 .chose {
   text-align: center;
-
-  /* padding-top: 18px; */
   padding-top: 32vh;
   color: $secondary-green-dark;
 }
@@ -60,10 +53,6 @@
   h4 {
     font-family: $zh-tw-maru;
     font-size: 1.5vw;
-
-    /* position: absolute;
-      padding-top: 19.3vh;
-      padding-left: 3vw; */
     z-index: 5;
   }
 
@@ -98,8 +87,6 @@
     justify-content: flex-start;
     overflow: auto;
     margin-top: 30px;
-
-    /* padding: 10px; */
   }
 
   .MainMealBox {
@@ -111,23 +98,25 @@
   width: 14.27vw;
   height: 18.1vw;
   background: $primary-lightgreen;
-
-  /* border-radius: 30px; */
   border-radius: 13%;
   margin: 33px 0 0vw 0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
-
+.sub-border{
+  border-radius: 13% 13% 0 0 ;
+  overflow: hidden;
+  width: 85%;
+  height: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .SideBox {
-  /* width: 274px;
-    height: 335px; */
   width: 14.27vw;
   height: 18.1vw;
   background: $primary-lightgray;
-
-  /* border-radius: 30px; */
   border-radius: 13%;
   margin: 33px 2vw 0vw 36.5px;
   display: flex;
@@ -139,31 +128,25 @@
   width: 14.27vw;
   height: 18.1vw;
   background: $primary-lightpink;
-
-  /* border-radius: 30px; */
   border-radius: 13%;
   margin: 33px 2vw 0vw 36.5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .sub {
-  /* padding: 10px 10px 30px 10px; */
-  padding: 10px 10px 2vh 10px;
-  width: 13.22vw;
-  height: 17.35vw;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .button-group {
   display: flex;
 
-  /* padding-bottom: 1vh; */
-
   .num {
     width: 1.8vw;
-
-    /* height: 3.7vh; */
     height: 1.7vw;
     text-align: center;
     border: 0;
@@ -172,8 +155,6 @@
   }
 
   .plus {
-    /* width: 34px;
-      height: 32px; */
     width: 1.8vw;
     height: 1.7vw;
     border: 1px solid transparent;
@@ -184,9 +165,6 @@
     background-image: url('http://localhost:3000/images/delivery/FoodDelivery/plus-solid.svg');
     background-position: 60% 30%;
     background-repeat: no-repeat;
-
-    /* background-size: contain; */
-    /* font-size: 100px; */
   }
 
   .minus {
@@ -197,12 +175,9 @@
     color: $secondary-green-dark;
     background: $secondary-lightyellow;
     filter: drop-shadow(0px 3px 6px rgba(50, 50, 50, 0.5));
-    // background-image: url(./../../../public/images/delivery/FoodDelivery/minus-solid.svg);
     background-image: url('http://localhost:3000/images/delivery/FoodDelivery/minus-solid.svg');
     background-repeat: no-repeat;
     background-position: 40% 0.4vh;
-
-    /* background-size: contain; */
   }
 }
 
@@ -230,26 +205,15 @@
 
 .OrderGet {
   cursor: pointer;
-
-  /* width: 150px; */
   width: 11.5vw;
-
-  /* height: 50px; */
   height: 8vh;
   border: 1px solid transparent;
   border-radius: 25px;
-
-  /* border-radius: 12vw; */
   color: #fff;
-
-  /* font-size: 20px; */
   font-size: 1.5vw;
   background: $accent-red;
   padding: 10px 21px 13px 0px;
-
-  /* padding: 1vh 21px 1vh 0px; */
   filter: drop-shadow(0px 3px 6px rgba(50, 50, 50, 0.5));
-  // background-image: url(./../../../public/images/delivery/FoodDelivery/arrow-circle-right-solid.png);
   background-image: url('http://localhost:3000/images/delivery/FoodDelivery/arrow-circle-right-solid.png');
   background-repeat: no-repeat;
   background-position: center right;
@@ -271,8 +235,6 @@
     bottom: 50vw;
     width: 14.89vw;
     height: calc(23.33vw + 30px);
-
-    /* background: $secondary-lightyellow; */
     border-radius: 1.04vw;
     box-sizing: border-box;
     padding: 2.7vw 1.97vw;
@@ -341,7 +303,6 @@
     height: 50px;
     border-radius: 25px;
     font-size: 20px;
-    // background-image: url(./../../../public/images/delivery/FoodDelivery/arrow-circle-right-solid.png);
     background-image: url('http://localhost:3000/images/delivery/FoodDelivery/arrow-circle-right-solid.png');
     top: 0;
     left: 0;
@@ -355,14 +316,6 @@
     margin: 0;
   }
 
-  /* .MainMeal-group {
-        white-space: nowrap;
-        overflow-y: auto;
-    }
-    .MainMeal-group::-webkit-scrollbar {
-        display: none;
-    } */
-
   .MainMeal-group,
   .Side-group,
   .Dessert-group {
@@ -370,32 +323,20 @@
     width: 100%;
   }
 
-  /* ---隱藏 */
-  /* .MealBox-group::-webkit-scrollbar {
-        display: none;
-    } */
-
   .wrapper {
     width: calc(100%);
-
-    /* overflow: auto; */
     margin: 0 0px;
   }
 
   .maindiv {
     flex-direction: column;
     justify-content: center;
-
-    /* white-space: nowrap;
-      overflow-y: auto; */
     position: relative;
     margin-bottom: 10px;
   }
 
   .category {
     h4 {
-      /* font-size: 20px; */
-      /* position: absolute; */
       padding-top: 0;
       padding-left: 0;
       z-index: 5;
@@ -409,9 +350,6 @@
 
   .button-group {
     .num {
-      /* width: 1.8vw; */
-      /* height: 3.7vh; */
-      /* height: 1.7vw; */
       width: 34px;
       height: 32px;
       text-align: center;
@@ -443,7 +381,6 @@
   margin: 0 auto;
   width: 8.49vw;
   height: 10vh;
-  // background: url('./../../../public/images/delivery/FoodDelivery/green.png') center top no-repeat;
   background: url('http://localhost:3000/images/delivery/FoodDelivery/green.png')
     center top no-repeat;
   background-size: contain;
@@ -456,7 +393,6 @@
   margin: 0 auto;
   width: 8.49vw;
   height: 10vh;
-  // background: url('./../../../public/images/delivery/FoodDelivery/gray.png') center top no-repeat;
   background: url('http://localhost:3000/images/delivery/FoodDelivery/gray.png')
     center top no-repeat;
   background-size: contain;
@@ -469,7 +405,6 @@
   margin: 0 auto;
   width: 8.49vw;
   height: 10vh;
-  // background: url('./../../../public/images/delivery/FoodDelivery/pink.png') center top no-repeat;
   background: url('http://localhost:3000/images/delivery/FoodDelivery/pink.png')
     center top no-repeat;
   background-size: contain;
@@ -487,7 +422,6 @@
     margin: 0 auto;
     width: 100px;
     height: 40px;
-    // background: url('./../../../public/images/delivery/FoodDelivery/green.png') center top no-repeat;
     background: url('http://localhost:3000/images/delivery/FoodDelivery/green.png')
       center top no-repeat;
     background-size: contain;
@@ -519,8 +453,6 @@
   }
 
   .category-innertext {
-    /* padding-top:10px;
-      padding-left: 10px; */
     padding-top: 10px !important;
     position: relative !important;
     padding-left: 10px !important;
@@ -529,7 +461,6 @@
 }
 
 /*  */
-/* mobile-button setting */
 
 .mobile-order-get,
 .mobile-order {
@@ -541,8 +472,6 @@
     display: block;
   }
 }
-
-/* mobile-order setting */
 
 @media screen and (max-width: 768px) {
   .order {

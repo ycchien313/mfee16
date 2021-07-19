@@ -5,7 +5,9 @@ function MainMealBox(props) {
   return (
     <>
       <div className="MainMealBox">
-        <img src={image_realistic} alt="" className="sub" />
+        <figure className="sub-border">
+          <img src={image_realistic} alt="" className="sub" />
+        </figure>
         <form id="myform" method="POST" action="#/" className="button-group">
           <input type="button" value="" className="minus" field="quantity" />
           <input type="text" name="quantity" value="0" className="num" />

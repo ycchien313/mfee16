@@ -7,6 +7,8 @@ import moment from 'moment'
 import $ from 'jquery'
 
 function Delivery(props) {
+  const [desertBoxTotal, setDesertBoxTotal] = useState('')
+
   //請選擇送餐時間time
   const [time, setTime] = useState('')
   //請選擇送餐時間date
@@ -62,6 +64,8 @@ function Delivery(props) {
       .catch(function (err) {
         console.log(err)
       })
+
+    // console.log(desertBoxTotal)
   }, [main])
 
   return (
@@ -280,6 +284,7 @@ function Delivery(props) {
                         name={v.name}
                         price={v.price}
                         image_realistic={v.image_realistic}
+                        // setDesertBoxTotal={setDesertBoxTotal}
                       />
                     )
                   })}

@@ -310,9 +310,9 @@ header {
 /** 共用部分開始 **/
 .edit-btn,
 .cancel-btn {
-  width: 2.3vw;
-  height: 2.3vw;
-  line-height: 10px;
+  width: clamp(23px, 2.3vw, 2.3vw);
+  height: clamp(23px, 2.3vw, 2.3vw);
+  line-height: 2.3vw;
   border-radius: 50%;
   text-align: center;
   cursor: pointer;
@@ -322,7 +322,7 @@ header {
   .cancel-btn {
     width: 4vw;
     height: 4vw;
-    line-height: clamp(24px, 4vw, none);
+    line-height: 4vw;
     min-width: 24px;
     min-height: 24px;
   }
@@ -448,7 +448,7 @@ header {
   }
 }
 /********** 左側：會員照片、個人資料、儲存按鈕 *********/
-.right-side .personal-info-container {
+.right-side .personal-info-container form {
   display: flex;
   flex-direction: column;
   /* justify-content: space-between;  */

@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react'
 function MealCard(props) {
-  const { id, name, index, setMealCountArr, mealCountArr } = props
+  const { id, name, type, index, setMealCountArr, mealCountArr, imgIllu, imgReal } =
+    props
   useEffect(() => {
     setCountValue(mealCountArr[index])
   }, [mealCountArr])
   const [countValue, setCountValue] = useState('')
+  let imgIlluSrc = 'http://localhost:3000/images/common/food/' + imgReal
+  let imgRealSrc = 'http://localhost:3000/images/common/food/' + imgIllu
   return (
     <>
-      <div className="card maindish" id={`food-${id}`}>
+      <div className={`card ${type}`} id={`food-${id}`}>
         <div className="card-image">
-          <img
-            src="http://localhost:3000/images/reservation/菜單-瑪格莉特大pizza.jpg"
-            alt=""
-          />
+          <img src={imgIlluSrc} alt="" />
         </div>
-        {/* <div class="illu-image">
-          <img
-            src="http://localhost:3000/images/reservation/瑪格莉特大pizza.png"
-            alt=""
-          />
-        </div> */}
+        <div class="illu-image">
+          <img src={imgRealSrc} alt="" />
+        </div>
         <div className="button-group">
           <div
             className="minus-button"

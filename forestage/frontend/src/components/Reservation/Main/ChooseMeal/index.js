@@ -1,10 +1,30 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useEffect } from 'react'
 
 import { useMediaQuery } from 'react-responsive'
 import MealsBig from './MealsBig/'
 import MealsSmall from './MealsSmall/'
+
 function ChooseMeal() {
+  const [dishes, setDishes] = useState([])
+  const [showDishes, setShowDishes] = useState([])
+
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+  const getDishes = async () => {
+    const response = await axios.get('http://127.0.0.1:3001/reservation/dish')
+
+    let initShowDishes = response.data.filter((dish) => {
+      return dish.type === '主餐'
+    })
+    console.log(initShowDishes)
+    setDishes(response.data)
+    setShowDishes(initShowDishes)
+  }
+
+  useEffect(() => {
+    getDishes()
+  }, [])
   return (
     <>
       <section className="choose-meal">
@@ -21,7 +41,16 @@ function ChooseMeal() {
             />
           </div>
         </div>
-        {isTabletOrMobile ? <MealsSmall /> : <MealsBig />}
+        {isTabletOrMobile ? (
+          <MealsSmall dishes={dishes} setDishes={setDishes} />
+        ) : (
+          <MealsBig
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+          />
+        )}
       </section>
     </>
   )

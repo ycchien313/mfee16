@@ -6,12 +6,13 @@ import ChooseMeal from './ChooseMeal'
 import CheckList from './CheckList'
 
 function Main() {
-  const [seatInfo, setSeatInfo] = useState({})
+  const [seatInfo, setSeatInfo] = useState()
   const [remainingSeat, setRemainingSeat] = useState()
   useEffect(() => {
     axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
-      console.log(result.data)
+      // console.log(result.data[0].name)
       setSeatInfo(result.data)
+
     })
 
     let reservationInfo = [

@@ -15,7 +15,7 @@ router.get('/singer-calendar', async(req, res)=>{
 })
 
 router.get('/dish', async(req, res)=> {
-    let getDishSql = 'SELECT dish_id, name, type, price FROM dish'
+    let getDishSql = 'SELECT dish_id, name, type, price, image_realistic, image_illustration FROM dish'
     let dish = await db.connection.queryAsync(getDishSql)
     res.json(dish)
 })

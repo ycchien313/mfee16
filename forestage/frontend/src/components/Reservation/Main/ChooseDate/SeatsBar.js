@@ -1,10 +1,11 @@
 import React from 'react'
 function SeatsBar(props) {
   const { seatInfo, remainingSeat, setRemainingSeat } = props
-  // console.log(seatInfo)
+  // console.log(typeof seatInfo)
+  // console.log(seatInfo, 'seatinfo')
   // console.log(seatInfo[0])
   // console.log(seatInfo[0].name)
-  console.log(remainingSeat)
+  // console.log(remainingSeat)
 
   return (
     <>

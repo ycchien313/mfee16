@@ -11,15 +11,15 @@ function ChooseMeal() {
 
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
 
-  const getDishes = async () => {
-    const response = await axios.get('http://127.0.0.1:3001/reservation/dish')
-
-    let initShowDishes = response.data.filter((dish) => {
-      return dish.type === '主餐'
+  function getDishes() {
+    axios.get('http://127.0.0.1:3001/reservation/dish').then((result) => {
+      let initShowDishes = result.data.filter((dish) => {
+        return dish.type === '主餐'
+      })
+      console.log(initShowDishes)
+      setDishes(result.data)
+      setShowDishes(initShowDishes)
     })
-    console.log(initShowDishes)
-    setDishes(response.data)
-    setShowDishes(initShowDishes)
   }
 
   useEffect(() => {

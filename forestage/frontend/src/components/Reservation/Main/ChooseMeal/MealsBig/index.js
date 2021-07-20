@@ -15,7 +15,6 @@ function MealsBig(props) {
     // 建立一個陣列儲存每筆餐點數量
     let newMealCountArr = new Array(dishes.length).fill(0)
     setMealCountArr(newMealCountArr)
-    console.log('showDishes', showDishes)
   }, [])
 
   useEffect(() => {

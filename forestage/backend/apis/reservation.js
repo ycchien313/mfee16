@@ -4,8 +4,8 @@ const db = require('../utils/db')
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order, seat_number AS totalSeats FROM seat'
-    let Seat = await db.connection.queryAsync(getSeatSql)
-    res.json(Seat)
+    let seat = await db.connection.queryAsync(getSeatSql)
+    res.send(seat)
 })
 
 router.get('/singer-calendar', async(req, res)=>{

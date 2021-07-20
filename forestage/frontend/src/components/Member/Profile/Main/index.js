@@ -1,10 +1,12 @@
 import React from 'react'
-import Aside from '../Main/Aside'
-import Breadcrumb from './Breadcrumb'
+import Aside from '../../Common/Main/Aside'
+import Breadcrumb from '../../Common/Main/Breadcrumb'
 import PersonalInfo from './PersonalInfo'
 import SigninInfo from './SigninInfo'
 
-function Main() {
+function Main(props) {
+  const { pagename } = props
+
   return (
     <>
       <main className="main">
@@ -14,7 +16,7 @@ function Main() {
           {/* <!-- 右側：麵包屑、內容--> */}
           <div className="right-side">
             {/* <!-- 麵包屑 --> */}
-            <Breadcrumb />
+            <Breadcrumb pagename={pagename} />
 
             {/* <!-- 內容 --> */}
             {/* <!-- ********** 不同部份開始 ********** --> */}

@@ -8,10 +8,10 @@ function Member(props) {
   return (
     <Switch>
       <Route path={`${url}/profile`}>
-        <Profile />
+        <Profile pagename="會員資料" />
       </Route>
       <Route exact path={`${url}`}>
-        <Profile />
+        <Profile pagename="會員資料" />
       </Route>
     </Switch>
   )

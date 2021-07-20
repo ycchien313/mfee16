@@ -1,13 +1,15 @@
 import React from 'react'
 
-function Banner() {
+function Banner(props) {
+  const { pagename } = props
+
   return (
     <>
       <section className="hero-section">
         <div className="top-wave">
           <div className="title">
             <h1 className="main-title">會員專區</h1>
-            <h3 className="sub-title">會員資料</h3>
+            <h3 className="sub-title">{pagename}</h3>
           </div>
           <img
             className="elfin"

@@ -1,15 +1,17 @@
 import React from 'react'
 import '../../../styles/member/profile.scss'
-import Banner from './Banner'
+import Banner from '../Common/Banner'
 import Main from './Main/'
 
-function Profile() {
-  document.title = '會員資料'
+function Profile(props) {
+  const { pagename } = props
+
+  document.title = pagename
 
   return (
     <>
-      <Banner />
-      <Main />
+      <Banner pagename={pagename} />
+      <Main pagename={pagename} />
     </>
   )
 }

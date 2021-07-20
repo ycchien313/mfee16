@@ -150,22 +150,22 @@ function Aside() {
       <nav className="nav-md">
         <ul className="container-md">
           <li>
-            <Link to={''} class="nav-link">
+            <Link to={''} className="nav-link">
               <h4 className="active">會員資料</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} class="nav-link">
+            <Link to={''} className="nav-link">
               <h4>我的訂位</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} class="nav-link">
+            <Link to={''} className="nav-link">
               <h4>外送訂單</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} class="nav-link">
+            <Link to={''} className="nav-link">
               <h4>折價券</h4>
             </Link>
           </li>

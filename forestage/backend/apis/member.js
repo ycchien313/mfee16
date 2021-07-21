@@ -263,59 +263,138 @@ router.put('/password/:memberId', async (req, res) => {
     console.log('METHOD:', req.method);
 
     const memberId = req.params.memberId;
-    const reqData = {
-        password: '456',
-        newPassword: '123',
-        confirmPassword: '123',
-    };
-    const { password, newPassword, confirmPassword } = reqData;
+    const reqData = req.body.data;
+    const newPassword = reqData.newPassword;
+
+    // 對新密碼進行加密
+    const hash = await bcrypt.hashAsync(newPassword, 10);
+
+    // 執行SQL，更新密碼
+    const sql = 'UPDATE `member` SET `password`=? WHERE member_id = ?';
+
+    try {
+        const dbResult = await conn.queryAsync(sql, [hash, memberId]);
+
+        if (dbResult) {
+            resData = { status: '成功', data: '更新成功' };
+        } else {
+            resData = { status: '成功', data: '更新失敗' };
+        }
+
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
 
     // 新密碼與確認密碼不同
-    if (newPassword !== confirmPassword) {
-        resData = "{status: '失敗', msg: '新密碼與確認密碼不一致' }";
-        console.log(resData);
-        res.status(400).send(resData);
-    } else {
-        // 執行 SQL，查詢該會員密碼
-        sql = 'SELECT * FROM member WHERE member_id = ?';
+    // if (newPassword !== confirmPassword) {
+    //     resData = "{status: '失敗', msg: '新密碼與確認密碼不一致' }";
+    //     console.log(resData);
+    //     res.status(400).send(resData);
+    // } else {
+    //     // 執行 SQL，查詢該會員密碼
+    //     sql = 'SELECT * FROM member WHERE member_id = ?';
+    //     const dbMember = await conn.queryAsync(sql, [memberId]);
+    //     const dbMemberPassword = dbMember[0].password;
+
+    //     // 對密碼進行加密比對
+    //     await bcrypt.compareAsync(
+    //         password,
+    //         dbMemberPassword,
+    //         async (err, result) => {
+    //             // 輸入密碼與資料庫密碼一樣
+    //             if (result) {
+    //                 // 對新密碼進行加密
+    //                 const hash = await bcrypt.hashAsync(newPassword, 10);
+
+    //                 // 執行SQL，更新密碼
+    //                 sql =
+    //                     'UPDATE `member` SET `password`=? WHERE member_id = ?';
+    //                 await conn
+    //                     .queryAsync(sql, [hash, memberId])
+    //                     .then(() => {
+    //                         resData = {
+    //                             status: '成功',
+    //                             msg: '更新成功',
+    //                         };
+    //                         res.status(200).send(resData);
+    //                     })
+    //                     .catch((error) => {
+    //                         resData = { status: 'fail', msg: error };
+    //                         res.status(500).send(resData);
+    //                     });
+    //             }
+    //             // 輸入密碼與資料庫密碼不一樣
+    //             else {
+    //                 resData = "{status: '失敗', msg: '密碼輸入錯誤' }";
+    //                 res.status(400).send();
+    //             }
+    //             console.log(resData);
+    //         }
+    //     );
+    // }
+});
+
+/********** 比對密碼 **********/
+router.post('/password/:memberId', async (req, res) => {
+    console.log('URL:', req.url);
+    console.log('METHOD:', req.method);
+
+    let resData = null;
+    const memberId = req.params.memberId;
+    const reqData = req.body.data;
+    const oldPassword = reqData.oldPassword;
+
+    const sql = 'SELECT password FROM member WHERE member_id = ?';
+
+    try {
+        // 執行 SQL，查詢 email、密碼
         const dbMember = await conn.queryAsync(sql, [memberId]);
-        const dbMemberPassword = dbMember[0].password;
-
-        // 對密碼進行加密比對
-        await bcrypt.compareAsync(
-            password,
-            dbMemberPassword,
-            async (err, result) => {
-                // 輸入密碼與資料庫密碼一樣
-                if (result) {
-                    // 對新密碼進行加密
-                    const hash = await bcrypt.hashAsync(newPassword, 10);
-
-                    // 執行SQL，更新密碼
-                    sql =
-                        'UPDATE `member` SET `password`=? WHERE member_id = ?';
-                    await conn
-                        .queryAsync(sql, [hash, memberId])
-                        .then(() => {
-                            resData = {
-                                status: '成功',
-                                msg: '更新成功',
-                            };
-                            res.status(200).send(resData);
-                        })
-                        .catch((error) => {
-                            resData = { status: 'fail', msg: error };
-                            res.status(500).send(resData);
-                        });
-                }
-                // 輸入密碼與資料庫密碼不一樣
-                else {
-                    resData = "{status: '失敗', msg: '密碼輸入錯誤' }";
-                    res.status(400).send();
-                }
-                console.log(resData);
+        const dbPassword = dbMember[0].password;
+        await bcrypt.compareAsync(oldPassword, dbPassword, (err, result) => {
+            if (result) {
+                resData = { status: '成功', data: '密碼相符' };
+                res.status(200).json(resData);
+            } else {
+                resData = { status: '成功', data: '密碼不符' };
+                res.status(200).json(resData);
             }
-        );
+
+            console.log(resData);
+        });
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
+
+        res.status(500).json(resData);
+    }
+});
+
+/********** 查詢 email 資料 **********/
+router.get('/email/:memberId', async (req, res) => {
+    console.log('URL:', req.url);
+    console.log('METHOD:', req.method);
+
+    let resData = null;
+    const memberId = req.params.memberId;
+
+    const sql = 'SELECT email FROM `member` WHERE member_id = ?';
+
+    try {
+        // 執行 SQL，查詢 email
+        const dbEmail = await conn.queryAsync(sql, [memberId]);
+        resData = { status: '成功', data: dbEmail };
+        console.log(dbEmail);
+
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
+
+        res.status(500).json(resData);
     }
 });
 
@@ -330,14 +409,7 @@ router.put('/profile/:memberId', async (req, res) => {
     let resData = null;
     let sql = null;
     const memberId = req.params.memberId;
-    const reqData = {
-        name: '鄒安琪',
-        birthday: '2000.06.12',
-        mobile: '0937605949',
-        address: '桃園市楊梅區楊新路92號',
-        gender: '女',
-        avatar: null,
-    };
+    const reqData = req.body.data;
     const { name, birthday, mobile, address, gender, avatar } = reqData;
 
     // 執行 SQL，更新個資
@@ -365,7 +437,7 @@ router.put('/profile/:memberId', async (req, res) => {
     console.log(resData);
 });
 
-/**********  查詢會員資料 **********/
+/********** 查詢會員資料 **********/
 router.get('/profile/:memberId', async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);

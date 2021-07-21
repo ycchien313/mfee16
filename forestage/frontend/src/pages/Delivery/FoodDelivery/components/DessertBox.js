@@ -1,8 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function DessertBox(props) {
-  const { name, price, image_realistic } = props
-  const [total, setTotal] = useState(0)
+  const {
+    index,
+    name,
+    price,
+    image_realistic,
+    counts,
+    setCounts,
+    dishes,
+    setDishes,
+  } = props
 
   return (
     <>
@@ -17,19 +25,16 @@ function DessertBox(props) {
             className="minus"
             field="quantity"
             onClick={() => {
-              if (total > 0) setTotal(total - 1)
+              let newCounts = [...counts]
+              if (newCounts[index] > 0) newCounts[index] = newCounts[index] - 1
+              setCounts(newCounts)
             }}
           />
           <input
             type="text"
             name="quantity"
-            defaultValue={total}
+            value={counts[index]}
             className="num"
-            onChange={(e) => {
-              setTotal(+e.target.value)
-              // setDesertBoxTotal(+e.target.value)
-            }}
-            //
           />
           <input
             type="button"
@@ -37,7 +42,13 @@ function DessertBox(props) {
             className="plus"
             field="quantity"
             onClick={() => {
-              setTotal(total + 1)
+              let newCounts = [...counts]
+              newCounts[index] = newCounts[index] + 1
+              setCounts(newCounts)
+              let newDishes = dishes
+              newDishes[name] = newCounts[index]
+              setDishes(newDishes)
+              console.log(newDishes)
             }}
           />
         </form>

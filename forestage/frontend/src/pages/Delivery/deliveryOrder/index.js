@@ -1,11 +1,11 @@
 import React from 'react'
 import '../../styles/delivery/deliveryOrder/takeout_check.scss'
-import DeliveryOrder from './deliveryOrder/components/DeliveryOrder'
+import deliveryOrder from './deliveryOrder/components/deliveryOrder'
 
 function index() {
   return (
     <>
-      <DeliveryOrder />
+      <deliveryOrder />
     </>
   )
 }

@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
-import $ from 'jquery'
+import Bread from './Bread'
 
-function deliveryOrder(props) {
+function DeliveryOrder(props) {
   //折價卷選擇
   const [selectedOption, setSelectOption] = useState('')
   //姓名輸入
@@ -36,15 +36,7 @@ function deliveryOrder(props) {
       </div>
       <div className="res-check">
         <div className="container-big">
-          <div className="bread-crumb">
-            <a href="#/" className="prev span">
-              外送訂餐
-            </a>
-            &nbsp; / &nbsp;
-            <a href="#/" className="active span">
-              確認訂單
-            </a>
-          </div>
+          <Bread />
           <div className="dish-content">
             <h3>外送訂單內容</h3>
             <hr className="top" />
@@ -254,4 +246,4 @@ function deliveryOrder(props) {
   )
 }
 
-export default deliveryOrder
+export default DeliveryOrder

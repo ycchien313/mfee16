@@ -21,6 +21,10 @@ router.get("/dish/dessert",async function(req,res,next){
     res.send(queryresult)
 } )
 
+router.get("/dish/",async function(req,res,next){
+    let queryresult = await db.connection.queryAsync("SELECT * FROM `dish`")
+    res.send(queryresult)
+} )
 
 
 module.exports = router;

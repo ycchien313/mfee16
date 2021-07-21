@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 function MainMealBox(props) {
-  const { index, name, price, image_realistic, counts, setCounts } = props
-  // const [counts, setCounts] = useState(0)
+  const {
+    index,
+    name,
+    price,
+    image_realistic,
+    counts,
+    setCounts,
+    dishes,
+    setDishes,
+  } = props
+
   return (
     <>
       <div className="MainMealBox">
@@ -18,19 +27,18 @@ function MainMealBox(props) {
             onClick={() => {
               // if (counts > 0) setCounts(counts - 1)
               let newCounts = [...counts]
-              newCounts[index] = newCounts[index] - 1
+              if (newCounts[index] > 0) newCounts[index] = newCounts[index] - 1
               setCounts(newCounts)
-              console.log(newCounts)
             }}
           />
           <input
             type="text"
             name="quantity"
-            defaultValue={counts}
+            value={counts[index]}
             className="num"
             onChange={() => {
-              let newCounts = [...counts]
-              setCounts(newCounts)
+              // let newCounts = [...counts]
+              // setCounts(newCounts)
             }}
             // onChange={(e) => setCounts(+e.target.value)}
             // onChange={() => setCounts(+counts)}
@@ -45,11 +53,12 @@ function MainMealBox(props) {
               let newCounts = [...counts]
               newCounts[index] = newCounts[index] + 1
               setCounts(newCounts)
-              console.log(newCounts)
-
+              let newDishes = dishes
+              newDishes[name] = newCounts[index]
+              setDishes(newDishes)
+              console.log(newDishes)
               // let newCount = counts + 1
               // setCounts(newCount)
-              // console.log(counts)
             }}
           />
         </form>

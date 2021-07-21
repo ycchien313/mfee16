@@ -1,8 +1,8 @@
 import React from 'react'
 
 function Aside(props) {
-  const { name, price } = props
-
+  const { counts, dishes, setDishes } = props
+  // console.log(counts)
   return (
     <>
       <aside className="aside-list">
@@ -13,9 +13,7 @@ function Aside(props) {
                 <h4>目前品項</h4>
               </div>
               <ul>
-                <li>
-                  {name}${price}
-                </li>
+                <li></li>
                 <li>碳烤豬肋排$500</li>
                 <li>總匯潛艇堡$200</li>
                 <hr />

@@ -24,16 +24,42 @@ function Delivery(props) {
   // 甜點
   const [dessert, inputDessert] = useState([])
 
-
   const [counts, setCounts] = useState(Array(3).fill(0))
-  // const [counts, setCounts] = useState(0)
+
+  // 所有餐點(含name、count)
+  // 希望物件，{碳烤豬肋排: 0, 大披薩: 0, ...}
+  const [dishes, setDishes] = useState({})
+
   // 餐點數量+-
-  // const setDishCount = (productIndex, newCount) => {
+  // const setProductItemCount = (productIndex, newCount) => {
   //   let newCounts = [...counts]
   //   newCounts[productIndex] = newCount
   //   setCounts(newCounts)
   // }
+
+  const getDishes = () => {
+    $.ajax({
+      url: 'http://localhost:3001/delivery/dish',
+      method: 'GET',
+      dataType: 'json',
+    })
+      .then(function (result) {
+        console.log(result)
+
+        let newDish = ''
+        result.forEach((dish) => {
+          newDish = { ...newDish, [dish.name]: 0 }
+        })
+        setDishes(newDish)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
+    getDishes()
+
     $.ajax({
       url: 'http://localhost:3001/delivery/dish/main',
       method: 'GET',
@@ -44,7 +70,7 @@ function Delivery(props) {
         // 抓
         // setdata(result[0].name)
         inputMain(result)
-        console.log(result)
+        // console.log(result[0])
       })
       .catch(function (err) {
         console.log(err)
@@ -74,6 +100,10 @@ function Delivery(props) {
         console.log(err)
       })
   }, [])
+
+  // useEffect(() => {
+  //   console.log(dishes)
+  // }, [dishes])
 
   return (
     <>
@@ -106,11 +136,8 @@ function Delivery(props) {
                         image_realistic={v.image_realistic}
                         counts={counts}
                         setCounts={setCounts}
-                        // -
-                        // counts={counts[i]}
-                        // setCounts={(newCount) => {
-                        //   setDishCount(newCount, i)
-                        // }}
+                        dishes={dishes}
+                        setDishes={setDishes}
                       />
                     )
                   })}
@@ -130,10 +157,19 @@ function Delivery(props) {
                   {side.map(function (v, i) {
                     return (
                       <SideBox
-                        key={v.dish_id}
+                        key={i}
+                        index={i}
                         name={v.name}
                         price={v.price}
                         image_realistic={v.image_realistic}
+                        counts={counts}
+                        setCounts={setCounts}
+                        dishes={dishes}
+                        setDishes={setDishes}
+                        // counts={counts[i]}
+                        // setCounts={(newCount) => {
+                        //   setProductItemCount(i, newCount)
+                        // }}
                       />
                     )
                   })}
@@ -153,11 +189,15 @@ function Delivery(props) {
                   {dessert.map(function (v, i) {
                     return (
                       <DessertBox
-                        key={v.dish_id}
+                        kkey={i}
+                        index={i}
                         name={v.name}
                         price={v.price}
                         image_realistic={v.image_realistic}
-                        // setDesertBoxTotal={setDesertBoxTotal}
+                        counts={counts}
+                        setCounts={setCounts}
+                        dishes={dishes}
+                        setDishes={setDishes}
                       />
                     )
                   })}
@@ -166,7 +206,7 @@ function Delivery(props) {
             </div>
           </div>
         </div>
-        <Aside />
+        <Aside counts={counts} dishes={dishes} setDishes={setDishes} />
       </div>
       <div className="mobile-out">
         <input

@@ -26,21 +26,12 @@ function MealCard(props) {
 
   // let activeClassName = `card ${type} active`
 
-
   return (
     <>
-      <div
-        className={`card ${type}`}
-
-        // className={dishCount[id] > 0 ? activeClassName : `card ${type}`}
-        // id={`food-${id}`}
-      >
+      <div className={`card ${type}`}>
         <div className="card-image">
           <img src={imgRealSrc} alt="" />
         </div>
-        {/* <div class="illu-image">
-          <img src={imgIlluSrc} alt="" />
-        </div> */}
         <div className="button-group">
           <div
             className="minus-button"

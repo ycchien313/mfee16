@@ -35,7 +35,6 @@ function MealsBig(props) {
       let newDishCount = {}
       dishes.forEach((item) => {
         newDishCount[item.dish_id] = 0
-        // console.log(newDishCount)
       })
       setDishCount(newDishCount)
     }

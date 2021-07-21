@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import $ from 'jquery'
 function Day(props) {
   const { date, picture, name, remainingSeat, setRemainingSeat } = props
 
@@ -15,9 +16,18 @@ function Day(props) {
     })
   }
 
+  const day = useRef(null)
+  useEffect(() => {
+    $(day.current).on('click', () => {
+      $(day.current).addClass('active')
+      $(day.current).siblings().removeClass('active')
+      $(day.current).parent().siblings().find('.day').removeClass('active')
+    })
+  }, [])
+
   return (
     <>
-      <div className="day">
+      <div className="day" ref={day}>
         <span className="h4 date">{newDate}</span>
         <div
           className="singer-pic"

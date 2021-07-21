@@ -872,26 +872,6 @@
 
 @for $i from 1 through 9 {
   @media screen and (min-width: 1200px) {
-    // 原本位置
-
-    // 新位置
-
-    // #food-#{$i}.card:hover .illu-image {
-
-    // #food-#{$i} .card:hover .illu-image {
-    //   width: 13vw;
-    //   height: 13vw;
-    //   position: absolute;
-    //   top: 21vw;
-    //   transition: 1s;
-    //   z-index: 0;
-
-    //   @if $i==1 {
-    //     left: -$i * 10 + vw;
-    //   } @else {
-    //     left: ($i - 2) * 10 + vw;
-    //   }
-    // }
 
     #food-#{$i}.illu-image.active {
       width: 13vw;
@@ -925,25 +905,13 @@
         left: 29vw;
       }
     }
-    
+
     #food-#{$i}.illu-image img {
       width: 100%;
     }
   }
 }
 
-// @media screen and (max-width: 1200px) {
-//   #food-#{$i} .illu-image {
-//     width: 13vw;
-//     height: 13vw;
-//     position: absolute;
-//     top: 29vw;
-//     left: 0vw;
-//   }
-//   #food-#{$i} .illu-image img {
-//     width: 100%;
-//   }
-// }
 
 /* 滑鼠滾輪動畫 */
 .center-con {

@@ -32,23 +32,9 @@ function Main() {
           : seatInfo[i].totalSeats
 
         // let newId = seatInfo[i].seat_id
-        console.log(seatInfo[i].seat_id, totalSeats)
         newObj[seatInfo[i].seat_id] = totalSeats
-        console.log(newObj)
         setSeatCount(newObj)
       }
-
-      // const rockSeatInfo = [...seatInfo].filter((seat) => {
-      //   return seat.seat_id === 1
-      // })
-      // console.log(rockSeatInfo[0].totalSeats)
-      // const rockSeatRemaining = [...remainingSeat].filter((seat) => {
-      //   return seat.seat_id === 1
-      // })
-      // console.log(rockSeatRemaining[0].remainingSeats)
-      // let newSeatCount =
-      //   rockSeatInfo[0].totalSeats - rockSeatRemaining[0].remainingSeats
-      // setSeatCount({ ...seatCount, 1: newSeatCount})
     }
   }, [remainingSeat])
   let reservationInfo = [
@@ -108,7 +94,11 @@ function Main() {
               seatCount={seatCount}
               setSeatCount={setSeatCount}
             />
-            <ChooseSeat />
+            <ChooseSeat
+              seatInfo={seatInfo}
+              seatCount={seatCount}
+              setSeatCount={setSeatCount}
+            />
             <ChooseMeal />
           </article>
           <aside class="aside-list">

@@ -16,7 +16,6 @@ function SeatsBar(props) {
 
   useEffect(() => {
     setDidMount(true)
-    console.log(seatCount, 'seatCount')
     leftSeat.current.style.display = 'none'
   }, [])
 

@@ -5,7 +5,7 @@ function Day(props) {
 
   // 取月份+日期
   let newDate = [...date]
-  newDate = newDate.slice(5).join('')
+  newDate = newDate.slice(5).join('').replace(/-/g, '/')
 
   let url = `http://localhost:3001/reservation/${date}`
 

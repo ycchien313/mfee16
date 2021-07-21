@@ -1,21 +1,44 @@
 import React, { useState, useEffect } from 'react'
 import MealCard from './MealCard'
+import Spinner from '../../../Spinner'
 
 // 假餐點資料
 
 function MealsBig(props) {
   const { dishes, setDishes, showDishes, setShowDishes } = props
-  const [mealCountArr, setMealCountArr] = useState([])
+  // const [mealCountArr, setMealCountArr] = useState([])
   const [mealType, setMealType] = useState('main')
   const [didMount, setDidMount] = useState(false)
   const [titleToggle, setTitleToggle] = useState([true, false, false])
+  const [loading, setLoading] = useState(false)
+  const [dishCount, setDishCount] = useState({})
 
   useEffect(() => {
     setDidMount(true)
     // 建立一個陣列儲存每筆餐點數量
-    let newMealCountArr = new Array(dishes.length).fill(0)
-    setMealCountArr(newMealCountArr)
+    // let newMealCountArr = new Array(dishes.length).fill(0)
+    // setMealCountArr(newMealCountArr)
   }, [])
+
+  function isLoading() {
+    setLoading(true)
+    setInterval(() => {
+      setLoading(false)
+    }, 1500)
+  }
+
+
+  // WHY?????
+  useEffect(() => {
+    if (didMount) {
+      let newDishCount = {}
+      dishes.forEach((item) => {
+        newDishCount[item.dish_id] = 0
+        // console.log(newDishCount)
+      })
+      setDishCount(newDishCount)
+    }
+  }, [dishes])
 
   useEffect(() => {
     if (didMount) {
@@ -56,6 +79,7 @@ function MealsBig(props) {
           onClick={() => {
             setMealType('main')
             setTitleToggle([true, false, false])
+            isLoading()
           }}
         >
           <h4>主餐</h4>
@@ -69,6 +93,7 @@ function MealsBig(props) {
           onClick={() => {
             setMealType('side')
             setTitleToggle([false, true, false])
+            isLoading()
           }}
         >
           <h4>附餐</h4>
@@ -82,6 +107,7 @@ function MealsBig(props) {
           onClick={() => {
             setMealType('dessert')
             setTitleToggle([false, false, true])
+            isLoading()
           }}
         >
           <h4>甜點</h4>
@@ -91,22 +117,29 @@ function MealsBig(props) {
           />
         </div>
       </div>
+
       <div className="cards">
-        {showDishes.map((v, i) => {
-          return (
-            <MealCard
-              key={v.dish_id}
-              index={i}
-              id={v.dish_id}
-              imgIllu={v.image_illustration}
-              imgReal={v.image_realistic}
-              name={v.name}
-              type={v.type}
-              setMealCountArr={setMealCountArr}
-              mealCountArr={mealCountArr}
-            />
-          )
-        })}
+        {loading ? (
+          <Spinner />
+        ) : (
+          showDishes.map((v, i) => {
+            return (
+              <MealCard
+                key={v.dish_id}
+                index={i}
+                id={v.dish_id}
+                imgIllu={v.image_illustration}
+                imgReal={v.image_realistic}
+                name={v.name}
+                type={v.type}
+                dishCount={dishCount}
+                setDishCount={setDishCount}
+                // setMealCountArr={setMealCountArr}
+                // mealCountArr={mealCountArr}
+              />
+            )
+          })
+        )}
       </div>
     </>
   )

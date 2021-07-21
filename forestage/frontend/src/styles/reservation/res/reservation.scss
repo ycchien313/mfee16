@@ -875,12 +875,16 @@
     // 原本位置
 
     // 新位置
-    #food-#{$i} .illu-image {
+
+    // #food-#{$i}.card:hover .illu-image {
+
+    #food-#{$i}.card:hover .illu-image {
       width: 13vw;
       height: 13vw;
       position: absolute;
       top: 21vw;
       transition: 1s;
+      z-index: 0;
 
       @if $i==1 {
         left: -$i * 10 + vw;
@@ -888,10 +892,31 @@
         left: ($i - 2) * 10 + vw;
       }
     }
-    #food-#{$i}.card:hover .illu-image {
+    #food-#{$i}.card.active .illu-image {
+      width: 13vw;
+      height: 13vw;
+      position: absolute;
+      top: 21vw;
+      transition: 1s;
+      z-index: 0;
+
+
+      @if $i==1 {
+        left: -$i * 10 + vw;
+      } @else {
+        left: ($i - 2) * 10 + vw;
+      }
+    }
+    #food-#{$i} .illu-image {
       top: 0;
       transition: 1s;
       z-index: 0;
+      position: absolute;
+      // width: 13vw;
+      // height: 13vw;
+      width:0;
+      height: 0;
+
 
       @if $i % 3 == 0 {
         left: 45vw;

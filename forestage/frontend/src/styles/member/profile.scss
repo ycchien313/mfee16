@@ -1,3 +1,5 @@
+@import '~bootstrap/scss/bootstrap';
+@import '../member/modal.scss';
 @import '../common/global.scss';
 
 @keyframes slidein-hero-section {
@@ -175,7 +177,7 @@ header {
   justify-content: space-evenly;
 }
 .main .left-side .nav .nav-row a,
-.main .left-side .nav .nav-row .nav-link {
+.main .left-side .nav .nav-row .nav-content {
   margin-left: 2.7vw;
   text-decoration: none;
   color: $primary-lightbrown;
@@ -183,23 +185,23 @@ header {
   align-items: center;
 }
 .main .left-side .nav .nav-row a.active,
-.main .left-side .nav .nav-row .nav-link.active {
+.main .left-side .nav .nav-row .nav-content.active {
   color: $secondary-green;
   cursor: default;
   pointer-events: none;
 }
 .main .left-side .nav .nav-row a.active path,
-.main .left-side .nav .nav-row .nav-link.active path {
+.main .left-side .nav .nav-row .nav-content.active path {
   fill: $secondary-green;
 }
 .main .left-side .nav .nav-row a:hover,
-.main .left-side .nav .nav-row .nav-link:hover {
+.main .left-side .nav .nav-row .nav-content:hover {
   color: $secondary-green;
 }
 .main .left-side .nav .nav-row a:hover path,
 .main .left-side .nav .nav-row a:active path,
-.main .left-side .nav .nav-row .nav-link:hover path,
-.main .left-side .nav .nav-row .nav-link:active path {
+.main .left-side .nav .nav-row .nav-content:hover path,
+.main .left-side .nav .nav-row .nav-content:active path {
   fill: $secondary-green;
 }
 .main .left-side .nav .nav-icon {
@@ -243,7 +245,7 @@ header {
     margin: 0;
     padding: 0;
   }
-  .nav-md .nav-link {
+  .nav-md .nav-content {
     text-decoration: none;
   }
   .nav-md h4 {
@@ -449,10 +451,12 @@ header {
 }
 /********** 左側：會員照片、個人資料、儲存按鈕 *********/
 .right-side .personal-info-container form {
+  height: 100%;
+  // line-height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   /* justify-content: space-between;  */
-  /* align-items: center; */
 }
 /* 會員照片 */
 .right-side .avatar-container {

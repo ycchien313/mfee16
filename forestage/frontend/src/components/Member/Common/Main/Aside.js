@@ -75,7 +75,7 @@ function Aside() {
         <nav className="nav">
           <div className="nav-container">
             <div className="nav-row">
-              <Link to="/member/profile" className="nav-link active">
+              <Link to="/member/profile" className="nav-content active">
                 {/* <a href={''} className="active"> */}
                 <img
                   className="nav-icon"
@@ -92,7 +92,7 @@ function Aside() {
               </Link>
             </div>
             <div className="nav-row">
-              <Link to="/member/profile" className="nav-link">
+              <Link to="/member/profile" className="nav-content">
                 {/* <a href={''}> */}
                 <img
                   className="nav-icon"
@@ -109,7 +109,7 @@ function Aside() {
               </Link>
             </div>
             <div className="nav-row">
-              <Link to="/member/profile" className="nav-link">
+              <Link to="/member/profile" className="nav-content">
                 {/* <a href={''}> */}
                 <img
                   className="nav-icon"
@@ -126,7 +126,7 @@ function Aside() {
               </Link>
             </div>
             <div className="nav-row">
-              <Link to="/member/profile" className="nav-link">
+              <Link to="/member/profile" className="nav-content">
                 {/* <a href={''}> */}
                 <img
                   className="nav-icon"
@@ -150,22 +150,22 @@ function Aside() {
       <nav className="nav-md">
         <ul className="container-md">
           <li>
-            <Link to={''} className="nav-link">
+            <Link to={''} className="nav-content">
               <h4 className="active">會員資料</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} className="nav-link">
+            <Link to={''} className="nav-content">
               <h4>我的訂位</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} className="nav-link">
+            <Link to={''} className="nav-content">
               <h4>外送訂單</h4>
             </Link>
           </li>
           <li>
-            <Link to={''} className="nav-link">
+            <Link to={''} className="nav-content">
               <h4>折價券</h4>
             </Link>
           </li>

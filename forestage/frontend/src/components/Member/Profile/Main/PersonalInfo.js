@@ -9,8 +9,16 @@ function PersonalInfo() {
   const [toggleInput, setToggleInput] = useState(true)
   const [toggleTextarea, setToggleTextarea] = useState(true)
 
-  const [profile, setProfile] = useState([])
-  const [dataLoading, setDataLoading] = useState(true)
+  const [profile, setProfile] = useState({
+    avatar: '',
+    name: '',
+    gender: '',
+    birthday: '',
+    mobile: '',
+    address: '',
+    email: '',
+  })
+  // const [dataLoading, setDataLoading] = useState(true)
   const [didMount, setDidMount] = useState(true)
 
   const memberId = 1
@@ -30,23 +38,44 @@ function PersonalInfo() {
       const response = await profileRequest.get(`${memberId}`)
       const data = response.data
       const status = data.status
+      const profileFields = {
+        avatar: data.data[0].avatar,
+        name: data.data[0].name,
+        gender: data.data[0].gender,
+        birthday: data.data[0].birthday,
+        mobile: data.data[0].mobile,
+        address: data.data[0].address,
+        email: data.data[0].email,
+      }
 
-      status === '成功' ? setProfile(data.data[0]) : new Error(data)
+      status === '成功' ? setProfile(profileFields) : new Error(data)
     } catch (error) {
       console.error(error)
     }
   }
 
   // 更新至 server 的會員資料
-  const updateProfileServer = () => {
-    // profile.name
-  }
+  // const updateProfileServer = () => {
+  //   profile.name
+  // }
 
   // input 編輯後，設定內容至 profile 狀態
   const setProfileFields = (field, value) => {
     let newProfile = profile
-    newProfile.field = value
+    newProfile[field] = value
     setProfile(newProfile)
+  }
+  // const setProfileFields = (e) => {
+  //   let newProfile = { ...profile, [e.target.name]: e.target.value }
+  //   setProfile(newProfile)
+  // }
+
+  const handelSubmit = (e) => {
+    e.preventDefault()
+
+    const data = new FormData(e.target)
+    console.log('handelSubmit data.get:', data.get('gender'))
+    console.log('handelSubmit profile: ', profile.gender)
   }
 
   // componentDidMount
@@ -58,7 +87,7 @@ function PersonalInfo() {
   // componentDidUpdate
   useEffect(() => {
     if (!didMount) {
-      console.log(profile)
+      console.log('didUpdate: ', profile)
 
       // setTimeout(() => {
       //   setDataLoading(false)
@@ -115,7 +144,7 @@ function PersonalInfo() {
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
                 onBlur={(e) => {
-                  setProfileFields(profile.name, e.target.value)
+                  setProfileFields('name', e.target.value)
                 }}
               />
             </div>
@@ -124,6 +153,7 @@ function PersonalInfo() {
             <div className="info-col">性別</div>
             <div className="info-col">
               <input
+                name="gender"
                 type="text"
                 defaultValue={profile.gender}
                 placeholder="男"
@@ -133,7 +163,8 @@ function PersonalInfo() {
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
                 onBlur={(e) => {
-                  setProfileFields(profile.gender, e.target.value)
+                  setProfileFields('gender', e.target.value)
+                  // setProfileFields(e)
                 }}
               />
             </div>
@@ -151,7 +182,7 @@ function PersonalInfo() {
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
                 onBlur={(e) => {
-                  setProfileFields(profile.birthday, e.target.value)
+                  setProfileFields('birthday', e.target.value)
                 }}
               />
             </div>
@@ -169,7 +200,7 @@ function PersonalInfo() {
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
                 onBlur={(e) => {
-                  setProfileFields(profile.mobile, e.target.value)
+                  setProfileFields('mobile', e.target.value)
                 }}
               />
             </div>
@@ -190,7 +221,7 @@ function PersonalInfo() {
                   setTaContainerValue(e.target.value)
                 }}
                 onBlur={(e) => {
-                  setProfileFields(profile.address, e.target.value)
+                  setProfileFields('address', e.target.value)
                 }}
               ></textarea>
             </div>
@@ -203,14 +234,13 @@ function PersonalInfo() {
   return (
     <>
       <div className="personal-info-container">
-        <form>
+        <form onSubmit={handelSubmit}>
           {/* 個人檔案 */}
           {showProfile}
 
           {/* 儲存按鈕 */}
           <div className="save-btn-container">
             <button
-              type="button"
               {...(!toggleBtn
                 ? { className: 'save-btn pink-guide-button' }
                 : { className: 'd-none' })}

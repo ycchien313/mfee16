@@ -12,7 +12,7 @@ function Spinner() {
           shapeRendering: 'auto',
         }}
         width="200px"
-        height="200px"
+        height="270px"
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid"
       >

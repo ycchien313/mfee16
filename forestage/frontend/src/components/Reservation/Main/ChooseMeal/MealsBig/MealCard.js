@@ -6,8 +6,8 @@ function MealCard(props) {
   //   setCountValue(mealCountArr[index])
   // }, [mealCountArr])
   // const [countValue, setCountValue] = useState('')
-  let imgIlluSrc = 'http://localhost:3000/images/common/food/' + imgReal
-  let imgRealSrc = 'http://localhost:3000/images/common/food/' + imgIllu
+  // let imgIlluSrc = 'http://localhost:3000/images/common/food/' + imgIllu
+  let imgRealSrc = 'http://localhost:3000/images/common/food/' + imgReal
 
   function addDishCount(dishId) {
     let newDishCount = { ...dishCount }
@@ -24,22 +24,23 @@ function MealCard(props) {
     setDishCount(newDishCount)
   }
 
-  let activeClassName = `card ${type} active`
+  // let activeClassName = `card ${type} active`
 
 
   return (
     <>
       <div
-        // className={`card ${type}`}
-        className={dishCount[id] > 0 ? activeClassName : `card ${type}`}
-        id={`food-${id}`}
+        className={`card ${type}`}
+
+        // className={dishCount[id] > 0 ? activeClassName : `card ${type}`}
+        // id={`food-${id}`}
       >
         <div className="card-image">
-          <img src={imgIlluSrc} alt="" />
-        </div>
-        <div class="illu-image">
           <img src={imgRealSrc} alt="" />
         </div>
+        {/* <div class="illu-image">
+          <img src={imgIlluSrc} alt="" />
+        </div> */}
         <div className="button-group">
           <div
             className="minus-button"

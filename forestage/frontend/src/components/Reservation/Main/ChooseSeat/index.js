@@ -21,8 +21,8 @@ function ChooseSeat(props) {
     $('.row').on('click', (e) => {
       $(e.target).closest('.row').addClass('active')
       $(e.target).closest('.row').siblings().removeClass('active')
-      console.log('ck')
     })
+
   }, [])
 
   useEffect(() => {

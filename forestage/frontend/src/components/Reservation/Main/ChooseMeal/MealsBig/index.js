@@ -13,6 +13,8 @@ function MealsBig(props) {
   const [loading, setLoading] = useState(false)
   const [dishCount, setDishCount] = useState({})
 
+  // let activeClassName = `card ${type} active`
+
   useEffect(() => {
     setDidMount(true)
     // 建立一個陣列儲存每筆餐點數量
@@ -26,7 +28,6 @@ function MealsBig(props) {
       setLoading(false)
     }, 1500)
   }
-
 
   // WHY?????
   useEffect(() => {
@@ -119,6 +120,21 @@ function MealsBig(props) {
       </div>
 
       <div className="cards">
+        {dishes.map((v, i) => {
+          let imgIlluSrc =
+            'http://localhost:3000/images/common/food/' + v.image_illustration
+          return (
+            <div
+              className={
+                dishCount[v.dish_id] > 0 ? 'active illu-image' : 'illu-image'
+              }
+              id={`food-${v.dish_id}`}
+            >
+              <img src={imgIlluSrc} alt="" />
+            </div>
+          )
+        })}
+
         {loading ? (
           <Spinner />
         ) : (
@@ -134,8 +150,6 @@ function MealsBig(props) {
                 type={v.type}
                 dishCount={dishCount}
                 setDishCount={setDishCount}
-                // setMealCountArr={setMealCountArr}
-                // mealCountArr={mealCountArr}
               />
             )
           })

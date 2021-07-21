@@ -13,7 +13,7 @@ function SideBox(props) {
         <form id="myform" method="POST" action="#/" className="button-group">
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="minus"
             field="quantity"
             onClick={() => {
@@ -23,13 +23,13 @@ function SideBox(props) {
           <input
             type="text"
             name="quantity"
-            value={total}
+            defaultValue={total}
             className="num"
             onChange={(e) => setTotal(+e.target.value)}
           />
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="plus"
             field="quantity"
             onClick={() => {

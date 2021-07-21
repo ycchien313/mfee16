@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 
 function MainMealBox(props) {
-  const { name, price, image_realistic } = props
-  const [total, setTotal] = useState(0)
-
+  const { index, name, price, image_realistic, counts, setCounts } = props
+  // const [counts, setCounts] = useState(0)
   return (
     <>
       <div className="MainMealBox">
@@ -13,27 +12,44 @@ function MainMealBox(props) {
         <form id="myform" method="POST" action="#/" className="button-group">
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="minus"
             field="quantity"
             onClick={() => {
-              if (total > 0) setTotal(total - 1)
+              // if (counts > 0) setCounts(counts - 1)
+              let newCounts = [...counts]
+              newCounts[index] = newCounts[index] - 1
+              setCounts(newCounts)
+              console.log(newCounts)
             }}
           />
           <input
             type="text"
             name="quantity"
-            value={total}
+            defaultValue={counts}
             className="num"
-            onChange={(e) => setTotal(+e.target.value)}
+            onChange={() => {
+              let newCounts = [...counts]
+              setCounts(newCounts)
+            }}
+            // onChange={(e) => setCounts(+e.target.value)}
+            // onChange={() => setCounts(+counts)}
           />
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="plus"
             field="quantity"
             onClick={() => {
-              setTotal(total + 1)
+              // console.log('plus click')
+              let newCounts = [...counts]
+              newCounts[index] = newCounts[index] + 1
+              setCounts(newCounts)
+              console.log(newCounts)
+
+              // let newCount = counts + 1
+              // setCounts(newCount)
+              // console.log(counts)
             }}
           />
         </form>

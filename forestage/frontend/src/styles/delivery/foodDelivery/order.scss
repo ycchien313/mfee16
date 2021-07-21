@@ -257,6 +257,10 @@
     justify-content: center;
     z-index: 2;
 
+    ul li {
+      font-size: 8px;
+    }
+    
     .title {
       display: flex;
       align-self: center;
@@ -370,7 +374,7 @@
   }
 }
 
-/* 宜諺加的 */
+/* 加的 */
 
 #category-title-green {
   display: flex;

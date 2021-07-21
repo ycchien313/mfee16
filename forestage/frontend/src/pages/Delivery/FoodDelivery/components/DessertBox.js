@@ -13,7 +13,7 @@ function DessertBox(props) {
         <form id="myform" method="POST" action="#/" className="button-group">
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="minus"
             field="quantity"
             onClick={() => {
@@ -23,7 +23,7 @@ function DessertBox(props) {
           <input
             type="text"
             name="quantity"
-            value={total}
+            defaultValue={total}
             className="num"
             onChange={(e) => {
               setTotal(+e.target.value)
@@ -33,7 +33,7 @@ function DessertBox(props) {
           />
           <input
             type="button"
-            value=""
+            defaultValue=""
             className="plus"
             field="quantity"
             onClick={() => {

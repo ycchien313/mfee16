@@ -1,0 +1,123 @@
+@import '../common/global.scss';
+
+.show-detail .modal-body {
+  color: $primary-lightbrown;
+}
+
+.show-detail .btn-close {
+  margin-left: 10px;
+}
+
+.show-detail .modal-header {
+  background: $primary-lightgreen;
+  color: white;
+  font-family: $zh-tw-maru;
+}
+
+.show-detail .modal-body {
+  font-family: $zh-tw-noto;
+}
+
+.show-detail .modal-body .title {
+  font-size: calc(1rem + 0.2vw);
+  color: $secondary-green-dark;
+}
+
+.show-detail .modal-body .left-part {
+  padding-right: 25px;
+  border-right: 1px solid $primary-lightgreen;
+}
+
+.show-detail .modal-body .right-part {
+  padding-left: 25px;
+}
+
+.close-button {
+  background: #ccc;
+  border: none;
+}
+
+.close-button:hover {
+  background: #aaa;
+  border: none;
+  font-family: $zh-tw-noto;
+}
+
+.password .modal-body {
+  font-family: $zh-tw-noto;
+}
+
+.password input {
+  outline: none;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.password input:focus {
+  box-shadow: 0 0 0 1px $primary-lightbrown;
+  border-radius: 5px;
+}
+
+.password .orange {
+  background: $accent-orange;
+  color: #fff;
+  border: none;
+}
+
+.password .orange:hover {
+  background: darken($accent-orange, 20%);
+  border: none;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+.password .modal-header {
+  background: $primary-lightgreen;
+  color: white;
+  font-family: $zh-tw-maru;
+}
+
+.password .modal-body .left-part {
+  font-size: 1rem;
+  color: $primary-lightbrown;
+}
+
+.password .orange:focus,
+.password .close-button:focus,
+.show-detail .close-button:focus,
+.cancel .orange:focus,
+.cancel .close-button:focus,
+.btn-close:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.password .tip {
+  margin-right: auto;
+  color: $accent-red;
+}
+
+.cancel .modal-body .h4 {
+  color: $accent-red;
+}
+
+.cancel .left-part {
+  font-size: 1.17rem;
+  color: $secondary-green-dark;
+}
+
+.cancel .right-part {
+  color: $primary-lightbrown;
+}
+.cancel .orange {
+  background: $accent-orange;
+  border: none;
+}
+.cancel .modal-header {
+  background: $primary-lightgreen;
+  color: white;
+  font-family: $zh-tw-maru;
+}
+
+.cancel .dish {
+  color: $primary-lightbrown;
+  font-size: 1rem;
+}

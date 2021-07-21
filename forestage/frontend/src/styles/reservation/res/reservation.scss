@@ -488,8 +488,12 @@
   display: flex;
   margin-top: 2vw;
 }
+.bar-length{
+  display: flex;
+  width: 100%;
+}
 .rock-bar {
-  width: 25%;
+  width: 33%;
   height: 100%;
   background: $accent-orange;
   border-radius: 40px 0 0 40px;
@@ -503,9 +507,11 @@
   width: 2.6vw;
   position: relative;
   z-index: 3;
+  flex-shrink: 0;
+
 }
 .middle-bar {
-  width: 25%;
+  width: 33%;
   height: 100%;
   background: $secondary-green;
   position: relative;
@@ -520,9 +526,10 @@
   position: relative;
   z-index: 2;
   left: -2.6vw;
+  flex-shrink: 0;
 }
 .back-bar {
-  width: 25%;
+  width:33%;
   height: 100%;
   background: $secondary-lightyellow;
   position: relative;
@@ -537,6 +544,8 @@
   position: relative;
   z-index: 1;
   left: -5.2vw;
+  flex-shrink: 0;
+
 }
 
 /* 剩餘座位文字 */

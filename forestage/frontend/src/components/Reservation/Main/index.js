@@ -8,8 +8,9 @@ import CheckList from './CheckList'
 function Main() {
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
-  const [seatCount, setSeatCount] = useState()
+  const [seatCount, setSeatCount] = useState([])
   const [didMount, setDidMount] = useState(false)
+
   useEffect(() => {
     setDidMount(true)
     axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
@@ -104,6 +105,8 @@ function Main() {
               remainingSeat={remainingSeat}
               setRemainingSeat={setRemainingSeat}
               seatInfo={seatInfo}
+              seatCount={seatCount}
+              setSeatCount={setSeatCount}
             />
             <ChooseSeat />
             <ChooseMeal />

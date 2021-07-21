@@ -4,7 +4,7 @@ import CalendarSmall from './CalendarSmall'
 import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
 function ChooseDate(props) {
-  const { remainingSeat, setRemainingSeat, seatInfo } = props
+  const { remainingSeat, setRemainingSeat, seatInfo, seatCount, setSeatCount } = props
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
@@ -35,9 +35,11 @@ function ChooseDate(props) {
             />
           )}
           <SeatsBar
-            remainingSeat={remainingSeat}
-            setRemainingSeat={setRemainingSeat}
+            // remainingSeat={remainingSeat}
+            // setRemainingSeat={setRemainingSeat}
             seatInfo={seatInfo}
+            seatCount={seatCount}
+            setSeatCount={setSeatCount}
           />
         </div>
       </section>

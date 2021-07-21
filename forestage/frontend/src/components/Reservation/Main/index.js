@@ -8,6 +8,7 @@ import CheckList from './CheckList'
 function Main() {
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
+  const [seatCount, setSeatCount] = useState()
   const [didMount, setDidMount] = useState(false)
   useEffect(() => {
     setDidMount(true)
@@ -15,18 +16,38 @@ function Main() {
       setSeatInfo(result.data)
     })
   }, [])
+
   useEffect(() => {
     if (didMount) {
-      const rockSeatInfo = [...seatInfo].filter((seat)=>{
-        return seat.seat_id === 1
-       })
-      console.log(rockSeatInfo[0].totalSeats)
-      const rockSeatRemaining = [...remainingSeat].filter((seat)=>{
-        return seat.seat_id === 1
-      })
-      console.log(rockSeatRemaining[0].remainingSeats)
-      // console.log("dm", seatInfo)
-      // console.log("dm", remainingSeat)
+      // console.log(seatInfo[0].seat_id)
+      let newObj = {}
+      for (let i = 0; i < seatInfo.length; i++) {
+        const foundRemainSeats = remainingSeat.find((item) => {
+          return item.seat_id === seatInfo[i].seat_id
+        })
+
+        let totalSeats = foundRemainSeats
+          ? foundRemainSeats.remainingSeats
+          : seatInfo[i].totalSeats
+
+        // let newId = seatInfo[i].seat_id
+        console.log(seatInfo[i].seat_id, totalSeats)
+        newObj[seatInfo[i].seat_id] = totalSeats
+        console.log(newObj)
+        setSeatCount(newObj)
+      }
+
+      // const rockSeatInfo = [...seatInfo].filter((seat) => {
+      //   return seat.seat_id === 1
+      // })
+      // console.log(rockSeatInfo[0].totalSeats)
+      // const rockSeatRemaining = [...remainingSeat].filter((seat) => {
+      //   return seat.seat_id === 1
+      // })
+      // console.log(rockSeatRemaining[0].remainingSeats)
+      // let newSeatCount =
+      //   rockSeatInfo[0].totalSeats - rockSeatRemaining[0].remainingSeats
+      // setSeatCount({ ...seatCount, 1: newSeatCount})
     }
   }, [remainingSeat])
   let reservationInfo = [

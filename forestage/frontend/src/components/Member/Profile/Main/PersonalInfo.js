@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 
-function PersonalInfo() {
-  const [taValue, setTaValue] = useState('桃園市中壢區中大路100號')
-  const [taContainerValue, setTaContainerValue] =
-    useState('桃園市中壢區中大路100號')
+function PersonalInfo(props) {
+  const { dbRequest, memberId } = props
   const [toggleBtn, setToggleBtn] = useState(true)
   const [toggleInput, setToggleInput] = useState(true)
   const [toggleTextarea, setToggleTextarea] = useState(true)
-
+  const [dataLoading, setDataLoading] = useState(false)
+  // const [didMount, setDidMount] = useState(true)
   const [profile, setProfile] = useState({
     avatar: '',
     name: '',
@@ -16,26 +14,20 @@ function PersonalInfo() {
     birthday: '',
     mobile: '',
     address: '',
-    email: '',
   })
-  // const [dataLoading, setDataLoading] = useState(true)
-  const [didMount, setDidMount] = useState(true)
-
-  const memberId = 1
-
-  // server 端會員資料的請求
-  const profileRequest = axios.create({
-    baseURL: 'http://127.0.0.1:3001/member/profile/',
-    headers: new Headers({
-      Accept: 'application/json',
-      'Content-Type': 'appliaction/json',
-    }),
+  const [restoreProfile, setRestoreProfile] = useState({
+    avatar: '',
+    name: '',
+    gender: '',
+    birthday: '',
+    mobile: '',
+    address: '',
   })
 
   // 取得來自 server 的會員資料
   const getProfileServer = async () => {
     try {
-      const response = await profileRequest.get(`${memberId}`)
+      const response = await dbRequest.get(`profile/${memberId}`)
       const data = response.data
       const status = data.status
       const profileFields = {
@@ -45,56 +37,81 @@ function PersonalInfo() {
         birthday: data.data[0].birthday,
         mobile: data.data[0].mobile,
         address: data.data[0].address,
-        email: data.data[0].email,
       }
 
-      status === '成功' ? setProfile(profileFields) : new Error(data)
+      if (status === '成功') {
+        setProfile(profileFields)
+        setRestoreProfile(profileFields)
+      } else {
+        new Error(data)
+      }
     } catch (error) {
       console.error(error)
     }
   }
 
   // 更新至 server 的會員資料
-  // const updateProfileServer = () => {
-  //   profile.name
-  // }
+  const updateProfileServer = () => {
+    try {
+      dbRequest.put(`profile/${memberId}`, {
+        data: profile,
+      })
+    } catch (error) {
+      console.error({ status: '失敗', msg: error })
+    }
+  }
 
   // input 編輯後，設定內容至 profile 狀態
-  const setProfileFields = (field, value) => {
-    let newProfile = profile
-    newProfile[field] = value
+  const setProfileFields = (e) => {
+    // 將 profile 物件全部給 newProfile，[e.target.name]有修改的部分則會覆蓋
+    let newProfile = { ...profile, [e.target.name]: e.target.value }
     setProfile(newProfile)
   }
-  // const setProfileFields = (e) => {
-  //   let newProfile = { ...profile, [e.target.name]: e.target.value }
-  //   setProfile(newProfile)
-  // }
 
+  // 處理 form 表單傳送
   const handelSubmit = (e) => {
     e.preventDefault()
 
-    const data = new FormData(e.target)
-    console.log('handelSubmit data.get:', data.get('gender'))
-    console.log('handelSubmit profile: ', profile.gender)
+    setToggleBtn(!toggleBtn)
+    setToggleInput(!toggleInput)
+    setToggleTextarea(!toggleTextarea)
+
+    // const formData = new FormData(e.target)
+
+    console.log('hamdleSubmit: ', profile)
+
+    updateProfileServer()
+
+    setDataLoading(true)
+    setTimeout(() => {
+      setDataLoading(false)
+    }, 1000)
   }
 
   // componentDidMount
   useEffect(() => {
     getProfileServer()
-    setDidMount(false)
+    // setDidMount(false)
   }, [])
 
-  // componentDidUpdate
-  useEffect(() => {
-    if (!didMount) {
-      console.log('didUpdate: ', profile)
+  //componentDidUpdate
+  // useEffect(() => {
+  //   if (!didMount) {
+  //   }
+  // }, [profile])
 
-      // setTimeout(() => {
-      //   setDataLoading(false)
-      // }, 1000)
-    }
-  }, [profile])
+  const loading = (
+    <>
+      <div className="text-center" style={{ width: '27.86vw' }}>
+        <img
+          src={process.env.PUBLIC_URL + '/images/member/spinner.svg'}
+          alt=""
+        ></img>
+      </div>
+    </>
+  )
 
+  // form 表單的內容
   const showProfile = (
     <>
       {/* <!--照片 --> */}
@@ -105,6 +122,8 @@ function PersonalInfo() {
             ? { className: 'edit-btn orange-guide-button' }
             : { className: 'cancel-btn orange-guide-button' })}
           onClick={() => {
+            toggleBtn === false && setProfile(restoreProfile)
+
             setToggleBtn(!toggleBtn)
             setToggleInput(!toggleInput)
             setToggleTextarea(!toggleTextarea)
@@ -138,13 +157,14 @@ function PersonalInfo() {
             <div className="info-col">使用者名稱</div>
             <div className="info-col">
               <input
+                name="name"
                 type="text"
-                defaultValue={profile.name}
+                value={profile.name}
                 {...(toggleInput
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
-                onBlur={(e) => {
-                  setProfileFields('name', e.target.value)
+                onChange={(e) => {
+                  setProfileFields(e)
                 }}
               />
             </div>
@@ -155,16 +175,15 @@ function PersonalInfo() {
               <input
                 name="gender"
                 type="text"
-                defaultValue={profile.gender}
-                placeholder="男"
+                value={profile.gender}
+                placeholder="ex. 男"
                 pattern="[男|女]{1}"
                 required
                 {...(toggleInput
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
-                onBlur={(e) => {
-                  setProfileFields('gender', e.target.value)
-                  // setProfileFields(e)
+                onChange={(e) => {
+                  setProfileFields(e)
                 }}
               />
             </div>
@@ -173,16 +192,17 @@ function PersonalInfo() {
             <div className="info-col">生日</div>
             <div className="info-col">
               <input
+                name="birthday"
                 type="text"
-                defaultValue="1990.01.01"
-                placeholder="1990.01.01"
+                value={profile.birthday}
+                placeholder="ex. 1990.01.01"
                 pattern="[0-9]{4}\.(0[1-9]|1[012])\.(0[1-9]|1[0-9]|2[0-9]|3[01])"
                 required
                 {...(toggleInput
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
-                onBlur={(e) => {
-                  setProfileFields('birthday', e.target.value)
+                onChange={(e) => {
+                  setProfileFields(e)
                 }}
               />
             </div>
@@ -191,16 +211,17 @@ function PersonalInfo() {
             <div className="info-col">手機號碼</div>
             <div className="info-col">
               <input
+                name="mobile"
                 type="tel"
-                defaultValue="0912345678"
-                placeholder="0911222333"
+                value={profile.mobile}
+                placeholder="ex. 0911222333"
                 pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
                 required
                 {...(toggleInput
                   ? { className: '', disabled: true }
                   : { className: 'active', disabled: false })}
-                onBlur={(e) => {
-                  setProfileFields('mobile', e.target.value)
+                onChange={(e) => {
+                  setProfileFields(e)
                 }}
               />
             </div>
@@ -208,20 +229,19 @@ function PersonalInfo() {
           <div className="info-row">
             <div className="info-col">地址</div>
             <div className="info-col textarea-container">
-              {taContainerValue}
+              {/* 從 textarea 設定 textarea-container 的文字 */}
+              {profile.address}
               <textarea
+                name="address"
                 className="textarea"
-                defaultValue={taValue}
+                value={profile.address}
+                pattern="(?\D+?[縣市])(?\D+?(市區|鎮區|鎮市|[鄉鎮市區]))?(?\D+?[村里])?(?\d+[鄰])?(?\D+?(村路|[路街道段]))?(?\D?段)?(?\d+巷)?(?\d+弄)?(?\d+號?)?(?-\d+?(號))?(?\d+樓)?(?.+)?"
+                required
                 {...(toggleTextarea
                   ? { className: 'textarea', disabled: true }
                   : { className: 'textarea active', disabled: false })}
-                onInput={(e) => {
-                  //  設定 textarea, textarea-container 的文字
-                  setTaValue(e.target.value)
-                  setTaContainerValue(e.target.value)
-                }}
-                onBlur={(e) => {
-                  setProfileFields('address', e.target.value)
+                onChange={(e) => {
+                  setProfileFields(e)
                 }}
               ></textarea>
             </div>
@@ -235,22 +255,17 @@ function PersonalInfo() {
     <>
       <div className="personal-info-container">
         <form onSubmit={handelSubmit}>
+          {/* <form> */}
           {/* 個人檔案 */}
-          {showProfile}
+          {dataLoading ? loading : showProfile}
 
           {/* 儲存按鈕 */}
           <div className="save-btn-container">
             <button
+              type="submit"
               {...(!toggleBtn
                 ? { className: 'save-btn pink-guide-button' }
                 : { className: 'd-none' })}
-              onClick={() => {
-                setToggleBtn(!toggleBtn)
-                setToggleInput(!toggleInput)
-                setToggleTextarea(!toggleTextarea)
-
-                console.log(profile)
-              }}
             >
               儲存
             </button>

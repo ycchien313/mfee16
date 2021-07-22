@@ -18,6 +18,13 @@ function Main(props) {
       'Content-Type': 'appliaction/json',
     }),
   })
+  // file 用 headers
+  // const dbRequest = axios.create({
+  //   baseURL: 'http://127.0.0.1:3001/member/',
+  //   headers: new Headers({
+  //     'Content-Type': 'multipart/form-data',
+  //   }),
+  // })
 
   return (
     <>

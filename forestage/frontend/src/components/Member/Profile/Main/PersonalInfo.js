@@ -24,7 +24,7 @@ function PersonalInfo(props) {
     mobile: '',
     address: '',
   })
-  const nodeRef = useRef(null)
+  // const nodeRef = useRef(null)
 
   // 取得來自 server 的會員資料(GET)
   const getProfileServer = async () => {

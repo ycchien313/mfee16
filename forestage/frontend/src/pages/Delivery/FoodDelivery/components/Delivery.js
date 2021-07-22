@@ -87,7 +87,6 @@ function Delivery(props) {
       .catch(function (err) {
         console.log(err)
       })
-    //
     $.ajax({
       url: 'http://localhost:3001/delivery/dish/dessert',
       method: 'GET',

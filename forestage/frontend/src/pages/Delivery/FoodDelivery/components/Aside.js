@@ -13,6 +13,7 @@ function Aside(props) {
                 <h4>目前品項</h4>
               </div>
               <ul>
+              {/*非 0 的東西塞選 */}
                 <li></li>
                 <li>碳烤豬肋排$500</li>
                 <li>總匯潛艇堡$200</li>

@@ -27,6 +27,8 @@ function Main() {
     })
   }, [])
 
+  // console.log(seatInfo[1].name)
+
   // 計算各區剩餘座位數量
   useEffect(() => {
     if (didMount) {

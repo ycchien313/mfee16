@@ -10,6 +10,7 @@ function ChooseSeat(props) {
     3: 0,
   })
 
+  // console.log(seatInfo[1].name)
   const barInfo = useRef(null)
 
   // active 樣式切換
@@ -17,9 +18,14 @@ function ChooseSeat(props) {
     barInfo.current.style.display = 'none'
     setDidMount(true)
 
-    $('.row').on('click', (e) => {
-      $(e.target).closest('.row').addClass('active')
-      $(e.target).closest('.row').siblings().removeClass('active')
+    // $('.row').on('click', (e) => {
+    //   $(e.target).closest('.row').addClass('active')
+    //   $(e.target).closest('.row').siblings().removeClass('active')
+    // })
+
+    $('.row').on('click', function () {
+      $(this).closest('.row').addClass('active')
+      $(this).closest('.row').siblings().removeClass('active')
     })
   }, [])
 

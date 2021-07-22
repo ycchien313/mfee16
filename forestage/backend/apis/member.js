@@ -4,6 +4,8 @@ const router = express.Router();
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt'));
 const db = require('../utils/db');
+const path = require('path');
+const multer = require('multer');
 
 const conn = db.connection;
 
@@ -18,6 +20,35 @@ const conn = db.connection;
 //         })
 //         .withMessage('密碼不同，請重新輸入'),
 // ];
+
+/********** 檔案上傳路徑 **********/
+// 設定上傳檔案的完整儲存目錄(含目錄路徑、檔案名稱)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../', 'public', 'members'));
+    },
+    filename: (req, file, cb) => {
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
+    },
+});
+
+/********** multer 中間件；處理上傳檔案 **********/
+const upload = multer({
+    // 指定存取位置
+    storage: storage,
+    // 副檔名篩選
+    fileFilter: (req, file, cb) => {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|svg)$/)) {
+            return cb(new Error('不合格的附檔名'));
+        }
+        cb(null, true);
+    },
+    // 設定檔案大小上限，1MB
+    limit: {
+        fileSize: 1024 * 1024,
+    },
+});
 
 /********** 查詢近期外送訂單 **********/
 router.get('/delivery/recent/:memberId', async (req, res, next) => {
@@ -399,7 +430,7 @@ router.get('/email/:memberId', async (req, res) => {
 });
 
 /********** 更新會員資料 **********/
-router.put('/profile/:memberId', async (req, res) => {
+router.put('/profile/:memberId', upload.single('avatar'), async (req, res) => {
     console.log('URL:', req.url);
     console.log('METHOD:', req.method);
 
@@ -407,16 +438,24 @@ router.put('/profile/:memberId', async (req, res) => {
     // const validationErrors = validationResult(req);
 
     let resData = null;
+    let avatar = null;
     let sql = null;
+    let queryValue = null;
     const memberId = req.params.memberId;
-    const reqData = req.body.data;
-    const { name, birthday, mobile, address, gender, avatar } = reqData;
+    const reqData = req.body;
+    const { name, birthday, mobile, address, gender } = reqData;
 
-    // 執行 SQL，更新個資
-    sql =
-        'UPDATE `member` SET `name`=?,`birthday`=?,`mobile`=?,`address`=?,`gender`=?,`avatar`= ? WHERE member_id = ?';
-    await conn
-        .queryAsync(sql, [
+    req.file !== undefined
+        ? (avatar = `/members/${req.file.filename}`)
+        : (avatar = null);
+
+    console.log(avatar);
+
+    // 帶有大頭貼檔案
+    if (avatar !== null) {
+        sql =
+            'UPDATE `member` SET `name`=?,`birthday`=?,`mobile`=?,`address`=?,`gender`=?,`avatar`= ? WHERE member_id = ?';
+        queryValue = [
             name,
             birthday,
             mobile,
@@ -424,15 +463,27 @@ router.put('/profile/:memberId', async (req, res) => {
             gender,
             avatar,
             memberId,
-        ])
-        .then(() => {
-            resData = { status: '成功', msg: '更新成功' };
-            res.status(200).send(resData);
-        })
-        .catch((error) => {
-            resData = { status: '失敗', msg: error };
-            res.status(500).send(resData);
-        });
+        ];
+    } else {
+        // 無大頭貼
+        sql =
+            'UPDATE `member` SET `name`=?,`birthday`=?,`mobile`=?,`address`=?,`gender`=? WHERE member_id = ?';
+        queryValue = [name, birthday, mobile, address, gender, memberId];
+    }
+
+    try {
+        // 執行 SQL，更新個資
+        const dbMember = await conn.queryAsync(sql, queryValue);
+
+        resData = { status: '成功', data: dbMember };
+
+        res.status(200).json(resData);
+    } catch (error) {
+        resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+        console.log('錯誤訊息: ', error);
+
+        res.status(500).json(resData);
+    }
 
     console.log(resData);
 });

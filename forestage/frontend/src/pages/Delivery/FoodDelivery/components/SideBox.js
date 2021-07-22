@@ -33,7 +33,7 @@ function SideBox(props) {
           <input
             type="text"
             name="quantity"
-            value={counts[index]}
+            defaultValue={counts[index]}
             className="num"
           />
           <input

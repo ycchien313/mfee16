@@ -34,12 +34,12 @@ function MainMealBox(props) {
           <input
             type="text"
             name="quantity"
-            value={counts[index]}
+            defaultValue={counts[index]}
             className="num"
-            onChange={() => {
-              // let newCounts = [...counts]
-              // setCounts(newCounts)
-            }}
+            // onChange={() => {
+            //   let newCounts = [...counts]
+            //   setCounts(newCounts)
+            // }}
             // onChange={(e) => setCounts(+e.target.value)}
             // onChange={() => setCounts(+counts)}
           />

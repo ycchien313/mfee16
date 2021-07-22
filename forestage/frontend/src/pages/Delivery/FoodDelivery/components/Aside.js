@@ -2,21 +2,20 @@ import React from 'react'
 
 function Aside(props) {
   const { counts, dishes, setDishes } = props
-  // console.log(counts)
   return (
     <>
       <aside className="aside-list">
         <div className="menu">
           <div className="content">
-            <div classNme="">
+            <div className="">
               <div className="title">
                 <h4>目前品項</h4>
               </div>
               <ul>
-              {/*非 0 的東西塞選 */}
-                <li></li>
-                <li>碳烤豬肋排$500</li>
-                <li>總匯潛艇堡$200</li>
+                {/* {dishes.map((item, i) => {
+                  return <li key={i}>{item}</li>
+                })} */}
+                {/* <li>總匯潛艇堡$200</li> */}
                 <hr />
               </ul>
             </div>

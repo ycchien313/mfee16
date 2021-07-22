@@ -9,33 +9,18 @@ import Map from './Map'
 import $ from 'jquery'
 
 function Delivery(props) {
-  //請選擇送餐時間time
   const [time, setTime] = useState('')
-  //請選擇送餐時間date
   const [date, setDate] = useState('')
-  //請輸入要外送地址區域
   const [dist, inputDist] = useState('')
-  //請輸入要外送地址路~號
   const [rd, inputRd] = useState('')
-  // 主餐
   const [main, inputMain] = useState([])
-  // 副餐
   const [side, inputSide] = useState([])
-  // 甜點
   const [dessert, inputDessert] = useState([])
-
   const [counts, setCounts] = useState(Array(3).fill(0))
 
   // 所有餐點(含name、count)
   // 希望物件，{碳烤豬肋排: 0, 大披薩: 0, ...}
   const [dishes, setDishes] = useState({})
-
-  // 餐點數量+-
-  // const setProductItemCount = (productIndex, newCount) => {
-  //   let newCounts = [...counts]
-  //   newCounts[productIndex] = newCount
-  //   setCounts(newCounts)
-  // }
 
   const getDishes = () => {
     $.ajax({
@@ -188,7 +173,7 @@ function Delivery(props) {
                   {dessert.map(function (v, i) {
                     return (
                       <DessertBox
-                        kkey={i}
+                        key={i}
                         index={i}
                         name={v.name}
                         price={v.price}

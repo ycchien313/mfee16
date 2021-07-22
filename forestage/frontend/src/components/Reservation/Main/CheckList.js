@@ -1,5 +1,21 @@
-import React from 'react'
-function CheckList() {
+import React, { useEffect, useState } from 'react'
+function CheckList(props) {
+  const { checkList, setCheckList, dishList, setDishList, seatInfo } = props
+  // console.log(checkList,"cklist")
+  const [didMount, setDidMount] = useState(false)
+  // useEffect(() => {
+  //   setDidMount(true)
+  // }, [])
+  // useEffect(() => {
+  //   if (didMount) {
+  //     let newCheckList = { ...checkList }
+  //     console.log(newCheckList, 'newchecklist')
+  //     newCheckList.chosenDate = newCheckList.chosenDate
+  //       .slice(5)
+  //       .join('')
+  //       .replace(/-/g, '/')
+  //   }
+  // }, [checkList, seatInfo])
   return (
     <>
       <div class="clipboard">
@@ -14,14 +30,14 @@ function CheckList() {
                 <i class="fas fa-check-circle active"></i>
                 <span>日期</span>
               </div>
-              <span class="detail">10/17 (四)</span>
+              <span class="detail">{checkList.chosenDate}</span>
             </li>
             <li>
               <div class="name">
                 <i class="fas fa-check-circle active"></i>
                 <span>歌手</span>
               </div>
-              <span class="detail">蕭敬騰</span>
+              <span class="detail">{checkList.singer}</span>
             </li>
             <hr />
             <li>
@@ -29,14 +45,14 @@ function CheckList() {
                 <i class="fas fa-check-circle"></i>
                 <span>座位區</span>
               </div>
-              <span class="detail">搖滾區</span>
+              <span class="detail">{checkList.seatArea}</span>
             </li>
             <li>
               <div class="name">
                 <i class="fas fa-check-circle"></i>
                 <span>訂位數量</span>
               </div>
-              <span class="detail">3</span>
+              <span class="detail">{checkList.attendance}</span>
             </li>
             <hr />
             <li>
@@ -44,14 +60,14 @@ function CheckList() {
                 <i class="fas fa-check-circle"></i>
                 <span>低消金額</span>
               </div>
-              <span class="detail">3000</span>
+              <span class="detail">{checkList.minOrder}</span>
             </li>
             <li>
               <div class="name">
                 <i class="fas fa-check-circle"></i>
                 <span>目前金額</span>
               </div>
-              <span class="detail"></span>
+              <span class="detail">{checkList.total}</span>
             </li>
             <hr />
             <li>
@@ -60,12 +76,16 @@ function CheckList() {
                 <span>已選擇餐點</span>
               </div>
             </li>
-            <li>瑪格麗特</li>
-            <li>瑪格麗特</li>
-            <li>瑪格麗特</li>
-            <li>瑪格麗特</li>
-            <li>瑪格麗特</li>
-            <li>瑪格麗特</li>
+            {dishList.map((v, i) => {
+              if (v[1] > 0) {
+                return (
+                  <li>
+                    <span>{v[0]}</span>
+                    <span>{v[1]}</span>
+                  </li>
+                )
+              }
+            })}
           </ul>
         </div>
         <img

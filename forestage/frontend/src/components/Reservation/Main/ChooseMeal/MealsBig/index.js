@@ -5,23 +5,28 @@ import Spinner from '../../../Spinner'
 // 假餐點資料
 
 function MealsBig(props) {
-  const { dishes, setDishes, showDishes, setShowDishes } = props
-  // const [mealCountArr, setMealCountArr] = useState([])
+  const {
+    dishes,
+    setDishes,
+    showDishes,
+    setShowDishes,
+    checkList,
+    setCheckList,
+    dishList,
+    setDishList
+  } = props
+
   const [mealType, setMealType] = useState('main')
   const [didMount, setDidMount] = useState(false)
   const [titleToggle, setTitleToggle] = useState([true, false, false])
   const [loading, setLoading] = useState(false)
   const [dishCount, setDishCount] = useState({})
 
-  // let activeClassName = `card ${type} active`
-
   useEffect(() => {
     setDidMount(true)
-    // 建立一個陣列儲存每筆餐點數量
-    // let newMealCountArr = new Array(dishes.length).fill(0)
-    // setMealCountArr(newMealCountArr)
   }, [])
 
+  // spinner
   function isLoading() {
     setLoading(true)
     setInterval(() => {
@@ -30,6 +35,7 @@ function MealsBig(props) {
   }
 
   // WHY?????
+  // 建立餐點物件 key為dish_id value為0
   useEffect(() => {
     if (didMount) {
       let newDishCount = {}
@@ -40,6 +46,25 @@ function MealsBig(props) {
     }
   }, [dishes])
 
+  // 建立餐點物件 key為name
+  useEffect(() => {
+    if (didMount) {
+      let newDishArr = [];
+      let dishArr = Object.entries(dishCount)
+      dishes.forEach((dish) => {
+        newDishArr = dishArr.map((v, i) => {
+          if (parseInt(v[0]) === dish.dish_id) {
+            v[0] = dish.name
+          }
+          return v
+        })
+      })
+      setDishList(newDishArr)
+      // console.log(newDishArr)
+    }
+  }, [dishes, dishCount])
+
+  // 切換餐點種類
   useEffect(() => {
     if (didMount) {
       let newDishes
@@ -68,6 +93,30 @@ function MealsBig(props) {
       setShowDishes(newDishes)
     }
   }, [mealType])
+
+  // 更新checkList的目前金額
+  function getSubtotal(dishId) {
+    let subtotal = 0
+    let dish = dishes.find((item) => {
+      return item.dish_id === dishId
+    })
+    subtotal = dish.price * dishCount[dishId]
+    return subtotal
+  }
+
+  useEffect(() => {
+    if (didMount) {
+      let dishIdArr = Object.keys(dishCount)
+      let total = 0
+      dishIdArr.forEach((dishId) => {
+        dishId = parseInt(dishId)
+        total += getSubtotal(dishId)
+      })
+      let newObj = { ...checkList }
+      newObj.total = total
+      setCheckList(newObj)
+    }
+  }, [dishCount, setDishCount])
 
   return (
     <>
@@ -149,6 +198,8 @@ function MealsBig(props) {
                 type={v.type}
                 dishCount={dishCount}
                 setDishCount={setDishCount}
+                checkList={checkList}
+                setCheckList={setCheckList}
               />
             )
           })

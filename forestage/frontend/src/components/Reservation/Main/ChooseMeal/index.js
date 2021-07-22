@@ -5,7 +5,8 @@ import { useMediaQuery } from 'react-responsive'
 import MealsBig from './MealsBig/'
 import MealsSmall from './MealsSmall/'
 
-function ChooseMeal() {
+function ChooseMeal(props) {
+  const { checkList, setCheckList, dishList, setDishList } = props
   const [dishes, setDishes] = useState([])
   const [showDishes, setShowDishes] = useState([])
 
@@ -49,6 +50,10 @@ function ChooseMeal() {
             setDishes={setDishes}
             showDishes={showDishes}
             setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishList={dishList}
+            setDishList={setDishList}
           />
         )}
       </section>

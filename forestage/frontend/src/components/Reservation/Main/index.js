@@ -18,6 +18,7 @@ function Main() {
     minOrder: 0,
     total: 0,
   })
+  const [dishList, setDishList] = useState([])
 
   useEffect(() => {
     setDidMount(true)
@@ -26,6 +27,7 @@ function Main() {
     })
   }, [])
 
+  // 計算各區剩餘座位數量
   useEffect(() => {
     if (didMount) {
       // console.log(seatInfo[0].seat_id)
@@ -91,10 +93,21 @@ function Main() {
               checkList={checkList}
               setCheckList={setCheckList}
             />
-            <ChooseMeal />
+            <ChooseMeal
+              checkList={checkList}
+              setCheckList={setCheckList}
+              dishList={dishList}
+              setDishList={setDishList}
+            />
           </article>
           <aside class="aside-list">
-            <CheckList />
+            <CheckList
+              checkList={checkList}
+              setCheckList={setCheckList}
+              dishList={dishList}
+              setDishList={setDishList}
+              seatInfo={seatInfo}
+            />
           </aside>
         </div>
       </main>

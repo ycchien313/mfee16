@@ -10,6 +10,14 @@ function Main() {
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
   const [didMount, setDidMount] = useState(false)
+  const [checkList, setCheckList] = useState({
+    chosenDate: '',
+    singer: '',
+    seatArea: '',
+    attendance: 0,
+    minOrder: 0,
+    total: 0,
+  })
 
   useEffect(() => {
     setDidMount(true)
@@ -62,26 +70,6 @@ function Main() {
     stauts,
   ] = reservationInfo
 
-  // axios({
-  //   method: 'post',
-  //   url: 'http://127.0.0.1:3001/reservation/checkout/send',
-  //   data: {
-  //     reservationInfo: {
-  //       date,
-  //       seat_id,
-  //       attendance,
-  //       name,
-  //       mobile,
-  //       total,
-  //       note,
-  //       member_id,
-  //       mcm_id,
-  //       stauts,
-  //   },
-  //   },
-  // }).then(() => {
-  //   console.log('aaa')
-  // })
   return (
     <>
       <main>
@@ -93,11 +81,15 @@ function Main() {
               seatInfo={seatInfo}
               seatCount={seatCount}
               setSeatCount={setSeatCount}
+              setCheckList={setCheckList}
+              checkList={checkList}
             />
             <ChooseSeat
               seatInfo={seatInfo}
               seatCount={seatCount}
               setSeatCount={setSeatCount}
+              checkList={checkList}
+              setCheckList={setCheckList}
             />
             <ChooseMeal />
           </article>

@@ -1,8 +1,17 @@
 import axios from 'axios'
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
+import ChooseDate from '..'
 function Day(props) {
-  const { date, picture, name, remainingSeat, setRemainingSeat } = props
+  const {
+    date,
+    picture,
+    name,
+    remainingSeat,
+    setRemainingSeat,
+    setCheckList,
+    checkList,
+  } = props
 
   // 取月份+日期
   let newDate = [...date]
@@ -14,6 +23,13 @@ function Day(props) {
     axios.get(url).then((result) => {
       setRemainingSeat(result.data)
     })
+  }
+
+  function updateCheckList(date, name) {
+    let newObj = { ...checkList }
+    newObj.chosenDate = date
+    newObj.singer = name
+    setCheckList(newObj)
   }
 
   const day = useRef(null)
@@ -37,6 +53,7 @@ function Day(props) {
           }}
           onClick={() => {
             getRemainingSeat()
+            updateCheckList(date, name)
           }}
         ></div>
         <span className="h4 name">{name}</span>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import $ from 'jquery'
 function ChooseSeat(props) {
-  const { seatInfo, seatCount, setSeatCount } = props
+  const { seatInfo, seatCount, setSeatCount, checkList, setCheckList } = props
 
   const [didMount, setDidMount] = useState(false)
   const [attendance, setAttendance] = useState({
@@ -9,28 +9,38 @@ function ChooseSeat(props) {
     2: 0,
     3: 0,
   })
-  const [active, setActive] = useState(false)
 
   const barInfo = useRef(null)
 
+  // active 樣式切換
   useEffect(() => {
     barInfo.current.style.display = 'none'
     setDidMount(true)
 
-    // active 樣式切換
     $('.row').on('click', (e) => {
       $(e.target).closest('.row').addClass('active')
       $(e.target).closest('.row').siblings().removeClass('active')
     })
-
   }, [])
 
+  // 顯示剩餘座位bar
   useEffect(() => {
     if (didMount) {
       barInfo.current.style.display = 'flex'
     }
   }, [seatCount])
 
+  // 更新checkList座位區 & 人數
+  useEffect(() => {
+    const seatIdArr = Object.keys(attendance)
+    // console.log(seatIdArr)
+    seatIdArr.forEach((seatId) => {
+      updateCheckList(parseInt(seatId))
+      console.log(seatId, 'seatId')
+    })
+  }, [attendance])
+
+  // 減號按鈕
   function minusAttendance(seatId) {
     const newAttendance = { ...attendance }
     newAttendance[seatId] > 0
@@ -44,6 +54,7 @@ function ChooseSeat(props) {
     }
   }
 
+  // 加號按鈕
   function addAttendance(seatId) {
     const newAttendance = { ...attendance }
     if (seatCount[seatId] > 0) {
@@ -61,8 +72,28 @@ function ChooseSeat(props) {
     if (seatCount[seatId] > 0) {
       newSeatCount[seatId] -= 1
       setSeatCount(newSeatCount)
-      console.log(newSeatCount)
+      // console.log(newSeatCount)
     }
+  }
+
+  // 更新checkList座位區 & 人數 & 低銷金額
+  async function updateCheckList(seatId) {
+    let newObj = { ...checkList }
+    let seat = {}
+    if (attendance[seatId] > 0) {
+      seat = await seatInfo.find((item) => {
+        // console.log(item.name, 'item') //有印出
+        return item.seat_id === seatId
+      })
+      newObj.seatArea = seat.name
+      newObj.attendance = attendance[seatId]
+      newObj.minOrder = attendance[seatId] * seat.minimum_order
+    } else if (attendance[seatId] === 0) {
+      newObj.seatArea = ''
+      newObj.attendance = 0
+      newObj.minOrder = 0
+    }
+    setCheckList(newObj)
   }
 
   return (

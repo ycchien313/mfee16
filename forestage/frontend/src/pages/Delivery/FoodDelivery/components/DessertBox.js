@@ -10,6 +10,8 @@ function DessertBox(props) {
     setCounts,
     dishes,
     setDishes,
+    dishePrice,
+    setDishePrice,
   } = props
 
   return (
@@ -33,7 +35,7 @@ function DessertBox(props) {
           <input
             type="text"
             name="quantity"
-            defaultValue={counts[index]}
+            value={counts[index]}
             className="num"
           />
           <input
@@ -48,7 +50,11 @@ function DessertBox(props) {
               let newDishes = dishes
               newDishes[name] = newCounts[index]
               setDishes(newDishes)
+              let newDishePrice = dishePrice
+              newDishePrice[price] = newCounts[index]
+              setDishePrice(newDishePrice)
               console.log(newDishes)
+              console.log(newDishePrice)
             }}
           />
         </form>

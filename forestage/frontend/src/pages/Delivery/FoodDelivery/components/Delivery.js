@@ -5,7 +5,6 @@ import DessertBox from '../components/DessertBox'
 import Aside from './Aside'
 import Takeout from './Takeout'
 import Map from './Map'
-
 import $ from 'jquery'
 
 function Delivery(props) {
@@ -21,6 +20,7 @@ function Delivery(props) {
   // 所有餐點(含name、count)
   // 希望物件，{碳烤豬肋排: 0, 大披薩: 0, ...}
   const [dishes, setDishes] = useState({})
+  const [dishePrice, setDishePrice] = useState({})
 
   const getDishes = () => {
     $.ajax({
@@ -33,7 +33,8 @@ function Delivery(props) {
 
         let newDish = ''
         result.forEach((dish) => {
-          newDish = { ...newDish, [dish.name]: 0 }
+          newDish = { ...newDish }
+          // newDish = { ...newDish, [dish.name]: 0 }
         })
         setDishes(newDish)
       })
@@ -122,6 +123,8 @@ function Delivery(props) {
                         setCounts={setCounts}
                         dishes={dishes}
                         setDishes={setDishes}
+                        dishePrice={dishePrice}
+                        setDishePrice={setDishePrice}
                       />
                     )
                   })}
@@ -150,6 +153,8 @@ function Delivery(props) {
                         setCounts={setCounts}
                         dishes={dishes}
                         setDishes={setDishes}
+                        dishePrice={dishePrice}
+                        setDishePrice={setDishePrice}
                         // counts={counts[i]}
                         // setCounts={(newCount) => {
                         //   setProductItemCount(i, newCount)
@@ -182,6 +187,8 @@ function Delivery(props) {
                         setCounts={setCounts}
                         dishes={dishes}
                         setDishes={setDishes}
+                        dishePrice={dishePrice}
+                        setDishePrice={setDishePrice}
                       />
                     )
                   })}

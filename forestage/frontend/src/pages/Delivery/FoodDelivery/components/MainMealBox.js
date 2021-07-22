@@ -10,6 +10,8 @@ function MainMealBox(props) {
     setCounts,
     dishes,
     setDishes,
+    dishePrice,
+    setDishePrice,
   } = props
 
   return (
@@ -34,7 +36,8 @@ function MainMealBox(props) {
           <input
             type="text"
             name="quantity"
-            defaultValue={counts[index]}
+            value={counts[index]}
+            // defaultValue={counts[index]}
             className="num"
             // onChange={() => {
             //   let newCounts = [...counts]
@@ -56,7 +59,11 @@ function MainMealBox(props) {
               let newDishes = dishes
               newDishes[name] = newCounts[index]
               setDishes(newDishes)
+              let newDishePrice = dishePrice
+              newDishePrice[price] = newCounts[index]
+              setDishePrice(newDishePrice)
               console.log(newDishes)
+              console.log(newDishePrice)
               // let newCount = counts + 1
               // setCounts(newCount)
             }}

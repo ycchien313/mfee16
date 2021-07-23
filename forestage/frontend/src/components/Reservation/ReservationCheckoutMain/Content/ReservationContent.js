@@ -1,5 +1,14 @@
-import React from 'react'
-function ReservationContent() {
+import React, { useEffect, useState } from 'react'
+function ReservationContent(props) {
+  const { checkList } = props
+  let newDate = checkList.chosenDate
+
+  // 更換日期格式
+  if (newDate !== undefined) {
+    newDate = newDate.replace(/-/g, ' / ')
+    console.log(newDate, 'newdate')
+  }
+
   return (
     <>
       <div className="res-content">
@@ -8,7 +17,7 @@ function ReservationContent() {
         <div className="content">
           <figure className="singer-pic">
             <img
-              src="http://localhost:3000/images/reservation/res_checkout/李榮浩.jpg"
+              src={`http://localhost:3000/images/common/${checkList.singerPic}`}
               alt=""
             />
           </figure>
@@ -20,10 +29,10 @@ function ReservationContent() {
               <span className="h4">訂位人數：</span>
             </div>
             <div className="detail">
-              <span className="h4 date">2021 / 08 / 20 18:00</span>
-              <span className="h4">蕭敬騰</span>
-              <span className="h4">搖滾區</span>
-              <span className="h4">3</span>
+              <span className="h4 date">{newDate}</span>
+              <span className="h4">{checkList.singer}</span>
+              <span className="h4">{checkList.seatArea}</span>
+              <span className="h4">{checkList.attendance}</span>
             </div>
           </div>
         </div>

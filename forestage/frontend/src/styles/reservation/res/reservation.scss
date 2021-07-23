@@ -718,17 +718,6 @@
     }
   }
 
-  /* table */
-
-  .table-bg {
-    width: 100%;
-    background: url(http://localhost:3000/images/reservation/table-bg.png);
-    background-size: cover;
-    height: 22vw;
-    position: relative;
-    bottom: 8vw;
-  }
-
   @media screen and (max-width: 768px) {
     .table-bg {
       display: none;
@@ -1018,3 +1007,14 @@
     }
   }
 }
+
+  /* table */
+
+  .reservation.table-bg {
+    width: 100%;
+    background: url(http://localhost:3000/images/reservation/table-bg.png);
+    background-size: cover;
+    height: 22vw;
+    position: relative;
+    bottom: 8vw;
+  }

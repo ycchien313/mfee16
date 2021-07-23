@@ -2,21 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 function CheckList(props) {
   const { checkList, setCheckList, dishList, setDishList, seatInfo } = props
-  // console.log(checkList,"cklist")
-  const [didMount, setDidMount] = useState(false)
-  // useEffect(() => {
-  //   setDidMount(true)
-  // }, [])
-  // useEffect(() => {
-  //   if (didMount) {
-  //     let newCheckList = { ...checkList }
-  //     console.log(newCheckList, 'newchecklist')
-  //     newCheckList.chosenDate = newCheckList.chosenDate
-  //       .slice(5)
-  //       .join('')
-  //       .replace(/-/g, '/')
-  //   }
-  // }, [checkList, seatInfo])
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'

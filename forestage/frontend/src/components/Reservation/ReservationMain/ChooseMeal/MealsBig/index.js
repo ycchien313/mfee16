@@ -13,7 +13,7 @@ function MealsBig(props) {
     checkList,
     setCheckList,
     dishList,
-    setDishList
+    setDishList,
   } = props
 
   const [mealType, setMealType] = useState('main')
@@ -34,7 +34,6 @@ function MealsBig(props) {
     }, 1500)
   }
 
-  // WHY?????
   // 建立餐點物件 key為dish_id value為0
   useEffect(() => {
     if (didMount) {
@@ -46,21 +45,23 @@ function MealsBig(props) {
     }
   }, [dishes])
 
-  // 建立餐點物件 key為name
+  // 建立餐點陣列 [餐點名稱,數量,小計,圖片,單價]
   useEffect(() => {
     if (didMount) {
-      let newDishArr = [];
+      let newDishArr = []
       let dishArr = Object.entries(dishCount)
       dishes.forEach((dish) => {
         newDishArr = dishArr.map((v, i) => {
           if (parseInt(v[0]) === dish.dish_id) {
             v[0] = dish.name
+            v[2] = dish.price * v[1]
+            v[3] = dish.image_realistic
+            v[4] = dish.price
           }
           return v
         })
       })
       setDishList(newDishArr)
-      // console.log(newDishArr)
     }
   }, [dishes, dishCount])
 
@@ -94,7 +95,7 @@ function MealsBig(props) {
     }
   }, [mealType])
 
-  // 更新checkList的目前金額
+  // 計算subtotal
   function getSubtotal(dishId) {
     let subtotal = 0
     let dish = dishes.find((item) => {
@@ -104,6 +105,7 @@ function MealsBig(props) {
     return subtotal
   }
 
+  // 更新checkList的目前金額
   useEffect(() => {
     if (didMount) {
       let dishIdArr = Object.keys(dishCount)

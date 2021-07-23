@@ -29,6 +29,7 @@ function Day(props) {
     let newObj = { ...checkList }
     newObj.chosenDate = date
     newObj.singer = name
+    newObj.singerPic = picture
     setCheckList(newObj)
   }
 

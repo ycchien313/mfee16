@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import ReservationContent from './Content/ReservationContent'
-import DishContent from './Content/DishContent'
+import DishContent from './Content/DishContent/'
 import ReservationPerson from './Content/ReservationPerson'
 function Main(props) {
-  // useEffect(() => {
-  //   console.log(props)
-  // }, [])
+  const { dishList, checkList } = props
   return (
     <>
       <main className="reservation-checkout">
@@ -20,8 +18,8 @@ function Main(props) {
                 訂位確認
               </a>
             </div>
-            <ReservationContent />
-            <DishContent />
+            <ReservationContent checkList={checkList} />
+            <DishContent dishList={dishList} />
             <ReservationPerson />
 
             <div className="check">

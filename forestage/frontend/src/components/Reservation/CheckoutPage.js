@@ -8,16 +8,17 @@ import '../../styles/reservation/res_checkout/res_check.scss'
 
 function CheckoutPage(props) {
   // const { checkList, setCheckList, test } = props
-  const [dishList, setDishList] = useState({})
+  const [dishList, setDishList] = useState([])
+  const [checkList, setCheckList] = useState([])
   useEffect(() => {
-    console.log(props, 'aa')
+    setDishList(props.location.state.dishList)
+    setCheckList(props.location.state.checkList)
   }, [])
   return (
     <>
-      {/* {console.log(test)} */}
       <Header />
       <Hero />
-      <Main />
+      <Main dishList={dishList} checkList={checkList} />
       {/* <Footer /> */}
     </>
   )

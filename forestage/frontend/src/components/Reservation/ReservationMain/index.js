@@ -15,6 +15,7 @@ function Main(props) {
   const [checkList, setCheckList] = useState({
     chosenDate: '',
     singer: '',
+    singerPic:'',
     seatArea: '',
     attendance: 0,
     minOrder: 0,
@@ -116,7 +117,7 @@ function Main(props) {
           </aside>
         </div>
       </main>
-      <div class="table-bg"></div>
+      <div class="table-bg reservation"></div>
     </>
   )
 }

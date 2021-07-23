@@ -1,0 +1,219 @@
+.sign-in {
+  @import '../common/global.scss';
+
+  .signin-page-container {
+    max-width: 1000px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .signin-page-container .wave-top {
+    max-height: 200px;
+    height: 20vw;
+    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-top.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .signin-page-container .wave-down {
+    max-width: 580px;
+    width: 58vw;
+    max-height: 140px;
+    height: 14vw;
+    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-down.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .wave-down {
+      max-width: unset;
+      width: 100%;
+      max-height: unset;
+      height: 220px;
+      background-image: url('http://127.0.0.1:3000/images/auth/auth-md-wave-down.svg');
+    }
+  }
+  .signin-page-container .middle-container {
+    height: 260px;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .middle-container {
+      height: unset;
+      flex-direction: column;
+    }
+  }
+  .signin-page-container .left-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .left-side {
+      margin: 20px 0 50px 0;
+    }
+  }
+  .signin-page-container .wel-img {
+    height: 145px;
+    padding-right: 15px;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .wel-img {
+      min-height: 80px;
+      height: 18.88vw;
+    }
+  }
+  .signin-page-container .wel-title {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .wel-title {
+      align-items: center;
+    }
+  }
+  .signin-page-container .title-top {
+    margin: 0;
+    color: $secondary-green;
+    font-family: $en-itim;
+    font-size: 40px;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .title-top {
+      align-items: center;
+      font-size: clamp(21px, 5.2vw, 40px);
+    }
+  }
+  .signin-page-container .title-down {
+    width: 81.5px;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .title-down {
+      width: clamp(70px, 10.61vw, 81.5px);
+    }
+  }
+  .signin-page-container .right-side {
+    height: 330px;
+    margin-top: -100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .right-side {
+      margin-top: 0;
+    }
+  }
+  .signin-page-container .title-container {
+    /* width: 100%; */
+    /* height: 100%; */
+    /* height: 55px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .signin-page-container .title-container .title {
+    margin: 0 0 10px 0;
+    color: $primary-lightbrown;
+    font-family: $zh-tw-maru;
+  }
+  .signin-page-container .title-container .sub-title {
+    margin: 0;
+    color: $primary-lightbrown;
+    font-family: $zh-tw-noto;
+  }
+  .signin-page-container .title-container .sub-title span {
+    color: $accent-red;
+  }
+  .signin-page-container .signin-container {
+    /* height: 100%; */
+    /* height: 36px; */
+    /* width:  */
+    display: flex;
+    justify-content: space-between;
+  }
+  .signin-page-container .signin-box {
+    height: 35px;
+    padding: 0;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px #707070;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .signin-page-container .signin-box .icon-box {
+    width: 35px;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .signin-page-container .signin-box .icon-box img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+  }
+  .signin-page-container .signin-box span {
+    width: 125px;
+    color: #fff;
+    font-family: $zh-tw-noto;
+    font-size: 10px;
+    transform: scale(0.95);
+    text-align: center;
+  }
+  .signin-page-container .g-blue {
+    background-color: #4285f4;
+  }
+  .signin-page-container .f-blue {
+    background-color: #4e6cab;
+  }
+  .signin-page-container .signin-box .icon-box i {
+    font-size: 25px;
+    color: #4e6cab;
+  }
+  .signin-page-container .form-container {
+    height: 180px;
+    width: 333px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .signin-page-container .form-container label {
+    font-family: $zh-tw-noto;
+    color: $primary-lightbrown;
+    padding-left: 16px;
+  }
+  .signin-page-container .form-container input {
+    height: 30px;
+    outline: none;
+  }
+  .signin-page-container .form-container .btn-row {
+    display: flex;
+    justify-content: flex-end;
+  }
+  @media screen and (max-width: 768px) {
+    .signin-page-container .form-container .btn-row {
+      justify-content: center;
+    }
+  }
+  .signin-page-container .form-container .btn-row button {
+    width: 100px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .signin-page-container .form-container .btn-row span {
+    font-size: 16px;
+    margin: 0 auto;
+  }
+  .signin-page-container .form-container .btn-row i {
+    width: 25px;
+    margin-left: auto;
+  }
+}

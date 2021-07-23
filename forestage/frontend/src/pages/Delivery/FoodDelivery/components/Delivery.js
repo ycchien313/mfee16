@@ -45,16 +45,6 @@ function Delivery(props) {
       })
   }
 
-  const total = () => {
-    let sum = 0
-    for (let i = 0; i < dishes.length; i++) {
-      sum += dishes[i].price * dishCount[i]
-    }
-    console.log(dishes)
-
-    return sum.toLocaleString()
-  }
-
   useEffect(() => {
     getDishes()
 
@@ -106,7 +96,7 @@ function Delivery(props) {
       })
       setDishCount(newDishCount)
       // console.log(dishCount, 'dsc')
-      console.log(dishes[1].name, 'dishes name')
+      // console.log(dishes[1].name, 'dishes name')
     }
   }, [dishes])
 
@@ -229,7 +219,6 @@ function Delivery(props) {
           setDishes={setDishes}
           dishList={dishList}
           setDishList={setDishList}
-          total={total()}
         />
       </div>
       <div className="mobile-out">

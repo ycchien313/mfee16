@@ -20,6 +20,8 @@ function MainMealBox(props) {
     newDishCount[id] += 1
     setDishCount(newDishCount)
   }
+  // console.log(dishCount, 'count')
+  // console.log(dishCount[id], 'count')
   return (
     <>
       <div className="MainMealBox">

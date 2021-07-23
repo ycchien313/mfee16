@@ -1,7 +1,18 @@
 import React, { useEffect } from 'react'
 
 function Aside(props) {
-  const { dishCount, dishes, setDishes, dishList, setDishList, total } = props
+  const { dishCount, dishes, setDishes, dishList, setDishList } = props
+
+  // 計算總金額
+  const total = () => {
+    let sum = 0
+    dishList.forEach((v, i) => {
+      const count = v[1]
+      const price = dishes[i].price
+      sum += count * price
+    })
+    return sum
+  }
 
   useEffect(() => {
     let newDishArr = []
@@ -17,7 +28,7 @@ function Aside(props) {
 
     setDishList(newDishArr)
   }, [dishCount])
-  console.log(dishes, '123')
+  // console.log(dishCount, '123')
 
   return (
     <>
@@ -32,7 +43,7 @@ function Aside(props) {
                 {dishList.map((v, i) => {
                   if (v[1] > 0) {
                     return (
-                      <li>
+                      <li key={i}>
                         <span>{v[0]}</span>
                         <span>{v[1]}</span>
                       </li>
@@ -43,9 +54,7 @@ function Aside(props) {
                 <li>
                   <span>免運門檻$300</span>
                 </li>
-                <li>
-                  <span>總金額${total}</span>
-                </li>
+                <li>{total() > 0 && <span>總金額${total()}</span>}</li>
               </ul>
             </div>
           </div>

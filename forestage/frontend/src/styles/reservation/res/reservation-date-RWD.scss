@@ -1,9 +1,10 @@
-@import '../../common/global.scss';
   
   /* --------------------- */
   /* reservation */
   /* hero section */
-  
+  .reservation{
+@import '../../common/global.scss';
+
   /* main container*/
   .container-big {
     margin-left: 8.33vw;
@@ -181,4 +182,4 @@
       font-size: 1rem;
     }
   }
-  
+  }

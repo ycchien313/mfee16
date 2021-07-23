@@ -1,3 +1,5 @@
+
+.reservation{
 @import '../../common/global.scss';
 
 @media screen and (min-width: 768px){
@@ -70,4 +72,5 @@
     color: $primary-lightbrown;
     margin-top: 17px;
   }
+}
 }

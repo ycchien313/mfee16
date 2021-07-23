@@ -1,19 +1,22 @@
-import React from 'react'
-import '../../styles/reservation/res/reservation.scss'
-import Hero from '../../components/Reservation/Hero'
-import Main from '../../components/Reservation/Main/'
-import Header from '../../components/Header'
+import React, { useState } from 'react'
+import { Switch, Route, withRouter } from 'react-router-dom'
+// import Header from '../../components/Header'
+import ReservationPage from '../../../src/components/Reservation/ReservationPage'
+import CheckoutPage from '../../../src/components/Reservation/CheckoutPage'
+
 // import Footer from '../../components/Footer'
 
-function Reservation() {
+function Reservation(props) {
+
+  const url = props.match.url
   return (
     <>
-      <Header />
-      <Hero />
-      <Main />
-      {/* <Footer /> */}
+      <Switch>
+        <Route path={`${url}/checkout`} component={CheckoutPage}></Route>
+        <Route path={`${url}`} component={ReservationPage}></Route>
+      </Switch>
     </>
   )
 }
 
-export default Reservation
+export default withRouter(Reservation)

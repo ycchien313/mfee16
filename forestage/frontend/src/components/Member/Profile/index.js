@@ -10,8 +10,10 @@ function Profile(props) {
 
   return (
     <>
-      <Banner pagename={pagename} />
-      <Main pagename={pagename} />
+      <div className="profile">
+        <Banner pagename={pagename} />
+        <Main pagename={pagename} />
+      </div>
     </>
   )
 }

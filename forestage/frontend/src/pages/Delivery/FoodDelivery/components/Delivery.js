@@ -16,11 +16,12 @@ function Delivery(props) {
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
   const [counts, setCounts] = useState(Array(3).fill(0))
+  const [dishCount, setDishCount] = useState({})
+  // 空[]
+  const [dishList, setDishList] = useState([])
 
-  // 所有餐點(含name、count)
-  // 希望物件，{碳烤豬肋排: 0, 大披薩: 0, ...}
-  const [dishes, setDishes] = useState({})
-  const [dishePrice, setDishePrice] = useState({})
+  const [dishes, setDishes] = useState([])
+  // const [didMount, setDidMount] = useState(false)
 
   const getDishes = () => {
     $.ajax({
@@ -29,18 +30,29 @@ function Delivery(props) {
       dataType: 'json',
     })
       .then(function (result) {
-        console.log(result)
+        // console.log(result)
+        setDishes(result)
 
         let newDish = ''
         result.forEach((dish) => {
           newDish = { ...newDish }
           // newDish = { ...newDish, [dish.name]: 0 }
         })
-        setDishes(newDish)
+        // setDishes(result)
       })
       .catch(function (err) {
         console.log(err)
       })
+  }
+
+  const total = () => {
+    let sum = 0
+    for (let i = 0; i < dishes.length; i++) {
+      sum += dishes[i].price * dishCount[i]
+    }
+    console.log(dishes)
+
+    return sum.toLocaleString()
   }
 
   useEffect(() => {
@@ -86,9 +98,17 @@ function Delivery(props) {
       })
   }, [])
 
-  // useEffect(() => {
-  //   console.log(dishes)
-  // }, [dishes])
+  useEffect(() => {
+    if (dishes.length > 0) {
+      let newDishCount = {}
+      dishes.forEach((item) => {
+        newDishCount[item.dish_id] = 0
+      })
+      setDishCount(newDishCount)
+      // console.log(dishCount, 'dsc')
+      console.log(dishes[1].name, 'dishes name')
+    }
+  }, [dishes])
 
   return (
     <>
@@ -111,23 +131,27 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  {main.map((v, i) => {
-                    return (
-                      <MainMealBox
-                        key={i}
-                        index={i}
-                        name={v.name}
-                        price={v.price}
-                        image_realistic={v.image_realistic}
-                        counts={counts}
-                        setCounts={setCounts}
-                        dishes={dishes}
-                        setDishes={setDishes}
-                        dishePrice={dishePrice}
-                        setDishePrice={setDishePrice}
-                      />
-                    )
+                  {dishes.map((v, i) => {
+                    if (v.type === '主餐') {
+                      return (
+                        <MainMealBox
+                          key={v.dish_id}
+                          index={i}
+                          name={v.name}
+                          price={v.price}
+                          id={v.dish_id}
+                          image_realistic={v.image_realistic}
+                          counts={counts}
+                          setCounts={setCounts}
+                          dishes={dishes}
+                          setDishes={setDishes}
+                          dishCount={dishCount}
+                          setDishCount={setDishCount}
+                        />
+                      )
+                    }
                   })}
+                  {/* {console.log(main, 'main')} */}
                 </div>
               </div>
             </div>
@@ -141,26 +165,25 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  {side.map(function (v, i) {
-                    return (
-                      <SideBox
-                        key={i}
-                        index={i}
-                        name={v.name}
-                        price={v.price}
-                        image_realistic={v.image_realistic}
-                        counts={counts}
-                        setCounts={setCounts}
-                        dishes={dishes}
-                        setDishes={setDishes}
-                        dishePrice={dishePrice}
-                        setDishePrice={setDishePrice}
-                        // counts={counts[i]}
-                        // setCounts={(newCount) => {
-                        //   setProductItemCount(i, newCount)
-                        // }}
-                      />
-                    )
+                  {dishes.map((v, i) => {
+                    if (v.type === '附餐') {
+                      return (
+                        <SideBox
+                          key={v.dish_id}
+                          index={i}
+                          name={v.name}
+                          price={v.price}
+                          id={v.dish_id}
+                          image_realistic={v.image_realistic}
+                          counts={counts}
+                          setCounts={setCounts}
+                          dishes={dishes}
+                          setDishes={setDishes}
+                          dishCount={dishCount}
+                          setDishCount={setDishCount}
+                        />
+                      )
+                    }
                   })}
                 </div>
               </div>
@@ -175,29 +198,39 @@ function Delivery(props) {
                   </div>
                 </div>
                 <div className="MealBox-group">
-                  {dessert.map(function (v, i) {
-                    return (
-                      <DessertBox
-                        key={i}
-                        index={i}
-                        name={v.name}
-                        price={v.price}
-                        image_realistic={v.image_realistic}
-                        counts={counts}
-                        setCounts={setCounts}
-                        dishes={dishes}
-                        setDishes={setDishes}
-                        dishePrice={dishePrice}
-                        setDishePrice={setDishePrice}
-                      />
-                    )
+                  {dishes.map((v, i) => {
+                    if (v.type === '甜點') {
+                      return (
+                        <DessertBox
+                          key={v.dish_id}
+                          index={i}
+                          name={v.name}
+                          price={v.price}
+                          id={v.dish_id}
+                          image_realistic={v.image_realistic}
+                          counts={counts}
+                          setCounts={setCounts}
+                          dishes={dishes}
+                          setDishes={setDishes}
+                          dishCount={dishCount}
+                          setDishCount={setDishCount}
+                        />
+                      )
+                    }
                   })}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Aside counts={counts} dishes={dishes} setDishes={setDishes} />
+        <Aside
+          dishCount={dishCount}
+          dishes={dishes}
+          setDishes={setDishes}
+          dishList={dishList}
+          setDishList={setDishList}
+          total={total()}
+        />
       </div>
       <div className="mobile-out">
         <input

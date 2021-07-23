@@ -1,19 +1,25 @@
 import React from 'react'
 
 function MainMealBox(props) {
-  const {
-    index,
-    name,
-    price,
-    image_realistic,
-    counts,
-    setCounts,
-    dishes,
-    setDishes,
-    dishePrice,
-    setDishePrice,
-  } = props
+  const { id, name, price, image_realistic, dishCount, setDishCount } = props
+  // console.log('id', id)
+  // console.log('dishCount', dishCount)
 
+  function minus(id) {
+    let newDishCount = { ...dishCount }
+    if (newDishCount[id] > 0) {
+      newDishCount[id] -= 1
+    } else {
+      newDishCount[id] = 0
+    }
+    setDishCount(newDishCount)
+  }
+
+  function add(id) {
+    let newDishCount = { ...dishCount }
+    newDishCount[id] += 1
+    setDishCount(newDishCount)
+  }
   return (
     <>
       <div className="MainMealBox">
@@ -27,24 +33,15 @@ function MainMealBox(props) {
             className="minus"
             field="quantity"
             onClick={() => {
-              // if (counts > 0) setCounts(counts - 1)
-              let newCounts = [...counts]
-              if (newCounts[index] > 0) newCounts[index] = newCounts[index] - 1
-              setCounts(newCounts)
+              minus(id)
             }}
           />
+
           <input
-            type="text"
+            type="number"
             name="quantity"
-            value={counts[index]}
-            // defaultValue={counts[index]}
+            defaultValue={dishCount[id]}
             className="num"
-            // onChange={() => {
-            //   let newCounts = [...counts]
-            //   setCounts(newCounts)
-            // }}
-            // onChange={(e) => setCounts(+e.target.value)}
-            // onChange={() => setCounts(+counts)}
           />
           <input
             type="button"
@@ -52,20 +49,7 @@ function MainMealBox(props) {
             className="plus"
             field="quantity"
             onClick={() => {
-              // console.log('plus click')
-              let newCounts = [...counts]
-              newCounts[index] = newCounts[index] + 1
-              setCounts(newCounts)
-              let newDishes = dishes
-              newDishes[name] = newCounts[index]
-              setDishes(newDishes)
-              let newDishePrice = dishePrice
-              newDishePrice[price] = newCounts[index]
-              setDishePrice(newDishePrice)
-              console.log(newDishes)
-              console.log(newDishePrice)
-              // let newCount = counts + 1
-              // setCounts(newCount)
+              add(id)
             }}
           />
         </form>

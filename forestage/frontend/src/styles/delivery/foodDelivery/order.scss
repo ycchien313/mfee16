@@ -496,4 +496,10 @@
   }
 }
 
+.button-group input::-webkit-outer-spin-button,
+.button-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* <!--order===================================================================================== --> */

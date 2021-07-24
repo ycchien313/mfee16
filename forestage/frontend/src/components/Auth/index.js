@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import Signin from './Signin/Signin/'
-import Signup from './Signup/Signup/'
+import Signin from './Signin/'
+import Signup from './Signup/'
 
 function Auth() {
-  const [toggleScreen, setToggleScreen] = useState(false)
+  // true: Signin
+  // false: Signup
+  const [signinScreen, setSigninScreen] = useState(true)
 
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      />
-      {toggleScreen ? <Signin /> : <Signup />}
+      {signinScreen ? (
+        <Signin signinScreen={signinScreen} setSigninScreen={setSigninScreen} />
+      ) : (
+        <Signup signinScreen={signinScreen} setSigninScreen={setSigninScreen} />
+      )}
     </>
   )
 }

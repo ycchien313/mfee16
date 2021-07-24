@@ -129,6 +129,7 @@
   }
   .signin-page-container .title-container .sub-title span {
     color: $accent-red;
+    cursor: pointer;
   }
   .signin-page-container .signin-container {
     /* height: 100%; */
@@ -145,6 +146,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    cursor: pointer;
   }
   .signin-page-container .signin-box .icon-box {
     width: 35px;

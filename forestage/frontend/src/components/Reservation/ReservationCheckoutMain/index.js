@@ -1,9 +1,21 @@
 import React, { useEffect } from 'react'
+import axios from 'axios'
 import ReservationContent from './Content/ReservationContent'
 import DishContent from './Content/DishContent/'
 import ReservationPerson from './Content/ReservationPerson'
+
 function Main(props) {
-  const { dishList, checkList } = props
+  const { dishList, checkList, insertResData, setInsertResData } = props
+  function insertReservation() {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/reservation/checkout/send',
+      data: {
+        dishList,
+        insertResData,
+      },
+    })
+  }
   return (
     <>
       <main className="reservation-checkout">
@@ -19,8 +31,16 @@ function Main(props) {
               </a>
             </div>
             <ReservationContent checkList={checkList} />
-            <DishContent dishList={dishList} />
-            <ReservationPerson />
+            <DishContent
+              dishList={dishList}
+              insertResData={insertResData}
+              setInsertResData={setInsertResData}
+              checkList={checkList}
+            />
+            <ReservationPerson
+              insertResData={insertResData}
+              setInsertResData={setInsertResData}
+            />
 
             <div className="check">
               <span className="info-text">
@@ -34,7 +54,12 @@ function Main(props) {
                   />
                   修改訂位
                 </button>
-                <button className="pink-guide-button">
+                <button
+                  className="pink-guide-button"
+                  onClick={() => {
+                    insertReservation()
+                  }}
+                >
                   確認送出
                   <img
                     src="http://localhost:3000/images/reservation/res_checkout/arrow-circle-right-solid.svg"

@@ -10,9 +10,9 @@
 // main.reservation{
 //   display: flex}
 
-.reservation {
-  @import '../../common/global.scss';
+@import '../../common/global.scss';
 
+.reservation {
   .h1.title {
     top: 4.3vw;
     position: absolute;
@@ -446,6 +446,7 @@
     .seat-row {
       display: none;
     }
+
     .seat-info {
       width: 100%;
       border-radius: 5.57vw;
@@ -454,21 +455,25 @@
       align-items: center;
       justify-content: space-evenly;
     }
+
     .button-group input {
       width: 30px;
       height: 30px;
       border-radius: 0px;
     }
+
     .plus-button {
       width: 30px;
       height: 30px;
       border-radius: 0px 5px 5px 0;
     }
+
     .minus-button {
       width: 30px;
       height: 30px;
       border-radius: 5px 0 0 5px;
     }
+
     .seat-info span {
       align-self: center;
       margin-bottom: 0;
@@ -1008,13 +1013,13 @@
   }
 }
 
-  /* table */
+/* table */
 
-  .reservation.table-bg {
-    width: 100%;
-    background: url(http://localhost:3000/images/reservation/table-bg.png);
-    background-size: cover;
-    height: 22vw;
-    position: relative;
-    bottom: 8vw;
-  }
+.reservation.table-bg {
+  width: 100%;
+  background: url(http://localhost:3000/images/reservation/table-bg.png);
+  background-size: cover;
+  height: 22vw;
+  position: relative;
+  bottom: 8vw;
+}

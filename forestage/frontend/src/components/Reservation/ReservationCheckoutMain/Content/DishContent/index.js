@@ -1,7 +1,49 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState, useEffect, useRef } from 'react'
 import DishRow from './DishRow'
 function DishContent(props) {
-  const { dishList } = props
+  const { dishList, checkList, insertResData, setInsertResData } = props
+  const [coupon, setCoupon] = useState([])
+  const selectRef = useRef(null)
+  // const [selectedCoupon, setSelectedCoupon] = useState()
+  function getMemberCoupons() {
+    axios
+      .get('http://localhost:3001/reservation/checkout/coupon', {
+        params: {
+          memberId: 1,
+        },
+      })
+      .then((result) => {
+        console.log(result.data)
+        setCoupon(result.data)
+      })
+  }
+  function setMcmId(e) {
+    let newInsertResData = { ...insertResData }
+    newInsertResData.mcm_id = parseInt(e.target.value)
+    setInsertResData(newInsertResData)
+  }
+
+  function getDiscount() {
+    let foundCoupon = coupon.find((v) => {
+      return v.mcm_id === insertResData.mcm_id
+    })
+    if (foundCoupon !== undefined) {
+      return foundCoupon.discount
+    } else {
+      return 0
+    }
+  }
+
+  useEffect(() => {
+    getMemberCoupons()
+  }, [])
+
+  useEffect(() => {
+    // setTotal()
+  }, [insertResData])
+
+  // let discount = 0
   return (
     <>
       <div className="dish-content">
@@ -37,18 +79,37 @@ function DishContent(props) {
             </div>
             <div className="price-count-detail">
               <div className="total">
-                <span className="h4">1700</span>
+                <span className="h4">{insertResData.total}</span>
                 <span className="h4">元</span>
               </div>
-              <select name="" id="" className="h4">
-                <option value="端午節優惠 滿千折百">端午節優惠 滿千折百</option>
+              <select
+                name=""
+                id=""
+                className="h4"
+                onChange={(e) => {
+                  setMcmId(e)
+                }}
+              >
+                <option value="">請選擇</option>
+                {/* coupon下拉選單 */}
+                {coupon.map((v) => {
+                  return checkList.total >= v.minimum_order_value ? (
+                    <option
+                      value={v.mcm_id}
+                    >{`${v.name} - ${v.discount}元`}</option>
+                  ) : (
+                    <option value={v.mcm_id} disabled>
+                      {`${v.name} - 低消:${v.minimum_order_value}`}
+                    </option>
+                  )
+                })}
               </select>
               <div className="discount">
-                <span className="h4">100</span>
+                <span className="h4">{getDiscount()}</span>
                 <span className="h4">元</span>
               </div>
               <div className="total-after">
-                <span className="h4">1600</span>
+                <span className="h4">{checkList.total - getDiscount()}</span>
                 <span className="h4">元</span>
               </div>
             </div>

@@ -94,6 +94,7 @@ function ChooseSeat(props) {
       newObj.seatArea = seat.name
       newObj.attendance = attendance[seatId]
       newObj.minOrder = attendance[seatId] * seat.minimum_order
+      newObj.seatId = seatId
     } else if (attendance[seatId] === 0) {
       newObj.seatArea = ''
       newObj.attendance = 0

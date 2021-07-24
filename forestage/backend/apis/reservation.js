@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
+const moment  = require('moment')
+let now = 
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order, seat_number AS totalSeats FROM seat'
@@ -21,8 +23,9 @@ router.get('/dish', async(req, res)=> {
 })
 
 router.get('/checkout/coupon', async(req, res)=>{
-    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = 1 AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1'
-    let memberCoupon = await db.connection.queryAsync(getMemberCouponSql)
+    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1'
+    let memberCoupon = await db.connection.queryAsync(getMemberCouponSql,[req.query.memberId])
+    console.log(req.query.memberId)
     res.send(memberCoupon)
 })
 
@@ -34,18 +37,39 @@ router.get('/checkout/memberInfo', async(req, res)=>{
 })
 
 router.post('/checkout/send', async(req, res)=>{
-    console.log(req.body.reservationInfo.mcm_id)
-    let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status) VALUES ("2021-07-31",1,2,"王曉華","0912344455",2000,"我是測試用的備註",1,1,"未完成")'
-    let reservation = await db.connection.queryAsync(insertReservationSql)
-    console.log(reservation)
+    let insertResData = req.body.insertResData
+    insertResData = Object.values(insertResData)
+    let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
+    let reservation = await db.connection.queryAsync(insertReservationSql,[insertResData])
 
-    let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES (${reservation.insertId}, 8),(${reservation.insertId}, 7)`
-    let insertDish = await db.connection.queryAsync(insertDishSql)
+    // 處理餐點陣列
+    let dishList = req.body.dishList
+    // 找出數量>0的餐點
+    dishList = dishList.filter((v)=>{
+        return v[1]>0
+    })
+
+    // 組成新陣列[數量, id]
+    dishList = dishList.map((v,i)=>{
+        return [v[1],v[5]]
+    })
+
+    // 建立insert陣列 [reservation_id,dish_id]
+    let newDishList = []
+    dishList.forEach((v)=>{
+        for(let i =0; i<v[0]; i++){
+            newDishList.push([reservation.insertId,v[1]])
+        }
+    })
+    console.log(newDishList)
+    
+    let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`
+    let insertDish = await db.connection.queryAsync(insertDishSql,[newDishList])
     console.log(insertDish)
 
     // 更新mcm表格中，哪一筆訂單使用此折價券
     let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
-    let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.reservationInfo.mcm_id])
+    let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
     console.log(updateMCM)
 
 })

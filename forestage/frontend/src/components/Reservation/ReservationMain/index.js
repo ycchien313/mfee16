@@ -15,12 +15,14 @@ function Main(props) {
   const [checkList, setCheckList] = useState({
     chosenDate: '',
     singer: '',
-    singerPic:'',
+    singerPic: '',
     seatArea: '',
+    seatId: 0,
     attendance: 0,
     minOrder: 0,
     total: 0,
   })
+
   const [dishList, setDishList] = useState([])
 
   useEffect(() => {
@@ -28,7 +30,6 @@ function Main(props) {
     axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
       setSeatInfo(result.data)
     })
-    // console.log(props,"sentprops")
   }, [])
 
   // console.log(seatInfo[1].name)
@@ -53,6 +54,7 @@ function Main(props) {
       }
     }
   }, [remainingSeat])
+  
   let reservationInfo = [
     '2021-07-31',
     1,

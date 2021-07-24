@@ -45,7 +45,7 @@ function MealsBig(props) {
     }
   }, [dishes])
 
-  // 建立餐點陣列 [餐點名稱,數量,小計,圖片,單價]
+  // 建立餐點陣列 [餐點名稱,數量,小計,圖片,單價, id]
   useEffect(() => {
     if (didMount) {
       let newDishArr = []
@@ -57,6 +57,7 @@ function MealsBig(props) {
             v[2] = dish.price * v[1]
             v[3] = dish.image_realistic
             v[4] = dish.price
+            v[5] = dish.dish_id
           }
           return v
         })

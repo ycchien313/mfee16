@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Signin from './Signin'
-import Signup from './Signup'
+import Signin from './Signin/Signin/'
+import Signup from './Signup/Signup/'
 
 function Auth() {
   const [toggleScreen, setToggleScreen] = useState(false)

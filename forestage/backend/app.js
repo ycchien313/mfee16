@@ -10,7 +10,12 @@ const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
 const db = require('./utils/db');
 const connection = db.connection;
-const port = 3000;
+const cors = require('cors');
+const port = 3001;
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cors());
 
 app.use('/auth', authApi);
 app.use('/comment', commentApi);

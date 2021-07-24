@@ -21,7 +21,6 @@ function Delivery(props) {
   const [dishList, setDishList] = useState([])
 
   const [dishes, setDishes] = useState([])
-  // const [didMount, setDidMount] = useState(false)
 
   const getDishes = () => {
     $.ajax({
@@ -30,15 +29,12 @@ function Delivery(props) {
       dataType: 'json',
     })
       .then(function (result) {
-        // console.log(result)
         setDishes(result)
 
         let newDish = ''
         result.forEach((dish) => {
           newDish = { ...newDish }
-          // newDish = { ...newDish, [dish.name]: 0 }
         })
-        // setDishes(result)
       })
       .catch(function (err) {
         console.log(err)
@@ -54,11 +50,7 @@ function Delivery(props) {
       dataType: 'json',
     })
       .then(function (result) {
-        // console.log(result)
-        // 抓
-        // setdata(result[0].name)
         inputMain(result)
-        // console.log(result[0])
       })
       .catch(function (err) {
         console.log(err)
@@ -95,139 +87,144 @@ function Delivery(props) {
         newDishCount[item.dish_id] = 0
       })
       setDishCount(newDishCount)
-      // console.log(dishCount, 'dsc')
-      // console.log(dishes[1].name, 'dishes name')
     }
   }, [dishes])
 
   return (
     <>
-      <div className="hero-section">
-        <Map dist={dist} inputDist={inputDist} rd={rd} inputRd={inputRd} />
-        <Takeout time={time} setTime={setTime} date={date} setDate={setDate} />
-      </div>
-      <h2 className="chose">選擇餐點</h2>
-      <div className="order">
-        <div className="mobile-order-out">
-          <div className="mobile-order"></div>
+      <div className="FoodDelivery">
+        <div className="hero-section">
+          <Map dist={dist} inputDist={inputDist} rd={rd} inputRd={inputRd} />
+          <Takeout
+            time={time}
+            setTime={setTime}
+            date={date}
+            setDate={setDate}
+          />
         </div>
-        <div className="order-left">
-          <div className="MainMeal-group">
-            <div className="wrapper">
-              <div className="maindiv">
-                <div className="category">
-                  <div className="category-bg" id="category-title-green">
-                    <h4 className="category-innertext">主餐</h4>
+        <h2 className="chose">選擇餐點</h2>
+        <div className="order">
+          <div className="mobile-order-out">
+            <div className="mobile-order"></div>
+          </div>
+          <div className="order-left">
+            <div className="MainMeal-group">
+              <div className="wrapper">
+                <div className="maindiv">
+                  <div className="category">
+                    <div className="category-bg" id="category-title-green">
+                      <h4 className="category-innertext">主餐</h4>
+                    </div>
+                  </div>
+                  <div className="MealBox-group">
+                    {dishes.map((v, i) => {
+                      if (v.type === '主餐') {
+                        return (
+                          <MainMealBox
+                            key={v.dish_id}
+                            index={i}
+                            name={v.name}
+                            price={v.price}
+                            id={v.dish_id}
+                            image_realistic={v.image_realistic}
+                            counts={counts}
+                            setCounts={setCounts}
+                            dishes={dishes}
+                            setDishes={setDishes}
+                            dishCount={dishCount}
+                            setDishCount={setDishCount}
+                          />
+                        )
+                      }
+                    })}
+                    {/* {console.log(main, 'main')} */}
                   </div>
                 </div>
-                <div className="MealBox-group">
-                  {dishes.map((v, i) => {
-                    if (v.type === '主餐') {
-                      return (
-                        <MainMealBox
-                          key={v.dish_id}
-                          index={i}
-                          name={v.name}
-                          price={v.price}
-                          id={v.dish_id}
-                          image_realistic={v.image_realistic}
-                          counts={counts}
-                          setCounts={setCounts}
-                          dishes={dishes}
-                          setDishes={setDishes}
-                          dishCount={dishCount}
-                          setDishCount={setDishCount}
-                        />
-                      )
-                    }
-                  })}
-                  {/* {console.log(main, 'main')} */}
+              </div>
+            </div>
+            <div className="Side-group">
+              <div className="wrapper">
+                <div className="maindiv">
+                  <div className="category">
+                    <div className="category-bg" id="category-title-gray">
+                      <h4 className="category-innertext">附餐</h4>
+                    </div>
+                  </div>
+                  <div className="MealBox-group">
+                    {dishes.map((v, i) => {
+                      if (v.type === '附餐') {
+                        return (
+                          <SideBox
+                            key={v.dish_id}
+                            index={i}
+                            name={v.name}
+                            price={v.price}
+                            id={v.dish_id}
+                            image_realistic={v.image_realistic}
+                            counts={counts}
+                            setCounts={setCounts}
+                            dishes={dishes}
+                            setDishes={setDishes}
+                            dishCount={dishCount}
+                            setDishCount={setDishCount}
+                          />
+                        )
+                      }
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="Dessert-group">
+              <div className="wrapper">
+                <div className="maindiv">
+                  <div className="category">
+                    <div className="category-bg" id="category-title-pink">
+                      <h4 className="category-innertext">甜點</h4>
+                    </div>
+                  </div>
+                  <div className="MealBox-group">
+                    {dishes.map((v, i) => {
+                      if (v.type === '甜點') {
+                        return (
+                          <DessertBox
+                            key={v.dish_id}
+                            index={i}
+                            name={v.name}
+                            price={v.price}
+                            id={v.dish_id}
+                            image_realistic={v.image_realistic}
+                            counts={counts}
+                            setCounts={setCounts}
+                            dishes={dishes}
+                            setDishes={setDishes}
+                            dishCount={dishCount}
+                            setDishCount={setDishCount}
+                          />
+                        )
+                      }
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="Side-group">
-            <div className="wrapper">
-              <div className="maindiv">
-                <div className="category">
-                  <div className="category-bg" id="category-title-gray">
-                    <h4 className="category-innertext">附餐</h4>
-                  </div>
-                </div>
-                <div className="MealBox-group">
-                  {dishes.map((v, i) => {
-                    if (v.type === '附餐') {
-                      return (
-                        <SideBox
-                          key={v.dish_id}
-                          index={i}
-                          name={v.name}
-                          price={v.price}
-                          id={v.dish_id}
-                          image_realistic={v.image_realistic}
-                          counts={counts}
-                          setCounts={setCounts}
-                          dishes={dishes}
-                          setDishes={setDishes}
-                          dishCount={dishCount}
-                          setDishCount={setDishCount}
-                        />
-                      )
-                    }
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="Dessert-group">
-            <div className="wrapper">
-              <div className="maindiv">
-                <div className="category">
-                  <div className="category-bg" id="category-title-pink">
-                    <h4 className="category-innertext">甜點</h4>
-                  </div>
-                </div>
-                <div className="MealBox-group">
-                  {dishes.map((v, i) => {
-                    if (v.type === '甜點') {
-                      return (
-                        <DessertBox
-                          key={v.dish_id}
-                          index={i}
-                          name={v.name}
-                          price={v.price}
-                          id={v.dish_id}
-                          image_realistic={v.image_realistic}
-                          counts={counts}
-                          setCounts={setCounts}
-                          dishes={dishes}
-                          setDishes={setDishes}
-                          dishCount={dishCount}
-                          setDishCount={setDishCount}
-                        />
-                      )
-                    }
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
+          <Aside
+            dishCount={dishCount}
+            dishes={dishes}
+            setDishes={setDishes}
+            dishList={dishList}
+            setDishList={setDishList}
+          />
         </div>
-        <Aside
-          dishCount={dishCount}
-          dishes={dishes}
-          setDishes={setDishes}
-          dishList={dishList}
-          setDishList={setDishList}
-        />
-      </div>
-      <div className="mobile-out">
-        <input
-          type="button"
-          defaultValue="送出訂單"
-          className="OrderGet mobile-order-get"
-          field=""
-        />
+        <div className="mobile-out">
+          <input
+            type="button"
+            defaultValue="送出訂單"
+            className="OrderGet mobile-order-get"
+            field=""
+          />
+        </div>
       </div>
     </>
   )

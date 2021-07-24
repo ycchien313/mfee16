@@ -1,562 +1,315 @@
 @import '../../common/normalize.scss';
 @import '../../common/global.scss';
 
-// :root {
-//   --primary-lightpink: #fee0dc;
-//   --primary-lightgreen: #b2d297;
-//   --primary-lightgray: #e4eded;
-//   --primary-lightbrown: #a1957d;
-//   --secondary-lightyellow: #fded82;
-//   --secondary-green: #97bc78;
-//   --secondary-green-dark: #5e7c60;
-//   --accent-red: #fc5c75;
-//   --accent-orange: #f5b54d;
-//   --zh-tw-maru: 'A-OTF Maru Folk Pro', sans-serif;
-//   --zh-tw-noto: 'Noto Sans TC', sans-serif;
-//   --en-itim: 'Itim', cursive;
-//   --en-open-sans: 'Open Sans', sans-serif;
-// }
-
-// h1,
-// h2,
-// h3,
-// h4 {
-//   font-weight: 400;
-// }
-
-// h1,
-// .h1 {
-//   font-size: calc(1rem + 1.25vw);
-// }
-
-// h2,
-// .h2 {
-//   font-size: calc(1rem + 0.85vw);
-// }
-
-// h3,
-// .h3 {
-//   font-size: calc(1rem + 0.45vw);
-// }
-
-// h4,
-// .h4 {
-//   font-size: calc(1rem + 0.2vw);
-// }
-
-// p,
-// span {
-//   font-size: 1rem;
-//   font-family: $zh-tw-noto;
-// }
-
-// input,
-// .input {
-//   height: 2rem;
-//   border-radius: 5px;
-//   background-color: #ffffff;
-//   font-size: 16px;
-//   padding: 8px 0 8px 10px;
-//   box-sizing: border-box;
-// }
-
-// textarea {
-//   border-radius: 5px;
-//   background-color: #ffffff;
-//   font-size: 16px;
-//   padding: 8px 0 8px 10px;
-//   box-sizing: border-box;
-// }
-
-// .guide-button {
-//   width: 150px;
-//   height: 50px;
-//   border: none;
-//   border-radius: 25px;
-//   font-size: 20px;
-//   font-family: $zh-tw-noto;
-//   color: #ffffff;
-
-//   /* padding: ; */
-//   box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
-//   box-sizing: border-box;
-
-//   &:active {
-//     box-shadow: none;
-//   }
-
-//   &.pink {
-//     background-color: $accent-red;
-//   }
-
-//   &.orange {
-//     background-color: $accent-red;
-//   }
-// }
-
-// @font-face {
-//   font-family: A-OTF Maru Folk Pro;
-//   src: url(../font/A-OTF-MaruFoPro-Regular.otf);
-// }
-
-// li {
-//   list-style: none;
-// }
-
-// ul {
-//   padding: 0;
-// }
-
-/* --------------------- */
-/* hero section */
-
-.hero-section {
-  background-image: url('http://localhost:3000/images/delivery/deliveryOrder/landing_newcolor_2-02.png');
-  background-size: cover;
-  height: 500px;
-  width: 100%;
-  position: relative;
-}
-
-.h1.title {
-  top: 3vw;
-  position: absolute;
-  left: 18.9vw;
-  margin: 0;
-  font-family: $zh-tw-maru;
-  color: $primary-lightbrown;
-}
-
-.h3.title {
-  top: 6.3vw;
-  position: absolute;
-  left: 18.9vw;
-  margin: 0;
-  font-family: $zh-tw-maru;
-  color: $primary-lightbrown;
-}
-
-.top-wave {
-  max-width: 100vw;
-  height: 9.85vw;
-  position: relative;
-  margin: 0;
-
-  /* top: 500px; */
-  top: calc(500px - 9.6vw);
-
-  .wave-1 {
-    width: 100%;
-  }
-
-  .elfin {
-    width: 5.2vw;
-    position: absolute;
-    top: 1.97vw;
-    left: 31.35vw;
-  }
-}
-
-@media screen and (max-width: 1200px) {
+.DeliveryOrder {
   .hero-section {
+    background-image: url('http://localhost:3000/images/delivery/deliveryOrder/landing_newcolor_2-02.png');
+    background-size: cover;
+    height: 500px;
     width: 100%;
-    height: 210px;
-    padding: 0 30px;
-    box-sizing: border-box;
+    position: relative;
+  }
+
+  .h1.title {
+    top: 3vw;
+    position: absolute;
+    left: 18.9vw;
+    margin: 0;
+    font-family: $zh-tw-maru;
+    color: $primary-lightbrown;
+  }
+
+  .h3.title {
+    top: 6.3vw;
+    position: absolute;
+    left: 18.9vw;
+    margin: 0;
+    font-family: $zh-tw-maru;
+    color: $primary-lightbrown;
   }
 
   .top-wave {
+    max-width: 100vw;
+    height: 9.85vw;
     position: relative;
-    top: 60px;
-    background: white;
-    width: 100%;
-    height: 130px;
-    border-radius: 30px;
+    margin: 0;
+
+    /* top: 500px; */
+    top: calc(500px - 9.6vw);
 
     .wave-1 {
+      width: 100%;
+    }
+
+    .elfin {
+      width: 5.2vw;
+      position: absolute;
+      top: 1.97vw;
+      left: 31.35vw;
+    }
+  }
+
+  @media screen and (max-width: 1200px) {
+    .hero-section {
+      width: 100%;
+      height: 210px;
+      padding: 0 30px;
+      box-sizing: border-box;
+    }
+
+    .top-wave {
+      position: relative;
+      top: 60px;
+      background: white;
+      width: 100%;
+      height: 130px;
+      border-radius: 30px;
+
+      .wave-1 {
+        display: none;
+      }
+    }
+
+    .h1.title {
+      top: 33px;
+      left: 50%;
+    }
+
+    .h3.title {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+    }
+
+    .top-wave .elfin {
+      width: 60px;
+      position: absolute;
+      top: 20px;
+      left: 25%;
+    }
+  }
+
+  /* main */
+
+  .container-big {
+    margin-left: 8.33vw;
+    margin-right: 8.33vw;
+  }
+
+  /* takeout-check */
+
+  .res-check {
+    padding-left: 8.33vw;
+    padding-right: 8.33vw;
+
+    hr {
+      border-top: 1px solid $primary-lightbrown;
+      border-bottom: none;
+      width: 100%;
+      margin: 0;
+    }
+
+    h3 {
+      margin-bottom: 1.14vw;
+      color: $secondary-green-dark;
+      font-weight: 700;
+    }
+
+    .h4 {
+      color: $primary-lightbrown;
+    }
+  }
+
+  /* bread crumb */
+
+  .bread-crumb {
+    margin-top: 2.08vw;
+    margin-bottom: 2.65vw;
+    display: block;
+    width: 100%;
+    color: $primary-lightbrown;
+    font-family: $primary-lightbrown;
+
+    a {
+      &:nth-child(1) {
+        color: #ccc;
+        text-decoration: none;
+      }
+
+      &:nth-child(2) {
+        color: $secondary-green;
+        text-decoration: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .bread-crumb {
       display: none;
     }
   }
 
-  .h1.title {
-    top: 33px;
-    left: 50%;
-  }
+  /* 訂位內容 */
 
-  .h3.title {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-  }
-
-  .top-wave .elfin {
-    width: 60px;
-    position: absolute;
-    top: 20px;
-    left: 25%;
-  }
-}
-
-/* main */
-
-.container-big {
-  margin-left: 8.33vw;
-  margin-right: 8.33vw;
-}
-
-/* takeout-check */
-
-.res-check {
-  padding-left: 8.33vw;
-  padding-right: 8.33vw;
-
-  hr {
-    border-top: 1px solid $primary-lightbrown;
-    border-bottom: none;
-    width: 100%;
-    margin: 0;
-  }
-
-  h3 {
-    margin-bottom: 1.14vw;
-    color: $secondary-green-dark;
-    font-weight: 700;
-  }
-
-  .h4 {
-    color: $primary-lightbrown;
-  }
-}
-
-/* bread crumb */
-
-.bread-crumb {
-  margin-top: 2.08vw;
-  margin-bottom: 2.65vw;
-  display: block;
-  width: 100%;
-  color: $primary-lightbrown;
-  font-family: $primary-lightbrown;
-
-  a {
-    &:nth-child(1) {
-      color: #ccc;
-      text-decoration: none;
-    }
-
-    &:nth-child(2) {
-      color: $secondary-green;
-      text-decoration: none;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .bread-crumb {
-    display: none;
-  }
-}
-
-/* 訂位內容 */
-
-.res-content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-
-  .content {
+  .res-content {
     display: flex;
-    margin-top: 2.65vw;
-    margin-bottom: 3.7vw;
+    flex-direction: column;
+    width: 100%;
+
+    .content {
+      display: flex;
+      margin-top: 2.65vw;
+      margin-bottom: 3.7vw;
+    }
+
+    .singer-pic {
+      width: 13.02vw;
+      height: 13.02vw;
+      margin: 0 2.24vw 0 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .name {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      margin-right: 1.04vw;
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+    }
+
+    .date {
+      color: $accent-red;
+    }
+
+    .text {
+      display: flex;
+    }
   }
 
-  .singer-pic {
-    width: 13.02vw;
-    height: 13.02vw;
-    margin: 0 2.24vw 0 0;
+  @media screen and (max-width: 768px) {
+    .res-content {
+      h3 {
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 19px;
+      }
 
-    img {
+      hr {
+        margin-bottom: 35px;
+      }
+
+      .content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .singer-pic {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 20px;
+      }
+
+      .h4 {
+        margin: 15px 0;
+      }
+    }
+  }
+
+  /* 送餐時間 */
+
+  .dish-content {
+    .order-time {
+      display: flex;
+      color: $accent-red;
+    }
+
+    .Time {
+      margin: auto 30px;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 2.65vw;
+      margin-bottom: 3.7vw;
+    }
+
+    .name {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 2.6vw;
+
+      .h4 {
+        color: $secondary-green-dark;
+      }
+    }
+
+    .dish-name {
+      width: 50.26vw;
+    }
+
+    .detail {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.61vw;
+
+      .dish {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .dish-pic {
+      width: 6.25vw;
+      height: 4.17vw;
+      margin: 0 9.37vw 0 0;
+    }
+
+    .detail .dish-name {
+      width: 33.5vw;
+    }
+
+    .dish-pic img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
 
-  .name {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    margin-right: 1.04vw;
-  }
-
-  .detail {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  .date {
-    color: $accent-red;
-  }
-
-  .text {
-    display: flex;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .res-content {
-    h3 {
-      text-align: center;
-      margin-top: 50px;
-      margin-bottom: 19px;
-    }
-
-    hr {
-      margin-bottom: 35px;
-    }
-
-    .content {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .singer-pic {
-      width: 250px;
-      height: 250px;
-      margin-bottom: 20px;
-    }
-
-    .h4 {
-      margin: 15px 0;
-    }
-  }
-}
-
-/* 送餐時間 */
-
-.dish-content {
-  .order-time {
-    display: flex;
-    color: $accent-red;
-  }
-
-  .Time {
-    margin: auto 30px;
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 2.65vw;
-    margin-bottom: 3.7vw;
-  }
-
-  .name {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2.6vw;
-
-    .h4 {
-      color: $secondary-green-dark;
-    }
-  }
-
-  .dish-name {
-    width: 50.26vw;
-  }
-
-  .detail {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.61vw;
-
-    .dish {
-      display: flex;
-      align-items: center;
-    }
-  }
-
-  .dish-pic {
-    width: 6.25vw;
-    height: 4.17vw;
-    margin: 0 9.37vw 0 0;
-  }
-
-  .detail .dish-name {
-    width: 33.5vw;
-  }
-
-  .dish-pic img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .dish-content .order-time {
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-}
-
-/* 餐點內容 */
-
-.price-count {
-  width: 38.17vw;
-  display: flex;
-  margin-top: 3.07vw;
-  align-self: flex-end;
-}
-
-.price-count-name {
-  display: flex;
-  flex-direction: column;
-  width: 17.34vw;
-
-  span {
-    margin-bottom: 0.83vw;
-    line-height: 2rem;
-  }
-}
-
-.price-count-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 20.83vw;
-
-  div {
-    margin-bottom: 0.83vw;
-    line-height: 2rem;
-
-    &:nth-child(1) {
-      margin-bottom: 0.42vw;
-    }
-  }
-
-  select {
-    margin-bottom: 0.42vw;
-    padding: 0.52vw 0 0.52vw 10px;
-    width: 20.83vw;
-    border-radius: 5px;
-    border: 1px solid $primary-lightbrown;
-
-    &:focus {
-      outline: 1px solid $primary-lightbrown;
-    }
-
-    option {
-      height: 2rem;
-    }
-  }
-
-  .total span:nth-child(1) {
-    color: $secondary-green-dark;
-  }
-
-  .discount span:nth-child(1) {
-    color: $accent-red;
-    color: $accent-red;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .dish-content {
-    h3 {
-      margin: 50px 0 19px 0;
-      text-align: center;
-    }
-
-    .content {
-      box-sizing: border-box;
+  @media screen and (max-width: 768px) {
+    .dish-content .order-time {
       padding-left: 15px;
       padding-right: 15px;
     }
-
-    hr.top {
-      margin-bottom: 19px;
-    }
-
-    .name {
-      margin-bottom: 30px;
-
-      .dish-name {
-        width: 33.5vw;
-      }
-    }
-
-    .dish-pic {
-      display: none;
-    }
-
-    .detail {
-      margin-bottom: 23px;
-    }
   }
+
+  /* 餐點內容 */
 
   .price-count {
+    width: 38.17vw;
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-self: unset;
+    margin-top: 3.07vw;
+    align-self: flex-end;
   }
 
-  .price-count-detail {
-    div {
-      margin-bottom: 0;
-    }
-
-    select {
-      width: 200px;
-    }
-  }
-
-  .price-count .after-discount {
-    white-space: nowrap;
-  }
-
-  .price-count-name span {
-    line-height: 2.5rem;
-  }
-
-  .price-count-detail {
-    .total {
-      line-height: 2.5rem;
-    }
-
-    select {
-      height: 2.5rem;
-      margin-top: 2px;
-      margin-bottom: 10px;
-    }
-
-    .discount {
-      margin-top: -2px;
-      margin-bottom: 10px;
-    }
-  }
-}
-
-/* 訂位人資料 */
-
-.res-person {
-  .content {
-    display: flex;
-    margin-top: 2.65vw;
-
-    /* margin-bottom: 3.7vw; */
-  }
-
-  .title {
+  .price-count-name {
     display: flex;
     flex-direction: column;
-    margin-right: 6.25vw;
+    width: 17.34vw;
 
     span {
       margin-bottom: 0.83vw;
@@ -564,158 +317,298 @@
     }
   }
 
-  .detail {
+  .price-count-detail {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    width: 20.83vw;
 
-    input {
+    div {
       margin-bottom: 0.83vw;
-      width: 18.38vw;
+      line-height: 2rem;
+
+      &:nth-child(1) {
+        margin-bottom: 0.42vw;
+      }
     }
 
-    textarea {
-      width: 36.77vw;
-      height: 5.36vw;
+    select {
+      margin-bottom: 0.42vw;
+      padding: 0.52vw 0 0.52vw 10px;
+      width: 20.83vw;
+      border-radius: 5px;
+      border: 1px solid $primary-lightbrown;
+
+      &:focus {
+        outline: 1px solid $primary-lightbrown;
+      }
+
+      option {
+        height: 2rem;
+      }
+    }
+
+    .total span:nth-child(1) {
+      color: $secondary-green-dark;
+    }
+
+    .discount span:nth-child(1) {
+      color: $accent-red;
+      color: $accent-red;
     }
   }
 
-  .content .detail .add {
-    border: transparent;
-  }
-}
+  @media screen and (max-width: 768px) {
+    .dish-content {
+      h3 {
+        margin: 50px 0 19px 0;
+        text-align: center;
+      }
 
-@media screen and (max-width: 768px) {
-  .res-person {
-    .content {
+      .content {
+        box-sizing: border-box;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      hr.top {
+        margin-bottom: 19px;
+      }
+
+      .name {
+        margin-bottom: 30px;
+
+        .dish-name {
+          width: 33.5vw;
+        }
+      }
+
+      .dish-pic {
+        display: none;
+      }
+
+      .detail {
+        margin-bottom: 23px;
+      }
+    }
+
+    .price-count {
+      display: flex;
+      width: 100%;
       justify-content: space-between;
+      align-self: unset;
     }
 
-    h3 {
-      margin: 50px 0 19px 0;
-      text-align: center;
+    .price-count-detail {
+      div {
+        margin-bottom: 0;
+      }
+
+      select {
+        width: 200px;
+      }
     }
 
-    .title span {
-      margin-bottom: 0.83vw;
+    .price-count .after-discount {
+      white-space: nowrap;
+    }
+
+    .price-count-name span {
       line-height: 2.5rem;
     }
 
+    .price-count-detail {
+      .total {
+        line-height: 2.5rem;
+      }
+
+      select {
+        height: 2.5rem;
+        margin-top: 2px;
+        margin-bottom: 10px;
+      }
+
+      .discount {
+        margin-top: -2px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  /* 訂位人資料 */
+
+  .res-person {
+    .content {
+      display: flex;
+      margin-top: 2.65vw;
+
+      /* margin-bottom: 3.7vw; */
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      margin-right: 6.25vw;
+
+      span {
+        margin-bottom: 0.83vw;
+        line-height: 2rem;
+      }
+    }
+
     .detail {
-      width: 80%;
+      display: flex;
+      flex-direction: column;
 
       input {
-        margin-top: 0.83vw;
         margin-bottom: 0.83vw;
-        width: 100%;
+        width: 18.38vw;
       }
 
       textarea {
-        margin-top: 0.83vw;
+        width: 36.77vw;
+        height: 5.36vw;
+      }
+    }
+
+    .content .detail .add {
+      border: transparent;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .res-person {
+      .content {
+        justify-content: space-between;
+      }
+
+      h3 {
+        margin: 50px 0 19px 0;
+        text-align: center;
+      }
+
+      .title span {
         margin-bottom: 0.83vw;
-        width: 100%;
-        height: 100px;
+        line-height: 2.5rem;
+      }
+
+      .detail {
+        width: 80%;
+
+        input {
+          margin-top: 0.83vw;
+          margin-bottom: 0.83vw;
+          width: 100%;
+        }
+
+        textarea {
+          margin-top: 0.83vw;
+          margin-bottom: 0.83vw;
+          width: 100%;
+          height: 100px;
+        }
       }
     }
   }
-}
 
-/* h4 add */
+  /* h4 add */
 
-@media screen and (min-width: 768px) {
-  .res-person .content .detail .add {
-    width: 400px;
+  @media screen and (min-width: 768px) {
+    .res-person .content .detail .add {
+      width: 400px;
+    }
   }
-}
 
-/* 確認按鈕與訊息 */
+  /* 確認按鈕與訊息 */
 
-.check {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.info-text {
-  margin-top: 15px;
-  color: $accent-red;
-}
-
-.buttons {
-  display: flex;
-  margin-top: 2.08vw;
-  margin-bottom: 5.2vw;
-
-  .back {
-    margin-right: 1.87vw;
-    background: $primary-lightbrown;
-  }
-}
-
-.check .guide-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px;
-
-  img {
-    filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.3));
-  }
-}
-
-@media screen and (max-width: 768px) {
   .check {
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
 
-    .guide-button {
-      width: 110px;
-      height: 32px;
-      font-size: 14px;
-      margin: 6px 0 6px 0;
-      justify-content: space-between;
-
-      img {
-        height: 20px;
-        width: 20px;
-      }
-    }
+  .info-text {
+    margin-top: 15px;
+    color: $accent-red;
   }
 
   .buttons {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
-  }
-}
+    margin-top: 2.08vw;
+    margin-bottom: 5.2vw;
 
-@media screen and (max-width: 768px) {
-  html {
-    font-size: 12px;
-  }
-
-  h1,
-  .h1 {
-    font-size: 1.67rem;
+    .back {
+      margin-right: 1.87vw;
+      background: $primary-lightbrown;
+    }
   }
 
-  h2,
-  .h2 {
-    font-size: 1.5rem;
+  .check .guide-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+
+    img {
+      filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.3));
+    }
   }
 
-  h3,
-  .h3 {
-    font-size: 1.33rem;
+  @media screen and (max-width: 768px) {
+    .check {
+      align-items: start;
+
+      .guide-button {
+        width: 110px;
+        height: 32px;
+        font-size: 14px;
+        margin: 6px 0 6px 0;
+        justify-content: space-between;
+
+        img {
+          height: 20px;
+          width: 20px;
+        }
+      }
+    }
+
+    .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
 
-  h4,
-  .h4 {
-    font-size: 1.17rem;
-  }
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 12px;
+    }
 
-  p,
-  .p,
-  span,
-  .span {
-    font-size: 1rem;
+    h1,
+    .h1 {
+      font-size: 1.67rem;
+    }
+
+    h2,
+    .h2 {
+      font-size: 1.5rem;
+    }
+
+    h3,
+    .h3 {
+      font-size: 1.33rem;
+    }
+
+    h4,
+    .h4 {
+      font-size: 1.17rem;
+    }
+
+    p,
+    .p,
+    span,
+    .span {
+      font-size: 1rem;
+    }
   }
 }

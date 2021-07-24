@@ -1,18 +1,6 @@
 import React from 'react'
 
 function SideBox(props) {
-  // const {
-  //   index,
-  //   name,
-  //   price,
-  //   image_realistic,
-  //   counts,
-  //   setCounts,
-  //   dishes,
-  //   setDishes,
-  //   dishePrice,
-  //   setDishePrice,
-  // } = props
   const {
     index,
     id,
@@ -31,7 +19,6 @@ function SideBox(props) {
   console.log('id', id)
   console.log('dishCount', dishCount)
 
-
   function minus(id) {
     let newDishCount = { ...dishCount }
     if (newDishCount[id] > 0) {
@@ -42,11 +29,10 @@ function SideBox(props) {
     setDishCount(newDishCount)
   }
 
-  function add(id){
+  function add(id) {
     let newDishCount = { ...dishCount }
     newDishCount[id] += 1
     setDishCount(newDishCount)
-
   }
 
   return (
@@ -62,9 +48,6 @@ function SideBox(props) {
             className="minus"
             field="quantity"
             onClick={() => {
-              // let newCounts = [...counts]
-              // if (newCounts[index] > 0) newCounts[index] = newCounts[index] - 1
-              // setCounts(newCounts)
               minus(id)
             }}
           />
@@ -80,17 +63,6 @@ function SideBox(props) {
             className="plus"
             field="quantity"
             onClick={() => {
-              // let newCounts = [...counts]
-              // newCounts[index] = newCounts[index] + 1
-              // setCounts(newCounts)
-              // let newDishes = dishes
-              // newDishes[name] = newCounts[index]
-              // setDishes(newDishes)
-              // let newDishePrice = dishePrice
-              // newDishePrice[price] = newCounts[index]
-              // setDishePrice(newDishePrice)
-              // console.log(newDishes)
-              // console.log(newDishePrice)
               add(id)
             }}
           />

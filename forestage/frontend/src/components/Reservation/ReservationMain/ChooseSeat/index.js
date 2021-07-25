@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 function ChooseSeat(props) {
   const { seatInfo, seatCount, setSeatCount, checkList, setCheckList } = props
 
@@ -18,16 +20,24 @@ function ChooseSeat(props) {
     barInfo.current.style.display = 'none'
     setDidMount(true)
 
-    // $('.row').on('click', (e) => {
-    //   $(e.target).closest('.row').addClass('active')
-    //   $(e.target).closest('.row').siblings().removeClass('active')
-    // })
-
     $('.row').on('click', function () {
       $(this).closest('.row').addClass('active')
       $(this).closest('.row').siblings().removeClass('active')
     })
   }, [])
+
+  // 驗證是否已經選擇日期(sweetalert)
+  const checkDateSwal = withReactContent(Swal)
+  function checkDate() {
+    if (checkList.chosenDate === '') {
+      checkDateSwal.fire({
+        title: <h3>請先選擇日期</h3>,
+        icon: 'warning',
+        confirmButtonColor: '#97bc78',
+        buttonsStyling: false,
+      })
+    }
+  }
 
   // 顯示剩餘座位bar
   useEffect(() => {
@@ -150,6 +160,7 @@ function ChooseSeat(props) {
                 <div
                   class="minus-button"
                   onClick={() => {
+                    checkDate()
                     minusAttendance(1)
                   }}
                 ></div>
@@ -157,6 +168,7 @@ function ChooseSeat(props) {
                 <div
                   class="plus-button"
                   onClick={() => {
+                    checkDate()
                     addAttendance(1)
                   }}
                 ></div>
@@ -195,6 +207,7 @@ function ChooseSeat(props) {
                 <div
                   class="minus-button"
                   onClick={() => {
+                    checkDate()
                     minusAttendance(2)
                   }}
                 ></div>
@@ -202,6 +215,7 @@ function ChooseSeat(props) {
                 <div
                   class="plus-button"
                   onClick={() => {
+                    checkDate()
                     addAttendance(2)
                   }}
                 ></div>
@@ -240,6 +254,7 @@ function ChooseSeat(props) {
                 <div
                   class="minus-button"
                   onClick={() => {
+                    checkDate()
                     minusAttendance(3)
                   }}
                 ></div>
@@ -247,6 +262,7 @@ function ChooseSeat(props) {
                 <div
                   class="plus-button"
                   onClick={() => {
+                    checkDate()
                     addAttendance(3)
                   }}
                 ></div>

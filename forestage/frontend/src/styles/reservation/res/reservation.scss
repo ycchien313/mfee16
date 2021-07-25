@@ -978,6 +978,10 @@
     margin: 0;
   }
 
+  // sweet alert樣式
+  // .swal2-confirm {
+  //   background: $secondary-green;
+  // }
   footer {
     height: 300px;
   }
@@ -1022,4 +1026,19 @@
   height: 22vw;
   position: relative;
   bottom: 8vw;
+}
+
+.swal2-confirm {
+  background: $secondary-green;
+  color: white;
+  font-family: $zh-tw-noto;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  width: 70px;
+  cursor: pointer;
+}
+.swal2-confirm:active {
+  background: darken($secondary-green, 10%);
 }

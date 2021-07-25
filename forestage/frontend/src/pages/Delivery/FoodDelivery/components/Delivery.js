@@ -10,8 +10,6 @@ import $ from 'jquery'
 function Delivery(props) {
   const [time, setTime] = useState('')
   const [date, setDate] = useState('')
-  const [dist, inputDist] = useState('')
-  const [rd, inputRd] = useState('')
   const [main, inputMain] = useState([])
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
@@ -21,6 +19,13 @@ function Delivery(props) {
   const [dishList, setDishList] = useState([])
 
   const [dishes, setDishes] = useState([])
+  //地址,縣區街道
+  const [address, setAddress] = useState({
+    city: '桃園市',
+    dist: '中壢區',
+    road: '中央路123號',
+  })
+  const [addFee, setFee] = useState('')
 
   const getDishes = () => {
     $.ajax({
@@ -94,7 +99,7 @@ function Delivery(props) {
     <>
       <div className="FoodDelivery">
         <div className="hero-section">
-          <Map dist={dist} inputDist={inputDist} rd={rd} inputRd={inputRd} />
+          <Map address={address} setAddress={setAddress} setFee={setFee}/>
           <Takeout
             time={time}
             setTime={setTime}
@@ -113,7 +118,19 @@ function Delivery(props) {
                 <div className="maindiv">
                   <div className="category">
                     <div className="category-bg" id="category-title-green">
-                      <h4 className="category-innertext">主餐</h4>
+                      <h4
+                        className="category-innertext"
+                        onClick={(e) => {
+                          let newAddress = {
+                            ...address,
+                            dist: '123',
+                          }
+                          setAddress(newAddress)
+                          console.log(address)
+                        }}
+                      >
+                        主餐
+                      </h4>
                     </div>
                   </div>
                   <div className="MealBox-group">
@@ -215,6 +232,7 @@ function Delivery(props) {
             setDishes={setDishes}
             dishList={dishList}
             setDishList={setDishList}
+            addFee={addFee}
           />
         </div>
         <div className="mobile-out">

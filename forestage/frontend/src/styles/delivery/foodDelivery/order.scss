@@ -163,6 +163,7 @@
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/plus-solid.svg');
       background-position: 60% 30%;
       background-repeat: no-repeat;
+      cursor: pointer;
     }
 
     .minus {
@@ -176,6 +177,7 @@
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/minus-solid.svg');
       background-repeat: no-repeat;
       background-position: 40% 0.4vh;
+      cursor: pointer;
     }
   }
 
@@ -263,6 +265,7 @@
       .title {
         display: flex;
         align-self: center;
+        height: 8.64vh;
       }
     }
   }
@@ -372,7 +375,9 @@
       }
     }
   }
-
+  .aside-sp {
+    justify-content: end;
+  }
   /* 加的 */
 
   #category-title-green {

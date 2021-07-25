@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 function Aside(props) {
-  const { dishCount, dishes, setDishes, dishList, setDishList } = props
+  const { dishCount, dishes, setDishes, dishList, setDishList, addFee } = props
 
   // 計算總金額
   const total = () => {
@@ -45,14 +45,14 @@ function Aside(props) {
                     return (
                       <li key={i}>
                         <span>{v[0]}</span>
-                        <span>{v[1]}</span>
+                        <span className="aside-sp">{v[1]}</span>
                       </li>
                     )
                   }
                 })}
                 <hr />
                 <li>
-                  <span>免運門檻$300</span>
+                  <span>免運門檻${addFee}</span>
                 </li>
                 <li>{total() > 0 && <span>總金額${total()}</span>}</li>
               </ul>

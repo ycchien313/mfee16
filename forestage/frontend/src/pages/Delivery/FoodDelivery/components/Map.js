@@ -1,7 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
+import $ from 'jquery'
 
 function Map(props) {
-  const { dist, inputDist, rd, inputRd } = props
+  const { address, setAddress, setFee } = props
+
+  const [min, setMin] = useState('')
+
+  function setAddressDist(e) {
+    let newAddress = {
+      ...address,
+      dist: e.target.dataset.area,
+    }
+    setAddress(newAddress)
+  }
+
+  $('.mapFee').on('click', function () {
+    let getTarget = $(this).data('fee')
+    setMin(getTarget)
+    $(this).addClass('active')
+    $(this).siblings().removeClass('active')
+    setFee(getTarget)
+  })
+
+  // }
+
+  // function setCharge(e) {
+  //   let NewMinCharge = {
+  //     ...minCharge,
+  //     minCharge: e.target.dataset.fee,
+  //   }
+  //   setMinCharge(NewMinCharge)
+  // }
 
   return (
     <>
@@ -20,22 +49,25 @@ function Map(props) {
               <input
                 type="text"
                 className="takeoutInput add"
-                defaultValue={dist}
-                onChange={(event) => {
-                  inputDist(event.target.value)
-                }}
+                defaultValue={address.dist}
+                placeholder
               />
             </div>
             <input
               type="text"
               className="takeoutInput add-r"
-              defaultValue={rd}
-              onChange={(event) => {
-                inputRd(event.target.value)
+              defaultValue={address.road}
+              onChange={(e) => {
+                let newAddress = {
+                  ...address,
+                  road: e.target.value,
+                }
+                setAddress(newAddress)
               }}
+              placeholder
             />
             <div className="Shipping">
-              <p>免運門檻: 300 元</p>
+              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}
               <p>運費: 60 元</p>
             </div>
           </div>
@@ -75,32 +107,37 @@ function Map(props) {
             className="Taoyuan"
           >
             <path
-              class="st0"
+              className="st0"
               d="M221.21,356.04c1.13-1.7,2.64-2.87,4.62-3.41C225.29,354.72,223.61,355.96,221.21,356.04z"
             />
             <path
-              class="st0"
+              className="st0"
               d="M27.69,438.62c0.05,1.67,0.04,3.3-2.1,3.75C25.74,440.81,26.16,439.4,27.69,438.62z"
             />
             <path
-              class="st0"
+              className="st0"
               d="M172.54,315.2c-1.71-0.48-2.55-1.41-1.62-3.22C172.16,312.7,172.5,313.87,172.54,315.2z"
             />
             <path
-              class="st0"
+              className="st0"
               d="M28.25,462.61c0.02-1.46,0.77-2.21,2.23-2.26C30.55,461.91,29.78,462.63,28.25,462.61z"
             />
             <path
-              class="st0"
+              className="st0"
               d="M125.71,315.93c-1.48,1.01-2.06,0.25-2.32-1.16C124.38,314.74,125.29,314.84,125.71,315.93z"
             />
             <path
-              class="st0"
+              className="st0"
               d="M228.18,348.12c-0.98-1.48-0.23-2.07,1.19-2.31C229.38,346.79,229.29,347.72,228.18,348.12z"
             />
             <path
+              // test
               data-area="大溪區"
-              class="st2"
+              data-fee="150"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st2 mapFee"
               d="M561.24,368.46c-0.56-1.73-1.63-3.15-3.28-4.09c-3.93-2.25-7.46-5.58-12.67-2.81c-2.4,1.27-5.38,1.15-6.99-1.6
             c-3.2-5.45-4.26-8.15,1.71-12.55c0.6-0.44,1.21-0.88,1.78-1.35c0.88-0.71,1.87-1.43,1.45-2.78c-0.41-1.31-1.52-1.87-2.77-1.91
             c-1.94-0.07-3.87-0.09-5.83,0.21c-2.65,0.41-5.2,0.46-7.83-0.91c-3.41-1.79-4.64-4.91-6.07-8.02c-1.25-2.71-2.2-5.6-4.22-7.86
@@ -132,7 +169,11 @@ function Map(props) {
             />
             <path
               data-area="觀音區"
-              class="st3"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st3 mapFee"
               d="M222.89,299.29c-0.5-7.23-3.14-13.41-6.4-19.36c-2.5-4.55-5.14-9.09-9.5-12.11c-4.14-2.87-7.15-6.55-9.41-10.97
             c-2.64-5.16-4.18-10.74-6.38-16.07c-1.3-3.16-2.78-6.15-5.47-8.55c-3.54-3.15-4.71-7.2-2.97-11.84c0.63-1.69,1.19-3.4,1.72-5.12
             c1.98-6.52,0.72-8.09-4.37-9.51c-4.25-1.18-5.91-3.89-5.71-7.57c0.16-2.87,0.05-2.99-2.9-2.95c-0.6,0.01-1.22-0.02-1.8,0.1
@@ -157,7 +198,12 @@ function Map(props) {
             />
             <path
               data-area="楊梅區"
-              class="st3"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+                // setCharge(e)
+              }}
+              className="st3 mapFee"
               d="M308.91,418.03c1.14-1.84,1.16-3.66,0.7-5.6c-1.4-5.9-2.76-11.8-4.88-17.51c-1.9-5.1-3.05-10.57-6.95-14.67
             c-4.61-4.83-7.19-10.63-9.08-16.93c-1.1-3.69-2.75-7.47-5.5-10.11c-4.18-4-8.77-7.66-14.01-10.34c-1.87-0.96-3.62-2.08-5-3.74
             c-3.13-3.75-6.03-7.64-8.31-11.97c-0.35-0.66-0.54-1.76-1.73-0.83c-4.45,3.47-9.25,6.44-13.2,10.63c-4.05,4.3-7.69,8.78-9.88,14.24
@@ -180,7 +226,11 @@ function Map(props) {
             />
             <path
               data-area="新屋區"
-              class="st4"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st4 mapFee"
               d="M229.37,345.81c3.04-4.74,6.4-9.23,10.7-13.53c-4.74,0.04-8.78-1.36-13.05-1.04c-4.73,0.35-9.44-0.6-14.16-0.9
             c-3.73-0.24-7.32-1.24-11.05-1.4c-3.19-0.14-6.34-0.97-9.52-1.4c-3.59-0.49-7.25-0.96-10.31-2.97c-3.74-2.46-7.09-5.43-9.42-9.36
             c-1.71-0.48-2.55-1.41-1.62-3.22c-0.39-0.98-0.51-2.03-0.81-3.02c-0.75-2.51-0.24-5.14-1.01-7.65c-0.54-1.77-1.47-2.56-3.33-2.69
@@ -211,7 +261,11 @@ function Map(props) {
             />
             <path
               data-area="中壢區"
-              class="st5"
+              data-fee="0"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st5 mapFee active"
               d="M381.17,307.9c-0.31-4.92-1.17-9.8-1.15-14.76c0.03-8.28-1.15-16.41-3.31-24.4c-1-3.7-2.89-6.71-6.17-8.98
             c-3.68-2.56-6.86-5.71-9.22-9.65c-1.65-2.75-2.19-5.47-1.17-8.54c0.9-2.7,0.45-3.47-2.29-4.24c-1.43-0.4-2.93-0.5-4.22-1.36
             c-2.93-1.97-4.5-4.98-5.75-8.05c-0.81-1.99-1.9-2.66-3.88-2.44c-5.08,0.56-8.25-2.05-10.73-6.18c-3.5-5.86-8.71-9.77-15.05-12.15
@@ -254,7 +308,11 @@ function Map(props) {
             />
             <path
               data-area="龍潭區"
-              class="st2"
+              data-fee="150"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st2 mapFee"
               d="M447.14,421.06c-1.15-2.75-2.67-3.77-5.52-3.5c-3.16,0.3-5.96-0.32-8.03-2.99c-0.82-1.06-1.68-2.1-2.61-3.06
             c-2.11-2.19-3.02-2.16-4.69,0.36c-1.36,2.05-2.49,4.24-3.71,6.38c-1.97,3.46-4.27,3.82-6.89,0.93c-1.83-2.02-2.78-4.58-3.73-7.1
             c-2.6-6.93-4.32-14.11-6.28-21.23c-0.21-0.74-0.22-2.06-1.02-1.98c-1.24,0.13-0.66,1.48-0.61,2.23c0.26,4.4,0.67,8.79,0.98,13.18
@@ -288,7 +346,11 @@ function Map(props) {
             />
             <path
               data-area="蘆竹區"
-              class="st3"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st3 mapFee"
               d="M407.52,51.25c-4.53-0.49-7.31-3.14-8.9-7.25c-0.24-0.63-0.6-1.22-0.78-1.87c-0.45-1.53-1.35-1.86-2.89-1.58
             c-8.44,1.48-16.9,1.26-25.35,0.12c-5.97-0.8-11.81-0.73-17.43,1.87c-1.97,0.91-4.01,1.7-6.09,2.34c-4.04,1.25-8.12,2.34-12.37,0.98
             c-2.38-0.77-4.46-2.15-6.58-3.41c-2.3-1.37-4.63-1.9-7.31-1.18c-7.24,1.94-13.02-1.96-19.14-4.79c-3.28-1.52-3.63-4.53-4.85-7.17
@@ -322,7 +384,11 @@ function Map(props) {
             />
             <path
               data-area="平鎮區"
-              class="st6"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st6 mapFee"
               d="M401.37,381.5c-3.44-10-7.61-19.72-11.25-29.65c-3.38-9.21-7.78-18.06-9.74-27.77c-0.38-1.87-1.45-1.95-2.72-1
             c-1.35,1.01-2.87,1.59-4.4,2.15c-9.07,3.31-18.22,6.39-28.06,5.81c-6.6-0.39-12.24-2.69-15.21-9.2c-0.94-2.05-2.06-4-3.53-5.68
             c-8.05-9.16-21.38-12.4-32.73-7.94c-5.44,2.14-11.01,3.1-16.84,2.59c-3.75-0.33-5.87-1.88-7.05-5.5c-0.44-1.34-0.73-2.73-1.09-4.09
@@ -342,7 +408,11 @@ function Map(props) {
             />
             <path
               data-area="八德區"
-              class="st4"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st4 mapFee"
               d="M463.82,248.82c-2.82-2.58-4.94-5.57-6.45-9.07c-0.8-1.85-1.7-3.68-2.72-5.41c-3.48-5.9-6.43-12.01-7.71-18.78
             c-0.37-1.96-1.2-2.01-2.74-1.27c-4.65,2.23-9.41,4.24-13.99,6.59c-6.07,3.11-11.95,3.18-17.97-0.1c-2.15-1.17-4.23-2.5-6.58-3.34
             c-2.12-0.75-2.52-0.45-2.96,1.73c-1.09,5.32,0.31,10.21,2.27,15.04c0.9,2.22,1.65,4.49,1.87,6.54c-0.04,3.5-3.1,5.73-6.05,4.63
@@ -363,7 +433,11 @@ function Map(props) {
             />
             <path
               data-area="復興區"
-              class="st7"
+              data-fee="300"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st7 mapFee"
               d="M866.39,634.18c4.01-4.03,3.69-8.59,1.13-12.12c-3.8-5.24-8.12-9.96-14.38-12.42c-1.61-0.63-3.01-1.68-4.15-3
             c-4.11-4.76-8.02-9.67-10.32-15.61c-1.63-4.21-2.58-8.46-1.9-13.11c0.64-4.39,2.35-8.5,2.98-12.85c0.92-6.28,0.83-10.06-5.82-12.82
             c-1.11-0.46-2.14-1.08-3.22-1.61c-3.66-1.81-6.13-4.54-7.43-8.52c-1.3-3.95-2.14-8.1-4.53-11.66c-0.99-1.47-1.86-1.77-3.47-0.89
@@ -405,7 +479,11 @@ function Map(props) {
             />
             <path
               data-area="大園區"
-              class="st4"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st4 mapFee"
               d="M309.2,202.53c-2.2-1.6-4.63-2.87-6.11-5.44c-0.61-1.05-1.16-2.39-2.34-3.17c-2.83-1.87-5.75-3.6-8.9-4.85
             c-3.68-1.46-7.11-3.38-9.26-6.72c-3.29-5.12-5.06-10.62-3.12-16.85c1.47-4.74,3.62-9.05,7-12.7c0.65-0.7,2.14-0.6,1.94-2.11
             c-0.15-1.1,0.08-2.21-0.47-3.3c-0.94-1.87-1.63-3.85-2.59-5.71c-0.44-0.86-0.27-1.37,0.08-2.22c1-2.41,3.1-3.4,5.16-4.5
@@ -446,7 +524,11 @@ function Map(props) {
             />
             <path
               data-area="龜山區"
-              class="st2"
+              data-fee="150"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st2 mapFee"
               d="M520.66,97.92c-0.97-0.08-1.96-0.11-2.93,0c-3.55,0.38-6.58-0.75-9.4-2.84c-1.18-0.88-2.53-1.58-3.89-2.15
             c-1.44-0.6-2.65-1.49-3.53-2.69c-2.12-2.88-4.1-5.84-5.03-9.4c-0.59-2.26-1.85-4.04-3.95-5.45c-2.46-1.65-5.01-3.3-7.01-5.58
             c-1.66-1.89-1.64-3.26,0.39-4.7c1.38-0.98,2.94-1.74,4.52-2.38c1.3-0.53,1.63-1.5,1.36-2.58c-0.29-1.14-1.45-1.05-2.4-1.05
@@ -473,7 +555,11 @@ function Map(props) {
             />
             <path
               data-area="桃園區"
-              class="st6"
+              data-fee="100"
+              onClick={(e) => {
+                setAddressDist(e)
+              }}
+              className="st6 mapFee"
               d="M445.85,208.06c-0.16-1.5,0.31-2.91-1.67-3.92c-6.55-3.35-12.15-7.97-16.81-13.69
             c-1.7-2.09-2.33-4.36-2.04-7.11c0.71-6.65,1.08-13.32,0.67-20.02c-0.53-8.62-2.36-10.98-10.52-13.22c-2-0.55-3.23-1.86-4.18-3.5
             c-0.75-1.29-1.36-2.67-1.94-4.06c-1.68-4-1.69-4.09-5.7-2.6c-6.12,2.27-11.51,1.38-16.07-3.42c-0.93-0.98-1.82-0.86-2.82-0.35
@@ -491,58 +577,46 @@ function Map(props) {
             C397.6,185.9,397.55,186.26,397.62,186.64z M400.2,182.2c-0.22,0.06-0.41,0.16-0.55,0.29C399.79,182.35,399.98,182.26,400.2,182.2z
              M401.51,185.26c-0.24,0.18-0.51,0.29-0.79,0.37C401,185.55,401.27,185.44,401.51,185.26z"
             />
-            <text x="310" y="70">
+            <text className="svg-text" x="310" y="70">
               蘆竹區
             </text>
-            <text x="420" y="120">
+            <text className="svg-text" x="420" y="120">
               龜山區
             </text>
-            <text x="200" y="140">
+            <text className="svg-text" x="200" y="140">
               大園區
             </text>
-            <text x="370" y="180">
+            <text className="svg-text" x="370" y="180">
               桃園區
             </text>
-            <text x="100" y="270">
+            <text className="svg-text" x="100" y="270">
               觀音區
             </text>
-            <text x="270" y="270">
+            <text className="svg-text" x="270" y="270">
               中壢區
             </text>
-            <text x="390" y="270">
+            <text className="svg-text" x="390" y="270">
               八德區
             </text>
-            <text x="80" y="370">
+            <text className="svg-text" x="80" y="370">
               新屋區
             </text>
-            <text x="200" y="420">
+            <text className="svg-text" x="200" y="420">
               楊梅區
             </text>
-            <text x="310" y="370">
+            <text className="svg-text" x="310" y="370">
               平鎮區
             </text>
-            <text x="350" y="470">
+            <text className="svg-text" x="350" y="470">
               龍潭區
             </text>
-            <text x="440" y="380">
+            <text className="svg-text" x="440" y="380">
               大溪區
             </text>
-            <text x="650" y="550">
+            <text className="svg-text" x="650" y="550">
               復興區
             </text>
           </svg>
-          {/* <img
-            src={
-              'http://localhost:3000/images/delivery/FoodDelivery/Taoyuan.png'
-            }
-            alt=""
-            className="Taoyuan"
-          /> */}
-          <img
-            src={'http://localhost:3000/images/delivery/FoodDelivery/pin.png'}
-            alt=""
-            className="pin"
-          />
         </div>
       </div>
       <div className="right-div">
@@ -565,18 +639,27 @@ function Map(props) {
               />
               <input
                 type="text"
-                defaultValue="中壢區"
+                value={address.dist}
                 className="takeoutInput add"
+                placeholder
               />
             </div>
             <input
               type="text"
-              defaultValue="中大路100號"
+              value={address.road}
               className="takeoutInput add-r"
+              onChange={(e) => {
+                let newAddress = {
+                  ...address,
+                  road: e.target.value,
+                }
+                setAddress(newAddress)
+              }}
+              placeholder
             />
             <div className="Shipping">
-              <p>免運門檻: 300 元</p>
-              <p>運費: 60 元</p>
+              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}
+              <p>運費: $60</p>
             </div>
           </div>
         </div>

@@ -130,6 +130,11 @@
       position: absolute;
       top: 18vh;
       margin-left: 10.5vw;
+      .svg-text {
+        font-family: $zh-tw-maru;
+        font-size: 18px;
+        fill: #ffffff;
+      }
     }
 
     .pin {
@@ -162,6 +167,7 @@
     top: 30.5vh;
     left: 43.42vw;
     width: 16vw;
+    // height: 50px;
     background: #fff;
     border-radius: 20px;
     position: absolute;
@@ -183,6 +189,7 @@
   .banner-text {
     text-align: center;
     color: $secondary-green-dark;
+    // padding:100px;
   }
 
   @media screen and (max-width: 1200px) {
@@ -437,6 +444,7 @@
   }
   path {
     fill: blueviolet;
+    cursor: pointer;
 
     &:hover {
       fill: #f5b54d;
@@ -445,11 +453,6 @@
   .st0 {
     fill: #c1d8ab;
   }
-
-  .st1 {
-    fill: #b7b7b6;
-  }
-
   .st2 {
     fill: #aecc94;
   }
@@ -473,4 +476,8 @@
   .st7 {
     fill: #c9dfb4;
   }
+}
+
+.mapFee.active {
+  fill: #f5b54d;
 }

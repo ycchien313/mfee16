@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Auth from '../../components/Auth/'
 
 function Member() {
+  const [showAuthModal, setShowAuthModal] = useState(false)
+
   return (
     <>
-      <Auth />
+      <button
+        onClick={() => {
+          setShowAuthModal(!showAuthModal)
+        }}
+      >
+        123
+      </button>
+      {showAuthModal && (
+        <Auth
+          showAuthModal={showAuthModal}
+          setShowAuthModal={setShowAuthModal}
+        />
+      )}
     </>
   )
 }

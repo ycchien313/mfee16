@@ -1,6 +1,19 @@
 .sign-in {
   @import '../common/global.scss';
 
+  // 彈出式視窗設定
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 1000px;
+
+  .bg-lightgray {
+    background-color: $primary-lightgray;
+  }
+
   .signin-page-container {
     max-width: 1000px;
     min-height: 600px;
@@ -29,7 +42,8 @@
       max-width: unset;
       width: 100%;
       max-height: unset;
-      height: 220px;
+      // height: 220px;
+      height: 28.64vw;
       background-image: url('http://127.0.0.1:3000/images/auth/auth-md-wave-down.svg');
     }
   }
@@ -197,12 +211,18 @@
   }
   .signin-page-container .form-container .btn-row {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
   }
   @media screen and (max-width: 768px) {
     .signin-page-container .form-container .btn-row {
-      justify-content: center;
+      height: 60px;
+      flex-direction: column;
+      justify-content: space-between;
     }
+  }
+  .signin-page-container .form-container .btn-row .error-msg {
+    color: $accent-red;
   }
   .signin-page-container .form-container .btn-row button {
     width: 100px;
@@ -210,11 +230,11 @@
     display: flex;
     align-items: center;
   }
-  .signin-page-container .form-container .btn-row span {
+  .signin-page-container .form-container button > span {
     font-size: 16px;
     margin: 0 auto;
   }
-  .signin-page-container .form-container .btn-row i {
+  .signin-page-container .form-container button > i {
     width: 25px;
     margin-left: auto;
   }

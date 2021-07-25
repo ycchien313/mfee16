@@ -1,6 +1,15 @@
 .sign-up {
   @import '../common/global.scss';
 
+  // 彈出式視窗設定
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 1000px;
+
   .bg-lightgray {
     background-color: $primary-lightgray;
   }
@@ -39,7 +48,8 @@
       max-width: unset;
       width: 100%;
       max-height: unset;
-      height: 220px;
+      // height: 220px;
+      height: 28.64vw;
       background-image: url('http://127.0.0.1:3000/images/auth/auth-md-wave-down.svg');
     }
   }

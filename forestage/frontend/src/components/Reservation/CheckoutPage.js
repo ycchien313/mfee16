@@ -22,20 +22,30 @@ function CheckoutPage(props) {
     mcm_id: 0,
     status: '未完成',
   })
+
+  const checkInsertResData = Boolean(localStorage.getItem('insertResData'))
+
   useEffect(() => {
     setDishList(props.location.state.dishList)
     setCheckList(props.location.state.checkList)
+    checkInsertResData &&
+      setInsertResData(JSON.parse(window.localStorage.getItem('insertResData')))
   }, [])
+
+  // 將訂位頁資料帶入insert物件中
+  // useEffect(() => {
+  //   let newInsertResData = { ...insertResData }
+  //   newInsertResData.date = checkList.chosenDate
+  //   newInsertResData.seat_id = checkList.seatId
+  //   newInsertResData.attendance = checkList.attendance
+  //   newInsertResData.total = checkList.total
+  //   setInsertResData(newInsertResData)
+  // }, [checkList])
+
+  // 將insertResData存入localstorage
   useEffect(() => {
-    // 將訂位頁資料帶入insert物件中
-    let newInsertResData = { ...insertResData }
-    newInsertResData.date = checkList.chosenDate
-    newInsertResData.seat_id = checkList.seatId
-    newInsertResData.attendance = checkList.attendance
-    newInsertResData.total = checkList.total
-    setInsertResData(newInsertResData)
-  }, [checkList])
-  
+    window.localStorage.setItem('insertResData', JSON.stringify(insertResData))
+  }, [insertResData])
   return (
     <>
       <Header />

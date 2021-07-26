@@ -5,11 +5,13 @@ import DessertBox from '../components/DessertBox'
 import Aside from './Aside'
 import Takeout from './Takeout'
 import Map from './Map'
+import { Link } from 'react-router-dom'
 import $ from 'jquery'
 
 function Delivery(props) {
   const [time, setTime] = useState('')
   const [date, setDate] = useState('')
+  const [fulltime, setFulltime] = useState('')
   const [main, inputMain] = useState([])
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
@@ -25,7 +27,15 @@ function Delivery(props) {
     dist: '中壢區',
     road: '中央路123號',
   })
+  const [fullData, setFullData] = useState({
+    price: '',
+    address: '',
+    picture: '',
+    data: '',
+    time: '',
+  })
   const [addFee, setFee] = useState('')
+  const [delivery, setDelivery] = useState([date, address, dishes])
 
   const getDishes = () => {
     $.ajax({
@@ -48,6 +58,8 @@ function Delivery(props) {
 
   useEffect(() => {
     getDishes()
+
+    setFulltime(date + time)
 
     $.ajax({
       url: 'http://localhost:3001/delivery/dish/main',
@@ -99,7 +111,7 @@ function Delivery(props) {
     <>
       <div className="FoodDelivery">
         <div className="hero-section">
-          <Map address={address} setAddress={setAddress} setFee={setFee}/>
+          <Map address={address} setAddress={setAddress} setFee={setFee} />
           <Takeout
             time={time}
             setTime={setTime}
@@ -126,7 +138,7 @@ function Delivery(props) {
                             dist: '123',
                           }
                           setAddress(newAddress)
-                          console.log(address)
+                          // console.log(address)
                         }}
                       >
                         主餐
@@ -233,15 +245,18 @@ function Delivery(props) {
             dishList={dishList}
             setDishList={setDishList}
             addFee={addFee}
+            delivery={delivery}
           />
         </div>
         <div className="mobile-out">
-          <input
-            type="button"
-            defaultValue="送出訂單"
-            className="OrderGet mobile-order-get"
-            field=""
-          />
+          <Link to={{ pathname: '/reservation', state: { delivery } }}>
+            <input
+              type="button"
+              defaultValue="送出訂單"
+              className="OrderGet mobile-order-get"
+              field=""
+            />
+          </Link>
         </div>
       </div>
     </>

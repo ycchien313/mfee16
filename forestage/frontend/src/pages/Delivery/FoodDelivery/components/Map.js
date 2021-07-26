@@ -50,13 +50,13 @@ function Map(props) {
                 type="text"
                 className="takeoutInput add"
                 defaultValue={address.dist}
-                placeholder
+                // placeholder
               />
             </div>
             <input
               type="text"
               className="takeoutInput add-r"
-              defaultValue={address.road}
+              value={address.road}
               onChange={(e) => {
                 let newAddress = {
                   ...address,
@@ -64,7 +64,7 @@ function Map(props) {
                 }
                 setAddress(newAddress)
               }}
-              placeholder
+              // placeholder
             />
             <div className="Shipping">
               {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}
@@ -639,9 +639,9 @@ function Map(props) {
               />
               <input
                 type="text"
-                value={address.dist}
+                defaultValue={address.dist}
                 className="takeoutInput add"
-                placeholder
+                // placeholder
               />
             </div>
             <input
@@ -655,7 +655,7 @@ function Map(props) {
                 }
                 setAddress(newAddress)
               }}
-              placeholder
+              // placeholder
             />
             <div className="Shipping">
               {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}

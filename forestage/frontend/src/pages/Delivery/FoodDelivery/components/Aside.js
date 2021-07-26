@@ -1,7 +1,16 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function Aside(props) {
-  const { dishCount, dishes, setDishes, dishList, setDishList, addFee } = props
+  const {
+    dishCount,
+    dishes,
+    setDishes,
+    dishList,
+    setDishList,
+    addFee,
+    delivery,
+  } = props
 
   // 計算總金額
   const total = () => {
@@ -62,12 +71,14 @@ function Aside(props) {
             src={'http://localhost:3000/images/delivery/FoodDelivery/menu.png'}
             alt=""
           />
-          <input
-            type="button"
-            defaultValue="送出訂單"
-            className="OrderGet"
-            field=""
-          />
+          <Link to={{ pathname: '/', state: { delivery } }}>
+            <input
+              type="button"
+              defaultValue="送出訂單"
+              className="OrderGet"
+              field=""
+            />
+          </Link>
         </div>
       </aside>
     </>

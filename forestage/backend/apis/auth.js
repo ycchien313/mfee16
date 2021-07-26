@@ -10,9 +10,11 @@ require('dotenv').config();
 const conn = db.connection;
 const upload = multer();
 
-/********** 解 token **********/
-router.get('/getmember', (req, res) => {
-    const headers = req.headers;
+/********** 解 token(得到登入者的資訊) **********/
+router.get('/me', (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
     const token = headers.authorization.replace('Bearer ', '');
     const decoded = jwt.getToken(token);
 
@@ -29,7 +31,7 @@ router.get('/getmember', (req, res) => {
 router.post('/signin', async (req, res) => {
     console.log('URL: ', req.url);
     console.log('METHOD: ', req.method);
-
+    console.log('signin headers', req.headers);
     let sql = null;
     let resData = null;
     const { account, password } = req.body;
@@ -72,6 +74,7 @@ router.post('/signin', async (req, res) => {
                     status: '成功',
                     result: '成功',
                     msg: '登入成功',
+                    data: { memberId: memberId },
                     token: token,
                 };
             }
@@ -151,5 +154,8 @@ router.post('/signup', upload.none(), async (req, res) => {
         res.status(500).json(resData);
     }
 });
+
+/********** 登出 **********/
+// sign out
 
 module.exports = router;

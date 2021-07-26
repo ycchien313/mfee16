@@ -6,7 +6,7 @@ import AuthSocial from '../AuthSocial'
 import AuthForm from '../AuthForm'
 
 function Signin(props) {
-  const { signinScreen, setSigninScreen } = props
+  const { signinScreen, setSigninScreen, setShowAuthModal } = props
 
   return (
     <>
@@ -23,7 +23,10 @@ function Signin(props) {
                 setSigninScreen={setSigninScreen}
               />
               <AuthSocial signinScreen={signinScreen} />
-              <AuthForm signinScreen={signinScreen} />
+              <AuthForm
+                signinScreen={signinScreen}
+                setShowAuthModal={setShowAuthModal}
+              />
             </div>
           </div>
           <div className="wave-down"></div>

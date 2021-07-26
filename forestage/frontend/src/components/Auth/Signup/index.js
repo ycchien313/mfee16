@@ -6,7 +6,7 @@ import AuthSocial from '../AuthSocial'
 import AuthForm from '../AuthForm'
 
 function Signup(props) {
-  const { signinScreen, setSigninScreen } = props
+  const { signinScreen, setSigninScreen, setShowAuthModal } = props
 
   return (
     <>
@@ -20,7 +20,10 @@ function Signup(props) {
                 setSigninScreen={setSigninScreen}
               />
               <AuthSocial signinScreen={signinScreen} />
-              <AuthForm signinScreen={signinScreen} />
+              <AuthForm
+                signinScreen={signinScreen}
+                setShowAuthModal={setShowAuthModal}
+              />
             </div>
             <div className="right-side">
               <WelLogo />

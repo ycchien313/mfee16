@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Aside(props) {
-  const { dishCount, dishes, setDishes, dishList, setDishList, addFee, img } =
-    props
+  const {
+    dishCount,
+    dishes,
+    setDishes,
+    dishList,
+    setDishList,
+    addFee,
+    img,
+    address,
+    fulltime,
+  } = props
   const [name, setName] = useState([])
   const [subTotal, setSubTotal] = useState([])
   const [counts, setCounts] = useState([])
@@ -85,7 +94,13 @@ function Aside(props) {
           <Link
             to={{
               pathname: '/',
-              state: { name: name, subTotal: subTotal, counts: counts },
+              state: {
+                name: name,
+                subTotal: subTotal,
+                counts: counts,
+                address: address,
+                fulltime: fulltime,
+              },
             }}
           >
             <input

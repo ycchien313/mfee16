@@ -20,17 +20,6 @@ function Delivery(props) {
   // 訂餐
   const [dishList, setDishList] = useState([])
 
-  // let Arr = dishList.join()
-
-  let Arr = dishList.filter(function (value) {
-    return value !== 0
-  })
-  Arr.join('')
-
-  console.log(Arr, '22222222')
-
-  // console.log(Arr, '1')
-
   const [dishes, setDishes] = useState([])
   //地址,縣區街道
   const [address, setAddress] = useState({
@@ -72,11 +61,12 @@ function Delivery(props) {
         console.log(err)
       })
   }
-
+  useEffect(() => {
+    setFulltime(date + ' ' + time)
+  }, [date, time])
   useEffect(() => {
     getDishes()
 
-    setFulltime(date + '' + time)
     setAllAddress(address.city + address.dist + address.road)
 
     $.ajax({
@@ -267,6 +257,8 @@ function Delivery(props) {
             setDishList={setDishList}
             addFee={addFee}
             img={img}
+            address={address}
+            fulltime={fulltime}
           />
         </div>
         <div className="mobile-out">

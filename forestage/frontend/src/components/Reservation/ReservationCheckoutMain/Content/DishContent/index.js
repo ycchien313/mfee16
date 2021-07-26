@@ -4,6 +4,7 @@ import DishRow from './DishRow'
 function DishContent(props) {
   const { dishList, checkList, insertResData, setInsertResData } = props
   const [coupon, setCoupon] = useState([])
+  const [didMount, setDidMount] = useState(false)
   const selectRef = useRef(null)
   // const [selectedCoupon, setSelectedCoupon] = useState()
   function getMemberCoupons() {
@@ -35,13 +36,25 @@ function DishContent(props) {
     }
   }
 
+  let checkMcmId = Boolean(window.localStorage.getItem('insertResData'))
+
+  let mcmIdInStorage = 0
+  if (checkMcmId) {
+    mcmIdInStorage = JSON.parse(
+      window.localStorage.getItem('insertResData')
+    ).mcm_id
+  }
+
   useEffect(() => {
+    setDidMount(true)
     getMemberCoupons()
   }, [])
 
-  useEffect(() => {
-    // setTotal()
-  }, [insertResData])
+  // useEffect(() => {
+  //   let mcmIdInStorage = JSON.parse(
+  //     window.localStorage.getItem('insertResData')
+  //   ).mcm_id
+  // }, [insertResData])
 
   // let discount = 0
   return (
@@ -96,6 +109,8 @@ function DishContent(props) {
                   return checkList.total >= v.minimum_order_value ? (
                     <option
                       value={v.mcm_id}
+                      selected={mcmIdInStorage === v.mcm_id ? 'selected' : ''}
+                      // checked={true}
                     >{`${v.name} - ${v.discount}元`}</option>
                   ) : (
                     <option value={v.mcm_id} disabled>

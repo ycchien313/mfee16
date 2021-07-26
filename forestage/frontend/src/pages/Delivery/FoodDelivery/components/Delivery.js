@@ -17,25 +17,38 @@ function Delivery(props) {
   const [dessert, inputDessert] = useState([])
   const [counts, setCounts] = useState(Array(3).fill(0))
   const [dishCount, setDishCount] = useState({})
-  // 空[]
+  // 訂餐
   const [dishList, setDishList] = useState([])
+
+  // let Arr = dishList.join()
+
+  let Arr = dishList.filter(function (value) {
+    return value !== 0
+  })
+  Arr.join('')
+
+  console.log(Arr, '22222222')
+
+  // console.log(Arr, '1')
 
   const [dishes, setDishes] = useState([])
   //地址,縣區街道
   const [address, setAddress] = useState({
     city: '桃園市',
-    dist: '中壢區',
+    dist: '',
     road: '中央路123號',
   })
-  const [fullData, setFullData] = useState({
-    price: '',
-    address: '',
-    picture: '',
-    data: '',
-    time: '',
-  })
+
+  //
+  const [img, setImg] = useState([])
+  //
+  const [allAddress, setAllAddress] = useState('')
+
+  const [fullData, setFullData] = useState('')
+  // 免運
   const [addFee, setFee] = useState('')
-  const [delivery, setDelivery] = useState([date, address, dishes])
+  // 總金
+  const [totalprice, setTotalPrice] = useState('')
 
   const getDishes = () => {
     $.ajax({
@@ -45,7 +58,11 @@ function Delivery(props) {
     })
       .then(function (result) {
         setDishes(result)
-
+        let imgArr = []
+        for (let i = 0; i < result.length; i++) {
+          imgArr.push(result[i].image_realistic)
+        }
+        setImg(imgArr)
         let newDish = ''
         result.forEach((dish) => {
           newDish = { ...newDish }
@@ -59,7 +76,8 @@ function Delivery(props) {
   useEffect(() => {
     getDishes()
 
-    setFulltime(date + time)
+    setFulltime(date + '' + time)
+    setAllAddress(address.city + address.dist + address.road)
 
     $.ajax({
       url: 'http://localhost:3001/delivery/dish/main',
@@ -107,6 +125,11 @@ function Delivery(props) {
     }
   }, [dishes])
 
+  // address
+  // useEffect(() => {
+  //   return () => {}
+  // }, [])
+
   return (
     <>
       <div className="FoodDelivery">
@@ -138,7 +161,6 @@ function Delivery(props) {
                             dist: '123',
                           }
                           setAddress(newAddress)
-                          // console.log(address)
                         }}
                       >
                         主餐
@@ -166,7 +188,6 @@ function Delivery(props) {
                         )
                       }
                     })}
-                    {/* {console.log(main, 'main')} */}
                   </div>
                 </div>
               </div>
@@ -245,11 +266,11 @@ function Delivery(props) {
             dishList={dishList}
             setDishList={setDishList}
             addFee={addFee}
-            delivery={delivery}
+            img={img}
           />
         </div>
         <div className="mobile-out">
-          <Link to={{ pathname: '/reservation', state: { delivery } }}>
+          <Link to={{ pathname: '/reservation', state: {} }}>
             <input
               type="button"
               defaultValue="送出訂單"

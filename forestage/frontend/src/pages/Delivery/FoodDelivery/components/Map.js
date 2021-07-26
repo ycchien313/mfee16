@@ -67,7 +67,7 @@ function Map(props) {
               // placeholder
             />
             <div className="Shipping">
-              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}
+              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'300'}&nbsp;</p>}
               <p>運費: 60 元</p>
             </div>
           </div>
@@ -133,7 +133,7 @@ function Map(props) {
             <path
               // test
               data-area="大溪區"
-              data-fee="150"
+              data-fee="450"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -169,7 +169,7 @@ function Map(props) {
             />
             <path
               data-area="觀音區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -198,7 +198,7 @@ function Map(props) {
             />
             <path
               data-area="楊梅區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
                 // setCharge(e)
@@ -226,7 +226,7 @@ function Map(props) {
             />
             <path
               data-area="新屋區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -261,7 +261,7 @@ function Map(props) {
             />
             <path
               data-area="中壢區"
-              data-fee="0"
+              data-fee="300"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -308,7 +308,7 @@ function Map(props) {
             />
             <path
               data-area="龍潭區"
-              data-fee="150"
+              data-fee="450"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -346,7 +346,7 @@ function Map(props) {
             />
             <path
               data-area="蘆竹區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -384,7 +384,7 @@ function Map(props) {
             />
             <path
               data-area="平鎮區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -408,7 +408,7 @@ function Map(props) {
             />
             <path
               data-area="八德區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -433,7 +433,7 @@ function Map(props) {
             />
             <path
               data-area="復興區"
-              data-fee="300"
+              data-fee="600"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -479,7 +479,7 @@ function Map(props) {
             />
             <path
               data-area="大園區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -524,7 +524,7 @@ function Map(props) {
             />
             <path
               data-area="龜山區"
-              data-fee="150"
+              data-fee="450"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -555,7 +555,7 @@ function Map(props) {
             />
             <path
               data-area="桃園區"
-              data-fee="100"
+              data-fee="400"
               onClick={(e) => {
                 setAddressDist(e)
               }}
@@ -577,16 +577,16 @@ function Map(props) {
             C397.6,185.9,397.55,186.26,397.62,186.64z M400.2,182.2c-0.22,0.06-0.41,0.16-0.55,0.29C399.79,182.35,399.98,182.26,400.2,182.2z
              M401.51,185.26c-0.24,0.18-0.51,0.29-0.79,0.37C401,185.55,401.27,185.44,401.51,185.26z"
             />
-            <text className="svg-text" x="310" y="70">
+            <text className="svg-text" x="315" y="80">
               蘆竹區
             </text>
             <text className="svg-text" x="420" y="120">
               龜山區
             </text>
-            <text className="svg-text" x="200" y="140">
+            <text className="svg-text" x="200" y="150">
               大園區
             </text>
-            <text className="svg-text" x="370" y="180">
+            <text className="svg-text" x="365" y="180">
               桃園區
             </text>
             <text className="svg-text" x="100" y="270">
@@ -658,7 +658,7 @@ function Map(props) {
               // placeholder
             />
             <div className="Shipping">
-              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'0'}&nbsp;</p>}
+              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'300'}&nbsp;</p>}
               <p>運費: $60</p>
             </div>
           </div>

@@ -71,6 +71,7 @@
         width: 18vw;
         height: 2.7vw;
         border: transparent;
+        // cursor: pointer; 
       }
     }
 
@@ -131,9 +132,10 @@
       top: 18vh;
       margin-left: 10.5vw;
       .svg-text {
-        font-family: $zh-tw-maru;
+        font-family: $zh-tw-noto;
         font-size: 18px;
         fill: #ffffff;
+        cursor: pointer;
       }
     }
 
@@ -448,6 +450,7 @@
 
     &:hover {
       fill: #f5b54d;
+      transition: 0.5s;
     }
   }
   .st0 {

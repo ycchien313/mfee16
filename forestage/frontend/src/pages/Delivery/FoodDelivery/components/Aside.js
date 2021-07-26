@@ -1,17 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 function Aside(props) {
-  const {
-    dishCount,
-    dishes,
-    setDishes,
-    dishList,
-    setDishList,
-    addFee,
-    delivery,
-  } = props
-
+  const { dishCount, dishes, setDishes, dishList, setDishList, addFee, img } =
+    props
+  const [name, setName] = useState([])
+  const [subTotal, setSubTotal] = useState([])
+  const [counts, setCounts] = useState([])
   // 計算總金額
   const total = () => {
     let sum = 0
@@ -34,11 +29,27 @@ function Aside(props) {
         return v
       })
     })
-
     setDishList(newDishArr)
   }, [dishCount])
-  // console.log(dishCount, '123')
 
+  // 宜諺加ㄉ
+  useEffect(() => {
+    ;(function () {
+      let price = []
+      let product = []
+      let count = []
+      for (let i = 0; i < dishList.length; i++) {
+        price.push(dishes[i].price * dishList[i][1])
+        product.push(dishList[i][0])
+        count.push(dishList[i][1])
+      }
+      console.log(price)
+      console.log(product)
+      setSubTotal(price)
+      setName(product)
+      setCounts(count)
+    })()
+  }, [dishList])
   return (
     <>
       <aside className="aside-list">
@@ -71,7 +82,12 @@ function Aside(props) {
             src={'http://localhost:3000/images/delivery/FoodDelivery/menu.png'}
             alt=""
           />
-          <Link to={{ pathname: '/', state: { delivery } }}>
+          <Link
+            to={{
+              pathname: '/',
+              state: { name: name, subTotal: subTotal, counts: counts },
+            }}
+          >
             <input
               type="button"
               defaultValue="送出訂單"

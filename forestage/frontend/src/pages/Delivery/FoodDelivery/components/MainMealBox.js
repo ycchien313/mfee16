@@ -2,8 +2,6 @@ import React from 'react'
 
 function MainMealBox(props) {
   const { id, name, price, image_realistic, dishCount, setDishCount } = props
-  // console.log('id', id)
-  // console.log('dishCount', dishCount)
 
   function minus(id) {
     let newDishCount = { ...dishCount }
@@ -20,8 +18,7 @@ function MainMealBox(props) {
     newDishCount[id] += 1
     setDishCount(newDishCount)
   }
-  // console.log(dishCount, 'count')
-  // console.log(dishCount[id], 'count')
+
   return (
     <>
       <div className="MainMealBox">

@@ -14,18 +14,19 @@ function Auth(props) {
         className="auth"
         onClick={(e) => {
           e.target.className === 'auth' && setShowAuthModal(!showAuthModal)
-          console.log(e)
         }}
       >
         {signinScreen ? (
           <Signin
             signinScreen={signinScreen}
             setSigninScreen={setSigninScreen}
+            setShowAuthModal={setShowAuthModal}
           />
         ) : (
           <Signup
             signinScreen={signinScreen}
             setSigninScreen={setSigninScreen}
+            setShowAuthModal={setShowAuthModal}
           />
         )}
       </div>

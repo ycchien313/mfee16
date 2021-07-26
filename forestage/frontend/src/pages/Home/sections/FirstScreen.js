@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react'
-import $ from 'jquery'
+import React, { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
 
 function FirstScreen(props) {
-  let { singerName, singerImg } = props
+  let { singerName, singerImg, singerDate } = props
+  let GsapTarget = useRef(null)
+  console.log(GsapTarget)
+  useEffect(() => {
+    gsap.to(GsapTarget, { x: 0, opacity: 1 })
+  }, [])
   let FirstScreen = (
     <div id="firstScreen">
       <div className="mask"></div>
@@ -31,7 +36,7 @@ function FirstScreen(props) {
             <h4>
               表演時間
               <br />
-              6/20 &ensp;18:00
+              {singerDate}&ensp;18:00
             </h4>
           </div>
         </div>
@@ -40,7 +45,12 @@ function FirstScreen(props) {
 
       <div className="card">
         <div className="cardTitle h2">本日歌手</div>
-        <div className="cardBody">
+        <div
+          className="cardBody"
+          ref={(element) => {
+            GsapTarget = element
+          }}
+        >
           <figure className="singer">
             <img src={singerImg} alt="" />
           </figure>
@@ -50,7 +60,7 @@ function FirstScreen(props) {
             <h4 className="cardInfoContent">
               表演時間
               <br />
-              6/20 &ensp;18:00
+              {singerDate} &ensp;18:00
             </h4>
           </div>
         </div>
@@ -72,7 +82,7 @@ function FirstScreen(props) {
                 src="http://localhost:3000/images/common/BrownLogo.png"
                 alt=""
               />
-              來一場 <span className="spanRed h1">音樂</span>與
+              &ensp;來一場 <span className="spanRed h1">音樂</span>與
               <span className="spanRed h1">美食</span>的饗宴
             </h1>
           </div>

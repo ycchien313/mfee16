@@ -1,7 +1,19 @@
 import React from 'react'
 
 function CommentCard(props) {
-  let { name, singer, title, nickname, img } = props
+  let { name, singer, title, nickname, img, likes } = props
+  // 星星數 = star * likes
+
+  let star = (
+    <li>
+      <img src="http://localhost:3000/images/home/star.png" alt="" />
+    </li>
+  )
+  let starArr = []
+  for (let i = 0; i < likes; i++) {
+    starArr.push(star)
+  }
+  //
   let card = (
     <li className="card-li">
       <div className="commentCard">
@@ -9,28 +21,12 @@ function CommentCard(props) {
           <div className="userImg">
             <img src={img} alt="" />
           </div>
-          <p>{nickname}</p>
+          <p>{name}</p>
           <p className="alignSelfEnd">{singer}</p>
         </div>
         <hr />
         <div className="stars">
-          <ul>
-            <li>
-              <img src="./image/star.png" alt="" />
-            </li>
-            <li>
-              <img src="./image/star.png" alt="" />
-            </li>
-            <li>
-              <img src="./image/star.png" alt="" />
-            </li>
-            <li>
-              <img src="./image/star.png" alt="" />
-            </li>
-            <li>
-              <img src="./image/star.png" alt="" />
-            </li>
-          </ul>
+          <ul>{starArr}</ul>
         </div>
         <div className="comment">
           <p>{title}</p>

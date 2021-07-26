@@ -25,14 +25,58 @@ function Main(props) {
 
   const [dishList, setDishList] = useState([])
 
+  const checkRemainingSeat = Boolean(localStorage.getItem('remainingSeat'))
+  const checkSeatCount = Boolean(localStorage.getItem('seatCount'))
+  const checkCheckList = Boolean(localStorage.getItem('checkList'))
+  const checkSeatInfo = Boolean(localStorage.getItem('seatInfo'))
+
   useEffect(() => {
     setDidMount(true)
     axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
       setSeatInfo(result.data)
     })
+
+    checkRemainingSeat &&
+      setRemainingSeat(JSON.parse(window.localStorage.getItem('remainingSeat')))
+    // checkSeatCount && setSeatCount(JSON.parse(window.localStorage.getItem('seatCount')))
+    checkCheckList &&
+      setCheckList(JSON.parse(window.localStorage.getItem('checkList')))
+    checkSeatInfo &&
+      setSeatInfo(JSON.parse(window.localStorage.getItem('seatInfo')))
+
+    // 將key轉回int(ID) 
+    if (checkSeatCount) {
+      console.log(seatInfo, 'sinfo')
+      let newSeatCount = JSON.parse(localStorage.getItem('seatCount'))
+      let keyArr = Object.keys(newSeatCount)
+      let newObj = {}
+      keyArr.forEach((v) => {
+        newObj[+v] = newSeatCount[v]
+      })
+      console.log(newObj)
+      setSeatCount(newObj)
+    }
   }, [])
 
-  // console.log(seatInfo[1].name)
+  // 將state存入localstorage
+  useEffect(() => {
+    if (didMount) {
+      window.localStorage.setItem(
+        'remainingSeat',
+        JSON.stringify(remainingSeat)
+      )
+      window.localStorage.setItem('checkList', JSON.stringify(checkList))
+      window.localStorage.setItem('seatCount', JSON.stringify(seatCount))
+      window.localStorage.setItem('seatInfo', JSON.stringify(seatInfo))
+
+      // setSeatCount(newObj)
+    }
+  }, [remainingSeat, seatCount, checkList, seatInfo])
+
+  // , seatCount, checkList
+
+  // useEffect(() => {
+  // }, [])
 
   // 計算各區剩餘座位數量
   useEffect(() => {
@@ -54,7 +98,7 @@ function Main(props) {
       }
     }
   }, [remainingSeat])
-  
+
   let reservationInfo = [
     '2021-07-31',
     1,
@@ -100,6 +144,7 @@ function Main(props) {
               setSeatCount={setSeatCount}
               checkList={checkList}
               setCheckList={setCheckList}
+              remainingSeat={remainingSeat}
             />
             <ChooseMeal
               checkList={checkList}

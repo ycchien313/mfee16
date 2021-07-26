@@ -3,17 +3,48 @@ import $ from 'jquery'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 function ChooseSeat(props) {
-  const { seatInfo, seatCount, setSeatCount, checkList, setCheckList } = props
+  const {
+    seatInfo,
+    seatCount,
+    setSeatCount,
+    checkList,
+    setCheckList,
+    remainingSeat,
+  } = props
 
   const [didMount, setDidMount] = useState(false)
-  const [attendance, setAttendance] = useState({
-    1: 0,
-    2: 0,
-    3: 0,
-  })
+  const [attendance, setAttendance] = useState({})
 
-  // console.log(seatInfo[1].name)
   const barInfo = useRef(null)
+  // 判斷localstorage中是否有此資料
+  const checkAttendance = Boolean(localStorage.getItem('attendance'))
+
+  useEffect(() => {
+    if (didMount) {
+      window.localStorage.setItem('attendance', JSON.stringify(attendance))
+    }
+  }, [attendance])
+
+  useEffect(() => {
+    // 若localstorage內沒有訂位人數資料，則指定各區人數為0
+    if (checkAttendance === false) {
+      let newAttendance = { ...attendance }
+      newAttendance[1] = 0
+      newAttendance[2] = 0
+      newAttendance[3] = 0
+      setAttendance(newAttendance)
+    } else {
+      // 若localstorage中有訂位人數資料，則帶入state中
+      let newAttendance = JSON.parse(localStorage.getItem('attendance'))
+      let keyArr = Object.keys(newAttendance)
+      let newObj = {}
+      keyArr.forEach((v) => {
+        newObj[+v] = newAttendance[v]
+      })
+      // console.log(newObj)
+      setAttendance(newObj)
+    }
+  }, [])
 
   // active 樣式切換
   useEffect(() => {
@@ -26,20 +57,7 @@ function ChooseSeat(props) {
     })
   }, [])
 
-  // 驗證是否已經選擇日期(sweetalert)
-  const checkDateSwal = withReactContent(Swal)
-  function checkDate() {
-    if (checkList.chosenDate === '') {
-      checkDateSwal.fire({
-        title: <h3>請先選擇日期</h3>,
-        icon: 'warning',
-        confirmButtonColor: '#97bc78',
-        buttonsStyling: false,
-      })
-    }
-  }
-
-  // 顯示剩餘座位bar
+  // 顯示剩餘座位長條圖
   useEffect(() => {
     if (didMount) {
       barInfo.current.style.display = 'flex'
@@ -48,16 +66,19 @@ function ChooseSeat(props) {
 
   // 更新checkList座位區 & 人數
   useEffect(() => {
-    const seatIdArr = Object.keys(attendance)
-    // console.log(seatIdArr)
-    seatIdArr.forEach((seatId) => {
-      updateCheckList(parseInt(seatId))
-      console.log(seatId, 'seatId')
-    })
+    if (didMount) {
+      const seatIdArr = Object.keys(attendance)
+      // console.log(seatIdArr)
+      seatIdArr.forEach((seatId) => {
+        updateCheckList(parseInt(seatId))
+        // console.log(seatId, 'seatId')
+      })
+    }
   }, [attendance])
 
   // 減號按鈕
   function minusAttendance(seatId) {
+
     const newAttendance = { ...attendance }
     newAttendance[seatId] > 0
       ? (newAttendance[seatId] -= 1)
@@ -73,7 +94,10 @@ function ChooseSeat(props) {
   // 加號按鈕
   function addAttendance(seatId) {
     const newAttendance = { ...attendance }
-    if (seatCount[seatId] > 0) {
+    // console.log(newAttendance)
+    // console.log('ifseatcount', seatCount[seatId])
+    // 已選擇日期後才可以加人數
+    if (seatCount[seatId] > 0 && checkList.chosenDate !== '') {
       for (let id = 1; id <= 3; id++) {
         if (id === seatId) {
           newAttendance[seatId] += 1
@@ -96,7 +120,9 @@ function ChooseSeat(props) {
   async function updateCheckList(seatId) {
     let newObj = { ...checkList }
     let seat = {}
-    if (attendance[seatId] > 0) {
+    if (attendance[seatId] > 0 && seatInfo.length>0) {
+
+      // console.log(seatInfo,"sinfo")
       seat = await seatInfo.find((item) => {
         // console.log(item.name, 'item') //有印出
         return item.seat_id === seatId
@@ -111,6 +137,19 @@ function ChooseSeat(props) {
       newObj.minOrder = 0
     }
     setCheckList(newObj)
+  }
+  
+  // 驗證是否已經選擇日期(sweetalert)
+  const checkDateSwal = withReactContent(Swal)
+  function checkDate() {
+    if (checkList.chosenDate === '') {
+      checkDateSwal.fire({
+        title: <h3>請先選擇日期</h3>,
+        icon: 'warning',
+        confirmButtonColor: '#97bc78',
+        buttonsStyling: false,
+      })
+    }
   }
 
   return (
@@ -164,7 +203,10 @@ function ChooseSeat(props) {
                     minusAttendance(1)
                   }}
                 ></div>
-                <input type="number" value={attendance[1]} />
+                <input
+                  type="number"
+                  value={attendance[1] ? attendance[1] : 0}
+                />
                 <div
                   class="plus-button"
                   onClick={() => {
@@ -211,7 +253,10 @@ function ChooseSeat(props) {
                     minusAttendance(2)
                   }}
                 ></div>
-                <input type="number" value={attendance[2]} />
+                <input
+                  type="number"
+                  value={attendance[2] ? attendance[2] : 0}
+                />
                 <div
                   class="plus-button"
                   onClick={() => {
@@ -258,7 +303,10 @@ function ChooseSeat(props) {
                     minusAttendance(3)
                   }}
                 ></div>
-                <input type="number" value={attendance[3]} />
+                <input
+                  type="number"
+                  value={attendance[3] ? attendance[3] : 0}
+                />
                 <div
                   class="plus-button"
                   onClick={() => {

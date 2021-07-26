@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
-import ChooseDate from '..'
+
 function Day(props) {
   const {
     date,

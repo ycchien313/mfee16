@@ -7,7 +7,7 @@ import CheckoutPage from '../../../src/components/Reservation/CheckoutPage'
 // import Footer from '../../components/Footer'
 
 function Reservation(props) {
-
+  
   const url = props.match.url
   return (
     <>

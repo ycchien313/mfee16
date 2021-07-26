@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ReservationContent from './Content/ReservationContent'
 import DishContent from './Content/DishContent/'
@@ -47,13 +48,15 @@ function Main(props) {
                 本店採現場付款，訂單送出後您將收到 E-Mail 確認信。
               </span>
               <div className="buttons">
-                <button className="guide-button back">
-                  <img
-                    src="http://localhost:3000/images/reservation/res_checkout/arrow-circle-left-solid.svg"
-                    alt=""
-                  />
-                  修改訂位
-                </button>
+                <Link to={{ pathname: '/reservation' }}>
+                  <button className="guide-button back">
+                    <img
+                      src="http://localhost:3000/images/reservation/res_checkout/arrow-circle-left-solid.svg"
+                      alt=""
+                    />
+                    修改訂位
+                  </button>
+                </Link>
                 <button
                   className="pink-guide-button"
                   onClick={() => {

@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
+import AuthContext from './AuthContext'
 
 function AuthForm(props) {
-  const { match, location, history, signinScreen } = props
+  const { setUser } = useContext(AuthContext)
+  const { signinScreen, setShowAuthModal } = props
   const [errorMsg, setErrorMsg] = useState('')
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState(['桃園市', '台北市', '新北市'])
@@ -21,12 +22,13 @@ function AuthForm(props) {
     password: '123',
   })
 
+  // 對 server 請求，不含 token
   const serverRequest = axios.create({
     baseURL: 'http://127.0.0.1:3001/auth/',
-    headers: new Headers({
+    headers: {
       Accept: 'application/json',
-      'Content-Type': 'appliaction/json',
-    }),
+      'Content-Type': 'application/json; charset=utf-8',
+    },
   })
 
   // 檢查密碼與確認密碼是否符合
@@ -115,6 +117,7 @@ function AuthForm(props) {
           const data = response.data
           const result = data.result
           const msg = data.msg
+          const memberId = data.data.memberId
           const token = data.token
 
           // 登入失敗
@@ -125,12 +128,20 @@ function AuthForm(props) {
 
           // 登入成功
           console.log('登入成功，token: ', token)
-          // 設定 token for localStorage
+
+          // 設定 token 給 localStorage
           setAuthToken(token)
-          // To Do 跳出彈出式視窗 (跳轉到當時頁面)
+          // 設定 token 給 request 的 header
+          serverRequest.defaults.headers.common['Authorization'] = token
+          // 設定 memberId 給 react context (user state)
+          setUser({ memberId: memberId })
 
           // 載入指示器及轉場
-          successfulTransition('登入成功')
+          await loading()
+          await transition('登入成功')
+
+          // 重新整理
+          setShowAuthModal(false)
         } catch (error) {}
         break
 
@@ -146,6 +157,7 @@ function AuthForm(props) {
           const data = response.data
           const result = data.result
           const msg = data.msg
+          const memberId = data.data.memberId
           const token = data.token
 
           // 註冊失敗
@@ -159,12 +171,20 @@ function AuthForm(props) {
 
           // 註冊成功
           console.log('註冊成功，token', token)
-          // 設定 token for localStorage
+          // 設定 token 給 localStorage
           setAuthToken(token)
-          // To Do 跳出彈出式視窗 (跳轉到當時頁面)
+          // 設定 token 給 request 的 header
+          serverRequest.defaults.headers.common['Authorization'] = token
+          // 設定 memberId 給 react context (user state)
+          setUser({ memberId: memberId })
 
           // 載入指示器及轉場
-          successfulTransition('註冊成功')
+          await loading()
+          await transition('登入成功')
+
+          // 重新整理
+          setShowAuthModal(false)
+          // window.location.reload(
         } catch (error) {
           // 內部錯誤
           console.error('error:', error)
@@ -176,25 +196,33 @@ function AuthForm(props) {
     }
   }
 
-  // 載入指示器及轉場
-  const successfulTransition = (title) => {
-    Swal.fire({
-      html:
-        '<div>' +
-        '<img src="http://127.0.0.1:3000//images/auth/spinner.svg" alt=""></img>' +
-        '</div>',
-      showConfirmButton: false,
-      timer: 750,
+  // 載入指示器
+  const loading = () =>
+    new Promise((resolve, reject) => {
+      resolve(
+        Swal.fire({
+          html:
+            '<div>' +
+            '<img src="http://127.0.0.1:3000//images/auth/spinner.svg" alt=""></img>' +
+            '</div>',
+          showConfirmButton: false,
+          timer: 750,
+        })
+      )
     })
-    setTimeout(() => {
-      Swal.fire({
-        icon: 'success',
-        title: title,
-        showConfirmButton: false,
-        timer: 1000,
-      })
-    }, 750)
-  }
+
+  // 轉場
+  const transition = (title) =>
+    new Promise((resolve, reject) => {
+      resolve(
+        Swal.fire({
+          icon: 'success',
+          title: title,
+          showConfirmButton: false,
+          timer: 1000,
+        })
+      )
+    })
 
   const signinDom = (
     <>
@@ -349,4 +377,4 @@ function AuthForm(props) {
   return <>{signinScreen ? signinDom : signupDom}</>
 }
 
-export default withRouter(AuthForm)
+export default AuthForm

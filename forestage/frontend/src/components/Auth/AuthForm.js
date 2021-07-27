@@ -22,9 +22,10 @@ function AuthForm(props) {
     password: '123',
   })
 
-  // 對 server 請求，不含 token
+  // 對 server 請求
   const serverRequest = axios.create({
-    baseURL: 'http://127.0.0.1:3001/auth/',
+    // baseURL: 'http://127.0.0.1:3001/auth/',
+    baseURL: 'https://localhost:8443/auth/',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
@@ -117,8 +118,6 @@ function AuthForm(props) {
           const data = response.data
           const result = data.result
           const msg = data.msg
-          const memberId = data.data.memberId
-          const token = data.token
 
           // 登入失敗
           if (result === '失敗') {
@@ -127,6 +126,8 @@ function AuthForm(props) {
           }
 
           // 登入成功
+          const memberId = data.data.memberId
+          const token = data.token
           console.log('登入成功，token: ', token)
 
           // 設定 token 給 localStorage

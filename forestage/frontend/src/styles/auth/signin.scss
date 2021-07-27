@@ -24,7 +24,7 @@
   .signin-page-container .wave-top {
     max-height: 200px;
     height: 20vw;
-    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-top.svg');
+    background-image: url('https://localhost:3000/images/auth/auth-wave-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -33,7 +33,7 @@
     width: 58vw;
     max-height: 140px;
     height: 14vw;
-    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-down.svg');
+    background-image: url('https://localhost:3000/images/auth/auth-wave-down.svg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -44,7 +44,7 @@
       max-height: unset;
       // height: 220px;
       height: 28.64vw;
-      background-image: url('http://127.0.0.1:3000/images/auth/auth-md-wave-down.svg');
+      background-image: url('https://localhost:3000/images/auth/auth-md-wave-down.svg');
     }
   }
   .signin-page-container .middle-container {
@@ -155,12 +155,16 @@
   .signin-page-container .signin-box {
     height: 35px;
     padding: 0;
+    border: none;
     border-radius: 5px;
     box-shadow: 0 3px 6px #707070;
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+  }
+  .signin-page-container .signin-box:hover {
+    box-shadow: none;
   }
   .signin-page-container .signin-box .icon-box {
     width: 35px;
@@ -186,8 +190,22 @@
   .signin-page-container .g-blue {
     background-color: #4285f4;
   }
+  .signin-page-container .g-blue:active {
+    background-color: darken(#4285f4, 10%);
+
+    .icon-box {
+      background-color: darken(#fff, 10%);
+    }
+  }
   .signin-page-container .f-blue {
     background-color: #4e6cab;
+  }
+  .signin-page-container .f-blue:active {
+    background-color: darken(#4e6cab, 10%);
+
+    .icon-box {
+      background-color: darken(#fff, 10%);
+    }
   }
   .signin-page-container .signin-box .icon-box i {
     font-size: 25px;

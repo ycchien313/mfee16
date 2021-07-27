@@ -1,10 +1,66 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+
 function CheckList(props) {
   const { checkList, setCheckList, dishList, setDishList, seatInfo } = props
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
+  const [checkData, setCheckData] = useState({
+    date: false,
+    seat: false,
+    minOrder: false,
+  })
+  const CheckDataSwal = withReactContent(Swal)
+
+  function fireAlert() {
+    let html = ''
+    checkList.chosenDate === '' ? (html += '<p>請選擇日期<p/>') : (html += '')
+    checkList.seatArea === '' ? (html += '<p>請選擇座位區<p/>') : (html += '')
+    if (checkList.total <= checkList.minOrder && checkList.total === 0) {
+      html += '<p>餐點未達低銷金額<p/>'
+    }
+
+    CheckDataSwal.fire({
+      title: '您尚未完成訂位',
+      html: html,
+      icon: 'warning',
+      confirmButtonColor: '#97bc78',
+      buttonsStyling: false,
+      didOpen: () => {
+        html = ''
+      },
+    })
+  }
+
+  function checkIfDataOk() {
+    let newCheckData = { ...checkData }
+    checkList.chosenDate !== ''
+      ? (newCheckData.date = true)
+      : (newCheckData.date = false)
+    checkList.seatArea !== ''
+      ? (newCheckData.seat = true)
+      : (newCheckData.seat = false)
+    checkList.total >= checkList.minOrder && checkList.minOrder !== 0
+      ? (newCheckData.minOrder = true)
+      : (newCheckData.minOrder = false)
+    console.log('chekData', newCheckData)
+    if (
+      newCheckData.date &&
+      newCheckData.seat &&
+      newCheckData.minOrder === true
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
+
   return (
     <>
       <div class="clipboard">
@@ -111,6 +167,12 @@ function CheckList(props) {
           alt=""
         />
         <Link
+          onClick={(e) => {
+            if (checkIfDataOk() === false) {
+              e.preventDefault()
+              fireAlert()
+            }
+          }}
           to={{
             pathname: '/reservation/checkout',
             state: { checkList, dishList },

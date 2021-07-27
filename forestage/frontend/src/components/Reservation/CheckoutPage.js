@@ -30,27 +30,7 @@ function CheckoutPage(props) {
     setCheckList(props.location.state.checkList)
     checkInsertResData &&
       setInsertResData(JSON.parse(window.localStorage.getItem('insertResData')))
-
-    // 關閉視窗時移除localstorage
-    window.addEventListener('beforeunload', function () {
-      window.localStorage.setItem('beforeunload', 'beforeunload')
-    })
-    return () => {
-      window.onbeforeunload = function () {
-        localStorage.clear()
-      }
-    }
   }, [])
-
-  // 將訂位頁資料帶入insert物件中
-  // useEffect(() => {
-  //   let newInsertResData = { ...insertResData }
-  //   newInsertResData.date = checkList.chosenDate
-  //   newInsertResData.seat_id = checkList.seatId
-  //   newInsertResData.attendance = checkList.attendance
-  //   newInsertResData.total = checkList.total
-  //   setInsertResData(newInsertResData)
-  // }, [checkList])
 
   // 將insertResData存入localstorage
   useEffect(() => {

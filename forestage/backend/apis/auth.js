@@ -5,6 +5,8 @@ const bcrypt = Promise.promisifyAll(require('bcrypt'));
 const db = require('../utils/db');
 const jwt = require('../utils/jwt');
 const multer = require('multer');
+const passport = require('passport');
+const FacebookStrategy = require('passport-facebook').Strategy;
 require('dotenv').config();
 
 const conn = db.connection;
@@ -95,8 +97,6 @@ router.post('/signup', upload.none(), async (req, res) => {
     console.log('URL: ', req.url);
     console.log('METHOD: ', req.method);
 
-    console.log(req.body);
-
     let sql = null;
     let resData = null;
     const { email, password, mobile, address } = req.body;
@@ -154,6 +154,47 @@ router.post('/signup', upload.none(), async (req, res) => {
         res.status(500).json(resData);
     }
 });
+
+/********** FB 登入 **********/
+router.post('/fb', async (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
+    console.log(req.body);
+    // const name = req.body.name;
+    // const accessToken = req.body.accessToken;
+});
+
+// router.get(
+//     '/facebook',
+//     passport.authenticate('facebook', { scope: 'email' }),
+//     (req, res) => {
+//         console.log('URL: ', req.url);
+//     }
+// );
+
+// router.get(
+//     '/facebook/callback',
+//     passport.authenticate('facebook', {
+//         successRedirect: '/success',
+//         failureRedirect: '/failed',
+//     }),
+//     (req, res) => {
+//         console.log('URL: ', req.url);
+//     }
+// );
+
+// router.get('/failed', function (req, res, next) {
+//     console.log('URL: ', req.url);
+//     res.render('index', { title: 'Express' });
+// });
+
+// router.get('/success', function (req, res, next) {
+//     console.log('URL: ', req.url);
+
+//     // console.log(req.user);
+//     res.render('success', { data: req.user });
+// });
 
 /********** 登出 **********/
 // sign out

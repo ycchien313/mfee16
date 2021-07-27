@@ -16,6 +16,8 @@ const passport = require('passport');
 const facebookStrategy = require('passport-facebook').Strategy;
 const port = 3001;
 
+require('dotenv').config();
+
 const fs = require('fs');
 const https = require('https');
 
@@ -46,8 +48,8 @@ passport.use(
     new facebookStrategy(
         {
             // pull in our app id and secret from our auth.js file
-            clientID: '259250762299628',
-            clientSecret: '797cd5bcb64bacba125016c80f267dd3',
+            clientID: process.env.FACEBOOK_ID,
+            clientSecret: process.env.FACEBOOK_SECRET,
             // callbackURL: 'https://localhost:8443/facebook/callback',
             callbackURL: 'http://localhost:3001/facebook/callback',
             profileFields: [

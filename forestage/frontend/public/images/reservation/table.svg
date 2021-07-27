@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="85.14" height="85.14" viewBox="0 0 85.14 85.14">
+  <g id="Group_511" data-name="Group 511" transform="translate(0 0)" opacity="0.8">
+    <circle id="Ellipse_91" data-name="Ellipse 91" cx="19.012" cy="19.012" r="19.012" transform="translate(42.57 15.684) rotate(45)" fill="#a1957d"/>
+    <g id="Group_508" data-name="Group 508" transform="translate(0 68.336) rotate(-45)">
+      <path id="Rectangle_632" data-name="Rectangle 632" d="M2.971,0h8.912A11.882,11.882,0,0,1,23.764,11.882v0A11.882,11.882,0,0,1,11.882,23.764H2.971A2.971,2.971,0,0,1,0,20.794V2.971A2.971,2.971,0,0,1,2.971,0Z" transform="translate(72.877)" fill="#a1957d"/>
+      <path id="Rectangle_633" data-name="Rectangle 633" d="M11.882,0h8.912a2.971,2.971,0,0,1,2.971,2.971V20.794a2.971,2.971,0,0,1-2.971,2.971H11.882A11.882,11.882,0,0,1,0,11.882v0A11.882,11.882,0,0,1,11.882,0Z" fill="#a1957d"/>
+    </g>
+    <g id="Group_509" data-name="Group 509" transform="translate(16.804 0) rotate(45)">
+      <path id="Rectangle_632-2" data-name="Rectangle 632" d="M2.971,0h8.912A11.882,11.882,0,0,1,23.764,11.882v0A11.882,11.882,0,0,1,11.882,23.764H2.971A2.971,2.971,0,0,1,0,20.794V2.971A2.971,2.971,0,0,1,2.971,0Z" transform="translate(72.877)" fill="#a1957d"/>
+      <path id="Rectangle_633-2" data-name="Rectangle 633" d="M11.882,0h8.912a2.971,2.971,0,0,1,2.971,2.971V20.794a2.971,2.971,0,0,1-2.971,2.971H11.882A11.882,11.882,0,0,1,0,11.882v0A11.882,11.882,0,0,1,11.882,0Z" fill="#a1957d"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,1011 @@
+@import '../../common/global.scss';
+/* --------------------- */
+/* reservation */
+/* hero section */
+.hero-section {
+  background-image: url(http://localhost:3000/images/reservation/reservation-hero.png);
+  background-size: cover;
+  height: 500px;
+  width: 100%;
+}
+
+.h1.title {
+  top: 4.3vw;
+  position: absolute;
+  left: 18.9vw;
+  margin: 0;
+  font-family: $zh-tw-maru;
+  color: $primary-lightbrown;
+}
+
+.top-wave {
+  max-width: 100vw;
+  height: 9.84vw;
+  position: relative;
+  margin: 0;
+  top: 500px;
+  top: calc(500px - 9.82vw);
+}
+
+.top-wave .wave-1 {
+  width: 100%;
+}
+
+.top-wave .elfin {
+  width: 5.2vw;
+  position: absolute;
+  top: 1.97vw;
+  left: 31.35vw;
+}
+
+.slogan {
+  width: 100%;
+  top: 498px;
+  position: absolute;
+}
+
+.slogan .bottom-wave {
+  width: 100%;
+  background: url(http://localhost:3000/images/reservation/bottom-wave.svg)
+    no-repeat;
+  height: 13.43vw;
+  background-size: cover;
+  /* display: inline-block; */
+}
+
+.slogan .h2.title {
+  width: 384px;
+  line-height: 64px;
+  display: block;
+  position: absolute;
+  right: 14.06vw;
+  top: 2.91vw;
+  font-family: $zh-tw-maru;
+  color: white;
+}
+
+@media screen and (max-width: 1400px) and (min-width: 1200px) {
+  .slogan .h2.title {
+    /* width: 500px; */
+    line-height: 64px;
+    right: 8vw;
+    top: 2vw;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .h1.title {
+    position: relative;
+    top: -200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    margin: 0 30px;
+    border-radius: 30px;
+    height: 220px;
+    text-align: center;
+  }
+
+  .top-wave .elfin {
+    width: 60px;
+    position: absolute;
+    top: -120px;
+    z-index: 5;
+  }
+
+  .slogan .h2.title {
+    width: 450px;
+    line-height: 64px;
+    right: 30px;
+    top: 1vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .h1.title {
+    position: relative;
+    top: -70px;
+    z-index: 2;
+    padding-left: 10vw;
+  }
+  .top-wave .elfin {
+    width: 60px;
+    position: absolute;
+    top: 0;
+    left: 25vw;
+    /* right: -10px; */
+    z-index: 5;
+  }
+  .slogan {
+    /* position: static; */
+    display: block;
+  }
+  .slogan .bottom-wave {
+    background: url(http://localhost:3000/images/reservation/rwd-wave.png)
+      no-repeat;
+    background-size: 100% 350px;
+    z-index: 5;
+    height: 350px;
+    position: static;
+    display: block;
+  }
+  .slogan .h2.title {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 64px;
+    right: 0px;
+    top: 194px;
+  }
+}
+
+/* main container*/
+.container-big {
+  margin-left: 8.33vw;
+  margin-right: 16.66vw;
+  display: flex;
+  font-family: $zh-tw-noto;
+  // width: 100%;
+}
+
+.main-article {
+  /* flex-shrink: 0; */
+  flex-grow: 1;
+  margin-right: 2.34vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .container-big {
+    margin-left: 30px;
+    margin-right: 30px;
+    /* display: flex; */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container-big {
+    display: block;
+  }
+  .main-article {
+    margin-right: 0;
+  }
+}
+
+/* 共用步驟標題 */
+.steps {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
+
+.arrow {
+  background: url(http://localhost:3000/images/reservation/process-arrow.svg);
+  width: 9.72vw;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
+
+.step {
+  font-family: $zh-tw-maru;
+  color: #d9d9d9;
+}
+
+.steps .active {
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .step {
+    display: none;
+  }
+  .active .step {
+    display: block;
+  }
+}
+
+.steps .active h3 {
+  position: relative;
+  z-index: 2;
+  color: $secondary-green-dark;
+}
+
+.steps .active img {
+  position: absolute;
+  width: calc(8.5vw + 19.2px);
+  bottom: 5px;
+  right: -2vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .steps .active img {
+    bottom: 10px;
+    right: -2.5vw;
+    width: calc(10.5vw + 19.2px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .steps .active img {
+    bottom: 5px;
+    right: -20px;
+    width: 120px;
+  }
+  .steps .active h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* 選擇日期 */
+
+.choose-date .steps {
+  margin-top: 18.33vw;
+}
+
+@media screen and (max-width: 768px) {
+  .choose-date .steps {
+    margin-top: calc(18.33vw + 300px);
+  }
+}
+
+/* 選擇座位 */
+
+.choose-seat .row {
+  opacity: 0.5;
+  transition: 0.2s;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.choose-seat .row:hover {
+  opacity: 1;
+}
+
+.choose-seat .row.active {
+  opacity: 1;
+}
+
+.seats-background {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 2.9vw;
+  padding: 1.82vw;
+  background: rgba(228, 237, 237, 0.5);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.seats-background .stage {
+  width: 27.07vw;
+  height: 5.1vw;
+  background: rgb(252, 92, 117, 0.2);
+  border-radius: 1.55vw;
+  border: 1px solid $accent-red;
+  font-family: $zh-tw-maru;
+  color: $accent-red;
+  text-align: center;
+  line-height: 5.1vw;
+}
+
+@media screen and (max-width: 768px) {
+  .seats-background {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-left: -30px;
+    margin-right: -30px;
+    width: auto;
+    border-radius: 0;
+  }
+  .seats-background .stage {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* 選擇座位背景色 */
+
+.rock,
+.middle,
+.back {
+  display: flex;
+}
+.rock .seat-row {
+  background: rgba(245, 181, 77, 0.3);
+}
+
+.rock .seat-info {
+  background: $accent-orange;
+}
+
+.middle .seat-row {
+  background: rgba(151, 188, 120, 0.3);
+}
+
+.middle .seat-info {
+  background: $secondary-green;
+}
+.back .seat-row {
+  background: rgba(253, 237, 130, 0.3);
+}
+
+.back .seat-info {
+  background: $secondary-lightyellow;
+}
+
+/* 三區座位共用 */
+
+.seat-row {
+  width: 45.71vw;
+  height: 6.77vw;
+  border-radius: 1.04vw 0 0 1.04vw;
+  display: flex;
+  justify-content: center;
+}
+
+.seat-row .tables {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 26.04vw;
+}
+.seat-row .tables img {
+  width: 4.42vw;
+  height: 4.42vw;
+}
+.seat-info {
+  width: 16.14vw;
+  height: 6.77vw;
+  border-radius: 0 5.57vw 5.57vw 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.seat-info h3 {
+  font-family: $zh-tw-maru;
+  margin-bottom: 0.625vw;
+  margin-top: 0;
+  color: white;
+}
+.seat-info span {
+  margin-bottom: 0.625vw;
+  color: white;
+}
+.button-group input {
+  width: 2vw;
+  height: 1.67vw;
+  border-radius: 0px;
+  border: none;
+}
+.button-group {
+  display: flex;
+}
+
+.plus-button {
+  width: 1.75vw;
+  height: 1.67vw;
+  border-radius: 0px 5px 5px 0;
+  background: url(http://localhost:3000/images/reservation/plus-solid.svg)
+      center center no-repeat,
+    $secondary-lightyellow;
+  background-size: 50%;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
+  transition: 0.2s;
+}
+.plus-button:hover {
+  box-shadow: none;
+}
+
+.minus-button {
+  width: 1.75vw;
+  height: 1.67vw;
+  border-radius: 5px 0 0 5px;
+  background: url(http://localhost:3000/images/reservation/minus-solid.svg)
+      center center no-repeat,
+    $secondary-lightyellow;
+  background-size: 50%;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
+  transition: 0.2s;
+}
+
+.minus-button:hover {
+  box-shadow: none;
+}
+/* 後區字型顏色 */
+.back .seat-info h3 {
+  color: $secondary-green-dark;
+}
+.back .seat-info span {
+  color: $secondary-green-dark;
+}
+
+@media screen and (max-width: 1200px) {
+  .seat-row {
+    display: none;
+  }
+  .seat-info {
+    width: 100%;
+    border-radius: 5.57vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .button-group input {
+    width: 30px;
+    height: 30px;
+    border-radius: 0px;
+  }
+  .plus-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 0px 5px 5px 0;
+  }
+  .minus-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px 0 0 5px;
+  }
+  .seat-info span {
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .seat-info {
+    height: 60px;
+  }
+}
+
+/* 剩餘座位長條圖 */
+.bar-background {
+  width: 100%;
+  height: 3.85vw;
+  background: $primary-lightgray;
+  border-radius: 40px;
+  padding: 0.36vw;
+  box-sizing: border-box;
+  display: flex;
+  margin-top: 2vw;
+}
+.rock-bar {
+  width: 25%;
+  height: 100%;
+  background: $accent-orange;
+  border-radius: 40px 0 0 40px;
+  position: relative;
+  z-index: 3;
+}
+.rock-bar-end {
+  height: 100%;
+  background: url(http://localhost:3000/images/reservation/rock-wave-end.svg);
+  background-size: cover;
+  width: 2.6vw;
+  position: relative;
+  z-index: 3;
+}
+.middle-bar {
+  width: 25%;
+  height: 100%;
+  background: $secondary-green;
+  position: relative;
+  z-index: 2;
+  left: -2.6vw;
+}
+.middle-bar-end {
+  height: 100%;
+  background: url(http://localhost:3000/images/reservation/middle-wave-end.svg);
+  background-size: cover;
+  width: 2.6vw;
+  position: relative;
+  z-index: 2;
+  left: -2.6vw;
+}
+.back-bar {
+  width: 25%;
+  height: 100%;
+  background: $secondary-lightyellow;
+  position: relative;
+  z-index: 1;
+  left: -5.2vw;
+}
+.back-bar-end {
+  height: 100%;
+  background: url(http://localhost:3000/images/reservation/back-wave-end.svg);
+  background-size: cover;
+  width: 2.6vw;
+  position: relative;
+  z-index: 1;
+  left: -5.2vw;
+}
+
+/* 剩餘座位文字 */
+
+.bar-info {
+  display: flex;
+  align-items: center;
+  margin-left: 1vw;
+  margin-top: 1vw;
+}
+
+.bar-info.under {
+  display: flex;
+  align-items: center;
+}
+
+.bar-info .title {
+  font-weight: 700;
+  color: $primary-lightbrown;
+}
+
+.bar-info p {
+  color: $primary-lightbrown;
+  margin: 0;
+  line-height: 1.3vw;
+}
+
+.bar-info p span {
+  color: $accent-red;
+  font-family: $en-open-sans;
+  font-weight: 700;
+}
+
+.bar-info .circle {
+  width: 1.3vw;
+  height: 1.3vw;
+  border-radius: 50%;
+}
+.bar-info .rock,
+.bar-info .middle,
+.bar-info .back {
+  margin: 0 1.52vw;
+}
+.rock .circle {
+  background-color: $accent-orange;
+}
+
+.middle .circle {
+  background-color: $secondary-green;
+}
+
+.back .circle {
+  background-color: $secondary-lightyellow;
+}
+
+/* 選擇餐點 */
+
+/* 餐點類別 */
+@media screen and (min-width: 768px) {
+  .category-group {
+    display: flex;
+    justify-content: center;
+  }
+
+  .category.active {
+    filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0));
+    opacity: 1;
+    cursor: default;
+  }
+
+  .category:hover {
+    opacity: 1;
+    transition: 0.1s;
+  }
+
+  .category {
+    position: relative;
+    margin: 3.125vw 3.43vw 0 3.43vw;
+    cursor: pointer;
+    filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.5));
+    opacity: 0.7;
+  }
+
+  .category h4 {
+    font-family: $zh-tw-maru;
+    position: absolute;
+    right: 2.45vw;
+    bottom: 0.1vw;
+  }
+
+  .category img {
+    width: 8.49vw;
+  }
+}
+
+/* 餐點card */
+
+.choose-meal .cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 3.28vw;
+  position: relative;
+  z-index: 1;
+}
+
+.choose-meal .card {
+  height: 17.45vw;
+  width: 14.27vw;
+  border-radius: 1.56vw;
+  background-color: $primary-lightgreen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.choose-meal .card-image {
+  height: 9.8vw;
+  width: 13.22vw;
+  border-radius: 1.56vw 1.56vw 0 0;
+  // background: url(http://localhost:3000/images/reservation/菜單-瑪格莉特大pizza.jpg);
+  background-size: cover;
+  margin-top: 0.55vw;
+  margin-bottom: 1.3vw;
+}
+
+.choose-meal .card-image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.56vw 1.56vw 0 0;
+}
+.choose-meal .card span {
+  margin-top: 1.3vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .category h4 {
+    position: absolute;
+    right: 2.45vw;
+    bottom: -0.8vw;
+  }
+
+  .category img {
+    width: 10vw;
+  }
+  .choose-meal .card {
+    height: 26.17vw;
+    width: 21.4vw;
+  }
+  .choose-meal .card-image {
+    height: 14.7vw;
+    width: 19.83vw;
+    border-radius: 1.56vw 1.56vw 0 0;
+    background: url(http://localhost:3000/images/reservation/菜單-瑪格莉特大pizza.jpg);
+    background-size: cover;
+    margin-top: 0.55vw;
+    margin-bottom: 1.3vw;
+  }
+  .choose-meal .card span {
+    margin-top: 2.5vw;
+  }
+}
+
+/* table */
+
+.table-bg {
+  width: 100%;
+  background: url(http://localhost:3000/images/reservation/table-bg.png);
+  background-size: cover;
+  height: 22vw;
+  position: relative;
+  bottom: 8vw;
+}
+
+@media screen and (max-width: 768px) {
+  .table-bg {
+    display: none;
+  }
+}
+
+/* 側邊總覽 */
+
+.aside-list {
+  /* width: 300px; */
+  /* background-color:palevioletred; */
+  margin-left: 2.34vw;
+  margin-top: 19.27vw;
+  margin-bottom: 8vw;
+  position: relative;
+  z-index: 2;
+}
+
+@media screen and (max-width: 1200px) {
+  .aside-list {
+    margin-right: 0px;
+    margin-left: auto;
+    width: 20%;
+  }
+}
+.aside-list .clipboard {
+  position: sticky;
+  top: 5vw;
+  bottom: 50vw;
+  min-width: 14.89vw;
+  /* height: calc(23.33vw + 30px); */
+  background: $secondary-lightyellow;
+  border-radius: 1.04vw;
+  box-sizing: border-box;
+  padding: 1.2vw 1vw 1vw 1vw;
+}
+
+.clipboard img {
+  width: 7.5vw;
+  position: absolute;
+  top: -0.5vw;
+  left: calc(14.89vw / 2 - 3.75vw);
+  z-index: 1;
+}
+
+/* clipboard文字內容 */
+.clipboard .content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-family: $zh-tw-noto;
+  color: $secondary-green-dark;
+  background: white;
+  padding: 0.5vw;
+  border-radius: 5px;
+}
+
+.clipboard .content hr {
+  border: 1px solid #d9d9d9;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+}
+.clipboard .content .title {
+  display: flex;
+  align-self: center;
+}
+.clipboard .content h4 {
+  margin: 0;
+  line-height: 1.87vw;
+}
+
+.clipboard .content .title i {
+  font-size: 1.87vw;
+  /* margin-left: 5px; */
+}
+
+.clipboard .content ul i {
+  color: #d9d9d9;
+  margin-right: 3px;
+  font-size: 0.93vw;
+}
+
+.clipboard .content ul span {
+  line-height: 0.93vw;
+}
+
+@media screen and (max-width: 1200px) {
+  .clipboard .content ul span {
+    line-height: 2vw;
+  }
+}
+
+.clipboard .content ul i.active {
+  color: $secondary-green;
+}
+
+.clipboard .content li {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.7vw 0;
+}
+
+.clipboard .content li .name {
+  display: flex;
+}
+
+.aside-list button {
+  /* top:100px; */
+  position: absolute;
+  bottom: -5vw;
+  left: calc(7.45vw - 75px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.aside-list button img {
+  width: 30px;
+  height: 30px;
+  top: 10px;
+  left: 110px;
+  filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.3));
+}
+
+@media screen and (max-width: 1200px) {
+  .aside-list button {
+    position: absolute;
+    bottom: -7vw;
+    left: calc(9.45vw - 75px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .aside-list {
+    display: none;
+  }
+}
+
+// 餐點動畫特效
+
+@for $i from 1 through 9 {
+  @media screen and (min-width: 1200px) {
+    // 原本位置
+
+    // 新位置
+    #food-#{$i} .illu-image {
+      width: 13vw;
+      height: 13vw;
+      position: absolute;
+      top: 21vw;
+      transition: 1s;
+
+      @if $i==1 {
+        left: -$i * 10 + vw;
+      } @else {
+        left: ($i - 2) * 10 + vw;
+      }
+    }
+    #food-#{$i}.card:hover .illu-image {
+      top: 0;
+      transition: 1s;
+      z-index: 0;
+
+      @if $i % 3 == 0 {
+        left: 45vw;
+      }
+      @if $i % 3 == 1 {
+        left: 7vw;
+      }
+      @if $i % 3 == 2 {
+        left: 26vw;
+      }
+    }
+    #food-#{$i} .illu-image img {
+      width: 100%;
+    }
+  }
+}
+
+// @media screen and (max-width: 1200px) {
+//   #food-#{$i} .illu-image {
+//     width: 13vw;
+//     height: 13vw;
+//     position: absolute;
+//     top: 29vw;
+//     left: 0vw;
+//   }
+//   #food-#{$i} .illu-image img {
+//     width: 100%;
+//   }
+// }
+
+/* 滑鼠滾輪動畫 */
+.center-con {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vw;
+  margin-bottom: 7vw;
+}
+
+@media screen and (max-width: 768px) {
+  .center-con {
+    margin-top: 3vw;
+    margin-bottom: 17vw;
+  }
+}
+.down-arrow {
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background: url(http://localhost:3000/images/reservation/chevron-down-solid.svg)
+    center center no-repeat;
+}
+
+.segunda {
+  margin-top: 0px;
+}
+
+.cta {
+  width: 30px;
+  height: 30px;
+}
+
+@keyframes bounceAlpha {
+  0% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  26% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.9);
+  }
+  55% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+.down-arrow {
+  animation-name: bounceAlpha;
+  animation-duration: 1.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+.down-arrow.primera {
+  animation-name: bounceAlpha;
+  animation-duration: 1.4s;
+  animation-delay: 0.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* 取消input上下箭頭 */
+.button-group input::-webkit-outer-spin-button,
+.button-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+footer {
+  height: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+  h1,
+  .h1 {
+    font-size: 1.67rem;
+  }
+  h2,
+  .h2 {
+    font-size: 1.5rem;
+  }
+  h3,
+  .h3 {
+    font-size: 1.33rem;
+  }
+  h4,
+  .h4 {
+    font-size: 1.17rem;
+  }
+  p,
+  .p {
+    font-size: 1rem;
+  }
+  span,
+  .span {
+    font-size: 1rem;
+  }
+}

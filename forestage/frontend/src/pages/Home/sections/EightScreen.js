@@ -32,7 +32,7 @@ function EightScreen(props) {
               )
             })}
         </ul>
-        <Link to={{ pathname: '/delivery' }}>
+        <Link to={{ pathname: '/delivery',state:  }}>
           <button className="button-red bot-button">
             <h4 className="btn-innerText">去訂餐</h4>
             <i className="fas fa-arrow-circle-right"></i>

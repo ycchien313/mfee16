@@ -24,7 +24,7 @@
   .signin-page-container .wave-top {
     max-height: 200px;
     height: 20vw;
-    background-image: url('https://localhost:3000/images/auth/auth-wave-top.svg');
+    background-image: url('http://localhost:3000/images/auth/auth-wave-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -33,7 +33,7 @@
     width: 58vw;
     max-height: 140px;
     height: 14vw;
-    background-image: url('https://localhost:3000/images/auth/auth-wave-down.svg');
+    background-image: url('http://localhost:3000/images/auth/auth-wave-down.svg');
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -44,7 +44,7 @@
       max-height: unset;
       // height: 220px;
       height: 28.64vw;
-      background-image: url('https://localhost:3000/images/auth/auth-md-wave-down.svg');
+      background-image: url('http://localhost:3000/images/auth/auth-md-wave-down.svg');
     }
   }
   .signin-page-container .middle-container {

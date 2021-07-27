@@ -508,6 +508,8 @@
     border-radius: 40px 0 0 40px;
     position: relative;
     z-index: 3;
+    transition: .5s;
+
   }
   .rock-bar-end {
     height: 100%;
@@ -525,6 +527,8 @@
     position: relative;
     z-index: 2;
     left: -2.6vw;
+    transition: .5s;
+
   }
   .middle-bar-end {
     height: 100%;
@@ -543,6 +547,8 @@
     position: relative;
     z-index: 1;
     left: -5.2vw;
+    transition: .5s;
+
   }
   .back-bar-end {
     height: 100%;

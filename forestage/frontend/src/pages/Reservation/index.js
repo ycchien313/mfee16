@@ -1,13 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 // import Header from '../../components/Header'
 import ReservationPage from '../../../src/components/Reservation/ReservationPage'
 import CheckoutPage from '../../../src/components/Reservation/CheckoutPage'
 
-// import Footer from '../../components/Footer'
-
 function Reservation(props) {
-  
+  // useEffect(() => {
+  //   window.onbeforeunload = () => {
+  //     localStorage.removeItem(
+  //       'checkList',
+  //       'dishCount',
+  //       'seatCount',
+  //       'attendance',
+  //       'remainingSeat',
+  //       'insertResData',
+  //       'seatInfo',
+  //       'activeDate'
+  //     )
+  //   }
+  // }, [])
   const url = props.match.url
   return (
     <>

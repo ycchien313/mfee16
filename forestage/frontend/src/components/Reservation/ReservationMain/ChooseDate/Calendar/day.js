@@ -53,6 +53,7 @@ function Day(props) {
       $(day.current).addClass('active')
       // console.log('same', date, dateInStorage)
     }
+    
     setDidMount(true)
     $(day.current).on('click', () => {
       $(day.current).addClass('active')

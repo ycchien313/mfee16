@@ -1,15 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../../styles/auth/signin.scss'
 import WelLogo from '../WelLogo'
 import AuthTitle from '../AuthTitle'
 import AuthSocial from '../AuthSocial'
 import AuthForm from '../AuthForm'
 
+import { Controls, PlayState, Tween } from 'react-gsap'
+
 function Signin(props) {
   const { signinScreen, setSigninScreen, setShowAuthModal } = props
+  const [errorMsg, setErrorMsg] = useState('')
 
   return (
     <>
+      {/* <Tween to={{ x: '300px' }} duration={2} playState={playState}> */}
       <div className="sign-in">
         <div className="signin-page-container">
           <div className="wave-top"></div>
@@ -17,21 +21,29 @@ function Signin(props) {
             <div className="left-side">
               <WelLogo />
             </div>
+
             <div className="right-side">
               <AuthTitle
                 signinScreen={signinScreen}
                 setSigninScreen={setSigninScreen}
               />
-              <AuthSocial signinScreen={signinScreen} />
+              <AuthSocial
+                signinScreen={signinScreen}
+                setShowAuthModal={setShowAuthModal}
+                setErrorMsg={setErrorMsg}
+              />
               <AuthForm
                 signinScreen={signinScreen}
                 setShowAuthModal={setShowAuthModal}
+                errorMsg={errorMsg}
+                setErrorMsg={setErrorMsg}
               />
             </div>
           </div>
           <div className="wave-down"></div>
         </div>
       </div>
+      {/* </Tween> */}
     </>
   )
 }

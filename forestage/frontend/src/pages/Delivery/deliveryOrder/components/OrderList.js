@@ -18,7 +18,11 @@ function OrderList(props) {
             <span className="h4">數量</span>
             <span className="h4">小計</span>
           </div>
-          <div className="detail">
+          {/*  */}
+          {/* {t.map(() => {
+            if () {
+              return(
+                <div className="detail">
             <div className="dish">
               <figure className="dish-pic">
                 <img
@@ -34,54 +38,10 @@ function OrderList(props) {
             <span className="h4">2</span>
             <span className="h4">1000</span>
           </div>
-          <div className="detail">
-            <div className="dish">
-              <figure className="dish-pic">
-                <img
-                  src={
-                    'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
-                  }
-                  alt=""
-                />
-              </figure>
-              <span className="dish-name h4">爆米花</span>
-            </div>
-            <span className="h4">100</span>
-            <span className="h4">2</span>
-            <span className="h4">200</span>
-          </div>
-          <div className="detail">
-            <div className="dish">
-              <figure className="dish-pic">
-                <img
-                  src={
-                    'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
-                  }
-                  alt=""
-                />
-              </figure>
-              <span className="dish-name h4">瑪格麗特大披薩</span>
-            </div>
-            <span className="h4">300</span>
-            <span className="h4">1</span>
-            <span className="h4">300</span>
-          </div>
-          <div className="detail">
-            <div className="dish">
-              <figure className="dish-pic">
-                <img
-                  src={
-                    'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
-                  }
-                  alt=""
-                />
-              </figure>
-              <span className="dish-name h4">總匯潛艇堡</span>
-            </div>
-            <span className="h4">200</span>
-            <span className="h4">1</span>
-            <span className="h4">200</span>
-          </div>
+              )
+            }
+          })} */}
+          {/*  */}
           <hr />
           <div className="price-count">
             <div className="price-count-name">
@@ -127,4 +87,4 @@ function OrderList(props) {
   )
 }
 
-export default OrderList.js
+export default OrderList

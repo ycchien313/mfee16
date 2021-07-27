@@ -3,6 +3,7 @@ import React from 'react'
 import Auth from './pages/Auth'
 import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
+import DeliveryOrder from './pages/Delivery/DeliveryOrder'
 import Dish from './pages/Dish'
 import Game from './pages/Game'
 import Home from './pages/Home'
@@ -18,6 +19,10 @@ function App() {
         </Route>
         <Route path="/comment/">
           <Comment />
+        </Route>
+        {/*  */}
+        <Route path="/delivery/deliveryOrder/">
+          <DeliveryOrder />
         </Route>
         <Route path="/delivery/">
           <Delivery />

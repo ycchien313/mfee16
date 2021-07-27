@@ -16,8 +16,6 @@ function SideBox(props) {
     dishCount,
     setDishCount,
   } = props
-  // console.log('id', id)
-  // console.log('dishCount', dishCount)
 
   function minus(id) {
     let newDishCount = { ...dishCount }

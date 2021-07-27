@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Order from './Order'
 import OrderList from './OrderList'
 
@@ -38,7 +37,7 @@ function DeliveryOrder(props) {
               <a href="#/" className="prev span">
                 外送訂餐
               </a>
-              &nbsp; / &nbsp;
+              {'  /  '}
               <a href="#/" className="active span">
                 確認訂單
               </a>

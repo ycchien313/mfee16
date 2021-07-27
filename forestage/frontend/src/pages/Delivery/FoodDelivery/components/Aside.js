@@ -10,6 +10,7 @@ function Aside(props) {
     setDishList,
     addFee,
     img,
+    setImg,
     address,
     fulltime,
   } = props
@@ -41,19 +42,22 @@ function Aside(props) {
     setDishList(newDishArr)
   }, [dishCount])
 
-  // 宜諺加ㄉ
+  // 宜諺加
   useEffect(() => {
     ;(function () {
       let price = []
       let product = []
       let count = []
+      let imgArr = []
       for (let i = 0; i < dishList.length; i++) {
-        price.push(dishes[i].price * dishList[i][1])
-        product.push(dishList[i][0])
-        count.push(dishList[i][1])
+        if (dishList[i][1] !== 0) {
+          imgArr.push(dishes[i].image_realistic)
+          product.push(dishList[i][0])
+          price.push(dishes[i].price * dishList[i][1])
+          count.push(dishList[i][1])
+        }
       }
-      console.log(price)
-      console.log(product)
+      setImg(imgArr)
       setSubTotal(price)
       setName(product)
       setCounts(count)
@@ -91,10 +95,12 @@ function Aside(props) {
             src={'http://localhost:3000/images/delivery/FoodDelivery/menu.png'}
             alt=""
           />
+          {/* 判斷token */}
           <Link
             to={{
-              pathname: '/',
+              pathname: '/delivery/deliveryOrder',
               state: {
+                img: img,
                 name: name,
                 subTotal: subTotal,
                 counts: counts,

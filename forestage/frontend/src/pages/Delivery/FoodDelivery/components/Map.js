@@ -21,17 +21,6 @@ function Map(props) {
     $(this).siblings().removeClass('active')
     setFee(getTarget)
   })
-
-  // }
-
-  // function setCharge(e) {
-  //   let NewMinCharge = {
-  //     ...minCharge,
-  //     minCharge: e.target.dataset.fee,
-  //   }
-  //   setMinCharge(NewMinCharge)
-  // }
-
   return (
     <>
       <div className="top-wave">

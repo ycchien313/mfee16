@@ -72,4 +72,4 @@ function Order(props) {
   )
 }
 
-export default Order.js
+export default Order

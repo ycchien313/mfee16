@@ -19,26 +19,18 @@ function Delivery(props) {
   const [dishCount, setDishCount] = useState({})
   // 訂餐
   const [dishList, setDishList] = useState([])
-
   const [dishes, setDishes] = useState([])
-  //地址,縣區街道
   const [address, setAddress] = useState({
     city: '桃園市',
     dist: '',
-    road: '中央路123號',
+    road: '輸入您的地址',
   })
 
-  //
   const [img, setImg] = useState([])
   //
   const [allAddress, setAllAddress] = useState('')
-
-  const [fullData, setFullData] = useState('')
   // 免運
   const [addFee, setFee] = useState('')
-  // 總金
-  const [totalprice, setTotalPrice] = useState('')
-
   const getDishes = () => {
     $.ajax({
       url: 'http://localhost:3001/delivery/dish',
@@ -46,12 +38,9 @@ function Delivery(props) {
       dataType: 'json',
     })
       .then(function (result) {
+        //
         setDishes(result)
-        let imgArr = []
-        for (let i = 0; i < result.length; i++) {
-          imgArr.push(result[i].image_realistic)
-        }
-        setImg(imgArr)
+        //
         let newDish = ''
         result.forEach((dish) => {
           newDish = { ...newDish }
@@ -61,6 +50,7 @@ function Delivery(props) {
         console.log(err)
       })
   }
+
   useEffect(() => {
     setFulltime(date + ' ' + time)
   }, [date, time])
@@ -114,11 +104,6 @@ function Delivery(props) {
       setDishCount(newDishCount)
     }
   }, [dishes])
-
-  // address
-  // useEffect(() => {
-  //   return () => {}
-  // }, [])
 
   return (
     <>
@@ -257,6 +242,7 @@ function Delivery(props) {
             setDishList={setDishList}
             addFee={addFee}
             img={img}
+            setImg={setImg}
             address={address}
             fulltime={fulltime}
           />

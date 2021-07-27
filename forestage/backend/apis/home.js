@@ -82,6 +82,14 @@ router.get("/seat/back/:date", async function (req, res, next) {
     res.send(queryResult);
 });
 
+// 取得餐點資訊
+router.get("/dish/main", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync(
+        'select * from dish where type="主餐" '
+    );
+    res.send(queryResult);
+});
+
 // 接收前台投票
 router.post("/update_candidate/:candidateId", async function (req, res, next) {
     let queryResult = await db.connection.queryAsync(

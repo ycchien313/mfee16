@@ -9,6 +9,7 @@ function AuthTitle(props) {
     subTitleLink: '',
   })
 
+  // 切換標題內容
   const toggleTitle = () => {
     let newAuthTitle = null
 
@@ -22,7 +23,7 @@ function AuthTitle(props) {
     } else {
       newAuthTitle = {
         ...AuthTitle,
-        title: '登出',
+        title: '註冊',
         subTitle: '已經有帳號了嗎 ? ',
         subTitleLink: '點此登入',
       }

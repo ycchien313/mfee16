@@ -11,10 +11,10 @@ import Member from './pages/Member'
 import Reservation from './pages/Reservation'
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [member, setMember] = useState(null)
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ member, setMember }}>
       <Router>
         <Switch>
           {/* <Route path="/auth/">

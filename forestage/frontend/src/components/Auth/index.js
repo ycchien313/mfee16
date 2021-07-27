@@ -43,27 +43,6 @@ function Auth(props) {
           </CSSTransition>
         </SwitchTransition>
       </div>
-
-      {/*   <div
-        className="auth"
-        onClick={(e) => {
-          e.target.className === 'auth' && setShowAuthModal(!showAuthModal)
-        }}
-      >
-        {signinScreen ? (
-          <Signin
-            signinScreen={signinScreen}
-            setSigninScreen={setSigninScreen}
-            setShowAuthModal={setShowAuthModal}
-          />
-        ) : (
-          <Signup
-            signinScreen={signinScreen}
-            setSigninScreen={setSigninScreen}
-            setShowAuthModal={setShowAuthModal}
-          />
-        )}
-      </div> */}
     </>
   )
 }

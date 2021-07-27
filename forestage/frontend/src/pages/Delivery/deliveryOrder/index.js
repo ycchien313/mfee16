@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../../styles/delivery/deliveryOrder/takeout_check.scss'
 import DeliveryOrder from './components/DeliveryOrder'
 import Header from '../../../components/Header'
 
-function index() {
+function Index(props) {
+  // console.log(props.location.state, 'props')
   return (
     <>
       <Header />
@@ -12,4 +13,4 @@ function index() {
   )
 }
 
-export default index
+export default Index

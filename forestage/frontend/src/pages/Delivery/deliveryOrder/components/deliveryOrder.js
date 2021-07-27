@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Order from './Order'
 import OrderList from './OrderList'
 
 function DeliveryOrder(props) {
+  // console.log(props.location.state, 'props')
   const [selectedOption, setSelectOption] = useState('')
   const [inputText, setInputText] = useState('')
   const [inputTel, setInputTel] = useState('')

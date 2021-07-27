@@ -61,7 +61,7 @@ function CheckList(props) {
                 <i
                   class={
                     checkList.total >= checkList.minOrder &&
-                    checkList.total !== 0
+                    checkList.minOrder !== 0
                       ? activeIconClass
                       : iconClass
                   }

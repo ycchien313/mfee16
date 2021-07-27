@@ -5,9 +5,8 @@ import { setAuthToken } from './utils'
 import AuthContext from './AuthContext'
 
 function AuthForm(props) {
-  const { setUser } = useContext(AuthContext)
-  const { signinScreen, setShowAuthModal } = props
-  const [errorMsg, setErrorMsg] = useState('')
+  const { setMember } = useContext(AuthContext)
+  const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState(['桃園市', '台北市', '新北市'])
   const [signupFields, setSignupFields] = useState({
@@ -24,8 +23,7 @@ function AuthForm(props) {
 
   // 對 server 請求
   const serverRequest = axios.create({
-    // baseURL: 'http://127.0.0.1:3001/auth/',
-    baseURL: 'https://localhost:8443/auth/',
+    baseURL: 'http://127.0.0.1:3001/auth/',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json; charset=utf-8',
@@ -135,13 +133,13 @@ function AuthForm(props) {
           // 設定 token 給 request 的 header
           serverRequest.defaults.headers.common['Authorization'] = token
           // 設定 memberId 給 react context (user state)
-          setUser({ memberId: memberId })
+          setMember({ memberId: memberId })
 
           // 載入指示器及轉場
           await loading()
           await transition('登入成功')
 
-          // 重新整理
+          // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {}
         break
@@ -177,7 +175,7 @@ function AuthForm(props) {
           // 設定 token 給 request 的 header
           serverRequest.defaults.headers.common['Authorization'] = token
           // 設定 memberId 給 react context (user state)
-          setUser({ memberId: memberId })
+          setMember({ memberId: memberId })
 
           // 載入指示器及轉場
           await loading()

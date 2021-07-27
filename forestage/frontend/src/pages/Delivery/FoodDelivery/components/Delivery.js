@@ -262,7 +262,12 @@ function Delivery(props) {
           />
         </div>
         <div className="mobile-out">
-          <Link to={{ pathname: '/reservation', state: {} }}>
+          <Link
+            to={{
+              pathname: '/',
+              state: {},
+            }}
+          >
             <input
               type="button"
               defaultValue="送出訂單"

@@ -5,8 +5,7 @@ function DishContent(props) {
   const { dishList, checkList, insertResData, setInsertResData } = props
   const [coupon, setCoupon] = useState([])
   const [didMount, setDidMount] = useState(false)
-  const selectRef = useRef(null)
-  // const [selectedCoupon, setSelectedCoupon] = useState()
+
   function getMemberCoupons() {
     axios
       .get('http://localhost:3001/reservation/checkout/coupon', {
@@ -19,12 +18,14 @@ function DishContent(props) {
         setCoupon(result.data)
       })
   }
+
   function setMcmId(e) {
     let newInsertResData = { ...insertResData }
     newInsertResData.mcm_id = parseInt(e.target.value)
     setInsertResData(newInsertResData)
   }
 
+  // 取得折價券的折扣金額
   function getDiscount() {
     let foundCoupon = coupon.find((v) => {
       return v.mcm_id === insertResData.mcm_id
@@ -50,13 +51,6 @@ function DishContent(props) {
     getMemberCoupons()
   }, [])
 
-  // useEffect(() => {
-  //   let mcmIdInStorage = JSON.parse(
-  //     window.localStorage.getItem('insertResData')
-  //   ).mcm_id
-  // }, [insertResData])
-
-  // let discount = 0
   return (
     <>
       <div className="dish-content">
@@ -92,7 +86,7 @@ function DishContent(props) {
             </div>
             <div className="price-count-detail">
               <div className="total">
-                <span className="h4">{insertResData.total}</span>
+                <span className="h4">{checkList.total}</span>
                 <span className="h4">元</span>
               </div>
               <select

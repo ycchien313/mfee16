@@ -30,6 +30,16 @@ function CheckoutPage(props) {
     setCheckList(props.location.state.checkList)
     checkInsertResData &&
       setInsertResData(JSON.parse(window.localStorage.getItem('insertResData')))
+
+    // 關閉視窗時移除localstorage
+    window.addEventListener('beforeunload', function () {
+      window.localStorage.setItem('beforeunload', 'beforeunload')
+    })
+    return () => {
+      window.onbeforeunload = function () {
+        localStorage.clear()
+      }
+    }
   }, [])
 
   // 將訂位頁資料帶入insert物件中

@@ -58,6 +58,7 @@ function Main(props) {
     }
   }, [])
 
+
   // 將state存入localstorage
   useEffect(() => {
     if (didMount) {
@@ -73,10 +74,7 @@ function Main(props) {
     }
   }, [remainingSeat, seatCount, checkList, seatInfo])
 
-  // , seatCount, checkList
-
-  // useEffect(() => {
-  // }, [])
+  
 
   // 計算各區剩餘座位數量
   useEffect(() => {

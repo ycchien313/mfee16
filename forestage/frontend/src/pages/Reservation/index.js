@@ -5,20 +5,8 @@ import ReservationPage from '../../../src/components/Reservation/ReservationPage
 import CheckoutPage from '../../../src/components/Reservation/CheckoutPage'
 
 function Reservation(props) {
-  // useEffect(() => {
-  //   window.onbeforeunload = () => {
-  //     localStorage.removeItem(
-  //       'checkList',
-  //       'dishCount',
-  //       'seatCount',
-  //       'attendance',
-  //       'remainingSeat',
-  //       'insertResData',
-  //       'seatInfo',
-  //       'activeDate'
-  //     )
-  //   }
-  // }, [])
+
+
   const url = props.match.url
   return (
     <>

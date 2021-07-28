@@ -1,5 +1,7 @@
 import React from 'react'
+import HeaderAuth from './HeaderAuth'
 import '../../styles/header/headerBig.scss'
+
 function HeaderBig() {
   return (
     <>
@@ -96,9 +98,7 @@ function HeaderBig() {
                 </li>
               </div>
               <li className="login">
-                <a href="#/" className="h4">
-                  登入
-                </a>
+                <HeaderAuth />
               </li>
             </ul>
           </nav>

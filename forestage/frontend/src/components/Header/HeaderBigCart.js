@@ -1,14 +1,18 @@
 import React from 'react'
 
 function HeaderBigCart(props) {
+  let { name, price, count, img } = props
+  let domain = 'http://localhost:3000/images/dish/'
   let content = (
     <div className="cart-detail">
       <figure>
-        <img src="" alt="" />
+        <img src={domain + img} alt="" />
       </figure>
-      <h4>Product</h4>
-      <h4>Price</h4>
-      <h4>Count</h4>
+      <div className="cart-info">
+        <h4 className="cart-info-name">{name}</h4>
+        <h4 className="cart-info-price">{price}</h4>
+        <h4 className="cart-info-count">{count}</h4>
+      </div>
     </div>
   )
 

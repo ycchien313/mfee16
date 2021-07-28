@@ -13,24 +13,27 @@ function Dish(props) {
     let newObj = {}
     newObj.name = name
     newObj.price = price
+    newObj.img = image_realistic
     let itemClone = [...item]
     // newObj.count = 0
     if (item.length == 0) {
-      newObj.count = 1
+      newObj.count = 0
       itemClone.push(newObj)
 
       setItem(itemClone)
     }
 
     if (item !== []) {
-      itemClone.forEach(function (value) {
-        if (value.name === name) {
-          value.count += 1
-        } else {
-          newObj.count = 1
-          itemClone.push(newObj)
-        }
+      let foundFood = itemClone.find((value) => {
+        return value.name === name
       })
+      if (foundFood !== undefined) {
+        foundFood.count += 1
+        newObj.count = foundFood.count
+      } else {
+        newObj.count = 1
+        itemClone.push(newObj)
+      }
       setItem(itemClone)
     }
   }

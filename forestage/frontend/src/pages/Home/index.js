@@ -52,13 +52,7 @@ function Home() {
 
   return (
     <>
-      <Header
-        cartName={cartName}
-        cartPrice={cartPrice}
-        cartCount={cartCount}
-        cartImg={cartImg}
-        all={all}
-      />
+      <Header item={item} />
       <div className="home">
         <FirstScreen
           singerName={singerName}

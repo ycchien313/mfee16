@@ -1342,7 +1342,7 @@ button {
     background: $accent-orange;
     border-radius: 40px 0 0 40px;
     position: relative;
-    z-index: 3;
+    z-index: 1;
     transition: 0.3s;
   }
   .rock-bar-end {
@@ -1352,6 +1352,7 @@ button {
     width: 2.6vw;
     position: relative;
     z-index: 3;
+    flex-shrink: 0;
   }
   .middle-bar {
     width: 25%;
@@ -1520,7 +1521,7 @@ button {
   }
   .delivery ul {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
     padding: 0;
   }
@@ -1546,7 +1547,7 @@ button {
     border-radius: 15px;
     margin: 0 auto;
     height: 100%;
-    width: 90%;
+    width: 280px;
   }
   .delivery-item.main {
     background: $primary-lightgreen;
@@ -1565,8 +1566,8 @@ button {
     }
   }
   .delivery-item figure {
-    height: 23.88vh;
-    width: 18.75vw;
+    height: 55%;
+    width: 90%;
     border-radius: 15px 15px 0 0;
     overflow: hidden;
   }

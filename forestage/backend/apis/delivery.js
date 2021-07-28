@@ -32,4 +32,10 @@ router.get("/coupon/",async function(req,res,next){
     res.send(queryresult)
 } )
 
+router.get("/member/",async function(req,res,next){
+    // 先設定 = 1
+    let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = 1")
+    res.send(queryresult)
+} )
+
 module.exports = router;

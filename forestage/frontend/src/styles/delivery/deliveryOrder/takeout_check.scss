@@ -611,4 +611,22 @@
       font-size: 1rem;
     }
   }
+  .res-person .head {
+    display: flex;
+    align-items: center;
+  }
+  .res-person .head button {
+    background: $accent-orange;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: $box-shadow;
+    margin-left: 20px;
+    color: white;
+    font-family: $zh-tw-noto;
+    cursor: pointer;
+    &:active {
+      box-shadow: none;
+    }
+  }
 }

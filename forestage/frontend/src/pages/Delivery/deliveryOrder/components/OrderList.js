@@ -26,7 +26,7 @@ function OrderList(props) {
   return (
     <>
       <div className="dish-content">
-        <h3>外送訂單內容</h3>
+        <h3>餐點資料</h3>
         <hr className="top" />
         <div className="order-time">
           <h4>送餐時間 :</h4>
@@ -77,7 +77,7 @@ function OrderList(props) {
                   setCouponName(e.target.value)
                 }}
               >
-                <option>請選擇折價卷</option>
+                <option disabled>請選擇折價卷</option>
                 {coupon.map((v, i) => {
                   return (
                     <option defaultValue={coupon[i].coupon_id}>

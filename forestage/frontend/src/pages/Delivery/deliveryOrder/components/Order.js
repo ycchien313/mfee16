@@ -9,12 +9,15 @@ function Order(props) {
     setInputTel,
     textArea,
     setTextArea,
-    orderAll
+    orderAll,
   } = props
   return (
     <>
       <div className="res-person">
-        <h3>訂位人資料</h3>
+        <div className="head">
+          <h3>訂位人資料</h3>
+          <button>同會員資料</button>
+        </div>
         <hr />
         <div className="content">
           <div className="title">

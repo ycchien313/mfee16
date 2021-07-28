@@ -3,7 +3,6 @@ import $ from 'jquery'
 import Dish from '../../../components/Home/Dish'
 import { Link } from 'react-router-dom'
 function EightScreen(props) {
-  let { setCart } = props
   // 預設狀態
   const [dish, setDish] = useState()
   const [dishState, setDishState] = useState()
@@ -11,7 +10,7 @@ function EightScreen(props) {
   const [targetDish, setTargetDish] = useState([])
 
   // 購物車用
-
+  let { all, setAll, item, setItem } = props
   useEffect(() => {
     $.ajax({
       url: 'http://localhost:3001/home/dish',
@@ -99,9 +98,12 @@ function EightScreen(props) {
                   key={value.dish_id}
                   name={value.name}
                   price={value.price}
-                  img_realistic={value.img_realistic}
+                  image_realistic={value.image_realistic}
                   className={value.class}
-                  setCart={setCart}
+                  all={all}
+                  setAll={setAll}
+                  item={item}
+                  setItem={setItem}
                 />
               )
             })}

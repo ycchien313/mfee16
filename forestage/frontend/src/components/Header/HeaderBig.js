@@ -1,44 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
+import $ from 'jquery'
+import HeaderBigCart from './HeaderBigCart'
 function HeaderBig(props) {
   // const [count,setCount] =useState()
-  let { item } = props
+
   useEffect(() => {
     // 待辦: 取得商品價格、圖片，存到新狀態給到子元件
     // 原狀態
-    console.log('item:', item)
-    // let target = {}
-
-    // for (let i = 0; i < item.length; i++) {
-    //   let name = item[i].name
-    //   console.log('name:', name)
-    //   target[name] = target[name] ? target[name] + 1 : 1
-    // }
-    // // 各商品之數量
-    // console.log(target)
-    let target = []
-
-    for (let i = 0; i < item.length; i++) {
-      let name = item[i].name
-      let price = item[i].price
-      let count = 1
-
-      for (let j = i + 1; j < item.length; j++) {
-        console.log(item[i], item[j])
-        if (item[i].name === item[j].name) {
-          console.log('in')
-          count++
-          item[j] = ''
-        }
-
-        if (j === item.length - 1) {
-          let newItem = { name: name, price: price, count: count }
-          target.push(newItem)
-        }
-      }
-    }
-    console.log('target:', target)
-  }, [item])
+    $('.cart-div').on('click', function () {
+      $(this).find('.header-cart').toggleClass('active')
+      $('.cart').toggleClass('disabled')
+    })
+  }, [])
   return (
     <>
       <div className="main-header">
@@ -116,23 +90,26 @@ function HeaderBig(props) {
                   </li>
                 </ul>
               </li>
-              <li>
-                <a href="#/" className="header-cart h4">
-                  外送訂餐
-                </a>
-              </li>
-              <div className="header-cartImgAndCircle">
-                <li>
-                  <a href="#/" className="header-cartImg">
-                    <img
-                      src="http://localhost:3000/images/header/shopping-cart-solid.png"
-                      alt=""
-                      class="cart-image"
-                    />
+              <li className="cart-div">
+                <div>
+                  <a href="#/" className="header-cart h4">
+                    外送訂餐
                   </a>
-                  <div className="header-circle"></div>
-                </li>
-              </div>
+                </div>
+                <div className="header-cartImgAndCircle">
+                  <li>
+                    <a href="#/" className="header-cartImg">
+                      <img
+                        src="http://localhost:3000/images/header/shopping-cart-solid.png"
+                        alt=""
+                        class="cart-image"
+                      />
+                    </a>
+                    <div className="header-circle"></div>
+                  </li>
+                </div>
+              </li>
+
               <li className="login">
                 <a href="#/" className="h4">
                   登入
@@ -140,6 +117,29 @@ function HeaderBig(props) {
               </li>
             </ul>
           </nav>
+        </div>
+      </div>
+      <div className="cart disabled">
+        {/* <div className="cart-title">
+          <div className="cart-detail">
+            <h4>Img</h4>
+            <h4>Product</h4>
+            <h4>Price</h4>
+            <h4>Count</h4>
+          </div>
+        </div> */}
+        <div className="cart-list">
+          <HeaderBigCart />
+          <HeaderBigCart />
+          <HeaderBigCart />
+          <HeaderBigCart />
+          <HeaderBigCart />
+          <HeaderBigCart />
+          <HeaderBigCart />
+        </div>
+        <div className="cart-submit">
+          <h4>Total</h4>
+          <button className="button-orange">送出</button>
         </div>
       </div>
     </>

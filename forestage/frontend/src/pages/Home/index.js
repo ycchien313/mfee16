@@ -18,7 +18,10 @@ import Header from '../../components/Header'
 
 function Home() {
   // 購物車使用
-  const [cart, setCart] = useState([])
+  const [cartName, setCartName] = useState([])
+  const [cartPrice, setCartPrice] = useState([])
+  const [cartCount, setCartCount] = useState([])
+  const [cartImg, setCartImg] = useState([])
 
   // 當天歌手資訊
   const [singerName, setSingerName] = useState()
@@ -27,6 +30,10 @@ function Home() {
 
   // 登入狀態
   const [loginState, setLoginState] = useState(false)
+  const [all, setAll] = useState({})
+  // name: '', price: 0, count: 0, img: ''
+  // item
+  const [item, setItem] = useState([])
 
   let current = moment().format('MM/DD')
   // ComponentDidmount
@@ -45,7 +52,13 @@ function Home() {
 
   return (
     <>
-      <Header cart={cart} />
+      <Header
+        cartName={cartName}
+        cartPrice={cartPrice}
+        cartCount={cartCount}
+        cartImg={cartImg}
+        all={all}
+      />
       <div className="home">
         <FirstScreen
           singerName={singerName}
@@ -62,7 +75,7 @@ function Home() {
         <FivethScreen />
         <SixthScreen />
         <SeventhScreen />
-        <EightScreen setCart={setCart} />
+        <EightScreen all={all} setAll={setAll} item={item} setItem={setItem} />
       </div>
     </>
   )

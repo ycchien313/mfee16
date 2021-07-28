@@ -73,7 +73,6 @@ function Aside() {
   }
 
   useEffect(() => {
-    // setAsideHeight(getScreenHeight())
     controlSvgColor()
   }, [])
 

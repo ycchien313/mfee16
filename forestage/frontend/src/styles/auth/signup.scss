@@ -67,6 +67,25 @@
       flex-direction: column;
     }
   }
+
+  // 關閉按鈕
+  .signup-page-container .cancel-btn {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .cancel-btn {
+      display: unset;
+      align-self: flex-end;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+    }
+  }
+  .signup-page-container .cancel-btn {
+    font-size: 16px;
+  }
+
   .signup-page-container .right-side {
     display: flex;
     flex-direction: row;

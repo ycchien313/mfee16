@@ -1,6 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
-function HeaderBig() {
+function HeaderBig(props) {
+  // const [count,setCount] =useState()
+  let { item } = props
+  useEffect(() => {
+    // 待辦: 取得商品價格、圖片，存到新狀態給到子元件
+    // 原狀態
+    console.log('item:', item)
+    // let target = {}
+
+    // for (let i = 0; i < item.length; i++) {
+    //   let name = item[i].name
+    //   console.log('name:', name)
+    //   target[name] = target[name] ? target[name] + 1 : 1
+    // }
+    // // 各商品之數量
+    // console.log(target)
+    let target = []
+
+    for (let i = 0; i < item.length; i++) {
+      let name = item[i].name
+      let price = item[i].price
+      let count = 1
+
+      for (let j = i + 1; j < item.length; j++) {
+        console.log(item[i], item[j])
+        if (item[i].name === item[j].name) {
+          console.log('in')
+          count++
+          item[j] = ''
+        }
+
+        if (j === item.length - 1) {
+          let newItem = { name: name, price: price, count: count }
+          target.push(newItem)
+        }
+      }
+    }
+    console.log('target:', target)
+  }, [item])
   return (
     <>
       <div className="main-header">

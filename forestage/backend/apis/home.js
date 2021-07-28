@@ -83,10 +83,8 @@ router.get("/seat/back/:date", async function (req, res, next) {
 });
 
 // 取得餐點資訊
-router.get("/dish/main", async function (req, res, next) {
-    let queryResult = await db.connection.queryAsync(
-        'select * from dish where type="主餐" '
-    );
+router.get("/dish", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync("select * from dish");
     res.send(queryResult);
 });
 

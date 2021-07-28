@@ -1539,15 +1539,25 @@ button {
     margin: 0 15px 0 15px;
   }
   .delivery-item {
+    background: $primary-lightgreen;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: $primary-lightgreen;
     border-radius: 15px;
     margin: 0 auto;
     height: 100%;
     width: 90%;
   }
+  .delivery-item.main {
+    background: $primary-lightgreen;
+  }
+  .delivery-item.sub {
+    background: $primary-lightgray;
+  }
+  .delivery-item.dessert {
+    background: $primary-lightpink;
+  }
+
   @media screen and (max-width: 768px) {
     .delivery-item {
       width: 230px;
@@ -1630,6 +1640,19 @@ button {
     .bot-button i {
       font-size: 20px;
     }
+  }
+  .change-dish-type {
+    border: 1px solid red;
+    width: 85vw;
+    margin: 0 auto;
+  }
+  .change-dish-type ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .change-dish-type ul li {
+    margin: 0 10px 0 10px;
   }
 
   // CSStransition setting

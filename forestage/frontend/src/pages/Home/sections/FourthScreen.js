@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import VoteCandidates from './Components/VoteCandidates'
+import VoteCandidates from '../../../components/Home/VoteCandidates'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 //

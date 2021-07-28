@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import Guide from './Components/Guide'
 import $ from 'jquery'
 import moment from 'moment'
-
+import Guide from '../../../components/Home/Guide'
 function SecondScreen(props) {
   const { singerName } = props
   let current = moment().format('YYYY.MM.DD')

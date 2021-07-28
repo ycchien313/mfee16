@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
-import CommentCard from './Components/CommentCard'
+import CommentCard from '../../../components/Home/CommentCard'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
 
@@ -87,7 +87,7 @@ function ThirdScreen(props) {
       setComment(result)
     })
   }, [targetId])
-
+  let fullPath = 'http://localhost:3000/images/home/歌手/' + singerImg
   //主要頁面
   let ThirdScreen = (
     <div id="thirdScreen">
@@ -121,7 +121,7 @@ function ThirdScreen(props) {
           classNames="transition"
         >
           <figure className="singerPageFigure">
-            <img src={singerImg} alt="" />
+            <img src={fullPath} alt="" />
           </figure>
         </CSSTransition>
         <div className="singerPageInfo">

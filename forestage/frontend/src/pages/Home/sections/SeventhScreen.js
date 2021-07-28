@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import moment from 'moment'
 import $ from 'jquery'
-import ReservationCandidate from './Components/ReservationCadidate'
+import ReservationCandidate from '../../../components/Home/ReservationCadidate'
 function SeventhScreen(props) {
   const [calendarResult, setCalendarResult] = useState([])
   const [date, getDate] = useState()

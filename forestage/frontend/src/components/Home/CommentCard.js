@@ -13,13 +13,17 @@ function CommentCard(props) {
   for (let i = 0; i < likes; i++) {
     starArr.push(star)
   }
+
+  let path = 'http://localhost:3000/images/home/user/'
+  let fullPath = path + img
+
   //
   let card = (
     <li className="card-li">
       <div className="commentCard">
         <div className="user">
           <div className="userImg">
-            <img src={img} alt="" />
+            <img src={fullPath} alt="" />
           </div>
           <p>{name}</p>
           <p className="alignSelfEnd">{singer}</p>

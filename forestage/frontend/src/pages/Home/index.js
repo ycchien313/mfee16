@@ -9,11 +9,17 @@ import FourthScreen from './sections/FourthScreen'
 import FivethScreen from './sections/FivthScreen'
 import SixthScreen from './sections/SixthScreen'
 import SeventhScreen from './sections/SeventhScreen'
+import EightScreen from './sections/EightScreen'
 //
 import moment from 'moment'
-import EightScreen from './sections/EightScreen'
+
+// header
+import Header from '../../components/Header'
 
 function Home() {
+  // 購物車使用
+  const [cart, setCart] = useState([])
+
   // 當天歌手資訊
   const [singerName, setSingerName] = useState()
   const [singerImg, setSingerImg] = useState()
@@ -39,6 +45,7 @@ function Home() {
 
   return (
     <>
+      <Header cart={cart} />
       <div className="home">
         <FirstScreen
           singerName={singerName}
@@ -55,7 +62,7 @@ function Home() {
         <FivethScreen />
         <SixthScreen />
         <SeventhScreen />
-        <EightScreen />
+        <EightScreen setCart={setCart} />
       </div>
     </>
   )

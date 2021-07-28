@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../../../styles/member/profile.scss'
 import axios from 'axios'
 import Aside from '../../Common/Main/Aside'
 import Breadcrumb from '../../Common/Main/Breadcrumb'
@@ -28,34 +29,36 @@ function Main(props) {
 
   return (
     <>
-      <main className="main">
-        <div className="main-container">
-          {/* <!-- 左側：導覽列 --> */}
-          <Aside />
-          {/* <!-- 右側：麵包屑、內容--> */}
-          <div className="right-side">
-            {/* <!-- 麵包屑 --> */}
-            <Breadcrumb pagename={pagename} />
+      <div className="profile">
+        <main className="main">
+          <div className="main-container">
+            {/* <!-- 左側：導覽列 --> */}
+            <Aside />
+            {/* <!-- 右側：麵包屑、內容--> */}
+            <div className="right-side">
+              {/* <!-- 麵包屑 --> */}
+              <Breadcrumb pagename={pagename} />
 
-            {/* <!-- 內容 --> */}
-            {/* <!-- ********** 不同部份開始 ********** --> */}
-            <div className="content">
-              <div className="content-container">
-                <div className="info-container">
-                  {/* <!-- 左側：會員照片、個人資料 --> */}
-                  <PersonalInfo dbRequest={dbRequest} memberId={memberId} />
+              {/* <!-- 內容 --> */}
+              {/* <!-- ********** 不同部份開始 ********** --> */}
+              <div className="content">
+                <div className="content-container">
+                  <div className="info-container">
+                    {/* <!-- 左側：會員照片、個人資料 --> */}
+                    <PersonalInfo dbRequest={dbRequest} memberId={memberId} />
 
-                  {/* <!-- 中間分隔線 --> */}
-                  <div className="vertical-line"></div>
+                    {/* <!-- 中間分隔線 --> */}
+                    <div className="vertical-line"></div>
 
-                  {/* <!-- 右側：登入資料 --> */}
-                  <SigninInfo dbRequest={dbRequest} memberId={memberId} />
+                    {/* <!-- 右側：登入資料 --> */}
+                    <SigninInfo dbRequest={dbRequest} memberId={memberId} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </>
   )
 }

@@ -3,16 +3,6 @@
   @import '../member/modal.scss';
   @import '../common/global.scss';
 
-  @keyframes slidein-hero-section {
-    0% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
   @keyframes slidein-main {
     0% {
       transform: translateY(-100%);
@@ -45,114 +35,11 @@
     transition: opacity 300ms, transform 300ms;
   }
 
-  header {
-    /* 使header靠上對齊用 */
-    width: 100%;
-    height: 5vw;
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-
-  /********** 主視覺 **********/
-  .hero-section {
-    width: 100%;
-    height: 26.04vw;
-    background-image: url('http://127.0.0.1:3000/images/member/banner-background.svg');
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: cover;
-    /* 波浪靠下對齊用 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-    animation: slidein-hero-section 1s;
-  }
-  @media screen and (max-width: 768px) {
-    .hero-section {
-      display: none;
-    }
-  }
-  .hero-section .top-wave {
-    height: 9.9vw;
-    background-image: url('http://127.0.0.1:3000/images/member/banner-wave.svg');
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    /* padding-left: 365px; */
-    padding-left: 19.1vw;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .hero-section .title {
-    height: 4.5vw;
-    margin-right: 4.16vw;
-    font-family: $zh-tw-maru;
-    color: $primary-lightbrown;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .hero-section .main-title {
-    margin: 0;
-  }
-  .hero-section .sub-title {
-    margin: 0;
-  }
-  .hero-section .elfin {
-    width: 5.2vw;
-  }
-
-  /********** 手機版主視覺 **********/
-  .hero-section-md {
-    display: none;
-  }
-  @media screen and (max-width: 768px) {
-    .hero-section-md {
-      min-height: 210px;
-      background-image: url(http://127.0.0.1:3000/images/member/banner-background.svg);
-      background-repeat: no-repeat;
-      background-position: bottom center;
-      background-size: cover;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-    }
-    .hero-section-md > .hero-container {
-      width: 60vw;
-      min-width: 330px;
-      height: 130px;
-      background-color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 20px;
-      border-radius: 30px;
-      display: flex;
-      justify-content: center;
-    }
-    .hero-section-md .hero-content {
-      width: 30vw;
-      min-width: 170px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .hero-section-md .elfin {
-      width: 60px;
-      height: 90px;
-    }
-    .hero-section-md .title {
-      color: $primary-lightbrown;
-      font-family: $zh-tw-maru;
-    }
-  }
-
   /********** 主畫面 **********/
   .main {
     width: 100%;
-
-    animation: slidein-main 1s;
+    margin-bottom: 5.2vw;
+    // animation: slidein-main 1s;
   }
   .main-container {
     width: 100%;
@@ -169,8 +56,12 @@
 
   /********** 左側：導覽列 *********/
   .main .left-side {
+    position: absolute;
+    // height: 926px;
+    top: 0;
+    z-index: -1;
     width: 16.66vw;
-    min-height: 100vh;
+    // min-height:110%;
     background-color: #b2d297;
   }
   @media screen and (max-width: 768px) {
@@ -186,9 +77,9 @@
     border-radius: 1.56vw;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
     margin: 0 1.82vw;
-    margin-top: 2.6vw;
+    margin-top: 28vw;
     position: sticky;
-    top: 2.6vw;
+    top: 90px;
     left: 0;
   }
   .main .left-side .nav .nav-container {
@@ -288,6 +179,7 @@
   /********** 右側 *********/
   .right-side {
     width: 100%;
+    margin-left: 16.66vw;
     display: flex;
     flex-direction: column;
     padding-right: 8.33vw;
@@ -295,6 +187,7 @@
   @media screen and (max-width: 768px) {
     .right-side {
       width: unset;
+      margin-left: 0;
       padding: 0;
     }
   }

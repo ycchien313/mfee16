@@ -1,9 +1,8 @@
 import React from 'react'
-import '../../../styles/member/profile.scss'
-import '../../../styles/member/aside.scss'
 import Banner from '../Common/Banner'
 import Main from './Main/'
 import Footer from '../../Footer/'
+import Header from '../../Header'
 
 function Profile(props) {
   const { pagename } = props
@@ -12,13 +11,9 @@ function Profile(props) {
 
   return (
     <>
-      <div className="profile">
-        <Banner pagename={pagename} />
-        <Main pagename={pagename} />
-      </div>
-      <div className="aside">
-        <div className="aside-to-footer"></div>
-      </div>
+      <Header />
+      <Banner pagename={pagename} />
+      <Main pagename={pagename} />
       <Footer />
     </>
   )

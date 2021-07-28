@@ -1,7 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 function Aside() {
+  const [asideHeight, setAsideHeight] = useState('')
+
+  const getScreenHeight = () => {
+    return document.body.offsetHeight
+  }
+
   function controlSvgColor() {
     document.querySelectorAll('.nav-icon').forEach((item, index) => {
       // 取得 <img> id, class, src
@@ -66,12 +72,17 @@ function Aside() {
   }
 
   useEffect(() => {
+    // setAsideHeight(getScreenHeight())
     controlSvgColor()
   }, [])
 
+  useEffect(() => {
+    setAsideHeight(getScreenHeight())
+  }, [asideHeight])
+
   return (
     <>
-      <aside className="left-side">
+      <aside className="left-side" style={{ height: asideHeight }}>
         <nav className="nav">
           <div className="nav-container">
             <div className="nav-row">

@@ -1,0 +1,108 @@
+.banner {
+  @import '../common/global.scss';
+
+  @keyframes slidein-hero-section {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  /********** 主視覺 **********/
+  .hero-section {
+    width: 100%;
+    height: 26.04vw;
+    background-image: url('http://127.0.0.1:3000/images/member/banner-background.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: cover;
+    /* 波浪靠下對齊用 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    animation: slidein-hero-section 1s;
+  }
+  @media screen and (max-width: 768px) {
+    .hero-section {
+      display: none;
+    }
+  }
+  .hero-section .top-wave {
+    height: 9.9vw;
+    background-image: url('http://127.0.0.1:3000/images/member/banner-wave.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* padding-left: 365px; */
+    padding-left: 19.1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .hero-section .title {
+    height: 4.5vw;
+    margin-right: 4.16vw;
+    font-family: $zh-tw-maru;
+    color: $primary-lightbrown;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-section .main-title {
+    margin: 0;
+  }
+  .hero-section .sub-title {
+    margin: 0;
+  }
+  .hero-section .elfin {
+    width: 5.2vw;
+  }
+
+  /********** 手機版主視覺 **********/
+  .hero-section-md {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .hero-section-md {
+      min-height: 210px;
+      background-image: url(http://127.0.0.1:3000/images/member/banner-background.svg);
+      background-repeat: no-repeat;
+      background-position: bottom center;
+      background-size: cover;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .hero-section-md > .hero-container {
+      width: 60vw;
+      min-width: 330px;
+      height: 130px;
+      background-color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 20px;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-section-md .hero-content {
+      width: 30vw;
+      min-width: 170px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hero-section-md .elfin {
+      width: 60px;
+      height: 90px;
+    }
+    .hero-section-md .title {
+      color: $primary-lightbrown;
+      font-family: $zh-tw-maru;
+    }
+  }
+}

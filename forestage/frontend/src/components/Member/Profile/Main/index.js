@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../../../styles/member/profile.scss'
 import axios from 'axios'
 import Aside from '../../Common/Main/Aside'
@@ -8,8 +8,7 @@ import SigninInfo from './SigninInfo'
 
 function Main(props) {
   const { pagename } = props
-
-  const memberId = 1
+  const [dataLoading, setDataLoading] = useState(true)
 
   // server 端會員資料的請求
   const dbRequest = axios.create({
@@ -27,6 +26,24 @@ function Main(props) {
   //   }),
   // })
 
+  useEffect(() => {
+    setTimeout(() => {
+      setDataLoading(false)
+    }, 1000)
+  }, [])
+
+
+  const loading = (
+    <>
+      <div className="content-spinner">
+        <img
+          src={process.env.PUBLIC_URL + '/images/member/spinner.svg'}
+          alt=""
+        ></img>
+      </div>
+    </>
+  )
+
   return (
     <>
       <div className="profile">
@@ -41,17 +58,26 @@ function Main(props) {
 
               {/* <!-- 內容 --> */}
               {/* <!-- ********** 不同部份開始 ********** --> */}
+
               <div className="content">
                 <div className="content-container">
                   <div className="info-container">
-                    {/* <!-- 左側：會員照片、個人資料 --> */}
-                    <PersonalInfo dbRequest={dbRequest} memberId={memberId} />
+                    {dataLoading ? (
+                      loading
+                    ) : (
+                      <>
+                        {/* <!-- 左側：會員照片、個人資料 --> */}
+                        {/* <PersonalInfo dbRequest={dbRequest} memberId={memberId} /> */}
+                        <PersonalInfo dbRequest={dbRequest} />
 
-                    {/* <!-- 中間分隔線 --> */}
-                    <div className="vertical-line"></div>
+                        {/* <!-- 中間分隔線 --> */}
+                        <div className="vertical-line"></div>
 
-                    {/* <!-- 右側：登入資料 --> */}
-                    <SigninInfo dbRequest={dbRequest} memberId={memberId} />
+                        {/* <!-- 右側：登入資料 --> */}
+                        {/* <SigninInfo dbRequest={dbRequest} memberId={memberId} /> */}
+                        <SigninInfo dbRequest={dbRequest} />
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

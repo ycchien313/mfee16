@@ -12,7 +12,17 @@ function ReservationPage(props) {
     window.addEventListener(
       'beforeunload',
       function () {
-        localStorage.clear()
+        localStorage.removeItem(
+          'dishCount',
+          'seatInfo',
+          'seatCount',
+          'checkList',
+          'singerCalendar',
+          'attendance',
+          'remainingSeat',
+          'activeDate',
+          'insertResData'
+        )
       },
       false
     )

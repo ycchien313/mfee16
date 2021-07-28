@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
-const moment  = require('moment')
-let now = 
+
+
+require('dotenv').config();
+const mailgun = require("mailgun-js");
+const DOMAIN = "sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org";
+
+const mg = mailgun({apiKey:process.env.MG_KEY, domain: DOMAIN});
+
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order, seat_number AS totalSeats FROM seat'
@@ -23,7 +29,7 @@ router.get('/dish', async(req, res)=> {
 })
 
 router.get('/checkout/coupon', async(req, res)=>{
-    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1'
+    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0'
     let memberCoupon = await db.connection.queryAsync(getMemberCouponSql,[req.query.memberId])
     console.log(req.query.memberId)
     res.send(memberCoupon)
@@ -71,6 +77,16 @@ router.post('/checkout/send', async(req, res)=>{
     let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
     let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
     console.log(updateMCM)
+        // mailgun確認信
+        const data = {
+            from: "Mailgun Sandbox <postmaster@sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org>",
+            to: "huiyu.lee580@gmail.com",
+            subject: "謝謝您的訂位",
+            text: "Testing some Mailgun awesomness!"
+        };
+        mg.messages().send(data, function (error, body) {
+        console.log(body);
+    });
 
 })
 

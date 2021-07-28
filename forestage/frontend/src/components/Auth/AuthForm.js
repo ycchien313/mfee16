@@ -8,17 +8,24 @@ function AuthForm(props) {
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
-  const [cityOptions, setCityOptions] = useState(['桃園市', '台北市', '新北市'])
+  const [cityOptions, setCityOptions] = useState([
+    '桃園市',
+    '基隆市',
+    '台北市',
+    '新北市',
+    '新竹縣',
+    '新竹市',
+  ])
   const [signupFields, setSignupFields] = useState({
-    email: 'angel@gmail.com',
-    password: '111',
-    confirmPassword: '111',
-    mobile: '0912345678',
-    address: '桃園市',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    mobile: '',
+    address: '',
   })
   const [signinFields, setSigninFields] = useState({
-    account: 'angel@gmail.com',
-    password: '123',
+    account: '',
+    password: '',
   })
 
   // 對 server 請求
@@ -231,8 +238,9 @@ function AuthForm(props) {
           <input
             name="account"
             type="text"
+            placeholder="請輸入帳號或 E-Mail"
             required
-            title="請輸入帳號或 E-mail"
+            title="請輸入帳號或 E-Mail"
             value={signinFields.account}
             onChange={(e) => {
               handleInputChange(e)
@@ -242,11 +250,11 @@ function AuthForm(props) {
           <input
             name="password"
             type="password"
-            placeholder="共 3 ~ 8 個字元"
+            placeholder="請輸入至少 3 個字元"
             minLength="3"
             maxLength="8"
             required
-            title="密碼長度為 3 ~ 8 個字元"
+            title="密碼至少要 3 個字元"
             value={signinFields.password}
             onChange={(e) => {
               handleInputChange(e)
@@ -269,12 +277,13 @@ function AuthForm(props) {
       <form onSubmit={handleSubmit} onInvalid={handleInvalid}>
         <div className="form-container">
           <div className="form-row">
-            <label htmlFor="email">E-mail (此為以後登入帳號)</label>
+            <label htmlFor="email">E-Mail (此為以後登入帳號)</label>
             <input
               name="email"
               type="email"
+              placeholder="請輸入 E-Mail"
               value={signupFields.email}
-              title="請輸入正確的 E-mail"
+              title="請輸入正確的 E-Mail"
               required
               onChange={(e) => {
                 handleInputChange(e)
@@ -287,11 +296,11 @@ function AuthForm(props) {
               <input
                 name="password"
                 type="password"
-                placeholder="共 3 ~ 8 個字元"
+                placeholder="至少 3 個字元"
                 minLength="3"
-                maxLength="8"
+                maxLength="50"
                 required
-                title="密碼字數為 3~8 個字元"
+                title="密碼至少要 3 個字元"
                 value={signupFields.password}
                 onChange={(e) => {
                   handleInputChange(e)
@@ -303,11 +312,11 @@ function AuthForm(props) {
               <input
                 name="confirmPassword"
                 type="password"
-                placeholder="共 3 ~ 8 個字元"
+                placeholder="至少 3 個字元"
                 minLength="3"
-                maxLength="8"
+                maxLength="50"
                 required
-                title="確認密碼字數為 3 ~ 8 個字元"
+                title="密碼至少要 3 個字元"
                 value={signupFields.confirmPassword}
                 onChange={(e) => {
                   handleInputChange(e)
@@ -321,7 +330,7 @@ function AuthForm(props) {
               name="mobile"
               type="tel"
               value={signupFields.mobile}
-              placeholder="ex. 0911222333"
+              placeholder="請輸入手機號碼 ex. 0911222333"
               pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
               required
               title="請輸入正確的手機號碼"
@@ -352,6 +361,7 @@ function AuthForm(props) {
               <input
                 name="street"
                 type="address"
+                placeholder="請輸入地址"
                 autoComplete="shipping street-address"
                 value={addr.street}
                 onChange={(e) => {

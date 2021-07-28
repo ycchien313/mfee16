@@ -26,6 +26,8 @@ function Member() {
       </button> */}
 
       <Header />
+      <div style={{ height: '100vh' }}></div>
+      <div style={{ height: '100vh' }}></div>
 
       {/* {showAuthModal && (
         <Auth

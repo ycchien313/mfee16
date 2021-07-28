@@ -1,33 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { withRouter, useHistory } from 'react-router-dom'
-import Swal from 'sweetalert2'
-import Auth from '../../components/Auth/'
+import React from 'react'
+import HeaderAuth from './HeaderAuth'
 import '../../styles/header/headerBig.scss'
 
-function HeaderBig(props) {
-  const history = useHistory()
-  const [showAuthModal, setShowAuthModal] = useState(false)
-  const [authToken, setAuthToken] = useState('')
-
-  const reloadPage = () => {
-    const pathname = props.location.pathname
-    history.push(pathname)
-  }
-
-  const logoutSwal = () => {
-    Swal.fire({
-      icon: 'success',
-      title: '登出成功',
-      showConfirmButton: false,
-      timer: 1000,
-    })
-  }
-
-  useEffect(() => {
-    setAuthToken(localStorage.getItem('authToken'))
-    reloadPage()
-  }, [showAuthModal])
-
+function HeaderBig() {
   return (
     <>
       <div className="main-header">
@@ -123,43 +98,14 @@ function HeaderBig(props) {
                 </li>
               </div>
               <li className="login">
-                {authToken ? (
-                  <a
-                    href="#/"
-                    className="h4"
-                    onClick={() => {
-                      localStorage.removeItem('authToken')
-                      setAuthToken('')
-                      logoutSwal()
-                    }}
-                  >
-                    登出
-                  </a>
-                ) : (
-                  <a
-                    href="#/"
-                    className="h4"
-                    onClick={() => {
-                      setShowAuthModal(!showAuthModal)
-                    }}
-                  >
-                    登入
-                  </a>
-                )}
+                <HeaderAuth />
               </li>
             </ul>
           </nav>
         </div>
       </div>
-
-      {showAuthModal && (
-        <Auth
-          showAuthModal={showAuthModal}
-          setShowAuthModal={setShowAuthModal}
-        />
-      )}
     </>
   )
 }
 
-export default withRouter(HeaderBig)
+export default HeaderBig

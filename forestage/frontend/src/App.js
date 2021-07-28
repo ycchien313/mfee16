@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import React, { useState } from 'react'
+import axios from 'axios'
 import AuthContext from './components/Auth/AuthContext'
-// import Auth from './pages/Auth'
 import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
 import Dish from './pages/Dish'
@@ -12,6 +12,31 @@ import Reservation from './pages/Reservation'
 
 function App() {
   const [member, setMember] = useState(null)
+
+  const setContextMember = async () => {
+    const token = localStorage.getItem('authToken')
+
+    try {
+      const response = await axios.get('http://localhost:3001/auth/me', {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      const data = response.data
+      const member = { memberId: data.memberId }
+
+      setMember(member)
+    } catch (err) {
+      localStorage.removeItem('authToken')
+      console.log('設定 localStorage 失敗: ', err)
+    }
+  }
+
+  useEffect(() => {
+    localStorage.getItem('authToken') && setContextMember()
+  }, [])
 
   return (
     <AuthContext.Provider value={{ member, setMember }}>

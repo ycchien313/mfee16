@@ -18,6 +18,15 @@ function Signin(props) {
         <div className="signin-page-container">
           <div className="wave-top"></div>
           <div className="middle-container">
+            <div
+              role="button"
+              className="cancel-btn orange-guide-button"
+              onClick={() => {
+                setShowAuthModal(false)
+              }}
+            >
+              <i className="cancel-btn-icon fas fa-times"></i>
+            </div>
             <div className="left-side">
               <WelLogo />
             </div>

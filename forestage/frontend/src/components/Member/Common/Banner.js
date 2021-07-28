@@ -7,6 +7,7 @@ function Banner(props) {
   return (
     <>
       <div className="banner">
+        {/* <!-- 電腦版主視覺 --> */}
         <section className="hero-section">
           <div className="top-wave">
             <div className="title">

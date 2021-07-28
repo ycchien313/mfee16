@@ -123,8 +123,8 @@
   margin-bottom: 2.65vw;
   display: block;
   width: 100%;
-  color: $primary-lightbrown;
-  font-family: $primary-lightbrown;
+  color: $secondary-green;
+  font-family: $zh-tw-noto;
 }
 
 .bread-crumb a:nth-child(1) {
@@ -402,6 +402,24 @@
 }
 
 /* 訂位人資料 */
+.res-person .head{
+  display: flex;
+  align-items: center;
+}
+.res-person .head button{
+  background: $accent-orange;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: $box-shadow;
+  margin-left: 20px;
+  color: white;
+  font-family: $zh-tw-noto;
+  cursor: pointer;
+  &:active{
+    box-shadow: none;
+  }
+}
 .res-person .content {
   display: flex;
   margin-top: 2.65vw;

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import StyledLink from '../StyledLink'
 
 
 function CheckList(props) {
   const { checkList, setCheckList, dishList, setDishList, seatInfo } = props
+
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
@@ -20,7 +21,7 @@ function CheckList(props) {
     let html = ''
     checkList.chosenDate === '' ? (html += '<p>請選擇日期<p/>') : (html += '')
     checkList.seatArea === '' ? (html += '<p>請選擇座位區<p/>') : (html += '')
-    if (checkList.total <= checkList.minOrder && checkList.total === 0) {
+    if (checkList.total <= checkList.minOrder || checkList.total === 0) {
       html += '<p>餐點未達低銷金額<p/>'
     }
 
@@ -28,7 +29,6 @@ function CheckList(props) {
       title: '您尚未完成訂位',
       html: html,
       icon: 'warning',
-      confirmButtonColor: '#97bc78',
       buttonsStyling: false,
       didOpen: () => {
         html = ''
@@ -58,8 +58,6 @@ function CheckList(props) {
       return false
     }
   }
-
-
 
   return (
     <>
@@ -166,7 +164,7 @@ function CheckList(props) {
           src="http://localhost:3000/images/reservation/board-top.svg"
           alt=""
         />
-        <Link
+        <StyledLink
           onClick={(e) => {
             if (checkIfDataOk() === false) {
               e.preventDefault()
@@ -177,6 +175,7 @@ function CheckList(props) {
             pathname: '/reservation/checkout',
             state: { checkList, dishList },
           }}
+          // style={StyledLink}
         >
           <button class="pink-guide-button">
             送出訂位
@@ -185,7 +184,7 @@ function CheckList(props) {
               alt=""
             />
           </button>
-        </Link>
+        </StyledLink>
       </div>
     </>
   )

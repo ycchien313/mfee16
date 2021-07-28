@@ -39,7 +39,7 @@ function MealCard(props) {
               minusDishCount(id)
             }}
           ></div>
-          <input type="number" value={dishCount[id]} />
+          <input type="number" value={dishCount[id] ? dishCount[id] : 0} />
           <div
             className="plus-button"
             onClick={() => {

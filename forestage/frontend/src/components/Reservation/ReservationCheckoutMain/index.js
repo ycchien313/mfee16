@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ReservationContent from './Content/ReservationContent'
 import DishContent from './Content/DishContent/'
 import ReservationPerson from './Content/ReservationPerson'
+import StyledLink from '../StyledLink'
+import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
+import withReactContent from 'sweetalert2-react-content'
 
 function Main(props) {
   const { dishList, checkList, insertResData, setInsertResData } = props
@@ -17,19 +20,31 @@ function Main(props) {
       },
     })
   }
+
+  const CheckDataSwal = withReactContent(Swal)
+
+  function fireAlert() {
+    CheckDataSwal.fire({
+      title: '您的訂位已送出',
+      html: <h5>請至信箱收取您的訂位確認信</h5>,
+      icon: 'success',
+      confirmButtonText: '<Link to="history.goBack()">LINK</Link>',
+      // buttonsStyling: false,
+      didOpen: () => {},
+    })
+  }
+
   return (
     <>
       <main className="reservation-checkout">
         <div className="res-check">
           <div className="container-big">
             <div className="bread-crumb">
-              <a href="" className="prev span">
+              <StyledLink to="history.goBack()" className="prev span">
                 線上訂位
-              </a>
+              </StyledLink>
               {'  /  '}
-              <a href="" className="active span">
-                訂位確認
-              </a>
+              <span className="active span">訂位確認</span>
             </div>
             <ReservationContent checkList={checkList} />
             <DishContent
@@ -48,7 +63,10 @@ function Main(props) {
                 本店採現場付款，訂單送出後您將收到 E-Mail 確認信。
               </span>
               <div className="buttons">
-                <Link to={{ pathname: '/reservation' }}>
+                <StyledLink
+                  to={{ pathname: '/reservation' }}
+                  style={{ textDecoration: 'none' }}
+                >
                   <button className="guide-button back">
                     <img
                       src="http://localhost:3000/images/reservation/res_checkout/arrow-circle-left-solid.svg"
@@ -56,11 +74,12 @@ function Main(props) {
                     />
                     修改訂位
                   </button>
-                </Link>
+                </StyledLink>
                 <button
                   className="pink-guide-button"
                   onClick={() => {
-                    insertReservation()
+                    fireAlert()
+                    // insertReservation()
                   }}
                 >
                   確認送出

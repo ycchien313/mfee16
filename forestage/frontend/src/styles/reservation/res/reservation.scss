@@ -508,8 +508,7 @@
     border-radius: 40px 0 0 40px;
     position: relative;
     z-index: 3;
-    transition: .5s;
-
+    transition: 0.5s;
   }
   .rock-bar-end {
     height: 100%;
@@ -527,8 +526,7 @@
     position: relative;
     z-index: 2;
     left: -2.6vw;
-    transition: .5s;
-
+    transition: 0.5s;
   }
   .middle-bar-end {
     height: 100%;
@@ -547,8 +545,7 @@
     position: relative;
     z-index: 1;
     left: -5.2vw;
-    transition: .5s;
-
+    transition: 0.5s;
   }
   .back-bar-end {
     height: 100%;
@@ -815,6 +812,7 @@
   .clipboard .content ul span {
     line-height: 0.93vw;
   }
+
 
   @media screen and (max-width: 1200px) {
     .clipboard .content ul span {

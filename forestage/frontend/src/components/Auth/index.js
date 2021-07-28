@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { withRouter, useHistory } from 'react-router-dom'
 import '../../styles/auth/auth.scss'
 import Signin from './Signin/'
 import Signup from './Signup/'
@@ -6,6 +7,7 @@ import Signup from './Signup/'
 import { CSSTransition, SwitchTransition } from 'react-transition-group'
 
 function Auth(props) {
+  const history = useHistory()
   const { showAuthModal, setShowAuthModal } = props
   const [signinScreen, setSigninScreen] = useState(true) // true: Signin，false: Signup
 
@@ -34,7 +36,12 @@ function Auth(props) {
       <div
         className="auth"
         onClick={(e) => {
-          e.target.className === 'auth' && setShowAuthModal(!showAuthModal)
+          // 關閉彈出視窗
+          e.target.className === 'auth' && setShowAuthModal(false)
+
+          // 會員專區則導回首頁
+          const url = props.match.url
+          url === '/member' && history.push('/')
         }}
       >
         <SwitchTransition mode={'out-in'}>
@@ -67,4 +74,4 @@ function Auth(props) {
   )
 }
 
-export default Auth
+export default withRouter(Auth)

@@ -135,17 +135,16 @@ function AuthForm(props) {
           const token = data.token
           console.log('登入成功，token: ', token)
 
+          // 載入指示器及轉場
+          await loading()
+          await transition('登入成功')
+
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
           serverRequest.defaults.headers.common['Authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
-
-          // 載入指示器及轉場
-          await loading()
-          await transition('登入成功')
-
           // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {}
@@ -252,7 +251,7 @@ function AuthForm(props) {
             type="password"
             placeholder="請輸入至少 3 個字元"
             minLength="3"
-            maxLength="8"
+            maxLength="50"
             required
             title="密碼至少要 3 個字元"
             value={signinFields.password}

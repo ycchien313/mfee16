@@ -1,14 +1,16 @@
-import React, { useContext, useState } from 'react'
-import Auth from '../../components/Auth/'
-import AuthContext from '../../components/Auth/AuthContext'
+import React from 'react'
+// import React, { useContext, useState } from 'react'
+// import Auth from '../../components/Auth/'
+// import AuthContext from '../../components/Auth/AuthContext'
+import Header from '../../components/Header/'
 
 function Member() {
-  const { member } = useContext(AuthContext)
-  const [showAuthModal, setShowAuthModal] = useState(false)
+  // const { member } = useContext(AuthContext)
+  // const [showAuthModal, setShowAuthModal] = useState(false)
 
   return (
     <>
-      <button
+      {/* <button
         onClick={() => {
           setShowAuthModal(!showAuthModal)
         }}
@@ -21,14 +23,16 @@ function Member() {
         }}
       >
         取得 member
-      </button>
+      </button> */}
 
-      {showAuthModal && (
+      <Header />
+
+      {/* {showAuthModal && (
         <Auth
           showAuthModal={showAuthModal}
           setShowAuthModal={setShowAuthModal}
         />
-      )}
+      )} */}
     </>
   )
 }

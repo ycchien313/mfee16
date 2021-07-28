@@ -5,7 +5,7 @@ import '../../../../styles/member/aside.scss'
 function Aside() {
   const [asideHeight, setAsideHeight] = useState('')
 
-  // 取得瀏覽器高度
+  // 計算 Aside 高度
   const calcAsideHeight = () => {
     // 瀏覽器高度
     const browserH = document.body.offsetHeight
@@ -82,16 +82,19 @@ function Aside() {
 
     // 設定 aside 高度
     setAsideHeight(calcAsideHeight())
+  }, [])
+
+  useEffect(() => {
+    // 設定 aside 高度
     window.addEventListener('resize', () => {
-      console.log(123)
       setAsideHeight(calcAsideHeight())
     })
-  }, [])
+  }, [asideHeight])
 
   return (
     <>
       <div className="aside">
-        <aside className="left-side" style={{ height: asideHeight }} on>
+        <aside className="left-side" style={{ height: asideHeight }}>
           {/* <!-- 電腦版導覽列--> */}
           <nav className="nav">
             <div className="nav-container">
@@ -113,7 +116,7 @@ function Aside() {
                 </Link>
               </div>
               <div className="nav-row">
-                <Link to="/member/profile" className="nav-content">
+                <Link to="/member/reservation" className="nav-content">
                   {/* <a href={''}> */}
                   <img
                     className="nav-icon"
@@ -130,7 +133,7 @@ function Aside() {
                 </Link>
               </div>
               <div className="nav-row">
-                <Link to="/member/profile" className="nav-content">
+                <Link to="/member/delivery" className="nav-content">
                   {/* <a href={''}> */}
                   <img
                     className="nav-icon"
@@ -147,7 +150,7 @@ function Aside() {
                 </Link>
               </div>
               <div className="nav-row">
-                <Link to="/member/profile" className="nav-content">
+                <Link to="/member/coupon" className="nav-content">
                   {/* <a href={''}> */}
                   <img
                     className="nav-icon"
@@ -171,22 +174,22 @@ function Aside() {
         <nav className="nav-md">
           <ul className="container-md">
             <li>
-              <Link to={''} className="nav-content">
+              <Link to="/member/profile" className="nav-content">
                 <h4 className="active">會員資料</h4>
               </Link>
             </li>
             <li>
-              <Link to={''} className="nav-content">
+              <Link to="/member/reservation" className="nav-content">
                 <h4>我的訂位</h4>
               </Link>
             </li>
             <li>
-              <Link to={''} className="nav-content">
+              <Link to="/member/delivery" className="nav-content">
                 <h4>外送訂單</h4>
               </Link>
             </li>
             <li>
-              <Link to={''} className="nav-content">
+              <Link to="/member/coupon" className="nav-content">
                 <h4>折價券</h4>
               </Link>
             </li>

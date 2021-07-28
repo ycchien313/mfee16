@@ -3,7 +3,9 @@ const router = express.Router();
 const db = require('../utils/db')
 const mailgun = require("mailgun-js");
 const DOMAIN = "sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org";
-const mg = mailgun({apiKey: "4fdffe07f3f410f87420d073647b15a4-a0cfb957-16715929", domain: DOMAIN});
+require('dotenv').config();
+
+const mg = process.env.MG_KEY
 
 
 

@@ -13,7 +13,6 @@ const connection = db.connection;
 const cors = require('cors');
 const port = 3001;
 
-<<<<<<< HEAD
 // 加入 headers
 // app.use(function (req, res, next) {
 //     // 允許連接的網頁
@@ -37,21 +36,16 @@ const port = 3001;
 //     // Pass to next layer of middleware
 //     next();
 // });
-=======
 require('dotenv').config();
 
 // const fs = require('fs');
 // const https = require('https');
->>>>>>> auth
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-<<<<<<< HEAD
 
 app.use(express.static('public'));
-=======
->>>>>>> auth
 
 app.use('/auth', authApi);
 app.use('/comment', commentApi);

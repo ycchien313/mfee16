@@ -1,12 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
+import axios from 'axios'
+import AuthContext from '../../../Auth/AuthContext'
 
 function PersonalInfo(props) {
-  const { dbRequest, memberId } = props
+  // const { member } = useContext(AuthContext)
+  // const { memberId } = member
+
+  const { dbRequest } = props
+  const [memberId, setMemberId] = useState('')
   const [toggleBtn, setToggleBtn] = useState(true)
   const [toggleInput, setToggleInput] = useState(true)
   const [toggleTextarea, setToggleTextarea] = useState(true)
   const [dataLoading, setDataLoading] = useState(false)
+  const [didMount, setDidMount] = useState(true)
   const [profile, setProfile] = useState({
     avatar: process.env.PUBLIC_URL + '/images/member/elfin-green.png',
     name: '',
@@ -26,25 +33,46 @@ function PersonalInfo(props) {
   })
   // const nodeRef = useRef(null)
 
+  // 取得 memberId (解 token)
+  const getMember = async () => {
+    const token = localStorage.getItem('authToken')
+    const response = await axios.get('http://localhost:3001/auth/me', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    const data = response.data
+    const resMemberId = data.memberId
+
+    setMemberId(resMemberId)
+  }
+
   // 取得來自 server 的會員資料(GET)
   const getProfileServer = async () => {
     try {
       const response = await dbRequest.get(`profile/${memberId}`)
       const data = response.data
       const status = data.status
+      const avatar =
+        data.data[0].avatar.substring(0, 4) === 'http'
+          ? data.data[0].avatar
+          : `http://127.0.0.1:3001/${data.data[0].avatar}`
       const profileFields = {
-        avatar: `http://127.0.0.1:3001/${data.data[0].avatar}`,
+        avatar: avatar,
         name: data.data[0].name,
         gender: data.data[0].gender,
         birthday: data.data[0].birthday,
         mobile: data.data[0].mobile,
         address: data.data[0].address,
       }
-
+      console.log(profileFields)
       if (status === '成功') {
         setProfile(profileFields)
         setRestoreProfile(profileFields)
       } else {
+        console.log('取得資料失敗')
         new Error(data)
       }
     } catch (error) {
@@ -57,6 +85,7 @@ function PersonalInfo(props) {
     console.log('on PUT')
     try {
       dbRequest.put(`profile/${memberId}`, form)
+      // dbRequest.put(`profile/1`, form)
     } catch (error) {
       console.error({ status: '失敗', msg: error })
     }
@@ -120,9 +149,17 @@ function PersonalInfo(props) {
 
   // componentDidMount
   useEffect(() => {
-    getProfileServer()
-    // setDidMount(false)
+    getMember()
+    setDidMount(false)
   }, [])
+
+  // componentDidUpdate
+  useEffect(() => {
+    if (didMount === false) {
+      getMember()
+      getProfileServer()
+    }
+  }, [memberId])
 
   const loading = (
     <>

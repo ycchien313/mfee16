@@ -4,6 +4,7 @@ import { Link, withRouter } from 'react-router-dom'
 function Aside() {
   const [asideHeight, setAsideHeight] = useState('')
 
+  // 取得瀏覽器高度
   const getScreenHeight = () => {
     return document.body.offsetHeight
   }

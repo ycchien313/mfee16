@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 function OrderList(props) {
-  const { selectedOption, setSelectOption } = props
+  const { selectedOption, setSelectOption, orderAll, coupon, inputCoupons } =
+    props
+  const { img, name, counts, subTotal, fulltime } = orderAll
+  const [couponName, setCouponName] = useState('')
+  const [couponPrice, setCouponPrice] = useState(0)
+
+  useEffect(() => {
+    if (coupon.length > 0) {
+      let newItem = coupon.filter(function (v) {
+        return v.name == couponName
+      })
+      setCouponPrice(newItem[0].discount)
+    }
+  }, [couponName])
+
+  function getTotal() {
+    let total = 0
+    for (let i = 0; i < subTotal.length; i++) {
+      total += subTotal[i]
+    }
+    return total
+  }
   return (
     <>
       <div className="dish-content">
@@ -9,7 +30,7 @@ function OrderList(props) {
         <hr className="top" />
         <div className="order-time">
           <h4>送餐時間 :</h4>
-          <span className="Time">2021/06/20 18:00</span>
+          <span className="Time">{fulltime}</span>
         </div>
         <div className="content">
           <div className="name">
@@ -18,30 +39,21 @@ function OrderList(props) {
             <span className="h4">數量</span>
             <span className="h4">小計</span>
           </div>
-          {/*  */}
-          {/* {t.map(() => {
-            if () {
-              return(
-                <div className="detail">
-            <div className="dish">
-              <figure className="dish-pic">
-                <img
-                  src={
-                    'http://localhost:3000/images/delivery/deliveryOrder/菜單-瑪格莉特大pizza.jpg'
-                  }
-                  alt=""
-                />
-              </figure>
-              <span className="dish-name h4">碳烤豬肋排</span>
-            </div>
-            <span className="h4">500</span>
-            <span className="h4">2</span>
-            <span className="h4">1000</span>
-          </div>
-              )
-            }
-          })} */}
-          {/*  */}
+          {img.map((v, i) => {
+            return (
+              <div className="detail">
+                <div className="dish">
+                  <figure className="dish-pic">
+                    <img src={img[i]} alt="" />
+                  </figure>
+                  <span className="dish-name h4">{name[i]}</span>
+                </div>
+                <span className="h4">{subTotal[i] / counts[i]}</span>
+                <span className="h4">{counts[i]}</span>
+                <span className="h4">{subTotal[i]}</span>
+              </div>
+            )
+          })}
           <hr />
           <div className="price-count">
             <div className="price-count-name">
@@ -52,7 +64,7 @@ function OrderList(props) {
             </div>
             <div className="price-count-detail">
               <div className="total">
-                <span className="h4">1700</span>
+                <span className="h4">{getTotal()}</span>
                 <span className="h4">元</span>
               </div>
               <select
@@ -62,21 +74,26 @@ function OrderList(props) {
                 value={selectedOption}
                 onChange={(e) => {
                   setSelectOption(e.target.value)
+                  setCouponName(e.target.value)
                 }}
               >
-                <option value="端午節優惠 滿千折百">端午節優惠 滿千折百</option>
-                <option value="參與音樂測驗遊戲獎勵">
-                  參與音樂測驗遊戲獎勵
-                </option>
-                <option value="發文評論獎勵">發文評論獎勵</option>
-                <option value="參與歌手投票獎勵">參與歌手投票獎勵</option>
+                <option>請選擇折價卷</option>
+                {coupon.map((v, i) => {
+                  return (
+                    <option defaultValue={coupon[i].coupon_id}>
+                      {coupon[i].name}
+                    </option>
+                  )
+                })}
               </select>
               <div className="discount">
-                <span className="h4">100</span>
+                <span className="h4" defaultValue="">
+                  {couponPrice}
+                </span>
                 <span className="h4">元</span>
               </div>
               <div className="total-after">
-                <span className="h4">1600</span>
+                <span className="h4">{getTotal() - couponPrice}</span>
                 <span className="h4">元</span>
               </div>
             </div>

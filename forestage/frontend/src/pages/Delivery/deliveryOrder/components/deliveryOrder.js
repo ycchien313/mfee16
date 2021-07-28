@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import Order from './Order'
 import OrderList from './OrderList'
+import $ from 'jquery'
 
 function DeliveryOrder(props) {
-  // console.log(props.location.state, 'props')
   const [selectedOption, setSelectOption] = useState('')
   const [inputText, setInputText] = useState('')
   const [inputTel, setInputTel] = useState('')
   const [textArea, setTextArea] = useState('')
+  const [inputAdd, setInputAdd] = useState('')
+  const { orderAll } = props
+  // console.log(orderAll, 'props')
+  const [coupon, inputCoupon] = useState([])
+  // console.log(coupon, '123')
+
+  useEffect(() => {
+    $.ajax({
+      url: 'http://localhost:3001/delivery/coupon',
+      method: 'GET',
+      dataType: 'json',
+    })
+      .then(function (result) {
+        inputCoupon(result)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  }, [])
 
   return (
     <>
@@ -46,14 +65,21 @@ function DeliveryOrder(props) {
             <OrderList
               selectedOption={selectedOption}
               setSelectOption={setSelectOption}
+              orderAll={orderAll}
+              coupon={coupon}
+              inputCoupon={inputCoupon}
             />
             <Order
               inputText={inputText}
               setInputText={setInputText}
               inputTel={inputTel}
               setInputTel={setInputTel}
+              inputAdd={inputAdd}
+              setInputAdd={setInputAdd}
               textArea={textArea}
               setTextArea={setTextArea}
+              orderAll={orderAll}
+
             />
             <div className="check">
               <span className="info-text">

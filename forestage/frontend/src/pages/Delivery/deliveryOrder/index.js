@@ -8,7 +8,7 @@ function Index(props) {
   return (
     <>
       <Header />
-      <DeliveryOrder />
+      <DeliveryOrder orderAll={props.location.state} />
     </>
   )
 }

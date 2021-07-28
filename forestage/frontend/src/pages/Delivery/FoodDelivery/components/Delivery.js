@@ -54,6 +54,7 @@ function Delivery(props) {
   useEffect(() => {
     setFulltime(date + ' ' + time)
   }, [date, time])
+
   useEffect(() => {
     getDishes()
 

@@ -10,7 +10,11 @@ function Header(props) {
   return (
     <>
       <header>
-        {isTabletOrMobile ? <HeaderSmall /> : <HeaderBig item={item} />}
+        {isTabletOrMobile ? (
+          <HeaderSmall item={item} />
+        ) : (
+          <HeaderBig item={item} />
+        )}
       </header>
     </>
   )

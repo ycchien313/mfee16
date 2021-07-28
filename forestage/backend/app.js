@@ -13,6 +13,7 @@ const connection = db.connection;
 const cors = require('cors');
 const port = 3001;
 
+<<<<<<< HEAD
 // 加入 headers
 // app.use(function (req, res, next) {
 //     // 允許連接的網頁
@@ -36,12 +37,21 @@ const port = 3001;
 //     // Pass to next layer of middleware
 //     next();
 // });
+=======
+require('dotenv').config();
+
+// const fs = require('fs');
+// const https = require('https');
+>>>>>>> auth
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+<<<<<<< HEAD
 
 app.use(express.static('public'));
+=======
+>>>>>>> auth
 
 app.use('/auth', authApi);
 app.use('/comment', commentApi);
@@ -53,7 +63,8 @@ app.use('/reservation', reservationApi);
 app.use('/singer', singerApi);
 
 app.get('/', (req, res) => {
-    res.send('');
+    console.log('URL:', req.url);
+    res.status(200).json({ url: req.url });
 });
 
 // 404 錯誤
@@ -65,3 +76,17 @@ app.listen(port, () => {
     console.log(`請連線至 http://127.0.0.1:${port}`);
     connection.connect();
 });
+
+// https
+//     .createServer(
+//         {
+//             key: fs.readFileSync('server.key'),
+//             cert: fs.readFileSync('server.cert'),
+//         },
+//         app
+//     )
+//     .listen(8443, function () {
+//         console.log(
+//             'Example app listening on port 8443! Go to https://localhost:8443/'
+//         );
+//     });

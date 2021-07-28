@@ -79,16 +79,19 @@ function Aside() {
 
   useEffect(() => {
     controlSvgColor()
-  }, [])
 
-  useEffect(() => {
+    // 設定 aside 高度
     setAsideHeight(calcAsideHeight())
-  }, [asideHeight])
+    window.addEventListener('resize', () => {
+      console.log(123)
+      setAsideHeight(calcAsideHeight())
+    })
+  }, [])
 
   return (
     <>
       <div className="aside">
-        <aside className="left-side" style={{ height: asideHeight }}>
+        <aside className="left-side" style={{ height: asideHeight }} on>
           {/* <!-- 電腦版導覽列--> */}
           <nav className="nav">
             <div className="nav-container">

@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../../../styles/member/breadcrumb.scss'
 
 function Breadcrumb(props) {
   const { pagename } = props

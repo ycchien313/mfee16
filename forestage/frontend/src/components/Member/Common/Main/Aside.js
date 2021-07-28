@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import '../../../../styles/member/aside.scss'
 
 function Aside() {
   const [asideHeight, setAsideHeight] = useState('')
@@ -82,107 +83,109 @@ function Aside() {
 
   return (
     <>
-      <aside className="left-side" style={{ height: asideHeight }}>
-        {/* <!-- 電腦版導覽列--> */}
-        <nav className="nav">
-          <div className="nav-container">
-            <div className="nav-row">
-              <Link to="/member/profile" className="nav-content active">
-                {/* <a href={''} className="active"> */}
-                <img
-                  className="nav-icon"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/main-aside-icon.svg'
-                  }
-                  alt=""
-                />
-                <div className="nav-title-box">
-                  <h4 className="nav-title">會員資料</h4>
-                </div>
-                {/* </a> */}
-              </Link>
+      <div className="aside">
+        <aside className="left-side" style={{ height: asideHeight }}>
+          {/* <!-- 電腦版導覽列--> */}
+          <nav className="nav">
+            <div className="nav-container">
+              <div className="nav-row">
+                <Link to="/member/profile" className="nav-content active">
+                  {/* <a href={''} className="active"> */}
+                  <img
+                    className="nav-icon"
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/member/main-aside-icon.svg'
+                    }
+                    alt=""
+                  />
+                  <div className="nav-title-box">
+                    <h4 className="nav-title">會員資料</h4>
+                  </div>
+                  {/* </a> */}
+                </Link>
+              </div>
+              <div className="nav-row">
+                <Link to="/member/profile" className="nav-content">
+                  {/* <a href={''}> */}
+                  <img
+                    className="nav-icon"
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/member/main-aside-icon.svg'
+                    }
+                    alt=""
+                  />
+                  <div className="nav-title-box">
+                    <h4 className="nav-title">我的訂位</h4>
+                  </div>
+                  {/* </a> */}
+                </Link>
+              </div>
+              <div className="nav-row">
+                <Link to="/member/profile" className="nav-content">
+                  {/* <a href={''}> */}
+                  <img
+                    className="nav-icon"
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/member/main-aside-icon.svg'
+                    }
+                    alt=""
+                  />
+                  <div className="nav-title-box">
+                    <h4 className="nav-title">外送訂單</h4>
+                  </div>
+                  {/* </a> */}
+                </Link>
+              </div>
+              <div className="nav-row">
+                <Link to="/member/profile" className="nav-content">
+                  {/* <a href={''}> */}
+                  <img
+                    className="nav-icon"
+                    src={
+                      process.env.PUBLIC_URL +
+                      '/images/member/main-aside-icon.svg'
+                    }
+                    alt=""
+                  />
+                  <div className="nav-title-box">
+                    <h4 className="nav-title">折價券</h4>
+                  </div>
+                  {/* </a> */}
+                </Link>
+              </div>
             </div>
-            <div className="nav-row">
-              <Link to="/member/profile" className="nav-content">
-                {/* <a href={''}> */}
-                <img
-                  className="nav-icon"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/main-aside-icon.svg'
-                  }
-                  alt=""
-                />
-                <div className="nav-title-box">
-                  <h4 className="nav-title">我的訂位</h4>
-                </div>
-                {/* </a> */}
-              </Link>
-            </div>
-            <div className="nav-row">
-              <Link to="/member/profile" className="nav-content">
-                {/* <a href={''}> */}
-                <img
-                  className="nav-icon"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/main-aside-icon.svg'
-                  }
-                  alt=""
-                />
-                <div className="nav-title-box">
-                  <h4 className="nav-title">外送訂單</h4>
-                </div>
-                {/* </a> */}
-              </Link>
-            </div>
-            <div className="nav-row">
-              <Link to="/member/profile" className="nav-content">
-                {/* <a href={''}> */}
-                <img
-                  className="nav-icon"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/main-aside-icon.svg'
-                  }
-                  alt=""
-                />
-                <div className="nav-title-box">
-                  <h4 className="nav-title">折價券</h4>
-                </div>
-                {/* </a> */}
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </aside>
+          </nav>
+        </aside>
 
-      {/* <!-- 手機版導覽列--> */}
-      <nav className="nav-md">
-        <ul className="container-md">
-          <li>
-            <Link to={''} className="nav-content">
-              <h4 className="active">會員資料</h4>
-            </Link>
-          </li>
-          <li>
-            <Link to={''} className="nav-content">
-              <h4>我的訂位</h4>
-            </Link>
-          </li>
-          <li>
-            <Link to={''} className="nav-content">
-              <h4>外送訂單</h4>
-            </Link>
-          </li>
-          <li>
-            <Link to={''} className="nav-content">
-              <h4>折價券</h4>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+        {/* <!-- 手機版導覽列--> */}
+        <nav className="nav-md">
+          <ul className="container-md">
+            <li>
+              <Link to={''} className="nav-content">
+                <h4 className="active">會員資料</h4>
+              </Link>
+            </li>
+            <li>
+              <Link to={''} className="nav-content">
+                <h4>我的訂位</h4>
+              </Link>
+            </li>
+            <li>
+              <Link to={''} className="nav-content">
+                <h4>外送訂單</h4>
+              </Link>
+            </li>
+            <li>
+              <Link to={''} className="nav-content">
+                <h4>折價券</h4>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </>
   )
 }

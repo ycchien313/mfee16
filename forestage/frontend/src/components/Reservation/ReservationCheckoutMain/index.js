@@ -28,7 +28,7 @@ function Main(props) {
       title: '您的訂位已送出',
       html: <h5>請至信箱收取您的訂位確認信</h5>,
       icon: 'success',
-      confirmButtonText: '<Link to="history.goBack()">LINK</Link>',
+      confirmButtonText: '<a href="/member/reservation">reservation</a>',
       // buttonsStyling: false,
       didOpen: () => {},
     })

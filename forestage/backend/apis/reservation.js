@@ -1,13 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
-const moment  = require('moment')
-let now = 
+const mailgun = require("mailgun-js");
+const DOMAIN = "sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org";
+const mg = mailgun({apiKey: "4fdffe07f3f410f87420d073647b15a4-a0cfb957-16715929", domain: DOMAIN});
+
+
+
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order, seat_number AS totalSeats FROM seat'
     let seat = await db.connection.queryAsync(getSeatSql)
     res.send(seat)
+
 })
 
 router.get('/singer-calendar', async(req, res)=>{
@@ -23,7 +28,7 @@ router.get('/dish', async(req, res)=> {
 })
 
 router.get('/checkout/coupon', async(req, res)=>{
-    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1'
+    let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0'
     let memberCoupon = await db.connection.queryAsync(getMemberCouponSql,[req.query.memberId])
     console.log(req.query.memberId)
     res.send(memberCoupon)
@@ -72,7 +77,20 @@ router.post('/checkout/send', async(req, res)=>{
     let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
     console.log(updateMCM)
 
+    // mailgun確認信
+    const data = {
+        from: "Mailgun Sandbox <postmaster@sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org>",
+        to: "huiyu.lee580@gmail.com",
+        subject: "謝謝您的訂位",
+        text: "Testing some Mailgun awesomness!"
+    };
+    mg.messages().send(data, function (error, body) {
+	console.log(body);
+});
+
 })
+
+
 
 router.get('/:date', async(req, res)=>{
     let getRemainingSeatsSql = 'SELECT s.name, s.seat_number-SUM(r.attendance) AS remainingSeats, s.seat_id FROM reservation r, seat s WHERE date=? AND s.seat_id = r.seat_id GROUP BY seat_id'

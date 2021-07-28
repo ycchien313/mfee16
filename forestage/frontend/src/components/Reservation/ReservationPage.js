@@ -19,7 +19,8 @@ function ReservationPage(props) {
 
     return () => {
       window.onbeforeunload = function () {
-        localStorage.clear()
+        // localStorage.clear()
+        localStorage.removeItem ('dishCount','seatInfo','seatCount','checkList','singerCalendar','attendance','remainingSeat','activeDate','insertResData')
       }
     }
   }, [])

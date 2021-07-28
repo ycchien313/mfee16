@@ -1,6 +1,48 @@
 import React from 'react'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import axios from 'axios'
+
 function ReservationPerson(props) {
-  const { insertResData, setInsertResData } = props
+  const { insertResData, setInsertResData, dishList } = props
+
+  function insertReservation() {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/reservation/checkout/send',
+      data: {
+        dishList,
+        insertResData,
+      },
+    })
+  }
+
+  const CheckDataSwal = withReactContent(Swal)
+
+  function fireAlert() {
+    CheckDataSwal.fire({
+      title: '您的訂位已送出',
+      icon: 'success',
+      html: '<h5>請至信箱收取您的訂位確認信</h5><div style="display:flex; justify-content:center"><a href="/member/reservation" style="background:#f5b54d; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">檢視訂單</a><a href="/home" style="background:#97bc78; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">回首頁<a/></div>',
+      showConfirmButton: false,
+      allowEscapeKey: false,
+      allowOutsideClick:false,
+      didOpen: () => {},
+    })
+  }
+
+  
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    const nameInp = document.getElementById("nameInp")
+    const phoneInp = document.getElementById("phoneInp")
+
+    if(nameInp && phoneInp){
+      insertReservation()
+      fireAlert()
+    }
+  }
 
   function setName(value) {
     const newInsertResData = { ...insertResData }
@@ -20,6 +62,7 @@ function ReservationPerson(props) {
     setInsertResData(newInsertResData)
   }
 
+
   return (
     <>
       <div className="res-person">
@@ -34,7 +77,8 @@ function ReservationPerson(props) {
             <span className="h4">電話</span>
             <span className="h4">備註</span>
           </div>
-          <div className="detail">
+          {/* <div > */}
+          <form id="resPersonForm" className="detail" onSubmit={handleSubmit}>
             <input
               type="text"
               placeholder="王大明"
@@ -42,14 +86,22 @@ function ReservationPerson(props) {
               onChange={(e) => {
                 setName(e.target.value)
               }}
+              required
+              id="nameInp"
             />
             <input
               type="text"
-              placeholder="0912345678"
+              pattern="09\d{8}"
+              placeholder="請輸入電話"
+              minLength="9"
+              maxLength="10"
               value={insertResData.mobile}
               onChange={(e) => {
                 setMobile(e.target.value)
               }}
+              required
+              id="phoneInp"
+
             />
             <textarea
               name=""
@@ -61,8 +113,10 @@ function ReservationPerson(props) {
               onChange={(e) => {
                 setNote(e.target.value)
               }}
+              maxlength="200"
             ></textarea>
-          </div>
+          </form>
+          {/* </div> */}
         </div>
       </div>
     </>

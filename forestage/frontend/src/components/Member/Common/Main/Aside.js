@@ -6,8 +6,12 @@ function Aside() {
   const [asideHeight, setAsideHeight] = useState('')
 
   // 取得瀏覽器高度
-  const getScreenHeight = () => {
-    return document.body.offsetHeight
+  const calcAsideHeight = () => {
+    // 瀏覽器高度
+    const browserH = document.body.offsetHeight
+    const bannerH = document.querySelector('.banner').clientHeight
+    const asideH = browserH - bannerH
+    return asideH
   }
 
   function controlSvgColor() {
@@ -78,7 +82,7 @@ function Aside() {
   }, [])
 
   useEffect(() => {
-    setAsideHeight(getScreenHeight())
+    setAsideHeight(calcAsideHeight())
   }, [asideHeight])
 
   return (

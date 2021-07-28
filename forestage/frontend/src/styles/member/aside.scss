@@ -4,11 +4,7 @@
   /********** 左側：導覽列 *********/
   .left-side {
     position: absolute;
-    // height: 926px;
-    top: 0;
-    z-index: -1;
     width: 16.66vw;
-    // min-height:110%;
     background-color: #b2d297;
   }
   @media screen and (max-width: 768px) {
@@ -24,7 +20,7 @@
     border-radius: 1.56vw;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 16%);
     margin: 0 1.82vw;
-    margin-top: 28vw;
+    margin-top: 3vw;
     position: sticky;
     top: 90px;
     left: 0;

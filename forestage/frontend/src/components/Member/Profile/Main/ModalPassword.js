@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import Swal from 'sweetalert2'
+import '../../../../styles/member/modal.scss'
 
 function ModalPassword(props) {
   const { show, handleClose, dbRequest, memberId } = props
@@ -65,8 +66,8 @@ function ModalPassword(props) {
     } else if (passwords.newPassword !== passwords.confirmPassword) {
       setTip('密碼不一致')
     } else if (
-      passwords.newPassword.length < 2 ||
-      passwords.confirmPassword.length < 2
+      passwords.newPassword.length < 3 ||
+      passwords.confirmPassword.length < 3
     ) {
       setTip('密碼長度過低')
     } else {
@@ -129,7 +130,7 @@ function ModalPassword(props) {
               name="newPassword"
               className="input-group"
               type="password"
-              placeholder="請輸入8位數以上密碼"
+              placeholder="請輸入3位數以上密碼"
               value={passwords.newPassword}
               onChange={(e) => {
                 setPasswordFields(e)

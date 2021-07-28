@@ -202,7 +202,7 @@ function AuthForm(props) {
         Swal.fire({
           html:
             '<div>' +
-            '<img src="http://127.0.0.1:3000//images/auth/spinner.svg" alt=""></img>' +
+            '<img src="http://127.0.0.1:3000/images/auth/spinner.svg" alt=""></img>' +
             '</div>',
           showConfirmButton: false,
           timer: 750,

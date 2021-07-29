@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../../../styles/header/headerSmall.scss'
 import DownMenu from './DownMenu'
+import HeaderAuth from '../HeaderAuth'
 import { CSSTransition } from 'react-transition-group'
 
 function HeaderSmall() {
@@ -12,9 +13,7 @@ function HeaderSmall() {
         <div className="small-header">
           <div className="logo"></div>
           <div className="menu-right">
-            <a href="#/" className="h3">
-              登入
-            </a>
+            <HeaderAuth />
             <div className="cart">
               <div className="icon"></div>
               <div className="circle">12</div>

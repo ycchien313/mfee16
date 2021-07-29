@@ -1,0 +1,329 @@
+.sign-up {
+  @import '../common/global.scss';
+
+  // 彈出式視窗設定
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  width: 1000px;
+
+  .bg-lightgray {
+    background-color: $primary-lightgray;
+  }
+
+  .signup-page-container {
+    max-width: 1000px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .signup-page-container .wave-top {
+    max-height: 200px;
+    height: 20vw;
+    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-top.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scaleX(-1);
+
+    position: relative;
+    z-index: -1;
+  }
+  .signup-page-container .wave-down {
+    max-width: 550px;
+    width: 50vw;
+    max-height: 130px;
+    height: 11vw;
+    background-image: url('http://127.0.0.1:3000/images/auth/auth-wave-down.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scaleX(-1);
+    align-self: flex-end;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .wave-down {
+      max-width: unset;
+      width: 100%;
+      max-height: unset;
+      // height: 220px;
+      height: 28.64vw;
+      background-image: url('http://127.0.0.1:3000/images/auth/auth-md-wave-down.svg');
+    }
+  }
+  .signup-page-container .middle-container {
+    height: 260px;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .middle-container {
+      height: unset;
+      flex-direction: column;
+    }
+  }
+
+  // 關閉按鈕
+  .signup-page-container .cancel-btn {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .cancel-btn {
+      display: unset;
+      align-self: flex-end;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      text-align: center;
+    }
+  }
+  .signup-page-container .cancel-btn {
+    font-size: 16px;
+  }
+
+  .signup-page-container .right-side {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .right-side {
+      order: 1;
+    }
+  }
+  .signup-page-container .wel-img {
+    height: 145px;
+    padding-right: 15px;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .wel-img {
+      min-height: 80px;
+      height: 18.88vw;
+    }
+  }
+  .signup-page-container .wel-title {
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .wel-title {
+      align-items: center;
+    }
+  }
+  .signup-page-container .title-top {
+    margin: 0;
+    color: $secondary-green;
+    font-family: $en-itim;
+    font-size: 40px;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .title-top {
+      align-items: center;
+      font-size: clamp(21px, 5.2vw, 40px);
+    }
+  }
+  .signup-page-container .title-down {
+    width: 81.5px;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .title-down {
+      width: clamp(70px, 10.61vw, 81.5px);
+    }
+  }
+  .signup-page-container .left-side {
+    width: 320px;
+    height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .left-side {
+      order: 2;
+      height: 470px;
+    }
+  }
+  .signup-page-container .title-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup-page-container .title-container .title {
+    margin: 0 0 10px 0;
+    color: $primary-lightbrown;
+    font-family: $zh-tw-maru;
+  }
+  .signup-page-container .title-container .sub-title {
+    margin: 0;
+    color: $primary-lightbrown;
+    font-family: $zh-tw-noto;
+  }
+  .signup-page-container .title-container .sub-title span {
+    color: $accent-red;
+    cursor: pointer;
+  }
+  .signup-page-container .signup-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  .signup-page-container .signup-box {
+    height: 35px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px #707070;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+  }
+  .signup-page-container .signup-box:hover {
+    box-shadow: none;
+  }
+  .signup-page-container .signup-box .icon-box {
+    width: 30px;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup-page-container .signup-box .icon-box img {
+    width: 25px;
+    height: 25px;
+    object-fit: cover;
+  }
+  .signup-page-container .signup-box span {
+    width: 127px;
+    color: #fff;
+    font-family: $zh-tw-noto;
+    font-size: 10px;
+    transform: scale(0.9);
+    text-align: center;
+  }
+  .signup-page-container .g-blue {
+    background-color: #4285f4;
+  }
+  .signup-page-container .f-blue {
+    background-color: #4e6cab;
+  }
+  .signup-page-container .g-blue:active {
+    background-color: darken(#4285f4, 10%);
+
+    .icon-box {
+      background-color: darken(#fff, 10%);
+    }
+  }
+  .signup-page-container .f-blue {
+    background-color: #4e6cab;
+  }
+  .signup-page-container .f-blue:active {
+    background-color: darken(#4e6cab, 10%);
+
+    .icon-box {
+      background-color: darken(#fff, 10%);
+    }
+  }
+  .signup-page-container .signup-box .icon-box i {
+    font-size: 25px;
+    color: #4e6cab;
+  }
+  .signup-page-container .form-container {
+    height: 315px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .form-container {
+      height: 350px;
+    }
+  }
+  .signup-page-container .form-container .form-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .signup-page-container .form-container .form-row:nth-child(2) {
+    flex-direction: row;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .form-container .form-row:nth-child(2) {
+      height: 108px;
+      flex-direction: column;
+    }
+  }
+  .signup-page-container .form-container .form-col {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .form-container .form-col {
+      width: unset;
+    }
+  }
+  .signup-page-container .form-container .form-row:nth-child(4) {
+    flex-direction: row;
+  }
+  .signup-page-container
+    .form-container
+    .form-row:nth-child(4)
+    .form-col:nth-child(1) {
+    width: 130px;
+  }
+  .signup-page-container
+    .form-container
+    .form-row:nth-child(4)
+    .form-col:nth-child(2) {
+    width: 180px;
+  }
+  .signup-page-container .form-container label {
+    font-family: $zh-tw-noto;
+    color: $primary-lightbrown;
+    padding-left: 16px;
+    padding-bottom: 5px;
+  }
+  .signup-page-container .form-container input {
+    height: 30px;
+  }
+  .signup-page-container .form-container select {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .signup-page-container .form-container .btn-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .signup-page-container .form-container .btn-row {
+      height: 60px;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+  .signup-page-container .form-container .btn-row .error-msg {
+    color: $accent-red;
+  }
+  .signup-page-container .form-container .btn-row button {
+    width: 100px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+  }
+  .signup-page-container .form-container button > span {
+    font-size: 16px;
+    margin: 0 auto;
+  }
+  .signup-page-container .form-container button > i {
+    width: 25px;
+    margin-left: auto;
+  }
+}

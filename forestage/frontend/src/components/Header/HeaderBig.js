@@ -6,11 +6,12 @@ function HeaderBig(props) {
   let { item } = props
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCountNum, setTotalCountNum] = useState(0)
-  // 計算總價
+  // 於item更新時執行計算總價及總數
   useEffect(() => {
     total()
     totalCount()
   }, [item])
+  // 總價計算
   function total() {
     let total = 0
     for (let i = 0; i < item.length; i++) {
@@ -19,6 +20,7 @@ function HeaderBig(props) {
     console.log(total)
     setTotalPrice(total)
   }
+  // 總數計算
   function totalCount() {
     let totalCount = 0
     for (let i = 0; i < item.length; i++) {
@@ -155,7 +157,7 @@ function HeaderBig(props) {
             })}
         </div>
         <div className="cart-submit">
-          <h4 class="cart-total">總金額: ${totalPrice}</h4>
+          <h4 class="cart-total">合計: ${totalPrice}</h4>
           <button className="button-orange">下一步</button>
         </div>
       </div>

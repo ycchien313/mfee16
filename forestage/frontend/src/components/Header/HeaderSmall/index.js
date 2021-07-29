@@ -71,7 +71,7 @@ function HeaderSmall(props) {
                 </div>
               </div>
               <div className="cart-small-total">
-                <h4>${totalPrice}</h4>
+                <h3>合計: ${totalPrice}</h3>
                 <div className="cart-small-submit">
                   <button className="button-orange">下一步</button>
                 </div>

@@ -159,8 +159,7 @@ li.login {
 .cart-big {
   border-radius: 15px;
   z-index: 2;
-  border: 1px solid blue;
-  background: white;
+  background: $primary-lightgreen;
   position: fixed;
   right: 50px;
   top: 100px;
@@ -199,7 +198,7 @@ li.login {
   bottom: 0;
   // height: 80px;
   background: white;
-  border-top: 1px solid red;
+
   border-radius: 0 0 15px 15px;
 }
 .cart-submit .button-orange {
@@ -215,16 +214,19 @@ li.login {
 }
 .cart-detail {
   display: flex;
-  border: 1px solid red;
+  background: $primary-lightpink;
   justify-content: flex-end;
   align-items: center;
   width: 90%;
   margin: 10px auto;
   border-radius: 15px;
+  color: $secondary-green-dark;
 }
 .cart-detail figure {
   width: 80px;
   height: 80px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 .cart-detail figure img {
   width: 100%;
@@ -235,6 +237,7 @@ li.login {
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
+  margin-right: 10px;
 }
 .cart-info h4 {
   font-family: $zh-tw-noto;
@@ -246,4 +249,5 @@ li.login {
 }
 .cart-total {
   font-family: $zh-tw-noto;
+  color: #333;
 }

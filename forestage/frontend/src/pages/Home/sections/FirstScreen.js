@@ -3,6 +3,7 @@ import gsap from 'gsap'
 
 function FirstScreen(props) {
   let { singerName, singerImg, singerDate } = props
+  const [test, setTest] = useState('test')
   let GsapTarget = useRef(null)
   console.log(GsapTarget)
   useEffect(() => {

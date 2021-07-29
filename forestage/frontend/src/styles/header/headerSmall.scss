@@ -188,7 +188,6 @@
   .cart-small {
     position: fixed;
     width: 80vw;
-    border: 1px solid red;
     left: 50%;
     transform: translateX(-50%);
     top: 8vh;
@@ -196,6 +195,7 @@
     background: white;
     display: flex;
     flex-direction: column;
+    box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
   }
   .cart-small.disabled {
     display: none;
@@ -209,7 +209,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    // border: 1px solid red;
+    padding-bottom: 10px;
   }
   .cart-small-submit .button-orange {
     border-radius: 25px;
@@ -217,25 +218,25 @@
     background: $accent-orange;
     border: none;
     width: 20vw;
-    height: 7vh;
+    height: 5vh;
     box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
     transition: 0.2s;
     color: white;
   }
   .cart-small-list {
-    border: 1px solid red;
     width: 100%;
     display: flex;
     flex-direction: column;
   }
   .cart-small-border {
-    border: 1px solid blue;
+    background: $primary-lightgreen;
+    border-radius: 15px 15px 0 0;
     flex-shrink: 0;
     height: 70vh;
     overflow: auto;
   }
   .cart-small-content {
-    border: 1px solid blue;
+    background: $primary-lightpink;
     align-items: center;
     display: flex;
     width: 90%;
@@ -243,9 +244,11 @@
     border-radius: 15px;
   }
   .cart-small-content figure {
-    border: 1px solid red;
-    width: 15vw;
+    // border: 1px solid red;
+    width: 25vw;
     height: 15vw;
+    border-radius: 10px;
+    overflow: hidden;
   }
   .cart-small-content figure img {
     width: 100%;
@@ -254,13 +257,18 @@
   }
   .cart-small-info {
     display: flex;
-    border: 1px solid red;
-    flex-grow: 1;
-    width: 80%;
-    justify-content: flex-end;
-    margin-right: 10px;
+    width: 100%;
+    justify-content: space-around;
   }
   .cart-small-info h4 {
-    margin: 0 15px 0 15px;
+    color: #333;
+  }
+  .cart-small-info .cart-small-name {
+    width: 50%;
+  }
+  .cart-small-info-num {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-around;
   }
 }

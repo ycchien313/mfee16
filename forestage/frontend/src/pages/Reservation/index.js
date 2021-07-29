@@ -1,8 +1,10 @@
+
 import React, { useEffect } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 // import Header from '../../components/Header'
 import ReservationPage from '../../../src/components/Reservation/ReservationPage'
 import CheckoutPage from '../../../src/components/Reservation/CheckoutPage'
+
 
 function Reservation(props) {
 

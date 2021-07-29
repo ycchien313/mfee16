@@ -25,10 +25,10 @@ function Main(props) {
 
   const [dishList, setDishList] = useState([])
 
-  const checkRemainingSeat = Boolean(localStorage.getItem('remainingSeat'))
-  const checkSeatCount = Boolean(localStorage.getItem('seatCount'))
-  const checkCheckList = Boolean(localStorage.getItem('checkList'))
-  const checkSeatInfo = Boolean(localStorage.getItem('seatInfo'))
+  const checkRemainingSeat = Boolean(sessionStorage.getItem('remainingSeat'))
+  const checkSeatCount = Boolean(sessionStorage.getItem('seatCount'))
+  const checkCheckList = Boolean(sessionStorage.getItem('checkList'))
+  const checkSeatInfo = Boolean(sessionStorage.getItem('seatInfo'))
 
   useEffect(() => {
     setDidMount(true)
@@ -37,17 +37,17 @@ function Main(props) {
     })
 
     checkRemainingSeat &&
-      setRemainingSeat(JSON.parse(window.localStorage.getItem('remainingSeat')))
-    // checkSeatCount && setSeatCount(JSON.parse(window.localStorage.getItem('seatCount')))
+      setRemainingSeat(JSON.parse(window.sessionStorage.getItem('remainingSeat')))
+    // checkSeatCount && setSeatCount(JSON.parse(window.sessionStorage.getItem('seatCount')))
     checkCheckList &&
-      setCheckList(JSON.parse(window.localStorage.getItem('checkList')))
+      setCheckList(JSON.parse(window.sessionStorage.getItem('checkList')))
     checkSeatInfo &&
-      setSeatInfo(JSON.parse(window.localStorage.getItem('seatInfo')))
+      setSeatInfo(JSON.parse(window.sessionStorage.getItem('seatInfo')))
 
     // 將key轉回int(ID) 
     if (checkSeatCount) {
       console.log(seatInfo, 'sinfo')
-      let newSeatCount = JSON.parse(localStorage.getItem('seatCount'))
+      let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
       let keyArr = Object.keys(newSeatCount)
       let newObj = {}
       keyArr.forEach((v) => {
@@ -59,16 +59,17 @@ function Main(props) {
   }, [])
 
 
-  // 將state存入localstorage
+  // 將state存入sessionStorage
   useEffect(() => {
     if (didMount) {
-      window.localStorage.setItem(
+      
+      window.sessionStorage.setItem(
         'remainingSeat',
         JSON.stringify(remainingSeat)
       )
-      window.localStorage.setItem('checkList', JSON.stringify(checkList))
-      window.localStorage.setItem('seatCount', JSON.stringify(seatCount))
-      window.localStorage.setItem('seatInfo', JSON.stringify(seatInfo))
+      window.sessionStorage.setItem('checkList', JSON.stringify(checkList))
+      window.sessionStorage.setItem('seatCount', JSON.stringify(seatCount))
+      window.sessionStorage.setItem('seatInfo', JSON.stringify(seatInfo))
 
       // setSeatCount(newObj)
     }

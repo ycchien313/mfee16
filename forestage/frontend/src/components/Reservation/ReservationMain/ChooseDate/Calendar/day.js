@@ -42,13 +42,13 @@ function Day(props) {
 
   useEffect(() => {
     if (didMount) {
-      window.localStorage.setItem('activeDate', activeDate)
+      window.sessionStorage.setItem('activeDate', activeDate)
     }
   }, [activeDate])
 
   useEffect(() => {
     // 前頁返回時仍然選取該日期
-    let dateInStorage = localStorage.getItem('activeDate')
+    let dateInStorage = sessionStorage.getItem('activeDate')
     if (date === dateInStorage) {
       $(day.current).addClass('active')
       // console.log('same', date, dateInStorage)

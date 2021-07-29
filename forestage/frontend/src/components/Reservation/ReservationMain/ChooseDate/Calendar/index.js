@@ -18,16 +18,16 @@ function CalendarBig(props) {
       })
   }
 
-  const checkSingerCalendar = Boolean(localStorage.getItem('singerCalendar'))
+  const checkSingerCalendar = Boolean(sessionStorage.getItem('singerCalendar'))
 
   useEffect(() => {
     getSingerCalendar()
     checkSingerCalendar &&
-      setSingerCalendar(JSON.parse(localStorage.getItem('singerCalendar')))
+      setSingerCalendar(JSON.parse(sessionStorage.getItem('singerCalendar')))
   }, [])
 
   useEffect(() => {
-    window.localStorage.setItem(
+    window.sessionStorage.setItem(
       'singerCalendar',
       JSON.stringify(singerCalendar)
     )

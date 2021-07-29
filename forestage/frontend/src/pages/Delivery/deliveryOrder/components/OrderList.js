@@ -79,11 +79,7 @@ function OrderList(props) {
               >
                 <option disabled>請選擇折價卷</option>
                 {coupon.map((v, i) => {
-                  return (
-                    <option defaultValue={coupon[i].coupon_id}>
-                      {coupon[i].name}
-                    </option>
-                  )
+                  return <option>{coupon[i].name}</option>
                 })}
               </select>
               <div className="discount">

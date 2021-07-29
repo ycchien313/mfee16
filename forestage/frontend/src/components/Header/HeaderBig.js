@@ -89,7 +89,7 @@ function HeaderBig() {
                     <img
                       src="http://localhost:3000/images/header/shopping-cart-solid.png"
                       alt=""
-                      class="cart-image"
+                      className="cart-image"
                     />
                   </a>
                   <div className="header-circle"></div>

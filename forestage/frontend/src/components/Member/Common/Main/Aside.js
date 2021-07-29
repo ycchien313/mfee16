@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import '../../../../styles/member/aside.scss'
 
-function Aside() {
+function Aside(props) {
+  const { location, pagename } = props
+  console.log(location)
+  console.log(location.pathname)
   const [asideHeight, setAsideHeight] = useState('')
+  const linkData = [
+    { href: '/member/profile', title: '會員資料' },
+    { href: '/member/reservation', title: '我的訂位' },
+    { href: '/member/delivery', title: '外送訂單' },
+    { href: '/member/coupon', title: '優惠券' },
+  ]
 
   // 計算 Aside 高度
   const calcAsideHeight = () => {
@@ -98,74 +107,32 @@ function Aside() {
           {/* <!-- 電腦版導覽列--> */}
           <nav className="nav">
             <div className="nav-container">
-              <div className="nav-row">
-                <Link to="/member/profile" className="nav-content active">
-                  {/* <a href={''} className="active"> */}
-                  <img
-                    className="nav-icon"
-                    src={
-                      process.env.PUBLIC_URL +
-                      '/images/member/main-aside-icon.svg'
-                    }
-                    alt=""
-                  />
-                  <div className="nav-title-box">
-                    <h4 className="nav-title">會員資料</h4>
+              {linkData.map((v, i) => {
+                return (
+                  <div key={i} className="nav-row">
+                    <Link
+                      to={v.href}
+                      className={
+                        pagename === v.title
+                          ? 'nav-content active'
+                          : 'nav-content'
+                      }
+                    >
+                      <img
+                        className="nav-icon"
+                        src={
+                          process.env.PUBLIC_URL +
+                          '/images/member/main-aside-icon.svg'
+                        }
+                        alt=""
+                      />
+                      <div className="nav-title-box">
+                        <h4 className="nav-title">{v.title}</h4>
+                      </div>
+                    </Link>
                   </div>
-                  {/* </a> */}
-                </Link>
-              </div>
-              <div className="nav-row">
-                <Link to="/member/reservation" className="nav-content">
-                  {/* <a href={''}> */}
-                  <img
-                    className="nav-icon"
-                    src={
-                      process.env.PUBLIC_URL +
-                      '/images/member/main-aside-icon.svg'
-                    }
-                    alt=""
-                  />
-                  <div className="nav-title-box">
-                    <h4 className="nav-title">我的訂位</h4>
-                  </div>
-                  {/* </a> */}
-                </Link>
-              </div>
-              <div className="nav-row">
-                <Link to="/member/delivery" className="nav-content">
-                  {/* <a href={''}> */}
-                  <img
-                    className="nav-icon"
-                    src={
-                      process.env.PUBLIC_URL +
-                      '/images/member/main-aside-icon.svg'
-                    }
-                    alt=""
-                  />
-                  <div className="nav-title-box">
-                    <h4 className="nav-title">外送訂單</h4>
-                  </div>
-                  {/* </a> */}
-                </Link>
-              </div>
-              <div className="nav-row">
-                <Link to="/member/coupon" className="nav-content">
-                  {/* <a href={''}> */}
-                  <img
-                    className="nav-icon"
-                    src={
-                      process.env.PUBLIC_URL +
-                      '/images/member/main-aside-icon.svg'
-                    }
-                    alt=""
-                  />
-                  <div className="nav-title-box">
-                    <h4 className="nav-title">折價券</h4>
-                  </div>
-                  {/* </a> */}
-                </Link>
-              </div>
+                )
+              })}
             </div>
           </nav>
         </aside>
@@ -173,26 +140,21 @@ function Aside() {
         {/* <!-- 手機版導覽列--> */}
         <nav className="nav-md">
           <ul className="container-md">
-            <li>
-              <Link to="/member/profile" className="nav-content">
-                <h4 className="active">會員資料</h4>
-              </Link>
-            </li>
-            <li>
-              <Link to="/member/reservation" className="nav-content">
-                <h4>我的訂位</h4>
-              </Link>
-            </li>
-            <li>
-              <Link to="/member/delivery" className="nav-content">
-                <h4>外送訂單</h4>
-              </Link>
-            </li>
-            <li>
-              <Link to="/member/coupon" className="nav-content">
-                <h4>折價券</h4>
-              </Link>
-            </li>
+            {linkData.map((v, i) => {
+              return (
+                <>
+                  <li>
+                    <Link to={v.href} className="nav-content">
+                      <h4
+                        {...(pagename === v.title && { className: 'active' })}
+                      >
+                        {v.title}
+                      </h4>
+                    </Link>
+                  </li>
+                </>
+              )
+            })}
           </ul>
         </nav>
       </div>

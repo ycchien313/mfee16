@@ -3,15 +3,13 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../../../styles/member/aside.scss'
 
 function Aside(props) {
-  const { location, pagename } = props
-  console.log(location)
-  console.log(location.pathname)
+  const { pagename } = props
   const [asideHeight, setAsideHeight] = useState('')
   const linkData = [
     { href: '/member/profile', title: '會員資料' },
     { href: '/member/reservation', title: '我的訂位' },
     { href: '/member/delivery', title: '外送訂單' },
-    { href: '/member/coupon', title: '優惠券' },
+    { href: '/member/coupon', title: '折價券' },
   ]
 
   // 計算 Aside 高度

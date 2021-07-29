@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import axios from 'axios'
 
-function RecentReservation() {
+function RecentReservation(props) {
+  const { memberId } = props
+
+  // 取得訂位資料
+  const fetchMemberReservation = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/member/reservation/recent/${memberId}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      }
+    )
+    const data = response.data.data
+
+    let resData = []
+    data.forEach((v, i) => {
+      console.log(v)
+      resData = [...resData, v.reservation_id, v.date]
+    })
+  }
+
+  useEffect(() => {
+    // 取得後端資料
+    const fetchData = async () => {
+      await fetchMemberReservation()
+    }
+    fetchData()
+  })
+
   return (
     <>
       <div className="recent-content">

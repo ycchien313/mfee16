@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Aside from '../../Common/Main/Aside'
 import Breadcrumb from '../../Common/Main/Breadcrumb'
 import Tab from './Tab'
@@ -10,6 +11,35 @@ import '../../../../styles/member/reservation.scss'
 function Main(props) {
   const { pagename } = props
   const [isRecent, setIsRecent] = useState(true)
+  const [memberId, setMemberId] = useState('')
+
+  const token = localStorage.getItem('authToken')
+
+  //解 token，取 memberId
+  const fetchMemberId = async () => {
+    const response = await axios.get('http://localhost:3001/auth/me', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    const memberId = response.data.memberId
+
+    return { memberId: memberId }
+  }
+
+  useEffect(() => {
+    // 抓後端資料，並設定至狀態
+    const fetchData = async () => {
+      const { memberId } = await fetchMemberId()
+
+      setMemberId(memberId)
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <>
@@ -28,7 +58,11 @@ function Main(props) {
               <Tab isRecent={isRecent} setIsRecent={setIsRecent} />
 
               {/* 近期訂位、歷史紀錄 */}
-              {isRecent ? <RecentReservation /> : <HistoryReservation />}
+              {isRecent ? (
+                <RecentReservation memberId={memberId} />
+              ) : (
+                <HistoryReservation memberId={memberId} />
+              )}
             </div>
           </div>
         </main>

@@ -31,8 +31,7 @@ function Home() {
   // 登入狀態
   const [loginState, setLoginState] = useState(false)
   const [all, setAll] = useState({})
-  // name: '', price: 0, count: 0, img: ''
-  // item
+
   const [item, setItem] = useState([])
 
   let current = moment().format('MM/DD')

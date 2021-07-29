@@ -9,13 +9,13 @@ function Header(props) {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
-      <header>
+      {/* <header>
         {isTabletOrMobile ? (
           <HeaderSmall item={item} />
         ) : (
           <HeaderBig item={item} />
         )}
-      </header>
+      </header> */}
     </>
   )
 }

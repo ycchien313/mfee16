@@ -6,8 +6,67 @@ function Dish(props) {
   let { name, price, image_realistic, className, all, setAll, item, setItem } =
     props
   const [productState, setProductState] = useState()
-  const [ok, setOk] = useState(false)
   const [countState, setCountState] = useState(1)
+  const [localCart, setLocalCart] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [state, setState] = useState([])
+  // useEffect(() => {
+  //   let result = JSON.parse(localStorage.getItem('cart'))
+  //   localStorage.setItem('newCart', JSON.stringify(result))
+  // }, [])
+
+  // useEffect(() => {
+  //   if (item != false) {
+  //     localStorage.setItem('cart', JSON.stringify(item))
+  //   }
+  // }, [item])
+
+  useEffect(() => {
+    if (item.length > 0) {
+      let target = JSON.stringify(item)
+      // let getItemCart = JSON.parse(localStorage.getItem('cart'))
+      // let result = [getItemCart].push(target)
+      // console.log('result:', result)
+      // console.log('didUpdate:', getItemCart)
+      const { name, price, img, count } = item[0]
+      console.log('item[0]:', item[0])
+      let dishesCount = []
+      let newState = {}
+      console.log('state:', state)
+      // console.log(Object.values(state))
+      Object.values(state).forEach(function (value, index) {
+        let newCount = value.count
+
+        if (value.name === name) {
+          newCount = value.count + count
+          dishesCount.push(newCount)
+        }
+        newState = {
+          ...newState,
+          name: value.name,
+          price: value.price,
+          img: value.img,
+          count: newCount,
+        }
+      })
+      console.log(newState)
+      let stateClone = { ...state }
+      setState(stateClone)
+      console.log(stateClone)
+      localStorage.setItem('cart', JSON.stringify(stateClone))
+    }
+  }, [item])
+  useEffect(() => {
+    let getStorage = JSON.parse(localStorage.getItem('cart'))
+    if (getStorage != null) {
+      // Json轉陣列
+      // Object.keys(getStorage).map(function (_) {
+      //   return getStorage[_]
+      // })
+      console.log('didMount:', getStorage)
+      setState(getStorage)
+    }
+  }, [])
 
   function push() {
     let newObj = {}

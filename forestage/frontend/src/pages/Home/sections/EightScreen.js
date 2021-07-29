@@ -99,6 +99,7 @@ function EightScreen(props) {
       </div>
       <div className="delivery">
         <ul>
+          {console.log('targetDish:', targetDish)}
           {targetDish.length > 0 &&
             targetDish.map(function (value, index) {
               return (

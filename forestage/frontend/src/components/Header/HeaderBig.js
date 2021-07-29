@@ -7,6 +7,10 @@ function HeaderBig(props) {
   let { item } = props
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCountNum, setTotalCountNum] = useState(0)
+
+  let data = JSON.parse(localStorage.getItem('cart'))
+  console.log('data:', data)
+
   // 於item更新時執行計算總價及總數
   useEffect(() => {
     total()
@@ -142,8 +146,8 @@ function HeaderBig(props) {
       </div>
       <div className="cart-big disabled">
         <div className="cart-list">
-          {item.length > 0 &&
-            item.map(function (value, index) {
+          {/* {data.length > 0 &&
+            data.map(function (value, index) {
               return (
                 <HeaderBigCart
                   key={index}
@@ -153,10 +157,10 @@ function HeaderBig(props) {
                   img={value.img}
                 />
               )
-            })}
+            })} */}
         </div>
         <div className="cart-submit">
-          <h4 class="cart-total">合計: ${totalPrice}</h4>
+          {/* <h4 class="cart-total">合計: ${totalPrice}</h4> */}
           <button className="button-orange">下一步</button>
         </div>
       </div>

@@ -6,7 +6,7 @@ const db = require('../utils/db')
 
 require('dotenv').config();
 const mailgun = require("mailgun-js");
-const DOMAIN = "sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org";
+const DOMAIN = "sandboxd434801e3d8446a8946d9b7075271e58.mailgun.org";
 const mg = mailgun({apiKey:process.env.MG_KEY, domain: DOMAIN});
 
 
@@ -46,6 +46,7 @@ router.get('/checkout/memberInfo', async(req, res)=>{
 
 router.post('/checkout/send', async(req, res)=>{
     let insertResData = req.body.insertResData
+    // console.log(insertResData)
     insertResData = Object.values(insertResData)
     let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
     let reservation = await db.connection.queryAsync(insertReservationSql,[insertResData])
@@ -79,25 +80,139 @@ router.post('/checkout/send', async(req, res)=>{
     let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
     let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
     console.log(updateMCM)
-        // mailgun確認信
-        const mailBody = {
-            from: "Mailgun Sandbox <postmaster@sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org>",
-            to: "huiyu.lee580@gmail.com",
-            subject: "謝謝您的訂位",
-            text: "Testing some Mailgun awesomness!"
-        };
-        mg.messages().send(mailBody, function (error, body) {
-        console.log(body);
-    });
+
+
+    let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
+    // [req.body.insertResData.member_id]
+    let memberInfo = await db.connection.queryAsync(getMemberInfo,1)
+    console.log(memberInfo[0].name)
+    let memberEmail = memberInfo[0].email
+    
 
     // mailgun確認信
-    const data = {
-        from: "Mailgun Sandbox <postmaster@sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org>",
-        to: "huiyu.lee580@gmail.com",
+    const mailBody = {
+        from: "Elfin Restaurant <restaurant.elfin@gmail.com>",
+        to: `${memberEmail}`,
         subject: "謝謝您的訂位",
-        text: "Testing some Mailgun awesomness!"
+        html: `
+        <!DOCTYPE html>
+            <html  style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+            <head>
+            <meta name="viewport" content="width=device-width" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <style type="text/css">
+            body {
+            margin: 0;
+            padding: 0;
+            }
+            img {
+            border: 0 !important;
+            outline: none !important;
+            }
+            p {
+            Margin: 0px !important;
+            Padding: 0px !important;
+            }
+            table {
+            border-collapse: collapse;
+            mso-table-lspace: 0px;
+            mso-table-rspace: 0px;
+            }
+            td, a, span {
+            border-collapse: collapse;
+            mso-line-height-rule: exactly;
+            }
+            </style>
+
+            </head>
+            <body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" align="center"  bgcolor="#efefef">
+                <tr>
+                <td align="center" valign="top"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
+                    <tr>
+                        <td align="center" valign="top" style="padding:0 25px;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td height="26" style="height:26px;" class="em_h20">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top"><a href="#" target="_blank" style="text-decoration:none; font-size:24px; color:#a1957d; font-weight:700;">Elfin 音樂餐廳</td>
+                        </tr>
+                        <tr>
+                            <td height="28" style="height:28px;" class="em_h20">&nbsp;</td>
+                        </tr>
+                        </table>
+                        </td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" align="center" bgcolor="#efefef">
+                <tr>
+                <td align="center" valign="top" class="em_aside5"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
+                    <tr>
+                        <td align="center" valign="top" style="padding:0 25px; background-color:#ffffff;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td height="25" style="height:25px;" class="em_h10">&nbsp;</td>
+                        </tr>
+                                    <tr>
+                            <td height="22" style="height:22px;" class="em_h20">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#5e7c60; font-weight:bold;">您預訂了${insertResData.date} 的音樂表演</td>
+                        </tr>
+                        <tr>
+                            <td height="15" style="height:15px; font-size:0px; line-height:0px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 22px; color:#434343;">線上訂位成功，預約人數：一共 ${insertResData.attendance} 人，總金額為${insertResData.total}，誠摯歡迎您的光臨</td>
+                        </tr>
+                        <tr>
+                            <td height="15" style="height:15px; font-size:1px; line-height:1px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 22px; color:#434343;"><span>桃園市中壢區中央路100號</span> <span class="em_hide2">&nbsp;|&nbsp;</span><span class="em_mob_block"></span>Email:restaurant.elfin@gmail.com</td>
+                        </tr>
+                        <tr>
+                            <td height="20" style="height:20px; font-size:1px; line-height:1px;">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top"><table width="145" style="width:145px; background-color:#6bafb2; border-radius:4px;" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#6bafb2">
+                            <tr>
+                                <td class="em_white" height="42" align="center" valign="middle" style="font-family: Arial, sans-serif; font-size: 16px; color:#ffffff; font-weight:bold; height:42px;"><a href="https://www.mailgun.com" target="_blank" style="text-decoration:none; color:#ffffff; line-height:42px; display:block;">查看訂單</a></td>
+                            </tr>
+                            </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td height="40" style="height:40px;" class="em_h10">&nbsp;</td>
+                        </tr>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="em_full_wrap" align="center" bgcolor="#efefef">
+                <tr>
+                <td align="center" valign="top"><table align="center" width="650" border="0" cellspacing="0" cellpadding="0" class="em_main_table" style="width:650px; table-layout:fixed;">
+                    <tr>
+                        <td align="center" valign="top" style="padding:0 25px;" class="em_aside10"><table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td height="40" style="height:40px;" class="em_h20">&nbsp;</td>
+                        </tr>
+                    <tr>
+                        <td class="em_hide" style="line-height:1px;min-width:650px;background-color:#efefef;"><img alt="" src="/assets/pilot/images/templates/spacer.gif" height="1" width="650" style="max-height:1px; min-height:1px; display:block; width:650px; min-width:650px;" border="0" /></td>
+                    </tr>
+                    </table>
+                </td>
+                </tr>
+            </table>
+            </body>
+            </html>
+        `
     };
-    mg.messages().send(data, function (error, body) {
+    
+    mg.messages().send(mailBody, function (error, body) {
 	console.log(body);
 });
 

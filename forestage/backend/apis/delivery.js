@@ -26,15 +26,22 @@ router.get("/dish/",async function(req,res,next){
     res.send(queryresult)
 } )
 
-router.get("/coupon/",async function(req,res,next){
+router.get("/coupon/:id",async function(req,res,next){
     // 先設定 = 1
-    let queryresult = await db.connection.queryAsync('SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = 1 AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0')
+    let queryresult = await db.connection.queryAsync('SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0',req.params.id)
     res.send(queryresult)
 } )
 
-router.get("/member/",async function(req,res,next){
+router.get("/member/:id",async function(req,res,next){
     // 先設定 = 1
-    let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = 1")
+    let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = ?",req.params.id)
+    res.send(queryresult)
+} )
+// 
+
+router.post("/order",async function(req,res,next){
+    // 先設定 = 1
+    let queryresult = await db.connection.queryAsync("INSERT deliery VALUES")
     res.send(queryresult)
 } )
 

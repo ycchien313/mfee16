@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import $ from 'jquery'
 
 function Order(props) {
   const {
@@ -10,13 +11,43 @@ function Order(props) {
     textArea,
     setTextArea,
     orderAll,
+    member,
+    inputMember,
+    memberId,
   } = props
+
+  const [allAddress, setAllAddress] = useState('')
+  const [memberData, setMemberData] = useState([])
+
+  function getData() {
+    $.ajax({
+      url: `http://localhost:3001/delivery/member/${memberId}`,
+      method: 'GET',
+      dataType: 'json',
+    }).then(function (result) {
+      setInputTel(result[0].mobile)
+      setInputText(result[0].name)
+    })
+  }
+  useEffect(() => {
+    setAllAddress(
+      orderAll.address.city + orderAll.address.dist + orderAll.address.road
+    )
+  }, [])
+
   return (
     <>
       <div className="res-person">
         <div className="head">
           <h3>訂位人資料</h3>
-          <button>同會員資料</button>
+          <button
+            value={member}
+            onClick={(e) => {
+              getData()
+            }}
+          >
+            同會員資料
+          </button>
         </div>
         <hr />
         <div className="content">
@@ -35,7 +66,7 @@ function Order(props) {
           <div className="detail">
             <input
               type="text"
-              placeholder="羅大奕"
+              placeholder="請輸入姓名"
               value={inputText}
               onChange={(event) => {
                 setInputText(event.target.value)
@@ -43,7 +74,7 @@ function Order(props) {
             />
             <input
               type="text"
-              placeholder="0912345678"
+              placeholder="請輸入電話"
               value={inputTel}
               onChange={(event) => {
                 setInputTel(event.target.value)
@@ -53,7 +84,7 @@ function Order(props) {
               type="text"
               className="add"
               placeholder="桃園市中壢區中央路100號"
-              value={inputAdd}
+              defaultValue={allAddress}
               disabled
             />
             <textarea
@@ -61,7 +92,7 @@ function Order(props) {
               id=""
               cols="30"
               rows="10"
-              placeholder="餐點放在門口就好"
+              placeholder="範例: 餐點放在門口就好，謝謝"
               value={textArea}
               onChange={(event) => {
                 setTextArea(event.target.value)

@@ -9,14 +9,13 @@ function DeliveryOrder(props) {
   const [inputTel, setInputTel] = useState('')
   const [textArea, setTextArea] = useState('')
   const [inputAdd, setInputAdd] = useState('')
-  const { orderAll } = props
-  // console.log(orderAll, 'props')
+  const { orderAll, memberId } = props
   const [coupon, inputCoupon] = useState([])
-  // console.log(coupon, '123')
+  const [member, inputMember] = useState([])
 
   useEffect(() => {
     $.ajax({
-      url: 'http://localhost:3001/delivery/coupon',
+      url: `http://localhost:3001/delivery/coupon/${memberId}`,
       method: 'GET',
       dataType: 'json',
     })
@@ -26,6 +25,27 @@ function DeliveryOrder(props) {
       .catch(function (err) {
         console.log(err)
       })
+  }, [])
+  useEffect(() => {
+    $.ajax({
+      url: `http://localhost:3001/delivery/member/${memberId}`,
+      method: 'GET',
+      dataType: 'json',
+    })
+      .then(function (result) {
+        inputMember(result)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  }, [])
+
+  useEffect(() => {
+    $.ajax({
+      url: 'http://localhost:3001/delivery//order',
+      method: 'POST',
+      dataType: 'json',
+    })
   }, [])
 
   return (
@@ -79,7 +99,9 @@ function DeliveryOrder(props) {
               textArea={textArea}
               setTextArea={setTextArea}
               orderAll={orderAll}
-
+              member={member}
+              inputMember={inputMember}
+              memberId={memberId}
             />
             <div className="check">
               <span className="info-text">

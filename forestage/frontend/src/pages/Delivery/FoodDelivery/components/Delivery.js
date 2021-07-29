@@ -7,6 +7,7 @@ import Takeout from './Takeout'
 import Map from './Map'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
+import Swal from 'sweetalert2'
 
 function Delivery(props) {
   const [time, setTime] = useState('')
@@ -27,10 +28,11 @@ function Delivery(props) {
   })
 
   const [img, setImg] = useState([])
-  //
-  const [allAddress, setAllAddress] = useState('')
   // 免運
   const [addFee, setFee] = useState('')
+  const [subTotal, setSubTotal] = useState([])
+  const [name, setName] = useState([])
+
   const getDishes = () => {
     $.ajax({
       url: 'http://localhost:3001/delivery/dish',
@@ -57,8 +59,6 @@ function Delivery(props) {
 
   useEffect(() => {
     getDishes()
-
-    setAllAddress(address.city + address.dist + address.road)
 
     $.ajax({
       url: 'http://localhost:3001/delivery/dish/main',
@@ -246,13 +246,24 @@ function Delivery(props) {
             setImg={setImg}
             address={address}
             fulltime={fulltime}
+            subTotal={subTotal}
+            setSubTotal={setSubTotal}
+            name={name}
+            setName={setName}
           />
         </div>
         <div className="mobile-out">
           <Link
             to={{
-              pathname: '/',
-              state: {},
+              pathname: '/delivery/deliveryOrder',
+              state: {
+                img: img,
+                name: name,
+                subTotal: subTotal,
+                counts: counts,
+                address: address,
+                fulltime: fulltime,
+              },
             }}
           >
             <input
@@ -260,6 +271,13 @@ function Delivery(props) {
               defaultValue="送出訂單"
               className="OrderGet mobile-order-get"
               field=""
+              onClick={function () {
+                Swal.fire(
+                  '外送訂餐選擇成功',
+                  '跳轉至外送確認頁面...',
+                  'success'
+                )
+              }}
             />
           </Link>
         </div>

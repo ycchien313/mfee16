@@ -9,10 +9,16 @@ function OrderList(props) {
 
   useEffect(() => {
     if (coupon.length > 0) {
-      let newItem = coupon.filter(function (v) {
+      let newItem = coupon.find(function (v) {
         return v.name == couponName
       })
-      setCouponPrice(newItem[0].discount)
+      console.log(newItem,'newitem')
+      if(newItem){
+
+        setCouponPrice(newItem.discount)
+      }else{
+        setCouponPrice(0)
+      }
     }
   }, [couponName])
 
@@ -77,7 +83,7 @@ function OrderList(props) {
                   setCouponName(e.target.value)
                 }}
               >
-                <option disabled>請選擇折價卷</option>
+                <option>請選擇折價卷</option>
                 {coupon.map((v, i) => {
                   return <option>{coupon[i].name}</option>
                 })}

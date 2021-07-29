@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 function Aside(props) {
   const {
@@ -13,9 +14,13 @@ function Aside(props) {
     setImg,
     address,
     fulltime,
+    subTotal,
+    setSubTotal,
+    name,
+    setName,
   } = props
-  const [name, setName] = useState([])
-  const [subTotal, setSubTotal] = useState([])
+  // const [name, setName] = useState([])
+  // const [subTotal, setSubTotal] = useState([])
   const [counts, setCounts] = useState([])
   // 計算總金額
   const total = () => {
@@ -109,12 +114,37 @@ function Aside(props) {
               },
             }}
           >
-            <input
-              type="button"
-              defaultValue="送出訂單"
-              className="OrderGet"
-              field=""
-            />
+            {(counts.length === 0) | (address.dist === '') ? (
+              <input
+                type="button"
+                defaultValue="送出訂單"
+                className="OrderGet"
+                field=""
+                onClick={function () {
+                  Swal.fire(
+                    '外送訂餐選擇成功',
+                    '跳轉至外送確認頁面...',
+                    'success'
+                  )
+                }}
+                disabled
+              />
+            ) : (
+              <input
+                type="button"
+                defaultValue="送出訂單"
+                className="OrderGet"
+                field=""
+                onClick={function () {
+                  Swal.fire(
+                    '外送訂餐選擇成功',
+                    '跳轉至外送確認頁面...',
+                    'success'
+                  )
+                  console.log(localStorage.getItem('authToken'))
+                }}
+              />
+            )}
           </Link>
         </div>
       </aside>

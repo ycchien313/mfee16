@@ -24,14 +24,14 @@ function CheckoutPage(props) {
     status: '未完成',
   })
 
-  const checkInsertResData = Boolean(localStorage.getItem('insertResData'))
+  const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))
 
   useEffect(() => {
     setDidMount(true)
     setDishList(props.location.state.dishList)
     setCheckList(props.location.state.checkList)
     checkInsertResData &&
-      setInsertResData(JSON.parse(window.localStorage.getItem('insertResData')))
+      setInsertResData(JSON.parse(window.sessionStorage.getItem('insertResData')))
     
   }, [])
 
@@ -47,16 +47,16 @@ function CheckoutPage(props) {
     }
   }, [checkList])
 
-  // 將insertResData存入localstorage
+  // 將insertResData存入sessionStorage
   useEffect(() => {
-    window.localStorage.setItem('insertResData', JSON.stringify(insertResData))
+    window.sessionStorage.setItem('insertResData', JSON.stringify(insertResData))
   }, [insertResData])
-  // 視窗關閉時移除localstorage
+  // 視窗關閉時移除sessionStorage
   // useEffect(() => {
   //   window.addEventListener(
   //     'beforeunload',
   //     function () {
-  //       localStorage.removeItem(
+  //       sessionStorage.removeItem(
   //         'dishCount',
   //         'seatInfo',
   //         'seatCount',
@@ -73,8 +73,8 @@ function CheckoutPage(props) {
 
   //   return () => {
   //     window.onbeforeunload = function () {
-  //       // localStorage.clear()
-  //       localStorage.removeItem(
+  //       // sessionStorage.clear()
+  //       sessionStorage.removeItem(
   //         'dishCount',
   //         'seatInfo',
   //         'seatCount',

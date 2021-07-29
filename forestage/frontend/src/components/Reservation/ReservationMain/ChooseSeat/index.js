@@ -16,17 +16,17 @@ function ChooseSeat(props) {
   const [attendance, setAttendance] = useState({})
 
   const barInfo = useRef(null)
-  // 判斷localstorage中是否有此資料
-  const checkAttendance = Boolean(localStorage.getItem('attendance'))
+  // 判斷sessionStorage中是否有此資料
+  const checkAttendance = Boolean(sessionStorage.getItem('attendance'))
 
   useEffect(() => {
     if (didMount) {
-      window.localStorage.setItem('attendance', JSON.stringify(attendance))
+      window.sessionStorage.setItem('attendance', JSON.stringify(attendance))
     }
   }, [attendance])
 
   useEffect(() => {
-    // 若localstorage內沒有訂位人數資料，則指定各區人數為0
+    // 若sessionStorage內沒有訂位人數資料，則指定各區人數為0
     if (checkAttendance === false) {
       let newAttendance = { ...attendance }
       newAttendance[1] = 0
@@ -34,8 +34,8 @@ function ChooseSeat(props) {
       newAttendance[3] = 0
       setAttendance(newAttendance)
     } else {
-      // 若localstorage中有訂位人數資料，則帶入state中
-      let newAttendance = JSON.parse(localStorage.getItem('attendance'))
+      // 若sessionStorage中有訂位人數資料，則帶入state中
+      let newAttendance = JSON.parse(sessionStorage.getItem('attendance'))
       let keyArr = Object.keys(newAttendance)
       let newObj = {}
       keyArr.forEach((v) => {

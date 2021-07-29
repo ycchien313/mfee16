@@ -37,12 +37,12 @@ function DishContent(props) {
     }
   }
 
-  let checkMcmId = Boolean(window.localStorage.getItem('insertResData'))
+  let checkMcmId = Boolean(window.sessionStorage.getItem('insertResData'))
 
   let mcmIdInStorage = 0
   if (checkMcmId) {
     mcmIdInStorage = JSON.parse(
-      window.localStorage.getItem('insertResData')
+      window.sessionStorage.getItem('insertResData')
     ).mcm_id
   }
 

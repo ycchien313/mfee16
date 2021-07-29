@@ -7,19 +7,19 @@ import '../../styles/reservation/res/reservation.scss'
 // import Footer from '../../components/Footer'
 
 function ReservationPage(props) {
-  // 視窗關閉時移除localstorage
+  // 視窗關閉時移除sessionStorage
   useEffect(() => {
     window.addEventListener(
       'beforeunload',
       function (event) {
-        localStorage.clear();
+        sessionStorage.clear();
       },
       false
     )
 
     return () => {
       window.onbeforeunload = function () {
-        localStorage.clear()
+        sessionStorage.clear()
       }
     }
   }, [])

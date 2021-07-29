@@ -23,21 +23,21 @@ function MealsBig(props) {
   const [dishCount, setDishCount] = useState({})
 
   // 檢查storage是否有此筆資料
-  const checkDishCount = Boolean(window.localStorage.getItem('dishCount'))
+  const checkDishCount = Boolean(window.sessionStorage.getItem('dishCount'))
 
   useEffect(() => {
     if (didMount) {
-      window.localStorage.setItem('dishCount', JSON.stringify(dishCount))
+      window.sessionStorage.setItem('dishCount', JSON.stringify(dishCount))
     }
 
-    // const storageDishCount = JSON.parse(localStorage.getItem(dishCount))
+    // const storageDishCount = JSON.parse(sessionStorage.getItem(dishCount))
     // console.log('storage', storageDishCount)
   }, [dishCount])
 
   useEffect(() => {
     setDidMount(true)
-    // setDishCount(JSON.parse(localStorage.getItem('dishCount')))
-    // let newdishCount = JSON.parse(localStorage.getItem('dishCount'))
+    // setDishCount(JSON.parse(sessionStorage.getItem('dishCount')))
+    // let newdishCount = JSON.parse(sessionStorage.getItem('dishCount'))
     // let keyArr = Object.keys(newdishCount)
     // let newObj = {}
     // keyArr.forEach((v) => {
@@ -57,7 +57,7 @@ function MealsBig(props) {
   // 建立餐點物件
   useEffect(() => {
     if (didMount) {
-      // 如果localstorage沒有dishCount時，建立餐點物件 key為dish_id value為0
+      // 如果sessionStorage沒有dishCount時，建立餐點物件 key為dish_id value為0
       if (checkDishCount === false) {
         let newDishCount = {}
         dishes.forEach((item) => {
@@ -65,8 +65,8 @@ function MealsBig(props) {
         })
         setDishCount(newDishCount)
       } else {
-        // 如果localstorage有dishCount，將localstorage餐點數量存入state
-        let newdishCount = JSON.parse(localStorage.getItem('dishCount'))
+        // 如果sessionStorage有dishCount，將sessionStorage餐點數量存入state
+        let newdishCount = JSON.parse(sessionStorage.getItem('dishCount'))
         let keyArr = Object.keys(newdishCount)
         let newObj = {}
         keyArr.forEach((v) => {

@@ -36,12 +36,15 @@ function Auth(props) {
       <div
         className="auth"
         onClick={(e) => {
-          // 關閉彈出視窗
-          e.target.className === 'auth' && setShowAuthModal(false)
-
-          // 會員專區則導回首頁
           const url = props.match.url
-          url === '/member' && history.push('/')
+
+          if (e.target.className === 'auth') {
+            // 關閉彈出視窗
+            setShowAuthModal(false)
+
+            // 會員專區則導回首頁
+            url === '/member' && history.push('/')
+          }
         }}
       >
         <SwitchTransition mode={'out-in'}>

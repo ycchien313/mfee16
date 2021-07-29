@@ -40,7 +40,7 @@ function PersonalInfo(props) {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     })
     const data = response.data

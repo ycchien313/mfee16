@@ -142,7 +142,7 @@ function AuthForm(props) {
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
-          serverRequest.defaults.headers.common['Authorization'] = token
+          serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
           // 關閉彈出視窗
@@ -179,7 +179,7 @@ function AuthForm(props) {
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
-          serverRequest.defaults.headers.common['Authorization'] = token
+          serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
 

@@ -142,17 +142,13 @@ function Aside(props) {
           <ul className="container-md">
             {linkData.map((v, i) => {
               return (
-                <>
-                  <li>
-                    <Link to={v.href} className="nav-content">
-                      <h4
-                        {...(pagename === v.title && { className: 'active' })}
-                      >
-                        {v.title}
-                      </h4>
-                    </Link>
-                  </li>
-                </>
+                <li key={i}>
+                  <Link to={v.href} className="nav-content">
+                    <h4 {...(pagename === v.title && { className: 'active' })}>
+                      {v.title}
+                    </h4>
+                  </Link>
+                </li>
               )
             })}
           </ul>

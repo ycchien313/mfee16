@@ -1,9 +1,20 @@
 import React from 'react'
+import Header from '../../Header/'
+import Banner from '../Common/Banner'
+import Main from './Main/'
+import Footer from '../../Footer/'
 
-function Reservation() {
+function Reservation(props) {
+  const { pagename } = props
+
+  document.title = pagename
+
   return (
     <>
-      <h1>123</h1>
+      <Header />
+      <Banner pagename={pagename} />
+      <Main pagename={pagename} />
+      <Footer />
     </>
   )
 }

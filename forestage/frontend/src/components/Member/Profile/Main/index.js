@@ -32,7 +32,6 @@ function Main(props) {
     }, 1000)
   }, [])
 
-
   const loading = (
     <>
       <div className="content-spinner">
@@ -50,7 +49,7 @@ function Main(props) {
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}
-            <Aside />
+            <Aside pagename={pagename} />
             {/* <!-- 右側：麵包屑、內容--> */}
             <div className="right-side">
               {/* <!-- 麵包屑 --> */}

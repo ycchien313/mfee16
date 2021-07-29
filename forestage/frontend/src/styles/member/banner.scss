@@ -1,16 +1,16 @@
 .banner {
   @import '../common/global.scss';
 
-  @keyframes slidein-hero-section {
-    0% {
-      transform: translateY(-100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  // @keyframes slidein-hero-section {
+  //   0% {
+  //     transform: translateY(-100%);
+  //     opacity: 0;
+  //   }
+  //   100% {
+  //     transform: translateY(0);
+  //     opacity: 1;
+  //   }
+  // }
 
   /********** 主視覺 **********/
   .hero-section {

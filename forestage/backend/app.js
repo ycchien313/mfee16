@@ -12,6 +12,10 @@ const db = require('./utils/db');
 const connection = db.connection;
 const cors = require('cors');
 const port = 3001;
+require('dotenv').config();
+
+// const fs = require('fs');
+// const https = require('https');
 
 // 加入 headers
 // app.use(function (req, res, next) {
@@ -36,10 +40,7 @@ const port = 3001;
 //     // Pass to next layer of middleware
 //     next();
 // });
-require('dotenv').config();
 
-// const fs = require('fs');
-// const https = require('https');
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

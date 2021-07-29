@@ -10,10 +10,6 @@ const reservationApi = require("./apis/reservation");
 const singerApi = require("./apis/singer");
 const db = require("./utils/db");
 const connection = db.connection;
-<<<<<<< HEAD
-const port = 3001;
-const cors = require("cors");
-=======
 const cors = require('cors');
 const port = 3001;
 
@@ -25,12 +21,10 @@ require('dotenv').config();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
->>>>>>> auth
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-<<<<<<< HEAD
 app.use(cors());
 app.use("/auth", authApi);
 app.use("/comment", commentApi);
@@ -41,13 +35,10 @@ app.use("/member", memberApi);
 app.use("/reservation", reservationApi);
 app.use("/singer", singerApi);
 
-app.get("/", (req, res) => {
-    res.send("");
-=======
+
 app.get('/', (req, res) => {
     console.log('URL:', req.url);
     res.status(200).json({ url: req.url });
->>>>>>> auth
 });
 
 // 404 錯誤

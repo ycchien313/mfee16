@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
 import $ from 'jquery'
 import HeaderBigCart from './HeaderBigCart'
+import HeaderAuth from './HeaderAuth'
 function HeaderBig(props) {
   let { item } = props
   const [totalPrice, setTotalPrice] = useState(0)
@@ -36,13 +36,6 @@ function HeaderBig(props) {
       $('.cart-big').toggleClass('disabled')
     })
   }, [])
-=======
-import React from 'react'
-import HeaderAuth from './HeaderAuth'
-import '../../styles/header/headerBig.scss'
-
-function HeaderBig() {
->>>>>>> auth
   return (
     <>
       <div className="main-header">

@@ -1,12 +1,14 @@
 @import '../common/global.scss';
 
 /* Index */
-body {
+.home {
   overflow-x: hidden;
+}
+.home::-webkit-scrollbar {
+  display: none;
 }
 @media screen and (max-width: 768px) {
   body {
-    overflow-x: hidden;
   }
 }
 // @font-face {
@@ -1506,7 +1508,41 @@ button {
     color: $secondary-green-dark;
     font-family: $zh-tw-maru;
   }
-
+  .dish-title {
+    // background: none;
+    border: none;
+    width: 150px;
+    height: 100px;
+    font-family: $zh-tw-noto;
+    display: flex;
+    justify-content: center;
+    opacity: 0.7;
+    align-items: center;
+    transition: 0.3s;
+  }
+  .dish-title.active {
+    opacity: 1;
+  }
+  .dish-title h4 {
+    padding-left: 10px;
+    color: #333;
+    margin: 0;
+  }
+  .dish-title.main {
+    background: url(http://localhost:3000/images/home/dish-main.svg) center
+      center no-repeat;
+    background-size: contain;
+  }
+  .dish-title.sub {
+    background: url(http://localhost:3000/images/home/dish-sub.svg) center
+      center no-repeat;
+    background-size: contain;
+  }
+  .dish-title.dessert {
+    background: url(http://localhost:3000/images/home/dish-dessert.svg) center
+      center no-repeat;
+    background-size: contain;
+  }
   .delivery {
     display: flex;
     flex-direction: column;
@@ -1643,7 +1679,6 @@ button {
     }
   }
   .change-dish-type {
-    border: 1px solid red;
     width: 85vw;
     margin: 0 auto;
   }

@@ -21,6 +21,11 @@ function EightScreen(props) {
       setTargetDish([result[0], result[1], result[2]])
       console.log('current State:', dishState)
     })
+
+    $('.dish-title').on('click', function () {
+      $(this).addClass('active')
+      $(this).closest('ul').siblings().find('.dish-title').removeClass('active')
+    })
   }, [])
   // 設定欲顯示之餐點
   useEffect(() => {
@@ -58,33 +63,36 @@ function EightScreen(props) {
   let content = (
     <div id="eighthScreen">
       <h2>外送訂餐</h2>
-      <div className="change-dish-type">
+      <div className="change-dish-type active">
         <ul>
           <li>
             <button
+              className="dish-title main active"
               onClick={() => {
                 setDishState('主餐')
               }}
             >
-              Main
+              <h4>主餐</h4>
             </button>
           </li>
           <li>
             <button
+              className="dish-title sub"
               onClick={() => {
                 setDishState('附餐')
               }}
             >
-              Sub
+              <h4>附餐</h4>
             </button>
           </li>
           <li>
             <button
+              className="dish-title dessert"
               onClick={() => {
                 setDishState('甜點')
               }}
             >
-              Dessert
+              <h4>甜點</h4>
             </button>
           </li>
         </ul>

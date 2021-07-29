@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-import Footer from '../../components/Footer/'
-
-function Member() {
-  return (
-    <>
-      <Footer />
-=======
 // import React, { useContext, useState } from 'react'
 // import Auth from '../../components/Auth/'
 // import AuthContext from '../../components/Auth/AuthContext'
@@ -43,7 +35,6 @@ function Member() {
           setShowAuthModal={setShowAuthModal}
         />
       )} */}
->>>>>>> auth
     </>
   )
 }

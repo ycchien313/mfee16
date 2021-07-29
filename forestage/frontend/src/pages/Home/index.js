@@ -50,6 +50,11 @@ function Home() {
       setSingerImg(result.picture)
       setSingetIntroduction(result.introduction)
     })
+    $('.home').on('click', function () {
+      $('.cart-big').addClass('disabled')
+      $('.cart-small').addClass('disabled')
+      $('.header-cart').removeClass('active')
+    })
   }, [])
 
   return (

@@ -5,7 +5,7 @@ import StyledLink from '../StyledLink'
 
 
 function CheckList(props) {
-  const { checkList, setCheckList, dishList, setDishList, seatInfo } = props
+  const { checkList, setCheckList, dishList, setDishList, seatInfo, setShowAuthModal, showAuthModal } = props
 
 
   let iconClass = 'fas fa-check-circle'
@@ -166,6 +166,7 @@ function CheckList(props) {
         />
         <StyledLink
           onClick={(e) => {
+            // setShowAuthModal(true)
             if (checkIfDataOk() === false) {
               e.preventDefault()
               fireAlert()
@@ -175,7 +176,6 @@ function CheckList(props) {
             pathname: '/reservation/checkout',
             state: { checkList, dishList },
           }}
-          // style={StyledLink}
         >
           <button class="pink-guide-button">
             送出訂位

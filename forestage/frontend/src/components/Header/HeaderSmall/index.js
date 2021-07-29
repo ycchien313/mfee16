@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../../styles/header/headerSmall.scss'
 import DownMenu from './DownMenu'
+import HeaderAuth from '../HeaderAuth'
 import { CSSTransition } from 'react-transition-group'
 import HeaderSmallCart from './HeaderSmallCart'
 import $ from 'jquery'
@@ -11,7 +12,7 @@ function HeaderSmall(props) {
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCount, setTotalCount] = useState(0)
   useEffect(() => {
-    $('.cart-div-small').on('click', function () {
+    $('.icon').on('click', function () {
       $('.cart-small').toggleClass('disabled')
     })
   }, [])
@@ -39,10 +40,8 @@ function HeaderSmall(props) {
         <div className="small-header">
           <div className="logo"></div>
           <div className="menu-right">
-            <a href="#/" className="h3">
-              登入
-            </a>
-            <div className="cart cart-div-small">
+            <HeaderAuth />
+            <div className="cart">
               <div className="icon"></div>
               <div className="circle">{totalCount}</div>
             </div>

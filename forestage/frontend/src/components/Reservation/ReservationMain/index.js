@@ -8,6 +8,7 @@ import CheckList from './CheckList'
 
 function Main(props) {
   // const { checkList, setCheckList } = props
+  const { showAuthModal, setShowAuthModal } = props
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
@@ -37,14 +38,16 @@ function Main(props) {
     })
 
     checkRemainingSeat &&
-      setRemainingSeat(JSON.parse(window.sessionStorage.getItem('remainingSeat')))
+      setRemainingSeat(
+        JSON.parse(window.sessionStorage.getItem('remainingSeat'))
+      )
     // checkSeatCount && setSeatCount(JSON.parse(window.sessionStorage.getItem('seatCount')))
     checkCheckList &&
       setCheckList(JSON.parse(window.sessionStorage.getItem('checkList')))
     checkSeatInfo &&
       setSeatInfo(JSON.parse(window.sessionStorage.getItem('seatInfo')))
 
-    // 將key轉回int(ID) 
+    // 將key轉回int(ID)
     if (checkSeatCount) {
       console.log(seatInfo, 'sinfo')
       let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
@@ -58,11 +61,9 @@ function Main(props) {
     }
   }, [])
 
-
   // 將state存入sessionStorage
   useEffect(() => {
     if (didMount) {
-      
       window.sessionStorage.setItem(
         'remainingSeat',
         JSON.stringify(remainingSeat)
@@ -74,8 +75,6 @@ function Main(props) {
       // setSeatCount(newObj)
     }
   }, [remainingSeat, seatCount, checkList, seatInfo])
-
-  
 
   // 計算各區剩餘座位數量
   useEffect(() => {
@@ -98,30 +97,6 @@ function Main(props) {
     }
   }, [remainingSeat])
 
-  let reservationInfo = [
-    '2021-07-31',
-    1,
-    2,
-    '王曉華',
-    '0912344455',
-    2000,
-    '我是測試用的備註',
-    1,
-    1,
-    '未完成',
-  ]
-  let [
-    date,
-    seat_id,
-    attendance,
-    name,
-    mobile,
-    total,
-    note,
-    member_id,
-    mcm_id,
-    stauts,
-  ] = reservationInfo
 
   return (
     <>
@@ -159,6 +134,8 @@ function Main(props) {
               dishList={dishList}
               setDishList={setDishList}
               seatInfo={seatInfo}
+              showAuthModal={showAuthModal}
+              setShowAuthModal={setShowAuthModal}
             />
           </aside>
         </div>

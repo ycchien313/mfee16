@@ -2,33 +2,34 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
 import $ from 'jquery'
 import HeaderBigCart from './HeaderBigCart'
+import HeaderAuth from './HeaderAuth'
 function HeaderBig(props) {
-  let { item } = props
+  // let { item } = props
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCountNum, setTotalCountNum] = useState(0)
   // 於item更新時執行計算總價及總數
-  useEffect(() => {
-    total()
-    totalCount()
-  }, [item])
+  // useEffect(() => {
+  //   total()
+  //   totalCount()
+  // }, [item])
   // 總價計算
-  function total() {
-    let total = 0
-    for (let i = 0; i < item.length; i++) {
-      total = total + item[i].price * item[i].count
-    }
-    console.log(total)
-    setTotalPrice(total)
-  }
-  // 總數計算
-  function totalCount() {
-    let totalCount = 0
-    for (let i = 0; i < item.length; i++) {
-      totalCount = totalCount + item[i].count
-    }
-    console.log(totalCount)
-    setTotalCountNum(totalCount)
-  }
+  // function total() {
+  //   let total = 0
+  //   for (let i = 0; i < item.length; i++) {
+  //     total = total + item[i].price * item[i].count
+  //   }
+  //   console.log(total)
+  //   setTotalPrice(total)
+  // }
+  // // 總數計算
+  // function totalCount() {
+  //   let totalCount = 0
+  //   for (let i = 0; i < item.length; i++) {
+  //     totalCount = totalCount + item[i].count
+  //   }
+  //   console.log(totalCount)
+  //   setTotalCountNum(totalCount)
+  // }
   useEffect(() => {
     $('.cart-div').on('click', function () {
       $(this).find('.header-cart').toggleClass('active')
@@ -127,15 +128,13 @@ function HeaderBig(props) {
                         class="cart-image"
                       />
                     </a>
-                    <div className="header-circle">{totalCountNum}</div>
+                    {/* <div className="header-circle">{totalCountNum}</div> */}
                   </li>
                 </div>
               </li>
 
               <li className="login">
-                <a href="#/" className="h4">
-                  登入
-                </a>
+                <HeaderAuth />
               </li>
             </ul>
           </nav>
@@ -143,7 +142,7 @@ function HeaderBig(props) {
       </div>
       <div className="cart-big disabled">
         <div className="cart-list">
-          {item.length > 0 &&
+          {/* {item.length > 0 &&
             item.map(function (value, index) {
               return (
                 <HeaderBigCart
@@ -154,10 +153,10 @@ function HeaderBig(props) {
                   img={value.img}
                 />
               )
-            })}
+            })} */}
         </div>
         <div className="cart-submit">
-          <h4 class="cart-total">合計: ${totalPrice}</h4>
+          {/* <h4 class="cart-total">合計: ${totalPrice}</h4> */}
           <button className="button-orange">下一步</button>
         </div>
       </div>

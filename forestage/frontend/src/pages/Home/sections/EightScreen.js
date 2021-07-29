@@ -24,7 +24,7 @@ function EightScreen(props) {
 
     $('.dish-title').on('click', function () {
       $(this).addClass('active')
-      $(this).closest('ul').siblings().find('.dish-title').removeClass('active')
+      $(this).closest('li').siblings().find('.dish-title').removeClass('active')
     })
   }, [])
   // 設定欲顯示之餐點

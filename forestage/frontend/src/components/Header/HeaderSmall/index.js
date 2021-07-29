@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../../styles/header/headerSmall.scss'
 import DownMenu from './DownMenu'
+import HeaderAuth from '../HeaderAuth'
 import { CSSTransition } from 'react-transition-group'
 import HeaderSmallCart from './HeaderSmallCart'
 import $ from 'jquery'
@@ -39,10 +40,15 @@ function HeaderSmall(props) {
         <div className="small-header">
           <div className="logo"></div>
           <div className="menu-right">
+<<<<<<< HEAD
             <a href="#/" className="h3">
               登入
             </a>
             <div className="cart cart-div-small">
+=======
+            <HeaderAuth />
+            <div className="cart">
+>>>>>>> auth
               <div className="icon"></div>
               <div className="circle">{totalCount}</div>
             </div>

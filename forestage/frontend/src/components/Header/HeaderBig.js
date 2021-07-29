@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
 import $ from 'jquery'
@@ -35,6 +36,13 @@ function HeaderBig(props) {
       $('.cart-big').toggleClass('disabled')
     })
   }, [])
+=======
+import React from 'react'
+import HeaderAuth from './HeaderAuth'
+import '../../styles/header/headerBig.scss'
+
+function HeaderBig() {
+>>>>>>> auth
   return (
     <>
       <div className="main-header">
@@ -133,9 +141,7 @@ function HeaderBig(props) {
               </li>
 
               <li className="login">
-                <a href="#/" className="h4">
-                  登入
-                </a>
+                <HeaderAuth />
               </li>
             </ul>
           </nav>

@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
+
+
+
+require('dotenv').config();
 const mailgun = require("mailgun-js");
 const DOMAIN = "sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org";
-const mg = mailgun({apiKey: "4fdffe07f3f410f87420d073647b15a4-a0cfb957-16715929", domain: DOMAIN});
-
+const mg = mailgun({apiKey:process.env.MG_KEY, domain: DOMAIN});
 
 
 
@@ -76,6 +79,16 @@ router.post('/checkout/send', async(req, res)=>{
     let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
     let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
     console.log(updateMCM)
+        // mailgun確認信
+        const mailBody = {
+            from: "Mailgun Sandbox <postmaster@sandbox4b719c10339c4ce2a86053aafec64a26.mailgun.org>",
+            to: "huiyu.lee580@gmail.com",
+            subject: "謝謝您的訂位",
+            text: "Testing some Mailgun awesomness!"
+        };
+        mg.messages().send(mailBody, function (error, body) {
+        console.log(body);
+    });
 
     // mailgun確認信
     const data = {

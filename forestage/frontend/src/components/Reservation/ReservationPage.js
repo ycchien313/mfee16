@@ -11,16 +11,15 @@ function ReservationPage(props) {
   useEffect(() => {
     window.addEventListener(
       'beforeunload',
-      function () {
-        localStorage.clear()
+      function (event) {
+        localStorage.clear();
       },
       false
     )
 
     return () => {
       window.onbeforeunload = function () {
-        // localStorage.clear()
-        localStorage.removeItem ('dishCount','seatInfo','seatCount','checkList','singerCalendar','attendance','remainingSeat','activeDate','insertResData')
+        localStorage.clear()
       }
     }
   }, [])

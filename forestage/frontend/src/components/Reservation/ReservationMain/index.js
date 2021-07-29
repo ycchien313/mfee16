@@ -62,6 +62,7 @@ function Main(props) {
   // 將state存入localstorage
   useEffect(() => {
     if (didMount) {
+      
       window.localStorage.setItem(
         'remainingSeat',
         JSON.stringify(remainingSeat)

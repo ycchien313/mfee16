@@ -9,30 +9,6 @@ import withReactContent from 'sweetalert2-react-content'
 
 function Main(props) {
   const { dishList, checkList, insertResData, setInsertResData } = props
-  // function insertReservation() {
-  //   axios({
-  //     method: 'post',
-  //     url: 'http://localhost:3001/reservation/checkout/send',
-  //     data: {
-  //       dishList,
-  //       insertResData,
-  //     },
-  //   })
-  // }
-
-  // const CheckDataSwal = withReactContent(Swal)
-
-  // function fireAlert() {
-  //   CheckDataSwal.fire({
-  //     title: '您的訂位已送出',
-  //     icon: 'success',
-  //     html: '<h5>請至信箱收取您的訂位確認信</h5><div style="display:flex; justify-content:center"><a href="/member/reservation" style="background:#f5b54d; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">檢視訂單</a><a href="/home" style="background:#97bc78; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">回首頁<a/></div>',
-  //     showConfirmButton: false,
-  //     allowEscapeKey: false,
-  //     allowOutsideClick:false,
-  //     didOpen: () => {},
-  //   })
-  // }
 
   return (
     <>
@@ -76,8 +52,8 @@ function Main(props) {
                     修改訂位
                   </button>
                 </StyledLink>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   form="resPersonForm"
                   className="pink-guide-button"
                   onClick={() => {

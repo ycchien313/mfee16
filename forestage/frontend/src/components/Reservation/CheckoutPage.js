@@ -10,6 +10,7 @@ function CheckoutPage(props) {
   // const { checkList, setCheckList, test } = props
   const [dishList, setDishList] = useState([])
   const [checkList, setCheckList] = useState({})
+  const [didMount, setDidMount] = useState(false)
   const [insertResData, setInsertResData] = useState({
     date: '',
     seat_id: 0,
@@ -26,16 +27,67 @@ function CheckoutPage(props) {
   const checkInsertResData = Boolean(localStorage.getItem('insertResData'))
 
   useEffect(() => {
+    setDidMount(true)
     setDishList(props.location.state.dishList)
     setCheckList(props.location.state.checkList)
     checkInsertResData &&
       setInsertResData(JSON.parse(window.localStorage.getItem('insertResData')))
+    
   }, [])
+
+  useEffect(() => {
+    // 將訂位頁資料帶入insert物件中，使用didMount避免帶入空的coupon id與備註
+    if (didMount) {
+      let newInsertResData = { ...insertResData }
+      newInsertResData.date = checkList.chosenDate
+      newInsertResData.seat_id = checkList.seatId
+      newInsertResData.attendance = checkList.attendance
+      newInsertResData.total = checkList.total
+      setInsertResData(newInsertResData)
+    }
+  }, [checkList])
 
   // 將insertResData存入localstorage
   useEffect(() => {
     window.localStorage.setItem('insertResData', JSON.stringify(insertResData))
   }, [insertResData])
+  // 視窗關閉時移除localstorage
+  // useEffect(() => {
+  //   window.addEventListener(
+  //     'beforeunload',
+  //     function () {
+  //       localStorage.removeItem(
+  //         'dishCount',
+  //         'seatInfo',
+  //         'seatCount',
+  //         'checkList',
+  //         'singerCalendar',
+  //         'attendance',
+  //         'remainingSeat',
+  //         'activeDate',
+  //         'insertResData'
+  //       )
+  //     },
+  //     false
+  //   )
+
+  //   return () => {
+  //     window.onbeforeunload = function () {
+  //       // localStorage.clear()
+  //       localStorage.removeItem(
+  //         'dishCount',
+  //         'seatInfo',
+  //         'seatCount',
+  //         'checkList',
+  //         'singerCalendar',
+  //         'attendance',
+  //         'remainingSeat',
+  //         'activeDate',
+  //         'insertResData'
+  //       )
+  //     }
+  //   }
+  // }, [])
   return (
     <>
       <Header />

@@ -46,7 +46,10 @@ router.get('/checkout/memberInfo', async(req, res)=>{
 
 router.post('/checkout/send', async(req, res)=>{
     let insertResData = req.body.insertResData
-    // console.log(insertResData)
+    console.log(insertResData)
+    let resDate = insertResData.date
+    let resTotal = insertResData.total
+    let resAttendance = insertResData.attendance
     insertResData = Object.values(insertResData)
     let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
     let reservation = await db.connection.queryAsync(insertReservationSql,[insertResData])
@@ -88,6 +91,7 @@ router.post('/checkout/send', async(req, res)=>{
     console.log(memberInfo[0].name)
     let memberEmail = memberInfo[0].email
     
+    console.log(memberInfo,"memberinfo")
 
     // mailgun確認信
     const mailBody = {
@@ -159,13 +163,13 @@ router.post('/checkout/send', async(req, res)=>{
                             <td height="22" style="height:22px;" class="em_h20">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#5e7c60; font-weight:bold;">您預訂了${insertResData.date} 的音樂表演</td>
+                            <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#5e7c60; font-weight:bold;">您預訂了${resDate} 的音樂表演</td>
                         </tr>
                         <tr>
                             <td height="15" style="height:15px; font-size:0px; line-height:0px;">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 22px; color:#434343;">線上訂位成功，預約人數：一共 ${insertResData.attendance} 人，總金額為${insertResData.total}，誠摯歡迎您的光臨</td>
+                            <td class="em_grey" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 22px; color:#434343;">線上訂位成功，預約人數：一共 ${resAttendance} 人，總金額為${resTotal}，誠摯歡迎您的光臨</td>
                         </tr>
                         <tr>
                             <td height="15" style="height:15px; font-size:1px; line-height:1px;">&nbsp;</td>

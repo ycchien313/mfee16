@@ -70,8 +70,6 @@
   @media screen and (max-width: 1000px) {
     .tab-container {
       width: 210px;
-      // height: 40px;
-      // line-height: 40px;
     }
   }
   @media screen and (max-width: 768px) {
@@ -184,6 +182,7 @@
   .content-table thead {
     color: $secondary-green-dark;
     border-bottom: 1px solid $primary-lightbrown;
+    text-align: center;
   }
   .content-table th {
     padding-bottom: 5px;

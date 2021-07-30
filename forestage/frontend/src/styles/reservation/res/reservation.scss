@@ -789,16 +789,16 @@
       right: 6vw;
     }
   }
-
+}
 
   @media screen and (max-width: 768px) {
-    .table-bg {
+    .reservation.table-bg {
       display: none;
     }
   }
 
   /* 側邊總覽 */
-
+.reservation{
   .aside-list {
     /* width: 300px; */
     /* background-color:palevioletred; */
@@ -926,9 +926,16 @@
       left: calc(9.45vw - 75px);
     }
   }
+
+
+  // 做到這裡
   @media screen and (max-width: 768px) {
     .aside-list {
-      display: none;
+      position: fixed;
+      font-size: 2rem;
+      top:0;
+      width: calc(100% - 60px);
+      z-index: 5;
     }
   }
 

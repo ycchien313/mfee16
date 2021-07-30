@@ -1,6 +1,45 @@
-import React from 'react'
-import '../../../../../styles/reservation/res/reservation-meal-RWD.scss'
-function MealsSmall() {
+import React, { useEffect, useState } from 'react'
+import MealCard from '../MealsBig/MealCard'
+
+function MealsSmall(props) {
+  const {
+    dishes,
+    showDishes,
+    setShowDishes,
+    checkList,
+    setCheckList,
+    dishCount,
+    setDishCount,
+  } = props
+  const [didMount, setDidMount] = useState(false)
+
+  useEffect(() => {
+    setDidMount(true)
+  }, [])
+  // 計算subtotal
+  function getSubtotal(dishId) {
+    let subtotal = 0
+    let dish = dishes.find((item) => {
+      return item.dish_id === dishId
+    })
+    subtotal = dish.price * dishCount[dishId]
+    return subtotal
+  }
+
+  // 更新checkList的目前金額
+  useEffect(() => {
+    if (didMount) {
+      let dishIdArr = Object.keys(dishCount)
+      let total = 0
+      dishIdArr.forEach((dishId) => {
+        dishId = parseInt(dishId)
+        total += getSubtotal(dishId)
+      })
+      let newObj = { ...checkList }
+      newObj.total = total
+      setCheckList(newObj)
+    }
+  }, [dishCount, setDishCount])
   return (
     <>
       <div className="category-group">
@@ -14,38 +53,30 @@ function MealsSmall() {
       </div>
       <div className="wrapper">
         <div className="cards">
-          <div className="card maindish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card maindish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card maindish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
+          {dishes.map((v, i) => {
+            if (v.type === '主餐') {
+              return (
+                <MealCard
+                  key={v.dish_id}
+                  index={i}
+                  id={v.dish_id}
+                  imgIllu={v.image_illustration}
+                  imgReal={v.image_realistic}
+                  name={v.name}
+                  type={v.type}
+                  dishCount={dishCount}
+                  setDishCount={setDishCount}
+                  checkList={checkList}
+                  setCheckList={setCheckList}
+                />
+              )
+            }
+          })}
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">3000</span> 元&nbsp;&nbsp;目前金額：
-        <span className="total">600</span> 元
+        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        <span className="total">{checkList.total}</span> 元
       </p>
       <div className="category-group">
         <div className="category">
@@ -58,38 +89,30 @@ function MealsSmall() {
       </div>
       <div className="wrapper">
         <div className="cards">
-          <div className="card sidedish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card sidedish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card sidedish">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
+        {dishes.map((v, i) => {
+            if (v.type === '附餐') {
+              return (
+                <MealCard
+                  key={v.dish_id}
+                  index={i}
+                  id={v.dish_id}
+                  imgIllu={v.image_illustration}
+                  imgReal={v.image_realistic}
+                  name={v.name}
+                  type={v.type}
+                  dishCount={dishCount}
+                  setDishCount={setDishCount}
+                  checkList={checkList}
+                  setCheckList={setCheckList}
+                />
+              )
+            }
+          })}
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">3000</span> 元&nbsp;&nbsp;目前金額：
-        <span className="total">600</span> 元
+        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        <span className="total">{checkList.total}</span> 元
       </p>
       <div className="category-group">
         <div className="category">
@@ -102,38 +125,30 @@ function MealsSmall() {
       </div>
       <div className="wrapper">
         <div className="cards">
-          <div className="card dessert">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card dessert">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
-          <div className="card dessert">
-            <div className="card-image"></div>
-            <div className="button-group">
-              <div className="minus-button"></div>
-              <input type="number" min="0" value="0" />
-              <div className="plus-button"></div>
-            </div>
-            <span>瑪格莉特大披薩</span>
-          </div>
+        {dishes.map((v, i) => {
+            if (v.type === '甜點') {
+              return (
+                <MealCard
+                  key={v.dish_id}
+                  index={i}
+                  id={v.dish_id}
+                  imgIllu={v.image_illustration}
+                  imgReal={v.image_realistic}
+                  name={v.name}
+                  type={v.type}
+                  dishCount={dishCount}
+                  setDishCount={setDishCount}
+                  checkList={checkList}
+                  setCheckList={setCheckList}
+                />
+              )
+            }
+          })}
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">3000</span> 元&nbsp;&nbsp;目前金額：
-        <span className="total">600</span> 元
+        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        <span className="total">{checkList.total}</span> 元
       </p>
     </>
   )

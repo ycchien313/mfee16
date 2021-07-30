@@ -7,6 +7,7 @@ function Day(props) {
     date,
     picture,
     name,
+    remainingSeat,
     setRemainingSeat,
     setCheckList,
     checkList,
@@ -63,21 +64,24 @@ function Day(props) {
 
   return (
     <>
-      <div className="day" ref={day}>
-        <span className="h4 date">{newDate}</span>
+      <div
+        className="day "
+        ref={day}
+        onClick={() => {
+          getRemainingSeat()
+          updateCheckList(date, name)
+          setActiveDate(date)
+        }}
+      >
         <div
           className="singer-pic"
           style={{
             background: `url(http://localhost:3000/images/common/${picture}), no-repeat center`,
             backgroundSize: 'cover',
           }}
-          onClick={() => {
-            getRemainingSeat()
-            updateCheckList(date, name)
-            setActiveDate(date)
-          }}
         ></div>
         <span className="h4 name">{name}</span>
+        <span className="h4 date">{newDate}</span>
       </div>
     </>
   )

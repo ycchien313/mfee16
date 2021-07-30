@@ -17,12 +17,6 @@ import moment from 'moment'
 import Header from '../../components/Header'
 
 function Home() {
-  // 購物車使用
-  const [cartName, setCartName] = useState([])
-  const [cartPrice, setCartPrice] = useState([])
-  const [cartCount, setCartCount] = useState([])
-  const [cartImg, setCartImg] = useState([])
-
   // 當天歌手資訊
   const [singerName, setSingerName] = useState()
   const [singerImg, setSingerImg] = useState()
@@ -31,10 +25,10 @@ function Home() {
   // 登入狀態
   const [loginState, setLoginState] = useState(false)
   const [all, setAll] = useState({})
-
+  const [cart, setCart] = useState([])
   const [item, setItem] = useState([])
-
   let current = moment().format('MM/DD')
+  const [loading, setLoading] = useState(false)
   // ComponentDidmount
   useEffect(() => {
     // 取得當天表演者資訊
@@ -56,7 +50,7 @@ function Home() {
 
   return (
     <>
-      <Header item={item} />
+      <Header item={item} setItem={setItem} />
       <div className="home">
         <FirstScreen
           singerName={singerName}

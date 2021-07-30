@@ -4,23 +4,20 @@ import $ from 'jquery'
 import HeaderBigCart from './HeaderBigCart'
 import HeaderAuth from './HeaderAuth'
 function HeaderBig(props) {
-  let { item } = props
+  let { cartList } = props
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCountNum, setTotalCountNum] = useState(0)
 
-  let data = JSON.parse(localStorage.getItem('cart'))
-  console.log('data:', data)
-
-  // 於item更新時執行計算總價及總數
+  // 於父母給予新資料時更新時執行計算總價及總數
   useEffect(() => {
     total()
     totalCount()
-  }, [item])
+  }, [cartList])
   // 總價計算
   function total() {
     let total = 0
-    for (let i = 0; i < item.length; i++) {
-      total = total + item[i].price * item[i].count
+    for (let i = 0; i < cartList.length; i++) {
+      total = total + cartList[i].price * cartList[i].count
     }
     console.log(total)
     setTotalPrice(total)
@@ -28,8 +25,8 @@ function HeaderBig(props) {
   // 總數計算
   function totalCount() {
     let totalCount = 0
-    for (let i = 0; i < item.length; i++) {
-      totalCount = totalCount + item[i].count
+    for (let i = 0; i < cartList.length; i++) {
+      totalCount = totalCount + cartList[i].count
     }
     console.log(totalCount)
     setTotalCountNum(totalCount)
@@ -146,8 +143,8 @@ function HeaderBig(props) {
       </div>
       <div className="cart-big disabled">
         <div className="cart-list">
-          {/* {data.length > 0 &&
-            data.map(function (value, index) {
+          {cartList.length > 0 &&
+            cartList.map(function (value, index) {
               return (
                 <HeaderBigCart
                   key={index}
@@ -157,10 +154,10 @@ function HeaderBig(props) {
                   img={value.img}
                 />
               )
-            })} */}
+            })}
         </div>
         <div className="cart-submit">
-          {/* <h4 class="cart-total">合計: ${totalPrice}</h4> */}
+          <h4 class="cart-total">合計: ${totalPrice}</h4>
           <button className="button-orange">下一步</button>
         </div>
       </div>

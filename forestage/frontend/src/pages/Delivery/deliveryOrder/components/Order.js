@@ -14,9 +14,11 @@ function Order(props) {
     member,
     inputMember,
     memberId,
+    allAddress,
+    setAllAddress,
   } = props
 
-  const [allAddress, setAllAddress] = useState('')
+  // const [allAddress, setAllAddress] = useState('')
   const [memberData, setMemberData] = useState([])
 
   function getData() {

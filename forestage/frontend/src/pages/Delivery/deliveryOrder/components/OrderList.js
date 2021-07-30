@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react'
 
 function OrderList(props) {
-  const { selectedOption, setSelectOption, orderAll, coupon, inputCoupons } =
-    props
+  const {
+    selectedOption,
+    setSelectOption,
+    orderAll,
+    coupon,
+    inputCoupons,
+    setMoney,
+  } = props
   const { img, name, counts, subTotal, fulltime } = orderAll
 
   const [couponName, setCouponName] = useState('')
@@ -19,6 +25,9 @@ function OrderList(props) {
         setCouponPrice(0)
       }
     }
+
+    //
+    setMoney(getTotal() - couponPrice)
   }, [couponName])
 
   function getTotal() {

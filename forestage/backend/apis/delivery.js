@@ -37,9 +37,25 @@ router.get("/member/:id",async function(req,res,next){
 } )
 // 
 
-// router.post("/order",async function(req,res,next){
-//     let queryresult = await db.connection.queryAsync("INSERT deliery VALUES")
-//     res.send(queryresult)
-// } )
+router.post("/order",async function(req,res,next){
+    let updateDeliery = await db.connection.queryAsync("INSERT INTO deliery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)");
+} )
+
+router.post('/order', async function (req, res, next) {
+    const { name, mobile, address, delivery_time, total, note, member_id } =
+      req.body.data
+    // 缺少 total, member_id
+    let sql =
+      'INSERT INTO deliery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)'
+    let updateDeliery = await db.connection.queryAsync(sql, [
+      name,
+      mobile,
+      address,
+      delivery_time,
+      total,
+      note,
+      member_id,
+    ])
+  })
 
 module.exports = router;

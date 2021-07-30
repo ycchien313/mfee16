@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Order from './Order'
 import OrderList from './OrderList'
 import $ from 'jquery'
+import axios from 'axios'
+import Swal from 'sweetalert2'
 
 function DeliveryOrder(props) {
   const [selectedOption, setSelectOption] = useState('')
@@ -12,6 +14,29 @@ function DeliveryOrder(props) {
   const { orderAll, memberId } = props
   const [coupon, inputCoupon] = useState([])
   const [member, inputMember] = useState([])
+  const [allAddress, setAllAddress] = useState('')
+  const [money, setMoney] = useState('')
+
+  const data = {
+    name: inputText,
+    mobile: inputTel,
+    address: allAddress,
+    delivery_time: orderAll.fulltime,
+    total: money,
+    note: textArea,
+    member_id: { memberId },
+  }
+  console.log(data, 'aaa')
+  const change = () => {
+    axios
+      .post('http://localhost:3001/delivery/order', data)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((error) => {
+        console.log(error.response)
+      })
+  }
 
   useEffect(() => {
     $.ajax({
@@ -40,13 +65,7 @@ function DeliveryOrder(props) {
       })
   }, [])
 
-  useEffect(() => {
-    $.ajax({
-      url: 'http://localhost:3001/delivery/order',
-      method: 'POST',
-      dataType: 'json',
-    })
-  }, [])
+  //
 
   return (
     <>
@@ -88,6 +107,7 @@ function DeliveryOrder(props) {
               orderAll={orderAll}
               coupon={coupon}
               inputCoupon={inputCoupon}
+              setMoney={setMoney}
             />
             <Order
               inputText={inputText}
@@ -102,6 +122,8 @@ function DeliveryOrder(props) {
               member={member}
               inputMember={inputMember}
               memberId={memberId}
+              allAddress={allAddress}
+              setAllAddress={setAllAddress}
             />
             <div className="check">
               <span className="info-text">
@@ -117,17 +139,36 @@ function DeliveryOrder(props) {
                   />
                   修改訂位
                 </button>
-                
-                <button className="pink-guide-button">
-                  確認送出
-                  <img
-                    src={
-                      'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
-                    }
-                    alt=""
-                  />
-                </button>
-
+                {(inputText === '') | (inputTel === '') ? (
+                  <button
+                    className="pink-guide-button"
+                    onClick={function () {
+                      Swal.fire({
+                        icon: 'warning',
+                        title: '確認有無遺漏填寫選項',
+                        text: '請輸入姓名及電話~',
+                      })
+                    }}
+                  >
+                    確認送出
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
+                      }
+                      alt=""
+                    />
+                  </button>
+                ) : (
+                  <button className="pink-guide-button" onClick={change}>
+                    確認送出
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
+                      }
+                      alt=""
+                    />
+                  </button>
+                )}
               </div>
             </div>
           </div>

@@ -21,8 +21,7 @@ function Aside(props) {
     date,
     time,
   } = props
-  // const [name, setName] = useState([])
-  // const [subTotal, setSubTotal] = useState([])
+
   const [counts, setCounts] = useState([])
   // 計算總金額
   const total = () => {
@@ -49,7 +48,6 @@ function Aside(props) {
     setDishList(newDishArr)
   }, [dishCount])
 
-  // 宜諺加
   useEffect(() => {
     ;(function () {
       let price = []

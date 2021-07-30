@@ -36,7 +36,9 @@ router.get('/checkout/coupon', async(req, res)=>{
 // 尚未決定如何取得memberid?
 router.get('/checkout/memberInfo', async(req, res)=>{
     let getMemberInfoSql = 'SELECT name, mobile FROM member WHERE member_id=?'
-    let memberInfo = await db.connection.queryAsync(getMemberInfoSql, [1])
+    let memberInfo = await db.connection.queryAsync(getMemberInfoSql, [req.query.memberId])
+    console.log('req.query.memberId:', req.query.memberId)
+    // console.log("memberInfo:",memberInfo)
     res.send(memberInfo)
 })
 

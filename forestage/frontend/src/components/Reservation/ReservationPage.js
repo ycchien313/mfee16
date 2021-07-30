@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header/'
 import Main from './ReservationMain/'
 import Hero from './ReservationMain/Hero'
+import '../../styles/reservation/res/reservation-meal-RWD.scss'
 import '../../styles/reservation/res/reservation.scss'
 import Auth from '../Auth/'
 
@@ -37,7 +38,6 @@ function ReservationPage(props) {
       )}
       <Hero />
       <Main showAuthModal={showAuthModal} setShowAuthModal={setShowAuthModal} />
-      {/* <Footer /> */}
     </>
   )
 }

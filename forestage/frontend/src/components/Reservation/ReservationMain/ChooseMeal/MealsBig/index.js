@@ -7,43 +7,22 @@ import Spinner from '../../../Spinner'
 function MealsBig(props) {
   const {
     dishes,
-    setDishes,
     showDishes,
     setShowDishes,
     checkList,
     setCheckList,
-    dishList,
-    setDishList,
+    dishCount,
+    setDishCount,
   } = props
 
   const [mealType, setMealType] = useState('main')
   const [didMount, setDidMount] = useState(false)
   const [titleToggle, setTitleToggle] = useState([true, false, false])
   const [loading, setLoading] = useState(false)
-  const [dishCount, setDishCount] = useState({})
-
-  // 檢查storage是否有此筆資料
-  const checkDishCount = Boolean(window.sessionStorage.getItem('dishCount'))
-
-  useEffect(() => {
-    if (didMount) {
-      window.sessionStorage.setItem('dishCount', JSON.stringify(dishCount))
-    }
-
-    // const storageDishCount = JSON.parse(sessionStorage.getItem(dishCount))
-    // console.log('storage', storageDishCount)
-  }, [dishCount])
 
   useEffect(() => {
     setDidMount(true)
-    // setDishCount(JSON.parse(sessionStorage.getItem('dishCount')))
-    // let newdishCount = JSON.parse(sessionStorage.getItem('dishCount'))
-    // let keyArr = Object.keys(newdishCount)
-    // let newObj = {}
-    // keyArr.forEach((v) => {
-    //   newObj[+v] = newdishCount[v]
-    // })
-    // setDishCount(newObj)
+
   }, [])
 
   // spinner
@@ -54,51 +33,6 @@ function MealsBig(props) {
     }, 1500)
   }
 
-  // 建立餐點物件
-  useEffect(() => {
-    if (didMount) {
-      // 如果sessionStorage沒有dishCount時，建立餐點物件 key為dish_id value為0
-      if (checkDishCount === false) {
-        let newDishCount = {}
-        dishes.forEach((item) => {
-          newDishCount[item.dish_id] = 0
-        })
-        setDishCount(newDishCount)
-      } else {
-        // 如果sessionStorage有dishCount，將sessionStorage餐點數量存入state
-        let newdishCount = JSON.parse(sessionStorage.getItem('dishCount'))
-        let keyArr = Object.keys(newdishCount)
-        let newObj = {}
-        keyArr.forEach((v) => {
-          newObj[+v] = newdishCount[v]
-        })
-        setDishCount(newObj)
-      }
-      // console.log(checkDishCount)
-      // console.log(checkDishCount)
-    }
-  }, [dishes])
-
-  // 建立餐點陣列 [餐點名稱,數量,小計,圖片,單價, id]
-  useEffect(() => {
-    if (didMount) {
-      let newDishArr = []
-      let dishArr = Object.entries(dishCount)
-      dishes.forEach((dish) => {
-        newDishArr = dishArr.map((v, i) => {
-          if (parseInt(v[0]) === dish.dish_id) {
-            v[0] = dish.name
-            v[2] = dish.price * v[1]
-            v[3] = dish.image_realistic
-            v[4] = dish.price
-            v[5] = dish.dish_id
-          }
-          return v
-        })
-      })
-      setDishList(newDishArr)
-    }
-  }, [dishes, dishCount])
 
   // 切換餐點種類
   useEffect(() => {

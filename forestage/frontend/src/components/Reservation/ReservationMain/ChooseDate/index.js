@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import CalendarBig from './Calendar'
 import CalendarSmall from './CalendarSmall'
 import SeatsBar from './SeatsBar'
@@ -13,6 +14,33 @@ function ChooseDate(props) {
     setCheckList,
     checkList
   } = props
+
+  const [singerCalendar, setSingerCalendar] = useState([])
+
+  function getSingerCalendar() {
+    axios
+      .get('http://127.0.0.1:3001/reservation/singer-calendar')
+      .then((result) => {
+
+        setSingerCalendar(result.data)
+      })
+  }
+
+  const checkSingerCalendar = Boolean(sessionStorage.getItem('singerCalendar'))
+
+  useEffect(() => {
+    getSingerCalendar()
+    checkSingerCalendar &&
+      setSingerCalendar(JSON.parse(sessionStorage.getItem('singerCalendar')))
+  }, [])
+
+  useEffect(() => {
+    window.sessionStorage.setItem(
+      'singerCalendar',
+      JSON.stringify(singerCalendar)
+    )
+  }, [singerCalendar])
+
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
@@ -35,6 +63,9 @@ function ChooseDate(props) {
             <CalendarSmall
               remainingSeat={remainingSeat}
               setRemainingSeat={setRemainingSeat}
+              setCheckList={setCheckList}
+              checkList={checkList}
+              singerCalendar={singerCalendar}
             />
           ) : (
             <CalendarBig
@@ -42,11 +73,10 @@ function ChooseDate(props) {
               setRemainingSeat={setRemainingSeat}
               setCheckList={setCheckList}
               checkList={checkList}
+              singerCalendar={singerCalendar}
             />
           )}
           <SeatsBar
-            // remainingSeat={remainingSeat}
-            // setRemainingSeat={setRemainingSeat}
             seatInfo={seatInfo}
             seatCount={seatCount}
             setSeatCount={setSeatCount}

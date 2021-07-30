@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import Header from '../Header/'
 import Hero from './ReservationCheckoutMain/Hero'
 import Main from './ReservationCheckoutMain/'
@@ -9,6 +10,7 @@ import { get } from 'jquery'
 // import Footer from '../../components/Footer'
 
 function CheckoutPage(props) {
+  const history = useHistory()
   // const { checkList, setCheckList, test } = props
   const [dishList, setDishList] = useState([])
   const [checkList, setCheckList] = useState({})
@@ -26,34 +28,25 @@ function CheckoutPage(props) {
     status: '未完成',
   })
 
-  // 取得登入帳號id
-
-  // async function getMemberId() {
-  //   let authToken = window.localStorage.getItem('authToken')
-  //   console.log('auth', authToken)
-  //   let result = await axios({
-  //     method: 'get',
-  //     headers: {
-  //       authorization: `Bearer ${authToken}`,
-  //     },
-  //     url: 'http://localhost:3001/auth/me'
-  //   })
-  //   console.log(result)
-  // }
-  // useEffect(()=>{
-  //   getMemberId()
-  // },[])
 
   const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))
 
   useEffect(() => {
     setDidMount(true)
-    setDishList(props.location.state.dishList)
-    setCheckList(props.location.state.checkList)
+
+    // 如果沒有從訂位頁面得到props.location，則導回訂位頁面
+    if (props.location.state !== undefined) {
+      setDishList(props.location.state.dishList)
+      setCheckList(props.location.state.checkList)
+    } else {
+      history.push('/reservation')
+    }
+
     checkInsertResData &&
       setInsertResData(
         JSON.parse(window.sessionStorage.getItem('insertResData'))
       )
+    // console.log(props.location.state.pathname)
   }, [])
 
   useEffect(() => {

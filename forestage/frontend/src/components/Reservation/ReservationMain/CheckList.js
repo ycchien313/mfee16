@@ -26,14 +26,21 @@ function CheckList(props) {
   // }
 
   function handleSubmit(e) {
-
+    const checkLoginSwal = withReactContent(Swal)
     if (checkIfDataOk() === false) {
       e.preventDefault()
-      fireAlert()
+      fireCheckDataAlert()
     } else if (ifLogin === false) {
       e.preventDefault()
-      setShowAuthModal(true)
-    } 
+      checkLoginSwal.fire({
+        title: '請先登入會員',
+        showConfirmButton: false,
+        timer: 2000,
+      })
+      setTimeout(() => {
+        setShowAuthModal(true)
+      }, 2000)
+    }
   }
 
   let iconClass = 'fas fa-check-circle'
@@ -43,9 +50,9 @@ function CheckList(props) {
     seat: false,
     minOrder: false,
   })
-  const CheckDataSwal = withReactContent(Swal)
 
-  function fireAlert() {
+  function fireCheckDataAlert() {
+    const CheckDataSwal = withReactContent(Swal)
     let html = ''
     checkList.chosenDate === '' ? (html += '<p>請選擇日期<p/>') : (html += '')
     checkList.seatArea === '' ? (html += '<p>請選擇座位區<p/>') : (html += '')
@@ -195,11 +202,6 @@ function CheckList(props) {
         <StyledLink
           onClick={(e) => {
             handleSubmit(e)
-            // setShowAuthModal(true)
-            // if (checkIfDataOk() === false) {
-            //   e.preventDefault()
-            //   fireAlert()
-            // }
           }}
           to={{
             pathname: '/reservation/checkout',

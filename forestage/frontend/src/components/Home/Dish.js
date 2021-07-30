@@ -28,23 +28,6 @@ function Dish(props) {
     console.log('didMount cart:', cartStorage)
     setCart(cartStorage)
 
-    // window.addEventListener(
-    //   'beforeunload',
-    //   () => {
-    //     localStorage.clear()
-    //   },
-    //   false
-    // )
-    // localStorage.setItem('cart', JSON.stringify(cartStorage))
-    // localStorage.setItem('cart', JSON.stringify(getStorage))
-    // if (getStorage != {} && getStorage != null) {
-    //   // Json轉陣列
-    //   // Object.keys(getStorage).map(function (_) {
-    //   //   return getStorage[_]
-    //   // })
-    //   console.log('didMount:', getStorage)
-    //   setState(getStorage)
-    // }
     setDidMount(false)
   }, [])
 

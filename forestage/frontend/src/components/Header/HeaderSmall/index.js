@@ -7,36 +7,36 @@ import HeaderSmallCart from './HeaderSmallCart'
 import $ from 'jquery'
 
 function HeaderSmall(props) {
-  let { item } = props
+  let { cartList } = props
   const [menuOn, setMenuOn] = useState(false)
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCount, setTotalCount] = useState(0)
-  // useEffect(() => {
-  //   $('.icon').on('click', function () {
-  //     $('.cart-small').toggleClass('disabled')
-  //   })
-  // }, [])
-  // useEffect(() => {
-  //   total()
-  //   totalCountValue()
-  // }, [item])
-  // function total() {
-  //   let total = 0
-  //   for (let i = 0; i < item.length; i++) {
-  //     total = total + item[i].price * item[i].count
-  //   }
-  //   setTotalPrice(total)
-  // }
-  // function totalCountValue() {
-  //   let total = 0
-  //   for (let i = 0; i < item.length; i++) {
-  //     total = total + item[i].count
-  //   }
-  //   setTotalCount(total)
-  // }
+  useEffect(() => {
+    $('.icon').on('click', function () {
+      $('.cart-small').toggleClass('disabled')
+    })
+  }, [])
+  useEffect(() => {
+    total()
+    totalCountValue()
+  }, [cartList])
+  function total() {
+    let total = 0
+    for (let i = 0; i < cartList.length; i++) {
+      total = total + cartList[i].price * cartList[i].count
+    }
+    setTotalPrice(total)
+  }
+  function totalCountValue() {
+    let total = 0
+    for (let i = 0; i < cartList.length; i++) {
+      total = total + cartList[i].count
+    }
+    setTotalCount(total)
+  }
   return (
     <>
-      {/* <div className="wrapper">
+      <div className="wrapper">
         <div className="small-header">
           <div className="logo"></div>
           <div className="menu-right">
@@ -50,13 +50,13 @@ function HeaderSmall(props) {
               onClick={() => {
                 !menuOn ? setMenuOn(true) : setMenuOn(false)
               }}
-            ></div> */}
+            ></div>
             {/* 購物車 */}
-            {/* <div className="cart-small disabled">
+            <div className="cart-small disabled">
               <div className="cart-small-list">
                 <div className="cart-small-border">
-                  {item.length > 0 &&
-                    item.map(function (value, index) {
+                  {cartList.length > 0 &&
+                    cartList.map(function (value, index) {
                       return (
                         <HeaderSmallCart
                           key={index}
@@ -81,7 +81,7 @@ function HeaderSmall(props) {
         <CSSTransition in={menuOn} classNames="my-down-menu" unmountOnExit>
           <DownMenu />
         </CSSTransition>
-      </div> */}
+      </div>
     </>
   )
 }

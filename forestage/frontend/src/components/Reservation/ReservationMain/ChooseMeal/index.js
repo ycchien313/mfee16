@@ -43,7 +43,16 @@ function ChooseMeal(props) {
           </div>
         </div>
         {isTabletOrMobile ? (
-          <MealsSmall dishes={dishes} setDishes={setDishes} />
+          <MealsSmall
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishList={dishList}
+            setDishList={setDishList}
+          />
         ) : (
           <MealsBig
             dishes={dishes}

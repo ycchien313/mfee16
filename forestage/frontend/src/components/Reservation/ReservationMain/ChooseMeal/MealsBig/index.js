@@ -7,7 +7,6 @@ import Spinner from '../../../Spinner'
 function MealsBig(props) {
   const {
     dishes,
-    setDishes,
     showDishes,
     setShowDishes,
     checkList,
@@ -30,20 +29,11 @@ function MealsBig(props) {
       window.sessionStorage.setItem('dishCount', JSON.stringify(dishCount))
     }
 
-    // const storageDishCount = JSON.parse(sessionStorage.getItem(dishCount))
-    // console.log('storage', storageDishCount)
   }, [dishCount])
 
   useEffect(() => {
     setDidMount(true)
-    // setDishCount(JSON.parse(sessionStorage.getItem('dishCount')))
-    // let newdishCount = JSON.parse(sessionStorage.getItem('dishCount'))
-    // let keyArr = Object.keys(newdishCount)
-    // let newObj = {}
-    // keyArr.forEach((v) => {
-    //   newObj[+v] = newdishCount[v]
-    // })
-    // setDishCount(newObj)
+
   }, [])
 
   // spinner
@@ -74,8 +64,6 @@ function MealsBig(props) {
         })
         setDishCount(newObj)
       }
-      // console.log(checkDishCount)
-      // console.log(checkDishCount)
     }
   }, [dishes])
 

@@ -29,7 +29,6 @@ function ReservationPage(props) {
   return (
     <>
       <Header />
-      {/* <Auth /> */}
       {showAuthModal && (
         <Auth
           showAuthModal={showAuthModal}

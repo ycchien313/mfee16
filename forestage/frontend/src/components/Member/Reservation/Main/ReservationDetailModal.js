@@ -7,13 +7,47 @@ function ReservationDetailModal(props) {
   const { show, handleClose, memberId, reservationId } = props
 
   const [didMount, setDidMount] = useState(true)
+  const [reservationFields, setReservationFields] = useState({
+    reservationId: '',
+    status: '',
+    date: '',
+    seatName: '',
+    attendance: '',
+    name: '',
+    mobile: '',
+    note: '',
+    total: '',
+  })
+  const [dishFields, setDishFields] = useState({
+    dishName: '',
+    dishCount: '',
+  })
 
   // 取得詳細訂單資料
-  const fetchReservation = () => {
-    const response = axios.get(
-      `/reservation/recent/detail/:${memberId}/:${reservationId}`,
-      { headers: {} }
+  const fetchReservation = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/member/reservation/recent/detail/${memberId}/${reservationId}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      }
     )
+    const data = response.data.data
+    const order = {
+      reservationId: data.reservation_id,
+      status: data.status,
+      date: data.date,
+      signerName: data.signer_name,
+      seatName: data.seat_name,
+      attendance: data.attendance,
+      name: data.name,
+      note: data.note,
+    }
+
+    // TODO: 塞到欄位裡
+    console.log(order)
   }
 
   useEffect(() => {

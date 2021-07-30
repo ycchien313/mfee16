@@ -216,7 +216,7 @@ router.get(
 
         // 執行 SQL，查詢會員的「詳細」訂位資料
         const sql =
-            'SELECT `member_id`, RES.`reservation_id`, `status`, RES.`date`, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+            'SELECT `member_id`, RES.`reservation_id`, `status`, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
             'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
             'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id AND RES.date > NOW() GROUP BY RDM.dish_id';
         await conn

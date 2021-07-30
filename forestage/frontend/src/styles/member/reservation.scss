@@ -167,6 +167,10 @@
   .content-head .detail-container i {
     font-size: clamp(23px, 1.82vw, 1.82vw);
     cursor: pointer;
+
+    &:hover {
+      color: $primary-lightbrown;
+    }
   }
   .content-head-title {
     margin: 0;

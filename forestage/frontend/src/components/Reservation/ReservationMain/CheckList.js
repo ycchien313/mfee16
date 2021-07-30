@@ -3,10 +3,38 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import StyledLink from '../StyledLink'
 
-
 function CheckList(props) {
-  const { checkList, setCheckList, dishList, setDishList, seatInfo, setShowAuthModal, showAuthModal } = props
+  const {
+    checkList,
+    setCheckList,
+    dishList,
+    setDishList,
+    seatInfo,
+    setShowAuthModal,
+    showAuthModal,
+  } = props
 
+  // const [ifLogin, setIfLogin] = useState(false)
+
+  const ifLogin = Boolean(window.localStorage.getItem('authToken'))
+  // function checkLogin() {
+  //   if (Boolean(window.localStorage.getItem('authToken'))) {
+  //     setIfLogin(true)
+  //   } else {
+  //     setIfLogin(false)
+  //   }
+  // }
+
+  function handleSubmit(e) {
+
+    if (checkIfDataOk() === false) {
+      e.preventDefault()
+      fireAlert()
+    } else if (ifLogin === false) {
+      e.preventDefault()
+      setShowAuthModal(true)
+    } 
+  }
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
@@ -166,11 +194,12 @@ function CheckList(props) {
         />
         <StyledLink
           onClick={(e) => {
+            handleSubmit(e)
             // setShowAuthModal(true)
-            if (checkIfDataOk() === false) {
-              e.preventDefault()
-              fireAlert()
-            }
+            // if (checkIfDataOk() === false) {
+            //   e.preventDefault()
+            //   fireAlert()
+            // }
           }}
           to={{
             pathname: '/reservation/checkout',

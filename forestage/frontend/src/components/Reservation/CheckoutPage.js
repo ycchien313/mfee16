@@ -3,6 +3,8 @@ import Header from '../Header/'
 import Hero from './ReservationCheckoutMain/Hero'
 import Main from './ReservationCheckoutMain/'
 import '../../styles/reservation/res_checkout/res_check.scss'
+import axios from 'axios'
+import { get } from 'jquery'
 
 // import Footer from '../../components/Footer'
 
@@ -24,6 +26,24 @@ function CheckoutPage(props) {
     status: '未完成',
   })
 
+  // 取得登入帳號id
+
+  // async function getMemberId() {
+  //   let authToken = window.localStorage.getItem('authToken')
+  //   console.log('auth', authToken)
+  //   let result = await axios({
+  //     method: 'get',
+  //     headers: {
+  //       authorization: `Bearer ${authToken}`,
+  //     },
+  //     url: 'http://localhost:3001/auth/me'
+  //   })
+  //   console.log(result)
+  // }
+  // useEffect(()=>{
+  //   getMemberId()
+  // },[])
+
   const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))
 
   useEffect(() => {
@@ -31,8 +51,9 @@ function CheckoutPage(props) {
     setDishList(props.location.state.dishList)
     setCheckList(props.location.state.checkList)
     checkInsertResData &&
-      setInsertResData(JSON.parse(window.sessionStorage.getItem('insertResData')))
-    
+      setInsertResData(
+        JSON.parse(window.sessionStorage.getItem('insertResData'))
+      )
   }, [])
 
   useEffect(() => {
@@ -49,45 +70,12 @@ function CheckoutPage(props) {
 
   // 將insertResData存入sessionStorage
   useEffect(() => {
-    window.sessionStorage.setItem('insertResData', JSON.stringify(insertResData))
+    window.sessionStorage.setItem(
+      'insertResData',
+      JSON.stringify(insertResData)
+    )
   }, [insertResData])
-  // 視窗關閉時移除sessionStorage
-  // useEffect(() => {
-  //   window.addEventListener(
-  //     'beforeunload',
-  //     function () {
-  //       sessionStorage.removeItem(
-  //         'dishCount',
-  //         'seatInfo',
-  //         'seatCount',
-  //         'checkList',
-  //         'singerCalendar',
-  //         'attendance',
-  //         'remainingSeat',
-  //         'activeDate',
-  //         'insertResData'
-  //       )
-  //     },
-  //     false
-  //   )
 
-  //   return () => {
-  //     window.onbeforeunload = function () {
-  //       // sessionStorage.clear()
-  //       sessionStorage.removeItem(
-  //         'dishCount',
-  //         'seatInfo',
-  //         'seatCount',
-  //         'checkList',
-  //         'singerCalendar',
-  //         'attendance',
-  //         'remainingSeat',
-  //         'activeDate',
-  //         'insertResData'
-  //       )
-  //     }
-  //   }
-  // }, [])
   return (
     <>
       <Header />

@@ -1,8 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import ReservationDetailModal from './ReservationDetailModal'
+import { useMediaQuery } from 'react-responsive'
 
 function RecentReservation(props) {
   const { memberId } = props
+  const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+  const [orders, setOrders] = useState([])
+  const [reservationId, setReservationId] = useState('')
+  const [didMount, setDidMount] = useState(true)
+  const [show, setShow] = useState(false)
+
+  // bootstrap modal 開啟關閉用
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   // 取得訂位資料
   const fetchMemberReservation = async () => {
@@ -15,81 +26,118 @@ function RecentReservation(props) {
         },
       }
     )
-    const data = response.data.data
-
-    let resData = []
-    data.forEach((v, i) => {
-      console.log(v)
-      resData = [...resData, v.reservation_id, v.date]
-    })
+    return response.data.data
   }
 
   useEffect(() => {
-    // 取得後端資料
-    const fetchData = async () => {
-      await fetchMemberReservation()
+    setDidMount(false)
+  }, [])
+
+  useEffect(() => {
+    if (!didMount) {
+      // 取得後端資料
+      const fetchData = async () => {
+        // 取得會員的訂位資料
+        const reservation = await fetchMemberReservation()
+        console.log('didUpdate reservstion:', reservation)
+
+        setOrders(reservation)
+      }
+
+      fetchData()
     }
-    fetchData()
-  })
+  }, [memberId])
+
+  // 電腦版按鈕列
+  const btnRowDom = (
+    <>
+      <div className="content-foot">
+        <div className="btns-container">
+          <button className="cancel-resv-btn guide-button">取消訂位</button>
+          <button className="update-resv-btn orange-guide-button">
+            修改訂位內容
+          </button>
+        </div>
+      </div>
+    </>
+  )
+
+  // 手機版按鈕列
+  const btnRowMdDom = (
+    <>
+      <div className="content-foot-md">
+        <div className="msgbox-container">
+          <p>共6件餐點</p>
+          <p>合計金額: 2000元</p>
+        </div>
+        <div className="btns-container">
+          <button className="cancel-resv-btn guide-button">取消訂位</button>
+          <button className="update-resv-btn orange-guide-button">
+            修改訂位內容
+          </button>
+        </div>
+      </div>
+    </>
+  )
 
   return (
     <>
-      <div className="recent-content">
-        <div className="content-container">
-          <div className="content-head">
-            <h4 className="content-head-title">訂位編號 #202106071111</h4>
-            <div className="detail-container">
-              <i className="fas fa-eye"></i>
-            </div>
-          </div>
-          <div className="content-body">
-            <table className="content-table">
-              <thead>
-                <tr>
-                  <th>訂位日期</th>
-                  <th>表演歌手</th>
-                  <th>座位區</th>
-                  <th>人數</th>
-                  <th>總金額</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>2021/07/15</td>
-                  <td>李龍號</td>
-                  <td>搖滾區</td>
-                  <td>2</td>
-                  <td>1500</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+      <ReservationDetailModal
+        show={show}
+        handleClose={handleClose}
+        memberId={memberId}
+        reservationId={reservationId}
+      />
 
-          {/* <!-- 按鈕列 --> */}
-          <div className="content-foot">
-            <div className="btns-container">
-              <button className="cancel-resv-btn guide-button">取消訂位</button>
-              <button className="update-resv-btn orange-guide-button">
-                修改訂位內容
-              </button>
-            </div>
-          </div>
+      {orders.map((v, i) => {
+        return (
+          <>
+            <div className="recent-content">
+              <div key={i} className="content-container">
+                <div className="content-head">
+                  <h4 className="content-head-title">
+                    訂位編號 #{v.reservation_id}
+                  </h4>
+                  <div className="detail-container">
+                    <i
+                      className="fas fa-eye"
+                      onClick={() => {
+                        setReservationId(v.reservation_id)
+                        handleShow()
+                      }}
+                    ></i>
+                  </div>
+                </div>
+                <div className="content-body">
+                  <table className="content-table">
+                    <thead>
+                      <tr>
+                        <th>訂位日期</th>
+                        <th>表演歌手</th>
+                        <th>座位區</th>
+                        <th>人數</th>
+                        <th>總金額</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{v.date}</td>
+                        <td>{v.singer_name}</td>
+                        <td>{v.seat_name}</td>
+                        <td>{v.attendance}</td>
+                        <td>{v.total}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
 
-          {/* <!-- 手機版按鈕列 --> */}
-          <div className="content-foot-md">
-            <div className="msgbox-container">
-              <p>共6件餐點</p>
-              <p>合計金額: 2000元</p>
+                {/* 手機版按鈕列 ←→ 電腦版按鈕列 */}
+                {isDesktopOrMobile ? btnRowMdDom : btnRowDom}
+              </div>
             </div>
-            <div className="btns-container">
-              <button className="cancel-resv-btn guide-button">取消訂位</button>
-              <button className="update-resv-btn orange-guide-button">
-                修改訂位內容
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+          </>
+        )
+      })}
     </>
   )
 }

@@ -4,7 +4,7 @@ import AuthContext from './components/Auth/AuthContext'
 // import Auth from './pages/Auth'
 import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
-import DeliveryOrder from './pages/Delivery/DeliveryOrder/'
+import DeliveryOrder from './pages/Delivery/deliveryOrder/'
 import Dish from './pages/Dish'
 import Game from './pages/Game'
 import Home from './pages/Home'
@@ -21,9 +21,10 @@ function App() {
           <Route path="/comment/">
             <Comment />
           </Route>
-          <Route path="/delivery/deliveryOrder" component={DeliveryOrder}>
-          {/* <DeliveryOrder /> */}
-        </Route>
+          {/* <Route path="/delivery/deliveryOrder/"> */}
+          <Route path="/delivery/deliveryOrder/" component={DeliveryOrder}>
+            {/* <DeliveryOrder /> */}
+          </Route>
           <Route path="/delivery/">
             <Delivery />
           </Route>

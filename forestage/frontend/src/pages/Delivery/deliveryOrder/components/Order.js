@@ -33,7 +33,8 @@ function Order(props) {
     setAllAddress(
       orderAll.address.city + orderAll.address.dist + orderAll.address.road
     )
-  }, [])
+    // orderAll一有更新，[]rerturn全部跑完才執行
+  }, [orderAll])
 
   return (
     <>

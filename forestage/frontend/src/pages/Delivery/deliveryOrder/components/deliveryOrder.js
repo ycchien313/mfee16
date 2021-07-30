@@ -42,7 +42,7 @@ function DeliveryOrder(props) {
 
   useEffect(() => {
     $.ajax({
-      url: 'http://localhost:3001/delivery//order',
+      url: 'http://localhost:3001/delivery/order',
       method: 'POST',
       dataType: 'json',
     })
@@ -117,6 +117,7 @@ function DeliveryOrder(props) {
                   />
                   修改訂位
                 </button>
+                
                 <button className="pink-guide-button">
                   確認送出
                   <img
@@ -126,6 +127,7 @@ function DeliveryOrder(props) {
                     alt=""
                   />
                 </button>
+
               </div>
             </div>
           </div>

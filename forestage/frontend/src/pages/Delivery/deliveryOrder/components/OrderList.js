@@ -4,6 +4,7 @@ function OrderList(props) {
   const { selectedOption, setSelectOption, orderAll, coupon, inputCoupons } =
     props
   const { img, name, counts, subTotal, fulltime } = orderAll
+
   const [couponName, setCouponName] = useState('')
   const [couponPrice, setCouponPrice] = useState(0)
 
@@ -12,11 +13,9 @@ function OrderList(props) {
       let newItem = coupon.find(function (v) {
         return v.name == couponName
       })
-      console.log(newItem,'newitem')
-      if(newItem){
-
+      if (newItem) {
         setCouponPrice(newItem.discount)
-      }else{
+      } else {
         setCouponPrice(0)
       }
     }

@@ -18,6 +18,8 @@ function Aside(props) {
     setSubTotal,
     name,
     setName,
+    date,
+    time,
   } = props
   // const [name, setName] = useState([])
   // const [subTotal, setSubTotal] = useState([])
@@ -100,52 +102,61 @@ function Aside(props) {
             src={'http://localhost:3000/images/delivery/FoodDelivery/menu.png'}
             alt=""
           />
-          {/* 判斷token */}
-          <Link
-            to={{
-              pathname: '/delivery/deliveryOrder',
-              state: {
-                img: img,
-                name: name,
-                subTotal: subTotal,
-                counts: counts,
-                address: address,
-                fulltime: fulltime,
-              },
-            }}
-          >
-            {(counts.length === 0) | (address.dist === '') ? (
+          {(counts.length === 0) |
+          (date === '') |
+          (time === '') |
+          (fulltime === '') |
+          (address.dist === '') |
+          (address.road === '') ? (
+            <input
+              type="button"
+              defaultValue="確認訂單"
+              className="OrderGet"
+              field=""
+              onClick={function () {
+                Swal.fire({
+                  icon: 'warning',
+                  title: '確認有無遺漏訂單選項',
+                  text: '包含: 地址、日期、時間以及定一份餐點~',
+                })
+              }}
+            />
+          ) : localStorage.getItem('authToken') === null ? (
+            <input
+              type="button"
+              defaultValue="確認登入"
+              className="OrderGet"
+              field=""
+              onClick={function () {
+                Swal.fire({
+                  icon: 'warning',
+                  title: '確認有無登入',
+                  text: '請至上方登入~',
+                })
+              }}
+            />
+          ) : (
+            <Link
+              to={{
+                pathname: '/delivery/deliveryOrder',
+                state: {
+                  img: img,
+                  name: name,
+                  subTotal: subTotal,
+                  counts: counts,
+                  address: address,
+                  fulltime: fulltime,
+                },
+              }}
+            >
               <input
                 type="button"
                 defaultValue="送出訂單"
                 className="OrderGet"
                 field=""
-                onClick={function () {
-                  Swal.fire(
-                    '外送訂餐選擇成功',
-                    '跳轉至外送確認頁面...',
-                    'success'
-                  )
-                }}
-                disabled
               />
-            ) : (
-              <input
-                type="button"
-                defaultValue="送出訂單"
-                className="OrderGet"
-                field=""
-                onClick={function () {
-                  Swal.fire(
-                    '外送訂餐選擇成功',
-                    '跳轉至外送確認頁面...',
-                    'success'
-                  )
-                  console.log(localStorage.getItem('authToken'))
-                }}
-              />
-            )}
-          </Link>
+            </Link>
+          )}
         </div>
       </aside>
     </>

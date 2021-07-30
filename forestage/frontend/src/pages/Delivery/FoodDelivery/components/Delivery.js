@@ -250,36 +250,66 @@ function Delivery(props) {
             setSubTotal={setSubTotal}
             name={name}
             setName={setName}
+            data={date}
+            time={time}
           />
         </div>
         <div className="mobile-out">
-          <Link
-            to={{
-              pathname: '/delivery/deliveryOrder',
-              state: {
-                img: img,
-                name: name,
-                subTotal: subTotal,
-                counts: counts,
-                address: address,
-                fulltime: fulltime,
-              },
-            }}
-          >
+          {(counts.length === 0) |
+          (date === '') |
+          (time === '') |
+          (fulltime === '') |
+          (address.dist === '') |
+          (address.road === '') ? (
             <input
               type="button"
-              defaultValue="送出訂單"
+              defaultValue="確認訂單"
               className="OrderGet mobile-order-get"
               field=""
               onClick={function () {
-                Swal.fire(
-                  '外送訂餐選擇成功',
-                  '跳轉至外送確認頁面...',
-                  'success'
-                )
+                Swal.fire({
+                  icon: 'warning',
+                  title: '確認有無遺漏訂單選項',
+                  text: '包含: 地址、日期、時間以及定一份餐點~',
+                })
               }}
             />
-          </Link>
+          ) : localStorage.getItem('authToken') === null ? (
+            <input
+              type="button"
+              defaultValue="確認登入"
+              className="OrderGet mobile-order-get"
+              field=""
+              onClick={function () {
+                Swal.fire({
+                  icon: 'warning',
+                  title: '確認有無登入',
+                  text: '請至上方登入~',
+                })
+              }}
+            />
+          ) : (
+            <Link
+              to={{
+                pathname: '/delivery/deliveryOrder',
+                state: {
+                  img: img,
+                  name: name,
+                  subTotal: subTotal,
+                  counts: counts,
+                  address: address,
+                  fulltime: fulltime,
+                },
+              }}
+            >
+              <input
+                type="button"
+                defaultValue="送出訂單"
+                className="OrderGet mobile-order-get"
+                field=""
+              />
+            </Link>
+          )}
         </div>
       </div>
     </>

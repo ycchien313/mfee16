@@ -420,6 +420,17 @@
     box-shadow: none;
   }
 }
+@media screen and (max-width:768px){
+  .res-person .head{
+    // display: flex;
+    align-items: flex-end;
+    // margin-bottom: 20px;
+  }
+  .res-person .head button{
+    margin-bottom: 10px;
+
+  }
+}
 .res-person .content {
   display: flex;
   margin-top: 2.65vw;

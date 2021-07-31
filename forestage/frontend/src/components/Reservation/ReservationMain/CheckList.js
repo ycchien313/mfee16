@@ -13,83 +13,86 @@ function CheckList(props) {
     setShowAuthModal,
     showAuthModal,
     showClipboard,
-    setShowClipboard
+    setShowClipboard,
+    checkData,
+    setCheckData,
+    handleSubmit,
   } = props
 
   // const [showClipboard, setShowClipboard] = useState(true)
   const clipboardDisActClass = 'clipboard disactive'
   const clipboardActClass = 'clipboard'
 
-  const ifLogin = Boolean(window.localStorage.getItem('authToken'))
+  // const ifLogin = Boolean(window.localStorage.getItem('authToken'))
 
-  function handleSubmit(e) {
-    const checkLoginSwal = withReactContent(Swal)
-    if (checkIfDataOk() === false) {
-      e.preventDefault()
-      fireCheckDataAlert()
-    } else if (ifLogin === false) {
-      e.preventDefault()
-      checkLoginSwal.fire({
-        title: '請先登入會員',
-        showConfirmButton: false,
-        timer: 2000,
-      })
-      setTimeout(() => {
-        setShowAuthModal(true)
-      }, 2000)
-    }
-  }
+  // function handleSubmit(e) {
+  //   const checkLoginSwal = withReactContent(Swal)
+  //   if (checkIfDataOk() === false) {
+  //     e.preventDefault()
+  //     fireCheckDataAlert()
+  //   } else if (ifLogin === false) {
+  //     e.preventDefault()
+  //     checkLoginSwal.fire({
+  //       title: '請先登入會員',
+  //       showConfirmButton: false,
+  //       timer: 1500,
+  //     })
+  //     setTimeout(() => {
+  //       setShowAuthModal(true)
+  //     }, 2000)
+  //   }
+  // }
+
+  // function fireCheckDataAlert() {
+  //   const CheckDataSwal = withReactContent(Swal)
+  //   let html = ''
+  //   checkList.chosenDate === '' ? (html += '<p>請選擇日期<p/>') : (html += '')
+  //   checkList.seatArea === '' ? (html += '<p>請選擇座位區<p/>') : (html += '')
+  //   if (checkList.total <= checkList.minOrder || checkList.total === 0) {
+  //     html += '<p>餐點未達低銷金額<p/>'
+  //   }
+
+  //   CheckDataSwal.fire({
+  //     title: '您尚未完成訂位',
+  //     html: html,
+  //     icon: 'warning',
+  //     buttonsStyling: false,
+  //     didOpen: () => {
+  //       html = ''
+  //     },
+  //   })
+  // }
+
+  // function checkIfDataOk() {
+  //   let newCheckData = { ...checkData }
+  //   checkList.chosenDate !== ''
+  //     ? (newCheckData.date = true)
+  //     : (newCheckData.date = false)
+  //   checkList.seatArea !== ''
+  //     ? (newCheckData.seat = true)
+  //     : (newCheckData.seat = false)
+  //   checkList.total >= checkList.minOrder && checkList.minOrder !== 0
+  //     ? (newCheckData.minOrder = true)
+  //     : (newCheckData.minOrder = false)
+  //   console.log('chekData', newCheckData)
+  //   if (
+  //     newCheckData.date &&
+  //     newCheckData.seat &&
+  //     newCheckData.minOrder === true
+  //   ) {
+  //     return true
+  //   } else {
+  //     return false
+  //   }
+  // }
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
-  const [checkData, setCheckData] = useState({
-    date: false,
-    seat: false,
-    minOrder: false,
-  })
-
-  function fireCheckDataAlert() {
-    const CheckDataSwal = withReactContent(Swal)
-    let html = ''
-    checkList.chosenDate === '' ? (html += '<p>請選擇日期<p/>') : (html += '')
-    checkList.seatArea === '' ? (html += '<p>請選擇座位區<p/>') : (html += '')
-    if (checkList.total <= checkList.minOrder || checkList.total === 0) {
-      html += '<p>餐點未達低銷金額<p/>'
-    }
-
-    CheckDataSwal.fire({
-      title: '您尚未完成訂位',
-      html: html,
-      icon: 'warning',
-      buttonsStyling: false,
-      didOpen: () => {
-        html = ''
-      },
-    })
-  }
-
-  function checkIfDataOk() {
-    let newCheckData = { ...checkData }
-    checkList.chosenDate !== ''
-      ? (newCheckData.date = true)
-      : (newCheckData.date = false)
-    checkList.seatArea !== ''
-      ? (newCheckData.seat = true)
-      : (newCheckData.seat = false)
-    checkList.total >= checkList.minOrder && checkList.minOrder !== 0
-      ? (newCheckData.minOrder = true)
-      : (newCheckData.minOrder = false)
-    console.log('chekData', newCheckData)
-    if (
-      newCheckData.date &&
-      newCheckData.seat &&
-      newCheckData.minOrder === true
-    ) {
-      return true
-    } else {
-      return false
-    }
-  }
+  // const [checkData, setCheckData] = useState({
+  //   date: false,
+  //   seat: false,
+  //   minOrder: false,
+  // })
 
   return (
     <>

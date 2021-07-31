@@ -7,17 +7,33 @@ function DishContent(props) {
   const [didMount, setDidMount] = useState(false)
 
   function getMemberCoupons() {
+    // 1. 取得登入id
+    let authToken = window.localStorage.getItem('authToken')
+    console.log('auth', authToken)
     axios
-      .get('http://localhost:3001/reservation/checkout/coupon', {
-        params: {
-          memberId: 1,
+      .get('http://localhost:3001/auth/me', {
+        method: 'get',
+        headers: {
+          authorization: `Bearer ${authToken}`,
         },
       })
       .then((result) => {
-        console.log(result.data)
-        setCoupon(result.data)
+        // 2. 取得會員姓名電話
+        let memeberId = result.data.memberId
+        console.log('memberid:', memeberId)
+        axios
+          .get('http://localhost:3001/reservation/checkout/coupon', {
+            params: {
+              memberId: memeberId,
+            },
+          })
+          .then((result) => {
+            console.log(result.data)
+            setCoupon(result.data)
+          })
       })
   }
+
 
   function setMcmId(e) {
     let newInsertResData = { ...insertResData }

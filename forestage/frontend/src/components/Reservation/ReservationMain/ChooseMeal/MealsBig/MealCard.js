@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 function MealCard(props) {
-  const { id, name, type, index, imgIllu, imgReal, dishCount, setDishCount } =
+  const { id, name, type, index, imgIllu, imgReal, dishCount, setDishCount, price } =
     props
   // useEffect(() => {
   //   setCountValue(mealCountArr[index])
@@ -47,7 +47,7 @@ function MealCard(props) {
             }}
           ></div>
         </div>
-        <span>{name}</span>
+        <span>{`${name} $${price}`}</span>
       </div>
     </>
   )

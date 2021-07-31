@@ -22,7 +22,6 @@ function MealsBig(props) {
 
   useEffect(() => {
     setDidMount(true)
-
   }, [])
 
   // spinner
@@ -32,7 +31,6 @@ function MealsBig(props) {
       setLoading(false)
     }, 1500)
   }
-
 
   // 切換餐點種類
   useEffect(() => {
@@ -171,6 +169,7 @@ function MealsBig(props) {
                 setDishCount={setDishCount}
                 checkList={checkList}
                 setCheckList={setCheckList}
+                price={v.price}
               />
             )
           })

@@ -219,8 +219,6 @@
     }
     .order-list-icon:hover{
       filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0));
-
-      // background: darken($accent-orange, 10%);
     }
   }
   /* 共用步驟標題 */
@@ -979,7 +977,7 @@
   }
 
 
-  // 做到這裡
+
   @media screen and (max-width: 768px) {
     .aside-list {
       position: fixed;
@@ -1087,8 +1085,32 @@
     }
   }
 
-  // 餐點動畫特效
+  // 手機版下方送出按鈕
+  button.pink-guide-button.bottom{
+    bottom: 20px;
+    height: 40px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+    font-size: 16px;
+    
+  }
+  button.pink-guide-button.bottom img{
+    position: static;
+    // top:8px;
+    width: 25px;
+    height: 25px;
+  }
+}
+.reservation.bottom{
+  display: flex;
+  justify-content: center;
+}
 
+  // 餐點動畫特效
+.reservation{
   @for $i from 1 through 9 {
     @media screen and (min-width: 1200px) {
       #food-#{$i}.illu-image.active {

@@ -68,6 +68,7 @@ function MealsSmall(props) {
                   setDishCount={setDishCount}
                   checkList={checkList}
                   setCheckList={setCheckList}
+                  price={v.price}
                 />
               )
             }
@@ -75,7 +76,8 @@ function MealsSmall(props) {
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        低消金額：<span className="minimum">{checkList.minOrder}</span>{' '}
+        元&nbsp;&nbsp;目前金額：
         <span className="total">{checkList.total}</span> 元
       </p>
       <div className="category-group">
@@ -89,7 +91,7 @@ function MealsSmall(props) {
       </div>
       <div className="wrapper">
         <div className="cards">
-        {dishes.map((v, i) => {
+          {dishes.map((v, i) => {
             if (v.type === '附餐') {
               return (
                 <MealCard
@@ -104,6 +106,7 @@ function MealsSmall(props) {
                   setDishCount={setDishCount}
                   checkList={checkList}
                   setCheckList={setCheckList}
+                  price={v.price}
                 />
               )
             }
@@ -111,7 +114,8 @@ function MealsSmall(props) {
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        低消金額：<span className="minimum">{checkList.minOrder}</span>{' '}
+        元&nbsp;&nbsp;目前金額：
         <span className="total">{checkList.total}</span> 元
       </p>
       <div className="category-group">
@@ -125,7 +129,7 @@ function MealsSmall(props) {
       </div>
       <div className="wrapper">
         <div className="cards">
-        {dishes.map((v, i) => {
+          {dishes.map((v, i) => {
             if (v.type === '甜點') {
               return (
                 <MealCard
@@ -140,6 +144,7 @@ function MealsSmall(props) {
                   setDishCount={setDishCount}
                   checkList={checkList}
                   setCheckList={setCheckList}
+                  price={v.price}
                 />
               )
             }
@@ -147,7 +152,8 @@ function MealsSmall(props) {
         </div>
       </div>
       <p className="order-info">
-        低消金額：<span className="minimum">{checkList.minOrder}</span> 元&nbsp;&nbsp;目前金額：
+        低消金額：<span className="minimum">{checkList.minOrder}</span>{' '}
+        元&nbsp;&nbsp;目前金額：
         <span className="total">{checkList.total}</span> 元
       </p>
     </>

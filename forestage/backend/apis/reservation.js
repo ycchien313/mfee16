@@ -33,6 +33,7 @@ router.get('/checkout/coupon', async(req, res)=>{
     res.send(memberCoupon)
 })
 
+
 // 尚未決定如何取得memberid?
 router.get('/checkout/memberInfo', async(req, res)=>{
     let getMemberInfoSql = 'SELECT name, mobile FROM member WHERE member_id=?'

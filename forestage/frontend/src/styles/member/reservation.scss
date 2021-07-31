@@ -199,7 +199,12 @@
   .content-table td i {
     font-size: 1.82vw;
     color: $primary-lightgreen;
+    cursor: pointer;
   }
+  .content-table td i:hover {
+    color: $primary-lightbrown;
+  }
+
 
   /* 電腦版按鈕列 */
   .content-foot {

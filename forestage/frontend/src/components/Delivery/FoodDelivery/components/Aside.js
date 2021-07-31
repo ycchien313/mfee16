@@ -144,6 +144,7 @@ function Aside(props) {
                   counts: counts,
                   address: address,
                   fulltime: fulltime,
+                  dishList: dishList,
                 },
               }}
             >

@@ -13,9 +13,10 @@ function Index(props) {
     img: [],
     name: [],
     subTotal: [],
+    dishList: [],
   })
 
-  console.log(props.location.state, 'locstate')
+  // console.log(props.location.state, 'locstate')
   useEffect(() => {
     // console.log(props)
     let newObj = {}
@@ -25,6 +26,7 @@ function Index(props) {
     newObj.img = props.location.state.img
     newObj.name = props.location.state.name
     newObj.subTotal = props.location.state.subTotal
+    newObj.dishList = props.location.state.dishList
     setOrderAll(newObj)
   }, [])
 

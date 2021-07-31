@@ -8,6 +8,8 @@ function OrderList(props) {
     coupon,
     inputCoupons,
     setMoney,
+    setCouponId,
+    setMcmId,
   } = props
   const { img, name, counts, subTotal, fulltime } = orderAll
 
@@ -21,11 +23,15 @@ function OrderList(props) {
       })
       if (newItem) {
         setCouponPrice(newItem.discount)
+        setCouponId(newItem.coupon_id)
+        setMcmId(newItem.mcm_id)
+        // console.log(newItem)
       } else {
         setCouponPrice(0)
+        setCouponId(null)
+        setMcmId(null)
       }
     }
-
     setMoney(getTotal() - couponPrice)
   }, [couponName])
 

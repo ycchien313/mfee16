@@ -18,7 +18,7 @@ function MainMealBox(props) {
     newDishCount[id] += 1
     setDishCount(newDishCount)
   }
-
+  // console.log(dishCount)
   return (
     <>
       <div className="MainMealBox">

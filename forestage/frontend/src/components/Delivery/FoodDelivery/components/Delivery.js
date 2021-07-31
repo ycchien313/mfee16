@@ -20,6 +20,7 @@ function Delivery(props) {
   const [dishCount, setDishCount] = useState({})
   // 訂餐
   const [dishList, setDishList] = useState([])
+  console.log(dishList)
   const [dishes, setDishes] = useState([])
   const [address, setAddress] = useState({
     city: '桃園市',
@@ -299,6 +300,7 @@ function Delivery(props) {
                   counts: counts,
                   address: address,
                   fulltime: fulltime,
+                  dishList: dishList,
                 },
               }}
             >

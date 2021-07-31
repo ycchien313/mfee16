@@ -17,6 +17,8 @@ function DeliveryOrder(props) {
   const [member, inputMember] = useState([])
   const [allAddress, setAllAddress] = useState('')
   const [money, setMoney] = useState('')
+  const [couponId, setCouponId] = useState('')
+  const [mcmId, setMcmId] = useState('')
 
   const data = {
     name: inputText,
@@ -26,9 +28,11 @@ function DeliveryOrder(props) {
     total: money,
     note: textArea,
     member_id: memberId,
-    // mcm_id:coupon,
+    mcm_id: mcmId,
+    coupon_id: couponId,
+    dishList: orderAll.dishList,
   }
-  console.log(data, 'aaa')
+  // console.log(typeof mcmId, 'aaa')
 
   const change = () => {
     axios({
@@ -122,6 +126,8 @@ function DeliveryOrder(props) {
               coupon={coupon}
               inputCoupon={inputCoupon}
               setMoney={setMoney}
+              setCouponId={setCouponId}
+              setMcmId={setMcmId}
             />
             <Order
               inputText={inputText}

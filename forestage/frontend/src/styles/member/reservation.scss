@@ -19,15 +19,6 @@
     }
   }
 
-  /* 增加部分 */
-  @media screen and (max-width: 768px) {
-    .main-container {
-      width: unset;
-      padding: 0 30px;
-      flex-direction: column;
-    }
-  }
-
   /********** 右側 *********/
   .right-side {
     width: 100%;
@@ -46,11 +37,6 @@
   }
 
   /********** 不同部份開始 **********/
-  /** 共用部分開始 **/
-  .d-none {
-    display: none !important;
-  }
-  /** 共用部分結束 **/
   /********** 右側：頁籤 **********/
   .tab {
     margin: 0 auto;
@@ -105,6 +91,12 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
     cursor: default;
   }
+
+  .content-spinner {
+    text-align: center;
+    margin: 100px 0;
+  }
+
   /********** 右側：內容 *********/
   .recent-content {
     padding-left: 4.95vw;
@@ -204,7 +196,6 @@
   .content-table td i:hover {
     color: $primary-lightbrown;
   }
-
 
   /* 電腦版按鈕列 */
   .content-foot {

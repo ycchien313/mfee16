@@ -11,16 +11,14 @@ function ReservationDetailModal(props) {
     reservationId: '',
     status: '',
     date: '',
+    singerName: '',
     seatName: '',
     attendance: '',
     name: '',
     mobile: '',
     note: '',
+    dishes: [{ dishName: '', dishCount: '' }],
     total: '',
-  })
-  const [dishFields, setDishFields] = useState({
-    dishName: '',
-    dishCount: '',
   })
 
   // 取得詳細訂單資料
@@ -35,19 +33,32 @@ function ReservationDetailModal(props) {
       }
     )
     const data = response.data.data
-    const order = {
-      reservationId: data.reservation_id,
-      status: data.status,
-      date: data.date,
-      signerName: data.signer_name,
-      seatName: data.seat_name,
-      attendance: data.attendance,
-      name: data.name,
-      note: data.note,
+
+    // 組合 dish_name, dish_count 成物件
+    const dishes = () => {
+      let dishesList = []
+      data.forEach((v, i) => {
+        dishesList.push({ dishName: v.dish_name, dishCount: v.dish_count })
+      })
+
+      return dishesList
     }
 
-    // TODO: 塞到欄位裡
-    console.log(order)
+    const order = {
+      reservationId: data[0].reservation_id,
+      status: data[0].status,
+      date: data[0].date,
+      singerName: data[0].singer_name,
+      seatName: data[0].seat_name,
+      attendance: data[0].attendance,
+      name: data[0].name,
+      mobile: data[0].mobile,
+      note: data[0].note,
+      dishes: dishes(),
+      total: data[0].total,
+    }
+
+    return order
   }
 
   useEffect(() => {
@@ -59,6 +70,8 @@ function ReservationDetailModal(props) {
       // 取得後端資料
       const fetchData = async () => {
         const order = await fetchReservation()
+
+        setReservationFields(order)
       }
 
       fetchData()
@@ -71,11 +84,11 @@ function ReservationDetailModal(props) {
         <Modal.Header className="modal-header">
           <Modal.Title>
             <span className="modal-title h4" id="exampleModalLabel">
-              訂位編號 #123
+              訂位編號 #{reservationFields.reservationId}
             </span>
           </Modal.Title>
           <div>
-            <span className="modal-title">已取消</span>
+            <span className="modal-title">{reservationFields.status}</span>
             <button
               type="button"
               className="btn-close"
@@ -89,35 +102,45 @@ function ReservationDetailModal(props) {
               <div className="col-6 left-part">
                 <div className="row">
                   <div className="col-6 mb-3 title">訂位日期</div>
-                  <div className="col-6 mb-3 text-end">2021/07/15</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.date}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-6 mb-3 title">表演歌手</div>
-                  <div className="col-6 mb-3 text-end">李龍號</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.singerName}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-6 mb-3 title">座位區</div>
-                  <div className="col-6 mb-3 text-end">搖滾區</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.seatName}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-6 mb-3 title">人數</div>
-                  <div className="col-6 mb-3 text-end">2</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.attendance}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-6 mb-3 title">訂位姓名</div>
-                  <div className="col-6 mb-3 text-end">王大明</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.name}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-6 mb-3 title">電話</div>
-                  <div className="col-6 mb-3 text-end">0912345678</div>
+                  <div className="col-6 mb-3 text-end">
+                    {reservationFields.mobile}
+                  </div>
                 </div>
                 <div className="row">
                   <div className="col-12 mb-1 title">備註</div>
                 </div>
                 <div className="row">
-                  <div className="col-12">
-                    我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬我不要番茄醬
-                  </div>
+                  <div className="col-12">{reservationFields.note}</div>
                 </div>
               </div>
               <div className="col-6 right-part">
@@ -125,25 +148,23 @@ function ReservationDetailModal(props) {
                   <div className="col-6 mb-3 title">餐點</div>
                   <div className="col-6 mb-3 title text-end">數量</div>
                 </div>
-                <div className="row">
-                  <div className="col-6 mb-1">瑪格莉特大披薩</div>
-                  <div className="col-6 mb-1 text-end">4</div>
-                </div>
-                <div className="row">
-                  <div className="col-6 mb-1">瑪格莉特大披薩</div>
-                  <div className="col-6 mb-1 text-end">4</div>
-                </div>
-                <div className="row">
-                  <div className="col-6 mb-1">瑪格莉特大披薩</div>
-                  <div className="col-6 mb-1 text-end">4</div>
-                </div>
-                <div className="row">
-                  <div className="col-6 mb-1">瑪格莉特大披薩</div>
-                  <div className="col-6 mb-1 text-end">4</div>
-                </div>
+                {reservationFields.dishes.map((dish, i) => {
+                  return (
+                    <>
+                      <div className="row" key={i}>
+                        <div className="col-6 mb-1">{dish.dishName}</div>
+                        <div className="col-6 mb-1 text-end">
+                          {dish.dishCount}
+                        </div>
+                      </div>
+                    </>
+                  )
+                })}
                 <div className="row">
                   <div className="col-6 mb-1 mt-3 title">總金額</div>
-                  <div className="col-6 mb-1 mt-3 text-end">4000</div>
+                  <div className="col-6 mb-1 mt-3 text-end">
+                    {reservationFields.total}
+                  </div>
                 </div>
               </div>
             </div>

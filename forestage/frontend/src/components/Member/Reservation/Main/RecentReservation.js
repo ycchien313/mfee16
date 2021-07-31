@@ -34,7 +34,7 @@ function RecentReservation(props) {
   }, [])
 
   useEffect(() => {
-    if (!didMount) {
+    if (didMount === false) {
       // 取得後端資料
       const fetchData = async () => {
         // 取得會員的訂位資料
@@ -92,8 +92,8 @@ function RecentReservation(props) {
       {orders.map((v, i) => {
         return (
           <>
-            <div className="recent-content">
-              <div key={i} className="content-container">
+            <div className="recent-content" key={i}>
+              <div className="content-container">
                 <div className="content-head">
                   <h4 className="content-head-title">
                     訂位編號 #{v.reservation_id}

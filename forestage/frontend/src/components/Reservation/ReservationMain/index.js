@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 import axios from 'axios'
 import ChooseDate from './ChooseDate'
@@ -13,6 +13,7 @@ function Main(props) {
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
   const [didMount, setDidMount] = useState(false)
+  const [dishList, setDishList] = useState([])
   const [checkList, setCheckList] = useState({
     chosenDate: '',
     singer: '',
@@ -23,8 +24,10 @@ function Main(props) {
     minOrder: 0,
     total: 0,
   })
+  // 手機版clipboard開關
+  const [showClipboard, setShowClipboard] = useState(false)
 
-  const [dishList, setDishList] = useState([])
+  const target = useRef(null)
 
   const checkRemainingSeat = Boolean(sessionStorage.getItem('remainingSeat'))
   const checkSeatCount = Boolean(sessionStorage.getItem('seatCount'))
@@ -37,17 +40,17 @@ function Main(props) {
       setSeatInfo(result.data)
     })
 
+    // 將sessionStorage狀態存入狀態
     checkRemainingSeat &&
       setRemainingSeat(
         JSON.parse(window.sessionStorage.getItem('remainingSeat'))
       )
-    // checkSeatCount && setSeatCount(JSON.parse(window.sessionStorage.getItem('seatCount')))
     checkCheckList &&
       setCheckList(JSON.parse(window.sessionStorage.getItem('checkList')))
     checkSeatInfo &&
       setSeatInfo(JSON.parse(window.sessionStorage.getItem('seatInfo')))
 
-    // 將key轉回int(ID)
+    // 將sessionStorage中seatCount的key轉回int(ID)後，存入狀態
     if (checkSeatCount) {
       console.log(seatInfo, 'sinfo')
       let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
@@ -59,7 +62,52 @@ function Main(props) {
       console.log(newObj)
       setSeatCount(newObj)
     }
+
+    // 拖曳事件
+    // find the element that you want to drag.
+    // let dragTarget = document.getElementById('dragTarget')
+    // let stickyAncester = document.querySelector('.sticky-ancester')
+
+    // // 計算sticky外層高度
+    // stickyAncester.style.height = document.body.clientHeight + 'px'
+    // // icon 初始位置
+    // dragTarget.style.left = document.body.clientWidth * 0.8 + 'px'
+
+    // dragTarget.addEventListener('touchmove', function (e) {
+    //   // grab the location of touch
+    //   var touchLocation = e.targetTouches[0]
+
+    //   e.preventDefault()
+    //   console.log(document.body.clientWidth)
+    //   // assign box new coordinates based on the touch.
+    //   dragTarget.style.left = touchLocation.pageX - 20 + 'px'
+    // })
   }, [])
+
+  useEffect(() => {
+    // 拖曳事件
+    let dragTarget = document.getElementById('dragTarget')
+    let stickyAncester = document.querySelector('.sticky-ancester')
+
+    // 點擊target後無法立即讀到dom物件，因此加此判斷式
+    if (target.current !== null) {
+      // 計算sticky外層高度
+      stickyAncester.style.height = document.body.clientHeight + 'px'
+
+      // icon 初始位置
+      dragTarget.style.left = document.body.clientWidth * 0.8 + 'px'
+
+      dragTarget.addEventListener('touchmove', function (e) {
+        // grab the location of touch
+        var touchLocation = e.targetTouches[0]
+
+        e.preventDefault()
+        console.log(document.body.clientWidth)
+        // assign box new coordinates based on the touch.
+        dragTarget.style.left = touchLocation.pageX - 20 + 'px'
+      })
+    }
+  }, [showClipboard])
 
   // 將state存入sessionStorage
   useEffect(() => {
@@ -71,8 +119,6 @@ function Main(props) {
       window.sessionStorage.setItem('checkList', JSON.stringify(checkList))
       window.sessionStorage.setItem('seatCount', JSON.stringify(seatCount))
       window.sessionStorage.setItem('seatInfo', JSON.stringify(seatInfo))
-
-      // setSeatCount(newObj)
     }
   }, [remainingSeat, seatCount, checkList, seatInfo])
 
@@ -97,10 +143,27 @@ function Main(props) {
     }
   }, [remainingSeat])
 
-
   return (
     <>
       <main className="reservation">
+        <div className="sticky-ancester">
+          <div className="list-move-zone">
+            {showClipboard ? (
+              <></>
+            ) : (
+              <img
+                className="order-list-icon"
+                id="dragTarget"
+                src="http://localhost:3000/images/common/order-list-icon.svg"
+                onClick={() => {
+                  setShowClipboard(true)
+                }}
+                ref={target}
+                alt=""
+              />
+            )}
+          </div>
+        </div>
         <div class="container-big">
           <article class="main-article">
             <ChooseDate
@@ -136,6 +199,8 @@ function Main(props) {
               seatInfo={seatInfo}
               showAuthModal={showAuthModal}
               setShowAuthModal={setShowAuthModal}
+              showClipboard={showClipboard}
+              setShowClipboard={setShowClipboard}
             />
           </aside>
         </div>

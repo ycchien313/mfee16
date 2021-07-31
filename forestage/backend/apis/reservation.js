@@ -75,6 +75,7 @@ router.post('/checkout/send', async(req, res)=>{
     
     let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`
     let insertDish = await db.connection.queryAsync(insertDishSql,[newDishList])
+    console.log("typeof dishlist:", typeof dishList)
     console.log(insertDish)
 
     // 更新mcm表格中，哪一筆訂單使用此折價券

@@ -12,18 +12,15 @@ function CheckList(props) {
     seatInfo,
     setShowAuthModal,
     showAuthModal,
+    showClipboard,
+    setShowClipboard
   } = props
 
-  // const [ifLogin, setIfLogin] = useState(false)
+  // const [showClipboard, setShowClipboard] = useState(true)
+  const clipboardDisActClass = 'clipboard disactive'
+  const clipboardActClass = 'clipboard'
 
   const ifLogin = Boolean(window.localStorage.getItem('authToken'))
-  // function checkLogin() {
-  //   if (Boolean(window.localStorage.getItem('authToken'))) {
-  //     setIfLogin(true)
-  //   } else {
-  //     setIfLogin(false)
-  //   }
-  // }
 
   function handleSubmit(e) {
     const checkLoginSwal = withReactContent(Swal)
@@ -96,7 +93,15 @@ function CheckList(props) {
 
   return (
     <>
-      <div class="clipboard">
+      <div class={showClipboard ? clipboardActClass : clipboardDisActClass}>
+        <div
+          className="close-button"
+          onClick={() => {
+            setShowClipboard(false)
+          }}
+        >
+          <i class="fas fa-times"></i>
+        </div>
         <div class="content">
           <div class="title">
             <h4>訂位資料</h4>
@@ -198,6 +203,7 @@ function CheckList(props) {
         <img
           src="http://localhost:3000/images/reservation/board-top.svg"
           alt=""
+          className="clip"
         />
         <StyledLink
           onClick={(e) => {

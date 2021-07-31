@@ -1,17 +1,14 @@
 import React, { useContext, useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
 import AuthContext from './AuthContext'
 
-const useForceUpdate = () => useState()[1]
-
 function AuthForm(props) {
-  const forceUpdate = useForceUpdate()
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
-  // const history  = useHistory()
+  const history = useHistory()
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState([
     '桃園市',
@@ -152,7 +149,7 @@ function AuthForm(props) {
           setMember({ memberId: memberId })
 
           // 首頁則強制更新
-          props.location.pathname === '/' && forceUpdate()
+          props.location.pathname === '/' && history.go(0)
           // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {}
@@ -197,7 +194,6 @@ function AuthForm(props) {
 
           // 重新整理
           setShowAuthModal(false)
-          // window.location.reload(
         } catch (error) {
           // 內部錯誤
           console.error('error:', error)

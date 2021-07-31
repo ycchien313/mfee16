@@ -16,6 +16,8 @@ function HeaderAuth() {
       title: '登出成功',
       showConfirmButton: false,
       timer: 1000,
+    }).then(() => {
+      history.go(0)
     })
   }
 
@@ -44,7 +46,6 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
-            history.push('/')
           }}
         >
           登出
@@ -73,7 +74,6 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
-            history.push('/')
           }}
         >
           登出

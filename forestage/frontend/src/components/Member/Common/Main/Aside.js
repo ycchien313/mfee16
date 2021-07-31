@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import '../../../../styles/member/aside.scss'
 
 function Aside(props) {
-  const { pagename } = props
+  const { pagename, isRecent } = props
   const [asideHeight, setAsideHeight] = useState('')
   const linkData = [
     { href: '/member/profile', title: '會員資料' },
@@ -96,7 +96,7 @@ function Aside(props) {
     window.addEventListener('resize', () => {
       setAsideHeight(calcAsideHeight())
     })
-  }, [asideHeight])
+  }, [asideHeight, isRecent])
 
   return (
     <>

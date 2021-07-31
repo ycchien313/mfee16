@@ -12,6 +12,8 @@ function Main(props) {
   const { pagename } = props
   const [isRecent, setIsRecent] = useState(true)
   const [memberId, setMemberId] = useState('')
+  const [dataLoading, setDataLoading] = useState(true)
+  const [didMount, setDidMount] = useState(true)
 
   const token = localStorage.getItem('authToken')
 
@@ -39,7 +41,24 @@ function Main(props) {
     }
 
     fetchData()
+    setDidMount(false)
+
+    setTimeout(() => {
+      setDataLoading(false)
+      console.log('didMount:', dataLoading)
+    }, 1000)
   }, [])
+
+  const loading = (
+    <>
+      <div className="content-spinner">
+        <img
+          src={process.env.PUBLIC_URL + '/images/member/spinner.svg'}
+          alt=""
+        ></img>
+      </div>
+    </>
+  )
 
   return (
     <>
@@ -47,7 +66,7 @@ function Main(props) {
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}
-            <Aside pagename={pagename} />
+            <Aside pagename={pagename} isRecent={isRecent} />
             {/* <!-- 右側：麵包屑、內容--> */}
             <div className="right-side">
               {/* <!-- 麵包屑 --> */}
@@ -57,17 +76,26 @@ function Main(props) {
               {/* <!-- 頁籤 --> */}
               <Tab isRecent={isRecent} setIsRecent={setIsRecent} />
 
+              {dataLoading
+                ? loading
+                : [
+                    isRecent ? (
+                      <RecentReservation memberId={memberId} />
+                    ) : (
+                      <HistoryReservation memberId={memberId} />
+                    ),
+                  ]}
+
               {/* 近期訂位、歷史紀錄 */}
-              {isRecent ? (
+              {/* {isRecent ? (
                 <RecentReservation memberId={memberId} />
               ) : (
                 <HistoryReservation memberId={memberId} />
-              )}
+              )} */}
             </div>
           </div>
         </main>
       </div>
-      <div style={{ height: '100vh' }}></div>
     </>
   )
 }

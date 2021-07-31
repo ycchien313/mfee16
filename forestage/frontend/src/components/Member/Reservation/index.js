@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from '../../Header/'
+import Header from '../../Header'
 import Banner from '../Common/Banner'
-import Main from './Main/'
-import Footer from '../../Footer/'
+import Main from './Main'
+import Footer from '../../Footer'
 
 function Reservation(props) {
   const { pagename } = props

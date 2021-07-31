@@ -15,7 +15,7 @@ function PersonalInfo(props) {
   const [dataLoading, setDataLoading] = useState(false)
   const [didMount, setDidMount] = useState(true)
   const [profile, setProfile] = useState({
-    avatar: process.env.PUBLIC_URL + '/images/member/elfin-green.png',
+    avatar: process.env.PUBLIC_URL + '/images/member/default-user.png',
     name: '',
     gender: '',
     birthday: '',
@@ -55,12 +55,18 @@ function PersonalInfo(props) {
       const response = await dbRequest.get(`profile/${memberId}`)
       const data = response.data
       const status = data.status
-      const avatar =
-        data.data[0].avatar.substring(0, 4) === 'http'
-          ? data.data[0].avatar
-          : `http://127.0.0.1:3001/${data.data[0].avatar}`
+      const avatar = () => {
+        if (data.data[0].avatar !== null) {
+          return data.data[0].avatar.substring(0, 4) === 'http'
+            ? data.data[0].avatar
+            : `http://127.0.0.1:3001/${data.data[0].avatar}`
+        }
+
+        return process.env.PUBLIC_URL + '/images/member/default-user.png'
+      }
+
       const profileFields = {
-        avatar: avatar,
+        avatar: avatar(),
         name: data.data[0].name,
         gender: data.data[0].gender,
         birthday: data.data[0].birthday,

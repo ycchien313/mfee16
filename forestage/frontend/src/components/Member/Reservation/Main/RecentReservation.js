@@ -6,10 +6,11 @@ import { useMediaQuery } from 'react-responsive'
 function RecentReservation(props) {
   const { memberId } = props
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
-  const [orders, setOrders] = useState([])
-  const [reservationId, setReservationId] = useState('')
   const [didMount, setDidMount] = useState(true)
   const [show, setShow] = useState(false)
+  const [orders, setOrders] = useState([])
+  // const [orders, setOrders] = useState([{reservationId:"",}])
+  const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
   const handleClose = () => setShow(false)
@@ -26,15 +27,20 @@ function RecentReservation(props) {
         },
       }
     )
+
+    console.log(response.data.data)
     return response.data.data
   }
 
   useEffect(() => {
     setDidMount(false)
+    console.log('mount')
   }, [])
 
   useEffect(() => {
     if (didMount === false) {
+      console.log('update')
+
       // 取得後端資料
       const fetchData = async () => {
         // 取得會員的訂位資料
@@ -46,7 +52,7 @@ function RecentReservation(props) {
 
       fetchData()
     }
-  }, [memberId])
+  }, [memberId, didMount])
 
   // 電腦版按鈕列
   const btnRowDom = (
@@ -88,7 +94,7 @@ function RecentReservation(props) {
         memberId={memberId}
         reservationId={reservationId}
       />
-
+      {console.log(orders)}
       {orders.map((v, i) => {
         return (
           <>

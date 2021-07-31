@@ -23,6 +23,9 @@ function Home() {
   const [singerIntroduction, setSingetIntroduction] = useState()
 
   // 登入狀態
+  const [loginDetail, setLoginDetail] = useState()
+  const [memberId, setMemberId] = useState(0)
+  const [authToken, setAuthToken] = useState()
   const [loginState, setLoginState] = useState(false)
   const [all, setAll] = useState({})
   const [cart, setCart] = useState([])
@@ -46,8 +49,16 @@ function Home() {
       $('.cart-small').addClass('disabled')
       $('.header-cart').removeClass('active')
     })
+    let result = localStorage.getItem('authToken')
+    setAuthToken(result)
+    console.log('token:', result)
   }, [])
-
+  useEffect(() => {
+    // memberId get
+    console.log('辨識用')
+    let token = localStorage.getItem('authToken')
+    console.log(token)
+  })
   return (
     <>
       <Header item={item} setItem={setItem} />
@@ -63,7 +74,7 @@ function Home() {
           singerImg={singerImg}
           singerIntroduction={singerIntroduction}
         />
-        <FourthScreen />
+        <FourthScreen memberId={memberId} />
         <FivethScreen />
         <SixthScreen />
         <SeventhScreen />

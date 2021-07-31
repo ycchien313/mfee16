@@ -30,6 +30,7 @@ function Dish(props) {
     if (Boolean(localStorage.getItem('cart'))) {
       setItem(cartStorage)
     }
+    // 防止冒泡事件
     $('.button-orange-s').on('click', function () {
       console.log('button-click')
       $('.cart-big').removeClass('disabled')

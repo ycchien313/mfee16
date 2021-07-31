@@ -5,10 +5,11 @@ import Swal from 'sweetalert2'
 //
 
 function FourthScreen(props) {
+  let { memberId } = props
   const [loading, setLoading] = useState(false)
 
   // 判斷是否投過票
-  const [voteState, setVoteState] = useState(false)
+  const [voteState, setVoteState] = useState(0)
   // 透過子元件得到候選人
   const [candidateId, setCandidateId] = useState([])
   const [candidateName, setCandidateName] = useState()
@@ -27,6 +28,15 @@ function FourthScreen(props) {
       setCounts(result)
     })
   }, [])
+  useEffect(() => {
+    if (memberId)
+      $.ajax({
+        url: `http://localhost:3001/home/member_state/${memberId}`,
+      }).then(function (result) {
+        console.log('投票狀態:', result[0].vote_valid)
+        setVoteState(result[0].vote_valid)
+      })
+  }, [memberId])
 
   // 投票函式
   function UpdateCandidateCounts() {
@@ -133,7 +143,6 @@ function FourthScreen(props) {
             UpdateCandidateCounts()
             VoteCountUpdate()
             Swal.fire('投票成功', '即將更新票數', 'success')
-            setVoteState(true)
           }}
         >
           <h4 className="btn-innerText">投票</h4>

@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 function EightScreen(props) {
   // 預設狀態
   const [dish, setDish] = useState()
-  const [dishState, setDishState] = useState()
+  const [dishState, setDishState] = useState('')
   // map出的目標
   const [targetDish, setTargetDish] = useState([])
-
+  const [text, setText] = useState()
   // 購物車用
   let { all, setAll, item, setItem } = props
   useEffect(() => {

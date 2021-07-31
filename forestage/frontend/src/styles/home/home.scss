@@ -1715,4 +1715,14 @@ button {
     transform: translateX(150px);
     transition: all 200ms;
   }
+  .test {
+    width: 100px;
+    height: 80px;
+    background: cyan;
+    border-radius: 5px;
+    color: white;
+    font-family: $zh-tw-maru;
+    border: none;
+    // transition: 0.3s;
+  }
 }

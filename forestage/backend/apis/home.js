@@ -17,6 +17,14 @@ router.get("/singer_today", async function (req, res, next) {
     // let queryResult = current + "T16:00:00.000Z";
     res.send(queryResult[0]);
 });
+// 取得登入後會員詳情
+router.get("/member_state/:memberId", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync(
+        "select * from member where member_id = ?",
+        req.params.memberId
+    );
+    res.json(queryResult);
+});
 
 // 取得評論資料
 router.get("/comment/:id", async function (req, res, next) {

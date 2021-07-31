@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react'
+import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
 import AuthContext from './AuthContext'
 
+const useForceUpdate = () => useState()[1]
+
 function AuthForm(props) {
+  const forceUpdate = useForceUpdate()
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
+  // const history  = useHistory()
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState([
     '桃園市',
@@ -145,6 +150,9 @@ function AuthForm(props) {
           serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
+
+          // 首頁則強制更新
+          props.location.pathname === '/' && forceUpdate()
           // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {}
@@ -385,4 +393,4 @@ function AuthForm(props) {
   return <>{signinScreen ? signinDom : signupDom}</>
 }
 
-export default AuthForm
+export default withRouter(AuthForm)

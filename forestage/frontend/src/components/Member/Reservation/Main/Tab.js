@@ -14,7 +14,7 @@ function Tab(props) {
               setIsRecent(true)
             }}
           >
-            <h4>近期訂單</h4>
+            <h4>近期訂位</h4>
           </div>
           <div
             className={isRecent ? 'tab-item' : 'tab-item active'}

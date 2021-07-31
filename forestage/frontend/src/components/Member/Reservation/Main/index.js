@@ -27,17 +27,17 @@ function Main(props) {
       },
     })
 
-    const memberId = response.data.memberId
+    const memberIdFromToken = response.data.memberId
 
-    return { memberId: memberId }
+    return { memberIdFromToken: memberIdFromToken }
   }
 
   useEffect(() => {
     // 抓後端資料，並設定至狀態
     const fetchData = async () => {
-      const { memberId } = await fetchMemberId()
+      const { memberIdFromToken } = await fetchMemberId()
 
-      setMemberId(memberId)
+      setMemberId(memberIdFromToken)
     }
 
     fetchData()
@@ -76,6 +76,7 @@ function Main(props) {
               {/* <!-- 頁籤 --> */}
               <Tab isRecent={isRecent} setIsRecent={setIsRecent} />
 
+              {/* 近期訂位、歷史紀錄 */}
               {dataLoading
                 ? loading
                 : [

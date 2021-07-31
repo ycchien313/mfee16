@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
@@ -7,6 +8,7 @@ import AuthContext from './AuthContext'
 function AuthForm(props) {
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
+  const history = useHistory()
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState([
     '桃園市',
@@ -146,7 +148,9 @@ function AuthForm(props) {
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
           // 關閉彈出視窗
-          setShowAuthModal(false)
+          // setShowAuthModal(false)
+
+          history.push('/')
         } catch (error) {}
         break
 

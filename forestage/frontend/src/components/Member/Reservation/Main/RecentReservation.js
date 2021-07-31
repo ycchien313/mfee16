@@ -9,7 +9,6 @@ function RecentReservation(props) {
   const [didMount, setDidMount] = useState(true)
   const [show, setShow] = useState(false)
   const [orders, setOrders] = useState([])
-  // const [orders, setOrders] = useState([{reservationId:"",}])
   const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
@@ -28,19 +27,15 @@ function RecentReservation(props) {
       }
     )
 
-    console.log(response.data.data)
     return response.data.data
   }
 
   useEffect(() => {
     setDidMount(false)
-    console.log('mount')
   }, [])
 
   useEffect(() => {
     if (didMount === false) {
-      console.log('update')
-
       // 取得後端資料
       const fetchData = async () => {
         // 取得會員的訂位資料
@@ -94,7 +89,7 @@ function RecentReservation(props) {
         memberId={memberId}
         reservationId={reservationId}
       />
-      {console.log(orders)}
+
       {orders.map((v, i) => {
         return (
           <>

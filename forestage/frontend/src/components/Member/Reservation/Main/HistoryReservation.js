@@ -1,6 +1,11 @@
 import React from 'react'
+import axios from 'axios'
 
-function HistoryReservation() {
+function HistoryReservation(props) {
+  const { memberId } = props
+
+  console.log(memberId)
+
   return (
     <>
       <div class="history-content active">

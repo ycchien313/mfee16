@@ -60,15 +60,15 @@ router.get('/delivery/recent/:memberId', async (req, res, next) => {
     try {
         // 執行 SQL，查詢該會員近期的外送訂單
         const sql =
-            'SELECT `member_id`, delivery.`delivery_id`, `delivey_time`, dish_name, COUNT(dish_id) AS dish_count, `total`, delivery.`name`, `address`, `mobile`, `note` ' +
+            'SELECT `member_id`, delivery.`delivery_id`, `delivery_time`, dish_name, COUNT(dish_id) AS dish_count, `total`, delivery.`name`, `address`, `mobile`, `note` ' +
             'FROM `delivery` ' +
             'JOIN (SELECT `delivery_id`, dish.name AS dish_name, delivery_dish_mapping.`dish_id`' +
             'FROM `delivery_dish_mapping` ' +
             'JOIN dish ' +
             'ON delivery_dish_mapping.dish_id = dish.dish_id) AS dishToDDM ' +
             'ON delivery.delivery_id = dishToDDM.delivery_id ' +
-            'WHERE member_id = ? AND delivey_time > NOW() ' +
-            'GROUP BY dish_id';
+            'WHERE member_id = ? AND delivery_time > NOW() ' +
+            'GROUP BY dish_id, delivery_id';
         const dbDelivery = await conn.queryAsync(sql, [memberId]);
         const resData = { status: '成功', data: dbDelivery };
 

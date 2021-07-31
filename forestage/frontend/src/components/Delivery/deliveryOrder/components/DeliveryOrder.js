@@ -26,6 +26,7 @@ function DeliveryOrder(props) {
     total: money,
     note: textArea,
     member_id: memberId,
+    // mcm_id:coupon,
   }
   console.log(data, 'aaa')
 
@@ -37,14 +38,6 @@ function DeliveryOrder(props) {
         data,
       },
     })
-    //   .post('http://localhost:3001/delivery/order', data)
-    //   .then((res) => {
-    //     console.log("res:",res)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.response)
-    //   })
-    // console.log('w')
   }
 
   useEffect(() => {

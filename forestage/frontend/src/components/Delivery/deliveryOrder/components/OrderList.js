@@ -26,7 +26,6 @@ function OrderList(props) {
       }
     }
 
-    //
     setMoney(getTotal() - couponPrice)
   }, [couponName])
 

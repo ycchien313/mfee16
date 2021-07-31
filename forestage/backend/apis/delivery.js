@@ -40,10 +40,12 @@ router.get("/member/:id",async function(req,res,next){
 router.post('/order', async function (req, res, next) {
     const { name, mobile, address, delivery_time, total, note, member_id } =req.body.data
     let arr = [name, mobile, address, delivery_time, total, note, member_id]
-    console.log(req.body.data)
     let sql =
       'INSERT INTO delivery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)'
     let updateDeliery = await db.connection.queryAsync(sql, [arr])
+    
+    // let McmSql =`UPDATE member_coupon_mapping SET delivery_id = ${updateDeliery.insertId}, valid = 0 WHERE mcm_id = ?`
+    // let updateMcm= await db.connection.queryAsync(McmSql,[arr.mcm_id])
   })
 
 module.exports = router;

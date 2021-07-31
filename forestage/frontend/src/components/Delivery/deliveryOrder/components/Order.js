@@ -74,14 +74,19 @@ function Order(props) {
               onChange={(event) => {
                 setInputText(event.target.value)
               }}
+              required
             />
             <input
               type="text"
               placeholder="請輸入電話"
+              pattern="09\d{8}"
+              minLength="9"
+              maxLength="10"
               value={inputTel}
               onChange={(event) => {
                 setInputTel(event.target.value)
               }}
+              required
             />
             <input
               type="text"
@@ -95,7 +100,8 @@ function Order(props) {
               id=""
               cols="30"
               rows="10"
-              placeholder="範例: 餐點放在門口就好，謝謝"
+              maxlength="150"
+              placeholder="請輸入備註事項"
               value={textArea}
               onChange={(event) => {
                 setTextArea(event.target.value)

@@ -22,9 +22,9 @@ function ReservationDetailModal(props) {
   })
 
   // 取得詳細訂單資料
-  const fetchReservation = async () => {
+  const fetchDetailReservation = async () => {
     const response = await axios.get(
-      `http://localhost:3001/member/reservation/recent/detail/${memberId}/${reservationId}`,
+      `http://localhost:3001/member/reservation/history/detail/${memberId}/${reservationId}`,
       {
         headers: {
           Accept: 'application/json',
@@ -33,6 +33,7 @@ function ReservationDetailModal(props) {
       }
     )
     const data = response.data.data
+    console.log(response)
 
     // 組合 dish_name, dish_count 成物件
     const dishes = () => {
@@ -69,14 +70,14 @@ function ReservationDetailModal(props) {
     if (didMount === false) {
       // 取得後端資料
       const fetchData = async () => {
-        const order = await fetchReservation()
+        const order = await fetchDetailReservation()
 
         setReservationFields(order)
       }
 
       fetchData()
     }
-  }, [reservationId])
+  }, [reservationId, didMount])
 
   return (
     <>

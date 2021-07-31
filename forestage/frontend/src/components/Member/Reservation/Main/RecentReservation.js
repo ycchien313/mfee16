@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import ReservationDetailModal from './ReservationDetailModal'
+import RecentReservationDetailModal from './RecentReservationDetailModal'
 import { useMediaQuery } from 'react-responsive'
 
 function RecentReservation(props) {
@@ -16,7 +16,7 @@ function RecentReservation(props) {
   const handleShow = () => setShow(true)
 
   // 取得訂位資料
-  const fetchMemberReservation = async () => {
+  const fetchRecentReservation = async () => {
     const response = await axios.get(
       `http://localhost:3001/member/reservation/recent/${memberId}`,
       {
@@ -39,10 +39,10 @@ function RecentReservation(props) {
       // 取得後端資料
       const fetchData = async () => {
         // 取得會員的訂位資料
-        const reservation = await fetchMemberReservation()
-        console.log('didUpdate reservstion:', reservation)
+        const recentReservation = await fetchRecentReservation()
+        console.log('didMount recent reservstion:', recentReservation)
 
-        setOrders(reservation)
+        setOrders(recentReservation)
       }
 
       fetchData()
@@ -83,7 +83,7 @@ function RecentReservation(props) {
 
   return (
     <>
-      <ReservationDetailModal
+      <RecentReservationDetailModal
         show={show}
         handleClose={handleClose}
         memberId={memberId}

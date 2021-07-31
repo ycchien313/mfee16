@@ -4,7 +4,7 @@ import '../../styles/delivery/foodDelivery/banner.scss'
 import Delivery from './FoodDelivery/components/Delivery'
 import Header from '../../components/Header/'
 
-function index() {
+function index(props) {
   return (
     <>
       <Header />

@@ -35,27 +35,15 @@ router.get("/member/:id",async function(req,res,next){
     let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = ?",req.params.id)
     res.send(queryresult)
 } )
-// 
 
-router.post("/order",async function(req,res,next){
-    let updateDeliery = await db.connection.queryAsync("INSERT INTO deliery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)");
-} )
 
 router.post('/order', async function (req, res, next) {
-    const { name, mobile, address, delivery_time, total, note, member_id } =
-      req.body.data
-    // 缺少 total, member_id
+    const { name, mobile, address, delivery_time, total, note, member_id } =req.body.data
+    let arr = [name, mobile, address, delivery_time, total, note, member_id]
+    console.log(req.body.data)
     let sql =
-      'INSERT INTO deliery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)'
-    let updateDeliery = await db.connection.queryAsync(sql, [
-      name,
-      mobile,
-      address,
-      delivery_time,
-      total,
-      note,
-      member_id,
-    ])
+      'INSERT INTO delivery (name,mobile,address,delivery_time,total,note,member_id) VALUES (?)'
+    let updateDeliery = await db.connection.queryAsync(sql, [arr])
   })
 
 module.exports = router;

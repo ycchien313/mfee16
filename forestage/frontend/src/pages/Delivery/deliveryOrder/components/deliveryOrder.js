@@ -4,6 +4,7 @@ import OrderList from './OrderList'
 import $ from 'jquery'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 
 function DeliveryOrder(props) {
   const [selectedOption, setSelectOption] = useState('')
@@ -24,18 +25,26 @@ function DeliveryOrder(props) {
     delivery_time: orderAll.fulltime,
     total: money,
     note: textArea,
-    member_id: { memberId },
+    member_id: memberId,
   }
   console.log(data, 'aaa')
+
   const change = () => {
-    axios
-      .post('http://localhost:3001/delivery/order', data)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
+    axios({
+      method: 'post',
+      url: 'http://localhost:3001/delivery/order',
+      data: {
+        data,
+      },
+    })
+    //   .post('http://localhost:3001/delivery/order', data)
+    //   .then((res) => {
+    //     console.log("res:",res)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.response)
+    //   })
+    // console.log('w')
   }
 
   useEffect(() => {
@@ -93,9 +102,21 @@ function DeliveryOrder(props) {
         <div className="res-check">
           <div className="container-big">
             <div className="bread-crumb">
-              <a href="#/" className="prev span">
-                外送訂餐
-              </a>
+              <Link
+                className="Link-back"
+                to={{
+                  pathname: '/delivery',
+                  state: {
+                    counts: orderAll.counts,
+                    address: orderAll.address,
+                    fulltime: orderAll.fulltime,
+                  },
+                }}
+              >
+                <a href="#/" className="prev span">
+                  外送訂餐
+                </a>
+              </Link>
               {'  /  '}
               <a href="#/" className="active span">
                 確認訂單
@@ -130,15 +151,27 @@ function DeliveryOrder(props) {
                 本店採現場付款，訂單送出後您將收到 E-Mail 確認信。
               </span>
               <div className="buttons">
-                <button className="guide-button back">
-                  <img
-                    src={
-                      'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-left-solid.svg'
-                    }
-                    alt=""
-                  />
-                  修改訂位
-                </button>
+                <Link
+                  className="Link-back"
+                  to={{
+                    pathname: '/delivery',
+                    state: {
+                      counts: orderAll.counts,
+                      address: orderAll.address,
+                      fulltime: orderAll.fulltime,
+                    },
+                  }}
+                >
+                  <button className="guide-button back">
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-left-solid.svg'
+                      }
+                      alt=""
+                    />
+                    修改訂餐
+                  </button>
+                </Link>
                 {(inputText === '') | (inputTel === '') ? (
                   <button
                     className="pink-guide-button"
@@ -147,6 +180,25 @@ function DeliveryOrder(props) {
                         icon: 'warning',
                         title: '確認有無遺漏填寫選項',
                         text: '請輸入姓名及電話~',
+                      })
+                    }}
+                  >
+                    確認送出
+                    <img
+                      src={
+                        'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
+                      }
+                      alt=""
+                    />
+                  </button>
+                ) : localStorage.getItem('authToken') === null ? (
+                  <button
+                    className="pink-guide-button"
+                    onClick={function () {
+                      Swal.fire({
+                        icon: 'warning',
+                        title: '確認有無登入',
+                        text: '請至上方登入~',
                       })
                     }}
                   >

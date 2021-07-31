@@ -629,4 +629,14 @@
       box-shadow: none;
     }
   }
+  .Link-back {
+    text-decoration: none;
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+      text-decoration: none;
+    }
+  }
 }

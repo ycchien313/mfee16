@@ -21,7 +21,6 @@ function App() {
           <Route path="/comment/">
             <Comment />
           </Route>
-          {/* <Route path="/delivery/deliveryOrder/"> */}
           <Route path="/delivery/deliveryOrder/" component={DeliveryOrder}>
             {/* <DeliveryOrder /> */}
           </Route>

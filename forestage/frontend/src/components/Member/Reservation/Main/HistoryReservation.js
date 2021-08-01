@@ -65,44 +65,46 @@ function HistoryReservation(props) {
         reservationId={reservationId}
       />
 
-      <div class="history-content active">
-        <div class="content-container">
-          <div class="content-body">
-            <table class="content-table">
-              <thead>
-                <tr>
-                  <th>訂單編號</th>
-                  <th>日期</th>
-                  <th>狀態</th>
-                  <th>更多</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map((order, i) => {
-                  return (
-                    <>
-                      <tr key={i}>
-                        <td>{order.reservationId}</td>
-                        <td>{order.date}</td>
-                        <td>{order.status}</td>
-                        <td>
-                          <i
-                            class="fas fa-eye"
-                            onClick={() => {
-                              setReservationId(order.reservationId)
-                              handleShow()
-                            }}
-                          ></i>
-                        </td>
-                      </tr>
-                    </>
-                  )
-                })}
-              </tbody>
-            </table>
+      {orders.length !== 0 && (
+        <div class="history-content active">
+          <div class="content-container">
+            <div class="content-body">
+              <table class="content-table">
+                <thead>
+                  <tr>
+                    <th>訂單編號</th>
+                    <th>日期</th>
+                    <th>狀態</th>
+                    <th>更多</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orders.map((order, i) => {
+                    return (
+                      <>
+                        <tr key={i}>
+                          <td>{order.reservationId}</td>
+                          <td>{order.date}</td>
+                          <td>{order.status}</td>
+                          <td>
+                            <i
+                              class="fas fa-eye"
+                              onClick={() => {
+                                setReservationId(order.reservationId)
+                                handleShow()
+                              }}
+                            ></i>
+                          </td>
+                        </tr>
+                      </>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

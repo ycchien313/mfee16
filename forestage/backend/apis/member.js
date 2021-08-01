@@ -50,6 +50,71 @@ const upload = multer({
     },
 });
 
+/********** 查詢詳細歷史訂單 **********/
+router.get(
+    '/delivery/history/detail/:memberId/:deliveryId',
+    async (req, res) => {
+        console.log('URL: ', req.url);
+        console.log('METHOD: ', req.method);
+
+        let dbDeliveryDetail = null;
+        const memberId = req.params.memberId;
+        const deliveryId = req.params.deliveryId;
+
+        // 執行 SQL，查詢會員的「詳細」訂位資料
+        const sql =
+            'SELECT `member_id`, DLV.`delivery_id`, `status`, DATE_FORMAT(DLV.delivery_time, "%Y/%m/%d") AS date, DLV.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(DDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+            'FROM `delivery` AS DLV, delivery_dish_mapping AS DDM, dish ' +
+            'WHERE member_id = ? AND DLV.delivery_id = ? AND DLV.delivery_id = DDM.delivery_id AND DDM.dish_id = dish.dish_id GROUP BY DDM.dish_id';
+        await conn
+            .queryAsync(sql, [memberId, deliveryId])
+            .then((result) => {
+                dbDeliveryDetail = result;
+                resData = { status: '成功', data: dbDeliveryDetail };
+                res.statusCode = 200;
+            })
+            .catch((error) => {
+                resData = { status: '失敗', msg: error };
+                res.statusCode = 500;
+            });
+
+        console.log(resData);
+        res.status(res.statusCode).json(resData);
+    }
+);
+
+/********** 查詢歷史外送訂單 **********/
+router.get('/delivery/history/:memberId', async (req, res) => {
+    console.log('URL: ', req.url);
+    console.log('METHOD: ', req.method);
+
+    let dbDelivery = null;
+    let resData = null;
+    const memberId = req.params.memberId;
+
+    // 執行 SQL，查詢歷史(今天以前)外送訂單資料
+    const sql =
+        'SELECT `member_id`, `delivery_id`, `delivery_time`, `status` ' +
+        'FROM `delivery` ' +
+        'WHERE member_id = ? AND (delivery_time < NOW() OR status = "已取消") ' +
+        'ORDER BY delivery_time';
+    await conn
+        .queryAsync(sql, memberId)
+        .then((result) => {
+            dbDelivery = result;
+            resData = { status: '成功', data: dbDelivery };
+            res.statusCode = 200;
+        })
+        .catch((error) => {
+            resData = { status: '失敗', msg: '請確認輸入格式' };
+            console.log('錯誤訊息: ', error);
+            res.statusCode = 500;
+        });
+
+    console.log(resData);
+    res.status(res.statusCode).json(resData);
+});
+
 /********** 查詢近期外送訂單 **********/
 router.get('/delivery/recent/:memberId', async (req, res, next) => {
     console.log('URL :', req.url);

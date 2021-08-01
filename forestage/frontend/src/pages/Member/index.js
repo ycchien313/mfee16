@@ -4,6 +4,7 @@ import ReactDelay from 'react-delay'
 import Profile from '../../components/Member/Profile/'
 import Reservation from '../../components/Member/Reservation/'
 import Delivery from '../../components/Member/Delivery/'
+import Coupon from '../../components/Member/Coupon/'
 import AuthContext from '../../components/Auth/AuthContext'
 import Auth from '../../components/Auth'
 
@@ -17,6 +18,9 @@ function Member(props) {
       <ReactDelay wait={500}>
         {member !== null ? (
           <Switch>
+            <Route path={`${url}/coupon`}>
+              <Coupon pagename="折價券" />
+            </Route>
             <Route path={`${url}/delivery`}>
               <Delivery pagename="外送訂單" />
             </Route>

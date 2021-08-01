@@ -11,7 +11,7 @@ function Main(props) {
   const { pagename } = props
   const [isRecent, setIsRecent] = useState(true)
   const [memberId, setMemberId] = useState('')
-  const [dataLoading, setDataLoading] = useState(false)
+  const [dataLoading, setDataLoading] = useState(true)
   const [contentIsLoaded, setContentIsLoaded] = useState(false)
 
   const token = localStorage.getItem('authToken')

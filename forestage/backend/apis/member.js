@@ -50,6 +50,58 @@ const upload = multer({
     },
 });
 
+/********** 查詢已使用(歷史)折價券 **********/
+router.get('/coupon/history/:memberId', async (req, res, next) => {
+    console.log('URL :', req.url);
+    console.log('METHOD: ', req.method);
+
+    const memberId = req.params.memberId;
+
+    try {
+        // 執行 SQL，查詢該會員近期的外送訂單
+        const sql =
+            'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
+            'FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id ' +
+            'WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())<0';
+        const dbCoupon = await conn.queryAsync(sql, [memberId]);
+        const resData = { status: '成功', data: dbCoupon };
+
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        const resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
+});
+
+/********** 查詢可使用(近期)折價券 **********/
+router.get('/coupon/recent/:memberId', async (req, res, next) => {
+    console.log('URL :', req.url);
+    console.log('METHOD: ', req.method);
+
+    const memberId = req.params.memberId;
+
+    try {
+        // 執行 SQL，查詢該會員近期的外送訂單
+        const sql =
+            'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
+            'FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id ' +
+            'WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0';
+        const dbCoupon = await conn.queryAsync(sql, [memberId]);
+        const resData = { status: '成功', data: dbCoupon };
+
+        console.log(resData);
+        res.status(200).json(resData);
+    } catch (error) {
+        const resData = { status: '失敗', msg: '內部錯誤，請聯絡伺服器管理員' };
+
+        console.log('錯誤訊息: ', error);
+        res.status(500).json(resData);
+    }
+});
+
 /********** 查詢詳細歷史訂單 **********/
 router.get(
     '/delivery/history/detail/:memberId/:deliveryId',

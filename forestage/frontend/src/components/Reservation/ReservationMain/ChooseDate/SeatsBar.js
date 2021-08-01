@@ -10,6 +10,10 @@ function SeatsBar(props) {
   const barLength = useRef(null)
   const leftSeat = useRef(null)
   const barBackground = useRef(null)
+  const rockBarend = useRef(null)
+  const middleBarend = useRef(null)
+  const backBarend = useRef(null)
+  const infoText = useRef(null)
 
   useEffect(() => {
     setDidMount(true)
@@ -77,9 +81,30 @@ function SeatsBar(props) {
         parseInt(backBar.current.style.width) +
         'px'
 
-      // 扣除尾端波浪長度
+      // 總長度需扣除尾端波浪長度
       barLength.current.style.width = `calc(${totalBarLength} - 2.6vw)`
 
+      // 若座位數為0，移除尾部波浪樣式
+      seatCount[1] === 0
+        ? (rockBarend.current.style.display = 'none')
+        : (rockBarend.current.style.display = 'block')
+
+      seatCount[2] === 0
+        ? (middleBarend.current.style.display = 'none')
+        : (middleBarend.current.style.display = 'block')
+
+      seatCount[3] === 0
+        ? (backBarend.current.style.display = 'none')
+        : (backBarend.current.style.display = 'block')
+
+      if (seatCount[1] === 0 && seatCount[2] === 0 && seatCount[3] === 0) {
+        barBackground.current.style.justifyContent = 'center'
+        infoText.current.style.display = 'block'
+      }else{
+        barBackground.current.style.justifyContent = 'initial'
+        infoText.current.style.display = 'none'
+
+      }
     }
   }, [seatCount])
 
@@ -87,13 +112,14 @@ function SeatsBar(props) {
     <>
       <div className="left-seat" ref={leftSeat}>
         <div className="bar-background" ref={barBackground}>
+          <p className="h4" ref={infoText}>本日座位已售罄</p>
           <div className="bar-length" ref={barLength}>
             <div className="rock-bar" ref={rockBar}></div>
-            <div className="rock-bar-end"></div>
+            <div className="rock-bar-end" ref={rockBarend}></div>
             <div className="middle-bar" ref={middleBar}></div>
-            <div className="middle-bar-end"></div>
+            <div className="middle-bar-end" ref={middleBarend}></div>
             <div className="back-bar" ref={backBar}></div>
-            <div className="back-bar-end"></div>
+            <div className="back-bar-end" ref={backBarend}></div>
           </div>
         </div>
         <div className="bar-info">

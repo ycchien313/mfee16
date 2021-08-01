@@ -539,12 +539,16 @@
     display: flex;
     margin-top: 2vw;
   }
+  .bar-background p{
+    align-items: center;
+    color: $accent-red;
+  }
   .bar-length {
     display: flex;
     width: 100%;
   }
   .rock-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $accent-orange;
     border-radius: 40px 0 0 40px;
@@ -565,7 +569,7 @@
     flex-shrink: 0;
   }
   .middle-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $secondary-green;
     position: relative;
@@ -586,7 +590,7 @@
     flex-shrink: 0;
   }
   .back-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $secondary-lightyellow;
     position: relative;

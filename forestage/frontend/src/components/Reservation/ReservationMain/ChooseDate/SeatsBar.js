@@ -3,16 +3,13 @@ function SeatsBar(props) {
   const [didMount, setDidMount] = useState(false)
   const { seatInfo, remainingSeat, setRemainingSeat, seatCount, setSeatCount } =
     props
-  // console.log(typeof seatInfo)
-  // console.log(seatInfo, 'seatinfo')
-  // console.log(seatInfo[0])
-  // console.log(remainingSeat)
 
   const rockBar = useRef(null)
   const middleBar = useRef(null)
   const backBar = useRef(null)
   const barLength = useRef(null)
   const leftSeat = useRef(null)
+  const barBackground = useRef(null)
 
   useEffect(() => {
     setDidMount(true)
@@ -21,10 +18,13 @@ function SeatsBar(props) {
 
   useEffect(() => {
     if (didMount) {
+      // 點擊後顯示長條圖
       leftSeat.current.style.display = 'block'
-      let seatPercent = ''
+      let seatWidthInPx = ''
       let totalRemainingSeat = 0
       let totalSeat = 0
+      // 找出瀏覽器寬度
+      let vw = document.documentElement.clientWidth / 100
 
       // 計算總座位數
       seatInfo.forEach((item) => {
@@ -36,31 +36,57 @@ function SeatsBar(props) {
         totalRemainingSeat += seatCount[item.seat_id]
         switch (item.seat_id) {
           case 1:
-            seatPercent = (seatCount[1] / totalSeat) * 100 + '%'
-            rockBar.current.style.width = seatPercent
+            seatWidthInPx =
+              seatCount[1] / totalSeat > 0
+                ? (seatCount[1] / totalSeat) *
+                    barBackground.current.offsetWidth -
+                  1.5 * vw +
+                  'px'
+                : 0 + 'px' //避免產生負數
+            rockBar.current.style.width = seatWidthInPx
             break
           case 2:
-            seatPercent = (seatCount[2] / totalSeat) * 100 + '%'
-            middleBar.current.style.width = seatPercent
+            seatWidthInPx =
+              seatCount[2] / totalSeat > 0
+                ? (seatCount[2] / totalSeat) *
+                    barBackground.current.offsetWidth -
+                  1.5 * vw +
+                  'px'
+                : 0 + 'px'
+            middleBar.current.style.width = seatWidthInPx
             break
           case 3:
-            seatPercent = (seatCount[3] / totalSeat) * 100 + '%'
-            backBar.current.style.width = seatPercent
+            seatWidthInPx =
+              seatCount[3] / totalSeat > 0
+                ? (seatCount[3] / totalSeat) *
+                    barBackground.current.offsetWidth -
+                  1.5 * vw +
+                  'px'
+                : 0 + 'px'
+            backBar.current.style.width = seatWidthInPx
             break
           default:
             break
         }
       })
+
       // 長條圖總長度
-      let totalBarLength = (totalRemainingSeat / totalSeat) * 100 + '%'
-      barLength.current.style.width = totalBarLength
+      let totalBarLength =
+        parseInt(rockBar.current.style.width) +
+        parseInt(middleBar.current.style.width) +
+        parseInt(backBar.current.style.width) +
+        'px'
+
+      // 扣除尾端波浪長度
+      barLength.current.style.width = `calc(${totalBarLength} - 2.6vw)`
+
     }
   }, [seatCount])
 
   return (
     <>
       <div className="left-seat" ref={leftSeat}>
-        <div className="bar-background">
+        <div className="bar-background" ref={barBackground}>
           <div className="bar-length" ref={barLength}>
             <div className="rock-bar" ref={rockBar}></div>
             <div className="rock-bar-end"></div>

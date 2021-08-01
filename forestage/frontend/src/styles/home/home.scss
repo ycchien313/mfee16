@@ -955,6 +955,7 @@ button {
       justify-content: space-around;
       border-radius: 70px;
       margin-bottom: 10px;
+      transition: 0.1s;
     }
     .mobile-vote-li-candidate {
       display: flex;
@@ -1739,5 +1740,11 @@ button {
     font-family: $zh-tw-maru;
     border: none;
     // transition: 0.3s;
+  }
+  .mobile-vote-li.active {
+    background: $secondary-green;
+  }
+  .mobile-vote-li.active h4 {
+    color: white;
   }
 }

@@ -4,6 +4,7 @@
   position: fixed;
   width: 100%;
   z-index: 100;
+  transition: 0.2s;
 }
 
 .main-header a,
@@ -261,3 +262,13 @@ li.login {
   border-radius: 20px; /* roundness of the scroll thumb */
   /* creates padding around scroll thumb */
 }
+
+/* Jquery */
+.hide {
+  transform: translateY(-120px);
+}
+
+.fixed-top {
+  position: fixed;
+}
+/* Jquery end  */

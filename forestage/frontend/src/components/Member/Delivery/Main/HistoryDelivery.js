@@ -1,8 +1,71 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import HistoryDeliveryDetailModal from './HistoryDeliveryDetailModal'
 
-function HistoryDelivery() {
+function HistoryDelivery(props) {
+  const { memberId, setContentIsLoaded } = props
+  const [deliveryId, setDeliveryId] = useState('')
+  const [orders, setOrders] = useState([
+    {
+      deliveryId: '',
+      deliveryTime: '',
+      status: '',
+    },
+  ])
+
+  // bootstrap modal 開啟關閉用
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const fetchHistoryDelivery = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/member/delivery/history/${memberId}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json, charset=utf-8',
+        },
+      }
+    )
+
+    const data = response.data.data
+    let delivery = []
+
+    data.forEach((v, i) => {
+      delivery.push({
+        deliveryId: v.delivery_id,
+        deliveryTime: v.delivery_time,
+        status: v.status,
+      })
+    })
+
+    return delivery
+  }
+
+  useEffect(() => {
+    // 取得後端資料
+    const fetchData = async () => {
+      // 取得歷史訂單資料
+      const historyDelivery = await fetchHistoryDelivery()
+      console.log('didMount history delivery: ', historyDelivery)
+
+      setOrders(historyDelivery)
+    }
+
+    fetchData()
+    setContentIsLoaded(true)
+  }, [])
+
   return (
     <>
+      <HistoryDeliveryDetailModal
+        show={show}
+        handleClose={handleClose}
+        memberId={memberId}
+        deliveryId={deliveryId}
+      />
+
       <div className="history-content active">
         <div className="content-container">
           <div className="content-body">
@@ -16,38 +79,24 @@ function HistoryDelivery() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>20210620001</td>
-                  <td>2021/06/20</td>
-                  <td>已完成</td>
-                  <td>
-                    <i className="fas fa-eye"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>20210630001</td>
-                  <td>2021/06/30</td>
-                  <td>已完成</td>
-                  <td>
-                    <i className="fas fa-eye"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>20210715001</td>
-                  <td>2021/07/15</td>
-                  <td>已取消</td>
-                  <td>
-                    <i className="fas fa-eye"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>20210718001</td>
-                  <td>2021/08/18</td>
-                  <td>已取消</td>
-                  <td>
-                    <i className="fas fa-eye"></i>
-                  </td>
-                </tr>
+                {orders.map((order, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>{order.deliveryId}</td>
+                      <td>{order.deliveryTime}</td>
+                      <td>{order.status}</td>
+                      <td>
+                        <i
+                          className="fas fa-eye"
+                          onClick={() => {
+                            setDeliveryId(order.deliveryId)
+                            handleShow()
+                          }}
+                        ></i>
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>

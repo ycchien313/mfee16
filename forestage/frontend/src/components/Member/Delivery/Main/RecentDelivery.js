@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 function RecentDelivery(props) {
-  const { memberId } = props
+  const { memberId, setContentIsLoaded } = props
   const [didMount, setDidMount] = useState(true)
   const [orders, setOrders] = useState([
     {
@@ -104,14 +104,15 @@ function RecentDelivery(props) {
       const fetchData = async () => {
         // 取得訂單資料
         const recentDelivery = await fetchRecentDelivery()
+        console.log('didUpdate recent delivery:', recentDelivery)
 
-        console.log(recentDelivery)
         setOrders(recentDelivery)
+        setContentIsLoaded(true)
       }
 
       fetchData()
     }
-  }, [memberId])
+  }, [memberId, didMount])
 
   return (
     <>

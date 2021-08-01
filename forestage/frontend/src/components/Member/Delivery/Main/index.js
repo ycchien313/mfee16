@@ -11,8 +11,8 @@ function Main(props) {
   const { pagename } = props
   const [isRecent, setIsRecent] = useState(true)
   const [memberId, setMemberId] = useState('')
-  const [dataLoading, setDataLoading] = useState(true)
-  const [didMount, setDidMount] = useState(true)
+  const [dataLoading, setDataLoading] = useState(false)
+  const [contentIsLoaded, setContentIsLoaded] = useState(false)
 
   const token = localStorage.getItem('authToken')
 
@@ -28,18 +28,22 @@ function Main(props) {
 
     const memberIdFromToken = response.data.memberId
 
-    return { memberIdFromToken: memberIdFromToken }
+    return { memberId: memberIdFromToken }
   }
 
   useEffect(() => {
     // 抓後端資料，並設定至狀態
     const fetchData = async () => {
-      const { memberIdFromToken } = await fetchMemberId()
+      const { memberId } = await fetchMemberId()
 
-      setMemberId(memberIdFromToken)
+      setMemberId(memberId)
     }
 
     fetchData()
+
+    setTimeout(() => {
+      setDataLoading(false)
+    }, 1000)
   }, [])
 
   const loading = (
@@ -59,7 +63,11 @@ function Main(props) {
         <main className="main">
           <div className="main-container">
             {/* 左側：導覽列 */}
-            <Aside pagename={pagename} isRecent={isRecent} />
+            <Aside
+              pagename={pagename}
+              contentIsLoaded={contentIsLoaded}
+              setContentIsLoaded={setContentIsLoaded}
+            />
 
             <div className="right-side">
               {/* 麵包屑 */}
@@ -70,11 +78,23 @@ function Main(props) {
 
               {/* TODO: 透過頁籤換內容 */}
               {/* TODO: 詳細訂單的內容、API */}
-              {/* 近期訂單 */}
-              <RecentDelivery memberId={memberId} />
 
-              {/* 歷史紀錄 */}
-              <HistoryDelivery memberId={memberId} />
+              {/* 近期訂單、歷史紀錄 */}
+              {dataLoading
+                ? loading
+                : [
+                    isRecent ? (
+                      <RecentDelivery
+                        memberId={memberId}
+                        setContentIsLoaded={setContentIsLoaded}
+                      />
+                    ) : (
+                      <HistoryDelivery
+                        memberId={memberId}
+                        setContentIsLoaded={setContentIsLoaded}
+                      />
+                    ),
+                  ]}
             </div>
           </div>
         </main>

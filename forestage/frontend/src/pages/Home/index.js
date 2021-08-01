@@ -51,13 +51,13 @@ function Home() {
     })
     let result = localStorage.getItem('authToken')
     setAuthToken(result)
-    console.log('token:', result)
+    // console.log('token:', result)
   }, [])
   useEffect(() => {
     // memberId get
-    console.log('辨識用')
+    // console.log('辨識用')
     let token = localStorage.getItem('authToken')
-    console.log(token)
+    // console.log(token)
     setAuthToken(token)
 
     $.ajax({
@@ -70,7 +70,7 @@ function Home() {
         Authorization: `Bearer ${token}`,
       },
     }).then(function (result) {
-      console.log(result)
+      // console.log(result)
       setMemberId(result.memberId)
     })
 
@@ -79,7 +79,7 @@ function Home() {
       method: 'GET',
       dataType: 'JSON',
     }).then(function (result) {
-      console.log(result[0].memberId)
+      // console.log(result[0].memberId)
     })
   }, [])
 

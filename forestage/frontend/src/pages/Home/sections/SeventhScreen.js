@@ -34,7 +34,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log(result)
+      // // console.log(result)
       setCalendarResult(result)
     })
     // 抓取剩餘座位
@@ -43,7 +43,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log('搖滾區:', result[0])
+      // // console.log('搖滾區:', result[0])
       setRockSeatState(result[0])
     })
     $.ajax({
@@ -51,7 +51,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log('中區:', result[0])
+      // // console.log('中區:', result[0])
       setMiddleSeatState(result[0])
     })
     $.ajax({
@@ -59,7 +59,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'JSON',
     }).then(function (result) {
-      console.log('後區', result[0])
+      // // console.log('後區', result[0])
       setBackSeatState(result[0])
     })
   }, [date])

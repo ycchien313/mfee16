@@ -13,7 +13,7 @@ function MobileVoteCandidate(props) {
         .find('.mobile-vote-li')
         .removeClass('active')
 
-      console.log(counts)
+      // console.log(counts)
       // 設定欲傳回父元件之投票id
       setCandidateId(id)
       setCandidateName(name)

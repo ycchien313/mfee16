@@ -6,7 +6,7 @@ function FirstScreen(props) {
   let domain = 'http://localhost:3000/images/home/歌手/'
   const [test, setTest] = useState('test')
   let GsapTarget = useRef(null)
-  console.log(GsapTarget)
+  // console.log(GsapTarget)
   useEffect(() => {
     gsap.to(GsapTarget, { x: 0, opacity: 1 })
   }, [])

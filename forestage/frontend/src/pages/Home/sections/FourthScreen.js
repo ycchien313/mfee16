@@ -27,7 +27,7 @@ function FourthScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      // console.log(result)
+      // // console.log(result)
       setCounts(result)
     })
   }, [])
@@ -38,7 +38,7 @@ function FourthScreen(props) {
     $.ajax({
       url: `http://localhost:3001/home/member_state/${memberId}`,
     }).then(function (result) {
-      console.log('投票狀態:', result[0].vote_valid)
+      // console.log('投票狀態:', result[0].vote_valid)
       setVoteState(result[0].vote_valid)
     })
   }, [memberId])
@@ -63,7 +63,7 @@ function FourthScreen(props) {
       if (value.id === candidateId) {
         value.count++
       }
-      console.log(countsClone)
+      // console.log(countsClone)
       setCounts(countsClone)
     })
   }
@@ -73,7 +73,7 @@ function FourthScreen(props) {
       $.ajax({
         url: `http://localhost:3001/home/member_state/${memberId}`,
       }).then(function (result) {
-        console.log('投票狀態:', result[0].vote_valid)
+        // console.log('投票狀態:', result[0].vote_valid)
         setVoteState(result[0].vote_valid)
       })
   }, [counts])

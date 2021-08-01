@@ -50,7 +50,7 @@ function ThirdScreen(props) {
       }
     }
     $('.selectBlock').on('click', function () {
-      console.log(this)
+      // console.log(this)
       $(this).addClass('active')
       $(this)
         .closest('li')

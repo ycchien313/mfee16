@@ -63,7 +63,7 @@ router.get(
 
         // 執行 SQL，查詢會員的「詳細」訂位資料
         const sql =
-            'SELECT `member_id`, DLV.`delivery_id`, `status`, DATE_FORMAT(DLV.delivery_time, "%Y/%m/%d") AS date, DLV.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(DDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
+            'SELECT `member_id`, DLV.`delivery_id`, `status`, DATE_FORMAT(DLV.delivery_time, "%Y/%m/%d %H:%i:%s") AS delivery_time, DLV.name, `mobile`, address, `note`, dish.dish_id, dish.name AS dish_name, COUNT(DDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
             'FROM `delivery` AS DLV, delivery_dish_mapping AS DDM, dish ' +
             'WHERE member_id = ? AND DLV.delivery_id = ? AND DLV.delivery_id = DDM.delivery_id AND DDM.dish_id = dish.dish_id GROUP BY DDM.dish_id';
         await conn

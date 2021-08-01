@@ -76,9 +76,6 @@ function Main(props) {
               {/* 頁籤 */}
               <Tab isRecent={isRecent} setIsRecent={setIsRecent} />
 
-              {/* TODO: 透過頁籤換內容 */}
-              {/* TODO: 詳細訂單的內容、API */}
-
               {/* 近期訂單、歷史紀錄 */}
               {dataLoading
                 ? loading

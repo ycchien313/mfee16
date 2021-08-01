@@ -43,15 +43,14 @@ function DeliveryDetailModal(props) {
       return dishesList
     }
 
+    // 設置新的
     const order = {
-      deliveryId: data[0].reservation_id,
+      deliveryId: data[0].delivery_id,
       status: data[0].status,
-      date: data[0].date,
-      singerName: data[0].singer_name,
-      seatName: data[0].seat_name,
-      attendance: data[0].attendance,
+      deliveryTime: data[0].delivery_time,
       name: data[0].name,
       mobile: data[0].mobile,
+      address: data[0].address,
       note: data[0].note,
       dishes: dishes(),
       total: data[0].total,
@@ -102,7 +101,7 @@ function DeliveryDetailModal(props) {
                 <div className="row">
                   <div className="col-6 mb-3 title">送餐時間</div>
                   <div className="col-6 mb-3 text-end">
-                    {deliveryFields.date}
+                    {deliveryFields.deliveryTime}
                   </div>
                 </div>
                 <div className="row">

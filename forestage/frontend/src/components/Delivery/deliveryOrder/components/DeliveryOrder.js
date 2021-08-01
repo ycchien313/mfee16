@@ -212,7 +212,20 @@ function DeliveryOrder(props) {
                     />
                   </button>
                 ) : (
-                  <button className="pink-guide-button" onClick={change}>
+                  <button
+                    className="pink-guide-button"
+                    onClick={
+                      (change,
+                      function () {
+                        Swal.fire({
+                          icon: 'success',
+                          title: '外送訂購成功',
+                          showConfirmButton: false,
+                          timer: 1000,
+                        })
+                      })
+                    }
+                  >
                     確認送出
                     <img
                       src={

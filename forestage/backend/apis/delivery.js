@@ -47,19 +47,11 @@ router.post('/order', async function (req, res, next) {
     let sql = null
     sql = 'INSERT INTO delivery (name,mobile,address,delivery_time,total,note,member_id,mcm_id) VALUES (?)'
     let updateDeliery = await db.connection.queryAsync(sql, [arr])
-    
-    // 
-    sql = 'SELECT delivery_id FROM `delivery` ORDER BY delivery_id DESC LIMIT 0,1'
-    let updateId = await db.connection.queryAsync(sql)
-    console.log(updateId,"Id")
-    // console.log(updateId.delivery_id,"Id")
-    // console.log(updateId.RowDataPacket.delivery_id,"Id")
-    // console.log([0].constructor.delivery_id,"Id")
+    console.log(updateDeliery.insertId,"Id")
 
-    // console.log(req.body.data.mcm_id)
-    console.log(req.body.data.dishList)
-    let McmSql =(`UPDATE member_coupon_mapping SET delivery_id = ${updateId}, valid = 0 WHERE mcm_id=?`)
+    let McmSql =(`UPDATE member_coupon_mapping SET delivery_id = ${updateDeliery.insertId}, valid = 0 WHERE mcm_id=?`)
     let updateMcm= await db.connection.queryAsync(McmSql,[req.body.data.mcm_id])
+
 
 //  req.body.data.dishList =[
 //   [ '總匯潛艇堡', 0 ],
@@ -72,20 +64,59 @@ router.post('/order', async function (req, res, next) {
 //   [ '巧克力聖代', 0 ],
 //   [ '草莓蛋糕', 0 ]
 // ]
+    console.log(req.body.data.dishList)
     // 取出>0的
+
     let list = req.body.data.dishList
     list = list.filter((v)=>{
         return v[1]>0
     })
-     // insert陣列 [delivery_id,dish_id]
-    let newDishList = []
-    list.forEach((v)=>{
-        for(let i =0; i<v[0]; i++){
-            newDishList.push([ ,v[0]])
+    // 塞
+    console.log(list)
+
+    for( let i =0; i<list.length;i++){
+        console.log(list[i][0])
+        switch( list[i][0]){
+        case "總匯潛艇堡":
+        list[i].push(1)
+        break
+        case "瑪格莉特大披薩":
+        list[i].push(2)
+        break
+        case "碳烤豬肋排":
+        list[i].push(3)
+        break
+        case "凱薩沙拉":
+        list[i].push(4)
+        break
+        case "甜椒封肉":
+        list[i].push(5)
+        break
+        case "墨西哥雞肉捲":
+        list[i].push(6)
+        break
+        case "爆米花":
+        list[i].push(7)
+        break
+        case "巧克力聖代":
+        list[i].push(8)
+        break
+        case "草莓蛋糕":
+        list[i].push(9)
+        break
         }
-    })
-    let insertDdm = `INSERT INTO delivery_dish_mapping (delivery_id, dish_id) VALUES ?`
-    let insertDish = await db.connection.queryAsync(insertDdm,[newDishList])
+    }
+
+    let newDishList = []
+    for(let i =0; i<list.length; i++){
+        for(let j =0; j<list[i][1]; j++){
+            newDishList.push({delivery_id:updateDeliery.insertId,dish_id:list[i][2]})
+        }
+    }
+    
+    for(let i=0;i<newDishList.length;i++){
+        let insertDish = await db.connection.queryAsync(`INSERT INTO delivery_dish_mapping (delivery_id, dish_id) VALUES (?,?)`,[[newDishList[i].delivery_id],[newDishList[i].dish_id]])
+    }
 
   })
 

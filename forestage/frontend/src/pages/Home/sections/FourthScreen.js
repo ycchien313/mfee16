@@ -11,8 +11,10 @@ function FourthScreen(props) {
   // 判斷是否投過票
   const [voteState, setVoteState] = useState(0)
   // 透過子元件得到候選人
-  const [candidateId, setCandidateId] = useState([])
+  const [candidateId, setCandidateId] = useState(0)
   const [candidateName, setCandidateName] = useState()
+
+  const [loginMessage, setLoginMessage] = useState('請先登入')
   useEffect(() => {
     setLoading(true)
   }, [])
@@ -29,22 +31,29 @@ function FourthScreen(props) {
     })
   }, [])
   useEffect(() => {
-    if (memberId)
-      $.ajax({
-        url: `http://localhost:3001/home/member_state/${memberId}`,
-      }).then(function (result) {
-        console.log('投票狀態:', result[0].vote_valid)
-        setVoteState(result[0].vote_valid)
-      })
+    if (memberId != 0) {
+      setLoginMessage('本週已投票')
+    }
+    $.ajax({
+      url: `http://localhost:3001/home/member_state/${memberId}`,
+    }).then(function (result) {
+      console.log('投票狀態:', result[0].vote_valid)
+      setVoteState(result[0].vote_valid)
+    })
   }, [memberId])
 
   // 投票函式
   function UpdateCandidateCounts() {
-    $.ajax({
-      url: `http://localhost:3001/home/update_candidate/${candidateId}`,
-      method: 'POST',
-      dataType: 'json',
-    })
+    if (candidateId !== 0) {
+      $.ajax({
+        url: `http://localhost:3001/home/update_candidate/${candidateId}`,
+        method: 'POST',
+        dataType: 'json',
+        data: { memberId: memberId },
+      }).then(Swal.fire('投票成功', '即將更新票數', 'success'))
+    } else {
+      Swal.fire('鍵入失敗', '請選擇歌手', 'error')
+    }
   }
   // 即時同步投票結果
   function VoteCountUpdate() {
@@ -57,6 +66,16 @@ function FourthScreen(props) {
       setCounts(countsClone)
     })
   }
+
+  useEffect(() => {
+    if (memberId)
+      $.ajax({
+        url: `http://localhost:3001/home/member_state/${memberId}`,
+      }).then(function (result) {
+        console.log('投票狀態:', result[0].vote_valid)
+        setVoteState(result[0].vote_valid)
+      })
+  }, [counts])
   let fourthScreen = (
     <div id="fourthScreen">
       <div className="titleArea">
@@ -136,13 +155,12 @@ function FourthScreen(props) {
         </ul>
       </div>
       {/*  */}
-      {voteState === false ? (
+      {voteState === 1 ? (
         <button
           className="button-orange"
           onClick={() => {
             UpdateCandidateCounts()
             VoteCountUpdate()
-            Swal.fire('投票成功', '即將更新票數', 'success')
           }}
         >
           <h4 className="btn-innerText">投票</h4>
@@ -150,7 +168,7 @@ function FourthScreen(props) {
         </button>
       ) : (
         <button className="button-orange disabled" disabled>
-          <h4 className="btn-innerText">本週已投票</h4>
+          <h4 className="btn-innerText loginCheck">{loginMessage}</h4>
         </button>
       )}
     </div>

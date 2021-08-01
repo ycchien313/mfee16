@@ -281,8 +281,8 @@ button {
   }
   @media screen and (max-width: 768px) {
     #secondScreen {
-      background: url('http://localhost:3000/images/secondScreenBG.png') center
-        center no-repeat;
+      background: url(http://localhost:3000/images/home/secondScreenBG.png)
+        center center;
       background-size: cover;
       height: 90vh;
     }
@@ -361,13 +361,15 @@ button {
     position: absolute;
     top: 75vh;
     left: 35vw;
-    cursor: pointer;
+    display: none;
   }
   @media screen and (max-width: 768px) {
     .liveSide .pointer {
+      cursor: pointer;
       width: 40px;
       top: 52vh;
       left: 77vw;
+      display: block;
     }
     .liveSide .pointer img {
       width: 100%;
@@ -636,6 +638,12 @@ button {
     font-size: 20px;
     text-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
   }
+  .btn-innerText.loginCheck {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
   .button-orange i {
     position: absolute;
     font-size: 30px;
@@ -698,6 +706,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
   }
   @media screen and (max-width: 768px) {
     .audienceComment {
@@ -1524,9 +1533,15 @@ button {
     opacity: 1;
   }
   .dish-title h4 {
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
     color: #333;
     margin: 0;
+    font-family: $zh-tw-maru;
+  }
+  .dish-info {
+    color: #333;
+    font-family: $zh-tw-noto;
   }
   .dish-title.main {
     background: url(http://localhost:3000/images/home/dish-main.svg) center

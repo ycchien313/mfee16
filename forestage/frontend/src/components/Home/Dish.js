@@ -202,17 +202,11 @@ function Dish(props) {
         <figure>
           <img src={domain + image_realistic} alt="" />
         </figure>
-        <h4>{name}</h4>
-        <h4>$ {price}</h4>
+        <h4 className="dish-info">{name}</h4>
+        <h4 className="dish-info">$ {price}</h4>
         <button
           className="button-orange-s"
           onClick={() => {
-            // setAll({
-            //   name: name,
-            //   price: price,
-            //   count: count,
-            //   img: domain + image_realistic,
-            // })
             push()
           }}
         >

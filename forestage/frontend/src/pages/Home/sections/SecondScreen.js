@@ -45,6 +45,7 @@ function SecondScreen(props) {
   }, [singerName])
 
   //
+
   let SecondScreen = (
     <div id="secondScreen">
       <h2 className="title">網站導覽</h2>

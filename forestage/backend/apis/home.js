@@ -102,6 +102,11 @@ router.post("/update_candidate/:candidateId", async function (req, res, next) {
         `INSERT INTO vote (vote_id, vote_time, singer_id) VALUES (NULL, '${current}', ?)`,
         [req.params.candidateId]
     );
+    let queryResult2 = await db.connection.queryAsync(
+        "update member set vote_valid = 0 where member_id = ?",
+        [req.body.memberId]
+    );
+    console.log(req.body.memberId);
 });
 
 module.exports = router;

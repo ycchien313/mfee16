@@ -58,7 +58,31 @@ function Home() {
     console.log('辨識用')
     let token = localStorage.getItem('authToken')
     console.log(token)
-  })
+    setAuthToken(token)
+
+    $.ajax({
+      url: 'http://localhost:3001/auth/me',
+      method: 'GET',
+      dataType: 'JSON',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(function (result) {
+      console.log(result)
+      setMemberId(result.memberId)
+    })
+
+    $.ajax({
+      url: `http://localhost:3001/member_state/${memberId}`,
+      method: 'GET',
+      dataType: 'JSON',
+    }).then(function (result) {
+      console.log(result[0].memberId)
+    })
+  }, [])
+
   return (
     <>
       <Header item={item} setItem={setItem} />
@@ -74,7 +98,7 @@ function Home() {
           singerImg={singerImg}
           singerIntroduction={singerIntroduction}
         />
-        <FourthScreen memberId={memberId} />
+        <FourthScreen memberId={memberId} authToken={authToken} />
         <FivethScreen />
         <SixthScreen />
         <SeventhScreen />

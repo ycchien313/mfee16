@@ -4,7 +4,7 @@ import RecentReservationDetailModal from './RecentReservationDetailModal'
 import { useMediaQuery } from 'react-responsive'
 
 function RecentReservation(props) {
-  const { memberId } = props
+  const { memberId, setContentIsLoaded } = props
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [didMount, setDidMount] = useState(true)
   const [show, setShow] = useState(false)
@@ -40,9 +40,10 @@ function RecentReservation(props) {
       const fetchData = async () => {
         // 取得會員的訂位資料
         const recentReservation = await fetchRecentReservation()
-        console.log('didMount recent reservstion:', recentReservation)
+        console.log('didUpdate recent reservstion:', recentReservation)
 
         setOrders(recentReservation)
+        setContentIsLoaded(true)
       }
 
       fetchData()

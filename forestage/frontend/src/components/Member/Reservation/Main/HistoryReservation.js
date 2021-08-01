@@ -3,7 +3,7 @@ import axios from 'axios'
 import HistoryReservationDetailModal from './HistoryReservationDetailModal'
 
 function HistoryReservation(props) {
-  const { memberId } = props
+  const { memberId, setContentIsLoaded } = props
   const [didMount, setDidMount] = useState(true)
   const [show, setShow] = useState(false)
   const [orders, setOrders] = useState([
@@ -46,14 +46,15 @@ function HistoryReservation(props) {
       console.log('didMount history reservation: ', historyReservation)
 
       setOrders(historyReservation)
+      setContentIsLoaded(true)
     }
 
     fetchData()
   }, [])
 
-  useEffect(() => {
-    console.log(orders)
-  }, [orders])
+  // useEffect(() => {
+  //   console.log(orders)
+  // }, [orders])
 
   return (
     <>

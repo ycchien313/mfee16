@@ -13,7 +13,7 @@ function Main(props) {
   const [isRecent, setIsRecent] = useState(true)
   const [memberId, setMemberId] = useState('')
   const [dataLoading, setDataLoading] = useState(true)
-  const [didMount, setDidMount] = useState(true)
+  const [contentIsLoaded, setContentIsLoaded] = useState(false)
 
   const token = localStorage.getItem('authToken')
 
@@ -29,23 +29,21 @@ function Main(props) {
 
     const memberIdFromToken = response.data.memberId
 
-    return { memberIdFromToken: memberIdFromToken }
+    return { memberId: memberIdFromToken }
   }
 
   useEffect(() => {
     // 抓後端資料，並設定至狀態
     const fetchData = async () => {
-      const { memberIdFromToken } = await fetchMemberId()
+      const { memberId } = await fetchMemberId()
 
-      setMemberId(memberIdFromToken)
+      setMemberId(memberId)
     }
 
     fetchData()
-    setDidMount(false)
 
     setTimeout(() => {
       setDataLoading(false)
-      console.log('didMount:', dataLoading)
     }, 1000)
   }, [])
 
@@ -66,7 +64,11 @@ function Main(props) {
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}
-            <Aside pagename={pagename} isRecent={isRecent} />
+            <Aside
+              pagename={pagename}
+              contentIsLoaded={contentIsLoaded}
+              setContentIsLoaded={setContentIsLoaded}
+            />
             {/* <!-- 右側：麵包屑、內容--> */}
             <div className="right-side">
               {/* <!-- 麵包屑 --> */}
@@ -81,9 +83,15 @@ function Main(props) {
                 ? loading
                 : [
                     isRecent ? (
-                      <RecentReservation memberId={memberId} />
+                      <RecentReservation
+                        memberId={memberId}
+                        setContentIsLoaded={setContentIsLoaded}
+                      />
                     ) : (
-                      <HistoryReservation memberId={memberId} />
+                      <HistoryReservation
+                        memberId={memberId}
+                        setContentIsLoaded={setContentIsLoaded}
+                      />
                     ),
                   ]}
 

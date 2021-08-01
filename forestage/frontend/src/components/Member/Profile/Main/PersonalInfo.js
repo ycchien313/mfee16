@@ -7,7 +7,7 @@ function PersonalInfo(props) {
   // const { member } = useContext(AuthContext)
   // const { memberId } = member
 
-  const { dbRequest } = props
+  const { dbRequest, setContentIsLoaded } = props
   const [memberId, setMemberId] = useState('')
   const [toggleBtn, setToggleBtn] = useState(true)
   const [toggleInput, setToggleInput] = useState(true)
@@ -164,6 +164,7 @@ function PersonalInfo(props) {
     if (didMount === false) {
       getMember()
       getProfileServer()
+      setContentIsLoaded(true)
     }
   }, [memberId])
 

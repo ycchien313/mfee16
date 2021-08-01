@@ -9,6 +9,7 @@ import SigninInfo from './SigninInfo'
 function Main(props) {
   const { pagename } = props
   const [dataLoading, setDataLoading] = useState(true)
+  const [contentIsLoaded, setContentIsLoaded] = useState(false)
 
   // server 端會員資料的請求
   const dbRequest = axios.create({
@@ -49,7 +50,11 @@ function Main(props) {
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}
-            <Aside pagename={pagename} />
+            <Aside
+              pagename={pagename}
+              contentIsLoaded={contentIsLoaded}
+              setContentIsLoaded={setContentIsLoaded}
+            />
             {/* <!-- 右側：麵包屑、內容--> */}
             <div className="right-side">
               {/* <!-- 麵包屑 --> */}
@@ -67,14 +72,20 @@ function Main(props) {
                       <>
                         {/* <!-- 左側：會員照片、個人資料 --> */}
                         {/* <PersonalInfo dbRequest={dbRequest} memberId={memberId} /> */}
-                        <PersonalInfo dbRequest={dbRequest} />
+                        <PersonalInfo
+                          dbRequest={dbRequest}
+                          setContentIsLoaded={setContentIsLoaded}
+                        />
 
                         {/* <!-- 中間分隔線 --> */}
                         <div className="vertical-line"></div>
 
                         {/* <!-- 右側：登入資料 --> */}
                         {/* <SigninInfo dbRequest={dbRequest} memberId={memberId} /> */}
-                        <SigninInfo dbRequest={dbRequest} />
+                        <SigninInfo
+                          dbRequest={dbRequest}
+                          setContentIsLoaded={setContentIsLoaded}
+                        />
                       </>
                     )}
                   </div>

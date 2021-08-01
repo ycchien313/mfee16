@@ -3,7 +3,7 @@ import axios from 'axios'
 import ModalPassword from './ModalPassword'
 
 function SigninInfo(props) {
-  const { dbRequest } = props
+  const { dbRequest, setContentIsLoaded } = props
 
   const [didMount, setDidMount] = useState(true)
   const [memberId, setMemberId] = useState('')
@@ -47,6 +47,7 @@ function SigninInfo(props) {
     if (didMount === false) {
       getMember()
       getEmailFromServer()
+      setContentIsLoaded(true)
     }
   }, [memberId])
 

@@ -6,31 +6,29 @@ function Order(props) {
     inputText,
     setInputText,
     inputTel,
-    inputAdd,
     setInputTel,
     textArea,
     setTextArea,
     orderAll,
     member,
-    inputMember,
-    memberId,
     allAddress,
     setAllAddress,
+    memberId,
   } = props
-
-  // const [allAddress, setAllAddress] = useState('')
-  const [memberData, setMemberData] = useState([])
 
   function getData() {
     $.ajax({
       url: `http://localhost:3001/delivery/member/${memberId}`,
+      // url: 'http://localhost:3001/delivery/member',
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
       setInputTel(result[0].mobile)
       setInputText(result[0].name)
+      console.log(result)
     })
   }
+
   useEffect(() => {
     setAllAddress(
       orderAll.address.city + orderAll.address.dist + orderAll.address.road

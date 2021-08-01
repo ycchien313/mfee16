@@ -47,6 +47,7 @@ function DeliveryOrder(props) {
   useEffect(() => {
     $.ajax({
       url: `http://localhost:3001/delivery/coupon/${memberId}`,
+      // url: 'http://localhost:3001/delivery/coupon',
       method: 'GET',
       dataType: 'json',
     })
@@ -60,6 +61,7 @@ function DeliveryOrder(props) {
   useEffect(() => {
     $.ajax({
       url: `http://localhost:3001/delivery/member/${memberId}`,
+      // url: 'http://localhost:3001/delivery/member',
       method: 'GET',
       dataType: 'json',
     })

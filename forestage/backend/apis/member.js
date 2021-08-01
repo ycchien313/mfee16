@@ -60,7 +60,7 @@ router.get('/coupon/history/:memberId', async (req, res, next) => {
     try {
         // 執行 SQL，查詢該會員近期的外送訂單
         const sql =
-            'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
+            'SELECT c.name, DATE_FORMAT(c.deadline, "%Y.%m.%d") AS deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
             'FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id ' +
             'WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())<0';
         const dbCoupon = await conn.queryAsync(sql, [memberId]);
@@ -86,7 +86,7 @@ router.get('/coupon/recent/:memberId', async (req, res, next) => {
     try {
         // 執行 SQL，查詢該會員近期的外送訂單
         const sql =
-            'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
+            'SELECT c.name, DATE_FORMAT(c.deadline, "%Y.%m.%d") AS deadline, c.minimum_order_value, c.discount,c.coupon_id, c.font_awesome ' +
             'FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id ' +
             'WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0';
         const dbCoupon = await conn.queryAsync(sql, [memberId]);

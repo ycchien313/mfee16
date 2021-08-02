@@ -228,7 +228,7 @@ router.post('/checkout/send', async (req, res) => {
     };
 
     mg.messages().send(mailBody, function (error, body) {
-        // console.log(body);
+        console.log(body);
     });
 });
 

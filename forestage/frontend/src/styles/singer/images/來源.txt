@@ -1,0 +1,2 @@
+shopping icon
+https://fontawesome.com/v5.15/icons/shopping-cart?style=solid

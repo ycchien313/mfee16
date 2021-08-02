@@ -10,6 +10,7 @@ import Game from './pages/Game'
 import Home from './pages/Home'
 import Member from './pages/Member'
 import Reservation from './pages/Reservation'
+import Singer from './pages/Singer'
 
 function App() {
   const [member, setMember] = useState(null)
@@ -58,6 +59,9 @@ function App() {
           <Route path="/game/">
             <Game />
           </Route>
+          <Route path="/singer/">
+          <Singer />
+        </Route>
           <Route path="/member/">
             <Member />
           </Route>

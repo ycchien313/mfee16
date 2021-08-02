@@ -8,6 +8,7 @@ import Game from './pages/Game'
 import Home from './pages/Home'
 import Member from './pages/Member'
 import Reservation from './pages/Reservation'
+import Singer from './pages/Singer'
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
         </Route>
         <Route path="/dish/">
           <Dish />
+        </Route>
+        <Route path="/singer/">
+          <Singer />
         </Route>
         <Route path="/game/">
           <Game />

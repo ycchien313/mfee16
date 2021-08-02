@@ -95,6 +95,20 @@ function Map(props) {
             viewBox="0 0 943.09 841.89"
             className="Taoyuan"
           >
+            <defs>
+              <linearGradient
+                id="myGradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+                spreadMethod="pad"
+              >
+                <stop offset="0%" stop-color="#f5b54d" stop-opacity="1" />
+                <stop offset="50%" stop-color="#f1bd69" stop-opacity="1" />
+                <stop offset="100%" stop-color="#ebcc9c" stop-opacity="1" />
+              </linearGradient>
+            </defs>
             <path
               className="st0"
               d="M221.21,356.04c1.13-1.7,2.64-2.87,4.62-3.41C225.29,354.72,223.61,355.96,221.21,356.04z"

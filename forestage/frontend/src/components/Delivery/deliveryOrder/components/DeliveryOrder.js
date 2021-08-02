@@ -32,7 +32,7 @@ function DeliveryOrder(props) {
     coupon_id: couponId,
     dishList: orderAll.dishList,
   }
-  console.log(data, 'aaa')
+  // console.log(data, 'aaa')
 
   const change = () => {
     axios({
@@ -215,15 +215,15 @@ function DeliveryOrder(props) {
                   <button
                     className="pink-guide-button"
                     onClick={
-                      change
-                      // function () {
-                      //   Swal.fire({
-                      //     icon: 'success',
-                      //     title: '外送訂購成功',
-                      //     showConfirmButton: false,
-                      //     timer: 1000,
-                      //   })
-                      // })
+                      // change
+                      function () {
+                        Swal.fire({
+                          icon: 'success',
+                          title: '外送訂購成功',
+                          showConfirmButton: false,
+                          timer: 1000,
+                        }).then(change)
+                      }
                     }
                   >
                     確認送出

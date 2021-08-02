@@ -71,7 +71,7 @@
         width: 18vw;
         height: 2.7vw;
         border: transparent;
-        // cursor: pointer; 
+        // cursor: pointer;
       }
     }
 
@@ -449,7 +449,8 @@
     cursor: pointer;
 
     &:hover {
-      fill: #f5b54d;
+      fill:#f1bd69; 
+      // fill: url(#myGradient); 
       transition: 0.5s;
     }
   }
@@ -483,4 +484,5 @@
 
 .mapFee.active {
   fill: #f5b54d;
+  // fill: url(#myGradient); 
 }

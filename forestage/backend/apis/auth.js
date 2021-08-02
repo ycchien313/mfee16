@@ -386,6 +386,7 @@ router.post('/signup', upload.none(), async (req, res) => {
                     status: '成功',
                     result: '成功',
                     msg: '註冊成功',
+                    memberId: memberId,
                     token: token,
                 };
             }

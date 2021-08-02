@@ -32,7 +32,7 @@ function ModalPassword(props) {
       if (status === '成功') return result
       else new Error(result)
     } catch (error) {
-      console.error({ status: '失敗', msg: error })
+      // console.error({ status: '失敗', msg: error })
     }
   }
 
@@ -49,7 +49,7 @@ function ModalPassword(props) {
       if (status === '成功') return result
       else new Error(result)
     } catch (error) {
-      console.error({ status: '失敗', msg: error })
+      // console.error({ status: '失敗', msg: error })
     }
   }
 

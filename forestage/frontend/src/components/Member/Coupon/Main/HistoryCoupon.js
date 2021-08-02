@@ -49,7 +49,7 @@ function HistoryCoupon(props) {
     const fetchData = async () => {
       // 取得已使用(歷史)的折價券資料
       const historyCoupons = await fetchHistoryCoupons()
-      console.log('didUpdate history coupons:', historyCoupons)
+      // console.log('didUpdate history coupons:', historyCoupons)
 
       setCoupons(historyCoupons)
       setContentIsLoaded(true)

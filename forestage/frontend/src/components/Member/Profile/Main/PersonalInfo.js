@@ -73,16 +73,16 @@ function PersonalInfo(props) {
         mobile: data.data[0].mobile,
         address: data.data[0].address,
       }
-      console.log(profileFields)
+      // console.log(profileFields)
       if (status === '成功') {
         setProfile(profileFields)
         setRestoreProfile(profileFields)
       } else {
-        console.log('取得資料失敗')
+        // console.log('取得資料失敗')
         new Error(data)
       }
     } catch (error) {
-      console.error(error)
+      // console.error(error)
     }
   }
 
@@ -93,7 +93,7 @@ function PersonalInfo(props) {
       dbRequest.put(`profile/${memberId}`, form)
       // dbRequest.put(`profile/1`, form)
     } catch (error) {
-      console.error({ status: '失敗', msg: error })
+      // console.error({ status: '失敗', msg: error })
     }
   }
 
@@ -141,7 +141,7 @@ function PersonalInfo(props) {
 
     const form = new FormData(e.target)
 
-    console.log('hamdleSubmit: ', profile)
+    // console.log('hamdleSubmit: ', profile)
 
     // 傳到後端
     updateProfileServer(form)

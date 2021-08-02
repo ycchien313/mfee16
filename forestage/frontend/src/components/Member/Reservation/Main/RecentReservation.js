@@ -41,7 +41,7 @@ function RecentReservation(props) {
       const fetchData = async () => {
         // 取得會員的訂位資料
         const recentReservation = await fetchRecentReservation()
-        console.log('didUpdate recent reservstion:', recentReservation)
+        // console.log('didUpdate recent reservstion:', recentReservation)
 
         setOrders(recentReservation)
         setContentIsLoaded(true)

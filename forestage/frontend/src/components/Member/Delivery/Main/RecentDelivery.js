@@ -105,7 +105,7 @@ function RecentDelivery(props) {
       const fetchData = async () => {
         // 取得訂單資料
         const recentDelivery = await fetchRecentDelivery()
-        console.log('didUpdate recent delivery:', recentDelivery)
+        // console.log('didUpdate recent delivery:', recentDelivery)
 
         setOrders(recentDelivery)
         setContentIsLoaded(true)

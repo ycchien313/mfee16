@@ -42,13 +42,13 @@ function Main(props) {
       setDataLoading(false)
     }, 1000)
 
-    console.log('mount')
+    // console.log('mount')
     setDidMount(false)
   }, [])
 
   useEffect(() => {
     if (didMount === false) {
-      console.log('update')
+      // console.log('update')
     }
   }, [didMount])
 

@@ -50,7 +50,7 @@ function RecentCoupon(props) {
   useEffect(() => {
     setDidMount(false)
 
-    console.log('recent mount')
+    // console.log('recent mount')
   }, [])
 
   useEffect(() => {
@@ -59,7 +59,7 @@ function RecentCoupon(props) {
       const fetchData = async () => {
         // 取得未使用(近期)的折價券資料
         const recentCoupons = await fetchRecentCoupon()
-        console.log('didUpdate recent coupons:', recentCoupons)
+        // console.log('didUpdate recent coupons:', recentCoupons)
 
         setCoupons(recentCoupons)
         setContentIsLoaded(true)

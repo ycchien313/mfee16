@@ -30,7 +30,7 @@ function App() {
       setMember(member)
     } catch (err) {
       localStorage.removeItem('authToken')
-      console.log('設定 localStorage 失敗: ', err)
+      // console.log('設定 localStorage 失敗: ', err)
     }
   }
 

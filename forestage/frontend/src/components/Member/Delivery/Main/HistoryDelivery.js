@@ -49,7 +49,7 @@ function HistoryDelivery(props) {
     const fetchData = async () => {
       // 取得歷史訂單資料
       const historyDelivery = await fetchHistoryDelivery()
-      console.log('didMount history delivery: ', historyDelivery)
+      // console.log('didMount history delivery: ', historyDelivery)
 
       setOrders(historyDelivery)
     }

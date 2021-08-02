@@ -32,7 +32,7 @@ function AuthSocial(props) {
     const result = data.result
     const msg = data.msg
 
-    console.log('google response: ', googleResponse)
+    // console.log('google response: ', googleResponse)
 
     // 登入失敗 或 註冊失敗，回傳錯誤訊息
     if (result !== '成功') {
@@ -80,7 +80,7 @@ function AuthSocial(props) {
     const result = data.result
     const msg = data.msg
 
-    console.log('fb response: ', fbResponse)
+    // console.log('fb response: ', fbResponse)
 
     // 登入失敗 或 註冊失敗，回傳錯誤訊息
     if (result !== '成功') {

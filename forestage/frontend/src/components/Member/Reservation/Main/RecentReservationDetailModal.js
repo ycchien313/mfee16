@@ -83,7 +83,6 @@ function RecentReservationDetailModal(props) {
       <Modal className="show-detail" size="lg" show={show} onHide={handleClose}>
         <Modal.Header className="modal-header">
           <Modal.Title>
-            {console.log(reservationFields.reservationId)}
             <span className="modal-title h4" id="exampleModalLabel">
               訂位編號 #{reservationFields.reservationId}
             </span>

@@ -487,14 +487,14 @@ function Create(props) {
               alt=""
             ></img>
           </button>
-          <button
-            class="orange-guide-button buttontext"
-            onClick={insertArticlefn()}
-          >
+          <button class="orange-guide-button buttontext">
             送出
             <img
               src="http://localhost:3000/images/comment/send2.svg"
               alt=""
+              onClick={() => {
+                insertArticlefn()
+              }}
             ></img>
           </button>
         </div>

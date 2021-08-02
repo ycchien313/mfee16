@@ -50,9 +50,14 @@ router.put("/articleNotGood", async (req, res) => {
 });
 //新增文章
 router.post("/createarticle", async (req, res) => {
-    // let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?,?,?,?,?,?,?,?)');
+
+    console.log(req.body)
+    let insertData = Object.values(req.body.insertArticle)
+    console.log(insertData)
+
+    let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?)',[insertData]);
+
     // res.json(result)
-    // console.log(req.body.insertArticle)
     // res.send(createArticle)
 });
 //新增留言
@@ -64,7 +69,7 @@ router.post("/createmessage", async (req, res) => {
 
     let createMessage = await db.connection.queryAsync('INSERT INTO message(create_time,message,member_id,article_id) VALUES (NOW(),?,?,?)',[ message,member_id,article_id]);
     // res.json(result)
-    res.send(createMessage)
+    // res.send(createMessage)
 });
 // 點擊文章顯示文章的相關內容(彈出視窗)
 // router.get("/:article", async (req, res) => {

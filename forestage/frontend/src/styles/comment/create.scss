@@ -1,0 +1,238 @@
+@import '../common/global.scss';
+
+.createeditor {
+  z-index: 10;
+  color: $primary-lightgreen;
+  margin: auto;
+  width: 75vw;
+  // height: 100%;
+  background: white;
+  border-radius: 37px;
+  padding: 31px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  position: relative;
+}
+.close {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 1vw;
+  top: 1vw;
+  cursor: pointer;
+}
+.createeditor h4 {
+  margin: 0 0 0.5vw 0;
+}
+.title {
+  width: 45vw;
+}
+.ineditor {
+  /* display: flex; */
+  /* margin:auto; */
+  /* width: ; */
+  /* border-radius: 37px; */
+  /* height: ; */
+  /* background: rgba(217,217,217,0.8) ; */
+  /* opacity: 0.8; */
+  /* padding: 5vw 7vw; */
+}
+.ineditor h4{
+  margin-top: 1vw;
+}
+.tagselect {
+  display: none;
+}
+
+@media screen and (max-width: 1000px) {
+  .tagselect {
+    display: flex;
+    /* position: relative; */
+    /* top: -50px; */
+    color: $secondary-green-dark;
+    font-family: $zh-tw-maru;
+    border: none;
+    /* height: vw; */
+    /* width: auto; */
+    font-size: 1.5vw;
+    /* text-align: center; */
+    text-align-last: center;
+    /* width: 89px;    */
+    /*移除箭頭樣式*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    /*改變右邊箭頭樣式*/
+    background: url(http://localhost:3000/images/comment/send.svg) no-repeat
+      center;
+    background-size: 100%;
+    border: 1px solid $primary-lightbrown;
+    padding: 0.5% 9% 1% 1%;
+    /* background-color:white; */
+    border-radius: 4px;
+    color: $secondary-green-dark;
+  }
+  .tagselect:focus {
+    outline: none;
+  }
+  .tagnone {
+    display: none;
+  }
+}
+.tag {
+  /* position: relative; */
+  /* overflow-x: scroll; */
+  /* width: 5vw; */
+  padding: unset;
+  text-align: center;
+  display: inline-table;
+  /* width: auto; */
+  border-radius: 26px;
+  /* border: 1px solid var(--primary-lightbrown); */
+}
+.tag li {
+  display: none;
+}
+.tag:hover .aa li {
+  margin: 0.5vw;
+  width: auto;
+  display: inline-block;
+  /* transition: 0.5s; */
+  border-radius: 26px;
+  /* border: 1px solid var(--primary-lightgreen); */
+  /* padding: 0.01vw 0.5vw; */
+  color: $secondary-green;
+  font-family: $zh-tw-noto;
+  /* background: white; */
+}
+.tag.active .aa li{
+  margin: 0.5vw;
+  width: auto;
+  display: inline-block;
+  /* transition: 0.5s; */
+  border-radius: 26px;
+  /* border: 1px solid var(--primary-lightgreen); */
+  /* padding: 0.01vw 0.5vw; */
+  color: $secondary-green;
+  font-family: $zh-tw-noto;
+  /* background: white; */
+}
+
+.point{
+  cursor: pointer;
+}
+
+.bb:hover {
+  background: $secondary-green;
+  color: white;
+}
+.bb.active{
+  background: $secondary-green;
+  color: white;
+}
+
+.aa {
+  /* width: 10vw; */
+  /* position: absolute; */
+  margin: 0;
+  background-color: rgba(245, 181, 77, 0.56);
+  display: flex;
+  border-radius: 26px;
+  width: auto;
+  padding: 0.001vw;
+}
+
+.bb {
+  /* margin-right: 0; */
+  width: 5vw;
+  border: 1px solid $primary-lightgray;
+  border-radius: 26px;
+  margin-bottom: 0.5vw;
+  padding: 0.1vw 1vw;
+  color: $secondary-green;
+  font-family: $zh-tw-noto;
+}
+.aa li:hover span {
+  background: $secondary-green;
+  color: white;
+}
+.aa li.active span {
+  background: $secondary-green;
+  color: white;
+}
+.aa span {
+  text-decoration: none;
+  border-radius: 26px;
+  text-align: center;
+  padding: 0 0.5vw;
+  border: 1px solid $primary-lightgray;
+  color: $secondary-green;
+  font-family: $zh-tw-noto;
+  background: white;
+}
+.point {
+  /* padding-top: 0.5vw; */
+  /* height: 2vw; */
+}
+.point img {
+  height: 1.5vw;
+  /* margin-top: 0.6vw; */
+}
+.buttongroup{
+margin-top: 1vw;
+display: flex;
+justify-content: center;
+}
+.buttontext{
+  margin-left: 5px;
+text-align: center;
+padding-bottom: 10px;
+}
+.buttontext img{
+  position: relative;
+  left: 2px;
+  top: 7px;
+  }
+  .buttontext2{
+    margin-right: 5px;
+  }
+.buttontext2 img{
+  position: relative;
+  left: 5px;
+  top: 2px;
+}
+.starss{
+  width: 7vw;
+  display: flex;
+  justify-content: space-around;
+}
+.fa-star{
+  cursor: pointer;
+  color: $primary-lightgray;
+}
+.fa-star:hover{
+  color: $secondary-lightyellow;
+}
+.fa-star.active{
+  color: $secondary-lightyellow;
+}
+@media screen and (max-width: 1200px) {
+  .point img {
+    height: 2vw;
+    /* margin-top: 0.6vw; */
+  }
+}
+@media screen and (max-width: 500px) {
+  .point img {
+    height: 3vw;
+    /* margin-top: 0.6vw; */
+  }
+  .ineditor h4 {
+    margin: 1vw 0 2vw 0;
+  }
+}
+.draft{
+  width: 100%;
+  min-height: 50vh;
+  border: 1px solid $primary-lightbrown;
+  color: $primary-lightbrown;
+}

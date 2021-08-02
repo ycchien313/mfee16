@@ -1,12 +1,10 @@
 import React from 'react'
-import '../../styles/home/home.scss'
-import FirstScreen from './sections/FirstScreen'
-import SecondScreen from './sections/SecondScreen'
+import Header from '../../components/Header'
+
 function Home() {
   return (
     <>
-      <FirstScreen />
-      <SecondScreen />
+      <Header />
     </>
   )
 }

@@ -1,0 +1,35 @@
+.breadcrumb {
+  @import '../../styles/common/global.scss';
+
+  /********** 右側：麵包屑 *********/
+  margin: 2.08vw 0 1.82vw 3vw;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+
+  .breadcrumb-list {
+    font-family: $zh-tw-noto;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .list-item {
+    list-style: none;
+  }
+
+  .list-item:nth-child(1) {
+    color: #ccc;
+  }
+
+  .list-item:nth-child(1)::after {
+    content: '/';
+    margin: 0 0.52vw;
+  }
+
+  .list-item:nth-child(2) {
+    color: $secondary-green;
+  }
+}

@@ -3,9 +3,9 @@ const router = express.Router();
 const db = require('../utils/db')
 
 require('dotenv').config();
-const mailgun = require("mailgun-js");
+// const mailgun = require("mailgun-js");
 const DOMAIN = "sandboxd434801e3d8446a8946d9b7075271e58.mailgun.org";
-const mg = mailgun({apiKey:process.env.MG_KEY, domain: DOMAIN});
+// const mg = mailgun({apiKey:process.e nv.MG_KEY, domain: DOMAIN});
 
 router.get('/seat', async (req, res)=>{
     let getSeatSql = 'SELECT seat_id, name, minimum_order, seat_number AS totalSeats FROM seat'

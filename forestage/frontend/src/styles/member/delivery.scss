@@ -97,6 +97,73 @@
   }
 
   /********** 右側：內容 *********/
+  /* 無資料 */
+  .no-data-container {
+    @mixin animation-mixin($name) {
+      @keyframes #{$name} {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+    }
+
+    @include animation-mixin(pulse);
+
+    // @keyframes pulse {
+    //   0% {
+    //     transform: scale(1);
+    //     opacity: 1;
+    //   }
+    //   100% {
+    //     transform: scale(2);
+    //     opacity: 0;
+    //   }
+    // }
+
+    height: 150px;
+    text-align: center;
+    color: $primary-lightgreen;
+    margin: 50px 0;
+    position: relative;
+
+    .no-data-link {
+      position: absolute;
+      top: 120px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      line-height: 80px;
+      border-radius: 50%;
+      text-decoration: none;
+    }
+
+    .no-data-link::before,
+    .no-data-link::after {
+      @extend .no-data-link;
+      content: '';
+      border: 1.5px solid $accent-orange;
+      top: 0;
+      left: 0;
+      transform: unset;
+    }
+
+    .no-data-link::before {
+      // animation: pulse 1.5 timing-function delay iteration-count direction fill-mode;
+      animation: pulse 1.5s infinite;
+    }
+
+    .no-data-link::after {
+      animation: pulse 1.5s 1s infinite;
+    }
+  }
+
+  /* 有資料 */
   .recent-content {
     padding-left: 4.95vw;
     font-family: $zh-tw-noto;

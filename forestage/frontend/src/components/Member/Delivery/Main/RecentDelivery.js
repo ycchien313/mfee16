@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 function RecentDelivery(props) {
@@ -114,78 +115,96 @@ function RecentDelivery(props) {
     }
   }, [memberId, didMount])
 
+  // 沒有資料時的 DOM
+  const noDataDom = (
+    <>
+      <div className="no-data-container">
+        <h1>您近期沒有任何訂餐</h1>
+        <Link to="/delivery" className="no-data-link orange-guide-button">
+          訂餐
+        </Link>
+      </div>
+    </>
+  )
+
   return (
     <>
-      <div className="recent-content">
-        {orders.map((v, i) => {
-          return (
-            <div className="content-container" key={i}>
-              <div className="content-head">
-                <h4 className="content-head-title">訂單編號 #{v.deliveryId}</h4>
-                <div className="detail-container">
-                  <i className="fas fa-eye"></i>
-                </div>
-              </div>
-              <div className="content-body">
-                <table className="content-table">
-                  <thead>
-                    <tr>
-                      <th>送餐時間</th>
-                      <th>餐點</th>
-                      <th>總金額</th>
-                      <th>訂購人</th>
-                      <th>取餐地址</th>
-                      <th>聯絡電話</th>
-                      <th>備註</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>{v.deliveryTime}</td>
-                      <td>
-                        {v.dishes.map((dish, i) => {
-                          return (
-                            <p>
-                              {dish.dishName}*{dish.dishCount}
-                            </p>
-                          )
-                        })}
-                      </td>
-                      <td>{v.total}</td>
-                      <td>{v.name}</td>
-                      <td>{v.address}</td>
-                      <td>{v.mobile}</td>
-                      <td>{v.note}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+      {orders.length > 0
+        ? [
+            orders.map((v, i) => {
+              return (
+                <div className="recent-content">
+                  <div className="content-container" key={i}>
+                    <div className="content-head">
+                      <h4 className="content-head-title">
+                        訂單編號 #{v.deliveryId}
+                      </h4>
+                      <div className="detail-container">
+                        <i className="fas fa-eye"></i>
+                      </div>
+                    </div>
+                    <div className="content-body">
+                      <table className="content-table">
+                        <thead>
+                          <tr>
+                            <th>送餐時間</th>
+                            <th>餐點</th>
+                            <th>總金額</th>
+                            <th>訂購人</th>
+                            <th>取餐地址</th>
+                            <th>聯絡電話</th>
+                            <th>備註</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{v.deliveryTime}</td>
+                            <td>
+                              {v.dishes.map((dish, i) => {
+                                return (
+                                  <p>
+                                    {dish.dishName}*{dish.dishCount}
+                                  </p>
+                                )
+                              })}
+                            </td>
+                            <td>{v.total}</td>
+                            <td>{v.name}</td>
+                            <td>{v.address}</td>
+                            <td>{v.mobile}</td>
+                            <td>{v.note}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
 
-              {/* 按鈕列 */}
-              <div className="content-foot">
-                <div className="btns-container">
-                  <button className="cancel-resv-btn guide-button">
-                    取消訂單
-                  </button>
-                </div>
-              </div>
+                    {/* 按鈕列 */}
+                    <div className="content-foot">
+                      <div className="btns-container">
+                        <button className="cancel-resv-btn guide-button">
+                          取消訂單
+                        </button>
+                      </div>
+                    </div>
 
-              {/* 手機版按鈕列 */}
-              <div className="content-foot-md">
-                <div className="msgbox-container">
-                  <p>共{calcDishCountTotal(v.dishes)}件餐點</p>
-                  <p>合計金額: {v.total}元</p>
+                    {/* 手機版按鈕列 */}
+                    <div className="content-foot-md">
+                      <div className="msgbox-container">
+                        <p>共{calcDishCountTotal(v.dishes)}件餐點</p>
+                        <p>合計金額: {v.total}元</p>
+                      </div>
+                      <div className="btns-container">
+                        <button className="cancel-resv-btn guide-button">
+                          取消訂單
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="btns-container">
-                  <button className="cancel-resv-btn guide-button">
-                    取消訂單
-                  </button>
-                </div>
-              </div>
-            </div>
-          )
-        })}
-      </div>
+              )
+            }),
+          ]
+        : noDataDom}
     </>
   )
 }

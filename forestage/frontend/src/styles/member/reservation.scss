@@ -99,63 +99,68 @@
 
   /********** 右側：內容 *********/
   /* 無資料 */
-  @mixin animation-mixin($name) {
-    @keyframes #{$name} {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2);
-        opacity: 0;
+  .no-data-container {
+    @mixin animation-mixin($name) {
+      @keyframes #{$name} {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(2);
+          opacity: 0;
+        }
       }
     }
-  }
-  @include animation-mixin(pulse);
 
-  // @keyframes pulse {
-  //   0% {
-  //     transform: scale(1);
-  //     opacity: 1;
-  //   }
-  //   100% {
-  //     transform: scale(1.5);
-  //     opacity: 0;
-  //   }
-  // }
+    @include animation-mixin(pulse);
 
-  .no-data-container {
-    margin: 50px;
+    // @keyframes pulse {
+    //   0% {
+    //     transform: scale(1);
+    //     opacity: 1;
+    //   }
+    //   100% {
+    //     transform: scale(2);
+    //     opacity: 0;
+    //   }
+    // }
+
+    height: 150px;
     text-align: center;
     color: $primary-lightgreen;
+    margin: 50px 0;
     position: relative;
 
-    .no-data-btn {
+    .no-data-link {
       position: absolute;
-      top: 100px;
+      top: 120px;
       left: 50%;
       transform: translate(-50%, -50%);
       width: 80px;
       height: 80px;
+      line-height: 80px;
       border-radius: 50%;
-
-      // animation: pulse 1.5 infinite;
-
-      // animation: pulse 1.5 timing-function delay iteration-count direction fill-mode;
+      text-decoration: none;
     }
 
-    .no-data-btn::before {
-      @extend .no-data-btn;
-      background-color: rgba(255, 255, 255, 0);
+    .no-data-link::before,
+    .no-data-link::after {
+      @extend .no-data-link;
       content: '';
-      // border: 1px solid black;
-      border: 1px solid $accent-orange;
+      border: 1.5px solid $accent-orange;
       top: 0;
       left: 0;
-      transform: scale(0.5);
-      opacity: 0;
+      transform: unset;
+    }
 
+    .no-data-link::before {
+      // animation: pulse 1.5 timing-function delay iteration-count direction fill-mode;
       animation: pulse 1.5s infinite;
+    }
+
+    .no-data-link::after {
+      animation: pulse 1.5s 1s infinite;
     }
   }
 

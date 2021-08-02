@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import HistoryReservationDetailModal from './HistoryReservationDetailModal'
 
 function HistoryReservation(props) {
   const { memberId, setContentIsLoaded } = props
-  const [didMount, setDidMount] = useState(true)
   const [show, setShow] = useState(false)
   const [orders, setOrders] = useState([
     { reservationId: '', date: '', status: '' },
@@ -43,7 +43,7 @@ function HistoryReservation(props) {
   useEffect(() => {
     const fetchData = async () => {
       const historyReservation = await fetchHistoryReservation()
-      console.log('didMount history reservation: ', historyReservation)
+      // console.log('didMount history reservation: ', historyReservation)
 
       setOrders(historyReservation)
       setContentIsLoaded(true)
@@ -52,9 +52,17 @@ function HistoryReservation(props) {
     fetchData()
   }, [])
 
-  // useEffect(() => {
-  //   console.log(orders)
-  // }, [orders])
+  // 沒有資料時的 DOM
+  const noDataDom = (
+    <>
+      <div className="no-data-container">
+        <h1>您近期沒有任何紀錄</h1>
+        <Link to="/reservation" className="no-data-link orange-guide-button">
+          訂位
+        </Link>
+      </div>
+    </>
+  )
 
   return (
     <>
@@ -65,7 +73,7 @@ function HistoryReservation(props) {
         reservationId={reservationId}
       />
 
-      {orders.length !== 0 && (
+      {orders.length > 0 ? (
         <div class="history-content active">
           <div class="content-container">
             <div class="content-body">
@@ -104,6 +112,8 @@ function HistoryReservation(props) {
             </div>
           </div>
         </div>
+      ) : (
+        noDataDom
       )}
     </>
   )

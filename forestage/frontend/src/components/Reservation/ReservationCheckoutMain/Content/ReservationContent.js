@@ -6,7 +6,7 @@ function ReservationContent(props) {
   // 更換日期格式
   if (newDate !== undefined) {
     newDate = newDate.replace(/-/g, ' / ')
-    console.log(newDate, 'newdate')
+    // console.log(newDate, 'newdate')
   }
 
   return (

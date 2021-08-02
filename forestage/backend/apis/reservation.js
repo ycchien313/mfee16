@@ -29,7 +29,7 @@ router.get('/dish', async(req, res)=> {
 router.get('/checkout/coupon', async(req, res)=>{
     let getMemberCouponSql = 'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0'
     let memberCoupon = await db.connection.queryAsync(getMemberCouponSql,[req.query.memberId])
-    console.log(req.query.memberId)
+    // console.log(req.query.memberId)
     res.send(memberCoupon)
 })
 
@@ -38,14 +38,14 @@ router.get('/checkout/coupon', async(req, res)=>{
 router.get('/checkout/memberInfo', async(req, res)=>{
     let getMemberInfoSql = 'SELECT name, mobile FROM member WHERE member_id=?'
     let memberInfo = await db.connection.queryAsync(getMemberInfoSql, [req.query.memberId])
-    console.log('req.query.memberId:', req.query.memberId)
+    // console.log('req.query.memberId:', req.query.memberId)
     // console.log("memberInfo:",memberInfo)
     res.send(memberInfo)
 })
 
 router.post('/checkout/send', async(req, res)=>{
     let insertResData = req.body.insertResData
-    console.log(insertResData)
+    // console.log(insertResData)
     let resDate = insertResData.date
     let resTotal = insertResData.total
     let resAttendance = insertResData.attendance
@@ -72,26 +72,25 @@ router.post('/checkout/send', async(req, res)=>{
             newDishList.push([reservation.insertId,v[1]])
         }
     })
-    console.log(newDishList)
+    // console.log(newDishList)
     
     let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`
     let insertDish = await db.connection.queryAsync(insertDishSql,[newDishList])
-    console.log("typeof dishlist:", typeof dishList)
-    console.log(insertDish)
+    // console.log(insertDish)
 
     // 更新mcm表格中，哪一筆訂單使用此折價券
     let updateMCMSql = `UPDATE member_coupon_mapping SET reservation_id = ${reservation.insertId}, valid = 0 WHERE mcm_id = ?`
     let updateMCM = await db.connection.queryAsync(updateMCMSql, [req.body.insertResData.mcm_id])
-    console.log(updateMCM)
+    // console.log(updateMCM)
 
 
     let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
     // [req.body.insertResData.member_id]
     let memberInfo = await db.connection.queryAsync(getMemberInfo,1)
-    console.log(memberInfo[0].name)
+    // console.log(memberInfo[0].name)
     let memberEmail = memberInfo[0].email
     
-    console.log(memberInfo,"memberinfo")
+    // console.log(memberInfo,"memberinfo")
 
     // mailgun確認信
     const mailBody = {
@@ -217,7 +216,7 @@ router.post('/checkout/send', async(req, res)=>{
     };
     
     mg.messages().send(mailBody, function (error, body) {
-	console.log(body);
+	// console.log(body);
 });
 
 })
@@ -228,7 +227,7 @@ router.get('/:date', async(req, res)=>{
     let remainingSeats = await db.connection.queryAsync(getRemainingSeatsSql,[req.params.date])
     
     res.json(remainingSeats)
-    console.log(req.params.date)
+    // console.log(req.params.date)
 })
 
 

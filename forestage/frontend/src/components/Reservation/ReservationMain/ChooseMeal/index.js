@@ -78,7 +78,7 @@ function ChooseMeal(props) {
       let initShowDishes = result.data.filter((dish) => {
         return dish.type === '主餐'
       })
-      console.log(initShowDishes)
+      // console.log(initShowDishes)
       setDishes(result.data)
       setShowDishes(initShowDishes)
     })

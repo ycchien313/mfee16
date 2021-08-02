@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
-import axios from 'axios'
 import ReservationContent from './Content/ReservationContent'
 import DishContent from './Content/DishContent/'
 import ReservationPerson from './Content/ReservationPerson'
 import StyledLink from '../StyledLink'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+
 
 function Main(props) {
   const { dishList, checkList, insertResData, setInsertResData } = props

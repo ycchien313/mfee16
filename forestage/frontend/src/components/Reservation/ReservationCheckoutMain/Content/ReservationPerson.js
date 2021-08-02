@@ -22,7 +22,7 @@ function ReservationPerson(props) {
 
     // 1. 取得登入id
     let authToken = window.localStorage.getItem('authToken')
-    console.log('auth', authToken)
+    // console.log('auth', authToken)
     axios
       .get('http://localhost:3001/auth/me', {
         method: 'get',
@@ -33,7 +33,7 @@ function ReservationPerson(props) {
       .then((result) => {
         // 2. 取得會員姓名電話
         let memeberId = result.data.memberId
-        console.log('memberid:', memeberId)
+        // console.log('memberid:', memeberId)
         axios
           .get('http://localhost:3001/reservation/checkout/memberInfo', {
             method: 'get',

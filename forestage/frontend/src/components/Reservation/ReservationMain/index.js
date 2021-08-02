@@ -95,7 +95,7 @@ function Main(props) {
     checkList.total >= checkList.minOrder && checkList.minOrder !== 0
       ? (newCheckData.minOrder = true)
       : (newCheckData.minOrder = false)
-    console.log('chekData', newCheckData)
+    // console.log('chekData', newCheckData)
     if (
       newCheckData.date &&
       newCheckData.seat &&
@@ -125,14 +125,14 @@ function Main(props) {
 
     // 將sessionStorage中seatCount的key轉回int(ID)後，存入狀態
     if (checkSeatCount) {
-      console.log(seatInfo, 'sinfo')
+      // console.log(seatInfo, 'sinfo')
       let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
       let keyArr = Object.keys(newSeatCount)
       let newObj = {}
       keyArr.forEach((v) => {
         newObj[+v] = newSeatCount[v]
       })
-      console.log(newObj)
+      // console.log(newObj)
       setSeatCount(newObj)
     }
   }, [])
@@ -157,7 +157,7 @@ function Main(props) {
         var touchLocation = e.targetTouches[0]
 
         e.preventDefault()
-        console.log(document.body.clientWidth)
+        // console.log(document.body.clientWidth)
         // assign box new coordinates based on the touch.
         dragTarget.style.left = touchLocation.pageX - 20 + 'px'
       })

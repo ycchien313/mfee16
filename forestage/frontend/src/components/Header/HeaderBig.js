@@ -19,7 +19,7 @@ function HeaderBig(props) {
     for (let i = 0; i < cartList.length; i++) {
       total = total + cartList[i].price * cartList[i].count
     }
-    console.log(total)
+    // console.log(total)
     setTotalPrice(total)
   }
   // 總數計算
@@ -28,7 +28,7 @@ function HeaderBig(props) {
     for (let i = 0; i < cartList.length; i++) {
       totalCount = totalCount + cartList[i].count
     }
-    console.log(totalCount)
+    // console.log(totalCount)
     setTotalCountNum(totalCount)
   }
   useEffect(() => {

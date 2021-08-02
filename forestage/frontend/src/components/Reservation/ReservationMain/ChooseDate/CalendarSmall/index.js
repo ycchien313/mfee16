@@ -28,7 +28,7 @@ function CalendarSmall(props) {
           className={chosenWeek === 1 ? nextWeekActClass : nextWeekClass}
           // className="next-week active h3"
           onClick={(e) => {
-            console.log("className:",e.target.className)
+            // console.log("className:",e.target.className)
             setChosenWeek(1)
           }}
         >

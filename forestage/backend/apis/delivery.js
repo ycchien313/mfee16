@@ -46,10 +46,7 @@ router.get("/coupon/:id",async function(req,res,next){
 //     res.send(memberInfo)
 // } )
 
-router.get("/member/:id",async function(req,res,next){
-    let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = ?",req.params.id)
-    res.send(queryresult)
-} )
+ 
 
 
 router.post('/order', async function (req, res, next) {

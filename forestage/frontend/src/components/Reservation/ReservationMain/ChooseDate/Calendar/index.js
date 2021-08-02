@@ -3,7 +3,17 @@ import '../../../../../styles/reservation/res/reservation-date.scss'
 import Day from './day'
 
 function CalendarBig(props) {
-  const { remainingSeat, setRemainingSeat, setCheckList, checkList, singerCalendar } = props
+  const {
+    remainingSeat,
+    setRemainingSeat,
+    setCheckList,
+    checkList,
+    singerCalendar,
+    seatInfo,
+    setSeatInfo,
+    setSeatCount,
+    seatCount,
+  } = props
 
   return (
     <>
@@ -16,9 +26,14 @@ function CalendarBig(props) {
                 date={v.date}
                 name={v.name}
                 picture={v.picture}
+                remainingSeat={remainingSeat}
                 setRemainingSeat={setRemainingSeat}
                 setCheckList={setCheckList}
                 checkList={checkList}
+                seatInfo={seatInfo}
+                setSeatCount={setSeatCount}
+                setSeatInfo={setSeatInfo}
+                seatCount={seatCount}
               />
             )
           }
@@ -37,6 +52,11 @@ function CalendarBig(props) {
                 setRemainingSeat={setRemainingSeat}
                 setCheckList={setCheckList}
                 checkList={checkList}
+                seatInfo={seatInfo}
+                setSeatInfo={setSeatInfo}
+                setSeatCount={setSeatCount}
+                seatCount={seatCount}
+
               />
             )
           }

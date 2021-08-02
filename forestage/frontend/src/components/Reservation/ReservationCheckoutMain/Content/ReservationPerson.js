@@ -20,7 +20,7 @@ function ReservationPerson(props) {
 
   function getMemberId() {
     let authToken = window.localStorage.getItem('authToken')
-    console.log('auth', authToken)
+    // console.log('auth', authToken)
     axios
       .get('http://localhost:3001/auth/me', {
         method: 'get',
@@ -35,7 +35,7 @@ function ReservationPerson(props) {
         setInsertResData(newInsertResData)
       })
   }
-  // 取得會員資料
+  // 取得會員資料，自動帶入input內
   function getMemberInfo() {
 
     axios

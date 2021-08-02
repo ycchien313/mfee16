@@ -2,7 +2,17 @@ import React, { useEffect, useState } from 'react'
 import '../../../../../styles/reservation/res/reservation-date-RWD.scss'
 import Day from './day'
 function CalendarSmall(props) {
-  const { setRemainingSeat, setCheckList, checkList, singerCalendar } = props
+  const {
+    remainingSeat,
+    setRemainingSeat,
+    setCheckList,
+    checkList,
+    singerCalendar,
+    seatInfo,
+    setSeatInfo,
+    setSeatCount,
+    seatCount,
+  } = props
 
   const [chosenWeek, setChosenWeek] = useState(0)
   const [thisWeekClass, thiWeekActClass, nextWeekClass, nextWeekActClass] = [
@@ -11,7 +21,6 @@ function CalendarSmall(props) {
     'next-week h3',
     'next-week active h3',
   ]
-
 
   return (
     <>
@@ -28,7 +37,7 @@ function CalendarSmall(props) {
           className={chosenWeek === 1 ? nextWeekActClass : nextWeekClass}
           // className="next-week active h3"
           onClick={(e) => {
-            console.log("className:",e.target.className)
+            // console.log("className:",e.target.className)
             setChosenWeek(1)
           }}
         >
@@ -45,9 +54,14 @@ function CalendarSmall(props) {
                     date={v.date}
                     name={v.name}
                     picture={v.picture}
+                    remainingSeat={remainingSeat}
                     setRemainingSeat={setRemainingSeat}
                     setCheckList={setCheckList}
                     checkList={checkList}
+                    seatInfo={seatInfo}
+                    setSeatCount={setSeatCount}
+                    setSeatInfo={setSeatInfo}
+                    seatCount={seatCount}
                   />
                 )
               }
@@ -60,9 +74,14 @@ function CalendarSmall(props) {
                     date={v.date}
                     name={v.name}
                     picture={v.picture}
+                    remainingSeat={remainingSeat}
                     setRemainingSeat={setRemainingSeat}
                     setCheckList={setCheckList}
                     checkList={checkList}
+                    seatInfo={seatInfo}
+                    setSeatCount={setSeatCount}
+                    setSeatInfo={setSeatInfo}
+                    seatCount={seatCount}
                   />
                 )
               }

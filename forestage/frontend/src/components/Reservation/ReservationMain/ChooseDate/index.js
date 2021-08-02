@@ -8,11 +8,12 @@ function ChooseDate(props) {
   const {
     remainingSeat,
     setRemainingSeat,
+    setSeatInfo,
     seatInfo,
     seatCount,
     setSeatCount,
     setCheckList,
-    checkList
+    checkList,
   } = props
 
   const [singerCalendar, setSingerCalendar] = useState([])
@@ -65,6 +66,10 @@ function ChooseDate(props) {
               setCheckList={setCheckList}
               checkList={checkList}
               singerCalendar={singerCalendar}
+              setSeatCount={setSeatCount}
+              setSeatInfo={setSeatInfo}
+              seatInfo={seatInfo}
+              seatCount={seatCount}
             />
           ) : (
             <CalendarBig
@@ -73,6 +78,10 @@ function ChooseDate(props) {
               setCheckList={setCheckList}
               checkList={checkList}
               singerCalendar={singerCalendar}
+              setSeatCount={setSeatCount}
+              setSeatInfo={setSeatInfo}
+              seatInfo={seatInfo}
+              seatCount={seatCount}
             />
           )}
           <SeatsBar

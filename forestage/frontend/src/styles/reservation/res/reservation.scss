@@ -1,7 +1,7 @@
 /* --------------------- */
 /* reservation */
 /* hero section */
-.reservation.hero-section{
+.reservation.hero-section {
   background-image: url(http://localhost:3000/images/reservation/reservation-hero.png);
   background-size: cover;
   height: 500px;
@@ -12,7 +12,6 @@
 //   display: flex}
 
 @import '../../common/global.scss';
-
 
 .reservation {
   // .drag-zone{
@@ -165,7 +164,7 @@
     flex-grow: 1;
     margin-right: 2.34vw;
   }
-  .order-list-icon{
+  .order-list-icon {
     display: none;
   }
 
@@ -173,7 +172,7 @@
     .container-big {
       margin-left: 30px;
       margin-right: 30px;
-      
+
       /* display: flex; */
     }
   }
@@ -185,8 +184,7 @@
     .main-article {
       margin-right: 0;
     }
-    .sticky-ancester{
-
+    .sticky-ancester {
       touch-action: none;
       width: 100%;
       position: absolute;
@@ -196,7 +194,7 @@
       pointer-events: none;
     }
 
-    .list-move-zone{
+    .list-move-zone {
       // background: red;
       position: sticky;
       width: 100%;
@@ -206,18 +204,17 @@
       pointer-events: none;
     }
 
-    .order-list-icon{
+    .order-list-icon {
       display: block;
       position: sticky;
       width: 60px;
       z-index: 1000;
       filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.5));
-      transition: .3s;
+      transition: 0.3s;
       pointer-events: visible;
       cursor: pointer;
-
     }
-    .order-list-icon:hover{
+    .order-list-icon:hover {
       filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0));
     }
   }
@@ -314,7 +311,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     position: relative;
-    z-index: 300;
+    z-index: 10;
   }
 
   .choose-seat .row:hover {
@@ -542,18 +539,24 @@
     display: flex;
     margin-top: 2vw;
   }
+  .bar-background p{
+    align-items: center;
+    color: $accent-red;
+  }
   .bar-length {
     display: flex;
     width: 100%;
   }
   .rock-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $accent-orange;
     border-radius: 40px 0 0 40px;
     position: relative;
     z-index: 3;
     transition: 0.5s;
+    flex-shrink: 0;
+
   }
   .rock-bar-end {
     height: 100%;
@@ -565,13 +568,15 @@
     flex-shrink: 0;
   }
   .middle-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $secondary-green;
     position: relative;
     z-index: 2;
     left: -2.6vw;
     transition: 0.5s;
+    flex-shrink: 0;
+
   }
   .middle-bar-end {
     height: 100%;
@@ -584,13 +589,15 @@
     flex-shrink: 0;
   }
   .back-bar {
-    width: 33%;
+    // width: 33%;
     height: 100%;
     background: $secondary-lightyellow;
     position: relative;
     z-index: 1;
     left: -5.2vw;
     transition: 0.5s;
+    flex-shrink: 0;
+
   }
   .back-bar-end {
     height: 100%;
@@ -601,6 +608,21 @@
     z-index: 1;
     left: -5.2vw;
     flex-shrink: 0;
+
+  }
+
+  @media screen and (max-width:768px){
+    .bar-background p{
+      margin: 0;
+      // margin-bottom: 10px;
+      position: relative;
+      bottom: 30px;
+      font-size: 20px;
+    }
+    .bar-background {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
 
   /* 剩餘座位文字 */
@@ -743,7 +765,7 @@
     margin-top: 1.3vw;
   }
 
-  @media screen and (max-width: 1200px) and (min-width:768px) {
+  @media screen and (max-width: 1200px) and (min-width: 768px) {
     .category h4 {
       position: absolute;
       right: 2.45vw;
@@ -792,7 +814,7 @@
       margin-top: 0.55vw;
       margin-bottom: 20px;
     }
-    
+
     .category img {
       width: 100px;
     }
@@ -823,7 +845,6 @@
       margin: 0 -30px;
     }
 
-
     .choose-meal .card span {
       margin-top: 20px;
     }
@@ -836,14 +857,14 @@
   }
 }
 
-  @media screen and (max-width: 768px) {
-    .reservation.table-bg {
-      display: none;
-    }
+@media screen and (max-width: 768px) {
+  .reservation.table-bg {
+    display: none;
   }
+}
 
-  /* 側邊總覽 */
-.reservation{
+/* 側邊總覽 */
+.reservation {
   .aside-list {
     /* width: 300px; */
     /* background-color:palevioletred; */
@@ -923,10 +944,9 @@
     line-height: 0.93vw;
   }
 
-  .clipboard .close-button{
+  .clipboard .close-button {
     display: none;
   }
-
 
   @media screen and (max-width: 1200px) {
     .clipboard .content ul span {
@@ -982,47 +1002,44 @@
     .aside-list {
       position: fixed;
       font-size: 2rem;
-      top:0;
+      top: 0;
       width: calc(100% - 60px);
       z-index: 1000;
-      transition: .5s;
+      transition: 0.5s;
       // overflow: hidden;
       // height: 100vh;
       // display: none;
     }
 
-    .aside-list .clipboard{
+    .aside-list .clipboard {
       padding: 10px;
       transition: 1s;
       opacity: 1;
       // left: 500px;
       position: relative;
-
     }
-    .aside-list .clipboard.disactive{
+    .aside-list .clipboard.disactive {
       display: none;
       opacity: 0;
       position: relative;
-
-
     }
 
-    .aside-list .clipboard .clip{
+    .aside-list .clipboard .clip {
       width: 100px;
-      left: calc(50% - 50px)
+      left: calc(50% - 50px);
     }
-    .aside-list .clipboard .content{
+    .aside-list .clipboard .content {
       padding: 20px 10px 10px 10px;
     }
-    .aside-list .clipboard .content .title{
+    .aside-list .clipboard .content .title {
       display: flex;
       align-items: center;
     }
-    .aside-list .clipboard .content .title h4{
+    .aside-list .clipboard .content .title h4 {
       margin-right: 10px;
       font-size: 20px;
     }
-    .aside-list .clipboard .content ul{
+    .aside-list .clipboard .content ul {
       margin-bottom: 35px;
     }
     .aside-list .clipboard .content li {
@@ -1030,20 +1047,19 @@
       display: flex;
       align-items: center;
     }
-    .aside-list .clipboard .content span{
+    .aside-list .clipboard .content span {
       line-height: 25px;
       margin-left: 10px;
       font-size: 14px;
-
     }
-    .aside-list .clipboard .content span.detail{
+    .aside-list .clipboard .content span.detail {
       margin-right: 10px;
       font-size: 14px;
     }
     .aside-list .clipboard .content i {
       font-size: 25px;
     }
-    .aside-list button{
+    .aside-list button {
       bottom: 20px;
       // left: 65%;
       left: calc(100% - 150px);
@@ -1055,13 +1071,13 @@
       padding: 0px 15px;
       font-size: 16px;
     }
-    .aside-list button img{
+    .aside-list button img {
       position: static;
       // top:8px;
       width: 25px;
       height: 25px;
     }
-    .clipboard .close-button{
+    .clipboard .close-button {
       display: block;
       position: absolute;
       z-index: 10;
@@ -1073,20 +1089,19 @@
       color: white;
       line-height: 28px;
       box-shadow: $box-shadow;
-      background:$accent-orange;
+      background: $accent-orange;
       width: 30px;
       height: 30px;
       border-radius: 50%;
       transition: 0.3s;
-
     }
-    .clipboard .close-button:hover{
+    .clipboard .close-button:hover {
       box-shadow: none;
     }
   }
 
   // 手機版下方送出按鈕
-  button.pink-guide-button.bottom{
+  button.pink-guide-button.bottom {
     bottom: 20px;
     height: 40px;
     width: 130px;
@@ -1095,22 +1110,32 @@
     justify-content: space-between;
     padding: 0px 15px;
     font-size: 16px;
-    
+    // display: none;
   }
-  button.pink-guide-button.bottom img{
+
+  button.pink-guide-button.bottom img {
     position: static;
     // top:8px;
     width: 25px;
     height: 25px;
   }
+
+  // 手機版下方送出按鈕
+  // 大螢幕時不顯示下方送出按拗
+  @media screen and (min-width: 768px){
+    button.pink-guide-button.bottom {
+      display: none;
+    }
+  }
+
 }
-.reservation.bottom{
+.reservation.bottom {
   display: flex;
   justify-content: center;
 }
 
-  // 餐點動畫特效
-.reservation{
+// 餐點動畫特效
+.reservation {
   @for $i from 1 through 9 {
     @media screen and (min-width: 1200px) {
       #food-#{$i}.illu-image.active {

@@ -95,7 +95,7 @@ function Main(props) {
     checkList.total >= checkList.minOrder && checkList.minOrder !== 0
       ? (newCheckData.minOrder = true)
       : (newCheckData.minOrder = false)
-    console.log('chekData', newCheckData)
+    // console.log('chekData', newCheckData)
     if (
       newCheckData.date &&
       newCheckData.seat &&
@@ -109,9 +109,9 @@ function Main(props) {
 
   useEffect(() => {
     setDidMount(true)
-    axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
-      setSeatInfo(result.data)
-    })
+    // axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
+    //   setSeatInfo(result.data)
+    // })
 
     // 將sessionStorage狀態存入狀態
     checkRemainingSeat &&
@@ -125,14 +125,14 @@ function Main(props) {
 
     // 將sessionStorage中seatCount的key轉回int(ID)後，存入狀態
     if (checkSeatCount) {
-      console.log(seatInfo, 'sinfo')
+      // console.log(seatInfo, 'sinfo')
       let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
       let keyArr = Object.keys(newSeatCount)
       let newObj = {}
       keyArr.forEach((v) => {
         newObj[+v] = newSeatCount[v]
       })
-      console.log(newObj)
+      // console.log(newObj)
       setSeatCount(newObj)
     }
   }, [])
@@ -157,7 +157,7 @@ function Main(props) {
         var touchLocation = e.targetTouches[0]
 
         e.preventDefault()
-        console.log(document.body.clientWidth)
+        // console.log(document.body.clientWidth)
         // assign box new coordinates based on the touch.
         dragTarget.style.left = touchLocation.pageX - 20 + 'px'
       })
@@ -178,25 +178,28 @@ function Main(props) {
   }, [remainingSeat, seatCount, checkList, seatInfo])
 
   // 計算各區剩餘座位數量
-  useEffect(() => {
-    if (didMount) {
-      // console.log(seatInfo[0].seat_id)
-      let newObj = {}
-      for (let i = 0; i < seatInfo.length; i++) {
-        const foundRemainSeats = remainingSeat.find((item) => {
-          return item.seat_id === seatInfo[i].seat_id
-        })
+  // function getSeatCount() {
+  //   let newObj = {}
+  //   for (let i = 0; i < seatInfo.length; i++) {
+  //     const foundRemainSeats = remainingSeat.find((item) => {
+  //       return item.seat_id === seatInfo[i].seat_id
+  //     })
 
-        let totalSeats = foundRemainSeats
-          ? foundRemainSeats.remainingSeats
-          : seatInfo[i].totalSeats
+  //     let totalSeats = foundRemainSeats
+  //       ? foundRemainSeats.remainingSeats
+  //       : seatInfo[i].totalSeats
 
-        // let newId = seatInfo[i].seat_id
-        newObj[seatInfo[i].seat_id] = totalSeats
-        setSeatCount(newObj)
-      }
-    }
-  }, [remainingSeat])
+  //     // let newId = seatInfo[i].seat_id
+  //     newObj[seatInfo[i].seat_id] = totalSeats
+  //     setSeatCount(newObj)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (didMount) {
+  //     getSeatCount()
+  //   }
+  // }, [remainingSeat])
 
   return (
     <>
@@ -229,6 +232,7 @@ function Main(props) {
               setSeatCount={setSeatCount}
               setCheckList={setCheckList}
               checkList={checkList}
+              setSeatInfo={setSeatInfo}
             />
             <ChooseSeat
               seatInfo={seatInfo}
@@ -237,6 +241,7 @@ function Main(props) {
               checkList={checkList}
               setCheckList={setCheckList}
               remainingSeat={remainingSeat}
+              setRemainingSeat={setRemainingSeat}
             />
             <ChooseMeal
               checkList={checkList}

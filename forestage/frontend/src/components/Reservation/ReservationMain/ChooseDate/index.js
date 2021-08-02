@@ -67,6 +67,9 @@ function ChooseDate(props) {
               checkList={checkList}
               singerCalendar={singerCalendar}
               setSeatCount={setSeatCount}
+              setSeatInfo={setSeatInfo}
+              seatInfo={seatInfo}
+              seatCount={seatCount}
             />
           ) : (
             <CalendarBig

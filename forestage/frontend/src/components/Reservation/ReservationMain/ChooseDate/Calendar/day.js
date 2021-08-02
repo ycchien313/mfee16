@@ -18,8 +18,6 @@ function Day(props) {
   } = props
 
   const [didMount, setDidMount] = useState(false)
-  // const [singerName, setSingerName] = useState('')
-  const [singerDate, setSingerDate] = useState('')
 
   // 取月份+日期
   let newDate = [...date]

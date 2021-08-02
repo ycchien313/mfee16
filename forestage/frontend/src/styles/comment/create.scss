@@ -1,5 +1,8 @@
 @import '../common/global.scss';
 
+
+
+  
 .createeditor {
   z-index: 10;
   color: $primary-lightgreen;
@@ -23,19 +26,19 @@
 .createeditor h4 {
   margin: 0 0 0.5vw 0;
 }
-.title {
+.titleee {
   width: 45vw;
 }
-.ineditor {
-  /* display: flex; */
-  /* margin:auto; */
-  /* width: ; */
-  /* border-radius: 37px; */
-  /* height: ; */
-  /* background: rgba(217,217,217,0.8) ; */
-  /* opacity: 0.8; */
-  /* padding: 5vw 7vw; */
-}
+// .ineditor {
+//   /* display: flex; */
+//   /* margin:auto; */
+//   /* width: ; */
+//   /* border-radius: 37px; */
+//   /* height: ; */
+//   /* background: rgba(217,217,217,0.8) ; */
+//   /* opacity: 0.8; */
+//   /* padding: 5vw 7vw; */
+// }
 .ineditor h4{
   margin-top: 1vw;
 }
@@ -169,10 +172,10 @@
   font-family: $zh-tw-noto;
   background: white;
 }
-.point {
-  /* padding-top: 0.5vw; */
-  /* height: 2vw; */
-}
+// .point {
+//   /* padding-top: 0.5vw; */
+//   /* height: 2vw; */
+// }
 .point img {
   height: 1.5vw;
   /* margin-top: 0.6vw; */

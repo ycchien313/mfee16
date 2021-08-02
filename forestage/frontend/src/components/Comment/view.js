@@ -11,22 +11,46 @@ function View(props) {
     boomArticle,
     setBoomArticle,
     setArticleLikesId,
-    setLikes,
+    // setLikes,
     getLikes,
-    addLikes,
-    minusLikes,
-    likes,
+    // addLikes,
+    // minusLikes,
+    // likes,
   } = props
   const [message, setMessage] = useState([])
+  const [likeCount, setLikeCount] = useState(boomArticle.likes)
+  const [likes, setLikes] = useState(true)
+
   const [insertMessage, setInsertMessage] = useState({
     message: '',
     member_id: 1,
     article_id: boomArticle.article_id,
   })
 
-  let likeClass = 'fas like fa-heart size'
-  let normallike = 'fas fa-heart size'
+  let likeClass = 'fas like fa-heart size cursor'
+  let normallike = 'fas fa-heart size cursor'
   console.log(boomArticle)
+  function addLikes(articleId) {
+    axios({
+      method: 'put',
+      url: 'http://127.0.0.1:3001/comment/articleGood',
+      data: {
+        article_id: articleId,
+      },
+    }).then(() => {})
+    setLikeCount(likeCount + 1)
+  }
+  function minusLikes(articleId) {
+    axios({
+      method: 'put',
+      url: 'http://127.0.0.1:3001/comment/articleNotGood',
+      data: {
+        article_id: articleId,
+      },
+    }).then(() => {})
+    setLikeCount(likeCount - 1)
+  }
+
   function insertMessagefn() {
     axios({
       method: 'post',
@@ -57,6 +81,9 @@ function View(props) {
   useEffect(() => {
     getMessage()
   }, [boomArticle, insertMessage])
+  // useEffect(() => {
+  //   setLikeCount(article1.likes)
+  // }, [])
   function findLikes() {
     let Index = article.findIndex((v) => {
       return v.article_id === boomArticle.article_id
@@ -95,11 +122,15 @@ function View(props) {
                 <div class="point">
                   推薦指數:
                   <div class="star-ratings-sprite">
-                            <span
-                              class="star-ratings-sprite-rating"
-                              style={{ width: `${(boomArticle.recommendation_index / 5)*100}%` }}
-                            ></span>
-                          </div>
+                    <span
+                      class="star-ratings-sprite-rating"
+                      style={{
+                        width: `${
+                          (boomArticle.recommendation_index / 5) * 100
+                        }%`,
+                      }}
+                    ></span>
+                  </div>
                 </div>
                 <div class="time">{boomArticle.create_time}</div>
               </div>
@@ -109,11 +140,13 @@ function View(props) {
             <div class="point1">
               推薦指數:
               <div class="star-ratings-sprite">
-                            <span
-                              class="star-ratings-sprite-rating"
-                              style={{ width: `${(boomArticle.recommendation_index / 5)*100}%` }}
-                            ></span>
-                          </div>
+                <span
+                  class="star-ratings-sprite-rating"
+                  style={{
+                    width: `${(boomArticle.recommendation_index / 5) * 100}%`,
+                  }}
+                ></span>
+              </div>
             </div>
             <div class="articleimg">
               <img
@@ -135,21 +168,32 @@ function View(props) {
               ></img>
               <div class="messagenum">{message.length}</div>
               <i
+                // class="cursor"
                 className={likes ? normallike : likeClass}
                 src="http://localhost:3000/images/comment/heart.svg"
                 alt=""
                 onClick={(e) => {
                   e.stopPropagation()
-                  setArticleLikesId(boomArticle.article_id)
+                  // setArticleLikesId(article1.article_id)
                   setLikes(!likes)
-                  getLikes(boomArticle.article_id)
+                  // getLikes(article1.article_id)
                   likes
                     ? addLikes(boomArticle.article_id)
                     : minusLikes(boomArticle.article_id)
                   // addLikes(v.article_id)
                 }}
+                // onClick={(e) => {
+                //   e.stopPropagation()
+                //   setArticleLikesId(boomArticle.article_id)
+                //   setLikes(!likes)
+                //   getLikes(boomArticle.article_id)
+                //   likes
+                //     ? addLikes(boomArticle.article_id)
+                //     : minusLikes(boomArticle.article_id)
+                //   // addLikes(v.article_id)
+                // }}
               ></i>
-              <div class="likenum">{findLikes()}</div>
+              <div class="likenum">{likeCount}</div>
             </div>
           </div>
           <div class="peoplesay1">
@@ -208,13 +252,13 @@ function View(props) {
               )
             })}
 
-          <div class="keep">
+          {/* <div class="keep">
             <img
               src="http://localhost:3000/images/comment/draw.svg"
               alt=""
               class="cursor"
             ></img>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

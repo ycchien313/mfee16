@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../../styles/comment/Comment.scss'
 // import Jquery from 'jquery'
-import Aside from './aside'
+// import Aside from './aside'
 import Main from './main'
 function Comment() {
   const [tag, setTag] = useState([])

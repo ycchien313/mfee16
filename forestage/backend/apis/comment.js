@@ -32,14 +32,14 @@ router.get("/tag", async (req, res) => {
 router.put("/articleGood", async (req, res) => {
     let commentGood = await db.connection.queryAsync('UPDATE article SET likes=likes+1 WHERE article_id=?',[req.body.article_id]);
     // res.json(result)
-    console.log(commentGood)
+    // console.log(commentGood)
     // res.send(commentGood)
 });
 //取得按讚數
 router.get("/articleLikes", async (req, res) => {
     let commentLikes = await db.connection.queryAsync('SELECT article_id,likes FROM article WHERE article_id=?',[req.query.article_id]);
     // res.json(result)
-    console.log(req.query)
+    // console.log(req.query)
     res.send(commentLikes)
 });
 //取消按讚
@@ -52,7 +52,7 @@ router.put("/articleNotGood", async (req, res) => {
 router.post("/createarticle", async (req, res) => {
     // let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?,?,?,?,?,?,?,?)');
     // res.json(result)
-    console.log(req.body.insertArticle)
+    // console.log(req.body.insertArticle)
     // res.send(createArticle)
 });
 //新增留言

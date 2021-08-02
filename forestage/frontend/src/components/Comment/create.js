@@ -1,12 +1,13 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/comment/create.scss'
-import Draft from './create/draft'
+// import Draft from './create/draft'
+// import Draft2 from './draft2'
 import $ from 'jquery'
 import axios from 'axios'
 // import Test from './test'
 function Create(props) {
   const { boom, setBoom, tag, selectTag, setSelectTag, getTagName } = props
-  const [content, setContent] = useState('')
+  // const [content, setContent] = useState('123')
   // const [star, setStar] = useState(0)
   const [insertArticle, setInsertArticle] = useState({
     title: '',
@@ -27,8 +28,7 @@ function Create(props) {
   // }
   // // $('.modal').on('shown.bs.modal', alignModal)
   // /* Resizing the modal according the screen size */
-  
- 
+
   function insertArticlefn() {
     axios({
       method: 'post',
@@ -59,6 +59,11 @@ function Create(props) {
     newArticle.recommendation_index = star
     setInsertArticle(newArticle)
   }
+  function getContent(e) {
+    let newArticle = { ...insertArticle }
+    newArticle.content = e.target.value
+    setInsertArticle(newArticle)
+  }
   useEffect(() => {
     $('.fa-star').on('click', function () {
       $(this).addClass('active')
@@ -75,14 +80,7 @@ function Create(props) {
         .siblings()
         .removeClass('active')
     })
-    
-    
   }, [])
-  // function setContent(e) {
-  //   let newArticle = { ...insertArticle }
-  //   newArticle.content = e.target.value
-  //   setInsertArticle(newArticle)
-  // }
   // console.log(boom)
   // console.log(selectTag)
   // 點擊標籤要active沒成功
@@ -109,7 +107,7 @@ function Create(props) {
         <div class="ineditor">
           <h4>文章標題：</h4>
           <input
-            class="title"
+            class="titleee"
             type="text"
             value={insertArticle.title}
             onChange={(e) => {
@@ -118,7 +116,7 @@ function Create(props) {
           ></input>
           <h4>匿名名稱：</h4>
           <input
-            class="title"
+            class="titleee"
             type="text"
             value={insertArticle.author}
             onChange={(e) => {
@@ -462,14 +460,23 @@ function Create(props) {
         </div>
 
         {/* 所見及所得 */}
-        <div class="draft">
-          <Draft
+        <textarea
+          class="draft"
+          value={insertArticle.content}
+          onChange={(e) => {
+            getContent(e)
+          }}
+        >
+          {/* <Draft
             insertArticle={insertArticle}
             setInsertArticle={setInsertArticle}
             content={content}
             setContent={setContent}
-          />
-        </div>
+            // onChange={(e) => {
+            //   getContent(e)
+            // }}
+          /> */}
+        </textarea>
 
         {/* <所見及所得 結束 */}
         <div class="buttongroup">

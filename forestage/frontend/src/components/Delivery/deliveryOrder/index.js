@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../../styles/delivery/deliveryOrder/takeout_check.scss'
 import DeliveryOrder from './components/DeliveryOrder'
 import Header from '../../../components/Header'
-import $ from 'jquery'
+// import $ from 'jquery'
 
 function Index(props) {
   // no.1

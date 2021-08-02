@@ -46,6 +46,11 @@ router.get("/coupon/:id",async function(req,res,next){
 //     res.send(memberInfo)
 // } )
 
+router.get("/member/:id",async function(req,res,next){
+    let queryresult = await db.connection.queryAsync("SELECT m.member_id ,m.name,m.mobile FROM member m WHERE m.member_id = ?",req.params.id)
+    res.send(queryresult)
+} )
+
  
 
 
@@ -53,7 +58,7 @@ router.post('/order', async function (req, res, next) {
     // 處理INSERT資料
     const { name, mobile, address, delivery_time, total, note, member_id,mcm_id,coupon_id,dishList } =req.body.data
     let arr = [name, mobile, address, delivery_time, total, note, member_id,mcm_id]
-    // console.log(arr)
+    console.log(arr)
 
     let sql = null
     sql = 'INSERT INTO delivery (name,mobile,address,delivery_time,total,note,member_id,mcm_id) VALUES (?)'
@@ -72,7 +77,7 @@ router.post('/order', async function (req, res, next) {
     // console.log(list)
 
     for( let i =0; i<list.length;i++){
-        // console.log(list[i][0])
+        console.log(list[i][0])
         switch( list[i][0]){
         case "總匯潛艇堡":
         list[i].push(1)

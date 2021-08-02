@@ -23,7 +23,11 @@ function MainMealBox(props) {
     <>
       <div className="MainMealBox">
         <figure className="sub-border">
-          <img src={image_realistic} alt="" className="sub" />
+          <img
+            src={'http://localhost:3000/images/common/food/' + image_realistic}
+            alt=""
+            className="sub"
+          />
         </figure>
         <form id="myform" method="POST" action="#/" className="button-group">
           <input

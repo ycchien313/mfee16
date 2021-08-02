@@ -5,7 +5,7 @@ import axios from 'axios'
 
 function ReservationPerson(props) {
   const { insertResData, setInsertResData, dishList } = props
-
+  const [memberId, setMemberId] = useState(0)
   function insertReservation() {
     axios({
       method: 'post',
@@ -13,14 +13,12 @@ function ReservationPerson(props) {
       data: {
         dishList,
         insertResData,
+        // memberId,
       },
     })
   }
 
-  // 取得會員資料
-  function getMemberInfo() {
-
-    // 1. 取得登入id
+  function getMemberId() {
     let authToken = window.localStorage.getItem('authToken')
     console.log('auth', authToken)
     axios
@@ -31,21 +29,27 @@ function ReservationPerson(props) {
         },
       })
       .then((result) => {
-        // 2. 取得會員姓名電話
-        let memeberId = result.data.memberId
-        console.log('memberid:', memeberId)
-        axios
-          .get('http://localhost:3001/reservation/checkout/memberInfo', {
-            method: 'get',
-            params: { memberId: memeberId },
-          })
-          .then((result) => {
-            const newInsertResData = { ...insertResData }
-            newInsertResData.name = result.data[0].name
-            newInsertResData.mobile = result.data[0].mobile
-            setInsertResData(newInsertResData)
-          })
+        setMemberId(result.data.memberId)
+        const newInsertResData = { ...insertResData }
+        newInsertResData.member_id = result.data.memberId
+        setInsertResData(newInsertResData)
       })
+  }
+  // 取得會員資料
+  function getMemberInfo() {
+
+    axios
+      .get('http://localhost:3001/reservation/checkout/memberInfo', {
+        method: 'get',
+        params: { memberId: memberId },
+      })
+      .then((result) => {
+        const newInsertResData = { ...insertResData }
+        newInsertResData.name = result.data[0].name
+        newInsertResData.mobile = result.data[0].mobile
+        setInsertResData(newInsertResData)
+      })
+    // })
   }
 
   function setName(value) {
@@ -92,6 +96,9 @@ function ReservationPerson(props) {
     }
   }
 
+  useEffect(() => {
+    getMemberId()
+  }, [])
   return (
     <>
       <div className="res-person">

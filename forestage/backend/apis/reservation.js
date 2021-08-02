@@ -86,8 +86,8 @@ router.post('/checkout/send', async(req, res)=>{
 
 
     let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
-    // [req.body.insertResData.member_id]
-    let memberInfo = await db.connection.queryAsync(getMemberInfo,1)
+    console.log(req.body.insertResData.member_id)
+    let memberInfo = await db.connection.queryAsync(getMemberInfo,[req.body.insertResData.member_id])
     console.log(memberInfo[0].name)
     let memberEmail = memberInfo[0].email
     

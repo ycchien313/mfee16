@@ -55,6 +55,15 @@ function Day(props) {
   function getRemainingSeat() {
     axios.get(url).then((result) => {
       setRemainingSeat(result.data)
+      if (
+        result.data.length === 3 &&
+        result.data[0].remainingSeats === 0 &&
+        result.data[1].remainingSeats === 0 &&
+        result.data[2].remainingSeats === 0
+      ) {
+        $(day.current).addClass('sold-out')
+        console.log('soldout')
+      }
     })
   }
 

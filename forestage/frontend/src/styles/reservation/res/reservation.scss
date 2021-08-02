@@ -311,7 +311,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     position: relative;
-    z-index: 300;
+    z-index: 10;
   }
 
   .choose-seat .row:hover {
@@ -557,7 +557,6 @@
     transition: 0.5s;
     flex-shrink: 0;
 
-  
   }
   .rock-bar-end {
     height: 100%;
@@ -609,6 +608,21 @@
     z-index: 1;
     left: -5.2vw;
     flex-shrink: 0;
+
+  }
+
+  @media screen and (max-width:768px){
+    .bar-background p{
+      margin: 0;
+      // margin-bottom: 10px;
+      position: relative;
+      bottom: 30px;
+      font-size: 20px;
+    }
+    .bar-background {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
 
   /* 剩餘座位文字 */

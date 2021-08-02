@@ -44,6 +44,7 @@ function Day(props) {
     // 如果座位數是0，清空checklist(不能先判斷再執行,先加進checklist再判斷)
     if (newObj[1] === 0 && newObj[2] === 0 && newObj[3] === 0) {
       clearCheckList()
+      // $(day.current).addClass('sold-out')
     }
   }
 
@@ -56,6 +57,17 @@ function Day(props) {
   function getRemainingSeat() {
     axios.get(url).then((result) => {
       setRemainingSeat(result.data)
+      console.log('result.data:', result.data)
+
+      if (
+        result.data.length === 3 &&
+        result.data[0].remainingSeats === 0 &&
+        result.data[1].remainingSeats === 0 &&
+        result.data[2].remainingSeats === 0
+      ) {
+        $(day.current).addClass('sold-out')
+        console.log('soldout')
+      }
     })
   }
 
@@ -92,7 +104,6 @@ function Day(props) {
     let dateInStorage = sessionStorage.getItem('activeDate')
     if (date === dateInStorage) {
       $(day.current).addClass('active')
-      // console.log('same', date, dateInStorage)
     }
 
     setDidMount(true)
@@ -104,7 +115,6 @@ function Day(props) {
 
     axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
       setSeatInfo(result.data)
-      // console.log(result.data)
     })
   }, [])
 

@@ -4,11 +4,12 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
 import AuthContext from './AuthContext'
-
+const useForceUpdate = () => useState()[1]
 function AuthForm(props) {
+  const forceUpdate = useForceUpdate()
+  const history = useHistory()
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
-  const history = useHistory()
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
   const [cityOptions, setCityOptions] = useState([
     '桃園市',
@@ -141,23 +142,16 @@ function AuthForm(props) {
           await loading()
           await transition('登入成功')
 
-          // 載入指示器及轉場
-          await loading()
-          await transition('登入成功')
-
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
           serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
-
           // 首頁則強制更新
           props.location.pathname === '/' && history.go(0)
           // 關閉彈出視窗
-          // setShowAuthModal(false)
-
-          history.push('/')
+          setShowAuthModal(false)
         } catch (error) {}
         break
 

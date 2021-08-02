@@ -8,7 +8,7 @@ import Dish from './pages/Dish'
 import Game from './pages/Game'
 import Home from './pages/Home'
 import Member from './pages/Member'
-import Reservation from './pages/Reservation'
+// import Reservation from './pages/Reservation'
 
 function App() {
   const [member, setMember] = useState(null)
@@ -61,8 +61,11 @@ function App() {
             <Member />
           </Route>
           <Route path="/reservation/">
-            <Reservation />
+            {/* <Reservation /> */}
           </Route>
+          {/* <Route path="/home">
+            <Home />
+          </Route> */}
           <Route exact path="/">
             <Home />
           </Route>

@@ -1,6 +1,6 @@
-const Promise = require('bluebird');
-const mysql = require('mysql');
-require('dotenv').config();
+const Promise = require("bluebird");
+const mysql = require("mysql");
+require("dotenv").config();
 const connection = Promise.promisifyAll(
     mysql.createConnection({
         host: process.env.DB_HOST,

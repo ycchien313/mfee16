@@ -264,7 +264,7 @@ router.get('/me', (req, res) => {
     console.log('METHOD: ', req.method);
 
     const headers = req.headers;
-    const token = headers.authorization.replace('Bearer ', '');
+    const token = req.headers.authorization.replace('Bearer ', '');
     const decoded = jwt.getToken(token);
 
     console.log('token 內容: ', decoded);

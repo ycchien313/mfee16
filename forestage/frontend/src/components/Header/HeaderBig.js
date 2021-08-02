@@ -1,8 +1,58 @@
-import React from 'react'
-import HeaderAuth from './HeaderAuth'
+import React, { useEffect, useState } from 'react'
 import '../../styles/header/headerBig.scss'
+import $ from 'jquery'
+import HeaderBigCart from './HeaderBigCart'
+import HeaderAuth from './HeaderAuth'
+function HeaderBig(props) {
+  let { cartList } = props
+  const [totalPrice, setTotalPrice] = useState(0)
+  const [totalCountNum, setTotalCountNum] = useState(0)
+  // header收起與顯示
+  useEffect(() => {
+    let currentPosition = 0
+    $(window).on('scroll', function () {
+      let position = $(this).scrollTop()
+      let result = position - currentPosition
+      currentPosition = position
+      if (result > 0 && position >= 1000) {
+        $('.main-header').addClass('hide')
+        $('.main-header').removeClass('fixed-top')
+      } else {
+        $('.main-header').removeClass('hide')
+        $('.main-header').addClass('fixed-top')
+      }
+    })
+  }, [])
 
-function HeaderBig() {
+  // 於父母給予新資料時更新時執行計算總價及總數
+  useEffect(() => {
+    total()
+    totalCount()
+  }, [cartList])
+  // 總價計算
+  function total() {
+    let total = 0
+    for (let i = 0; i < cartList.length; i++) {
+      total = total + cartList[i].price * cartList[i].count
+    }
+    // console.log(total)
+    setTotalPrice(total)
+  }
+  // 總數計算
+  function totalCount() {
+    let totalCount = 0
+    for (let i = 0; i < cartList.length; i++) {
+      totalCount = totalCount + cartList[i].count
+    }
+    // console.log(totalCount)
+    setTotalCountNum(totalCount)
+  }
+  useEffect(() => {
+    $('.cart-div').on('click', function () {
+      $(this).find('.header-cart').toggleClass('active')
+      $('.cart-big').toggleClass('disabled')
+    })
+  }, [])
   return (
     <>
       <div className="main-header">
@@ -80,28 +130,51 @@ function HeaderBig() {
                   </li>
                 </ul>
               </li>
-              <li>
-                <a href="#/" className="header-cart h4">
-                  外送訂餐
-                </a>
-              </li>
-              <div className="header-cartImgAndCircle">
-                <li>
-                  <a href="#/" className="header-cartImg">
-                    <img
-                      src="http://localhost:3000/images/header/shopping-cart-solid.png"
-                      alt=""
-                      class="cart-image"
-                    />
+              <li className="cart-div">
+                <div>
+                  <a href="#/" className="header-cart h4">
+                    外送訂餐
                   </a>
-                  <div className="header-circle"></div>
-                </li>
-              </div>
+                </div>
+                <div className="header-cartImgAndCircle">
+                  <li>
+                    <a href="#/" className="header-cartImg">
+                      <img
+                        src="http://localhost:3000/images/header/shopping-cart-solid.png"
+                        alt=""
+                        class="cart-image"
+                      />
+                    </a>
+                    <div className="header-circle">{totalCountNum}</div>
+                  </li>
+                </div>
+              </li>
+
               <li className="login">
                 <HeaderAuth />
               </li>
             </ul>
           </nav>
+        </div>
+      </div>
+      <div className="cart-big disabled">
+        <div className="cart-list">
+          {cartList.length > 0 &&
+            cartList.map(function (value, index) {
+              return (
+                <HeaderBigCart
+                  key={index}
+                  name={value.name}
+                  price={value.price}
+                  count={value.count}
+                  img={value.img}
+                />
+              )
+            })}
+        </div>
+        <div className="cart-submit">
+          <h4 class="cart-total">合計: ${totalPrice}</h4>
+          <button className="button-orange">下一步</button>
         </div>
       </div>
     </>

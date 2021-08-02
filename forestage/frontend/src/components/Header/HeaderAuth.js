@@ -16,7 +16,7 @@ function HeaderAuth() {
       title: '登出成功',
       showConfirmButton: false,
       timer: 1000,
-    }).then(() => {
+    }).then(function (result) {
       history.go(0)
     })
   }

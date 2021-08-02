@@ -505,4 +505,14 @@
     -webkit-appearance: none;
     margin: 0;
   }
+  .Link-back {
+    text-decoration: none;
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+      text-decoration: none;
+    }
+  }
 }

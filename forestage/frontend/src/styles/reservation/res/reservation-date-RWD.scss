@@ -1,0 +1,189 @@
+  
+  /* --------------------- */
+  /* reservation */
+  /* hero section */
+  .reservation{
+@import '../../common/global.scss';
+
+  /* main container*/
+  .container-big {
+    margin-left: 8.33vw;
+    margin-right: 16.66vw;
+    display: flex;
+  }
+  
+  
+  @media screen and (max-width: 1200px) {
+    .container-big {
+      margin-left: 30px;
+      margin-right: 30px;
+      display: flex;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .container-big {
+      display: block;
+    }
+    .main-article {
+      margin-right: 0;
+      width: 100%;
+    }
+    .weeks {
+      display: flex;
+      flex-direction: column;
+    }
+    .week-tags {
+      display: flex;
+      margin: 15px auto 26px auto;
+      position: relative;
+      z-index: 300;
+    }
+    .this-week {
+      width: 100px;
+      height: 32px;
+      background: white;
+      color: $accent-orange;
+      border: 1px solid $accent-orange;
+      border-radius: 50px 0 0 50px;
+      line-height: 32px;
+      text-align: center;
+      box-shadow: rgba(50, 50, 50, 0.3) 0px 3px 6px;
+      cursor: pointer;
+      transition: .2s;
+    
+    }
+    
+    .next-week {
+      width: 100px;
+      height: 32px;
+      background: white;
+      color: $accent-orange;
+      border: 1px solid $accent-orange;
+      border-radius: 0 50px 50px 0;
+      line-height: 32px;
+      text-align: center;
+      box-shadow: rgba(50, 50, 50, 0.3) 0px 3px 6px;
+      cursor: pointer;
+      transition: .2s;
+    }
+    
+    .active.this-week,
+    .active.next-week {
+      background: $accent-orange;
+      color: white;
+      box-shadow: none;
+      cursor: auto;
+    }
+    
+    .this-week:active, .next-week:active{
+      box-shadow: none;
+    }
+    
+    .this-week:hover, .next-week:hover{
+      box-shadow: none;
+    }
+    
+    .week {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .singer-pic {
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      background: url(http://localhost:3000/images/reservation/李榮浩.jpg) no-repeat center;
+      background-size: cover;
+      box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
+      box-sizing: border-box;
+      box-shadow: 0 0 0 3px white,
+                  0 0 0 4px $secondary-green;
+    
+    }
+    
+    .day {
+    
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      border-radius: 30px 10px 10px 30px;
+      height: 53px;
+      border: 1px solid $secondary-green;
+      margin: 20px 0;
+      padding-right: 40px;
+      box-sizing: border-box;
+      box-shadow: rgba(50, 50, 50, 0.3) 0 3px 6px;
+      transition: .2s;
+      cursor: pointer;
+      position: relative;
+      z-index: 300;
+    }
+    
+    .day.active{
+      box-shadow: none;
+      background: $primary-lightgreen;
+    }
+    
+    .day:active{
+      box-shadow: none;
+      background: $primary-lightgreen;
+    }
+    
+    .day:active span{
+      color: white;
+    }
+    
+    
+    .day:hover{
+      box-shadow: none;
+    }
+    
+    .day.active span{
+      color: white;
+    }
+    
+    .day .name{
+      font-family: $zh-tw-noto;
+      color: $primary-lightbrown;
+    }
+    
+    .day .date{
+      font-family: $zh-tw-noto;
+      color: $accent-orange;
+    }
+  }
+  
+  
+  
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 12px;
+    }
+    h1,
+    .h1 {
+      font-size: 1.67rem;
+    }
+    h2,
+    .h2 {
+      font-size: 1.5rem;
+    }
+    h3,
+    .h3 {
+      font-size: 1.33rem;
+    }
+    h4,
+    .h4 {
+      font-size: 1.17rem;
+    }
+    p,
+    .p {
+      font-size: 1rem;
+    }
+    span,
+    .span {
+      font-size: 1rem;
+    }
+  }
+  }

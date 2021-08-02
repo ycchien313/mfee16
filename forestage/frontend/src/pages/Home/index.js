@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react'
 import '../../styles/home/home.scss'
 import $ from 'jquery'
@@ -15,6 +16,7 @@ import moment from 'moment'
 
 // header
 import Header from '../../components/Header'
+
 
 function Home() {
   // 當天歌手資訊

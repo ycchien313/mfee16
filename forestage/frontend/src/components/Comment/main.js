@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import $ from 'jquery'
 import View from './view'
@@ -8,14 +8,21 @@ function Main(props) {
   const { tag } = props
   const [news, setNews] = useState({})
   const [selectTag, setSelectTag] = useState(0)
-  const [article, setArticle] = useState({})
+  const [article, setArticle] = useState([])
   const [tagId, setTagId] = useState(0)
   const [boom, setBoom] = useState(false)
   const [boom2, setBoom2] = useState(false)
   const [asideTag, setAsideTag] = useState('所有文章')
   const [didmount, setDidmount] = useState(false)
-  // const [all, setAll] = useState({})
+  const [likes, setLikes] = useState(true)
+  const [articleLikesId, setArticleLikesId] = useState(0)
+  const [messageNum, setMessageNum] = useState(0)
+
   const [boomArticle, setBoomArticle] = useState({})
+
+  let likeClass = 'fas like fa-heart'
+  let normallike = 'fas fa-heart'
+
   // function getBoomArticle() {
   //   axios.get(`http://127.0.0.1:3001/comment/${boomArticle}`).then((result) => {
   //     setBoomArticle(result.data)
@@ -25,22 +32,63 @@ function Main(props) {
   // useEffect(() => {
   //   getBoomArticle()
   // }, [])
-
+  function addLikes(articleId) {
+    // axios.put('http://127.0.0.1:3001/comment/articleGood').then((result) => {
+    //   setLikes(result.data)
+    // })
+    axios({
+      method: 'put',
+      url: 'http://127.0.0.1:3001/comment/articleGood',
+      data: {
+        article_id: articleId,
+      },
+    })
+  }
+  function minusLikes(articleId) {
+    // axios.put('http://127.0.0.1:3001/comment/articleGood').then((result) => {
+    //   setLikes(result.data)
+    // })
+    axios({
+      method: 'put',
+      url: 'http://127.0.0.1:3001/comment/articleNotGood',
+      data: {
+        article_id: articleId,
+      },
+    })
+  }
   function getNews() {
     axios.get('http://127.0.0.1:3001/comment/news').then((result) => {
       setNews(result.data)
     })
   }
-  // function getAll() {
-  //   axios.get('http://127.0.0.1:3001/comment/').then((result) => {
-  //     setArticle(result.data)
-  //     console.log(result.data)
-  //   })
+ 
+  // function setDivCenter() {
+
+  //   var top = ($(window).height() - $('#vieww').height()) / 2
+  //   // var left = ($(window).width() - $('.vieww').width()) / 2
+  //   var scrollTop = $(document).scrollTop()
+  //   // var scrollLeft = $(document).scrollLeft()
+  //   // $('.vieww')
+  //   //   .css({
+  //   //     position: 'absolute',
+  //   //     top: top + scrollTop,
+  //   //     // left: left + scrollLeft,
+  //   //   })
+  //     // .show()
+  //     let vieww=document.getElementById('vieww')
+  //     // vieww.style.top=top+scrollTop+'px'
+  //   console.log(vieww)
   // }
   // useEffect(() => {
-  //   setArticle(all)
-  // }, [all])
+  // window.onload()=function(){
+
+  //     setDivCenter()
+  //   }
+  //   // var vieww = $(this).find('.vieww')
+  // }, [boom])
+
   useEffect(() => {
+    
     getNews()
     $('.click').on('click', function () {
       $(this).addClass('active')
@@ -52,6 +100,8 @@ function Main(props) {
       $(this).siblings().find('li').removeClass('active')
     })
     setSelectTag(16)
+    getLikes(articleLikesId)
+    
   }, [])
   let url = ``
   useEffect(() => {
@@ -80,6 +130,45 @@ function Main(props) {
       // console.log(result.data)
     })
   }
+  //取得按讚數
+  function getLikes(articleId) {
+    axios
+      .get('http://127.0.0.1:3001/comment/articlelikes', {
+        params: {
+          article_id: articleId,
+        },
+      })
+      .then(function (result) {
+        if (article.length > 0) {
+          let newarticle = [...article]
+          let index = newarticle.findIndex((v) => {
+            return v.article_id === articleId
+          })
+          console.log(index, '123')
+          console.log(result.data, '321')
+          newarticle[index].likes = result.data[0].likes
+          setArticle(newarticle)
+        }
+        // setArticleLikes(result.data)
+        // console.log(result)
+      })
+  }
+  useEffect(() => {
+    getLikes(articleLikesId)
+  }, [likes, articleLikesId])
+  //顯示留言數量
+  // console.log(article.article_id)
+  // function getMessageNum() {
+  //   axios
+  //     .get(`http://127.0.0.1:3001/comment/message`)
+  //     .then((result) => {
+  //       // setMessageNum(result.data.length)
+  //       console.log(result.data)
+  //     })
+  // }
+  // useEffect(() => {
+  //   getMessageNum()
+  // }, [])
   //   aside顯示相關文章
   let selectURL = ''
   useEffect(() => {
@@ -527,6 +616,7 @@ function Main(props) {
                   article.map((v, i) => {
                     return (
                       <div
+                        key={v.article_id}
                         class="commentbox"
                         onClick={() => {
                           setBoom2(!boom2)
@@ -546,25 +636,41 @@ function Main(props) {
                           <p>{v.content}</p>
                         </div>
                         <div class="star">
-                          <img
-                            class="starss"
-                            src="http://localhost:3000/images/comment/star.svg"
-                            alt=""
-                          ></img>
+                          <div class="star-ratings-sprite">
+                            <span
+                              class="star-ratings-sprite-rating"
+                              style={{
+                                width: `${(v.recommendation_index / 5) * 100}%`,
+                              }}
+                            ></span>
+                          </div>
+
                           <div class="share">
                             <img
                               src="http://localhost:3000/images/comment/share.svg"
                               alt=""
                             ></img>
-
                             <img
                               src="http://localhost:3000/images/comment/message.svg"
                               alt=""
                             ></img>
-                            <img
+                            {/* <div>{message.length}</div> */}
+                            <i
+                              className={likes ? normallike : likeClass}
                               src="http://localhost:3000/images/comment/heart.svg"
                               alt=""
-                            ></img>
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                setArticleLikesId(v.article_id)
+                                setLikes(!likes)
+                                getLikes(v.article_id)
+                                likes
+                                  ? addLikes(v.article_id)
+                                  : minusLikes(v.article_id)
+                                // addLikes(v.article_id)
+                              }}
+                            ></i>
+                            <div>{v.likes}</div>
                           </div>
                         </div>
                       </div>
@@ -587,12 +693,20 @@ function Main(props) {
       )}
       {boom2 && (
         <View
+        id="vieww"
+          // className="vieww"
           boom2={boom2}
           setBoom2={setBoom2}
           article={article}
           setArticle={setArticle}
           boomArticle={boomArticle}
           setBoomArticle={setBoomArticle}
+          setArticleLikesId={setArticleLikesId}
+          likes={likes}
+          setLikes={setLikes}
+          getLikes={getLikes}
+          addLikes={addLikes}
+          minusLikes={minusLikes}
         />
       )}
     </>

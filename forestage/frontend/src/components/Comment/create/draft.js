@@ -8,8 +8,10 @@ export default class TextEditor extends Component {
   constructor(props) {
     // console.log(props)
     // const { insertArticle, setInsertArticle } = props
+    console.log(props)
     super(props)
     this.state = {
+      // editorState: props.inserArticle.content,
       editorState: EditorState.createEmpty(),
       message: '',
       // insertArticle: insertArticle,
@@ -21,9 +23,7 @@ export default class TextEditor extends Component {
     this.setState(
       {
         editorState,
-        message: draftToHtml(
-          convertToRaw(editorState.getCurrentContent())
-        ),
+        message: draftToHtml(convertToRaw(editorState.getCurrentContent())),
       },
       () => {
         // let newArticle = { ...insertArticle }
@@ -35,6 +35,12 @@ export default class TextEditor extends Component {
         // this.setInsertArticle(newObj)
       }
     )
+  }
+  componentDidUpdate(prevProps) {
+    // 常見用法（別忘了比較 prop）：
+    if (this.props.content !== prevProps.content) {
+      this.insertArticle({ content: this.state.message })
+    }
   }
 
   render() {

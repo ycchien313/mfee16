@@ -263,6 +263,7 @@
     left: 410px;
     /* display: inline-block; */
   }
+ 
   @media screen and (max-width: 1400px) {
     main {
       left: 0;
@@ -281,6 +282,12 @@
       /* width: 20vw; */
     }
     .share img {
+      display: none;
+    }
+    .share i {
+      display: none;
+    }
+    .share div {
       display: none;
     }
     #Path_857 {
@@ -651,8 +658,8 @@
     margin: 0.5vw;
     overflow: hidden;
     border-radius: 50%;
-    width: 8vw;
-    height: 8vw;
+    width: 7vw;
+    height: 7vw;
     flex-shrink: 0;
   }
   .articleimgsize img {
@@ -677,4 +684,32 @@
     position: absolute;
   width: 100%;
   }
+  .fa-heart{
+    font-size: 22px;
+  }
+  .like.fa-heart{
+    color: $accent-red;
+  }
+  .star-ratings-sprite {
+    background: url("http://127.0.0.1:3000/images/comment/star.png") repeat-x;
+    font-size: 0;
+    height: 21px;
+    line-height: 0;
+    overflow: hidden;
+    text-indent: -999em;
+    width: 110px;
+    margin: 0 auto;
+    
+    &-rating {
+      background: url("http://127.0.0.1:3000/images/comment/star.png") repeat-x;
+      background-position: 0 100%;
+      float: left;
+      height: 21px;
+      display:block;
+      color: $secondary-lightyellow;
+      // width: 80%;
+    }
+    
+  }
+  
 }

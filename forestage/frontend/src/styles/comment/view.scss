@@ -1,11 +1,11 @@
 @import '../common/global.scss';
-.sticky{
-    position: relative;
-    top: 10%;
-    background-color: rgba(217,217,217,0.6);
-    width: 100vw;
-    height: 100%;
-}
+// .sticky{
+//     // position: absolute;
+//     top: 10%;
+//     background-color: rgba(217,217,217,0.6);
+//     width: 100vw;
+//     height: 100%;
+// }
 .view{
     height: 100%;
     position: sticky;
@@ -17,7 +17,7 @@
     border-radius: 37px;
     padding: 31px;
     box-shadow: 0 3px 6px rgba(0,0,0,.16);
-    // position: relative;
+    position: relative;
     z-index: 10;
     top:10vh;
 }
@@ -64,7 +64,7 @@
 
 @media screen and (max-width:1400px) {
     .close{
-        display: none;
+        // display: none;
     }
     
 }
@@ -215,9 +215,10 @@
 }
 
 .whatusay .input{
+    // text-align: center;
     font-size: 16px;
     width: 50vw;
-    height:3vw;
+    min-height:3vw;
     border-radius: 50px;
     outline: transparent;
 }
@@ -248,7 +249,7 @@
 .whatusay1 p{
     font-family: $en-open-sans;
     width: 49.4vw;
-    height: 3.2vw;
+    min-height: vw;
     border-radius: 10px;
     outline: transparent;
     display: -webkit-box;
@@ -275,6 +276,21 @@
 .time{
     display: flex;
     justify-content: space-between;
+}
+.size{
+    // position: absolute;
+    line-height: 3vw;
+    font-size: 2vw !important;
+}
+.messagenum{
+    position: absolute;
+    top: 2vw;
+    right: 4.5vw;
+}
+.likenum{
+    position: absolute;
+    top: 1.9vw;
+    right: 0.1vw;
 }
 @media screen and (max-width:500px){
     .peoplesay1{
@@ -316,7 +332,7 @@
         width: 100%;
     }
     .whatusay .input{
-        height: 29px;
+        min-height: 29px;
         width:64vw;
         border-radius: 8px;
     }

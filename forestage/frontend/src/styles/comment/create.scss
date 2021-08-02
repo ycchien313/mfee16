@@ -5,7 +5,7 @@
   color: $primary-lightgreen;
   margin: auto;
   width: 75vw;
-  /* height: 95vw; */
+  // height: 100%;
   background: white;
   border-radius: 37px;
   padding: 31px;
@@ -104,7 +104,7 @@
   font-family: $zh-tw-noto;
   /* background: white; */
 }
-.tag.active{
+.tag.active .aa li{
   margin: 0.5vw;
   width: auto;
   display: inline-block;
@@ -117,6 +117,9 @@
   /* background: white; */
 }
 
+.point{
+  cursor: pointer;
+}
 
 .bb:hover {
   background: $secondary-green;
@@ -196,6 +199,21 @@ padding-bottom: 10px;
   position: relative;
   left: 5px;
   top: 2px;
+}
+.starss{
+  width: 7vw;
+  display: flex;
+  justify-content: space-around;
+}
+.fa-star{
+  cursor: pointer;
+  color: $primary-lightgray;
+}
+.fa-star:hover{
+  color: $secondary-lightyellow;
+}
+.fa-star.active{
+  color: $secondary-lightyellow;
 }
 @media screen and (max-width: 1200px) {
   .point img {

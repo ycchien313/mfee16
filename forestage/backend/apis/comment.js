@@ -16,14 +16,38 @@ router.get("/news", async (req, res) => {
     // res.json(result)
     res.send(commentNews)
 });
-
+//所有留言
+router.get("/message", async (req, res) => {
+    let commentAllMessage = await db.connection.queryAsync('SELECT article_id,message_id FROM message');
+    // res.json(result)
+    res.send(commentAllMessage)
+});
 //標籤
 router.get("/tag", async (req, res) => {
     let commentTag = await db.connection.queryAsync('SELECT * FROM tag ORDER BY tag_id DESC');
     // res.json(result)
     res.send(commentTag)
 });
-
+//按讚
+router.put("/articleGood", async (req, res) => {
+    let commentGood = await db.connection.queryAsync('UPDATE article SET likes=likes+1 WHERE article_id=?',[req.body.article_id]);
+    // res.json(result)
+    console.log(commentGood)
+    // res.send(commentGood)
+});
+//取得按讚數
+router.get("/articleLikes", async (req, res) => {
+    let commentLikes = await db.connection.queryAsync('SELECT article_id,likes FROM article WHERE article_id=?',[req.query.article_id]);
+    // res.json(result)
+    console.log(req.query)
+    res.send(commentLikes)
+});
+//取消按讚
+router.put("/articleNotGood", async (req, res) => {
+    let commentNotGood = await db.connection.queryAsync('UPDATE article SET likes=likes-1 WHERE article_id=?',[req.body.article_id]);
+    // res.json(result)
+    // res.send(commentNotGood)
+});
 //新增文章
 router.post("/createarticle", async (req, res) => {
     // let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?,?,?,?,?,?,?,?)');
@@ -33,7 +57,7 @@ router.post("/createarticle", async (req, res) => {
 });
 //新增留言
 router.post("/createmessage", async (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     let message=req.body.insertMessage.message
     let member_id=req.body.insertMessage.member_id
     let article_id=req.body.insertMessage.article_id

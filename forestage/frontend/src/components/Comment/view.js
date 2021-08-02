@@ -3,14 +3,29 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/comment/view.scss'
 
 function View(props) {
-  const { boom2, setBoom2, article, setArticle, boomArticle, setBoomArticle } =
-    props
+  const {
+    boom2,
+    setBoom2,
+    article,
+    setArticle,
+    boomArticle,
+    setBoomArticle,
+    setArticleLikesId,
+    setLikes,
+    getLikes,
+    addLikes,
+    minusLikes,
+    likes,
+  } = props
   const [message, setMessage] = useState([])
   const [insertMessage, setInsertMessage] = useState({
     message: '',
     member_id: 1,
     article_id: boomArticle.article_id,
   })
+
+  let likeClass = 'fas like fa-heart size'
+  let normallike = 'fas fa-heart size'
   console.log(boomArticle)
   function insertMessagefn() {
     axios({
@@ -41,7 +56,13 @@ function View(props) {
   }
   useEffect(() => {
     getMessage()
-  }, [message])
+  }, [boomArticle, insertMessage])
+  function findLikes() {
+    let Index = article.findIndex((v) => {
+      return v.article_id === boomArticle.article_id
+    })
+    return article[Index].likes
+  }
   return (
     <>
       <div class="sticky">
@@ -73,10 +94,12 @@ function View(props) {
               <div class="outpoint">
                 <div class="point">
                   推薦指數:
-                  <img
-                    src="http://localhost:3000/images/comment/star.svg"
-                    alt=""
-                  ></img>
+                  <div class="star-ratings-sprite">
+                            <span
+                              class="star-ratings-sprite-rating"
+                              style={{ width: `${(boomArticle.recommendation_index / 5)*100}%` }}
+                            ></span>
+                          </div>
                 </div>
                 <div class="time">{boomArticle.create_time}</div>
               </div>
@@ -85,10 +108,12 @@ function View(props) {
             <div class="time1">{boomArticle.create_time}</div>
             <div class="point1">
               推薦指數:
-              <img
-                src="http://localhost:3000/images/comment/star.svg"
-                alt=""
-              ></img>
+              <div class="star-ratings-sprite">
+                            <span
+                              class="star-ratings-sprite-rating"
+                              style={{ width: `${(boomArticle.recommendation_index / 5)*100}%` }}
+                            ></span>
+                          </div>
             </div>
             <div class="articleimg">
               <img
@@ -108,11 +133,23 @@ function View(props) {
                 src="http://localhost:3000/images/comment/message.svg"
                 alt=""
               ></img>
-              <img
-                class="cursor"
+              <div class="messagenum">{message.length}</div>
+              <i
+                className={likes ? normallike : likeClass}
                 src="http://localhost:3000/images/comment/heart.svg"
                 alt=""
-              ></img>
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setArticleLikesId(boomArticle.article_id)
+                  setLikes(!likes)
+                  getLikes(boomArticle.article_id)
+                  likes
+                    ? addLikes(boomArticle.article_id)
+                    : minusLikes(boomArticle.article_id)
+                  // addLikes(v.article_id)
+                }}
+              ></i>
+              <div class="likenum">{findLikes()}</div>
             </div>
           </div>
           <div class="peoplesay1">
@@ -130,7 +167,6 @@ function View(props) {
                 value={insertMessage.message}
                 onChange={(e) => {
                   setMessagefn(e)
-                  
                 }}
               ></input>
               <button

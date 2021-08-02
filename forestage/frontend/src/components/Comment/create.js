@@ -3,8 +3,11 @@ import '../../styles/comment/create.scss'
 import Draft from './create/draft'
 import $ from 'jquery'
 import axios from 'axios'
+// import Test from './test'
 function Create(props) {
   const { boom, setBoom, tag, selectTag, setSelectTag, getTagName } = props
+  const [content, setContent] = useState('')
+  // const [star, setStar] = useState(0)
   const [insertArticle, setInsertArticle] = useState({
     title: '',
     author: '',
@@ -15,6 +18,17 @@ function Create(props) {
     member_id: 0,
     tag_id: 0,
   })
+  // function alignModal() {
+  //   var createeditor = $(this).find('.createeditor')
+  //   createeditor.css(
+  //     'margin-top',
+  //     Math.max(0, ($(window).height() - createeditor.height()) / 2)
+  //   )
+  // }
+  // // $('.modal').on('shown.bs.modal', alignModal)
+  // /* Resizing the modal according the screen size */
+  
+ 
   function insertArticlefn() {
     axios({
       method: 'post',
@@ -39,11 +53,36 @@ function Create(props) {
     newArticle.author = e.target.value
     setInsertArticle(newArticle)
   }
-  function setContent(e) {
+
+  function setRecommendation_index(star) {
     let newArticle = { ...insertArticle }
-    newArticle.content = e.target.value
+    newArticle.recommendation_index = star
     setInsertArticle(newArticle)
   }
+  useEffect(() => {
+    $('.fa-star').on('click', function () {
+      $(this).addClass('active')
+      $(this).prevAll().addClass('active')
+      $(this).nextAll().removeClass('active')
+    })
+    $('.click').on('click', function () {
+      $(this).addClass('active').siblings().removeClass('active')
+      $(this).closest('.tag').find('.bb').addClass('active')
+      $(this).closest('.tag').siblings().find('.bb').removeClass('active')
+      $(this)
+        .closest('.tag')
+        .addClass('active')
+        .siblings()
+        .removeClass('active')
+    })
+    
+    
+  }, [])
+  // function setContent(e) {
+  //   let newArticle = { ...insertArticle }
+  //   newArticle.content = e.target.value
+  //   setInsertArticle(newArticle)
+  // }
   // console.log(boom)
   // console.log(selectTag)
   // 點擊標籤要active沒成功
@@ -106,9 +145,9 @@ function Create(props) {
             </select>
             <div class="tagnone">
               <div class="tag">
-                <div class="bb click">爵士</div>
-                <ul class="aa click">
-                  <li class="click">
+                <div class="bb point">爵士</div>
+                <ul class="aa">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -122,7 +161,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -139,9 +178,9 @@ function Create(props) {
                 </ul>
               </div>
               <div class="tag">
-                <div class="bb">搖滾</div>
+                <div class="bb point">搖滾</div>
                 <ul class="aa">
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -154,7 +193,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -172,7 +211,7 @@ function Create(props) {
               <div class="tag">
                 <div class="bb">抒情</div>
                 <ul class="aa">
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -185,7 +224,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -201,9 +240,9 @@ function Create(props) {
                 </ul>
               </div>
               <div class="tag">
-                <div class="bb">主餐</div>
+                <div class="bb point">主餐</div>
                 <ul class="aa">
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -216,7 +255,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -229,7 +268,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -245,9 +284,9 @@ function Create(props) {
                 </ul>
               </div>
               <div class="tag">
-                <div class="bb">附餐</div>
+                <div class="bb point">附餐</div>
                 <ul class="aa">
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -260,7 +299,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -273,7 +312,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -289,9 +328,9 @@ function Create(props) {
                 </ul>
               </div>
               <div class="tag">
-                <div class="bb">甜點</div>
+                <div class="bb point">甜點</div>
                 <ul class="aa">
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -304,7 +343,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -317,7 +356,7 @@ function Create(props) {
                       </span>
                     )}
                   </li>
-                  <li class="click">
+                  <li class="click point">
                     {tag.length > 0 && (
                       <span
                         onClick={() => {
@@ -335,25 +374,100 @@ function Create(props) {
             </div>
           </div>
 
-          <h4 class="point">
-            推薦指數：
-            <img
-              src="http://localhost:3000/images/comment/star.svg"
+          <h4 class="point">推薦指數：</h4>
+          {/* <Test
+            star={}
+          /> */}
+          <div class="starss" id="stars">
+            <i
+              id="star1"
+              class="fas fa-star"
+              onClick={() => {
+                setRecommendation_index(1)
+              }}
+            ></i>
+            <i
+              id="star2"
+              class="fas fa-star"
+              onClick={() => {
+                setRecommendation_index(2)
+              }}
+            ></i>
+            <i
+              id="star3"
+              class="fas fa-star"
+              onClick={() => {
+                setRecommendation_index(3)
+              }}
+            ></i>
+            <i
+              id="star4"
+              class="fas fa-star"
+              onClick={() => {
+                setRecommendation_index(4)
+              }}
+            ></i>
+            <i
+              id="star5"
+              class="fas fa-star"
+              onClick={() => {
+                setRecommendation_index(5)
+              }}
+            ></i>
+            {/* <img
+              id="star1"
+              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
               alt=""
+              onClick={() => {
+                setRecommendation_index(1)
+              }}
+            ></img> */}
+            {/* <img
+              id="star2"
+              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
+              alt=""
+              onClick={() => {
+                setRecommendation_index(2)
+              }}
             ></img>
-          </h4>
+            <img
+              id="star3"
+              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
+              alt=""
+              onClick={() => {
+                setRecommendation_index(3)
+              }}
+            ></img>
+            <img
+              id="star4"
+              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
+              alt=""
+              onClick={() => {
+                setRecommendation_index(4)
+              }}
+            ></img>
+            <img
+              id="star5"
+              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
+              alt=""
+              onClick={() => {
+                setRecommendation_index(5)
+              }}
+            ></img> */}
+          </div>
+          {/* <div id="comment" class="left">
+            0
+          </div> */}
           <h4>文章內容：</h4>
         </div>
 
         {/* 所見及所得 */}
         <div class="draft">
           <Draft
-            value={insertArticle.content}
-            onChange={(e) => {
-              setContent(e)
-            }}
-            // insertArticle={insertArticle}
-            // setInsertArticle={setInsertArticle}
+            insertArticle={insertArticle}
+            setInsertArticle={setInsertArticle}
+            content={content}
+            setContent={setContent}
           />
         </div>
 

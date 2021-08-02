@@ -91,55 +91,64 @@ function RecentReservation(props) {
         reservationId={reservationId}
       />
 
-      {orders.map((v, i) => {
-        return (
-          <>
-            <div className="recent-content" key={i}>
-              <div className="content-container">
-                <div className="content-head">
-                  <h4 className="content-head-title">
-                    訂位編號 #{v.reservation_id}
-                  </h4>
-                  <div className="detail-container">
-                    <i
-                      className="fas fa-eye"
-                      onClick={() => {
-                        setReservationId(v.reservation_id)
-                        handleShow()
-                      }}
-                    ></i>
+      {orders.length > 0 ? (
+        [
+          orders.map((v, i) => {
+            return (
+              <>
+                <div className="recent-content" key={i}>
+                  <div className="content-container">
+                    <div className="content-head">
+                      <h4 className="content-head-title">
+                        訂位編號 #{v.reservation_id}
+                      </h4>
+                      <div className="detail-container">
+                        <i
+                          className="fas fa-eye"
+                          onClick={() => {
+                            setReservationId(v.reservation_id)
+                            handleShow()
+                          }}
+                        ></i>
+                      </div>
+                    </div>
+                    <div className="content-body">
+                      <table className="content-table">
+                        <thead>
+                          <tr>
+                            <th>訂位日期</th>
+                            <th>表演歌手</th>
+                            <th>座位區</th>
+                            <th>人數</th>
+                            <th>總金額</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{v.date}</td>
+                            <td>{v.singer_name}</td>
+                            <td>{v.seat_name}</td>
+                            <td>{v.attendance}</td>
+                            <td>{v.total}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    {/* 手機版按鈕列 ←→ 電腦版按鈕列 */}
+                    {isDesktopOrMobile ? btnRowMdDom : btnRowDom}
                   </div>
                 </div>
-                <div className="content-body">
-                  <table className="content-table">
-                    <thead>
-                      <tr>
-                        <th>訂位日期</th>
-                        <th>表演歌手</th>
-                        <th>座位區</th>
-                        <th>人數</th>
-                        <th>總金額</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{v.date}</td>
-                        <td>{v.singer_name}</td>
-                        <td>{v.seat_name}</td>
-                        <td>{v.attendance}</td>
-                        <td>{v.total}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* 手機版按鈕列 ←→ 電腦版按鈕列 */}
-                {isDesktopOrMobile ? btnRowMdDom : btnRowDom}
-              </div>
-            </div>
-          </>
-        )
-      })}
+              </>
+            )
+          }),
+        ]
+      ) : (
+        <div className="no-data-container">
+          <h1>您目前沒有任何訂位</h1>
+          <button className="no-data-btn orange-guide-button">訂位</button>
+        </div>
+      )}
     </>
   )
 }

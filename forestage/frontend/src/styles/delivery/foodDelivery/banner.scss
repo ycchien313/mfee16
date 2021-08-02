@@ -1,0 +1,488 @@
+@import '../../common/normalize.scss';
+@import '../../common/global.scss';
+
+.FoodDelivery {
+  .hero-section {
+    background-image: url('http://localhost:3000/images/delivery/FoodDelivery/WallPaper.png');
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+    position: relative;
+  }
+
+  .h1.title {
+    top: 3.6vw;
+    position: absolute;
+    left: 18.9vw;
+    margin: 0;
+    font-family: $zh-tw-maru;
+    color: $primary-lightbrown;
+  }
+
+  .top-wave {
+    max-width: 100vw;
+    height: 19.84vw;
+    position: absolute;
+    margin: 0;
+    top: calc(100vh - 9.5vw);
+
+    .wave-1 {
+      width: 100%;
+    }
+
+    .elfin {
+      width: 5.2vw;
+      position: absolute;
+      top: 0.97vw;
+      left: 31.35vw;
+    }
+
+    .path {
+      width: 5.2vw;
+      position: absolute;
+      top: 0.97vw;
+      left: 79.35vw;
+    }
+  }
+
+  .slogan {
+    width: 100%;
+    top: 100vh;
+    position: absolute;
+
+    .order-time {
+      top: 1vh;
+      left: 70vw;
+      position: absolute;
+      padding: 0vh;
+
+      p {
+        font-size: 1.3vw;
+        color: $primary-lightbrown;
+      }
+
+      h3 {
+        margin: 0;
+        padding: 0.2vw;
+        color: $secondary-green-dark;
+      }
+
+      .input {
+        width: 18vw;
+        height: 2.7vw;
+        border: transparent;
+        // cursor: pointer;
+      }
+    }
+
+    .bottom-wave {
+      width: 100%;
+      background: url('http://localhost:3000/images/delivery/FoodDelivery/Maskpink.svg')
+        no-repeat;
+      height: 13.43vw;
+      background-size: cover;
+    }
+
+    .h2.title {
+      width: 384px;
+      line-height: 64px;
+      display: block;
+      position: absolute;
+      right: 14.06vw;
+      top: 2.91vw;
+      font-family: $zh-tw-maru;
+      color: white;
+    }
+  }
+
+  @media screen and (max-width: 786px) {
+    .slogan {
+      text-align: center;
+
+      .order-time {
+        .input {
+          width: 230px;
+          height: 34px;
+        }
+
+        p {
+          font-size: 16px;
+          padding-right: 50px;
+        }
+
+        h3 {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  /* --- */
+
+  .left-div {
+    max-width: 100vw;
+    height: 19.84vw;
+    position: absolute;
+    margin: 0;
+    top: 0;
+
+    .Taoyuan {
+      width: 42.89vw;
+      position: absolute;
+      top: 18vh;
+      margin-left: 10.5vw;
+      .svg-text {
+        font-family: $zh-tw-noto;
+        font-size: 18px;
+        fill: #ffffff;
+        cursor: pointer;
+      }
+    }
+
+    .pin {
+      width: 2.69vw;
+      position: absolute;
+      top: 16.42vw;
+      left: 25vw;
+    }
+  }
+
+  .map {
+    position: relative;
+  }
+
+  @media screen and (max-width: 768px) {
+    .left-div,
+    .path,
+    .pinkElfin {
+      display: none;
+    }
+  }
+
+  /* --- */
+
+  .order-banner {
+    display: flex;
+  }
+
+  .banner-DialogBox {
+    top: 30.5vh;
+    left: 43.42vw;
+    width: 16vw;
+    // height: 50px;
+    background: #fff;
+    border-radius: 20px;
+    position: absolute;
+
+    &::after {
+      border-color: #fff #fff transparent transparent;
+      border-style: solid solid solid solid;
+      transform: rotateY(180deg);
+      border-width: 20px 20px;
+      bottom: -29px;
+      content: '';
+      height: 0px;
+      left: 29px;
+      position: absolute;
+      width: 0px;
+    }
+  }
+
+  .banner-text {
+    text-align: center;
+    color: $secondary-green-dark;
+    // padding:100px;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .banner-text {
+      font-size: 16px;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .banner-text {
+      font-size: 10px;
+    }
+  }
+
+  /* --- */
+
+  .right-div {
+    max-width: 100vw;
+    height: 10.84vw;
+    position: relative;
+    margin: 0;
+
+    .pinkElfin {
+      width: 5.2vw;
+      position: absolute;
+      top: 15vh;
+      right: 10vw;
+    }
+
+    .takeout {
+      width: 320px;
+      height: 240px;
+      position: absolute;
+      top: 30vh;
+      left: 62vw;
+      border-radius: 50px;
+      background-clip: padding-box, border-box;
+      background-origin: padding-box, border-box;
+      background-image: linear-gradient(
+          135deg,
+          rgba(253, 237, 130, 0.9),
+          rgba(253, 237, 130, 0.9)
+        ),
+        linear-gradient(135deg, #5e7c60, #97bc78, #fded82);
+      border: 15px transparent solid;
+    }
+  }
+
+  .mobile-takeout {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .mobile-takeout {
+      z-index: 10;
+      margin-top: 40px;
+      width: 86vw;
+      display: flex;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 35vh;
+      top: -45vh;
+      border-radius: 50px;
+      background-clip: padding-box, border-box;
+      background-origin: padding-box, border-box;
+      background-image: linear-gradient(
+          135deg,
+          rgba(253, 237, 130, 0.9),
+          rgba(253, 237, 130, 0.9)
+        ),
+        linear-gradient(135deg, #5e7c60, #97bc78, #fded82);
+      border: 15px transparent solid;
+    }
+
+    .takeout {
+      display: none !important;
+    }
+  }
+
+  .takeoutDiv {
+    h3 {
+      padding: 0;
+      margin: 15px 5px;
+      color: $secondary-green-dark;
+    }
+
+    position: absolute;
+    padding: 30px 0 0 40px;
+    margin: auto 0;
+  }
+
+  .Area {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px 8px 0px;
+  }
+
+  .Shipping {
+    display: flex;
+
+    p {
+      color: $secondary-green-dark;
+    }
+  }
+
+  .input-disable {
+    border: transparent;
+    height: 32px;
+    width: 82px;
+    background: transparent;
+  }
+
+  .takeoutInput {
+    border: transparent;
+  }
+
+  .takeoutDiv {
+    .add {
+      width: 150px;
+    }
+
+    .add-r {
+      width: 240px;
+    }
+  }
+
+  @media screen and (max-width: 1400px) and (min-width: 1200px) {
+    .slogan .h2.title {
+      line-height: 64px;
+      right: 8vw;
+      top: 2vw;
+    }
+  }
+
+  /* -- */
+
+  @media screen and (max-width: 768px) {
+    .right-div {
+      left: -66vw;
+      position: relative;
+      top: 0px;
+
+      .takeout {
+        display: flex;
+        width: 85vw;
+        height: 35vh;
+        align-items: center;
+        justify-content: center;
+        margin: 0px 0px 0 50px;
+      }
+    }
+
+    .slogan .order-time {
+      top: 15vh;
+      left: 25vw;
+      position: absolute;
+
+      p {
+        padding-top: 0px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      .bottom-wave {
+        display: flex !important;
+        justify-content: center !important;
+      }
+
+      .slogan .order-time {
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 30px;
+      }
+    }
+
+    .h1.title {
+      position: relative;
+      top: -680px;
+      z-index: 2;
+      padding-left: 10vw;
+    }
+
+    .top-wave .elfin {
+      width: 100px;
+      position: absolute;
+      top: -630px;
+      left: 25vw;
+      z-index: 5;
+    }
+
+    .slogan {
+      display: block;
+
+      .bottom-wave {
+        background: url('http://localhost:3000/images/delivery/FoodDelivery/rwd-wave.svg')
+          no-repeat;
+        background-size: 100%;
+        z-index: 5;
+        height: 420px;
+        position: static;
+        display: block;
+      }
+    }
+
+    .hero-section {
+      position: relative;
+    }
+
+    .top-wave {
+      position: relative;
+    }
+
+    .h1.title {
+      position: relative;
+      top: -420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      left: 0;
+      background: rgb(255, 255, 255);
+      padding: 10px;
+      margin: 0 30px;
+      border-radius: 30px;
+      height: 130px;
+      text-align: center;
+    }
+
+    .top-wave .elfin {
+      width: 60px;
+      position: absolute;
+      top: -390px;
+      z-index: 5;
+    }
+
+    .slogan .h2.title {
+      width: 460px;
+      line-height: 64px;
+      right: 30px;
+      top: 1vw;
+    }
+  }
+  // map
+  #pic_1 {
+    enable-background: new 0 0 943.09 841.89;
+  }
+  path {
+    fill: blueviolet;
+    cursor: pointer;
+
+    &:hover {
+      fill:#f1bd69; 
+      // fill: url(#myGradient); 
+      transition: 0.5s;
+    }
+  }
+  .st0 {
+    fill: #c1d8ab;
+  }
+  .st2 {
+    fill: #aecc94;
+  }
+
+  .st3 {
+    fill: #94b776;
+  }
+
+  .st4 {
+    fill: #95b777;
+  }
+
+  .st5 {
+    fill: #86b557;
+  }
+
+  .st6 {
+    fill: #95b778;
+  }
+
+  .st7 {
+    fill: #c9dfb4;
+  }
+}
+
+.mapFee.active {
+  fill: #f5b54d;
+  // fill: url(#myGradient); 
+}

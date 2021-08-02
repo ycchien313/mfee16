@@ -14,9 +14,6 @@ const cors = require('cors');
 const port = 3001;
 require('dotenv').config();
 
-// const fs = require('fs');
-// const https = require('https');
-
 // 加入 headers
 // app.use(function (req, res, next) {
 //     // 允許連接的網頁

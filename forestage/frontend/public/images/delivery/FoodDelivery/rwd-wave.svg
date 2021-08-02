@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="732" height="409" viewBox="0 0 732 409">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="矩形_652" data-name="矩形 652" width="732" height="409" transform="translate(0.455 401.242)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect id="矩形_565" data-name="矩形 565" width="843" height="535" transform="translate(0 -0.126)" fill="#fff" stroke="#707070" stroke-width="1"/>
+    </clipPath>
+  </defs>
+  <g id="蒙版组_87" data-name="蒙版组 87" transform="translate(-0.455 -401.242)" clip-path="url(#clip-path)">
+    <g id="组_578" data-name="组 578" transform="translate(-79.545 331.368)">
+      <g id="蒙版组_73" data-name="蒙版组 73" transform="translate(0 0)" clip-path="url(#clip-path-2)">
+        <path id="路径_233" data-name="路径 233" d="M1177.721,95.352S1129.8,2.106,954.66,0C776.88,8.264,736.33,55.767,590.867,72.57S345.7-14.182,245.353,95.352-139.6,373.008,82.979,491.358c79.332,42.182,259.658,47.743,384.777,67.986S775.318,675.255,926.507,679,1191.049,590.2,1191.049,590.2Z" transform="translate(1149.254 478.941) rotate(180)" fill="#fee0dc"/>
+      </g>
+    </g>
+  </g>
+</svg>

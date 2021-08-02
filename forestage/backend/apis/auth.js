@@ -387,6 +387,7 @@ router.post('/signup', upload.none(), async (req, res) => {
                     status: '成功',
                     result: '成功',
                     msg: '註冊成功',
+                    memberId: memberId,
                     token: token,
                 };
             }
@@ -401,8 +402,5 @@ router.post('/signup', upload.none(), async (req, res) => {
         res.status(500).json(resData);
     }
 });
-
-/********** 登出 **********/
-// sign out
 
 module.exports = router;

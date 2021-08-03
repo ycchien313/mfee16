@@ -192,7 +192,7 @@
     transform: translateX(-50%);
     top: 8vh;
     border-radius: 15px;
-    background: white;
+    background: $secondary-green;
     display: flex;
     flex-direction: column;
     box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
@@ -211,6 +211,7 @@
     align-items: center;
     // border: 1px solid red;
     padding-bottom: 10px;
+    color: white;
   }
   .cart-small-submit .button-orange {
     border-radius: 25px;
@@ -229,14 +230,14 @@
     flex-direction: column;
   }
   .cart-small-border {
-    background: $primary-lightgreen;
+    background: $secondary-green;
     border-radius: 15px 15px 0 0;
     flex-shrink: 0;
     height: 70vh;
     overflow: auto;
   }
   .cart-small-content {
-    background: $primary-lightpink;
+    background: white;
     align-items: center;
     display: flex;
     width: 90%;
@@ -261,7 +262,7 @@
     justify-content: space-around;
   }
   .cart-small-info h4 {
-    color: #333;
+    color: $secondary-green-dark;
   }
   .cart-small-info .cart-small-name {
     width: 50%;
@@ -270,5 +271,16 @@
     display: flex;
     flex-grow: 1;
     justify-content: space-around;
+  }
+  // sidebar
+  .cart-small-border::-webkit-scrollbar {
+    width: 12px;
+    height: 12px; /* width of the entire scrollbar */
+  }
+
+  .cart-small-border::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    /* creates padding around scroll thumb */
   }
 }

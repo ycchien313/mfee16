@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="33.049" height="21.225" viewBox="0 0 33.049 21.225">
+  <defs>
+    <filter id="minus-solid" x="0" y="0" width="33.049" height="21.225" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, 0, 0)" filter="url(#minus-solid)">
+    <path id="minus-solid-2" data-name="minus-solid" d="M13.974,208H1.075A1.075,1.075,0,0,0,0,209.075v1.075a1.075,1.075,0,0,0,1.075,1.075h12.9a1.075,1.075,0,0,0,1.075-1.075v-1.075A1.075,1.075,0,0,0,13.974,208Z" transform="translate(9 -202)" fill="#5e7c60"/>
+  </g>
+</svg>

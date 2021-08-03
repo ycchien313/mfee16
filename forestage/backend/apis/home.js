@@ -17,6 +17,14 @@ router.get("/singer_today", async function (req, res, next) {
     // let queryResult = current + "T16:00:00.000Z";
     res.send(queryResult[0]);
 });
+// 取得登入後會員詳情
+router.get("/member_state/:memberId", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync(
+        "select * from member where member_id = ?",
+        req.params.memberId
+    );
+    res.json(queryResult);
+});
 
 // 取得評論資料
 router.get("/comment/:id", async function (req, res, next) {
@@ -94,6 +102,11 @@ router.post("/update_candidate/:candidateId", async function (req, res, next) {
         `INSERT INTO vote (vote_id, vote_time, singer_id) VALUES (NULL, '${current}', ?)`,
         [req.params.candidateId]
     );
+    let queryResult2 = await db.connection.queryAsync(
+        "update member set vote_valid = 0 where member_id = ?",
+        [req.body.memberId]
+    );
+    console.log(req.body.memberId);
 });
 
 module.exports = router;

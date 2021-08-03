@@ -96,7 +96,13 @@ textarea,
     background-color: darken($accent-red, 10%);
   }
 }
-
+.green-guide-button {
+  @extend .guide-button;
+  background-color: $secondary-green;
+  &:active {
+    background-color: darken($secondary-green, 10%);
+  }
+}
 .orange-guide-button {
   @extend .guide-button;
   background-color: $accent-orange;

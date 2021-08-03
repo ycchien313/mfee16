@@ -7,6 +7,22 @@ function HeaderBig(props) {
   let { cartList } = props
   const [totalPrice, setTotalPrice] = useState(0)
   const [totalCountNum, setTotalCountNum] = useState(0)
+  // header收起與顯示
+  useEffect(() => {
+    let currentPosition = 0
+    $(window).on('scroll', function () {
+      let position = $(this).scrollTop()
+      let result = position - currentPosition
+      currentPosition = position
+      if (result > 0 && position >= 1000) {
+        $('.main-header').addClass('hide')
+        $('.main-header').removeClass('fixed-top')
+      } else {
+        $('.main-header').removeClass('hide')
+        $('.main-header').addClass('fixed-top')
+      }
+    })
+  }, [])
 
   // 於父母給予新資料時更新時執行計算總價及總數
   useEffect(() => {

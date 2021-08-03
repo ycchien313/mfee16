@@ -37,7 +37,7 @@ function Guide(props) {
         <h4>{guideContent[1]}</h4>
       </div>
       <div className="pointer">
-        <img src="./image/pointer.svg" alt="" />
+        <img src="http://localhost:3000/images/home/pointer.svg" alt="" />
       </div>
     </div>
   )

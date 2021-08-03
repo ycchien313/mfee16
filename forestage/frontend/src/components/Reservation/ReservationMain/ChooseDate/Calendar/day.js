@@ -15,6 +15,7 @@ function Day(props) {
     setSeatCount,
     setSeatInfo,
     seatCount,
+    dateFromHome
   } = props
 
   const [didMount, setDidMount] = useState(false)
@@ -71,7 +72,6 @@ function Day(props) {
     })
   }
 
-  // checklist name一直抓到最後一個歌手名稱
 
   function updateCheckList(date, name) {
     let newObj = { ...checkList }
@@ -100,6 +100,12 @@ function Day(props) {
   }, [activeDate])
 
   useEffect(() => {
+    // 從歌手頁來時給active狀態
+    if (date === dateFromHome.date){
+      $(day.current).addClass('active')
+      day.current.click()
+    }
+
     // 前頁返回時仍然選取該日期
     let dateInStorage = sessionStorage.getItem('activeDate')
     if (date === dateInStorage) {

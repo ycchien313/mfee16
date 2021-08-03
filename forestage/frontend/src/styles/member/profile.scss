@@ -1,0 +1,412 @@
+.profile {
+  @import '~bootstrap/scss/bootstrap';
+  @import '../member/modal.scss';
+  @import '../common/global.scss';
+
+  @keyframes slidein-main {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .fade-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .fade-enter-active {
+    opacity: 1;
+    // transform: scale(0.9);
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+    // transition: opacity 300ms ease-in;
+  }
+  .fade-exit {
+    opacity: 0;
+  }
+  .fade-exit-active {
+    opacity: 1;
+    // transform: scale(0.9);
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  /********** 主畫面 **********/
+  .main {
+    width: 100%;
+    // animation: slidein-main 1s;
+  }
+  .main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  @media screen and (max-width: 768px) {
+    .main-container {
+      width: unset;
+      padding: 0 30px;
+      flex-direction: column;
+    }
+  }
+
+  /********** 右側 *********/
+  .right-side {
+    width: 100%;
+    margin-left: 16.66vw;
+    display: flex;
+    flex-direction: column;
+    padding-right: 8.33vw;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side {
+      width: unset;
+      margin-left: 0;
+      padding: 0;
+    }
+  }
+
+  .content-spinner {
+    margin: 0 auto;
+    height: 34vw;
+    line-height: 34vw;
+  }
+
+  /********** 右側：內容 *********/
+  /** 共用部分開始 **/
+  .edit-btn,
+  .cancel-btn {
+    width: clamp(23px, 2.3vw, 2.3vw);
+    height: clamp(23px, 2.3vw, 2.3vw);
+    line-height: 2.3vw;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .edit-btn,
+    .cancel-btn {
+      width: 4vw;
+      height: 4vw;
+      line-height: 4vw;
+      min-width: 24px;
+      min-height: 24px;
+    }
+  }
+  .edit-pen,
+  .cancel-edit {
+    font-size: clamp(16px, 1.5vw, 1.5vw);
+  }
+  /* table 共同設定開始 */
+  .d-none {
+    display: none !important;
+  }
+  .right-side .table-container {
+    width: 27.86vw;
+    background-color: #fff;
+    border-radius: 1vw;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .table-container {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+  .right-side .table-container .info-row:nth-child(1) {
+    height: 45px;
+    background-color: $primary-lightgreen;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2vw;
+    border-radius: 1vw 1vw 0 0;
+    color: #fff;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .table-container .info-row:nth-child(1) {
+      border-radius: 10px 10px 0 0;
+      padding: 0 15px;
+    }
+  }
+  .right-side .table-container .info-row:not(:nth-child(1)) {
+    color: $primary-lightbrown;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2vw;
+  }
+  @media screen and (max-width: 1000px) {
+    .right-side .table-container .info-row:not(:nth-child(1)) {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .table-container .info-row:not(:nth-child(1)) {
+      font-size: 1rem;
+      padding: 0 15px;
+    }
+  }
+  .right-side
+    .table-container
+    .info-row:not(:nth-child(1))
+    .info-col:nth-child(1) {
+    /* width: 190px; */
+    width: 18vw;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side
+      .table-container
+      .info-row:not(:nth-child(1))
+      .info-col:nth-child(1) {
+      width: 200px;
+    }
+  }
+  .right-side .table-container .info-col:nth-child(2) {
+    /* max-width: 350px; */
+    width: 100%;
+  }
+  .right-side .table-container input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: none;
+    outline: none;
+    text-align: right;
+    font-size: 1rem;
+  }
+  .right-side .table-container input.active,
+  .right-side .table-container textarea.active {
+    border: 1px solid $primary-lightbrown;
+  }
+  /* table 共同設定結束 */
+  /**共用部分結束 **/
+
+  .right-side > .content {
+    padding-left: 4.95vw;
+    height: 100%;
+    font-family: $zh-tw-noto;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side > .content {
+      padding-left: unset;
+    }
+  }
+  .right-side .content-container {
+    border-radius: 1.56vw;
+    background-color: $primary-lightgray;
+    padding: 3.65vw 2.6vw 4.3vw 2.6vw;
+    position: relative;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .content-container {
+      border-radius: 15px;
+      padding: 20px 10px;
+    }
+  }
+  .right-side .info-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .info-container {
+      flex-direction: column;
+    }
+  }
+  /********** 左側：會員照片、個人資料、儲存按鈕 *********/
+  .right-side .personal-info-container form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // align-items: center;
+  }
+
+  .right-side .personal-info-container .spinner {
+    width: 27.86vw;
+    text-align: center;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .personal-info-container .spinner {
+      width: 100%;
+    }
+  }
+
+  /* 會員照片 */
+  .right-side .avatar-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .right-side .edit-btn,
+  .right-side .cancel-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .right-side .content .photo-box {
+    /* width: 240px;
+        height: 300px; */
+    width: 12.5vw;
+    height: 15.63vw;
+    border-radius: 0.52vw;
+    background-color: #fff;
+    position: relative;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .content .photo-box {
+      width: 20vw;
+      height: 25vw;
+      min-width: 96px;
+      min-height: 121px;
+      border-radius: 10px;
+    }
+  }
+  .right-side .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 大頭貼遮罩 */
+  .right-side .photo-mask {
+    width: 12.5vw;
+    height: 15.63vw;
+    border-radius: 0.52vw;
+    background-color: #fff;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    transition: 0.5s;
+  }
+  .right-side .photo-mask.fade {
+    opacity: 0.5;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .photo-mask {
+      width: 20vw;
+      height: 25vw;
+      min-width: 96px;
+      min-height: 121px;
+      border-radius: 10px;
+    }
+  }
+
+  .right-side .photo-box i {
+    font-size: clamp(60px, 6vw, 6vw);
+    color: $primary-lightbrown;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+  }
+  .right-side .photo-box i:hover {
+    transition: 0.5s;
+    opacity: 1;
+  }
+
+  .right-side .name-box {
+    width: 27.86vw;
+    word-break: break-all;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .name-box {
+      width: 100%;
+    }
+  }
+  .right-side .name {
+    margin: 0.52vw 0 1.04vw 0;
+    text-align: center;
+    color: $primary-lightbrown;
+  }
+
+  /* 個人資料 */
+  .right-side .personal-info-container .table-container .info-row:nth-child(6) {
+    margin: 8px 0;
+    padding-bottom: 15px;
+  }
+  .right-side .table-container .textarea-container {
+    text-align: right;
+    border: 1px solid transparent;
+    padding: 8px 5px 8px 1px;
+    word-break: break-all;
+    position: relative;
+    font-size: 1rem;
+  }
+  .right-side .table-container .textarea {
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: right;
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    font-size: 1rem;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 8px 5px 8px 1px;
+  }
+  /* 儲存按鈕 */
+  .right-side .save-btn-container {
+    height: 0;
+    position: relative;
+    top: 0.5vw;
+    margin: 0 auto;
+  }
+
+  /********** 中間分隔線 *********/
+  .right-side .vertical-line {
+    width: 2px;
+    line-height: 100%;
+    background-color: #fff;
+  }
+  /********** 右側登入資料 *********/
+  .right-side .signin-info-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .right-side .signin-info-container::before {
+    content: '';
+    height: calc(15.63vw + 0.52vw + 1.04vw + 1rem + 0.45vw);
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .signin-info-container::before {
+      height: 50px;
+    }
+  }
+  .right-side .signin-info-container .table-container .info-row:nth-child(2) {
+    margin: 5px 0;
+    padding-bottom: 15px;
+  }
+
+  /* 重設密碼、儲存按鈕樣式 */
+  .right-side .reset-btn,
+  .right-side .save-btn {
+    width: 80px;
+    height: clamp(26px, 1.5vw, 1.5vw);
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .right-side .reset-btn,
+    .right-side .save-btn {
+      width: 60px;
+      font-size: 12px;
+    }
+  }
+  /********** 不同部份結束 **********/
+}

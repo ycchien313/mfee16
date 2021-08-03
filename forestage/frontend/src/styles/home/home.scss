@@ -281,8 +281,8 @@ button {
   }
   @media screen and (max-width: 768px) {
     #secondScreen {
-      background: url('http://localhost:3000/images/secondScreenBG.png') center
-        center no-repeat;
+      background: url(http://localhost:3000/images/home/secondScreenBG.png)
+        center center;
       background-size: cover;
       height: 90vh;
     }
@@ -361,13 +361,15 @@ button {
     position: absolute;
     top: 75vh;
     left: 35vw;
-    cursor: pointer;
+    display: none;
   }
   @media screen and (max-width: 768px) {
     .liveSide .pointer {
+      cursor: pointer;
       width: 40px;
       top: 52vh;
       left: 77vw;
+      display: block;
     }
     .liveSide .pointer img {
       width: 100%;
@@ -636,6 +638,12 @@ button {
     font-size: 20px;
     text-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
   }
+  .btn-innerText.loginCheck {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
   .button-orange i {
     position: absolute;
     font-size: 30px;
@@ -698,6 +706,7 @@ button {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 10px;
   }
   @media screen and (max-width: 768px) {
     .audienceComment {
@@ -946,6 +955,7 @@ button {
       justify-content: space-around;
       border-radius: 70px;
       margin-bottom: 10px;
+      transition: 0.1s;
     }
     .mobile-vote-li-candidate {
       display: flex;
@@ -1220,7 +1230,7 @@ button {
       width: 90px;
       height: 30px;
       color: $secondary-green-dark;
-      background: url('http://localhost:3000/images/mobile-reservation-ul.svg')
+      background: url('http://localhost:3000/images/home/mobile-reservation-ul.svg')
         center center no-repeat;
       background-size: contain;
     }
@@ -1296,6 +1306,12 @@ button {
       border-radius: 70px 20px 20px 70px;
       box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.2);
       margin-bottom: 40px;
+    }
+    .mobile-candidate.active {
+      background: $secondary-green;
+    }
+    .mobile-candidate.active h4 {
+      color: white;
     }
     .mobile-candidate figure {
       border: 0.5px solid $primary-lightgreen;
@@ -1524,9 +1540,15 @@ button {
     opacity: 1;
   }
   .dish-title h4 {
-    padding-left: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
     color: #333;
     margin: 0;
+    font-family: $zh-tw-maru;
+  }
+  .dish-info {
+    color: #333;
+    font-family: $zh-tw-noto;
   }
   .dish-title.main {
     background: url(http://localhost:3000/images/home/dish-main.svg) center
@@ -1714,5 +1736,21 @@ button {
     opacity: 0;
     transform: translateX(150px);
     transition: all 200ms;
+  }
+  .test {
+    width: 100px;
+    height: 80px;
+    background: cyan;
+    border-radius: 5px;
+    color: white;
+    font-family: $zh-tw-maru;
+    border: none;
+    // transition: 0.3s;
+  }
+  .mobile-vote-li.active {
+    background: $secondary-green;
+  }
+  .mobile-vote-li.active h4 {
+    color: white;
   }
 }

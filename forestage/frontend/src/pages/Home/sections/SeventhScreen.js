@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import ReservationCandidate from '../../../components/Home/ReservationCadidate'
+import MobileReservation from '../../../components/Home/MobileReservation'
+
 function SeventhScreen(props) {
   const [calendarResult, setCalendarResult] = useState([])
   const [date, getDate] = useState()
@@ -11,8 +13,20 @@ function SeventhScreen(props) {
   const [backSeatState, setBackSeatState] = useState([])
   // 傳給蕙伃的設定
   const [select, setSelect] = useState({ singer: '', date: '' })
-
-  const [test, setTest] = useState(0)
+  // 手機板切換按鈕
+  const [btnWeek, setBtnWeek] = useState(0)
+  useEffect(() => {
+    $('.switch-btn').on('click', function () {
+      $(this).addClass('switched')
+      $(this).siblings().removeClass('switched')
+    })
+    $('.switch-btn-left').on('click', function () {
+      setBtnWeek(0)
+    })
+    $('.switch-btn-right').on('click', function () {
+      setBtnWeek(1)
+    })
+  }, [])
   useEffect(() => {
     //   抓取表演者行事曆
     $.ajax({
@@ -20,7 +34,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log(result)
+      // // console.log(result)
       setCalendarResult(result)
     })
     // 抓取剩餘座位
@@ -29,7 +43,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log('搖滾區:', result[0])
+      // // console.log('搖滾區:', result[0])
       setRockSeatState(result[0])
     })
     $.ajax({
@@ -37,7 +51,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      console.log('中區:', result[0])
+      // // console.log('中區:', result[0])
       setMiddleSeatState(result[0])
     })
     $.ajax({
@@ -45,7 +59,7 @@ function SeventhScreen(props) {
       method: 'GET',
       dataType: 'JSON',
     }).then(function (result) {
-      console.log('後區', result[0])
+      // // console.log('後區', result[0])
       setBackSeatState(result[0])
     })
   }, [date])
@@ -238,72 +252,42 @@ function SeventhScreen(props) {
             </li>
           </ul>
           <div className="mobile-reservation-switch-btn">
-            <button className="switch-btn-left switched">本週</button>
-            <button className="switch-btn-right">下週</button>
+            <button className="switch-btn switch-btn-left switched">
+              本週
+            </button>
+            <button className="switch-btn switch-btn-right">下週</button>
           </div>
         </div>
         <div className="mobile-reservation-candidates">
           <ul>
-            <li>
-              <div className="mobile-candidate">
-                <figure>
-                  <img
-                    src="http://localhost:3000/images/home/歌手/林肯公園.jpg"
-                    alt=""
-                  />
-                </figure>
-                <h4 className="candidate-name">林肯公園</h4>
-                <h4 className="candidate-date">8/16(一)</h4>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-candidate">
-                <figure>
-                  <img
-                    src="http://localhost:3000/images/home/歌手/劉德華.jpg"
-                    alt=""
-                  />
-                </figure>
-                <h4 className="candidate-name">劉德華</h4>
-                <h4 className="candidate-date">8/17(二)</h4>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-candidate">
-                <figure>
-                  <img
-                    src="http://localhost:3000/images/home/歌手/李榮浩.jpg"
-                    alt=""
-                  />
-                </figure>
-                <h4 className="candidate-name">李榮浩</h4>
-                <h4 className="candidate-date">8/18(三)</h4>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-candidate">
-                <figure>
-                  <img
-                    src="http://localhost:3000/images/home/歌手/maroon5.jpg"
-                    alt=""
-                  />
-                </figure>
-                <h4 className="candidate-name">馬倫five</h4>
-                <h4 className="candidate-date">8/19(四))</h4>
-              </div>
-            </li>
-            <li>
-              <div className="mobile-candidate">
-                <figure>
-                  <img
-                    src="http://localhost:3000/images/home/歌手/楊丞琳.jpg"
-                    alt=""
-                  />
-                </figure>
-                <h4 className="candidate-name">楊丞琳</h4>
-                <h4 className="candidate-date">8/20(五)</h4>
-              </div>
-            </li>
+            {calendarResult.length > 0 &&
+              calendarResult.map(function (value, index) {
+                if (btnWeek === 0) {
+                  if (index < 5) {
+                    return (
+                      <MobileReservation
+                        key={index}
+                        name={value.name}
+                        date={value.date}
+                        setSelect={setSelect}
+                        getDate={getDate}
+                      />
+                    )
+                  }
+                } else {
+                  if (index >= 5) {
+                    return (
+                      <MobileReservation
+                        key={index}
+                        name={value.name}
+                        date={value.date}
+                        setSelect={setSelect}
+                        getDate={getDate}
+                      />
+                    )
+                  }
+                }
+              })}
           </ul>
         </div>
         <button className="button-red">

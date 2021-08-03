@@ -6,7 +6,7 @@ function VoteCandidates(props) {
   let path = 'http://localhost:3000/images/home/歌手/'
   useEffect(() => {
     $(candidate.current).on('click', function () {
-      console.log(counts)
+      // // console.log(counts)
       // 設定欲傳回父元件之投票id
       setCandidateId(id)
       setCandidateName(name)

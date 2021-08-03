@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react'
+import { withRouter, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { setAuthToken } from './utils'
 import AuthContext from './AuthContext'
-
+const useForceUpdate = () => useState()[1]
 function AuthForm(props) {
+  const forceUpdate = useForceUpdate()
+  const history = useHistory()
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, errorMsg, setErrorMsg } = props
   const [addr, setAddr] = useState({ city: '桃園市', street: '' })
@@ -116,7 +119,7 @@ function AuthForm(props) {
     switch (signinScreen) {
       // 登入
       case true:
-        console.log('準備傳入後端，資料為: ', signinFields)
+        // console.log('準備傳入後端，資料為: ', signinFields)
 
         try {
           const response = await serverRequest.post('/signin', signinFields)
@@ -133,7 +136,7 @@ function AuthForm(props) {
           // 登入成功
           const memberId = data.data.memberId
           const token = data.token
-          console.log('登入成功，token: ', token)
+          // console.log('登入成功，token: ', token)
 
           // 載入指示器及轉場
           await loading()
@@ -145,6 +148,8 @@ function AuthForm(props) {
           serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
+          // 首頁則強制更新
+          props.location.pathname === '/' && history.go(0)
           // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {}
@@ -155,15 +160,13 @@ function AuthForm(props) {
         // 密碼與確認密碼不一致
         if (!checkPassword(e)) return
 
-        console.log('準備傳入後端，資料為: ', signupFields)
+        // console.log('準備傳入後端，資料為: ', signupFields)
 
         try {
           const response = await serverRequest.post('/signup', signupFields)
           const data = response.data
           const result = data.result
           const msg = data.msg
-          const memberId = data.data.memberId
-          const token = data.token
 
           // 註冊失敗
           if (result === '失敗') {
@@ -175,7 +178,9 @@ function AuthForm(props) {
           }
 
           // 註冊成功
-          console.log('註冊成功，token', token)
+          const memberId = data.memberId
+          const token = data.token
+          // console.log('註冊成功，token', token)
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
@@ -189,10 +194,9 @@ function AuthForm(props) {
 
           // 重新整理
           setShowAuthModal(false)
-          // window.location.reload(
         } catch (error) {
           // 內部錯誤
-          console.error('error:', error)
+          // console.error('error:', error)
         }
         break
 
@@ -330,7 +334,7 @@ function AuthForm(props) {
               type="tel"
               value={signupFields.mobile}
               placeholder="請輸入手機號碼 ex. 0911222333"
-              pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+              pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
               required
               title="請輸入正確的手機號碼"
               onChange={(e) => {
@@ -385,4 +389,4 @@ function AuthForm(props) {
   return <>{signinScreen ? signinDom : signupDom}</>
 }
 
-export default AuthForm
+export default withRouter(AuthForm)

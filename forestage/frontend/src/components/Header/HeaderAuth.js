@@ -4,16 +4,11 @@ import { useMediaQuery } from 'react-responsive'
 import Swal from 'sweetalert2'
 import Auth from '../../components/Auth/'
 
-function HeaderAuth(props) {
+function HeaderAuth() {
   const isTableOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const history = useHistory()
   const [authToken, setAuthToken] = useState('')
   const [showAuthModal, setShowAuthModal] = useState(false)
-
-  const reloadPage = () => {
-    const pathname = props.location.pathname
-    history.push(pathname)
-  }
 
   const logoutSwal = () => {
     Swal.fire({
@@ -21,12 +16,14 @@ function HeaderAuth(props) {
       title: '登出成功',
       showConfirmButton: false,
       timer: 1000,
+    }).then(function (result) {
+      history.go(0)
     })
   }
 
   useEffect(() => {
-    setAuthToken(localStorage.getItem('authToken'))
-    reloadPage()
+    const token = localStorage.getItem('authToken')
+    token === null ? setAuthToken(null) : setAuthToken(token)
   }, [authToken, showAuthModal])
 
   const loginDom = (
@@ -47,7 +44,7 @@ function HeaderAuth(props) {
           className="h4"
           onClick={() => {
             localStorage.removeItem('authToken')
-            setAuthToken('')
+            setAuthToken(null)
             logoutSwal()
           }}
         >
@@ -75,7 +72,7 @@ function HeaderAuth(props) {
           className="h3"
           onClick={() => {
             localStorage.removeItem('authToken')
-            setAuthToken('')
+            setAuthToken(null)
             logoutSwal()
           }}
         >

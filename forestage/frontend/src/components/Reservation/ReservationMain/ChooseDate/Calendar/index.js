@@ -13,8 +13,9 @@ function CalendarBig(props) {
     setSeatInfo,
     setSeatCount,
     seatCount,
+    dateFromHome
   } = props
-
+  // 拜託
   return (
     <>
       <div className="week">
@@ -34,6 +35,7 @@ function CalendarBig(props) {
                 setSeatCount={setSeatCount}
                 setSeatInfo={setSeatInfo}
                 seatCount={seatCount}
+                dateFromHome={dateFromHome}
               />
             )
           }
@@ -56,7 +58,7 @@ function CalendarBig(props) {
                 setSeatInfo={setSeatInfo}
                 setSeatCount={setSeatCount}
                 seatCount={seatCount}
-
+                dateFromHome={dateFromHome}
               />
             )
           }

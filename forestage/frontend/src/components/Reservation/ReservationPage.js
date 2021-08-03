@@ -10,7 +10,10 @@ import Auth from '../Auth/'
 
 function ReservationPage(props) {
   const [showAuthModal, setShowAuthModal] = useState(false)
-
+  let dateFromHome = {}
+  if (props.location.state !== undefined) {
+    dateFromHome = props.location.state.select
+  }
   // 視窗關閉時移除sessionStorage
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -38,7 +41,11 @@ function ReservationPage(props) {
         />
       )}
       <Hero />
-      <Main showAuthModal={showAuthModal} setShowAuthModal={setShowAuthModal} />
+      <Main
+        showAuthModal={showAuthModal}
+        setShowAuthModal={setShowAuthModal}
+        dateFromHome={dateFromHome}
+      />
     </>
   )
 }

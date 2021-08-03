@@ -11,7 +11,7 @@ function Header(props) {
   useEffect(() => {
     if (loading === true) {
       if (item.length > 0) {
-        console.log('item in header:', item)
+        // console.log('item in header:', item)
         localStorage.setItem('cart', JSON.stringify(item))
         setCartList(JSON.parse(localStorage.getItem('cart')))
       }

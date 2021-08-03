@@ -50,7 +50,7 @@ function ThirdScreen(props) {
       }
     }
     $('.selectBlock').on('click', function () {
-      console.log(this)
+      // console.log(this)
       $(this).addClass('active')
       $(this)
         .closest('li')
@@ -212,7 +212,7 @@ function ThirdScreen(props) {
             {comment.map(function (v, i) {
               return (
                 <CommentCard
-                  key={v.article_id}
+                  key={i}
                   name={v.name}
                   singer={v.singer}
                   title={v.title}

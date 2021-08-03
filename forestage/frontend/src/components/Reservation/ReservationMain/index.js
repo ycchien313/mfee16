@@ -12,7 +12,7 @@ import CheckList from './CheckList'
 
 function Main(props) {
   // const { checkList, setCheckList } = props
-  const { showAuthModal, setShowAuthModal} = props
+  const { showAuthModal, setShowAuthModal, dateFromHome} = props
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
@@ -233,6 +233,7 @@ function Main(props) {
               setCheckList={setCheckList}
               checkList={checkList}
               setSeatInfo={setSeatInfo}
+              dateFromHome={dateFromHome}
             />
             <ChooseSeat
               seatInfo={seatInfo}

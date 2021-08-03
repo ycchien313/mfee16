@@ -3,9 +3,10 @@ import gsap from 'gsap'
 
 function FirstScreen(props) {
   let { singerName, singerImg, singerDate } = props
+  let domain = 'http://localhost:3000/images/home/歌手/'
   const [test, setTest] = useState('test')
   let GsapTarget = useRef(null)
-  console.log(GsapTarget)
+  // console.log(GsapTarget)
   useEffect(() => {
     gsap.to(GsapTarget, { x: 0, opacity: 1 })
   }, [])
@@ -29,7 +30,7 @@ function FirstScreen(props) {
         </div>
         <div className="mobile-card-singer">
           <figure>
-            <img src={singerImg} alt="" />
+            <img src={domain + singerImg} alt="" />
           </figure>
           <div className="today-info">
             <h3>{singerName}</h3>
@@ -53,7 +54,7 @@ function FirstScreen(props) {
           }}
         >
           <figure className="singer">
-            <img src={singerImg} alt="" />
+            <img src={domain + singerImg} alt="" />
           </figure>
           <div className="cardInfo">
             <h3 className="cardInfoTitle">{singerName}</h3>

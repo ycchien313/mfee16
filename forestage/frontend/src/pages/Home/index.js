@@ -25,6 +25,9 @@ function Home() {
   const [singerIntroduction, setSingetIntroduction] = useState()
 
   // 登入狀態
+  const [loginDetail, setLoginDetail] = useState()
+  const [memberId, setMemberId] = useState(0)
+  const [authToken, setAuthToken] = useState()
   const [loginState, setLoginState] = useState(false)
   const [all, setAll] = useState({})
   const [cart, setCart] = useState([])
@@ -48,6 +51,38 @@ function Home() {
       $('.cart-small').addClass('disabled')
       $('.header-cart').removeClass('active')
     })
+    let result = localStorage.getItem('authToken')
+    setAuthToken(result)
+    // console.log('token:', result)
+  }, [])
+  useEffect(() => {
+    // memberId get
+    // console.log('辨識用')
+    let token = localStorage.getItem('authToken')
+    // console.log(token)
+    setAuthToken(token)
+
+    $.ajax({
+      url: 'http://localhost:3001/auth/me',
+      method: 'GET',
+      dataType: 'JSON',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(function (result) {
+      // console.log(result)
+      setMemberId(result.memberId)
+    })
+
+    $.ajax({
+      url: `http://localhost:3001/member_state/${memberId}`,
+      method: 'GET',
+      dataType: 'JSON',
+    }).then(function (result) {
+      // console.log(result[0].memberId)
+    })
   }, [])
 
   return (
@@ -65,7 +100,7 @@ function Home() {
           singerImg={singerImg}
           singerIntroduction={singerIntroduction}
         />
-        <FourthScreen />
+        <FourthScreen memberId={memberId} authToken={authToken} />
         <FivethScreen />
         <SixthScreen />
         <SeventhScreen />

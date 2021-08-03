@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 function EightScreen(props) {
   // 預設狀態
   const [dish, setDish] = useState()
-  const [dishState, setDishState] = useState()
+  const [dishState, setDishState] = useState('')
   // map出的目標
   const [targetDish, setTargetDish] = useState([])
-
+  const [text, setText] = useState()
   // 購物車用
   let { all, setAll, item, setItem } = props
   useEffect(() => {
@@ -19,7 +19,7 @@ function EightScreen(props) {
     }).then(function (result) {
       setDish(result)
       setTargetDish([result[0], result[1], result[2]])
-      console.log('current State:', dishState)
+      // console.log('current State:', dishState)
     })
 
     $('.dish-title').on('click', function () {
@@ -29,11 +29,11 @@ function EightScreen(props) {
   }, [])
   // 設定欲顯示之餐點
   useEffect(() => {
-    console.log('current State:', dishState)
+    // console.log('current State:', dishState)
     // 將state內的狀態存進複製陣列
     if (dish) {
       let dishClone = [...dish]
-      console.log('Before dishClone:', dishClone)
+      // console.log('Before dishClone:', dishClone)
       // 將複製陣列內篩選過後的狀態再次存進新陣列
       let newDishClone = dishClone.filter(function (value, index) {
         return value.type === dishState
@@ -54,7 +54,7 @@ function EightScreen(props) {
             newDishClone[i].class = 'main'
         }
       }
-      console.log('After dishClone:', newDishClone)
+      // console.log('After dishClone:', newDishClone)
       // 將class給到後的新複製陣列存回state
       setTargetDish(newDishClone)
     }
@@ -99,7 +99,6 @@ function EightScreen(props) {
       </div>
       <div className="delivery">
         <ul>
-          {console.log('targetDish:', targetDish)}
           {targetDish.length > 0 &&
             targetDish.map(function (value, index) {
               return (

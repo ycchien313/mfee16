@@ -100,10 +100,19 @@ function Day(props) {
   }, [activeDate])
 
   useEffect(() => {
-    // 從歌手頁來時給active狀態
+    // 從歌手頁傳來資料
     if (date === dateFromHome.date){
+      // 歌手active樣式
       $(day.current).addClass('active')
-      day.current.click()
+      $(day.current).siblings().removeClass('active')
+      $(day.current).parent().siblings().find('.day').removeClass('active')
+      //前一頁返回時維持選取
+      setActiveDate(dateFromHome.date) 
+      // 長條圖
+      url = `http://localhost:3001/reservation/${dateFromHome.date}`
+      getRemainingSeat()
+      // 帶入checkList
+      updateCheckList(dateFromHome.date, dateFromHome.singer)
     }
 
     // 前頁返回時仍然選取該日期

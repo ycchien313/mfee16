@@ -112,6 +112,8 @@ router.get(
         let dbDeliveryDetail = null;
         const memberId = req.params.memberId;
         const deliveryId = req.params.deliveryId;
+        console.log(memberId)
+        console.log(deliveryId)
 
         // 執行 SQL，查詢會員的「詳細」訂位資料
         const sql =
@@ -268,6 +270,10 @@ router.get(
         let dbReservationDetail = null;
         const memberId = req.params.memberId;
         const reservationId = req.params.reservationId;
+
+        
+        console.log(memberId)
+        console.log(deliveryId)
 
         // 執行 SQL，查詢會員的「詳細」訂位資料
         const sql =

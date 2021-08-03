@@ -1,5 +1,4 @@
 @import '../common/global.scss';
-// @import '~bootstrap/scss/bootstrap';
 
 .show-detail .modal-body {
   color: $primary-lightbrown;
@@ -33,12 +32,12 @@
   padding-left: 25px;
 }
 
-.close-button {
-  background: #ccc;
+.password .close-button {
+  background-color: #ccc;
   border: none;
 }
 
-.close-button:hover {
+.password .close-button:hover {
   background: #aaa;
   border: none;
   font-family: $zh-tw-noto;
@@ -67,11 +66,15 @@
 .password .orange:hover {
   background: darken($accent-orange, 20%);
   border: none;
+  color: #FFF;
   font-family: 'Noto Sans TC', sans-serif;
 }
 
 .password .modal-header {
   background: $primary-lightgreen;
+}
+
+.password .modal-header .h4 {
   color: white;
   font-family: $zh-tw-maru;
 }

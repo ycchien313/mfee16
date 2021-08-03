@@ -56,8 +56,12 @@ function Map(props) {
               // placeholder
             />
             <div className="Shipping">
-              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'300'}&nbsp;</p>}
-              <p>運費: 60 元</p>
+              {min ? (
+                <p>免運門檻: ${min}&nbsp;&nbsp;</p>
+              ) : (
+                <p>免運門檻: ${'300'}&nbsp;&nbsp;</p>
+              )}
+              <p>&nbsp;&nbsp;運費: 60元</p>
             </div>
           </div>
         </div>
@@ -661,8 +665,12 @@ function Map(props) {
               // placeholder
             />
             <div className="Shipping">
-              {min ? <p>免運門檻: ${min}</p> : <p>免運門檻: ${'300'}&nbsp;</p>}
-              <p>運費: $60</p>
+              {min ? (
+                <p>免運門檻: ${min}&nbsp;&nbsp;</p>
+              ) : (
+                <p>免運門檻: ${'300'}&nbsp;&nbsp;</p>
+              )}
+              <p>&nbsp;&nbsp;運費: $60</p>
             </div>
           </div>
         </div>

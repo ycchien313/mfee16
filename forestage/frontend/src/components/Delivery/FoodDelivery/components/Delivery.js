@@ -20,7 +20,7 @@ function Delivery(props) {
   const [dishCount, setDishCount] = useState({})
   // 訂餐
   const [dishList, setDishList] = useState([])
-  console.log(dishList)
+  // console.log(dishList)
   const [dishes, setDishes] = useState([])
   const [address, setAddress] = useState({
     city: '桃園市',
@@ -33,6 +33,8 @@ function Delivery(props) {
   const [addFee, setFee] = useState('')
   const [subTotal, setSubTotal] = useState([])
   const [name, setName] = useState([])
+
+  //彈出
 
   const getDishes = () => {
     $.ajax({
@@ -272,6 +274,7 @@ function Delivery(props) {
                   icon: 'warning',
                   title: '確認有無遺漏訂單選項',
                   text: '包含: 地址、日期、時間以及定一份餐點~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />
@@ -286,6 +289,7 @@ function Delivery(props) {
                   icon: 'warning',
                   title: '確認有無登入',
                   text: '請至上方登入~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />

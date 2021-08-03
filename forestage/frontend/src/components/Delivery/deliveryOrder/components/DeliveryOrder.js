@@ -45,6 +45,7 @@ function DeliveryOrder(props) {
   }
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     $.ajax({
       url: `http://localhost:3001/delivery/coupon/${memberId}`,
       // url: 'http://localhost:3001/delivery/coupon',
@@ -220,8 +221,10 @@ function DeliveryOrder(props) {
                         Swal.fire({
                           icon: 'success',
                           title: '外送訂購成功',
+                          html: '<h5>請至信箱收取您的訂位確認信</h5><div style="display:flex; justify-content:center"><a href="/member/delivery" style="background:#f5b54d; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">檢視訂單</a><a href="/home" style="background:#97bc78; width:120px; height:40px; color:white; display:block; line-height:40px; border-radius:5px; text-decoration: none; margin:5px;">回首頁<a/></div>',
                           showConfirmButton: false,
-                          timer: 1000,
+                          allowEscapeKey: false,
+                          allowOutsideClick: false,
                         }).then(change)
                       }
                     }

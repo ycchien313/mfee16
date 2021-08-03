@@ -187,6 +187,7 @@
     align-items: center;
     font-size: 1.2vw;
     padding: 0;
+    color:#333333;
   }
   @media screen and (max-width: 768px) {
     .food {
@@ -266,6 +267,10 @@
         display: flex;
         align-self: center;
         height: 8.64vh;
+
+        ul {
+          justify-content: left;
+        }
       }
     }
   }
@@ -418,6 +423,7 @@
 
   .category-innertext {
     padding: 10px 0 0 10px;
+    color:#333333;
   }
 
   @media screen and (max-width: 768px) {
@@ -463,6 +469,7 @@
       position: relative !important;
       padding-left: 10px !important;
       z-index: 5;
+      color:#333333;
     }
   }
 
@@ -496,7 +503,7 @@
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/menuRWD\ .svg');
       background-repeat: no-repeat;
       background-position: center right;
-      height: calc(10vw + 30px);
+      height: calc(10vw + 100px);
     }
   }
 

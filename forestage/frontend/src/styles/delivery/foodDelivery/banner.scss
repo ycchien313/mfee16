@@ -296,6 +296,7 @@
 
     p {
       color: $secondary-green-dark;
+      justify-content: space-around;
     }
   }
 
@@ -316,7 +317,8 @@
     }
 
     .add-r {
-      width: 240px;
+      // width: 240px;
+      width: 100%;
     }
   }
 

@@ -271,10 +271,6 @@ router.get(
         const memberId = req.params.memberId;
         const reservationId = req.params.reservationId;
 
-        
-        console.log(memberId)
-        console.log(deliveryId)
-
         // 執行 SQL，查詢會員的「詳細」訂位資料
         const sql =
             'SELECT `member_id`, RES.`reservation_id`, `status`, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +

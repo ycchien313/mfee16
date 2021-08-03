@@ -15,6 +15,7 @@ function CheckoutPage(props) {
   const [dishList, setDishList] = useState([])
   const [checkList, setCheckList] = useState({})
   const [didMount, setDidMount] = useState(false)
+  const [memberId, setMemberId] = useState(0)
   const [insertResData, setInsertResData] = useState({
     date: '',
     seat_id: 0,
@@ -28,9 +29,30 @@ function CheckoutPage(props) {
     status: '未完成',
   })
 
-
   const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))
-
+  // 載入時取得會員id
+  // // 取得memberid，存入memberId狀態
+  function getMemberIdAndResInfo() {
+    let authToken = window.localStorage.getItem('authToken')
+    // console.log('auth', authToken)
+    axios
+      .get('http://localhost:3001/auth/me', {
+        method: 'get',
+        headers: {
+          authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then((result) => {
+        setMemberId(result.data.memberId)
+        let newInsertResData = { ...insertResData }
+        newInsertResData.date = checkList.chosenDate
+        newInsertResData.seat_id = checkList.seatId
+        newInsertResData.attendance = checkList.attendance
+        newInsertResData.total = checkList.total
+        newInsertResData.member_id = result.data.memberId
+        setInsertResData(newInsertResData)
+      })
+  }
   useEffect(() => {
     setDidMount(true)
 
@@ -46,18 +68,12 @@ function CheckoutPage(props) {
       setInsertResData(
         JSON.parse(window.sessionStorage.getItem('insertResData'))
       )
-    // console.log(props.location.state.pathname)
   }, [])
 
   useEffect(() => {
     // 將訂位頁資料帶入insert物件中，使用didMount避免帶入空的coupon id與備註
     if (didMount) {
-      let newInsertResData = { ...insertResData }
-      newInsertResData.date = checkList.chosenDate
-      newInsertResData.seat_id = checkList.seatId
-      newInsertResData.attendance = checkList.attendance
-      newInsertResData.total = checkList.total
-      setInsertResData(newInsertResData)
+      getMemberIdAndResInfo()
     }
   }, [checkList])
 
@@ -78,6 +94,8 @@ function CheckoutPage(props) {
         checkList={checkList}
         insertResData={insertResData}
         setInsertResData={setInsertResData}
+        memberId={memberId}
+        setMemberId={setMemberId}
       />
       {/* <Footer /> */}
     </>

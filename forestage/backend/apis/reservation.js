@@ -45,10 +45,16 @@ router.get('/checkout/memberInfo', async(req, res)=>{
 
 router.post('/checkout/send', async(req, res)=>{
     let insertResData = req.body.insertResData
-    // console.log(insertResData)
+    console.log("insertResData:",insertResData)
     let resDate = insertResData.date
+    console.log("resDate:",resDate)
+
     let resTotal = insertResData.total
+    console.log("resTotal:",resTotal)
+
     let resAttendance = insertResData.attendance
+    console.log("resAttendance:",resAttendance)
+
     insertResData = Object.values(insertResData)
     let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
     let reservation = await db.connection.queryAsync(insertReservationSql,[insertResData])
@@ -216,7 +222,7 @@ router.post('/checkout/send', async(req, res)=>{
     };
     
     mg.messages().send(mailBody, function (error, body) {
-	// console.log(body);
+	console.log(body);
 });
 
 })

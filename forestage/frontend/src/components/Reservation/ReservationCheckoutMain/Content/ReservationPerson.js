@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
 
 function ReservationPerson(props) {
-  const { insertResData, setInsertResData, dishList } = props
-  const [memberId, setMemberId] = useState(0)
+  const { insertResData, setInsertResData, dishList, memberId, setMemberId } = props
+  // const [memberId, setMemberId] = useState(0)
   function insertReservation() {
     axios({
       method: 'post',
@@ -96,9 +96,9 @@ function ReservationPerson(props) {
     }
   }
 
-  useEffect(() => {
-    getMemberId()
-  }, [])
+  // useLayoutEffect(() => {
+  //   getMemberId()
+  // })
   return (
     <>
       <div className="res-person">

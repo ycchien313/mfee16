@@ -5,7 +5,6 @@ import Hero from './ReservationCheckoutMain/Hero'
 import Main from './ReservationCheckoutMain/'
 import '../../styles/reservation/res_checkout/res_check.scss'
 import axios from 'axios'
-import { get } from 'jquery'
 
 // import Footer from '../../components/Footer'
 
@@ -55,6 +54,7 @@ function CheckoutPage(props) {
   }
   useEffect(() => {
     setDidMount(true)
+    window.scrollTo(0, 0)
 
     // 如果沒有從訂位頁面得到props.location，則導回訂位頁面
     if (props.location.state !== undefined) {

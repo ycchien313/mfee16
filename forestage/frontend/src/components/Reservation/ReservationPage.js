@@ -13,6 +13,7 @@ function ReservationPage(props) {
 
   // 視窗關閉時移除sessionStorage
   useEffect(() => {
+    window.scrollTo(0, 0)
     window.addEventListener(
       'beforeunload',
       function (event) {

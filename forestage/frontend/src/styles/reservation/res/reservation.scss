@@ -1175,6 +1175,44 @@
         width: 100%;
       }
     }
+    @media screen and (max-width: 1200px) and (min-width:768px){
+      #food-#{$i}.illu-image.active {
+        width: 13vw;
+        height: 13vw;
+        position: absolute;
+        top: 30vw;
+        transition: 1s;
+        z-index: 0;
+
+        @if $i==1 {
+          left: -$i * 10 + vw;
+        } @else {
+          left: ($i - 2) * 10 + vw;
+        }
+      }
+
+      #food-#{$i}.illu-image {
+        top: 15vw;
+        transition: 1s;
+        z-index: 0;
+        position: absolute;
+        width: 0;
+        height: 0;
+        @if $i % 3 == 0 {
+          left: 48vw;
+        }
+        @if $i % 3 == 1 {
+          left: 10vw;
+        }
+        @if $i % 3 == 2 {
+          left: 29vw;
+        }
+      }
+
+      #food-#{$i}.illu-image img {
+        width: 100%;
+      }
+    }
   }
 
   /* 滑鼠滾輪動畫 */

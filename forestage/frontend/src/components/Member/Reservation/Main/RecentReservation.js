@@ -8,13 +8,22 @@ function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [didMount, setDidMount] = useState(true)
-  const [show, setShow] = useState(false)
   const [orders, setOrders] = useState([])
   const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
+  const handleClose = () => {
+    setBootstrapCdnLoad(false)
+    setShow(false)
+  }
+  const handleShow = () => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      setShow(true)
+    }, 10)
+  }
 
   // 取得訂位資料
   const fetchRecentReservation = async () => {
@@ -95,14 +104,20 @@ function RecentReservation(props) {
     </>
   )
 
+  const bootstrapModalCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapModalCdn}
+
       <RecentReservationDetailModal
         show={show}
         handleClose={handleClose}

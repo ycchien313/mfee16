@@ -386,6 +386,7 @@ router.post('/signup', upload.none(), async (req, res) => {
                     status: '成功',
                     result: '成功',
                     msg: '註冊成功',
+                    memberId: memberId,
                     token: token,
                 };
             }
@@ -400,28 +401,5 @@ router.post('/signup', upload.none(), async (req, res) => {
         res.status(500).json(resData);
     }
 });
-
-router.get('/coupon', async (req, res) => {
-    let getMemberCouponSql =
-        'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=1 AND DATEDIFF(c.deadline, CURDATE())>=0';
-    let memberCoupon = await db.connection.queryAsync(getMemberCouponSql, [
-        req.query.memberId,
-    ]);
-    console.log(req.query.memberId);
-    res.send(memberCoupon);
-});
-
-router.get('/coupon/used', async (req, res) => {
-    let getMemberCouponSql =
-        'SELECT c.name, c.deadline, c.minimum_order_value, c.discount,c.coupon_id, mcm.mcm_id FROM member m JOIN member_coupon_mapping mcm ON m.member_id = ? AND m.member_id = mcm.member_id JOIN coupon c ON mcm.coupon_id = c.coupon_id WHERE mcm.valid=0 OR DATEDIFF(c.deadline, CURDATE())<0';
-    let memberCoupon = await db.connection.queryAsync(getMemberCouponSql, [
-        req.query.memberId,
-    ]);
-    console.log(req.query.memberId);
-    res.send(memberCoupon);
-});
-
-/********** 登出 **********/
-// sign out
 
 module.exports = router;

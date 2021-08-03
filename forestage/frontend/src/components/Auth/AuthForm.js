@@ -167,8 +167,6 @@ function AuthForm(props) {
           const data = response.data
           const result = data.result
           const msg = data.msg
-          const memberId = data.data.memberId
-          const token = data.token
 
           // 註冊失敗
           if (result === '失敗') {
@@ -180,6 +178,8 @@ function AuthForm(props) {
           }
 
           // 註冊成功
+          const memberId = data.memberId
+          const token = data.token
           // console.log('註冊成功，token', token)
           // 設定 token 給 localStorage
           setAuthToken(token)
@@ -334,7 +334,7 @@ function AuthForm(props) {
               type="tel"
               value={signupFields.mobile}
               placeholder="請輸入手機號碼 ex. 0911222333"
-              pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+              pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
               required
               title="請輸入正確的手機號碼"
               onChange={(e) => {

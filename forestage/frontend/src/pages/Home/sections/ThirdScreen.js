@@ -21,10 +21,16 @@ function ThirdScreen(props) {
   const [singerName, setSingerName] = useState()
   const [singerInfo, setSingerInfo] = useState()
   const [singerImg, setSingerImg] = useState()
-
+  const [mobileSingerId, setMobileSingerId] = useState([])
+  const [mobileTagId, setMobileTagId] = useState([])
+  useState(() => {
+    let singerId = [10, 11, 12, 13, 14, 15]
+    let tagId = [5, 3, 4, 6, 2, 1]
+    setMobileSingerId(singerId)
+    setMobileTagId(tagId)
+  }, [])
   useEffect(() => {
     //获取拖拽实验对象
-
     let el = document.getElementById('drag-target')
     //在该对象上绑定鼠标点击事件
     el.onmousedown = (e) => {
@@ -224,6 +230,8 @@ function ThirdScreen(props) {
             })}
           </ul>
         </div>
+        <button className="mobile-singer-next">click</button>
+        <button className="mobile-singer-before">click</button>
         <button className="button-orange seeMore">
           <h4 className="btn-innerText">撰寫評論</h4>
           <i className="fas fa-arrow-circle-right"></i>

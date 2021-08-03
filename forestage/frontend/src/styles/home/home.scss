@@ -863,6 +863,26 @@ button {
     align-self: center;
     /* margin-right: 10%; */
   }
+  .mobile-singer-next,
+  .mobile-singer-before {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .mobile-singer-next {
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 50%;
+    }
+    .mobile-singer-before {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 50%;
+    }
+  }
   /* thirdScreen end */
 
   /* fourthScreen start */

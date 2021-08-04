@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import $ from 'jquery'
+import moment from 'moment'
 
 function Map(props) {
-  const { address, setAddress, setFee } = props
+  const { address, setAddress, setFee, date, setDate, time, setTime } = props
 
   const [min, setMin] = useState('')
 
@@ -26,7 +27,7 @@ function Map(props) {
       <div className="top-wave">
         <h1 className="h1 title">外送頁面</h1>
         <div className="mobile-takeout">
-          <div className="takeoutDiv">
+          <div className="mobile-takeoutDiv">
             <h3>請輸入您要外送的地址</h3>
             <div className="Area">
               <input
@@ -55,6 +56,34 @@ function Map(props) {
               }}
               // placeholder
             />
+            <div className="order-time">
+              <div className="date">
+                <p className="p">日期</p>
+                <input
+                  type="date"
+                  defaultValue={date}
+                  className="input"
+                  min={moment().format('YYYY-MM-DD')}
+                  // min="2021-07-19"
+                  onChange={(event) => {
+                    setDate(event.target.value)
+                  }}
+                />
+              </div>
+              <div className="time">
+                <p className="p">時間</p>
+                <input
+                  type="time"
+                  defaultValue={time}
+                  className="input"
+                  min={moment().format('hh:MM')}
+                  // min="10:00:00"
+                  onChange={(event) => {
+                    setTime(event.target.value)
+                  }}
+                />
+              </div>
+            </div>
             <div className="Shipping">
               {min ? (
                 <p>免運門檻: ${min}&nbsp;&nbsp;</p>
@@ -77,11 +106,6 @@ function Map(props) {
           src={
             'http://localhost:3000/images/delivery/FoodDelivery/YellowElfin.png'
           }
-          alt=""
-        />
-        <img
-          className="path"
-          src={'http://localhost:3000/images/delivery/FoodDelivery/Path .png'}
           alt=""
         />
       </div>
@@ -627,13 +651,6 @@ function Map(props) {
         </div>
       </div>
       <div className="right-div">
-        <img
-          className="pinkElfin"
-          src={
-            'http://localhost:3000/images/delivery/FoodDelivery/PinkElfin.png'
-          }
-          alt=""
-        />
         <div className="takeout">
           <div className="takeoutDiv">
             <h3>請輸入您要外送的地址</h3>
@@ -664,6 +681,34 @@ function Map(props) {
               }}
               // placeholder
             />
+            <div className="order-time">
+              <div className="date">
+                <p className="p">日期</p>
+                <input
+                  type="date"
+                  defaultValue={date}
+                  className="input"
+                  min={moment().format('YYYY-MM-DD')}
+                  // min="2021-07-19"
+                  onChange={(event) => {
+                    setDate(event.target.value)
+                  }}
+                />
+              </div>
+              <div className="time">
+                <p className="p">時間</p>
+                <input
+                  type="time"
+                  defaultValue={time}
+                  className="input"
+                  min={moment().format('hh:MM')}
+                  // min="10:00:00"
+                  onChange={(event) => {
+                    setTime(event.target.value)
+                  }}
+                />
+              </div>
+            </div>
             <div className="Shipping">
               {min ? (
                 <p>免運門檻: ${min}&nbsp;&nbsp;</p>
@@ -674,6 +719,9 @@ function Map(props) {
             </div>
           </div>
         </div>
+      </div>
+      <div className="slogan">
+        <div className="bottom-wave"></div>
       </div>
     </>
   )

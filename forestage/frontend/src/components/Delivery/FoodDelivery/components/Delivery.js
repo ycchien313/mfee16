@@ -3,13 +3,16 @@ import MainMealBox from '../components/MainMealBox'
 import SideBox from '../components/SideBox'
 import DessertBox from '../components/DessertBox'
 import Aside from './Aside'
-import Takeout from './Takeout'
 import Map from './Map'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
+// import { Modal } from 'react-bootstrap'
+import AsideMobile from './AsideMobile'
 
 function Delivery(props) {
+  const [show, setShow] = useState(false)
+
   const [time, setTime] = useState('')
   const [date, setDate] = useState('')
   const [fulltime, setFulltime] = useState('')
@@ -113,8 +116,10 @@ function Delivery(props) {
     <>
       <div className="FoodDelivery">
         <div className="hero-section">
-          <Map address={address} setAddress={setAddress} setFee={setFee} />
-          <Takeout
+          <Map
+            address={address}
+            setAddress={setAddress}
+            setFee={setFee}
             time={time}
             setTime={setTime}
             date={date}
@@ -124,7 +129,19 @@ function Delivery(props) {
         <h2 className="chose">選擇餐點</h2>
         <div className="order">
           <div className="mobile-order-out">
-            <div className="mobile-order"></div>
+            <AsideMobile
+              show={show}
+              dishes={dishes}
+              dishList={dishList}
+              addFee={addFee}
+            />
+
+            <div
+              className="mobile-order"
+              onClick={() => {
+                setShow(!show)
+              }}
+            ></div>
           </div>
           <div className="order-left">
             <div className="MainMeal-group">
@@ -268,6 +285,7 @@ function Delivery(props) {
               type="button"
               defaultValue="確認訂單"
               className="OrderGet mobile-order-get"
+              // className="pink-guide-button mobile-order-get"
               field=""
               onClick={function () {
                 Swal.fire({
@@ -282,6 +300,7 @@ function Delivery(props) {
             <input
               type="button"
               defaultValue="確認登入"
+              // className="pink-guide-button mobile-order-get"
               className="OrderGet mobile-order-get"
               field=""
               onClick={function () {
@@ -312,6 +331,7 @@ function Delivery(props) {
               <input
                 type="button"
                 defaultValue="送出訂單"
+                // className="pink-guide-button mobile-order-get"
                 className="OrderGet mobile-order-get"
                 field=""
               />

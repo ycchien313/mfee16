@@ -1,7 +1,7 @@
-@import '../../common/normalize.scss';
-@import '../../common/global.scss';
-
 .FoodDelivery {
+  @import '../../common/normalize.scss';
+  @import '../../common/global.scss';
+
   .hero-section {
     background-image: url('http://localhost:3000/images/delivery/FoodDelivery/WallPaper.png');
     background-size: cover;
@@ -49,31 +49,6 @@
     width: 100%;
     top: 100vh;
     position: absolute;
-
-    .order-time {
-      top: 1vh;
-      left: 70vw;
-      position: absolute;
-      padding: 0vh;
-
-      p {
-        font-size: 1.3vw;
-        color: $primary-lightbrown;
-      }
-
-      h3 {
-        margin: 0;
-        padding: 0.2vw;
-        color: $secondary-green-dark;
-      }
-
-      .input {
-        width: 18vw;
-        height: 2.7vw;
-        border: transparent;
-        // cursor: pointer;
-      }
-    }
 
     .bottom-wave {
       width: 100%;
@@ -224,9 +199,9 @@
 
     .takeout {
       width: 320px;
-      height: 240px;
+      height: 340px;
       position: absolute;
-      top: 30vh;
+      top: 20vh;
       left: 62vw;
       border-radius: 50px;
       background-clip: padding-box, border-box;
@@ -254,8 +229,8 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      height: 35vh;
-      top: -45vh;
+      height: 45vh;
+      top: -55vh;
       border-radius: 50px;
       background-clip: padding-box, border-box;
       background-origin: padding-box, border-box;
@@ -271,6 +246,48 @@
     .takeout {
       display: none !important;
     }
+
+    .mobile-takeoutDiv {
+      h3 {
+        padding: 0;
+        margin: 15px 5px;
+        color: $secondary-green-dark;
+      }
+
+      position: absolute;
+      padding: 0 0 0 40px;
+      margin: auto 0;
+
+      .order-time {
+        p {
+          font-size: 1.3vw;
+          color: $primary-lightbrown;
+          font-family: unset;
+        }
+
+        h3 {
+          margin: 0;
+          padding: 0.2vw;
+          color: $secondary-green-dark;
+        }
+
+        .input {
+          // width: 18vw;
+          width: 200px;
+          // height: 2.7vw;
+          border: transparent;
+          // font-family: $zh-tw-noto;
+        }
+      }
+      .add {
+        width: 150px;
+      }
+
+      .add-r {
+        // width: 240px;
+        width: 100%;
+      }
+    }
   }
 
   .takeoutDiv {
@@ -283,6 +300,28 @@
     position: absolute;
     padding: 30px 0 0 40px;
     margin: auto 0;
+
+    .order-time {
+      p {
+        font-size: 1.3vw;
+        color: $primary-lightbrown;
+        font-family: unset;
+      }
+
+      h3 {
+        margin: 0;
+        padding: 0.2vw;
+        color: $secondary-green-dark;
+      }
+
+      .input {
+        // width: 18vw;
+        width: 200px;
+        // height: 2.7vw;
+        border: transparent;
+        // font-family: $zh-tw-noto;
+      }
+    }
   }
 
   .Area {
@@ -355,6 +394,8 @@
 
       p {
         padding-top: 0px;
+        font-family: unset;
+        // font-family: Noto Sans;
       }
     }
 
@@ -416,6 +457,7 @@
     .h1.title {
       position: relative;
       top: -420px;
+      // top: -90vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -451,8 +493,8 @@
     cursor: pointer;
 
     &:hover {
-      fill:#f1bd69; 
-      // fill: url(#myGradient); 
+      fill: #f1bd69;
+      // fill: url(#myGradient);
       transition: 0.5s;
     }
   }
@@ -486,5 +528,5 @@
 
 .mapFee.active {
   fill: #f5b54d;
-  // fill: url(#myGradient); 
+  // fill: url(#myGradient);
 }

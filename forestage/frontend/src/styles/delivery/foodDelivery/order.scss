@@ -1,7 +1,7 @@
-@import '../../common/normalize.scss';
-@import '../../common/global.scss';
-
 .FoodDelivery {
+  @import '../../common/normalize.scss';
+  @import '../../common/global.scss';
+
   .order {
     display: flex;
   }
@@ -13,11 +13,12 @@
 
   .date {
     display: flex;
-    padding: 18px 0px 18px 0px;
+    padding: 10px 0px 10px 0px;
 
     p {
       margin: 0;
       padding: 10px 12px 0px 0px;
+      color: $primary-lightbrown;
     }
   }
 
@@ -27,6 +28,7 @@
     p {
       margin: 0;
       padding: 10px 12px 0px 0px;
+      color: $primary-lightbrown;
     }
   }
 
@@ -187,7 +189,7 @@
     align-items: center;
     font-size: 1.2vw;
     padding: 0;
-    color:#333333;
+    color: #333333;
   }
   @media screen and (max-width: 768px) {
     .food {
@@ -207,13 +209,13 @@
     cursor: pointer;
     width: 11.5vw;
     height: 8vh;
-    border: 1px solid transparent;
+    border: none;
     border-radius: 25px;
     color: #fff;
     font-size: 1.5vw;
     background: $accent-red;
     padding: 10px 21px 13px 0px;
-    filter: drop-shadow(0px 3px 6px rgba(50, 50, 50, 0.5));
+    box-shadow: $box-shadow;
     background-image: url('http://localhost:3000/images/delivery/FoodDelivery/arrow-circle-right-solid.png');
     background-repeat: no-repeat;
     background-position: center right;
@@ -221,6 +223,12 @@
     background-size: contain;
     top: 30vw;
     left: 2vw;
+    &:hover {
+      box-shadow: none;
+    }
+    &:active {
+      background-color: darken($accent-red, 10%);
+    }
   }
 
   /* --- */
@@ -423,7 +431,7 @@
 
   .category-innertext {
     padding: 10px 0 0 10px;
-    color:#333333;
+    color: #333333;
   }
 
   @media screen and (max-width: 768px) {
@@ -469,14 +477,15 @@
       position: relative !important;
       padding-left: 10px !important;
       z-index: 5;
-      color:#333333;
+      color: #333333;
     }
   }
 
   /*  */
 
   .mobile-order-get,
-  .mobile-order {
+  .mobile-order,
+  .menuMobile {
     display: none;
   }
 
@@ -502,8 +511,42 @@
       display: block;
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/menuRWD\ .svg');
       background-repeat: no-repeat;
-      background-position: center right;
+      background-position: center left;
       height: calc(10vw + 100px);
+      //
+      width: 80px;
+    }
+    .Mobile-div {
+      width: 35vw;
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+    .menuMobile .menu {
+      top: 15vw;
+      left: 25.35vw;
+    }
+    .menuMobile .content {
+
+      ul li {
+        font-size: 8px;
+        justify-content: center;
+      }
+
+      .title {
+        display: flex;
+        align-self: center;
+        height: 5vh;
+        justify-content: center;
+
+        ul {
+          justify-content: center;
+        }
+      }
+    }
+
+    .menuMobile img {
+      height: 80vw;
+      width: 50vw;
     }
   }
 
@@ -522,4 +565,5 @@
       text-decoration: none;
     }
   }
+  // 小按鈕
 }

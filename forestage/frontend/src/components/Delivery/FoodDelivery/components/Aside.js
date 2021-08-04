@@ -6,7 +6,6 @@ function Aside(props) {
   const {
     dishCount,
     dishes,
-    setDishes,
     dishList,
     setDishList,
     addFee,
@@ -110,6 +109,7 @@ function Aside(props) {
               type="button"
               defaultValue="確認訂單"
               className="OrderGet"
+              // className="pink-guide-button"
               field=""
               onClick={function () {
                 Swal.fire({
@@ -125,6 +125,7 @@ function Aside(props) {
               type="button"
               defaultValue="確認登入"
               className="OrderGet"
+              // className="pink-guide-button"
               field=""
               onClick={function () {
                 Swal.fire({
@@ -155,6 +156,7 @@ function Aside(props) {
                 type="button"
                 defaultValue="送出訂單"
                 className="OrderGet"
+                // className="pink-guide-button"
                 field=""
               />
             </Link>

@@ -101,20 +101,22 @@
     align-items: center;
 } */
 // .outaside{
-//   // position: sticky;
-//   // z-index: 10;
+//   position: sticky;
+//   z-index: 10;
 //   // height: 500px;
-//   // top: 100vw;
+//   top: 100vw;
 // }
   .aside {
     width: 290px;
+    // height: 500px;
     /* min-height: 30%; */
     border-radius: 30px;
     background: rgba(255, 255, 255, 0.8);
-    /* position: fixed; */
+    // position: sticky;
     position: absolute;
+    float:left;
     z-index: 1;
-    top: 75%;
+    top: 70%;
     left: 4%;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
     color: $primary-lightbrown;
@@ -330,9 +332,19 @@
     }
   }
   @media screen and (max-width: 500px) {
+    // .starsize{
+    //   width: 30px;
+    //   height: 30px;
+    // }
+    // .starsize div{
+    //   width: 100%;
+    //   height: 100%;
+    // }
     .star {
+      // width: 20px;
+      // height: 20;
       top: 2vw;
-      left: 70vw;
+      left: 60vw;
     }
     .starss {
       width: 20vw;
@@ -341,6 +353,10 @@
       /* left: 0; */
       margin: auto 6vw;
     }
+    // .starsize div{
+    //   width: 10vw;
+    //   height: 10vw;
+    // }
     // .newsdiv {
     //   /* height: 300vw */
     //   /* margin: auto 30px; */
@@ -553,7 +569,9 @@
       width: 330px;
       height: 58px;
       border-radius: 4px;
-      margin: auto auto 18px auto;
+      margin-bottom: 18px;
+      position: relative;
+      right: 10px;
     }
     .commentbox p {
       // max-width: 1000px;
@@ -568,6 +586,7 @@
     .commentbox h4 {
       line-height: 14px;
       margin: 0px;
+      // width: 10px;
     }
     .article span {
       line-height: 20px;
@@ -578,7 +597,7 @@
       height: 55px;
     }
     .article h4 {
-      width: 200px;
+      width: 170px;
     }
   }
 
@@ -718,6 +737,7 @@
     text-indent: -999em;
     width: 110px;
     margin: 0 auto;
+    // object-fit: cover;
     
     &-rating {
       background: url("http://127.0.0.1:3000/images/comment/star.png") repeat-x;
@@ -726,9 +746,18 @@
       height: 21px;
       display:block;
       color: $secondary-lightyellow;
+      // object-fit: cover;
       // width: 80%;
     }
     
   }
-  
+  .fa-arrow-circle-up{
+    position: fixed;
+    font-size: 50px;
+    color: $primary-lightbrown;
+    right: 2vw;
+    bottom: 2vw;
+    cursor: pointer;
+    
+  }
 }

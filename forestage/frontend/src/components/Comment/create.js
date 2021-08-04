@@ -6,7 +6,18 @@ import $ from 'jquery'
 import axios from 'axios'
 // import Test from './test'
 function Create(props) {
-  const { boom, setBoom, tag, selectTag, setSelectTag, getTagName } = props
+  const {
+    boom,
+    setBoom,
+    tag,
+    selectTag,
+    setSelectTag,
+    getTagName,
+    article,
+    setArticle,
+    asideTag,
+    // articleTag
+  } = props
   // const [content, setContent] = useState('123')
   // const [star, setStar] = useState(0)
   const [insertArticle, setInsertArticle] = useState({
@@ -19,7 +30,8 @@ function Create(props) {
     member_id: 0,
     tag_id: 0,
   })
-  // function alignModal() {
+
+    // function alignModal() {
   //   var createeditor = $(this).find('.createeditor')
   //   createeditor.css(
   //     'margin-top',
@@ -36,6 +48,9 @@ function Create(props) {
       data: {
         insertArticle: insertArticle,
       },
+    }).then(()=>{
+      getAsideArticle()
+    //   console.log('bbbbb')
     })
   }
   function setArticleTag(tagId) {
@@ -81,6 +96,25 @@ function Create(props) {
         .removeClass('active')
     })
   }, [])
+  
+  useEffect(() => {
+    console.log('boom')
+    console.log('aaaaaa')
+    getAsideArticle()
+    // return () => {
+    //   // setBoom(false)
+    //   // getAsideArticle()
+    // }
+  }, [asideTag])
+  function getAsideArticle() {
+    console.log(insertArticle.tag_id, '122222')
+    axios
+      .get(`http://127.0.0.1:3001/comment/${insertArticle.tag_id}`)
+      .then((result) => {
+        setArticle(result.data)
+        //   console.log(result.data)
+      })
+  }
   // console.log(boom)
   // console.log(selectTag)
   // 點擊標籤要active沒成功
@@ -107,6 +141,7 @@ function Create(props) {
         <div class="ineditor">
           <h4>文章標題：</h4>
           <input
+            placeholder="請輸入您的文章標題"
             class="titleee"
             type="text"
             value={insertArticle.title}
@@ -116,6 +151,7 @@ function Create(props) {
           ></input>
           <h4>匿名名稱：</h4>
           <input
+            placeholder="請輸入您的匿名名稱"
             class="titleee"
             type="text"
             value={insertArticle.author}
@@ -371,114 +407,64 @@ function Create(props) {
               </div>
             </div>
           </div>
-
-          <h4 class="point">推薦指數：</h4>
-          {/* <Test
+          <div class="rwdpointh4">
+            <h4 class="">推薦指數：</h4>
+            {/* <Test
             star={}
           /> */}
-          <div class="starss" id="stars">
-            <i
-              id="star1"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(1)
-              }}
-            ></i>
-            <i
-              id="star2"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(2)
-              }}
-            ></i>
-            <i
-              id="star3"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(3)
-              }}
-            ></i>
-            <i
-              id="star4"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(4)
-              }}
-            ></i>
-            <i
-              id="star5"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(5)
-              }}
-            ></i>
-            {/* <img
-              id="star1"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(1)
-              }}
-            ></img> */}
-            {/* <img
-              id="star2"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(2)
-              }}
-            ></img>
-            <img
-              id="star3"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(3)
-              }}
-            ></img>
-            <img
-              id="star4"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(4)
-              }}
-            ></img>
-            <img
-              id="star5"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(5)
-              }}
-            ></img> */}
+            <div class="starss" id="stars">
+              <i
+                id="star1"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(1)
+                }}
+              ></i>
+              <i
+                id="star2"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(2)
+                }}
+              ></i>
+              <i
+                id="star3"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(3)
+                }}
+              ></i>
+              <i
+                id="star4"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(4)
+                }}
+              ></i>
+              <i
+                id="star5"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(5)
+                }}
+              ></i>
+            </div>
           </div>
-          {/* <div id="comment" class="left">
-            0
-          </div> */}
           <h4>文章內容：</h4>
-        </div>
-
-        {/* 所見及所得 */}
         <textarea
           class="draft"
           value={insertArticle.content}
           onChange={(e) => {
             getContent(e)
           }}
-        >
-          {/* <Draft
-            insertArticle={insertArticle}
-            setInsertArticle={setInsertArticle}
-            content={content}
-            setContent={setContent}
-            // onChange={(e) => {
-            //   getContent(e)
-            // }}
-          /> */}
-        </textarea>
-
-        {/* <所見及所得 結束 */}
+        ></textarea>
+        <h4>上傳圖片：</h4>
+        <input
+          placeholder="請輸入您的文章標題"
+          class="titleee"
+          type="file"
+        ></input>
+        </div>
         <div class="buttongroup">
           <button class="green-guide-button buttontext2">
             預覽
@@ -494,6 +480,8 @@ function Create(props) {
               alt=""
               onClick={() => {
                 insertArticlefn()
+                setBoom(false)
+                
               }}
             ></img>
           </button>

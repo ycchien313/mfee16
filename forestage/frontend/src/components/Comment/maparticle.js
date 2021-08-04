@@ -46,7 +46,7 @@ function MapArticle(props) {
     setLikeCount(likeCount - 1)
   }
 
-  console.log(likeCount)
+  // console.log(likeCount)
 
   useEffect(() => {
     setLikeCount(article1.likes)
@@ -73,6 +73,8 @@ function MapArticle(props) {
           <p>{article1.content}</p>
         </div>
         <div class="star">
+        <div class="starsize">
+
           <div class="star-ratings-sprite">
             <span
               class="star-ratings-sprite-rating"
@@ -81,6 +83,7 @@ function MapArticle(props) {
               }}
             ></span>
           </div>
+        </div>
 
           <div class="share">
             <img

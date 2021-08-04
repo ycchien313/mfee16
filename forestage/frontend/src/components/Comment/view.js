@@ -132,7 +132,7 @@ function View(props) {
                     ></span>
                   </div>
                 </div>
-                <div class="time">{boomArticle.create_time}</div>
+                <div class="time0">{boomArticle.create_time}</div>
               </div>
             </div>
             <p class="articlep">{boomArticle.content}</p>

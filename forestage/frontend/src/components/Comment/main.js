@@ -128,8 +128,8 @@ function Main(props) {
     setSelectTag(16)
     // getLikes(articleLikesId)
   }, [])
-  let url = ``
   useEffect(() => {
+    let url = ``
     setDidmount(true)
     // console.log(tag)
     tag.forEach((v) => {
@@ -150,11 +150,18 @@ function Main(props) {
     }
   }, [selectTag])
   function getTagArticle() {
+    let url = `http://localhost:3001/comment/${selectTag}`
     axios.get(url).then((result) => {
       setArticle(result.data)
       // console.log(result.data)
     })
   }
+  useEffect(() => {
+    getTagArticle()
+    // console.log("123")
+    // window.addEventListener
+    // getAsideArticle()
+  }, [boom])
   // //取得按讚數
   // function getLikes(articleId) {
   //   axios
@@ -231,7 +238,7 @@ function Main(props) {
   // }, [selectTag])
   return (
     <>
-      <div class="ou">
+      <div class="outaside">
         <aside class="aside">
           <div class="asidesing clean">
             <img
@@ -629,12 +636,15 @@ function Main(props) {
       </div>
       {boom && (
         <Create
+          asideTag={asideTag}
           boom={boom}
           setBoom={setBoom}
           tag={tag}
           selectTag={selectTag}
           setSelectTag={setSelectTag}
           getTagName={getTagName}
+          article={article}
+          setArticle={setArticle}
         />
       )}
       {boom2 && (
@@ -655,6 +665,13 @@ function Main(props) {
           // minusLikes={minusLikes}
         />
       )}
+      <i
+        class="fas fa-arrow-circle-up"
+        onClick={() => {
+          window.scrollTo(0, 500)
+          
+        }}
+      ></i>
     </>
   )
 }

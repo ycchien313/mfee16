@@ -6,6 +6,10 @@
 //     width: 100vw;
 //     height: 100%;
 // }
+
+
+
+
 .view{
     height: 100%;
     position: sticky;
@@ -108,7 +112,7 @@
 }
 @media screen and (max-width:500px){
     .view{
-        padding: 10px;
+        padding: 20px;
     }
     .inview{
         /* opacity: 0.19; */
@@ -131,7 +135,8 @@
     .point{
         display: none;
     }
-    .time{
+   
+    .time0{
         display: none;
     }
     .time1{
@@ -141,10 +146,19 @@
     }
     .point1{
         width: 100px;
+        // height: 50px;
         display:inline;
     }
     .point1 img{
         width: 30%;
+    }
+    .close1{
+        top: -1.5vw;
+        right: -3vw;
+    }
+    .close1 img{
+        width: 70%;
+        height: 70%;
     }
 }
 .outpoint{
@@ -298,6 +312,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 3vw;
+    // margin-bottom: 3vw;
     }
     
     .sayimg2{
@@ -351,15 +366,19 @@
     .whatusay1{
         margin: 1vw;
     }
+    .time{
+        width: 250px;
+    }
     .rwdsay h4{
         margin-left: 5px;
+        // margin-right: 100px;
     }
     .whatusay1 p{
         width: 70vw;
-        height:14vw;
+        max-height:14vw;
         border-radius: 10px;
         -webkit-line-clamp: 3;
-        margin: 0;
+        margin: 10px;
     }
     .sharegroup{
         width: 20vw;
@@ -371,4 +390,42 @@
         width: 100%;
         margin-left: 3vw;
     }
+    .star-ratings-sprite {
+        background: url("http://127.0.0.1:3000/images/comment/star.png") repeat-x;
+        font-size: 0;
+        height: 21px;
+        line-height: 0;
+        overflow: hidden;
+        text-indent: -999em;
+        width: 110px;
+        margin: 5px 0px 5px 0px !important;
+        // object-fit: cover;
+        
+        &-rating {
+          background: url("http://127.0.0.1:3000/images/comment/star.png") repeat-x;
+          background-position: 0 100%;
+          float: left;
+          height: 21px;
+          display:block;
+          color: $secondary-lightyellow;
+          // object-fit: cover;
+          // width: 80%;
+        }
+        
+      }
+      .size{
+          margin-left: 10px;
+        // position: absolute;
+        line-height: 5vw;
+        font-size: 5vw !important;
+    }
+    .messagenum{
+top: 3vw;
+right: 3vw;
+    }
+    .likenum{
+top: 2.7vw;
+right: -5.5vw;
+    }
 }
+

@@ -29,6 +29,9 @@
 .titleee {
   width: 45vw;
 }
+.titleee::placeholder {
+  color: $primary-lightbrown;
+}
 // .ineditor {
 //   /* display: flex; */
 //   /* margin:auto; */
@@ -218,6 +221,12 @@ padding-bottom: 10px;
 .fa-star.active{
   color: $secondary-lightyellow;
 }
+.draft{
+  width: 100%;
+  min-height: 50vh;
+  border: 1px solid $primary-lightbrown;
+  color: $primary-lightbrown;
+}
 @media screen and (max-width: 1200px) {
   .point img {
     height: 2vw;
@@ -225,17 +234,34 @@ padding-bottom: 10px;
   }
 }
 @media screen and (max-width: 500px) {
-  .point img {
+  .point i {
     height: 3vw;
-    /* margin-top: 0.6vw; */
+    // /* margin-top: 0.6vw; */
   }
   .ineditor h4 {
     margin: 1vw 0 2vw 0;
   }
+  .rwdpointh4{
+    margin-top: 1vw;
+  }
+  .draft{
+    min-height: 20vh
+  }
+  .buttontext{
+    padding-bottom: 13px !important;
+  }
+  .buttontext img{
+width: 25%;
+// margin-bottom: 5px;
+// margin-left: 0px;
+  }
+  .buttontext2{
+    // padding-bottom: 13px !important;
+  }
+  .buttontext2 img{
+width: 25%;
+// margin-bottom: 5px;
+// margin-left: 0px;
+  }
 }
-.draft{
-  width: 100%;
-  min-height: 50vh;
-  border: 1px solid $primary-lightbrown;
-  color: $primary-lightbrown;
-}
+

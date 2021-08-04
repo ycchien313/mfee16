@@ -135,18 +135,16 @@ function AuthForm(props) {
           // 登入成功
           const memberId = data.data.memberId
           const token = data.token
-          // console.log('登入成功，token: ', token)
-
-          // 載入指示器及轉場
-          await loading()
-          await transition('登入成功')
-
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
           serverRequest.defaults.headers.common['authorization'] = token
           // 設定 memberId 給 react context (user state)
           setMember({ memberId: memberId })
+
+          // 載入指示器及轉場
+          await loading()
+          await transition('登入成功')
 
           // 首頁則強制更新
           props.location.pathname === '/' && history.go(0)
@@ -180,7 +178,6 @@ function AuthForm(props) {
           // 註冊成功
           const memberId = data.memberId
           const token = data.token
-          // console.log('註冊成功，token', token)
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header
@@ -192,7 +189,9 @@ function AuthForm(props) {
           await loading()
           await transition('登入成功')
 
-          // 重新整理
+          // 首頁則強制更新
+          props.location.pathname === '/' && history.go(0)
+          // 關閉彈出視窗
           setShowAuthModal(false)
         } catch (error) {
           // 內部錯誤

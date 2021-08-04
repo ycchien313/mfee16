@@ -109,7 +109,7 @@ function Create(props) {
         <div class="ineditor">
           <h4>文章標題：</h4>
           <input
-            class="title"
+            class="titleee"
             type="text"
             value={insertArticle.title}
             onChange={(e) => {

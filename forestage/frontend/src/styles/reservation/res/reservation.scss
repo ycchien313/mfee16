@@ -1291,9 +1291,9 @@
   // .swal2-confirm {
   //   background: $secondary-green;
   // }
-  footer {
-    height: 300px;
-  }
+  // footer {
+  //   height: 300px;
+  // }
 
   @media screen and (max-width: 768px) {
     html {
@@ -1326,7 +1326,13 @@
   }
 }
 
+// footer
+.res-footer{
+  margin-top: -100px;
+}
+
 /* table */
+
 
 .reservation.table-bg {
   width: 100%;

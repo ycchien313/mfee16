@@ -5,6 +5,7 @@ import Hero from './ReservationCheckoutMain/Hero'
 import Main from './ReservationCheckoutMain/'
 import '../../styles/reservation/res_checkout/res_check.scss'
 import axios from 'axios'
+import Footer from '../Footer/'
 
 // import Footer from '../../components/Footer'
 
@@ -97,7 +98,7 @@ function CheckoutPage(props) {
         memberId={memberId}
         setMemberId={setMemberId}
       />
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

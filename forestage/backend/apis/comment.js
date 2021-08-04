@@ -75,7 +75,15 @@ router.put("/articleNotGood", async (req, res) => {
     // res.json(result)
     // res.send(commentNotGood)
 });
-//新增文章
+//新增優惠券
+// router.post("/getcoupon", async (req, res) => {
+//     let message=req.body.insertMessage.message
+//     let member_id=req.body.insertMessage.member_id
+//     let article_id=req.body.insertMessage.article_id
+
+//     let createMessage = await db.connection.queryAsync('INSERT INTO message(create_time,message,member_id,article_id) VALUES (NOW(),?,?,?)',[ message,member_id,article_id]);
+// });
+//新增文章&優惠券
 router.post("/createarticle",async (req, res) => {
     console.log(req.body,"cc")
     let insertData = Object.values(req.body.insertArticle)
@@ -95,7 +103,7 @@ router.post("/createarticle",async (req, res) => {
     // console.log(req.file,"cccc")
 
     let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?)',[insertData]);
-
+    let getcoupon =await db.connection.queryAsync('INSERT INTO member_coupon_mapping(member_id,coupon_id,valid) VALUES (?,5,1)',[insertData[6]]);
     // res.json(result)
     // res.send(createArticle)
 });

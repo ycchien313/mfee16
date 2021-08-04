@@ -7,6 +7,8 @@ import Article from './article'
 import Footer from '../Footer/index'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import Auth from '../Auth/'
+import { func } from 'prop-types'
 function Main(props) {
   const { tag } = props
   const [news, setNews] = useState({})
@@ -17,7 +19,6 @@ function Main(props) {
   const [boom2, setBoom2] = useState(false)
   const [asideTag, setAsideTag] = useState('所有文章')
   const [didmount, setDidmount] = useState(false)
-  const [alreadyinsert,setAlreadyinsert] =useState(false)
   // const [likes, setLikes] = useState(true)
   // const [articleLikesId, setArticleLikesId] = useState(0)
   const [messageNum, setMessageNum] = useState(0)
@@ -25,11 +26,40 @@ function Main(props) {
   const [boomArticle, setBoomArticle] = useState({})
   const [aside, setAside] = useState(true)
   const [aside1, setAside1] = useState(true)
+  const [showAuth, setShowAuth] = useState(false)
+  const [insertArticle, setInsertArticle] = useState({
+    title: '',
+    author: '',
+    content: '',
+    image: '',
+    recommendation_index: 0,
+    likes: 0,
+    member_id: 0,
+    tag_id: 0,
+  })
+  const [alreadyinsert, setAlreadyinsert] = useState(false)
   let likeClass = 'fas like fa-heart'
   let normallike = 'fas fa-heart'
   let asideClose = 'asideul'
   let asideOpen = 'asideulopen'
 
+  function getMemberId() {
+    let authToken = localStorage.getItem('authToken')
+    axios
+      .get('http://localhost:3001/auth/me', {
+        method: 'get',
+        headers: {
+          authorization: `Bearer ${authToken}`,
+        },
+      })
+      .then((result) => {
+        let newArticle = { ...insertArticle }
+        newArticle.member_id = result.data.memberId
+        setInsertArticle(newArticle)
+        console.log(result.data)
+      })
+  }
+  let iflogin = Boolean(localStorage.getItem('authToken'))
   // function getBoomArticle() {
   //   axios.get(`http://127.0.0.1:3001/comment/${boomArticle}`).then((result) => {
   //     setBoomArticle(result.data)
@@ -130,6 +160,7 @@ function Main(props) {
     })
 
     setSelectTag(16)
+    getMemberId()
     // getLikes(articleLikesId)
   }, [])
   useEffect(() => {
@@ -167,14 +198,19 @@ function Main(props) {
     // window.addEventListener
     // getAsideArticle()
   }, [boom])
-  useEffect(()=>{
-    if(didmount){
+  useEffect(() => {
+    if (didmount) {
       MySwal.fire({
-        title: <p>Hello World</p>,
-        footer: 'Copyright 2018',
+        icon: 'success',
+        title: '感謝您的評論',
+        html:'<h5>請至會員專區查看您的優惠券</h5>',
+        buttonsStyling:false,
+        didOpen: () => {
+          setAlreadyinsert(false)
+        }
       })
     }
-  },[alreadyinsert])
+  }, [alreadyinsert])
   // //取得按讚數
   // function getLikes(articleId) {
   //   axios
@@ -595,7 +631,7 @@ function Main(props) {
               <button
                 class="guide-button pink-guide-button write"
                 onClick={() => {
-                  setBoom(!boom)
+                  iflogin ? setBoom(!boom) : setShowAuth(true)
                 }}
               >
                 寫評論
@@ -662,6 +698,8 @@ function Main(props) {
           setArticle={setArticle}
           alreadyinsert={alreadyinsert}
           setAlreadyinsert={setAlreadyinsert}
+          insertArticle={insertArticle}
+          setInsertArticle={setInsertArticle}
         />
       )}
       {boom2 && (
@@ -688,6 +726,9 @@ function Main(props) {
           window.scrollTo(0, 500)
         }}
       ></i>
+      {showAuth &&
+      <Auth />
+      }
     </>
   )
 }

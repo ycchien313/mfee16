@@ -19,20 +19,22 @@ function Create(props) {
     asideTag,
     alreadyinsert,
     setAlreadyinsert,
+    insertArticle,
+    setInsertArticle,
     // articleTag
   } = props
   // const [content, setContent] = useState('123')
   // const [star, setStar] = useState(0)
-  const [insertArticle, setInsertArticle] = useState({
-    title: '',
-    author: '',
-    content: '',
-    image: '',
-    recommendation_index: 0,
-    likes: 0,
-    member_id: 0,
-    tag_id: 0,
-  })
+  // const [insertArticle, setInsertArticle] = useState({
+  //   title: '',
+  //   author: '',
+  //   content: '',
+  //   image: '',
+  //   recommendation_index: 0,
+  //   likes: 0,
+  //   member_id: 0,
+  //   tag_id: 0,
+  // })
 
   // function alignModal() {
   //   var createeditor = $(this).find('.createeditor')

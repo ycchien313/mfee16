@@ -1,0 +1,39 @@
+.auth {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  .auth-container {
+    position: relative;
+    top: 50%;
+    left: 0%;
+  }
+
+  // 進到 signin 動畫
+  .fade-enter {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  .fade-enter-active {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+
+  // 進到 signout 動畫
+  .fade-exit {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  .fade-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  .fade-enter-active,
+  .fade-exit-active {
+    transition: opacity 350ms, transform 350ms;
+  }
+}

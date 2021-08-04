@@ -35,7 +35,7 @@ function Index(props) {
         Authorization: `Bearer ${token}`,
       },
     }).then(function (result) {
-      console.log(result)
+      console.log('result:', result)
       setMemberId(result.memberId)
     })
   }, [])

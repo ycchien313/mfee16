@@ -42,7 +42,7 @@ function Order(props) {
         <div className="head">
           <h3>訂位人資料</h3>
           <button
-            value={member}
+            defaultValue={member}
             onClick={(e) => {
               getData()
             }}

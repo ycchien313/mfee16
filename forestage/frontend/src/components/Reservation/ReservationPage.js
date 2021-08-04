@@ -6,6 +6,10 @@ import Footer from '../Footer/'
 import '../../styles/reservation/res/reservation-meal-RWD.scss'
 import '../../styles/reservation/res/reservation.scss'
 import Auth from '../Auth/'
+import { gsap } from 'gsap'
+import { Tween } from 'react-gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 // import Footer from '../../components/Footer'
 

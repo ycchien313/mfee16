@@ -42,7 +42,6 @@ function Main(props) {
   const checkSeatCount = Boolean(sessionStorage.getItem('seatCount'))
   const checkCheckList = Boolean(sessionStorage.getItem('checkList'))
   const checkSeatInfo = Boolean(sessionStorage.getItem('seatInfo'))
-
   const ifLogin = Boolean(window.localStorage.getItem('authToken'))
 
   // 驗證登入

@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import MealsBig from './MealsBig/'
 import MealsSmall from './MealsSmall/'
+import { gsap } from 'gsap'
+import { Tween } from 'react-gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 function ChooseMeal(props) {
   const { checkList, setCheckList, dishList, setDishList } = props
@@ -19,12 +23,10 @@ function ChooseMeal(props) {
     if (didMount) {
       window.sessionStorage.setItem('dishCount', JSON.stringify(dishCount))
     }
-
   }, [dishCount])
 
   useEffect(() => {
     setDidMount(true)
-
   }, [])
 
   // 建立餐點物件
@@ -97,35 +99,52 @@ function ChooseMeal(props) {
           <div className="arrow"></div>
           <div className="active">
             <h3 className="step">選擇餐點</h3>
-            <img
-              src="http://localhost:3000/images/reservation/active-title.png"
-              alt=""
-            />
+            <Tween
+              from={{
+                x: '-20vw',
+              }}
+              to={{
+                x: '0px',
+                scrollTrigger: {
+                  trigger: '.square',
+                  start: '2200px center',
+                  end: '2700px center',
+                  scrub: 1,
+                  markers: true,
+                },
+              }}
+            >
+              <img
+                src="http://localhost:3000/images/reservation/active-title.png"
+                alt=""
+              />
+            </Tween>
           </div>
         </div>
-        {isTabletOrMobile ? (
-          <MealsSmall
-            dishes={dishes}
-            setDishes={setDishes}
-            showDishes={showDishes}
-            setShowDishes={setShowDishes}
-            checkList={checkList}
-            setCheckList={setCheckList}
-            dishCount={dishCount}
-            setDishCount={setDishCount}
-          />
-        ) : (
-          <MealsBig
-            dishes={dishes}
-            setDishes={setDishes}
-            showDishes={showDishes}
-            setShowDishes={setShowDishes}
-            checkList={checkList}
-            setCheckList={setCheckList}
-            dishCount={dishCount}
-            setDishCount={setDishCount}
-          />
-        )}
+        
+          {isTabletOrMobile ? (
+            <MealsSmall
+              dishes={dishes}
+              setDishes={setDishes}
+              showDishes={showDishes}
+              setShowDishes={setShowDishes}
+              checkList={checkList}
+              setCheckList={setCheckList}
+              dishCount={dishCount}
+              setDishCount={setDishCount}
+            />
+          ) : (
+            <MealsBig
+              dishes={dishes}
+              setDishes={setDishes}
+              showDishes={showDishes}
+              setShowDishes={setShowDishes}
+              checkList={checkList}
+              setCheckList={setCheckList}
+              dishCount={dishCount}
+              setDishCount={setDishCount}
+            />
+          )}
       </section>
     </>
   )

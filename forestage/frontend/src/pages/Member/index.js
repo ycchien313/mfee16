@@ -1,7 +1,12 @@
 import React from 'react'
+import Footer from '../../components/Footer/'
 
 function Member() {
-  return <></>
+  return (
+    <>
+      <Footer />
+    </>
+  )
 }
 
 export default Member

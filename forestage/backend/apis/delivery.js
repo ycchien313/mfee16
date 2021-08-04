@@ -83,7 +83,7 @@ router.post('/order', async function (req, res, next) {
     // console.log(list)
 
     for( let i =0; i<list.length;i++){
-        console.log(list[i][0])
+        // console.log(list[i][0])
         switch( list[i][0]){
         case "總匯潛艇堡":
         list[i].push(1)

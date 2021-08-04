@@ -22,7 +22,7 @@ function Index(props) {
 
   useEffect(() => {
     let token = localStorage.getItem('authToken')
-    console.log('辨識:', token)
+    // console.log('辨識:', token)
     setAuthToken(token)
 
     $.ajax({

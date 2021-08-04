@@ -20,11 +20,15 @@ function Delivery(props) {
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
   const [counts, setCounts] = useState(Array(3).fill(0))
+  // console.log("count:",counts)
   const [dishCount, setDishCount] = useState({})
+  // console.log('dishCount:', dishCount)
   // 訂餐
   const [dishList, setDishList] = useState([])
-  // console.log(dishList)
+  // console.log("dishList:",dishList)
+  // all
   const [dishes, setDishes] = useState([])
+  // console.log('dishes', dishes)
   const [address, setAddress] = useState({
     city: '桃園市',
     dist: '',
@@ -64,6 +68,7 @@ function Delivery(props) {
   }, [date, time])
 
   useEffect(() => {
+    //
     getDishes()
 
     $.ajax({
@@ -102,12 +107,31 @@ function Delivery(props) {
       })
   }, [])
 
+  //
   useEffect(() => {
     if (dishes.length > 0) {
       let newDishCount = {}
       dishes.forEach((item) => {
         newDishCount[item.dish_id] = 0
       })
+      // cart，轉成陣列
+      const cart = JSON.parse(localStorage.getItem('cart'))
+      // console.log(cart, 'cart')
+      if (cart !== undefined) {
+        cart.forEach((v, i) => {
+          // console.log('v:', v)
+          for (let i = 0; i < dishes.length; i++) {
+            // console.log(dishes[i].name)
+            if (dishes[i].name === v.name) {
+              const id = dishes[i].dish_id
+              const cartCount = v.count
+              // console.log(cartCount)
+              newDishCount = { ...newDishCount, [id]: cartCount }
+            }
+          }
+          // console.log('newDishCount', newDishCount)
+        })
+      }
       setDishCount(newDishCount)
     }
   }, [dishes])

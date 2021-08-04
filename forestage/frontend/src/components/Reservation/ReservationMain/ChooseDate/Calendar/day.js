@@ -24,12 +24,13 @@ function Day(props) {
   let newDate = [...date]
   newDate = newDate.slice(5).join('').replace(/-/g, '/')
 
-  let url = `http://localhost:3001/reservation/${date}`
+  // let url = `http://localhost:3001/reservation/${date}`
+  // console.log('url:outside', url)
 
   function getSeatCount() {
     let newObj = {}
-    // console.log("seatInfo", seatInfo)
     for (let i = 0; i < seatInfo.length; i++) {
+      console.log("seatInfo", seatInfo)
       const foundRemainSeats = remainingSeat.find((item) => {
         return item.seat_id === seatInfo[i].seat_id
       })
@@ -41,11 +42,12 @@ function Day(props) {
       // let newId = seatInfo[i].seat_id
       newObj[seatInfo[i].seat_id] = totalSeats
       setSeatCount(newObj)
+      // console.log(newObj,'seatCount')
     }
+    // console.log('seatCount',newObj)
     // 如果座位數是0，清空checklist(不能先判斷再執行,先加進checklist再判斷)
     if (newObj[1] === 0 && newObj[2] === 0 && newObj[3] === 0) {
       clearCheckList()
-      // $(day.current).addClass('sold-out')
     }
   }
 
@@ -53,12 +55,15 @@ function Day(props) {
     if (didMount) {
       getSeatCount()
     }
-  }, [remainingSeat])
+   // 得到資訊後才執行 
+  }, [remainingSeat, seatInfo])
 
-  function getRemainingSeat() {
+  function getRemainingSeat(date1) {
+  let url = `http://localhost:3001/reservation/${date1}`
+    // console.log("url in rm seat:", date1)
     axios.get(url).then((result) => {
-      setRemainingSeat(result.data)
       console.log('result.data:', result.data)
+      setRemainingSeat(result.data)
 
       if (
         result.data.length === 3 &&
@@ -109,8 +114,10 @@ function Day(props) {
       //前一頁返回時維持選取
       setActiveDate(dateFromHome.date) 
       // 長條圖
-      url = `http://localhost:3001/reservation/${dateFromHome.date}`
-      getRemainingSeat()
+      // let url = `http://localhost:3001/reservation/${dateFromHome.date}`
+      // console.log('url:', url)
+      getRemainingSeat(dateFromHome.date)
+    
       // 帶入checkList
       updateCheckList(dateFromHome.date, dateFromHome.singer)
     }
@@ -144,7 +151,7 @@ function Day(props) {
             backgroundSize: 'cover',
           }}
           onClick={() => {
-            getRemainingSeat()
+            getRemainingSeat(date)
             updateCheckList(date, name)
             setActiveDate(date)
           }}

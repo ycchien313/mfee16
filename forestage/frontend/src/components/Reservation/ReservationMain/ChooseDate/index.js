@@ -90,6 +90,7 @@ function ChooseDate(props) {
             seatInfo={seatInfo}
             seatCount={seatCount}
             setSeatCount={setSeatCount}
+            remainingSeat={remainingSeat}
           />
         </div>
       </section>

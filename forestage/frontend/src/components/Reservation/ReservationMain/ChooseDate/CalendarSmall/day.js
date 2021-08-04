@@ -14,6 +14,7 @@ function Day(props) {
     seatInfo,
     setSeatCount,
     setSeatInfo,
+    dateFromHome,
   } = props
 
   const [didMount, setDidMount] = useState(false)
@@ -22,7 +23,7 @@ function Day(props) {
   let newDate = [...date]
   newDate = newDate.slice(5).join('').replace(/-/g, '/')
 
-  let url = `http://localhost:3001/reservation/${date}`
+  // let url = `http://localhost:3001/reservation/${date}`
 
   function getSeatCount() {
     let newObj = {}
@@ -50,9 +51,12 @@ function Day(props) {
     if (didMount) {
       getSeatCount()
     }
-  }, [remainingSeat])
+   // 得到資訊後才執行
+  }, [remainingSeat, seatInfo])
 
-  function getRemainingSeat() {
+  function getRemainingSeat(date1) {
+  let url = `http://localhost:3001/reservation/${date1}`
+
     axios.get(url).then((result) => {
       setRemainingSeat(result.data)
       if (
@@ -96,6 +100,21 @@ function Day(props) {
   }, [activeDate])
 
   useEffect(() => {
+    // 從歌手頁傳來資料
+    if (date === dateFromHome.date){
+      $(day.current).addClass('active')
+      $(day.current).siblings().removeClass('active')
+      $(day.current).parent().siblings().find('.day').removeClass('active')
+      //前一頁返回時維持選取
+      setActiveDate(dateFromHome.date) 
+      // 長條圖
+      // let url = `http://localhost:3001/reservation/${dateFromHome.date}`
+      // console.log('url:', url)
+      getRemainingSeat(dateFromHome.date)
+    
+      // 帶入checkList
+      updateCheckList(dateFromHome.date, dateFromHome.singer)
+    }
     // 前頁返回時仍然選取該日期
     let dateInStorage = sessionStorage.getItem('activeDate')
     if (date === dateInStorage) {

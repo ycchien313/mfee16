@@ -12,6 +12,7 @@ function CalendarSmall(props) {
     setSeatInfo,
     setSeatCount,
     seatCount,
+    dateFromHome
   } = props
 
   const [chosenWeek, setChosenWeek] = useState(0)
@@ -62,6 +63,7 @@ function CalendarSmall(props) {
                     setSeatCount={setSeatCount}
                     setSeatInfo={setSeatInfo}
                     seatCount={seatCount}
+                    dateFromHome={dateFromHome}
                   />
                 )
               }
@@ -82,6 +84,7 @@ function CalendarSmall(props) {
                     setSeatCount={setSeatCount}
                     setSeatInfo={setSeatInfo}
                     seatCount={seatCount}
+                    dateFromHome={dateFromHome}
                   />
                 )
               }

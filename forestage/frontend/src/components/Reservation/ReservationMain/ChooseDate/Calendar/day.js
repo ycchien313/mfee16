@@ -15,7 +15,7 @@ function Day(props) {
     setSeatCount,
     setSeatInfo,
     seatCount,
-    dateFromHome
+    dateFromHome,
   } = props
 
   const [didMount, setDidMount] = useState(false)

@@ -11,6 +11,16 @@
   }
 }
 
+.show-detail .close-button {
+  @extend %close-button;
+}
+.password .close-button {
+  @extend %close-button;
+}
+.cancel .close-button {
+  @extend %close-button;
+}
+
 .show-detail .modal-body {
   color: $primary-lightbrown;
 }
@@ -41,14 +51,6 @@
 
 .show-detail .modal-body .right-part {
   padding-left: 25px;
-}
-
-.show-detail .close-button {
-  @extend %close-button;
-}
-
-.password .close-button {
-  @extend %close-button;
 }
 
 .password .modal-body {
@@ -122,7 +124,14 @@
 .cancel .orange {
   background: $accent-orange;
   border: none;
+
+  &:hover {
+    background-color: darken($accent-orange, 20%);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
 }
+
 .cancel .modal-header {
   background: $primary-lightgreen;
   color: white;

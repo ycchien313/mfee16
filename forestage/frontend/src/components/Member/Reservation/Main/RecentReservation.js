@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import RecentReservationDetailModal from './RecentReservationDetailModal'
-import { useMediaQuery } from 'react-responsive'
+import RecentReservationCancelModal from './RecentReservationCancelModal'
 
 function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
@@ -13,15 +14,19 @@ function RecentReservation(props) {
 
   // bootstrap modal 開啟關閉用
   const [show, setShow] = useState(false)
+  const [showCancelModal, setShowCancelModal] = useState(false)
   const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const handleClose = () => {
-    setBootstrapCdnLoad(false)
     setShow(false)
+    setShowCancelModal(false)
+    setTimeout(() => {
+      setBootstrapCdnLoad(false)
+    }, 100)
   }
-  const handleShow = () => {
+  const handleShow = (modalName) => {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
-      setShow(true)
+      modalName === 'detail' ? setShow(true) : setShowCancelModal(true)
     }, 20)
   }
 
@@ -65,7 +70,14 @@ function RecentReservation(props) {
     <>
       <div className="content-foot">
         <div className="btns-container">
-          <button className="cancel-resv-btn guide-button">取消訂位</button>
+          <button
+            className="cancel-resv-btn guide-button"
+            onClick={() => {
+              handleShow('cancel')
+            }}
+          >
+            取消訂位
+          </button>
           <button className="update-resv-btn orange-guide-button">
             修改訂位內容
           </button>
@@ -119,8 +131,16 @@ function RecentReservation(props) {
       {/* bootstrap CDN */}
       {bootstrapCdnLoad && bootstrapCdn}
 
+      {/* 詳細訂單視窗 */}
       <RecentReservationDetailModal
         show={show}
+        handleClose={handleClose}
+        memberId={memberId}
+        reservationId={reservationId}
+      />
+      {/* 取消訂單視窗 */}
+      <RecentReservationCancelModal
+        showCancelModal={showCancelModal}
         handleClose={handleClose}
         memberId={memberId}
         reservationId={reservationId}
@@ -142,7 +162,7 @@ function RecentReservation(props) {
                             className="fas fa-eye"
                             onClick={() => {
                               setReservationId(v.reservation_id)
-                              handleShow()
+                              handleShow('detail')
                             }}
                           ></i>
                         </div>

@@ -84,9 +84,9 @@ function ModalPassword(props) {
           title: '修改成功',
           showConfirmButton: false,
           timer: 1000,
+        }).then(() => {
+          handleClose()
         })
-
-        handleClose()
 
         setDataLoading(false)
       }, 1000)

@@ -25,7 +25,7 @@ function HistoryDelivery(props) {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
       setShow(true)
-    }, 10)
+    }, 20)
   }
 
   const fetchHistoryDelivery = async () => {

@@ -20,7 +20,7 @@ function SigninInfo(props) {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
       setShow(true)
-    }, 10)
+    }, 20)
   }
 
   // 取得 memberId (解 token)

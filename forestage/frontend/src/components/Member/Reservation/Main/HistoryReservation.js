@@ -21,7 +21,7 @@ function HistoryReservation(props) {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
       setShow(true)
-    }, 10)
+    }, 20)
   }
 
   // 取得歷史訂位資料

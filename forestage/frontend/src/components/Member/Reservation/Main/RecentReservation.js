@@ -22,7 +22,7 @@ function RecentReservation(props) {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
       setShow(true)
-    }, 10)
+    }, 20)
   }
 
   // 取得訂位資料

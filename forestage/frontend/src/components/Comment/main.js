@@ -4,6 +4,9 @@ import $ from 'jquery'
 import View from './view'
 import Create from './create'
 import Article from './article'
+import Footer from '../Footer/index'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 function Main(props) {
   const { tag } = props
   const [news, setNews] = useState({})
@@ -14,10 +17,11 @@ function Main(props) {
   const [boom2, setBoom2] = useState(false)
   const [asideTag, setAsideTag] = useState('所有文章')
   const [didmount, setDidmount] = useState(false)
+  const [alreadyinsert,setAlreadyinsert] =useState(false)
   // const [likes, setLikes] = useState(true)
   // const [articleLikesId, setArticleLikesId] = useState(0)
   const [messageNum, setMessageNum] = useState(0)
-
+  const MySwal = withReactContent(Swal)
   const [boomArticle, setBoomArticle] = useState({})
   const [aside, setAside] = useState(true)
   const [aside1, setAside1] = useState(true)
@@ -151,6 +155,7 @@ function Main(props) {
   }, [selectTag])
   function getTagArticle() {
     let url = `http://localhost:3001/comment/${selectTag}`
+    console.log(selectTag)
     axios.get(url).then((result) => {
       setArticle(result.data)
       // console.log(result.data)
@@ -162,6 +167,14 @@ function Main(props) {
     // window.addEventListener
     // getAsideArticle()
   }, [boom])
+  useEffect(()=>{
+    if(didmount){
+      MySwal.fire({
+        title: <p>Hello World</p>,
+        footer: 'Copyright 2018',
+      })
+    }
+  },[alreadyinsert])
   // //取得按讚數
   // function getLikes(articleId) {
   //   axios
@@ -632,6 +645,8 @@ function Main(props) {
               </div>
             </div>
           </main>
+
+          <Footer />
         </div>
       </div>
       {boom && (
@@ -645,6 +660,8 @@ function Main(props) {
           getTagName={getTagName}
           article={article}
           setArticle={setArticle}
+          alreadyinsert={alreadyinsert}
+          setAlreadyinsert={setAlreadyinsert}
         />
       )}
       {boom2 && (
@@ -669,7 +686,6 @@ function Main(props) {
         class="fas fa-arrow-circle-up"
         onClick={() => {
           window.scrollTo(0, 500)
-          
         }}
       ></i>
     </>

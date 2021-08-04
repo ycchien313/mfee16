@@ -1,8 +1,35 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../utils/db')
-
-
+const multer = require('multer');
+const path = require('path');
+const download = require('image-downloader');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../', 'public', 'comment'));
+    },
+    filename: (req, file, cb) => {
+        console.log(file,"topfile")
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
+    },
+});
+const upload = multer({
+    // 指定存取位置
+    storage: storage,
+    // 副檔名篩選
+    fileFilter: (req, file, cb) => {
+        console.log(file,"副檔名篩選")
+        if (!file.originalname.match(/\.(jpg|jpeg|png|svg)$/)) {
+            return cb(new Error('不合格的附檔名'));
+        }
+        cb(null, true);
+    },
+    // 設定檔案大小上限，1MB
+    limit: {
+        fileSize: 1024 * 1024,
+    },
+});
 
 //顯示所有文章
 router.get("/16", async (req, res) => {
@@ -49,11 +76,23 @@ router.put("/articleNotGood", async (req, res) => {
     // res.send(commentNotGood)
 });
 //新增文章
-router.post("/createarticle", async (req, res) => {
-
-    console.log(req.body)
+router.post("/createarticle",async (req, res) => {
+    console.log(req.body,"cc")
     let insertData = Object.values(req.body.insertArticle)
+    // insertData[3]=`/public/comment/${req.file.filename}`
     console.log(insertData)
+    console.log(insertData[3])
+    // let imgUrl= insertData[3].split("blob:")[1]
+    let imgUrl= insertData[3]
+    console.log(imgUrl)
+    
+    // const options = {
+    //   url: imgUrl,
+    //   dest: '/public/comment'
+    // }
+  
+    // download.image(options)
+    // console.log(req.file,"cccc")
 
     let createArticle = await db.connection.queryAsync('INSERT INTO article(create_time,title,author,content,image,recommendation_index,likes,member_id,tag_id) VALUES (NOW(),?)',[insertData]);
 

@@ -275,6 +275,7 @@
     /* margin: 0 0 0 0; */
     left: 410px;
     /* display: inline-block; */
+    margin-bottom: 200px;
   }
  
   @media screen and (max-width: 1400px) {
@@ -649,6 +650,9 @@
       outline: none;
     }
     @media screen and (max-width: 500px) {
+      main{
+        margin-bottom: 30vw;
+      }
       .commentstar select {
         height: 50px;
       }
@@ -758,6 +762,7 @@
     right: 2vw;
     bottom: 2vw;
     cursor: pointer;
-    
+    z-index: 10;
   }
+
 }

@@ -4,6 +4,7 @@ import '../../styles/comment/Comment.scss'
 // import Jquery from 'jquery'
 // import Aside from './aside'
 import Main from './main'
+
 function Comment() {
   const [tag, setTag] = useState([])
   function getTag() {
@@ -19,6 +20,7 @@ function Comment() {
     <>
       {/* <Aside tag={tag} /> */}
       <Main tag={tag} />
+      
     </>
   )
 }

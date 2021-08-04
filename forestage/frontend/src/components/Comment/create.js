@@ -4,6 +4,7 @@ import '../../styles/comment/create.scss'
 // import Draft2 from './draft2'
 import $ from 'jquery'
 import axios from 'axios'
+
 // import Test from './test'
 function Create(props) {
   const {
@@ -16,6 +17,8 @@ function Create(props) {
     article,
     setArticle,
     asideTag,
+    alreadyinsert,
+    setAlreadyinsert,
     // articleTag
   } = props
   // const [content, setContent] = useState('123')
@@ -31,7 +34,7 @@ function Create(props) {
     tag_id: 0,
   })
 
-    // function alignModal() {
+  // function alignModal() {
   //   var createeditor = $(this).find('.createeditor')
   //   createeditor.css(
   //     'margin-top',
@@ -42,20 +45,33 @@ function Create(props) {
   // /* Resizing the modal according the screen size */
 
   function insertArticlefn() {
+    // e.preventDefault()
+    // let form = new FormData(e.target)
+    // console.log(e.target)
+    // console.log(form)
     axios({
       method: 'post',
       url: 'http://127.0.0.1:3001/comment/createarticle',
       data: {
         insertArticle: insertArticle,
+        // form: form,
       },
-    }).then(()=>{
+    }).then(() => {
       getAsideArticle()
-    //   console.log('bbbbb')
+      //   console.log('bbbbb')
     })
   }
   function setArticleTag(tagId) {
     let newArticle = { ...insertArticle }
     newArticle.tag_id = tagId
+    setInsertArticle(newArticle)
+  }
+  function setImage(e) {
+    let newArticle = { ...insertArticle }
+    // console.log(e)
+    let imageFile = e.target.files.item(0)
+    let imageUrl = URL.createObjectURL(imageFile)
+    newArticle.image = imageUrl
     setInsertArticle(newArticle)
   }
   function setTitle(e) {
@@ -95,17 +111,23 @@ function Create(props) {
         .siblings()
         .removeClass('active')
     })
+    // $('.inputimg').on('change', function () {
+    //   $(this)
+    //     .siblings()
+    //     .find('.imggg')
+    //     .attr('src', {insertArticle.image})
+    // })
   }, [])
-  
-  useEffect(() => {
-    console.log('boom')
-    console.log('aaaaaa')
-    getAsideArticle()
-    // return () => {
-    //   // setBoom(false)
-    //   // getAsideArticle()
-    // }
-  }, [asideTag])
+
+  // useEffect(() => {
+  //   // console.log('boom')
+  //   // console.log('aaaaaa')
+  //   getAsideArticle()
+  //   // return () => {
+  //   //   // setBoom(false)
+  //   //   // getAsideArticle()
+  //   // }
+  // }, [asideTag])
   function getAsideArticle() {
     console.log(insertArticle.tag_id, '122222')
     axios
@@ -451,21 +473,65 @@ function Create(props) {
             </div>
           </div>
           <h4>文章內容：</h4>
-        <textarea
-          class="draft"
-          value={insertArticle.content}
-          onChange={(e) => {
-            getContent(e)
-          }}
-        ></textarea>
-        <h4>上傳圖片：</h4>
-        <input
-          placeholder="請輸入您的文章標題"
-          class="titleee"
-          type="file"
-        ></input>
+          <textarea
+            class="draft"
+            value={insertArticle.content}
+            onChange={(e) => {
+              getContent(e)
+            }}
+          ></textarea>
+          <h4>上傳圖片：</h4>
+          <form
+            id="imgform"
+            onSubmit={insertArticlefn}
+            encType="multipart/form-data"
+            action="/contact/save"
+          >
+            <input
+              name="image"
+              class="titleee inputimg"
+              type="file"
+              // value={insertArticle.image}
+              onChange={(e) => {
+                setImage(e)
+              }}
+            ></input>
+            <div class="firstimg">
+              {/* <img class="imggg" src="http://fakeimg.pl/800x350/b2d297/a1957d/?text=Elfin"></img> */}
+              <img src={insertArticle.image}></img>
+            </div>
+            {/* <button type="submit">123</button> */}
+            <div class="buttongroup">
+              <button class="green-guide-button buttontext2">
+                預覽
+                <img
+                  src="http://localhost:3000/images/comment/view.svg"
+                  alt=""
+                ></img>
+              </button>
+              <button
+                type="submit"
+                // form="imgfrom"
+                class="orange-guide-button buttontext"
+                onClick={() => {
+                  insertArticlefn()
+                  setBoom(false)
+                  setAlreadyinsert(true)
+                }}
+              >
+                送出
+                <img
+                  src="http://localhost:3000/images/comment/send2.svg"
+                  alt=""
+                ></img>
+              </button>
+            </div>
+          </form>
+          {/* <div class="firstimg">
+            <img src={insertArticle.image}></img>
+          </div> */}
         </div>
-        <div class="buttongroup">
+        {/* <div class="buttongroup">
           <button class="green-guide-button buttontext2">
             預覽
             <img
@@ -473,7 +539,11 @@ function Create(props) {
               alt=""
             ></img>
           </button>
-          <button class="orange-guide-button buttontext">
+          <button
+            type="submit"
+            // form="imgfrom"
+            class="orange-guide-button buttontext"
+          >
             送出
             <img
               src="http://localhost:3000/images/comment/send2.svg"
@@ -481,11 +551,11 @@ function Create(props) {
               onClick={() => {
                 insertArticlefn()
                 setBoom(false)
-                
+                setAlreadyinsert(true)
               }}
             ></img>
           </button>
-        </div>
+        </div> */}
       </div>
     </>
   )

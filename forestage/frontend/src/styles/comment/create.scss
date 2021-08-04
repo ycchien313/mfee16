@@ -227,6 +227,18 @@ padding-bottom: 10px;
   border: 1px solid $primary-lightbrown;
   color: $primary-lightbrown;
 }
+.firstimg{
+  margin-top: 10px;
+  height: 20vw;
+  // background-color: #CCC;
+  width: 45vw;
+}
+
+.firstimg img{
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
 @media screen and (max-width: 1200px) {
   .point img {
     height: 2vw;

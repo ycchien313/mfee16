@@ -98,7 +98,7 @@ function Order(props) {
               id=""
               cols="30"
               rows="10"
-              maxlength="150"
+              maxLength="150"
               placeholder="請輸入備註事項"
               value={textArea}
               onChange={(event) => {

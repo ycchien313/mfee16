@@ -132,9 +132,9 @@ function Map(props) {
                 y2="100%"
                 spreadMethod="pad"
               >
-                <stop offset="0%" stop-color="#f5b54d" stop-opacity="1" />
-                <stop offset="50%" stop-color="#f1bd69" stop-opacity="1" />
-                <stop offset="100%" stop-color="#ebcc9c" stop-opacity="1" />
+                <stop offset="0%" stopColor="#f5b54d" stopOpacity="1" />
+                <stop offset="50%" stopColor="#f1bd69" stopOpacity="1" />
+                <stop offset="100%" stopColor="#ebcc9c" stopOpacity="1" />
               </linearGradient>
             </defs>
             <path

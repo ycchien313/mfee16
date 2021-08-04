@@ -104,7 +104,8 @@ function RecentReservation(props) {
     </>
   )
 
-  const bootstrapModalCdn = (
+  // Bootstrap Cdn
+  const bootstrapCdn = (
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -116,7 +117,7 @@ function RecentReservation(props) {
   return (
     <>
       {/* bootstrap CDN */}
-      {bootstrapCdnLoad && bootstrapModalCdn}
+      {bootstrapCdnLoad && bootstrapCdn}
 
       <RecentReservationDetailModal
         show={show}

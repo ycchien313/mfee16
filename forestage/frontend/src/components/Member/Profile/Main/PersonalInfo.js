@@ -68,10 +68,10 @@ function PersonalInfo(props) {
       const profileFields = {
         avatar: avatar(),
         name: data.data[0].name,
-        gender: data.data[0].gender,
-        birthday: data.data[0].birthday,
-        mobile: data.data[0].mobile,
-        address: data.data[0].address,
+        gender: data.data[0].gender ? data.data[0].gender : '',
+        birthday: data.data[0].birthday ? data.data[0].birthday : '',
+        mobile: data.data[0].mobile ? data.data[0].mobile : '',
+        address: data.data[0].address ? data.data[0].address : '',
       }
       // console.log(profileFields)
       if (status === '成功') {
@@ -327,7 +327,7 @@ function PersonalInfo(props) {
               <div className="info-col">地址</div>
               <div className="info-col textarea-container">
                 {/* 從 textarea 設定 textarea-container 的文字 */}
-                {profile.address}
+                {profile.address ? profile.address : '　'}
                 <textarea
                   name="address"
                   className="textarea"

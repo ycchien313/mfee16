@@ -96,12 +96,8 @@ function ThirdScreen(props) {
       setComment(result)
     })
   }, [targetId])
-<<<<<<< HEAD
-  let fullPath = 'http://localhost:3000/images/home/歌手/' + singerImg
-=======
   let fullPath = 'http://localhost:3000/images/common/' + singerImg
 
->>>>>>> home
   //主要頁面
   let ThirdScreen = (
     <div id="thirdScreen">

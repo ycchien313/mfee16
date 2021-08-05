@@ -71,7 +71,7 @@ function RecentReservation(props) {
       <div className="content-foot">
         <div className="btns-container">
           <button
-            className="cancel-resv-btn guide-button"
+            className="guide-button cancel-resv-btn"
             onClick={() => {
               handleShow('cancel')
             }}

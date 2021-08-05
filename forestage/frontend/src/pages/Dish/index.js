@@ -3,7 +3,7 @@ import $ from 'jquery'
 import '../../styles/dish/dish.scss'
 import Food from '../../components/Dish/Food'
 import FoodMiddle from '../../components/Dish/FoodMiddle'
-
+import Footer from '../../components/Footer'
 function Dish() {
   // 存取api
   const [dishState, setDishState] = useState('主餐')
@@ -189,6 +189,7 @@ function Dish() {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   )
 }

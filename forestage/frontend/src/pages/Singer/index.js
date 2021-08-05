@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import $, { ajax } from 'jquery'
 import '../../styles/singer/singer.scss'
 import SingerInfo from '../../components/Singer/SingerInfo'
-
+import Footer from '../../components/Footer'
 function Singer() {
   // 存取api
   const [style, setStyle] = useState('搖滾')
@@ -132,6 +132,7 @@ function Singer() {
           </div>
         </main>
       </div>
+       <Footer/>
     </>
   )
 }

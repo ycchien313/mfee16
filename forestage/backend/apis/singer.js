@@ -11,7 +11,7 @@ router.get('/comment/:singerId',async function(req,res,next){
     res.json(queryrResult)
 })
 router.get('/likes/:singers',async function(req,res,next){
-    let queryrResult = await db.connection.queryAsync(`SELECT  count(recommendation_index) as reviewer,  (SUM(recommendation_index)/count(recommendation_index))*20 as stars tag_id as tag_id=? from article  where tag_id = ?`,req.params.singers)
+    let queryrResult = await db.connection.queryAsync(`SELECT  count(recommendation_index) as reviewer,  (SUM(recommendation_index)/count(recommendation_index))*20 as stars  from article where tag_id = ?`,req.params.singers)
     res.json(queryrResult)
 })
 module.exports = router;

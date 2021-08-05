@@ -3,7 +3,7 @@ import gsap from 'gsap'
 
 function FirstScreen(props) {
   let { singerName, singerImg, singerDate } = props
-  let domain = 'http://localhost:3000/images/home/歌手/'
+  let domain = 'http://localhost:3000/images/common/'
   const [test, setTest] = useState('test')
   let GsapTarget = useRef(null)
   // console.log(GsapTarget)

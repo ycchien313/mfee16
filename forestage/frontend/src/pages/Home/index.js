@@ -15,7 +15,8 @@ import moment from 'moment'
 
 // header
 import Header from '../../components/Header'
-
+// footer
+import Footer from '../../components/Footer'
 function Home() {
   // 當天歌手資訊
   const [singerName, setSingerName] = useState()
@@ -108,6 +109,7 @@ function Home() {
         <SixthScreen />
         <SeventhScreen />
         <EightScreen all={all} setAll={setAll} item={item} setItem={setItem} />
+        <Footer />
       </div>
     </>
   )

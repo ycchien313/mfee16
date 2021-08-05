@@ -64,7 +64,7 @@ function Main(props) {
   )
   return (
     <>
-      <div className="member_coupon">
+      <div className="member-coupon">
         <div className="main-container">
           {/* 左側：導覽列 */}
           <Aside

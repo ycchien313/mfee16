@@ -59,7 +59,7 @@ function Main(props) {
 
   return (
     <>
-      <div className="member_delivery">
+      <div className="member-delivery">
         <main className="main">
           <div className="main-container">
             {/* 左側：導覽列 */}

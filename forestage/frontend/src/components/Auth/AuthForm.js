@@ -179,6 +179,7 @@ function AuthForm(props) {
           // 註冊成功
           const memberId = data.memberId
           const token = data.token
+          console.log(memberId)
           // 設定 token 給 localStorage
           setAuthToken(token)
           // 設定 token 給 request 的 header

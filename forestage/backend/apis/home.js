@@ -14,8 +14,11 @@ router.get("/singer_today", async function (req, res, next) {
     let queryResult = await db.connection.queryAsync(
         `SELECT * from singer as s inner join singer_calendar as s_c on s.singer_id = s_c.singer_id where s_c.date LIKE '${current}%'`
     );
-    // let queryResult = current + "T16:00:00.000Z";
-    res.send(queryResult[0]);
+    let getCalendarSql = await db.connection.queryAsync(
+        "SELECT sc.date, s.name, s.picture FROM singer_calendar AS sc, singer AS s WHERE DATEDIFF(sc.date, CURDATE())>=0 AND s.singer_id=sc.singer_id ORDER BY sc.date LIMIT 10"
+    );
+
+    res.send(getCalendarSql[0]);
 });
 // 手機板歌手資訊
 router.get("/singer_all", async function (req, res, next) {

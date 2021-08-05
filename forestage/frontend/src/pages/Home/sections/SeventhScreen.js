@@ -218,7 +218,7 @@ function SeventhScreen(props) {
           <Link
             to={{
               pathname: '/reservation',
-              state: { select },
+              state: { select, prevPath: '/home' },
             }}
           >
             <button className="button-red">

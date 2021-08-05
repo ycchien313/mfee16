@@ -25,7 +25,7 @@ function Order(props) {
     }).then(function (result) {
       setInputTel(result[0].mobile)
       setInputText(result[0].name)
-      console.log(result)
+      // console.log(result)
     })
   }
 

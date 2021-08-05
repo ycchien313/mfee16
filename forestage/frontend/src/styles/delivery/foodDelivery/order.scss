@@ -484,9 +484,13 @@
   /*  */
 
   .mobile-order-get,
-  .mobile-order,
-  .menuMobile {
+  .mobile-order {
     display: none;
+  }
+  @media screen and (min-width: 769px) {
+    .menuMobile{
+      display: none;
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -526,7 +530,6 @@
       left: 25.35vw;
     }
     .menuMobile .content {
-
       ul li {
         font-size: 8px;
         justify-content: center;

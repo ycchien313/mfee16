@@ -13,9 +13,9 @@ function Del() {
   //
   useEffect(() => {
     // memberId get
-    console.log('辨識')
+    // console.log('辨識')
     let token = localStorage.getItem('authToken')
-    console.log(token)
+    // console.log(token)
     setAuthToken(token)
 
     $.ajax({
@@ -28,7 +28,7 @@ function Del() {
         Authorization: `Bearer ${token}`,
       },
     }).then(function (result) {
-      console.log(result)
+      // console.log(result)
       setMemberId(result.memberId)
     })
   }, [])

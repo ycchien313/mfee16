@@ -164,6 +164,7 @@ function Delivery(props) {
               className="mobile-order"
               onClick={() => {
                 setShow(!show)
+                console.log('123')
               }}
             ></div>
           </div>

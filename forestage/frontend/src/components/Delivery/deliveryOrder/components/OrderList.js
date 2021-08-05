@@ -25,7 +25,6 @@ function OrderList(props) {
         setCouponPrice(newItem.discount)
         setCouponId(newItem.coupon_id)
         setMcmId(newItem.mcm_id)
-        // console.log(newItem)
       } else {
         setCouponPrice(0)
         setCouponId(null)

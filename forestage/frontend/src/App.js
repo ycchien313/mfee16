@@ -44,6 +44,9 @@ function App() {
     <AuthContext.Provider value={{ member, setMember }}>
       <Router>
         <Switch>
+          {/* <Route path="/auth/">
+          <Auth />
+        </Route> */}
           <Route path="/comment/">
             <Comment />
           </Route>
@@ -53,6 +56,9 @@ function App() {
           <Route path="/delivery/">
             <Delivery />
           </Route>
+          <Route path="/singer/">
+            <Singer />
+          </Route>
           <Route path="/dish/">
             <Dish />
           </Route>
@@ -60,8 +66,8 @@ function App() {
             <Game />
           </Route>
           <Route path="/singer/">
-          <Singer />
-        </Route>
+            <Singer />
+          </Route>
           <Route path="/member/">
             <Member />
           </Route>

@@ -24,6 +24,11 @@ function HeaderAuth() {
   useEffect(() => {
     const token = localStorage.getItem('authToken')
     token === null ? setAuthToken(null) : setAuthToken(token)
+<<<<<<< HEAD
+=======
+
+    reloadPage()
+>>>>>>> dish
   }, [authToken, showAuthModal])
 
   const loginDom = (
@@ -46,6 +51,7 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
+            history.push('/')
           }}
         >
           登出
@@ -74,6 +80,7 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
+            history.push('/')
           }}
         >
           登出

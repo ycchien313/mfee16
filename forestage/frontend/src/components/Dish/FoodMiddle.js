@@ -2,7 +2,7 @@ import React from 'react'
 
 function FoodMiddle(props) {
   let { name, price, introduction, image_realistic } = props
-  let defaulDomain = 'http://localhost:3000/images/dish/'
+  let defaulDomain = 'http://localhost:3000/images/common/'
   return (
     <>
       <div className="subway food-m">
@@ -15,7 +15,7 @@ function FoodMiddle(props) {
                   <div className="empty_star">★★★★★</div>
                   <div className="full_star">★★★★★</div>
                 </div>
-                <div className="h4">(111)</div>
+                <div className="h4">{}</div>
               </div>
             </div>
             <div className="link-top"></div>

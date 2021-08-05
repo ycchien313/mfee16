@@ -3,12 +3,11 @@ import $ from 'jquery'
 import '../../styles/dish/dish.scss'
 import Food from '../../components/Dish/Food'
 import FoodMiddle from '../../components/Dish/FoodMiddle'
-
+import Footer from '../../components/Footer'
 function Dish() {
   // 存取api
   const [dishState, setDishState] = useState('主餐')
   const [content, setContent] = useState([])
-
   const [main, setMain] = useState([])
   const [sub, setSub] = useState([])
   const [dessert, setDessert] = useState([])
@@ -144,7 +143,7 @@ function Dish() {
                 </li>
               </ul>
             </div>
-            <div className="food-title h2">主餐</div>
+            <div className="food-title h2">{dishState}</div>
             <div className="introduction-all">
               {mapArr.map(function (value, index) {
                 if (index % 2 == 0) {
@@ -190,6 +189,7 @@ function Dish() {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   )
 }

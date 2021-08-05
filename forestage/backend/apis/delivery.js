@@ -8,6 +8,7 @@ require('dotenv').config();
 const mailgun = require("mailgun-js");
 const DOMAIN = "sandboxd434801e3d8446a8946d9b7075271e58.mailgun.org";
 const mg = mailgun({apiKey:process.env.MG_KEY, domain: DOMAIN});
+// 
 
 
 // 取得的網址名稱("自行命名",callback函式)

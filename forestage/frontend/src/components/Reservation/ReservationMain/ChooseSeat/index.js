@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import { Tween } from 'react-gsap'
+
 function ChooseSeat(props) {
   const {
     seatInfo,
@@ -78,7 +80,6 @@ function ChooseSeat(props) {
 
   // 減號按鈕
   function minusAttendance(seatId) {
-
     const newAttendance = { ...attendance }
     newAttendance[seatId] > 0
       ? (newAttendance[seatId] -= 1)
@@ -120,8 +121,7 @@ function ChooseSeat(props) {
   async function updateCheckList(seatId) {
     let newObj = { ...checkList }
     let seat = {}
-    if (attendance[seatId] > 0 && seatInfo.length>0) {
-
+    if (attendance[seatId] > 0 && seatInfo.length > 0) {
       // console.log(seatInfo,"sinfo")
       seat = await seatInfo.find((item) => {
         // console.log(item.name, 'item') //有印出
@@ -138,7 +138,7 @@ function ChooseSeat(props) {
     }
     setCheckList(newObj)
   }
-  
+
   // 驗證是否已經選擇日期(sweetalert)
   const checkDateSwal = withReactContent(Swal)
   function checkDate() {
@@ -160,185 +160,217 @@ function ChooseSeat(props) {
           <div class="arrow"></div>
           <div class="active">
             <h3 class="step two">選擇座位</h3>
-            <img
-              src="http://localhost:3000/images/reservation/active-title.png"
-              alt=""
-            />
+            <Tween
+              from={{
+                x: '-30vw',
+              }}
+              to={{
+                x: '0px',
+                scrollTrigger: {
+                  trigger: '.square',
+                  start: '1300px center',
+                  end: '1800px center',
+                  scrub: 1,
+                  markers: true,
+                },
+              }}
+            >
+              <img
+                src="http://localhost:3000/images/reservation/active-title.png"
+                alt=""
+              />
+            </Tween>
           </div>
           <div class="arrow"></div>
           <h3 class="step three">選擇餐點</h3>
         </div>
-        <div class="seats-background">
-          <div class="stage h4">舞台區</div>
-          <div class="rock row">
-            {/* <div class="rock row active"> */}
-            <div class="seat-row">
-              <div class="tables">
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
+        <Tween
+          from={{
+            x: '-30vw',
+          }}
+          to={{
+            x: '0px',
+            scrollTrigger: {
+              trigger: '.square',
+              start: '1300px center',
+              end: '1800px center',
+              scrub: 1,
+              markers: true,
+            },
+          }}
+        >
+          <div class="seats-background">
+            <div class="stage h4">舞台區</div>
+            <div class="rock row">
+              {/* <div class="rock row active"> */}
+              <div class="seat-row">
+                <div class="tables">
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="seat-info">
+                <h3>搖滾區</h3>
+                <span>低銷金額 $ 1000</span>
+                <div class="button-group">
+                  <div
+                    class="minus-button"
+                    onClick={() => {
+                      checkDate()
+                      minusAttendance(1)
+                    }}
+                  ></div>
+                  <input
+                    type="number"
+                    value={attendance[1] ? attendance[1] : 0}
+                  />
+                  <div
+                    class="plus-button"
+                    onClick={() => {
+                      checkDate()
+                      addAttendance(1)
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
-            <div class="seat-info">
-              <h3>搖滾區</h3>
-              <span>低銷金額 $ 1000</span>
-              <div class="button-group">
-                <div
-                  class="minus-button"
-                  onClick={() => {
-                    checkDate()
-                    minusAttendance(1)
-                  }}
-                ></div>
-                <input
-                  type="number"
-                  value={attendance[1] ? attendance[1] : 0}
-                />
-                <div
-                  class="plus-button"
-                  onClick={() => {
-                    checkDate()
-                    addAttendance(1)
-                  }}
-                ></div>
+            <div class="middle row">
+              <div class="seat-row">
+                <div class="tables">
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="seat-info">
+                <h3>中區&nbsp;</h3>
+                <span>低銷金額 &nbsp;$ 600</span>
+                <div class="button-group">
+                  <div
+                    class="minus-button"
+                    onClick={() => {
+                      checkDate()
+                      minusAttendance(2)
+                    }}
+                  ></div>
+                  <input
+                    type="number"
+                    value={attendance[2] ? attendance[2] : 0}
+                  />
+                  <div
+                    class="plus-button"
+                    onClick={() => {
+                      checkDate()
+                      addAttendance(2)
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="back row">
+              <div class="seat-row">
+                <div class="tables">
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                  <img
+                    src="http://localhost:3000/images/reservation/table.svg"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="seat-info">
+                <h3>後區&nbsp;</h3>
+                <span>低銷金額 &nbsp;$ 400</span>
+                <div class="button-group">
+                  <div
+                    class="minus-button"
+                    onClick={() => {
+                      checkDate()
+                      minusAttendance(3)
+                    }}
+                  ></div>
+                  <input
+                    type="number"
+                    value={attendance[3] ? attendance[3] : 0}
+                  />
+                  <div
+                    class="plus-button"
+                    onClick={() => {
+                      checkDate()
+                      addAttendance(3)
+                    }}
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="bar-info under" ref={barInfo}>
+              <span class="title">剩餘座位</span>
+              <div class="rock">
+                <div class="circle"></div>
+                <p>
+                  搖滾區 <span>{seatCount[1]}</span> 席
+                </p>
+              </div>
+              <div class="middle">
+                <div class="circle"></div>
+                <p>
+                  中區 <span>{seatCount[2]}</span> 席
+                </p>
+              </div>
+              <div class="back">
+                <div class="circle"></div>
+                <p>
+                  後區 <span>{seatCount[3]}</span> 席
+                </p>
               </div>
             </div>
           </div>
-          <div class="middle row">
-            <div class="seat-row">
-              <div class="tables">
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div class="seat-info">
-              <h3>中區&nbsp;</h3>
-              <span>低銷金額 &nbsp;$ 600</span>
-              <div class="button-group">
-                <div
-                  class="minus-button"
-                  onClick={() => {
-                    checkDate()
-                    minusAttendance(2)
-                  }}
-                ></div>
-                <input
-                  type="number"
-                  value={attendance[2] ? attendance[2] : 0}
-                />
-                <div
-                  class="plus-button"
-                  onClick={() => {
-                    checkDate()
-                    addAttendance(2)
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div class="back row">
-            <div class="seat-row">
-              <div class="tables">
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-                <img
-                  src="http://localhost:3000/images/reservation/table.svg"
-                  alt=""
-                />
-              </div>
-            </div>
-            <div class="seat-info">
-              <h3>後區&nbsp;</h3>
-              <span>低銷金額 &nbsp;$ 400</span>
-              <div class="button-group">
-                <div
-                  class="minus-button"
-                  onClick={() => {
-                    checkDate()
-                    minusAttendance(3)
-                  }}
-                ></div>
-                <input
-                  type="number"
-                  value={attendance[3] ? attendance[3] : 0}
-                />
-                <div
-                  class="plus-button"
-                  onClick={() => {
-                    checkDate()
-                    addAttendance(3)
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
-          <div class="bar-info under" ref={barInfo}>
-            <span class="title">剩餘座位</span>
-            <div class="rock">
-              <div class="circle"></div>
-              <p>
-                搖滾區 <span>{seatCount[1]}</span> 席
-              </p>
-            </div>
-            <div class="middle">
-              <div class="circle"></div>
-              <p>
-                中區 <span>{seatCount[2]}</span> 席
-              </p>
-            </div>
-            <div class="back">
-              <div class="circle"></div>
-              <p>
-                後區 <span>{seatCount[3]}</span> 席
-              </p>
-            </div>
-          </div>
-        </div>
+        </Tween>
       </section>
       {/* 滑鼠滾輪 */}
       <div class="center-con">

@@ -2,7 +2,7 @@
 /* reservation */
 /* hero section */
 .reservation.hero-section {
-  background-image: url(http://localhost:3000/images/reservation/reservation-hero.png);
+  background-image: url(http://localhost:3000/images/reservation/reservation-hero.jpg);
   background-size: cover;
   height: 500px;
   width: 100%;
@@ -311,7 +311,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     position: relative;
-    z-index: 300;
+    z-index: 10;
   }
 
   .choose-seat .row:hover {
@@ -557,7 +557,6 @@
     transition: 0.5s;
     flex-shrink: 0;
 
-  
   }
   .rock-bar-end {
     height: 100%;
@@ -609,6 +608,21 @@
     z-index: 1;
     left: -5.2vw;
     flex-shrink: 0;
+
+  }
+
+  @media screen and (max-width:768px){
+    .bar-background p{
+      margin: 0;
+      // margin-bottom: 10px;
+      position: relative;
+      bottom: 30px;
+      font-size: 20px;
+    }
+    .bar-background {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
   }
 
   /* 剩餘座位文字 */
@@ -1161,6 +1175,44 @@
         width: 100%;
       }
     }
+    @media screen and (max-width: 1200px) and (min-width:768px){
+      #food-#{$i}.illu-image.active {
+        width: 13vw;
+        height: 13vw;
+        position: absolute;
+        top: 30vw;
+        transition: 1s;
+        z-index: 0;
+
+        @if $i==1 {
+          left: -$i * 10 + vw;
+        } @else {
+          left: ($i - 2) * 10 + vw;
+        }
+      }
+
+      #food-#{$i}.illu-image {
+        top: 15vw;
+        transition: 1s;
+        z-index: 0;
+        position: absolute;
+        width: 0;
+        height: 0;
+        @if $i % 3 == 0 {
+          left: 48vw;
+        }
+        @if $i % 3 == 1 {
+          left: 10vw;
+        }
+        @if $i % 3 == 2 {
+          left: 29vw;
+        }
+      }
+
+      #food-#{$i}.illu-image img {
+        width: 100%;
+      }
+    }
   }
 
   /* 滑鼠滾輪動畫 */
@@ -1239,9 +1291,9 @@
   // .swal2-confirm {
   //   background: $secondary-green;
   // }
-  footer {
-    height: 300px;
-  }
+  // footer {
+  //   height: 300px;
+  // }
 
   @media screen and (max-width: 768px) {
     html {
@@ -1274,7 +1326,13 @@
   }
 }
 
+// footer
+.res-footer{
+  margin-top: -100px;
+}
+
 /* table */
+
 
 .reservation.table-bg {
   width: 100%;

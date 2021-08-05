@@ -49,18 +49,21 @@ router.get('/checkout/memberInfo', async (req, res) => {
     res.send(memberInfo);
 });
 
-router.post('/checkout/send', async (req, res) => {
-    let insertResData = req.body.insertResData;
-    // console.log(insertResData)
-    let resDate = insertResData.date;
-    let resTotal = insertResData.total;
-    let resAttendance = insertResData.attendance;
-    insertResData = Object.values(insertResData);
-    let insertReservationSql =
-        'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())';
-    let reservation = await db.connection.queryAsync(insertReservationSql, [
-        insertResData,
-    ]);
+router.post('/checkout/send', async(req, res)=>{
+    let insertResData = req.body.insertResData
+    console.log("insertResData:",insertResData)
+    let resDate = insertResData.date
+    console.log("resDate:",resDate)
+
+    let resTotal = insertResData.total
+    console.log("resTotal:",resTotal)
+
+    let resAttendance = insertResData.attendance
+    console.log("resAttendance:",resAttendance)
+
+    insertResData = Object.values(insertResData)
+    let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
+    let reservation = await db.connection.queryAsync(insertReservationSql,[insertResData])
 
     // 處理餐點陣列
     let dishList = req.body.dishList;
@@ -96,12 +99,13 @@ router.post('/checkout/send', async (req, res) => {
     ]);
     // console.log(updateMCM)
 
-    let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`;
-    // [req.body.insertResData.member_id]
-    let memberInfo = await db.connection.queryAsync(getMemberInfo, 1);
-    // console.log(memberInfo[0].name)
-    let memberEmail = memberInfo[0].email;
 
+    let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
+    console.log(req.body.insertResData.member_id)
+    let memberInfo = await db.connection.queryAsync(getMemberInfo,[req.body.insertResData.member_id])
+    console.log(memberInfo[0].name)
+    let memberEmail = memberInfo[0].email
+    
     // console.log(memberInfo,"memberinfo")
 
     // mailgun確認信
@@ -228,8 +232,11 @@ router.post('/checkout/send', async (req, res) => {
     };
 
     mg.messages().send(mailBody, function (error, body) {
-        console.log(body);
+
+	console.log(body);
+
     });
+
 });
 
 router.get('/:date', async (req, res) => {

@@ -2,7 +2,18 @@ import React, { useEffect, useState } from 'react'
 import '../../../../../styles/reservation/res/reservation-date-RWD.scss'
 import Day from './day'
 function CalendarSmall(props) {
-  const { setRemainingSeat, setCheckList, checkList, singerCalendar } = props
+  const {
+    remainingSeat,
+    setRemainingSeat,
+    setCheckList,
+    checkList,
+    singerCalendar,
+    seatInfo,
+    setSeatInfo,
+    setSeatCount,
+    seatCount,
+    dateFromHome
+  } = props
 
   const [chosenWeek, setChosenWeek] = useState(0)
   const [thisWeekClass, thiWeekActClass, nextWeekClass, nextWeekActClass] = [
@@ -11,7 +22,6 @@ function CalendarSmall(props) {
     'next-week h3',
     'next-week active h3',
   ]
-
 
   return (
     <>
@@ -45,9 +55,15 @@ function CalendarSmall(props) {
                     date={v.date}
                     name={v.name}
                     picture={v.picture}
+                    remainingSeat={remainingSeat}
                     setRemainingSeat={setRemainingSeat}
                     setCheckList={setCheckList}
                     checkList={checkList}
+                    seatInfo={seatInfo}
+                    setSeatCount={setSeatCount}
+                    setSeatInfo={setSeatInfo}
+                    seatCount={seatCount}
+                    dateFromHome={dateFromHome}
                   />
                 )
               }
@@ -60,9 +76,15 @@ function CalendarSmall(props) {
                     date={v.date}
                     name={v.name}
                     picture={v.picture}
+                    remainingSeat={remainingSeat}
                     setRemainingSeat={setRemainingSeat}
                     setCheckList={setCheckList}
                     checkList={checkList}
+                    seatInfo={seatInfo}
+                    setSeatCount={setSeatCount}
+                    setSeatInfo={setSeatInfo}
+                    seatCount={seatCount}
+                    dateFromHome={dateFromHome}
                   />
                 )
               }

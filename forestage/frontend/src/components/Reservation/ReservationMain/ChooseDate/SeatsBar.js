@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 function SeatsBar(props) {
   const [didMount, setDidMount] = useState(false)
-  const { seatInfo, remainingSeat, setRemainingSeat, seatCount, setSeatCount } =
+  const { seatInfo, remainingSeat, seatCount } =
     props
 
   const rockBar = useRef(null)
@@ -17,12 +17,14 @@ function SeatsBar(props) {
 
   useEffect(() => {
     setDidMount(true)
+
     leftSeat.current.style.display = 'none'
+    console.log(leftSeat.current.style.display,"didmount style")
   }, [])
 
   useEffect(() => {
     if (didMount) {
-      // 點擊後顯示長條圖
+      // 點擊後(remaining seat改變時)顯示長條圖
       leftSeat.current.style.display = 'block'
       let seatWidthInPx = ''
       let totalRemainingSeat = 0
@@ -106,6 +108,9 @@ function SeatsBar(props) {
 
       }
     }
+    // console.log(leftSeat.current.style.display,"update style")
+    // console.log(seatCount,"update seatCount")
+
   }, [seatCount])
 
   return (

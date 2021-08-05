@@ -39,6 +39,7 @@ function Delivery(props) {
   // 免運
   const [addFee, setFee] = useState('')
   const [subTotal, setSubTotal] = useState([])
+  // console.log('sub', subTotal)
   const [name, setName] = useState([])
 
   //彈出
@@ -164,7 +165,7 @@ function Delivery(props) {
               className="mobile-order"
               onClick={() => {
                 setShow(!show)
-                console.log('123')
+                // console.log('123')
               }}
             ></div>
           </div>

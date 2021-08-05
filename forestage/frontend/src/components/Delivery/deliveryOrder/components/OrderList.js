@@ -12,9 +12,14 @@ function OrderList(props) {
     setMcmId,
   } = props
   const { img, name, counts, subTotal, fulltime } = orderAll
-
+  console.log('subTotal', subTotal)
   const [couponName, setCouponName] = useState('')
   const [couponPrice, setCouponPrice] = useState(0)
+  const [mount, setMount] = useState(true)
+
+  useEffect(() => {
+    setMount(false)
+  }, [])
 
   useEffect(() => {
     if (coupon.length > 0) {
@@ -32,7 +37,7 @@ function OrderList(props) {
       }
     }
     setMoney(getTotal() - couponPrice)
-  }, [couponName])
+  }, [couponName, mount])
 
   function getTotal() {
     let total = 0

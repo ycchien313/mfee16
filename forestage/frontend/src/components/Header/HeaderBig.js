@@ -158,7 +158,7 @@ function HeaderBig(props) {
                       <img
                         src="http://localhost:3000/images/header/shopping-cart-solid.png"
                         alt=""
-                        class="cart-image"
+                        className="cart-image"
                       />
                     </a>
                     <div className="header-circle">{totalCountNum}</div>
@@ -188,7 +188,7 @@ function HeaderBig(props) {
             })}
         </div>
         <div className="cart-submit">
-          <h4 class="cart-total">合計: ${totalPrice}</h4>
+          <h4 className="cart-total">合計: ${totalPrice}</h4>
           <Link to={{ pathname: '/delivery' }}>
             <button className="button-orange">下一步</button>
           </Link>

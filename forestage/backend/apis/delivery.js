@@ -66,7 +66,7 @@ router.post('/order', async function (req, res, next) {
     // 處理INSERT資料
     const { name, mobile, address, delivery_time, total, note, member_id,mcm_id,coupon_id,dishList } =req.body.data
     let arr = [name, mobile, address, delivery_time, total, note, member_id,mcm_id ]
-    // console.log(arr)
+    console.log(arr)
 
     let sql = null
     // 餐點詳情
@@ -132,8 +132,7 @@ router.post('/order', async function (req, res, next) {
 
 
   let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
-  [req.body.data.member_id]
-  let memberInfo = await db.connection.queryAsync(getMemberInfo,1)
+  let memberInfo = await db.connection.queryAsync(getMemberInfo,member_id)
 //   console.log(memberInfo[0].name)
   let memberEmail = memberInfo[0].email
 
@@ -208,7 +207,7 @@ router.post('/order', async function (req, res, next) {
                             <td height="22" style="height:22px;" class="em_h20">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#5e7c60; font-weight:bold;">您在${delivery_tim}訂購了餐點</td>
+                            <td class="em_blue em_font_22" align="center" valign="top" style="font-family: Arial, sans-serif; font-size: 26px; line-height: 29px; color:#5e7c60; font-weight:bold;">您在${delivery_time}訂購了餐點</td>
                         </tr>
                         <tr>
                             <td height="15" style="height:15px; font-size:0px; line-height:0px;">&nbsp;</td>

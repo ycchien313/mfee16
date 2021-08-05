@@ -25,14 +25,14 @@ function DeliveryOrder(props) {
     mobile: inputTel,
     address: allAddress,
     delivery_time: orderAll.fulltime,
-    total: money, //額外拉出來
+    total: money,
     note: textArea,
     member_id: memberId,
     mcm_id: mcmId,
     coupon_id: couponId,
     dishList: orderAll.dishList,
   }
-  // console.log(data, 'aaa')
+  console.log(data, 'aaa')
   // console.log(memberId, 'memberId')
 
   function change() {
@@ -47,7 +47,7 @@ function DeliveryOrder(props) {
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    // console.log(memberId)
+    // console.log(money)
     $.ajax({
       url: `http://localhost:3001/delivery/coupon/${memberId}`,
       // url: 'http://localhost:3001/delivery/coupon',
@@ -62,6 +62,7 @@ function DeliveryOrder(props) {
         console.log(err)
       })
   }, [memberId])
+
   useEffect(() => {
     $.ajax({
       url: `http://localhost:3001/delivery/member/${memberId}`,

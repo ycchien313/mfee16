@@ -198,8 +198,10 @@
     }
 
     .takeout {
-      width: 320px;
-      height: 340px;
+      width: 520px;
+      // width: 25.6vw;
+      height: 400px;
+      // height: 20vw;
       position: absolute;
       top: 20vh;
       left: 62vw;
@@ -213,6 +215,8 @@
         ),
         linear-gradient(135deg, #5e7c60, #97bc78, #fded82);
       border: 15px transparent solid;
+      justify-content: center;
+      align-items: center;
     }
   }
 
@@ -293,30 +297,32 @@
   .takeoutDiv {
     h3 {
       padding: 0;
-      margin: 15px 5px;
+      // margin: 15px 5px;
       color: $secondary-green-dark;
     }
 
     position: absolute;
-    padding: 30px 0 0 40px;
+    padding: 30px 0 0 100px;
+    // padding: 30px 0 0 40px;
     margin: auto 0;
 
     .order-time {
       p {
-        font-size: 1.3vw;
+        // font-size: 1.3vw;
+        padding-left: 14px;
         color: $primary-lightbrown;
         font-family: unset;
       }
 
       h3 {
         margin: 0;
-        padding: 0.2vw;
+        // padding: 0.2vw;
         color: $secondary-green-dark;
       }
 
       .input {
         // width: 18vw;
-        width: 200px;
+        width: 80%;
         // height: 2.7vw;
         border: transparent;
         // font-family: $zh-tw-noto;
@@ -352,7 +358,8 @@
 
   .takeoutDiv {
     .add {
-      width: 150px;
+      // width: 150px;
+      width: 100%;
     }
 
     .add-r {

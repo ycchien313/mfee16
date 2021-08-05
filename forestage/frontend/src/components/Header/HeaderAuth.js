@@ -21,6 +21,8 @@ function HeaderAuth(props) {
       title: '登出成功',
       showConfirmButton: false,
       timer: 1000,
+    }).then(function (result) {
+      history.go(0)
     })
   }
 
@@ -75,6 +77,7 @@ function HeaderAuth(props) {
           className="h3"
           onClick={() => {
             localStorage.removeItem('authToken')
+            console.log(props.location.pathname)
             setAuthToken('')
             logoutSwal()
           }}

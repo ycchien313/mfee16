@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import VoteCandidates from '../../../components/Home/VoteCandidates'
+import MobileVoteCandidate from '../../../components/Home/MobileVoteCandidate'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 //
@@ -26,7 +27,7 @@ function FourthScreen(props) {
       method: 'GET',
       dataType: 'json',
     }).then(function (result) {
-      // console.log(result)
+      // // console.log(result)
       setCounts(result)
     })
   }, [])
@@ -37,7 +38,7 @@ function FourthScreen(props) {
     $.ajax({
       url: `http://localhost:3001/home/member_state/${memberId}`,
     }).then(function (result) {
-      console.log('投票狀態:', result[0].vote_valid)
+      // console.log('投票狀態:', result[0].vote_valid)
       setVoteState(result[0].vote_valid)
     })
   }, [memberId])
@@ -62,7 +63,7 @@ function FourthScreen(props) {
       if (value.id === candidateId) {
         value.count++
       }
-      console.log(countsClone)
+      // console.log(countsClone)
       setCounts(countsClone)
     })
   }
@@ -72,7 +73,7 @@ function FourthScreen(props) {
       $.ajax({
         url: `http://localhost:3001/home/member_state/${memberId}`,
       }).then(function (result) {
-        console.log('投票狀態:', result[0].vote_valid)
+        // console.log('投票狀態:', result[0].vote_valid)
         setVoteState(result[0].vote_valid)
       })
   }, [counts])
@@ -107,51 +108,19 @@ function FourthScreen(props) {
       </div>
       <div className="mobile-vote-area">
         <ul className="mobile-vote-ul">
-          <li className="mobile-vote-li">
-            <div className="mobile-vote-li-candidate">
-              <figure>
-                <img src="./image/歌手/林肯公園.jpg" alt="" />
-              </figure>
-              <h4>林肯公園</h4>
-            </div>
-            <h4 className="mobile-vote-li-counts">285票</h4>
-          </li>
-          <li className="mobile-vote-li">
-            <div className="mobile-vote-li-candidate">
-              <figure>
-                <img src="./image/歌手/maroon5.jpg" alt="" />
-              </figure>
-              <h4>馬倫five</h4>
-            </div>
-            <h4 className="mobile-vote-li-counts">333票</h4>
-          </li>
-          <li className="mobile-vote-li">
-            <div className="mobile-vote-li-candidate">
-              <figure>
-                <img src="./image/歌手/楊丞琳.jpg" alt="" />
-              </figure>
-              <h4>楊丞琳</h4>
-            </div>
-            <h4 className="mobile-vote-li-counts">288票</h4>
-          </li>
-          <li className="mobile-vote-li">
-            <div className="mobile-vote-li-candidate">
-              <figure>
-                <img src="./image/歌手/蕭敬騰.jpg" alt="" />
-              </figure>
-              <h4>蕭敬騰</h4>
-            </div>
-            <h4 className="mobile-vote-li-counts">197票</h4>
-          </li>
-          <li className="mobile-vote-li">
-            <div className="mobile-vote-li-candidate">
-              <figure>
-                <img src="./image/歌手/劉德華.jpg" alt="" />
-              </figure>
-              <h4>劉德華</h4>
-            </div>
-            <h4 className="mobile-vote-li-counts">300票</h4>
-          </li>
+          {counts.map(function (value, index) {
+            return (
+              <MobileVoteCandidate
+                key={value.id}
+                name={value.name}
+                counts={value.count}
+                picture={value.picture}
+                setCandidateId={setCandidateId}
+                setCandidateName={setCandidateName}
+                id={value.id}
+              />
+            )
+          })}
         </ul>
       </div>
       {/*  */}

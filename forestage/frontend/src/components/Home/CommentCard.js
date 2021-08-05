@@ -14,7 +14,7 @@ function CommentCard(props) {
     starArr.push(star)
   }
 
-  let path = 'http://localhost:3000/images/home/user/'
+  let path = 'http://localhost:3001'
   let fullPath = path + img
 
   //

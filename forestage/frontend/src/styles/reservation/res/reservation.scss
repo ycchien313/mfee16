@@ -1331,29 +1331,32 @@
   margin-top: -100px;
 }
 
-/* table */
-
-
-.reservation.table-bg {
-  width: 100%;
-  background: url(http://localhost:3000/images/reservation/table-bg.png);
-  background-size: cover;
-  height: 22vw;
-  position: relative;
-  bottom: 8vw;
-}
-
-.swal2-confirm {
-  background: $secondary-green;
-  color: white;
-  font-family: $zh-tw-noto;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  height: 35px;
-  width: 70px;
-  cursor: pointer;
-}
-.swal2-confirm:active {
-  background: darken($secondary-green, 10%);
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+  h1,
+  .h1 {
+    font-size: 1.67rem;
+  }
+  h2,
+  .h2 {
+    font-size: 1.5rem;
+  }
+  h3,
+  .h3 {
+    font-size: 1.33rem;
+  }
+  h4,
+  .h4 {
+    font-size: 1.17rem;
+  }
+  p,
+  .p {
+    font-size: 1rem;
+  }
+  span,
+  .span {
+    font-size: 1rem;
+  }
 }

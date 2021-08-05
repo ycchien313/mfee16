@@ -258,14 +258,14 @@
     background-color: $primary-lightgray;
     width: 100%;
     height: 100%;
-    // position: absolute;
+    // position: relative;
   }
   main {
     /* margin-right: 0; */
     /* justify-content: center; */
     /* display: flex; */
     width: 69vw;
-    height: 100%;
+    min-height: 1550px;
     /* height: 2000px; */
     /* border: 1px solid green; */
     position: relative;
@@ -405,6 +405,17 @@
     background: $secondary-lightyellow;
     border-radius: 30px;
     padding: 6px;
+    display: flex;
+    border: none;
+  }
+  .mynews {
+    /* position: relative; */
+    /* top: 64px; */
+    /* min-width: 700px; */
+    // height: 150px;
+    // background: $secondary-lightyellow;
+    border-radius: 30px;
+    // padding: 6px;
     display: flex;
     border: none;
   }
@@ -612,6 +623,11 @@
     margin-top: 111px;
     /* position: relative; */
   }
+  .my{
+    /* height: 100%; */
+    margin-top: 0px;
+    /* position: relative; */
+  }
   .commentstar select {
     display: none;
   }
@@ -649,20 +665,20 @@
     .commentstar select:focus {
       outline: none;
     }
-    @media screen and (max-width: 500px) {
-      main{
-        margin-bottom: 30vw;
-      }
-      .commentstar select {
-        height: 50px;
-      }
-      .commentstar {
-        margin-top: 20vw;
-      }
-      .write {
-        margin-top: 9vw;
-        left: 55vw;
-      }
+  }
+  @media screen and (max-width: 500px) {
+    main{
+      margin-bottom: 30vw;
+    }
+    .commentstar select {
+      height: 50px;
+    }
+    .commentstar {
+      margin-top: 20vw;
+    }
+    .write {
+      margin-top: 9vw;
+      left: 55vw;
     }
   }
   .star {

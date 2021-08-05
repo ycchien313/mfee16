@@ -92,6 +92,7 @@ function ThirdScreen(props) {
       url: `http://localhost:3001/home/comment/${targetId}`,
       method: 'GET',
       dataType: 'json',
+      // async: false,
     }).then(function (result) {
       setComment(result)
     })

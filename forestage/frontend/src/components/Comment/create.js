@@ -153,6 +153,7 @@ function Create(props) {
   // })
   return (
     <>
+    <div class="createjsscss">
       <div class="createeditor">
         <img
           class="close"
@@ -558,6 +559,7 @@ function Create(props) {
             ></img>
           </button>
         </div> */}
+      </div>
       </div>
     </>
   )

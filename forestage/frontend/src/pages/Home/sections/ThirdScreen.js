@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
 import CommentCard from '../../../components/Home/CommentCard'
-import MobileSinger from '../../../components/Header/MobileSinger'
+import MobileSinger from '../../../components/Home/MobileSinger'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
 
@@ -96,7 +96,12 @@ function ThirdScreen(props) {
       setComment(result)
     })
   }, [targetId])
+<<<<<<< HEAD
   let fullPath = 'http://localhost:3000/images/home/歌手/' + singerImg
+=======
+  let fullPath = 'http://localhost:3000/images/common/' + singerImg
+
+>>>>>>> home
   //主要頁面
   let ThirdScreen = (
     <div id="thirdScreen">

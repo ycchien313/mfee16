@@ -27,7 +27,7 @@ function MobileReservation(props) {
         >
           <figure>
             <img
-              src={`http://localhost:3000/images/home/歌手/${name}.jpg`}
+              src={`http://localhost:3000/images/common/${name}.jpg`}
               alt=""
             />
           </figure>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
 import CommentCard from '../../../components/Home/CommentCard'
-import MobileSinger from '../../../components/Header/MobileSinger'
+import MobileSinger from '../../../components/Home/MobileSinger'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
 

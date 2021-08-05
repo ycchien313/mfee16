@@ -84,9 +84,9 @@ function ModalPassword(props) {
           title: '修改成功',
           showConfirmButton: false,
           timer: 1000,
+        }).then(() => {
+          handleClose()
         })
-
-        handleClose()
 
         setDataLoading(false)
       }, 1000)
@@ -161,8 +161,8 @@ function ModalPassword(props) {
     <>
       <Modal className="password" show={show} onHide={handleClose}>
         <Modal.Header className="modal-header">
-          <Modal.Title>
-            <span className="modal-title h4">重設密碼</span>
+          <Modal.Title className="modal-title">
+            <span className="h4">重設密碼</span>
           </Modal.Title>
           <button
             type="button"

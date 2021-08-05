@@ -30,10 +30,12 @@ passport.use(
             let sql = null;
             let dbMember = null;
             let resData = null;
+            let signup = 0;
             console.log(profile);
             const name = profile.displayName;
             const email = profile.emails[0].value;
             const avatar = profile.photos[0].value;
+            const password = 'elfin';
 
             try {
                 // 執行 SQL，檢查有無該使用者
@@ -42,6 +44,9 @@ passport.use(
 
                 // 查無該會員的 email → 註冊
                 if (dbMember.length == 0) {
+                    signup = 1;
+                    const hash = await bcrypt.hashAsync(password, 10);
+
                     // 執行 SQL，新增會員至資料庫
                     sql =
                         'INSERT INTO member(name, email, password, avatar) VALUES(?, ?, ?, ?)';
@@ -72,6 +77,7 @@ passport.use(
                     result: '成功',
                     msg: '登入成功',
                     data: dbMember,
+                    signup: signup,
                 };
 
                 return cb(null, resData); //cb(error, data)
@@ -116,7 +122,7 @@ router.post(
         //登入成功
         const memberId = req.user.data[0].member_id;
         const email = req.user.data[0].email;
-        const password = req.user.data[0].password;
+        const signup = req.user.signup;
         //建立 token
         const token = jwt.setToken({ memberId });
 
@@ -126,7 +132,7 @@ router.post(
             msg: '登入成功',
             memberId: memberId,
             email: email,
-            password: password,
+            signup: signup,
             token: token,
         };
 
@@ -150,10 +156,12 @@ passport.use(
             let sql = null;
             let dbMember = null;
             let resData = null;
+            let signup = 0;
             console.log(profile);
             const name = profile.displayName;
             const email = profile.emails[0].value;
             const avatar = profile._json.picture;
+            const password = 'elfin';
 
             console.log(name);
             console.log(email);
@@ -166,13 +174,16 @@ passport.use(
 
                 // 查無該會員的 email → 註冊
                 if (dbMember.length == 0) {
+                    signup = 1;
+                    const hash = await bcrypt.hashAsync(password, 10);
+
                     // 執行 SQL，新增會員至資料庫
                     sql =
                         'INSERT INTO member(name, email, password, avatar) VALUES(?, ?, ?, ?)';
                     const dbResult = await conn.queryAsync(sql, [
                         name,
                         email,
-                        email,
+                        hash,
                         avatar,
                     ]);
 
@@ -196,6 +207,7 @@ passport.use(
                     result: '成功',
                     msg: '登入成功',
                     data: dbMember,
+                    signup: signup,
                 };
 
                 return cb(null, resData); //cb(error, data)
@@ -240,7 +252,7 @@ router.post(
         //登入成功
         const memberId = req.user.data[0].member_id;
         const email = req.user.data[0].email;
-        const password = req.user.data[0].password;
+        const signup = req.user.signup;
         //建立 token
         const token = jwt.setToken({ memberId });
 
@@ -250,10 +262,11 @@ router.post(
             msg: '登入成功',
             memberId: memberId,
             email: email,
-            password: password,
+            signup: signup,
             token: token,
         };
 
+        console.log(resData);
         res.status(200).json(resData);
     }
 );

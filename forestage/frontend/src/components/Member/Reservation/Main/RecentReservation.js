@@ -1,20 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import RecentReservationDetailModal from './RecentReservationDetailModal'
-import { useMediaQuery } from 'react-responsive'
+import RecentReservationCancelModal from './RecentReservationCancelModal'
 
 function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [didMount, setDidMount] = useState(true)
-  const [show, setShow] = useState(false)
   const [orders, setOrders] = useState([])
   const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [show, setShow] = useState(false)
+  const [showCancelModal, setShowCancelModal] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
+  const handleClose = () => {
+    setShow(false)
+    setShowCancelModal(false)
+    setTimeout(() => {
+      setBootstrapCdnLoad(false)
+    }, 100)
+  }
+  const handleShow = (modalName) => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      modalName === 'detail' ? setShow(true) : setShowCancelModal(true)
+    }, 20)
+  }
 
   // 取得訂位資料
   const fetchRecentReservation = async () => {
@@ -56,7 +70,14 @@ function RecentReservation(props) {
     <>
       <div className="content-foot">
         <div className="btns-container">
-          <button className="cancel-resv-btn guide-button">取消訂位</button>
+          <button
+            className="cancel-resv-btn guide-button"
+            onClick={() => {
+              handleShow('cancel')
+            }}
+          >
+            取消訂位
+          </button>
           <button className="update-resv-btn orange-guide-button">
             修改訂位內容
           </button>
@@ -95,16 +116,31 @@ function RecentReservation(props) {
     </>
   )
 
+  // Bootstrap Cdn
+  const bootstrapCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapCdn}
+
+      {/* 詳細訂單視窗 */}
       <RecentReservationDetailModal
         show={show}
+        handleClose={handleClose}
+        memberId={memberId}
+        reservationId={reservationId}
+      />
+      {/* 取消訂單視窗 */}
+      <RecentReservationCancelModal
+        showCancelModal={showCancelModal}
         handleClose={handleClose}
         memberId={memberId}
         reservationId={reservationId}
@@ -126,7 +162,7 @@ function RecentReservation(props) {
                             className="fas fa-eye"
                             onClick={() => {
                               setReservationId(v.reservation_id)
-                              handleShow()
+                              handleShow('detail')
                             }}
                           ></i>
                         </div>

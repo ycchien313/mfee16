@@ -6,14 +6,23 @@ import HistoryReservationDetailModal from './HistoryReservationDetailModal'
 function HistoryReservation(props) {
   const { memberId, setContentIsLoaded } = props
   const [show, setShow] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const [orders, setOrders] = useState([
     { reservationId: '', date: '', status: '' },
   ])
   const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const handleClose = () => {
+    setBootstrapCdnLoad(false)
+    setShow(false)
+  }
+  const handleShow = () => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      setShow(true)
+    }, 20)
+  }
 
   // 取得歷史訂位資料
   const fetchHistoryReservation = async () => {
@@ -64,14 +73,20 @@ function HistoryReservation(props) {
     </>
   )
 
+  const bootstrapModalCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapModalCdn}
+
       <HistoryReservationDetailModal
         show={show}
         handleClose={handleClose}

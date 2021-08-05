@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { withRouter, useHistory } from 'react-router'
 import axios from 'axios'
 import AuthContext from './AuthContext'
 import { setAuthToken } from './utils'
@@ -9,6 +10,7 @@ import GoogleLogin from 'react-google-login'
 function AuthSocial(props) {
   const { setMember } = useContext(AuthContext)
   const { signinScreen, setShowAuthModal, setErrorMsg } = props
+  const history = useHistory()
 
   // 對 server 請求
   const serverRequest = axios.create({
@@ -32,7 +34,7 @@ function AuthSocial(props) {
     const result = data.result
     const msg = data.msg
 
-    // console.log('google response: ', googleResponse)
+    console.log('google response: ', googleResponse)
 
     // 登入失敗 或 註冊失敗，回傳錯誤訊息
     if (result !== '成功') {
@@ -42,7 +44,7 @@ function AuthSocial(props) {
     // 登入成功 或 註冊成功
     const memberId = data.memberId
     const email = data.email
-    const password = data.password
+    const signup = data.signup
     const token = data.token
     // 設定 token 給 localStorage
     setAuthToken(token)
@@ -56,11 +58,14 @@ function AuthSocial(props) {
     await loading()
     await transition('登入成功')
 
-    // 密碼未修改者，設定 email 到 localStorage，跳出未修改訊息
-    if (email === password) {
+    // 第一次登入(註冊)，設定 email 到 localStorage，跳出未修改訊息
+    if (signup === 1) {
       localStorage.setItem('email', email)
       await changePasswordTip('Google')
     }
+
+    // 首頁則強制更新
+    props.location.pathname === '/' && history.go(0)
 
     // 關閉彈出視窗
     setShowAuthModal(false)
@@ -90,7 +95,7 @@ function AuthSocial(props) {
     // 登入成功 或 註冊成功
     const memberId = data.memberId
     const email = data.email
-    const password = data.password
+    const signup = data.signup
     const token = data.token
     // 設定 token 給 localStorage
     setAuthToken(token)
@@ -104,12 +109,14 @@ function AuthSocial(props) {
     await loading()
     await transition('登入成功')
 
-    // 密碼未修改者，設定 email 到 localStorage，跳出未修改訊息
-    if (email === password) {
+    // 第一次登入(註冊)，設定 email 到 localStorage，跳出未修改訊息
+    if (signup === 1) {
       localStorage.setItem('email', email)
       await changePasswordTip('Facebook')
     }
 
+    // 首頁則強制更新
+    props.location.pathname === '/' && history.go(0)
     // 關閉彈出視窗
     setShowAuthModal(false)
   }
@@ -142,7 +149,7 @@ function AuthSocial(props) {
       )
     })
 
-  // 未修改密碼提示訊息
+  // 第一次登入，修改密碼提示訊息
   const changePasswordTip = (social) =>
     new Promise((resolve, reject) => {
       resolve(
@@ -150,7 +157,8 @@ function AuthSocial(props) {
           icon: 'info',
           title:
             '提醒：請記得至<a href="https://127.0.0.1/member/profile" style="text-decoration: none; color:#f5b54d";>會員專區</a>修改密碼',
-          text: `第一次登入，密碼為您的 ${social} E-Mail`,
+          text: `第一次 ${social} 登入，密碼為 elfin`,
+          confirmButtonColor: '#97bc78',
         })
       )
     })
@@ -242,4 +250,4 @@ function AuthSocial(props) {
   return <>{signinScreen ? signinSocial : signupSocial}</>
 }
 
-export default AuthSocial
+export default withRouter(AuthSocial)

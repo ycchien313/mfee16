@@ -28,7 +28,8 @@
     "react-transition-group": "^4.4.2",
     "sass": "^1.35.2",
     "sweetalert2": "^11.0.20",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "youtube-v3-api": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

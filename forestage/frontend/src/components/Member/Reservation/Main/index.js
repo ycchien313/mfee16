@@ -6,7 +6,7 @@ import Tab from './Tab'
 import RecentReservation from './RecentReservation'
 import HistoryReservation from './HistoryReservation'
 import '../../../../styles/member/aside.scss'
-import '../../../../styles/member/reservation.scss'
+import '../../../../styles/member/member_reservation.scss'
 
 function Main(props) {
   const { pagename } = props
@@ -60,7 +60,7 @@ function Main(props) {
 
   return (
     <>
-      <div className="reservation">
+      <div className="member-reservation">
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}

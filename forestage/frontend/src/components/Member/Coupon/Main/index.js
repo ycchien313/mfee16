@@ -5,7 +5,7 @@ import Breadcrumb from '../../Common/Main/Breadcrumb'
 import Tab from './Tab'
 import RecentCoupon from './RecentCoupon'
 import HistoryCoupon from './HistoryCoupon'
-import '../../../../styles/member/coupon.scss'
+import '../../../../styles/member/member_coupon.scss'
 
 function Main(props) {
   const { pagename } = props
@@ -64,7 +64,7 @@ function Main(props) {
   )
   return (
     <>
-      <div className="coupon">
+      <div className="member-coupon">
         <div className="main-container">
           {/* 左側：導覽列 */}
           <Aside

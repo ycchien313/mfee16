@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../../../../styles/member/profile.scss'
+import '../../../../styles/member/member_profile.scss'
 import axios from 'axios'
 import Aside from '../../Common/Main/Aside'
 import Breadcrumb from '../../Common/Main/Breadcrumb'
@@ -46,7 +46,7 @@ function Main(props) {
 
   return (
     <>
-      <div className="profile">
+      <div className="member-profile">
         <main className="main">
           <div className="main-container">
             {/* <!-- 左側：導覽列 --> */}

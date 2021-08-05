@@ -5,7 +5,7 @@ import Breadcrumb from '../../Common/Main/Breadcrumb'
 import Tab from './Tab'
 import RecentDelivery from './RecentDelivery'
 import HistoryDelivery from './HistoryDelivery'
-import '../../../../styles/member/delivery.scss'
+import '../../../../styles/member/member_delivery.scss'
 
 function Main(props) {
   const { pagename } = props
@@ -59,7 +59,7 @@ function Main(props) {
 
   return (
     <>
-      <div className="delivery">
+      <div className="member_delivery">
         <main className="main">
           <div className="main-container">
             {/* 左側：導覽列 */}

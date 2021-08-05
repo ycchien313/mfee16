@@ -4,6 +4,8 @@ import '../../styles/dish/dish.scss'
 import Food from '../../components/Dish/Food'
 import FoodMiddle from '../../components/Dish/FoodMiddle'
 import Footer from '../../components/Footer'
+import Header from '../../components/Header'
+
 function Dish() {
   // 存取api
   const [dishState, setDishState] = useState('主餐')
@@ -71,6 +73,7 @@ function Dish() {
 
   return (
     <>
+      <Header />
       <div id="dish">
         <div className="hero-section">
           <div className="top-wave">

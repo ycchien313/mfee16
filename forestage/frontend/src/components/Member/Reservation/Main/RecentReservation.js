@@ -19,9 +19,8 @@ function RecentReservation(props) {
   const handleClose = () => {
     setShow(false)
     setShowCancelModal(false)
-    setTimeout(() => {
-      setBootstrapCdnLoad(false)
-    }, 100)
+    setBootstrapCdnLoad(false)
+
   }
   const handleShow = (modalName) => {
     setBootstrapCdnLoad(true)

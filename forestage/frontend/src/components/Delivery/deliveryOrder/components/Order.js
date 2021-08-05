@@ -25,7 +25,7 @@ function Order(props) {
     }).then(function (result) {
       setInputTel(result[0].mobile)
       setInputText(result[0].name)
-      console.log(result)
+      // console.log(result)
     })
   }
 
@@ -42,7 +42,7 @@ function Order(props) {
         <div className="head">
           <h3>訂位人資料</h3>
           <button
-            value={member}
+            defaultValue={member}
             onClick={(e) => {
               getData()
             }}
@@ -98,7 +98,7 @@ function Order(props) {
               id=""
               cols="30"
               rows="10"
-              maxlength="150"
+              maxLength="150"
               placeholder="請輸入備註事項"
               value={textArea}
               onChange={(event) => {

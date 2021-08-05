@@ -17,6 +17,12 @@ router.get("/singer_today", async function (req, res, next) {
     // let queryResult = current + "T16:00:00.000Z";
     res.send(queryResult[0]);
 });
+// 手機板歌手資訊
+router.get("/singer_all", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync("SELECT * FROM singer");
+    res.send(queryResult);
+});
+
 // 取得登入後會員詳情
 router.get("/member_state/:memberId", async function (req, res, next) {
     let queryResult = await db.connection.queryAsync(

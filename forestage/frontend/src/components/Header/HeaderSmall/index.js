@@ -4,6 +4,7 @@ import DownMenu from './DownMenu'
 import HeaderAuth from '../HeaderAuth'
 import { CSSTransition } from 'react-transition-group'
 import HeaderSmallCart from './HeaderSmallCart'
+import { Link } from 'react-router-dom'
 import $ from 'jquery'
 
 function HeaderSmall(props) {
@@ -38,7 +39,9 @@ function HeaderSmall(props) {
     <>
       <div className="wrapper">
         <div className="small-header">
-          <div className="logo"></div>
+          <Link to={{ pathname: '/' }}>
+            <div className="logo"></div>
+          </Link>
           <div className="menu-right">
             <HeaderAuth />
             <div className="cart">

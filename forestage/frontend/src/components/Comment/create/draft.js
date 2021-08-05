@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
 import { Editor } from 'react-draft-wysiwyg'
-import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import '../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.scss'
 import { EditorState, convertToRaw } from 'draft-js'
 import draftToHtml from 'draftjs-to-html'
 
 export default class TextEditor extends Component {
   constructor(props) {
-    // console.log(props)
-    // const { insertArticle, setInsertArticle } = props
-    console.log(props)
     super(props)
     this.state = {
-      // editorState: props.inserArticle.content,
       editorState: EditorState.createEmpty(),
       message: '',
-      // insertArticle: insertArticle,
     }
-
-    this.onEditorStateChange = this.onEditorStateChange.bind(this)
   }
   onEditorStateChange(editorState, message) {
     this.setState(
@@ -26,21 +19,9 @@ export default class TextEditor extends Component {
         message: draftToHtml(convertToRaw(editorState.getCurrentContent())),
       },
       () => {
-        // let newArticle = { ...insertArticle }
-        // newArticle.content = this.state.message
-        // setInsertArticle(newArticle)
         console.log(this.state.message)
-        // let newObj = { ...this.insertArticle }
-        // newObj.content = this.state.message
-        // this.setInsertArticle(newObj)
       }
     )
-  }
-  componentDidUpdate(prevProps) {
-    // 常見用法（別忘了比較 prop）：
-    if (this.props.content !== prevProps.content) {
-      this.insertArticle({ content: this.state.message })
-    }
   }
 
   render() {
@@ -131,6 +112,7 @@ export default class TextEditor extends Component {
         wrapperClassName="demo-wrapper"
         editorClassName="demo-editor"
         onEditorStateChange={this.onEditorStateChange}
+        // content={editorState.message}
       />
     )
   }

@@ -82,7 +82,7 @@ function Aside(props) {
                     return (
                       <li key={i}>
                         <span>{v[0]}</span>
-                        <span className="aside-sp">{v[1]}</span>
+                        <span className="aside-sp">{v[1]}份</span>
                       </li>
                     )
                   }

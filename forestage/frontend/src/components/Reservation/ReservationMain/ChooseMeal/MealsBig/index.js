@@ -92,7 +92,7 @@ function MealsBig(props) {
     <>
       <Tween
         from={{
-          x: '-30vw',
+          x: '-20vw',
         }}
         to={{
           x: '0px',
@@ -101,7 +101,7 @@ function MealsBig(props) {
             start: '2300px center',
             end: '2800px center',
             scrub: 1,
-            markers: true,
+            markers: false,
           },
         }}
       >

@@ -18,7 +18,7 @@ function ReservationPage(props) {
   let dateFromHome = {}
   if (props.location.state !== undefined) {
     dateFromHome = props.location.state.select
-    if (props.location.state.prevPath === '/home') {
+    if (props.history.location.state.prevPath === '/home') {
       sessionStorage.clear()
       console.log(props.location.state.prevPath)
     }

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import {useHistory} from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import StyledLink from '../StyledLink'
 
 function CheckList(props) {
+  const history = useHistory()
   const {
     checkList,
     setCheckList,
@@ -144,6 +146,7 @@ function CheckList(props) {
         <StyledLink
           onClick={(e) => {
             handleSubmit(e)
+            history.push()
           }}
           to={{
             pathname: '/reservation/checkout',

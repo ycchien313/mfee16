@@ -51,7 +51,7 @@ function MobileSinger(props) {
       <div className="mobile-singer">
         <div className="mobile-singer-innerborder">
           <figure className="mobile-singer-figure">
-            <img src={'http://localhost:3000/images/home/歌手/' + img} alt="" />
+            <img src={'http://localhost:3000/images/common/' + img} alt="" />
           </figure>
           <div className="mobile-singer-info">
             <h4 className="name h3">{name}</h4>

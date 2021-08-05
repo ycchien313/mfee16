@@ -138,8 +138,9 @@ function HeaderBig(props) {
                     </Link>
                   </li>
                   <li className="bottom-border-radius">
-                    <Link to={{ pathname: '/member/coupon' }}></Link>
-                    <a href="#/">折價卷</a>
+                    <Link to={{ pathname: '/member/coupon' }}>
+                      <a href="#/">折價卷</a>
+                    </Link>
                   </li>
                 </ul>
               </li>

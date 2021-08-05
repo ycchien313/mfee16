@@ -101,14 +101,14 @@ function ChooseMeal(props) {
             <h3 className="step">選擇餐點</h3>
             <Tween
               from={{
-                x: '-20vw',
+                x: '-10vw',
               }}
               to={{
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
-                  start: '2200px center',
-                  end: '2700px center',
+                  start: '2000px center',
+                  end: '2500px center',
                   scrub: 1,
                   markers: true,
                 },

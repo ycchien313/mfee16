@@ -30,7 +30,7 @@ function Day(props) {
   function getSeatCount() {
     let newObj = {}
     for (let i = 0; i < seatInfo.length; i++) {
-      console.log("seatInfo", seatInfo)
+      console.log('seatInfo', seatInfo)
       const foundRemainSeats = remainingSeat.find((item) => {
         return item.seat_id === seatInfo[i].seat_id
       })
@@ -55,11 +55,11 @@ function Day(props) {
     if (didMount) {
       getSeatCount()
     }
-   // 得到資訊後才執行 
+    // 得到資訊後才執行
   }, [remainingSeat, seatInfo])
 
   function getRemainingSeat(date1) {
-  let url = `http://localhost:3001/reservation/${date1}`
+    let url = `http://localhost:3001/reservation/${date1}`
     // console.log("url in rm seat:", date1)
     axios.get(url).then((result) => {
       console.log('result.data:', result.data)
@@ -76,7 +76,6 @@ function Day(props) {
       }
     })
   }
-
 
   function updateCheckList(date, name) {
     let newObj = { ...checkList }
@@ -106,18 +105,18 @@ function Day(props) {
 
   useEffect(() => {
     // 從歌手頁傳來資料
-    if (date === dateFromHome.date){
+    if (date === dateFromHome.date) {
       // 歌手active樣式
       $(day.current).addClass('active')
       $(day.current).siblings().removeClass('active')
       $(day.current).parent().siblings().find('.day').removeClass('active')
       //前一頁返回時維持選取
-      setActiveDate(dateFromHome.date) 
+      setActiveDate(dateFromHome.date)
       // 長條圖
       // let url = `http://localhost:3001/reservation/${dateFromHome.date}`
       // console.log('url:', url)
       getRemainingSeat(dateFromHome.date)
-    
+
       // 帶入checkList
       updateCheckList(dateFromHome.date, dateFromHome.singer)
     }

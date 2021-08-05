@@ -162,7 +162,7 @@ function ChooseSeat(props) {
             <h3 class="step two">選擇座位</h3>
             <Tween
               from={{
-                x: '-30vw',
+                x: '-10vw',
               }}
               to={{
                 x: '0px',
@@ -186,7 +186,7 @@ function ChooseSeat(props) {
         </div>
         <Tween
           from={{
-            x: '-30vw',
+            x: '-10vw',
           }}
           to={{
             x: '0px',

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 function SeatsBar(props) {
   const [didMount, setDidMount] = useState(false)
-  const { seatInfo, remainingSeat, seatCount } =
-    props
+  const { seatInfo, remainingSeat, seatCount } = props
 
   const rockBar = useRef(null)
   const middleBar = useRef(null)
@@ -19,7 +18,7 @@ function SeatsBar(props) {
     setDidMount(true)
 
     leftSeat.current.style.display = 'none'
-    console.log(leftSeat.current.style.display,"didmount style")
+    console.log(leftSeat.current.style.display, 'didmount style')
   }, [])
 
   useEffect(() => {
@@ -88,36 +87,36 @@ function SeatsBar(props) {
 
       // 若座位數為0，移除尾部波浪樣式
       seatCount[1] === 0
-        ? (rockBarend.current.style.display = 'none')
-        : (rockBarend.current.style.display = 'block')
+        ? (rockBarend.current.style.visibility = 'hidden')
+        : (rockBarend.current.style.visibility = 'visible')
 
       seatCount[2] === 0
-        ? (middleBarend.current.style.display = 'none')
-        : (middleBarend.current.style.display = 'block')
+        ? (middleBarend.current.style.visibility = 'hidden')
+        : (middleBarend.current.style.visibility = 'visible')
 
       seatCount[3] === 0
-        ? (backBarend.current.style.display = 'none')
-        : (backBarend.current.style.display = 'block')
+        ? (backBarend.current.style.visibility = 'hidden')
+        : (backBarend.current.style.visibility = 'visible')
 
       if (seatCount[1] === 0 && seatCount[2] === 0 && seatCount[3] === 0) {
         barBackground.current.style.justifyContent = 'center'
         infoText.current.style.display = 'block'
-      }else{
+      } else {
         barBackground.current.style.justifyContent = 'initial'
         infoText.current.style.display = 'none'
-
       }
     }
     // console.log(leftSeat.current.style.display,"update style")
     // console.log(seatCount,"update seatCount")
-
   }, [seatCount])
 
   return (
     <>
       <div className="left-seat" ref={leftSeat}>
         <div className="bar-background" ref={barBackground}>
-          <p className="h4" ref={infoText}>本日座位已售罄</p>
+          <p className="h4" ref={infoText}>
+            本日座位已售罄
+          </p>
           <div className="bar-length" ref={barLength}>
             <div className="rock-bar" ref={rockBar}></div>
             <div className="rock-bar-end" ref={rockBarend}></div>

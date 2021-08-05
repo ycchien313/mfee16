@@ -71,7 +71,6 @@ function Day(props) {
     })
   }
 
-  // checklist name一直抓到最後一個歌手名稱
 
   function updateCheckList(date, name) {
     let newObj = { ...checkList }
@@ -140,7 +139,7 @@ function Day(props) {
         className="day "
         ref={day}
         onClick={() => {
-          getRemainingSeat()
+          getRemainingSeat(date)
           updateCheckList(date, name)
           setActiveDate(date)
         }}

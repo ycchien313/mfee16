@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-// import RecentReservationCancelModal from './RecentReservationCancelModal'
+import RecentDeliveryCancelModal from './RecentDeliveryCancelModal'
 
 function RecentDelivery(props) {
   const { memberId, setContentIsLoaded } = props
   const [didMount, setDidMount] = useState(true)
+  const [deliveryId, setDeliveryId] = useState('')
   const [orders, setOrders] = useState([
     {
       deliveryId: '',
@@ -158,12 +159,12 @@ function RecentDelivery(props) {
       {bootstrapCdnLoad && bootstrapCdn}
 
       {/* 取消訂單視窗 */}
-      {/* <RecentReservationCancelModal
+      <RecentDeliveryCancelModal
         showCancelModal={showCancelModal}
         handleClose={handleClose}
         memberId={memberId}
         deliveryId={deliveryId}
-      /> */}
+      />
 
       {orders.length > 0
         ? [
@@ -217,7 +218,13 @@ function RecentDelivery(props) {
                     {/* 按鈕列 */}
                     <div className="content-foot">
                       <div className="btns-container">
-                        <button className="cancel-resv-btn guide-button">
+                        <button
+                          className="cancel-resv-btn guide-button"
+                          onClick={() => {
+                            setDeliveryId(v.deliveryId)
+                            handleShow()
+                          }}
+                        >
                           取消訂單
                         </button>
                       </div>

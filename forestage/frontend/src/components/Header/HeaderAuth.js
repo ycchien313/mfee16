@@ -24,11 +24,6 @@ function HeaderAuth() {
   useEffect(() => {
     const token = localStorage.getItem('authToken')
     token === null ? setAuthToken(null) : setAuthToken(token)
-<<<<<<< HEAD
-=======
-
-    reloadPage()
->>>>>>> dish
   }, [authToken, showAuthModal])
 
   const loginDom = (

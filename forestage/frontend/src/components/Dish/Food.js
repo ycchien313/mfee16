@@ -1,8 +1,8 @@
 import React from 'react'
 
 function Food(props) {
-  let { name, price, introduction, image_realistic } = props
-  let defaulDomain = 'http://localhost:3000/images/dish/'
+  let { name, price, introduction, image_realistic, star, tag_id } = props
+  let defaulDomain = 'http://localhost:3000/images/common/'
   return (
     <>
       <div className="pizza food-m">
@@ -18,7 +18,7 @@ function Food(props) {
                   <div className="empty_star">★★★★★</div>
                   <div className="full_star">★★★★★</div>
                 </div>
-                <div className="h4">(222)</div>
+                <div className="h4">{}</div>
               </div>
             </div>
             <div className="link-top"></div>

@@ -21,6 +21,7 @@ function Home() {
   const [singerName, setSingerName] = useState()
   const [singerImg, setSingerImg] = useState()
   const [singerIntroduction, setSingetIntroduction] = useState()
+  const [singerDate, setSingerDate] = useState()
 
   // 登入狀態
   const [loginDetail, setLoginDetail] = useState()
@@ -43,6 +44,10 @@ function Home() {
       setSingerName(result.name)
       setSingerImg(result.picture)
       setSingetIntroduction(result.introduction)
+      // 處理時間格式
+      let fullDate = [...result.date]
+      let date = fullDate.slice(5).join('').replace(/-/g, '/')
+      setSingerDate(date)
     })
     $('.home').on('click', function () {
       $('.cart-big').addClass('disabled')
@@ -90,9 +95,9 @@ function Home() {
         <FirstScreen
           singerName={singerName}
           singerImg={singerImg}
-          singerDate={current}
+          singerDate={singerDate}
         />
-        <SecondScreen singerName={singerName} />
+        <SecondScreen singerName={singerName} singerDate={singerDate} />
         <ThirdScreen
           singerName={singerName}
           singerImg={singerImg}

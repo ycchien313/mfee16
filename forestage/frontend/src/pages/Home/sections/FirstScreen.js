@@ -46,7 +46,7 @@ function FirstScreen(props) {
       {/* <!-- for mobile device end --> */}
 
       <div className="card">
-        <div className="cardTitle h2">本日歌手</div>
+        <div className="cardTitle h2">近期歌手</div>
         <div
           className="cardBody"
           ref={(element) => {

@@ -37,6 +37,15 @@ router.get("/16", async (req, res) => {
     // res.json(result)
     res.send(commentAll)
 });
+//顯示我的評論所有文章
+router.get("/mycomment/16", async (req, res) => {
+
+    // console.log("上面")
+    console.log(req.query.member_id,"ID")
+    let myCommentAll = await db.connection.queryAsync('SELECT * FROM article WHERE member_id=? ORDER BY article_id DESC',[req.query.member_id]);
+    // res.json(result)
+    res.send(myCommentAll)
+});
 // 最新消息
 router.get("/news", async (req, res) => {
     let commentNews = await db.connection.queryAsync('SELECT * FROM news WHERE valid=1 ORDER BY news_id DESC');
@@ -124,18 +133,27 @@ router.post("/createmessage", async (req, res) => {
 //     // res.json(result)
 //     res.send(boomArticle)
 // });
+
 //點擊文章的相關留言
 router.get("/article/:message", async (req, res) => {
     let commentMessage = await db.connection.queryAsync('SELECT message.message_id, message.message, message.create_time, member.name, member.avatar FROM message,member WHERE article_id=? AND message.member_id=member.member_id ORDER BY message_id DESC',[req.params.message]);
     // res.json(result)
     res.send(commentMessage)
 });
+
+
 // 點擊標籤的相關文章
 router.get("/:tag", async (req, res) => {
     let commentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id ORDER BY article_id DESC',[req.params.tag]);
     // res.json(result)
     res.send(commentArticle)
 });
-
-
+// 點擊標籤的相關文章
+router.get("/mycomment/:tag", async (req, res) => {
+    console.log(req.query.member_id,"tag的member_id")
+    console.log(req.params.tag,"tag的tag_id")
+    let myCommentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id AND member_id=? ORDER BY article_id DESC',[req.params.tag,req.query.member_id]);
+    // res.json(result)
+    res.send(myCommentArticle)
+});
 module.exports = router;

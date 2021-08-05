@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import React, { useState } from 'react'
 import AuthContext from './components/Auth/AuthContext'
 // import Auth from './pages/Auth'
+import Mycomment from './pages/Comment/mycomment'
 import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
 import Dish from './pages/Dish'
@@ -20,6 +21,9 @@ function App() {
           {/* <Route path="/auth/">
           <Auth />
         </Route> */}
+        <Route path="/comment/myComment">
+            <Mycomment />
+          </Route>
           <Route path="/comment/">
             <Comment />
           </Route>

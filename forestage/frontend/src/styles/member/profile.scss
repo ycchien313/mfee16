@@ -1,6 +1,4 @@
 .profile {
-  @import '~bootstrap/scss/bootstrap';
-  @import '../member/modal.scss';
   @import '../common/global.scss';
 
   @keyframes slidein-main {
@@ -329,6 +327,20 @@
   }
 
   /* 個人資料 */
+  /* 性別 */
+  .right-side .personal-info-container .table-container .info-row:nth-child(3) {
+    .info-col:nth-child(2) {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      input[type='radio'] {
+        width: 20px;
+        margin: 0 5px 0 25px;
+      }
+    }
+  }
+
   .right-side .personal-info-container .table-container .info-row:nth-child(6) {
     margin: 8px 0;
     padding-bottom: 15px;

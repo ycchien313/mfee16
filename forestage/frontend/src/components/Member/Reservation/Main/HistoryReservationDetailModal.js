@@ -33,7 +33,7 @@ function ReservationDetailModal(props) {
       }
     )
     const data = response.data.data
-    // console.log(response)
+    console.log(response)
 
     // 組合 dish_name, dish_count 成物件
     const dishes = () => {
@@ -68,6 +68,7 @@ function ReservationDetailModal(props) {
 
   useEffect(() => {
     if (didMount === false) {
+      console.log(reservationId)
       // 取得後端資料
       const fetchData = async () => {
         const order = await fetchDetailReservation()

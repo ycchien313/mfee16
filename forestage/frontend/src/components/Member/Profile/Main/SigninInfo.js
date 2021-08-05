@@ -7,11 +7,21 @@ function SigninInfo(props) {
 
   const [didMount, setDidMount] = useState(true)
   const [memberId, setMemberId] = useState('')
-  const [show, setShow] = useState(false)
   const [email, setEmail] = useState('')
 
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  // bootstrap modal 開啟關閉用
+  const [show, setShow] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
+  const handleClose = () => {
+    setBootstrapCdnLoad(false)
+    setShow(false)
+  }
+  const handleShow = () => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      setShow(true)
+    }, 20)
+  }
 
   // 取得 memberId (解 token)
   const getMember = async () => {
@@ -51,8 +61,21 @@ function SigninInfo(props) {
     }
   }, [memberId])
 
+  // Bootstrap Cdn
+  const bootstrapCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapCdn}
+
       <ModalPassword
         show={show}
         handleClose={handleClose}

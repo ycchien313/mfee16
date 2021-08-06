@@ -6,7 +6,6 @@ function Aside(props) {
   const {
     dishCount,
     dishes,
-    setDishes,
     dishList,
     setDishList,
     addFee,
@@ -83,7 +82,7 @@ function Aside(props) {
                     return (
                       <li key={i}>
                         <span>{v[0]}</span>
-                        <span className="aside-sp">{v[1]}</span>
+                        <span className="aside-sp">{v[1]}份</span>
                       </li>
                     )
                   }
@@ -110,12 +109,14 @@ function Aside(props) {
               type="button"
               defaultValue="確認訂單"
               className="OrderGet"
+              // className="pink-guide-button"
               field=""
               onClick={function () {
                 Swal.fire({
                   icon: 'warning',
                   title: '確認有無遺漏訂單選項',
                   text: '包含: 地址、日期、時間以及定一份餐點~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />
@@ -124,12 +125,14 @@ function Aside(props) {
               type="button"
               defaultValue="確認登入"
               className="OrderGet"
+              // className="pink-guide-button"
               field=""
               onClick={function () {
                 Swal.fire({
                   icon: 'warning',
                   title: '確認有無登入',
                   text: '請至上方登入~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />
@@ -153,6 +156,7 @@ function Aside(props) {
                 type="button"
                 defaultValue="送出訂單"
                 className="OrderGet"
+                // className="pink-guide-button"
                 field=""
               />
             </Link>

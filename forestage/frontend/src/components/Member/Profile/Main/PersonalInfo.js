@@ -68,10 +68,10 @@ function PersonalInfo(props) {
       const profileFields = {
         avatar: avatar(),
         name: data.data[0].name,
-        gender: data.data[0].gender,
-        birthday: data.data[0].birthday,
-        mobile: data.data[0].mobile,
-        address: data.data[0].address,
+        gender: data.data[0].gender ? data.data[0].gender : '',
+        birthday: data.data[0].birthday ? data.data[0].birthday : '',
+        mobile: data.data[0].mobile ? data.data[0].mobile : '',
+        address: data.data[0].address ? data.data[0].address : '',
       }
       // console.log(profileFields)
       if (status === '成功') {
@@ -179,6 +179,54 @@ function PersonalInfo(props) {
     </>
   )
 
+  // 性別欄位 DOM
+  const genderDom = (
+    <>
+      {toggleBtn ? (
+        <input value={profile.gender} />
+      ) : (
+        ['男', '女'].map((v, i) => {
+          return (
+            <>
+              <input
+                name="gender"
+                type="radio"
+                value={v}
+                checked={profile.gender === v ? true : false}
+                onChange={(e) => {
+                  setProfileFields(e)
+                }}
+              />
+              <label>{v}</label>
+            </>
+          )
+        })
+      )}
+    </>
+  )
+
+  // 生日欄位 DOM
+  const birthdayDom = (
+    <>
+      {toggleBtn ? (
+        <input name="birthday" type="text" value={profile.birthday} />
+      ) : (
+        <input
+          name="birthday"
+          type="date"
+          value={profile.birthday.replaceAll('.', '-')}
+          // value="2020-01-01"
+          {...(toggleInput
+            ? { className: '', disabled: true }
+            : { className: 'active', disabled: false })}
+          onChange={(e) => {
+            setProfileFields(e)
+          }}
+        />
+      )}
+    </>
+  )
+
   // form 表單的內容
   const showProfile = (
     <>
@@ -268,27 +316,13 @@ function PersonalInfo(props) {
             </div>
             <div className="info-row">
               <div className="info-col">性別</div>
-              <div className="info-col">
-                <input
-                  name="gender"
-                  type="text"
-                  value={profile.gender}
-                  placeholder="ex. 男"
-                  pattern="[男|女]{1}"
-                  required
-                  {...(toggleInput
-                    ? { className: '', disabled: true }
-                    : { className: 'active', disabled: false })}
-                  onChange={(e) => {
-                    setProfileFields(e)
-                  }}
-                />
-              </div>
+              <div className="info-col">{genderDom}</div>
             </div>
             <div className="info-row">
               <div className="info-col">生日</div>
               <div className="info-col">
-                <input
+                {birthdayDom}
+                {/* <input
                   name="birthday"
                   type="text"
                   value={profile.birthday}
@@ -301,7 +335,7 @@ function PersonalInfo(props) {
                   onChange={(e) => {
                     setProfileFields(e)
                   }}
-                />
+                /> */}
               </div>
             </div>
             <div className="info-row">
@@ -312,7 +346,7 @@ function PersonalInfo(props) {
                   type="tel"
                   value={profile.mobile}
                   placeholder="ex. 0911222333"
-                  pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+                  pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
                   required
                   {...(toggleInput
                     ? { className: '', disabled: true }
@@ -327,7 +361,7 @@ function PersonalInfo(props) {
               <div className="info-col">地址</div>
               <div className="info-col textarea-container">
                 {/* 從 textarea 設定 textarea-container 的文字 */}
-                {profile.address}
+                {profile.address ? profile.address : '　'}
                 <textarea
                   name="address"
                   className="textarea"

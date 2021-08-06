@@ -1,23 +1,41 @@
-import React, { useState, useEffect, Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/comment/create.scss'
-import Draft from './create/draft'
+// import Draft from './create/draft'
+// import Draft2 from './draft2'
 import $ from 'jquery'
 import axios from 'axios'
+
 // import Test from './test'
 function Create(props) {
-  const { boom, setBoom, tag, selectTag, setSelectTag, getTagName } = props
-  const [content, setContent] = useState('')
+  const {
+    boom,
+    setBoom,
+    tag,
+    selectTag,
+    setSelectTag,
+    getTagName,
+    article,
+    setArticle,
+    asideTag,
+    alreadyinsert,
+    setAlreadyinsert,
+    insertArticle,
+    setInsertArticle,
+    // articleTag
+  } = props
+  // const [content, setContent] = useState('123')
   // const [star, setStar] = useState(0)
-  const [insertArticle, setInsertArticle] = useState({
-    title: '',
-    author: '',
-    content: '',
-    image: '',
-    recommendation_index: 0,
-    likes: 0,
-    member_id: 0,
-    tag_id: 0,
-  })
+  // const [insertArticle, setInsertArticle] = useState({
+  //   title: '',
+  //   author: '',
+  //   content: '',
+  //   image: '',
+  //   recommendation_index: 0,
+  //   likes: 0,
+  //   member_id: 0,
+  //   tag_id: 0,
+  // })
+
   // function alignModal() {
   //   var createeditor = $(this).find('.createeditor')
   //   createeditor.css(
@@ -27,20 +45,35 @@ function Create(props) {
   // }
   // // $('.modal').on('shown.bs.modal', alignModal)
   // /* Resizing the modal according the screen size */
-  
- 
+
   function insertArticlefn() {
+    // e.preventDefault()
+    // let form = new FormData(e.target)
+    // console.log(e.target)
+    // console.log(form)
     axios({
       method: 'post',
       url: 'http://127.0.0.1:3001/comment/createarticle',
       data: {
         insertArticle: insertArticle,
+        // form: form,
       },
+    }).then(() => {
+      getAsideArticle()
+      //   console.log('bbbbb')
     })
   }
   function setArticleTag(tagId) {
     let newArticle = { ...insertArticle }
     newArticle.tag_id = tagId
+    setInsertArticle(newArticle)
+  }
+  function setImage(e) {
+    let newArticle = { ...insertArticle }
+    // console.log(e)
+    let imageFile = e.target.files.item(0)
+    let imageUrl = URL.createObjectURL(imageFile)
+    newArticle.image = imageUrl
     setInsertArticle(newArticle)
   }
   function setTitle(e) {
@@ -59,6 +92,11 @@ function Create(props) {
     newArticle.recommendation_index = star
     setInsertArticle(newArticle)
   }
+  function getContent(e) {
+    let newArticle = { ...insertArticle }
+    newArticle.content = e.target.value
+    setInsertArticle(newArticle)
+  }
   useEffect(() => {
     $('.fa-star').on('click', function () {
       $(this).addClass('active')
@@ -75,14 +113,32 @@ function Create(props) {
         .siblings()
         .removeClass('active')
     })
-    
-    
+    // $('.inputimg').on('change', function () {
+    //   $(this)
+    //     .siblings()
+    //     .find('.imggg')
+    //     .attr('src', {insertArticle.image})
+    // })
   }, [])
-  // function setContent(e) {
-  //   let newArticle = { ...insertArticle }
-  //   newArticle.content = e.target.value
-  //   setInsertArticle(newArticle)
-  // }
+
+  // useEffect(() => {
+  //   // console.log('boom')
+  //   // console.log('aaaaaa')
+  //   getAsideArticle()
+  //   // return () => {
+  //   //   // setBoom(false)
+  //   //   // getAsideArticle()
+  //   // }
+  // }, [asideTag])
+  function getAsideArticle() {
+    console.log(insertArticle.tag_id, '122222')
+    axios
+      .get(`http://127.0.0.1:3001/comment/${insertArticle.tag_id}`)
+      .then((result) => {
+        setArticle(result.data)
+        //   console.log(result.data)
+      })
+  }
   // console.log(boom)
   // console.log(selectTag)
   // 點擊標籤要active沒成功
@@ -97,6 +153,7 @@ function Create(props) {
   // })
   return (
     <>
+    <div class="createjsscss">
       <div class="createeditor">
         <img
           class="close"
@@ -109,6 +166,7 @@ function Create(props) {
         <div class="ineditor">
           <h4>文章標題：</h4>
           <input
+            placeholder="請輸入您的文章標題"
             class="titleee"
             type="text"
             value={insertArticle.title}
@@ -118,7 +176,8 @@ function Create(props) {
           ></input>
           <h4>匿名名稱：</h4>
           <input
-            class="title"
+            placeholder="請輸入您的匿名名稱"
+            class="titleee"
             type="text"
             value={insertArticle.author}
             onChange={(e) => {
@@ -373,106 +432,109 @@ function Create(props) {
               </div>
             </div>
           </div>
-
-          <h4 class="point">推薦指數：</h4>
-          {/* <Test
+          <div class="rwdpointh4">
+            <h4 class="">推薦指數：</h4>
+            {/* <Test
             star={}
           /> */}
-          <div class="starss" id="stars">
-            <i
-              id="star1"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(1)
-              }}
-            ></i>
-            <i
-              id="star2"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(2)
-              }}
-            ></i>
-            <i
-              id="star3"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(3)
-              }}
-            ></i>
-            <i
-              id="star4"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(4)
-              }}
-            ></i>
-            <i
-              id="star5"
-              class="fas fa-star"
-              onClick={() => {
-                setRecommendation_index(5)
-              }}
-            ></i>
-            {/* <img
-              id="star1"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(1)
-              }}
-            ></img> */}
-            {/* <img
-              id="star2"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(2)
-              }}
-            ></img>
-            <img
-              id="star3"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(3)
-              }}
-            ></img>
-            <img
-              id="star4"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(4)
-              }}
-            ></img>
-            <img
-              id="star5"
-              src="http://127.0.0.1:3000/images/comment/star-empty.svg"
-              alt=""
-              onClick={() => {
-                setRecommendation_index(5)
-              }}
-            ></img> */}
+            <div class="starss" id="stars">
+              <i
+                id="star1"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(1)
+                }}
+              ></i>
+              <i
+                id="star2"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(2)
+                }}
+              ></i>
+              <i
+                id="star3"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(3)
+                }}
+              ></i>
+              <i
+                id="star4"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(4)
+                }}
+              ></i>
+              <i
+                id="star5"
+                class="fas fa-star"
+                onClick={() => {
+                  setRecommendation_index(5)
+                }}
+              ></i>
+            </div>
           </div>
-          {/* <div id="comment" class="left">
-            0
-          </div> */}
           <h4>文章內容：</h4>
+          <textarea
+            class="draft"
+            value={insertArticle.content}
+            onChange={(e) => {
+              getContent(e)
+            }}
+          ></textarea>
+          <h4>上傳圖片：</h4>
+          <form
+            id="imgform"
+            onSubmit={insertArticlefn}
+            encType="multipart/form-data"
+            action="/contact/save"
+          >
+            <input
+              name="image"
+              class="titleee inputimg"
+              type="file"
+              // value={insertArticle.image}
+              onChange={(e) => {
+                setImage(e)
+              }}
+            ></input>
+            <div class="firstimg">
+              {/* <img class="imggg" src="http://fakeimg.pl/800x350/b2d297/a1957d/?text=Elfin"></img> */}
+              <img src={insertArticle.image}></img>
+            </div>
+            {/* <button type="submit">123</button> */}
+            <div class="buttongroup">
+              <button class="green-guide-button buttontext2">
+                預覽
+                <img
+                  src="http://localhost:3000/images/comment/view.svg"
+                  alt=""
+                ></img>
+              </button>
+              <button
+                type="submit"
+                // form="imgfrom"
+                class="orange-guide-button buttontext"
+                onClick={() => {
+                  insertArticlefn()
+                  setBoom(false)
+                  setAlreadyinsert(true)
+                }}
+              >
+                送出
+                <img
+                  src="http://localhost:3000/images/comment/send2.svg"
+                  alt=""
+                ></img>
+              </button>
+            </div>
+          </form>
+          {/* <div class="firstimg">
+            <img src={insertArticle.image}></img>
+          </div> */}
         </div>
-
-        {/* 所見及所得 */}
-        <div class="draft">
-          <Draft
-            insertArticle={insertArticle}
-            setInsertArticle={setInsertArticle}
-            content={content}
-            setContent={setContent}
-          />
-        </div>
-
-        {/* <所見及所得 結束 */}
-        <div class="buttongroup">
+        {/* <div class="buttongroup">
           <button class="green-guide-button buttontext2">
             預覽
             <img
@@ -481,16 +543,23 @@ function Create(props) {
             ></img>
           </button>
           <button
+            type="submit"
+            // form="imgfrom"
             class="orange-guide-button buttontext"
-            onClick={insertArticlefn()}
           >
             送出
             <img
               src="http://localhost:3000/images/comment/send2.svg"
               alt=""
+              onClick={() => {
+                insertArticlefn()
+                setBoom(false)
+                setAlreadyinsert(true)
+              }}
             ></img>
           </button>
-        </div>
+        </div> */}
+      </div>
       </div>
     </>
   )

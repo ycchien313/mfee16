@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
 function Dish(props) {
-  let domain = 'http://localhost:3000/images/dish/'
+  let domain = 'http://localhost:3000/images/common/food/'
   const [count, setCount] = useState(1)
   let { name, price, image_realistic, className, all, setAll, item, setItem } =
     props

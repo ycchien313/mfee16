@@ -1,5 +1,25 @@
 @import '../common/global.scss';
-// @import '~bootstrap/scss/bootstrap';
+
+%close-button {
+  background-color: #ccc;
+  border: none;
+
+  &:hover {
+    background: #aaa;
+    border: none;
+    font-family: $zh-tw-noto;
+  }
+}
+
+.show-detail .close-button {
+  @extend %close-button;
+}
+.password .close-button {
+  @extend %close-button;
+}
+.cancel .close-button {
+  @extend %close-button;
+}
 
 .show-detail .modal-body {
   color: $primary-lightbrown;
@@ -33,17 +53,6 @@
   padding-left: 25px;
 }
 
-.close-button {
-  background: #ccc;
-  border: none;
-}
-
-.close-button:hover {
-  background: #aaa;
-  border: none;
-  font-family: $zh-tw-noto;
-}
-
 .password .modal-body {
   font-family: $zh-tw-noto;
 }
@@ -67,11 +76,15 @@
 .password .orange:hover {
   background: darken($accent-orange, 20%);
   border: none;
+  color: #fff;
   font-family: 'Noto Sans TC', sans-serif;
 }
 
 .password .modal-header {
   background: $primary-lightgreen;
+}
+
+.password .modal-header .h4 {
   color: white;
   font-family: $zh-tw-maru;
 }
@@ -111,7 +124,14 @@
 .cancel .orange {
   background: $accent-orange;
   border: none;
+
+  &:hover {
+    background-color: darken($accent-orange, 20%);
+    color: #fff;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
 }
+
 .cancel .modal-header {
   background: $primary-lightgreen;
   color: white;

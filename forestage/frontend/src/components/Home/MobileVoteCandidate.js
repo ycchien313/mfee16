@@ -20,7 +20,7 @@ function MobileVoteCandidate(props) {
     })
   }, [])
 
-  let path = 'http://localhost:3000/images/home/歌手/'
+  let path = 'http://localhost:3000/images/common/'
   const { name, counts, picture, setCandidateId, setCandidateName, id } = props
   let content = (
     <div className="target">

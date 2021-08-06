@@ -3,7 +3,7 @@ import $ from 'jquery'
 import moment from 'moment'
 import Guide from '../../../components/Home/Guide'
 function SecondScreen(props) {
-  const { singerName } = props
+  const { singerDate, singerName } = props
   let current = moment().format('YYYY.MM.DD')
   // Guide內的state設定
   const [guideButton, setGuideButton] = useState('點擊參加live直播')
@@ -41,8 +41,11 @@ function SecondScreen(props) {
   }, [])
   //
   useEffect(() => {
-    setGuideContent([`表演者：　${singerName}`, `演出時間：　${current} 18:00`])
-  }, [singerName])
+    setGuideContent([
+      `表演者：　${singerName}`,
+      `演出時間：　${singerDate} 18:00`,
+    ])
+  }, [singerName, singerDate])
 
   //
 
@@ -60,7 +63,7 @@ function SecondScreen(props) {
                   setGuideIndex(0)
                   setGuideContent([
                     `表演者：　${singerName}`,
-                    `演出時間：　${current} 18:00`,
+                    `演出時間：　${singerDate} 18:00`,
                   ])
                   setGuideTitle('在線上即時看精彩的音樂表演')
                 }}

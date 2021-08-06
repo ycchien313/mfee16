@@ -16,8 +16,17 @@ function HistoryDelivery(props) {
 
   // bootstrap modal 開啟關閉用
   const [show, setShow] = useState(false)
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
+  const handleClose = () => {
+    setBootstrapCdnLoad(false)
+    setShow(false)
+  }
+  const handleShow = () => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      setShow(true)
+    }, 20)
+  }
 
   const fetchHistoryDelivery = async () => {
     const response = await axios.get(
@@ -70,14 +79,20 @@ function HistoryDelivery(props) {
     </>
   )
 
+  const bootstrapModalCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossorigin="anonymous"
-      />
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapModalCdn}
+
       <HistoryDeliveryDetailModal
         show={show}
         handleClose={handleClose}

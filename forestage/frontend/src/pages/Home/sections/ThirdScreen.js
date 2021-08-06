@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
 import CommentCard from '../../../components/Home/CommentCard'
+import MobileSinger from '../../../components/Home/MobileSinger'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
 
@@ -21,10 +22,18 @@ function ThirdScreen(props) {
   const [singerName, setSingerName] = useState()
   const [singerInfo, setSingerInfo] = useState()
   const [singerImg, setSingerImg] = useState()
-
+  const [mobileInfo, setMobileInfo] = useState([])
+  useState(() => {
+    $.ajax({
+      url: 'http://localhost:3001/home/singer_all',
+      method: 'GET',
+      dataType: 'JSON',
+    }).then(function (result) {
+      setMobileInfo(result)
+    })
+  }, [])
   useEffect(() => {
     //获取拖拽实验对象
-
     let el = document.getElementById('drag-target')
     //在该对象上绑定鼠标点击事件
     el.onmousedown = (e) => {
@@ -83,11 +92,13 @@ function ThirdScreen(props) {
       url: `http://localhost:3001/home/comment/${targetId}`,
       method: 'GET',
       dataType: 'json',
+      // async: false,
     }).then(function (result) {
       setComment(result)
     })
   }, [targetId])
-  let fullPath = 'http://localhost:3000/images/home/歌手/' + singerImg
+  let fullPath = 'http://localhost:3000/images/common/' + singerImg
+
   //主要頁面
   let ThirdScreen = (
     <div id="thirdScreen">
@@ -205,6 +216,26 @@ function ThirdScreen(props) {
           </div>
         </div>
       </div>
+      {/* 手機板歌手 */}
+      <div class="mobile-singer-out">
+        <div className="mobile-singer-border">
+          {mobileInfo.length > 0 &&
+            mobileInfo.map(function (value, index) {
+              return (
+                <MobileSinger
+                  key={value.singer_id}
+                  name={value.name}
+                  introduction={value.introduction}
+                  img={value.picture}
+                />
+              )
+            })}
+        </div>
+      </div>
+      <button className="button-orange mobile-btn">
+        <h4 className="btn-innerText">撰寫評論</h4>
+        <i className="fas fa-arrow-circle-right"></i>
+      </button>
       <div className="audienceComment">
         <h2 className="h2">客戶好評</h2>
         <div className="commentSide">

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import axios from 'axios'
 import AuthContext from './components/Auth/AuthContext'
+// import Auth from './pages/Auth'
+import Mycomment from './pages/Comment/mycomment'
 import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
 import DeliveryOrder from '../src/components/Delivery/deliveryOrder'
@@ -44,6 +46,12 @@ function App() {
     <AuthContext.Provider value={{ member, setMember }}>
       <Router>
         <Switch>
+          {/* <Route path="/auth/">
+          <Auth />
+        </Route> */}
+        <Route path="/comment/myComment">
+            <Mycomment />
+          </Route>
           <Route path="/comment/">
             <Comment />
           </Route>
@@ -53,6 +61,9 @@ function App() {
           <Route path="/delivery/">
             <Delivery />
           </Route>
+          <Route path="/singer/">
+            <Singer />
+          </Route>
           <Route path="/dish/">
             <Dish />
           </Route>
@@ -60,8 +71,8 @@ function App() {
             <Game />
           </Route>
           <Route path="/singer/">
-          <Singer />
-        </Route>
+            <Singer />
+          </Route>
           <Route path="/member/">
             <Member />
           </Route>

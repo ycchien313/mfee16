@@ -46,6 +46,7 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
+            history.push('/')
           }}
         >
           登出
@@ -74,6 +75,7 @@ function HeaderAuth() {
             localStorage.removeItem('authToken')
             setAuthToken(null)
             logoutSwal()
+            history.push('/')
           }}
         >
           登出

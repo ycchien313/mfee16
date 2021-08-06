@@ -4,6 +4,9 @@ import CalendarBig from './Calendar'
 import CalendarSmall from './CalendarSmall'
 import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
+import { Tween } from 'react-gsap'
+
+
 function ChooseDate(props) {
   const {
     remainingSeat,
@@ -14,6 +17,7 @@ function ChooseDate(props) {
     setSeatCount,
     setCheckList,
     checkList,
+    dateFromHome,
   } = props
 
   const [singerCalendar, setSingerCalendar] = useState([])
@@ -48,10 +52,26 @@ function ChooseDate(props) {
         <div className="steps">
           <div className="active">
             <h3 className="step">選擇日期</h3>
-            <img
-              src="http://localhost:3000/images/reservation/active-title.png"
-              alt=""
-            />
+            <Tween
+              from={{
+                x: '-300px',
+              }}
+              to={{
+                x: '0px',
+                scrollTrigger: {
+                  trigger: '.square',
+                  start: '600px center',
+                  end: '900px center',
+                  scrub: 1,
+                  markers: true,
+                },
+              }}
+            >
+              <img
+                src="http://localhost:3000/images/reservation/active-title.png"
+                alt=""
+              />
+            </Tween>
           </div>
           <div className="arrow"></div>
           <h3 className="step">選擇座位</h3>
@@ -67,6 +87,10 @@ function ChooseDate(props) {
               checkList={checkList}
               singerCalendar={singerCalendar}
               setSeatCount={setSeatCount}
+              setSeatInfo={setSeatInfo}
+              seatInfo={seatInfo}
+              seatCount={seatCount}
+              dateFromHome={dateFromHome}
             />
           ) : (
             <CalendarBig
@@ -79,12 +103,14 @@ function ChooseDate(props) {
               setSeatInfo={setSeatInfo}
               seatInfo={seatInfo}
               seatCount={seatCount}
+              dateFromHome={dateFromHome}
             />
           )}
           <SeatsBar
             seatInfo={seatInfo}
             seatCount={seatCount}
             setSeatCount={setSeatCount}
+            remainingSeat={remainingSeat}
           />
         </div>
       </section>

@@ -13,8 +13,10 @@ function SigninInfo(props) {
   const [show, setShow] = useState(false)
   const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const handleClose = () => {
-    setBootstrapCdnLoad(false)
     setShow(false)
+    setTimeout(() => {
+      setBootstrapCdnLoad(false)
+    }, 100)
   }
   const handleShow = () => {
     setBootstrapCdnLoad(true)

@@ -6,7 +6,7 @@ import StyledLink from '../StyledLink'
 
 
 function Main(props) {
-  const { dishList, checkList, insertResData, setInsertResData } = props
+  const { dishList, checkList, insertResData, setInsertResData, memberId, setMemberId } = props
 
   return (
     <>
@@ -31,6 +31,8 @@ function Main(props) {
               insertResData={insertResData}
               setInsertResData={setInsertResData}
               dishList={dishList}
+              memberId={memberId}
+              setMemberId={setMemberId}
             />
 
             <div className="check">

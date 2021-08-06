@@ -2,7 +2,7 @@ import React from 'react'
 
 function HeaderBigCart(props) {
   let { name, price, count, img } = props
-  let domain = 'http://localhost:3000/images/dish/'
+  let domain = 'http://localhost:3000/images/common/'
   let content = (
     <div className="cart-detail">
       <figure>

@@ -2,17 +2,30 @@ import React, { useEffect, useState } from 'react'
 import Header from '../Header/'
 import Main from './ReservationMain/'
 import Hero from './ReservationMain/Hero'
+import Footer from '../Footer/'
 import '../../styles/reservation/res/reservation-meal-RWD.scss'
 import '../../styles/reservation/res/reservation.scss'
 import Auth from '../Auth/'
+import { gsap } from 'gsap'
+import { Tween } from 'react-gsap'
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 // import Footer from '../../components/Footer'
 
 function ReservationPage(props) {
   const [showAuthModal, setShowAuthModal] = useState(false)
-
+  let dateFromHome = {}
+  if (props.location.state !== undefined) {
+    dateFromHome = props.location.state.select
+    if (props.location.state.prevPath === '/home') {
+      sessionStorage.clear()
+      console.log(props.location.state.prevPath)
+    }
+  }
   // 視窗關閉時移除sessionStorage
   useEffect(() => {
+    window.scrollTo(0, 0)
     window.addEventListener(
       'beforeunload',
       function (event) {
@@ -37,7 +50,14 @@ function ReservationPage(props) {
         />
       )}
       <Hero />
-      <Main showAuthModal={showAuthModal} setShowAuthModal={setShowAuthModal} />
+      <Main
+        showAuthModal={showAuthModal}
+        setShowAuthModal={setShowAuthModal}
+        dateFromHome={dateFromHome}
+      />
+      <div className="res-footer">
+        <Footer />
+      </div>
     </>
   )
 }

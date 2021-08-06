@@ -346,7 +346,7 @@ function PersonalInfo(props) {
                   type="tel"
                   value={profile.mobile}
                   placeholder="ex. 0911222333"
-                  pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+                  pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
                   required
                   {...(toggleInput
                     ? { className: '', disabled: true }

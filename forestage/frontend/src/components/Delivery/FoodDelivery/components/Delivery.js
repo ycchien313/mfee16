@@ -3,13 +3,16 @@ import MainMealBox from '../components/MainMealBox'
 import SideBox from '../components/SideBox'
 import DessertBox from '../components/DessertBox'
 import Aside from './Aside'
-import Takeout from './Takeout'
 import Map from './Map'
 import { Link } from 'react-router-dom'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
+// import { Modal } from 'react-bootstrap'
+import AsideMobile from './AsideMobile'
 
 function Delivery(props) {
+  const [show, setShow] = useState(false)
+
   const [time, setTime] = useState('')
   const [date, setDate] = useState('')
   const [fulltime, setFulltime] = useState('')
@@ -17,11 +20,15 @@ function Delivery(props) {
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
   const [counts, setCounts] = useState(Array(3).fill(0))
+  // console.log("count:",counts)
   const [dishCount, setDishCount] = useState({})
+  // console.log('dishCount:', dishCount)
   // 訂餐
   const [dishList, setDishList] = useState([])
-  console.log(dishList)
+  // console.log("dishList:",dishList)
+  // all
   const [dishes, setDishes] = useState([])
+  // console.log('dishes', dishes)
   const [address, setAddress] = useState({
     city: '桃園市',
     dist: '',
@@ -32,7 +39,10 @@ function Delivery(props) {
   // 免運
   const [addFee, setFee] = useState('')
   const [subTotal, setSubTotal] = useState([])
+  // console.log('sub', subTotal)
   const [name, setName] = useState([])
+
+  //彈出
 
   const getDishes = () => {
     $.ajax({
@@ -59,6 +69,7 @@ function Delivery(props) {
   }, [date, time])
 
   useEffect(() => {
+    //
     getDishes()
 
     $.ajax({
@@ -97,12 +108,31 @@ function Delivery(props) {
       })
   }, [])
 
+  //
   useEffect(() => {
     if (dishes.length > 0) {
       let newDishCount = {}
       dishes.forEach((item) => {
         newDishCount[item.dish_id] = 0
       })
+      // cart，轉成陣列
+      const cart = JSON.parse(localStorage.getItem('cart'))
+      // console.log(cart, 'cart')
+      if (cart !== undefined) {
+        cart.forEach((v, i) => {
+          // console.log('v:', v)
+          for (let i = 0; i < dishes.length; i++) {
+            // console.log(dishes[i].name)
+            if (dishes[i].name === v.name) {
+              const id = dishes[i].dish_id
+              const cartCount = v.count
+              // console.log(cartCount)
+              newDishCount = { ...newDishCount, [id]: cartCount }
+            }
+          }
+          // console.log('newDishCount', newDishCount)
+        })
+      }
       setDishCount(newDishCount)
     }
   }, [dishes])
@@ -111,8 +141,10 @@ function Delivery(props) {
     <>
       <div className="FoodDelivery">
         <div className="hero-section">
-          <Map address={address} setAddress={setAddress} setFee={setFee} />
-          <Takeout
+          <Map
+            address={address}
+            setAddress={setAddress}
+            setFee={setFee}
             time={time}
             setTime={setTime}
             date={date}
@@ -122,7 +154,20 @@ function Delivery(props) {
         <h2 className="chose">選擇餐點</h2>
         <div className="order">
           <div className="mobile-order-out">
-            <div className="mobile-order"></div>
+            <AsideMobile
+              show={show}
+              dishes={dishes}
+              dishList={dishList}
+              addFee={addFee}
+            />
+
+            <div
+              className="mobile-order"
+              onClick={() => {
+                setShow(!show)
+                // console.log('123')
+              }}
+            ></div>
           </div>
           <div className="order-left">
             <div className="MainMeal-group">
@@ -266,12 +311,14 @@ function Delivery(props) {
               type="button"
               defaultValue="確認訂單"
               className="OrderGet mobile-order-get"
+              // className="pink-guide-button mobile-order-get"
               field=""
               onClick={function () {
                 Swal.fire({
                   icon: 'warning',
                   title: '確認有無遺漏訂單選項',
                   text: '包含: 地址、日期、時間以及定一份餐點~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />
@@ -279,6 +326,7 @@ function Delivery(props) {
             <input
               type="button"
               defaultValue="確認登入"
+              // className="pink-guide-button mobile-order-get"
               className="OrderGet mobile-order-get"
               field=""
               onClick={function () {
@@ -286,6 +334,7 @@ function Delivery(props) {
                   icon: 'warning',
                   title: '確認有無登入',
                   text: '請至上方登入~',
+                  confirmButtonColor: '#fc5c75',
                 })
               }}
             />
@@ -308,6 +357,7 @@ function Delivery(props) {
               <input
                 type="button"
                 defaultValue="送出訂單"
+                // className="pink-guide-button mobile-order-get"
                 className="OrderGet mobile-order-get"
                 field=""
               />

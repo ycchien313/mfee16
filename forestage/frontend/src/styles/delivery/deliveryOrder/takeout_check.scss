@@ -94,6 +94,8 @@
   .container-big {
     margin-left: 8.33vw;
     margin-right: 8.33vw;
+    display: flex;
+    flex-direction: column;
   }
 
   /* takeout-check */

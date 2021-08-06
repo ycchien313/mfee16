@@ -2,27 +2,14 @@ import React, { useState, useEffect } from 'react'
 import $, { ajax } from 'jquery'
 import '../../styles/singer/singer.scss'
 import SingerInfo from '../../components/Singer/SingerInfo'
-
+import Footer from '../../components/Footer'
+import Header from '../../components/Header'
 function Singer() {
   // 存取api
-  const [singerState, setSingerState] = useState()
-  const [content, setContent] = useState([])
-
   const [style, setStyle] = useState('搖滾')
+  const [tag, setTag] = useState([15, 14])
   const [singerInfo, setSingerInfo] = useState([])
   // 將api匯入至state
-  useEffect(() => {
-    let singerArr = [10, 11, 12, 13, 14, 15]
-    for (let i = 0; i < singerArr.length; i++) {
-      $.ajax({
-        url: `http://localhost:3001/singer/comment/${singerArr[i]}`,
-        method: `get`,
-        dataType: `json`,
-      }).then(function (result) {
-        // console.log(result)
-      })
-    }
-  }, [])
 
   useEffect(() => {
     $.ajax({
@@ -39,9 +26,19 @@ function Singer() {
       setSingerInfo(singerInfoClone)
     })
   }, [style])
+  useEffect(() => {
+    $('.music-tag').on('click', function () {
+      $(this).addClass('active')
+      $(this).closest('li').siblings().find('.music-tag').removeClass('active')
+    })
+    let newTag = tag
+    console.log('newTag : ', newTag)
+    setTag(newTag)
+  }, [])
   //
   return (
     <>
+      <Header />
       <div className="singer">
         <div class="hero-section">
           <div class="top-wave">
@@ -69,13 +66,14 @@ function Singer() {
               <ul class="tag-ul">
                 <li>
                   <div
-                    class="rock music-style"
+                    class="rock music-tag active"
                     onClick={function () {
                       setStyle('搖滾')
+                      setTag([15, 14])
                     }}
                   >
                     <img
-                      class="rock-tag"
+                      class="rock-tag "
                       src="http://localhost:3000/images/singer/rock.svg"
                       alt=""
                     />
@@ -84,9 +82,10 @@ function Singer() {
                 </li>
                 <li>
                   <div
-                    class="jazz music-style"
+                    class="jazz music-tag"
                     onClick={function () {
                       setStyle('爵士')
+                      setTag([11, 12])
                     }}
                   >
                     <img
@@ -99,9 +98,10 @@ function Singer() {
                 </li>
                 <li>
                   <div
-                    class="lyrical music-style"
+                    class="lyrical music-tag"
                     onClick={function () {
                       setStyle('抒情')
+                      setTag([10, 12])
                     }}
                   >
                     <img
@@ -114,7 +114,7 @@ function Singer() {
                 </li>
               </ul>
             </div>
-            <SingerInfo singerInfo={singerInfo} />
+            <SingerInfo singerInfo={singerInfo} style={style} tag={tag} />
             <div class="btn">
               <div class="guide-button orange">
                 去投票
@@ -134,6 +134,7 @@ function Singer() {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   )
 }

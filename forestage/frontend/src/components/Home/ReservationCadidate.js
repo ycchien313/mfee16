@@ -27,7 +27,7 @@ function ReservationCandidate(props) {
           <h4 className="h4">{result.length > 0 && result}</h4>
           <figure>
             <img
-              src={`http://localhost:3000/images/home/歌手/${name}.jpg`}
+              src={`http://localhost:3000/images/common/${name}.jpg`}
               alt=""
             />
           </figure>

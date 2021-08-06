@@ -275,7 +275,6 @@ router.post(
 router.get('/me', (req, res) => {
     console.log('URL: ', req.url);
     console.log('METHOD: ', req.method);
-
     const token = req.headers.authorization.replace('Bearer ', '');
     const decoded = jwt.getToken(token);
 

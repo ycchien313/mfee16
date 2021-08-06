@@ -1,0 +1,338 @@
+.member-coupon {
+  @import '../common/global.scss';
+
+  /********** 主畫面 **********/
+  .main {
+    width: 100%;
+  }
+  .main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+  @media screen and (max-width: 768px) {
+    .main-container {
+      width: unset;
+      padding: 0 30px;
+      flex-direction: column;
+    }
+  }
+
+  /********** 右側 *********/
+  .right-side {
+    width: 100%;
+    margin-left: 16.66vw;
+    display: flex;
+    flex-direction: column;
+    padding-right: 8.33vw;
+  }
+  /* 增加部分 */
+  @media screen and (max-width: 768px) {
+    .right-side {
+      width: unset;
+      margin-left: 0;
+      padding: 0;
+    }
+  }
+
+  /********** 右側：頁籤 **********/
+  .tab {
+    margin: 0 auto;
+    /* padding-bottom: 2vw; */
+  }
+  .tab-container {
+    width: 18vw;
+    border: 1px solid $secondary-green;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+    font-family: $zh-tw-noto;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 1000px) {
+    .tab-container {
+      width: 210px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .tab-container {
+      width: 136px;
+      font-size: 12px;
+    }
+  }
+  .tab-item {
+    width: 100%;
+    height: 100%;
+    color: $secondary-green;
+  }
+  .tab-item:nth-child(1) {
+    border-radius: 50px 0 0 50px;
+  }
+  .tab-item:nth-child(2) {
+    border-radius: 0 50px 50px 0;
+  }
+  .tab-item h4 {
+    margin: 0;
+    height: clamp(30px, 3.3vw, 3.3vw);
+    line-height: clamp(30px, 3.3vw, 3.3vw);
+  }
+  @media screen and (max-width: 768px) {
+    .tab-item h4 {
+      font-size: 12px;
+    }
+  }
+  .tab-item.active {
+    color: #fff;
+    background-color: $secondary-green;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+    cursor: default;
+  }
+
+  .content-spinner {
+    text-align: center;
+    margin: 100px 0;
+  }
+
+  /********** 右側 *********/
+  /** 電腦版可使用優惠券 **/
+  .recent-content {
+    padding-left: 4.95vw;
+    font-family: $zh-tw-noto;
+  }
+  @media screen and (max-width: 768px) {
+    .recent-content {
+      padding-left: unset;
+    }
+  }
+  /** 手機版可使用優惠券元素最外層 **/
+  .recent-content-md {
+    font-family: $zh-tw-noto;
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .recent-content-md {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  .history-content {
+    padding-left: 4.95vw;
+    font-family: $zh-tw-noto;
+  }
+  @media screen and (max-width: 768px) {
+    .history-content {
+      padding-left: unset;
+    }
+  }
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    margin: 2.6vw;
+  }
+  .coupon-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5625vw 0;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-row {
+      flex-direction: column;
+      align-items: center;
+      margin: 10px 0;
+    }
+  }
+  .coupon-box {
+    height: 8.07vw;
+    min-height: 90px;
+    border: 2px solid $primary-lightgreen;
+    border-radius: 1.2vw;
+    display: flex;
+    background-color: #fff;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-box {
+      width: 330px;
+      height: 100px;
+      border-radius: 20px;
+    }
+  }
+  .coupon-box.empty {
+    background-color: $primary-lightgreen;
+  }
+  .coupon-left {
+    width: 7vw;
+    min-width: 80px;
+    border-right: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-left {
+      width: 80px;
+    }
+  }
+  .coupon-left i {
+    /* font-size: 2.5vw; */
+    font-size: clamp(35px, 2.5vw, 2.5vw);
+    color: $primary-lightbrown;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-left i {
+      font-size: 35px;
+    }
+  }
+  .coupon-middle {
+    width: 2px;
+    background-image: linear-gradient(
+      to bottom,
+      $primary-lightgreen 0%,
+      $primary-lightgreen 50%,
+      transparent 0%
+    );
+    background-size: 100% 20px;
+    background-repeat: repeat-y;
+    border-top: 2px solid $primary-lightgreen;
+    border-bottom: 2px solid $primary-lightgreen;
+  }
+  .coupon-middle.empty {
+    background-image: linear-gradient(
+      to bottom,
+      #fff 0%,
+      #fff 50%,
+      transparent 0%
+    );
+  }
+  .coupon-right {
+    width: 22vw;
+    min-width: 200px;
+    border-left: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-right {
+      width: unset;
+      flex-grow: 1;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+  }
+  .coupon-right .msg-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-left: 0.52vw;
+    color: $primary-lightbrown;
+  }
+  .coupon-right .title {
+    margin: 0;
+  }
+  @media screen and (max-width: 1200px) {
+    .coupon-right .title {
+      font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-right .title {
+      font-size: 1.17rem;
+    }
+  }
+  .coupon-right .sub-title p {
+    margin: 5px 0;
+    font-size: 14px;
+  }
+  @media screen and (max-width: 1200px) {
+    .coupon-right .sub-title p {
+      font-size: 12px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-right .sub-title p {
+      font-size: 1rem;
+    }
+  }
+  .coupon-right .discount {
+    margin: 0;
+    padding-right: 1.7vw;
+    color: $accent-red;
+  }
+  @media screen and (max-width: 1200px) {
+    .coupon-right .discount {
+      font-size: 16px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-right .discount {
+      font-size: 1.33rem;
+      padding-right: 20px;
+    }
+  }
+  .coupon-right .hole {
+    width: 1.5vw;
+    height: 2.6vw;
+    border-radius: 2.6vw 0 0 2.6vw;
+    border: 2px solid $primary-lightgreen;
+    border-right: 1px solid #fff;
+    position: absolute;
+    right: -2px;
+    background-color: #fff;
+  }
+  @media screen and (max-width: 768px) {
+    .coupon-right .hole {
+      width: 20px;
+      height: 30px;
+      border-radius: 20px 0 0 20px;
+    }
+  }
+
+  /* 歷史紀錄樣式 */
+  .history-content .coupon-box,
+  .history-content-md .coupon-box {
+    border: #ccc;
+    background-color: #ccc;
+  }
+  .history-content .coupon-right .hole,
+  .history-content-md .coupon-right .hole {
+    border: #ccc;
+  }
+  .history-content .coupon-left i,
+  .history-content .coupon-right h4,
+  .history-content .coupon-right p,
+  .history-content-md .coupon-left i,
+  .history-content-md .coupon-right h4,
+  .history-content-md .coupon-right p {
+    color: #fff;
+  }
+  .history-content .discount,
+  .history-content-md .discount {
+    color: #fff;
+  }
+  .history-content .coupon-middle,
+  .history-content-md .coupon-middle {
+    background-image: linear-gradient(
+      to bottom,
+      #fff 0%,
+      #fff 50%,
+      transparent 0%
+    );
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+  .history-content-md {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .history-content-md {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

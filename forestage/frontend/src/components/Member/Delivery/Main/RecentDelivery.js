@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import RecentDeliveryCancelModal from './RecentDeliveryCancelModal'
 
 function RecentDelivery(props) {
   const { memberId, setContentIsLoaded } = props
   const [didMount, setDidMount] = useState(true)
+  const [deliveryId, setDeliveryId] = useState('')
   const [orders, setOrders] = useState([
     {
       deliveryId: '',
@@ -17,6 +19,20 @@ function RecentDelivery(props) {
       note: '',
     },
   ])
+
+  // bootstrap modal 開啟關閉用
+  const [showCancelModal, setShowCancelModal] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
+  const handleClose = () => {
+    setShowCancelModal(false)
+    setBootstrapCdnLoad(false)
+  }
+  const handleShow = (modalName) => {
+    setBootstrapCdnLoad(true)
+    setTimeout(() => {
+      setShowCancelModal(true)
+    }, 20)
+  }
 
   // 從後端取得訂單資料
   const fetchRecentDelivery = async () => {
@@ -127,8 +143,29 @@ function RecentDelivery(props) {
     </>
   )
 
+  // Bootstrap Cdn
+  const bootstrapCdn = (
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  )
+
   return (
     <>
+      {/* bootstrap CDN */}
+      {bootstrapCdnLoad && bootstrapCdn}
+
+      {/* 取消訂單視窗 */}
+      <RecentDeliveryCancelModal
+        showCancelModal={showCancelModal}
+        handleClose={handleClose}
+        memberId={memberId}
+        deliveryId={deliveryId}
+      />
+
       {orders.length > 0
         ? [
             orders.map((v, i) => {
@@ -181,7 +218,13 @@ function RecentDelivery(props) {
                     {/* 按鈕列 */}
                     <div className="content-foot">
                       <div className="btns-container">
-                        <button className="cancel-resv-btn guide-button">
+                        <button
+                          className="cancel-resv-btn guide-button"
+                          onClick={() => {
+                            setDeliveryId(v.deliveryId)
+                            handleShow()
+                          }}
+                        >
                           取消訂單
                         </button>
                       </div>

@@ -12,7 +12,7 @@ import CheckList from './CheckList'
 
 function Main(props) {
   // const { checkList, setCheckList } = props
-  const { showAuthModal, setShowAuthModal } = props
+  const { showAuthModal, setShowAuthModal, dateFromHome} = props
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
@@ -42,7 +42,6 @@ function Main(props) {
   const checkSeatCount = Boolean(sessionStorage.getItem('seatCount'))
   const checkCheckList = Boolean(sessionStorage.getItem('checkList'))
   const checkSeatInfo = Boolean(sessionStorage.getItem('seatInfo'))
-
   const ifLogin = Boolean(window.localStorage.getItem('authToken'))
 
   // 驗證登入
@@ -233,6 +232,7 @@ function Main(props) {
               setCheckList={setCheckList}
               checkList={checkList}
               setSeatInfo={setSeatInfo}
+              dateFromHome={dateFromHome}
             />
             <ChooseSeat
               seatInfo={seatInfo}

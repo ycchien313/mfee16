@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import MealCard from './MealCard'
 import Spinner from '../../../Spinner'
+import { Tween } from 'react-gsap'
 
 // 假餐點資料
 
@@ -89,92 +90,108 @@ function MealsBig(props) {
 
   return (
     <>
-      <div className="category-group">
-        <div
-          className={titleToggle[0] === true ? 'category active' : 'category'}
-          // className="category"
+      <Tween
+        from={{
+          x: '-30vw',
+        }}
+        to={{
+          x: '0px',
+          scrollTrigger: {
+            trigger: '.square',
+            start: '2300px center',
+            end: '2800px center',
+            scrub: 1,
+            markers: true,
+          },
+        }}
+      >
+        <div className="category-group">
+          <div
+            className={titleToggle[0] === true ? 'category active' : 'category'}
+            // className="category"
 
-          onClick={() => {
-            setMealType('main')
-            setTitleToggle([true, false, false])
-            isLoading()
-          }}
-        >
-          <h4>主餐</h4>
-          <img
-            src="http://localhost:3000/images/reservation/maindish-bg.svg"
-            alt=""
-          />
+            onClick={() => {
+              setMealType('main')
+              setTitleToggle([true, false, false])
+              isLoading()
+            }}
+          >
+            <h4>主餐</h4>
+            <img
+              src="http://localhost:3000/images/reservation/maindish-bg.svg"
+              alt=""
+            />
+          </div>
+          <div
+            className={titleToggle[1] === true ? 'category active' : 'category'}
+            onClick={() => {
+              setMealType('side')
+              setTitleToggle([false, true, false])
+              isLoading()
+            }}
+          >
+            <h4>附餐</h4>
+            <img
+              src="http://localhost:3000/images/reservation/sidedish-bg.svg"
+              alt=""
+            />
+          </div>
+          <div
+            className={titleToggle[2] === true ? 'category active' : 'category'}
+            onClick={() => {
+              setMealType('dessert')
+              setTitleToggle([false, false, true])
+              isLoading()
+            }}
+          >
+            <h4>甜點</h4>
+            <img
+              src="http://localhost:3000/images/reservation/dessert-bg.svg"
+              alt=""
+            />
+          </div>
         </div>
-        <div
-          className={titleToggle[1] === true ? 'category active' : 'category'}
-          onClick={() => {
-            setMealType('side')
-            setTitleToggle([false, true, false])
-            isLoading()
-          }}
-        >
-          <h4>附餐</h4>
-          <img
-            src="http://localhost:3000/images/reservation/sidedish-bg.svg"
-            alt=""
-          />
-        </div>
-        <div
-          className={titleToggle[2] === true ? 'category active' : 'category'}
-          onClick={() => {
-            setMealType('dessert')
-            setTitleToggle([false, false, true])
-            isLoading()
-          }}
-        >
-          <h4>甜點</h4>
-          <img
-            src="http://localhost:3000/images/reservation/dessert-bg.svg"
-            alt=""
-          />
-        </div>
-      </div>
 
-      <div className="cards">
-        {dishes.map((v, i) => {
-          let imgIlluSrc =
-            'http://localhost:3000/images/common/food/' + v.image_illustration
-          return (
-            <div
-              className={
-                dishCount[v.dish_id] > 0 ? 'active illu-image' : 'illu-image'
-              }
-              id={`food-${v.dish_id}`}
-            >
-              <img src={imgIlluSrc} alt="" />
-            </div>
-          )
-        })}
-
-        {loading ? (
-          <Spinner />
-        ) : (
-          showDishes.map((v, i) => {
+        <div className="cards">
+          {dishes.map((v, i) => {
+            let imgIlluSrc =
+              'http://localhost:3000/images/common/food/' + v.image_illustration
             return (
-              <MealCard
-                key={v.dish_id}
-                index={i}
-                id={v.dish_id}
-                imgIllu={v.image_illustration}
-                imgReal={v.image_realistic}
-                name={v.name}
-                type={v.type}
-                dishCount={dishCount}
-                setDishCount={setDishCount}
-                checkList={checkList}
-                setCheckList={setCheckList}
-                price={v.price}
-              />
+              <div
+                className={
+                  dishCount[v.dish_id] > 0 ? 'active illu-image' : 'illu-image'
+                }
+                id={`food-${v.dish_id}`}
+              >
+                <img src={imgIlluSrc} alt="" />
+              </div>
             )
-          })
-        )}
-      </div>
+          })}
+
+          {loading ? (
+            <Spinner />
+          ) : (
+            showDishes.map((v, i) => {
+              return (
+                <MealCard
+                  key={v.dish_id}
+                  index={i}
+                  id={v.dish_id}
+                  imgIllu={v.image_illustration}
+                  imgReal={v.image_realistic}
+                  name={v.name}
+                  type={v.type}
+                  dishCount={dishCount}
+                  setDishCount={setDishCount}
+                  checkList={checkList}
+                  setCheckList={setCheckList}
+                  price={v.price}
+                />
+              )
+            })
+          )}
+        </div>
+      </Tween>
     </>
   )
 }

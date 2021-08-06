@@ -5,14 +5,14 @@ import HistoryReservationDetailModal from './HistoryReservationDetailModal'
 
 function HistoryReservation(props) {
   const { memberId, setContentIsLoaded } = props
-  const [show, setShow] = useState(false)
-  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const [orders, setOrders] = useState([
     { reservationId: '', date: '', status: '' },
   ])
   const [reservationId, setReservationId] = useState('')
 
   // bootstrap modal 開啟關閉用
+  const [show, setShow] = useState(false)
+  const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const handleClose = () => {
     setBootstrapCdnLoad(false)
     setShow(false)

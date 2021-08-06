@@ -282,9 +282,13 @@
     display: flex;
     justify-content: space-evenly;
   }
+  .content-foot .update-resv-btn {
+    text-decoration: none;
+  }
   .content-foot .guide-button {
     width: fit-content;
     height: 2.3vw;
+    line-height: 2.3vw;
     min-height: 28px;
     font-size: 16px;
     border-radius: 5px;

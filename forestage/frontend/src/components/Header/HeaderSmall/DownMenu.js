@@ -7,55 +7,29 @@ function DownMenu() {
       <div className="down-menu">
         <ul>
           <li>
-            <Link to={{ pathname: '/reservation' }}>
-              <a href="#/">線上訂位</a>
-            </Link>
+            <Link to={{ pathname: '/reservation' }}>線上訂位</Link>
           </li>
           <li>
-            <Link to={{ pathname: '/singer' }}>
-              <a href="#/">歌手介紹</a>
-            </Link>
-            <Link to={{ pathname: '/dish' }}>
-              <a href="#/">餐點介紹</a>
-            </Link>
+            <Link to={{ pathname: '/singer' }}>歌手介紹</Link>
+            <Link to={{ pathname: '/dish' }}>餐點介紹</Link>
           </li>
           <li>
-            <Link to={{ pathname: '/comment' }}>
-              <a href="#/">檢視文章</a>
-            </Link>
-            <Link to={{ pathname: '/comment' }}>
-              <a href="#/">我的評論</a>
-            </Link>
+            <Link to={{ pathname: '/comment' }}>檢視文章</Link>
+            <Link to={{ pathname: '/comment' }}>我的評論</Link>
           </li>
           <li>
-            <Link to={{ pathname: '/' }}>
-              <a href="#/">Live 直播</a>
-            </Link>
-            <Link to={{ pathname: '/' }}>
-              <a href="#/">歌手投票</a>
-            </Link>
-            <Link to={{ pathname: '/game' }}>
-              <a href="#/">小遊戲</a>
-            </Link>
+            <Link to={{ pathname: '/' }}>Live 直播</Link>
+            <Link to={{ pathname: '/' }}>歌手投票</Link>
+            <Link to={{ pathname: '/game' }}>小遊戲</Link>
           </li>
           <li>
-            <Link to={{ pathname: '/member' }}>
-              <a href="#/">會員資料</a>
-            </Link>
-            <Link to={{ pathname: '/member/reservation' }}>
-              <a href="#/">我的訂位</a>
-            </Link>
-            <Link to={{ pathname: '/member/delivery' }}>
-              <a href="#/">外送訂單</a>
-            </Link>
-            <Link to={{ pathname: '/member/coupon' }}>
-              <a href="#/">折價券</a>
-            </Link>
+            <Link to={{ pathname: '/member' }}>會員資料</Link>
+            <Link to={{ pathname: '/member/reservation' }}>我的訂位</Link>
+            <Link to={{ pathname: '/member/delivery' }}>外送訂單</Link>
+            <Link to={{ pathname: '/member/coupon' }}>折價券</Link>
           </li>
           <li>
-            <Link to={{ pathname: '/reservation' }}>
-              <a href="#/">外送訂餐</a>
-            </Link>
+            <Link to={{ pathname: '/delivery' }}>外送訂餐</Link>
           </li>
         </ul>
       </div>

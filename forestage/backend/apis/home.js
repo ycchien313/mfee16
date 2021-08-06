@@ -6,8 +6,26 @@ const { query } = require("express");
 let current = moment().format("YYYY-MM-DD");
 let beginWeek = moment().startOf("isoWeek").format("YYYY-MM-DD");
 let endWeek = moment().endOf("isoWeek").format("YYYY-MM-DD");
+// 取得直播影片id
+const { YoutubeDataAPI } = require("youtube-v3-api");
+const API_KEY = process.env.API_KEY;
 
-// let getCalendarSql = 'SELECT sc.date, s.name, s.picture FROM singer_calendar AS sc, singer AS s WHERE DATEDIFF(sc.date, CURDATE())>=0 AND s.singer_id=sc.singer_id ORDER BY sc.date LIMIT 10' 蕙伃的
+const api = new YoutubeDataAPI(API_KEY);
+
+api.searchAll(`Elfin 詹宜諺`, 1)
+    .then(function (result) {
+        // for (let i = 0; i < result.items.length; i++) {
+        //     console.log(result.items[i].snippet);
+        // }
+        router.get("/youtube", function (req, res, next) {
+            let queryResult = result.items[0].id.videoId;
+            res.send(queryResult);
+        });
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
+//
 
 // 取得本日表演者資訊
 router.get("/singer_today", async function (req, res, next) {

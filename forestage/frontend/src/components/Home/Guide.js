@@ -1,16 +1,23 @@
-import React, { useState } from 'react'
-import { YoutubeDataAPI } from 'youtube-v3-api'
+import React, { useEffect, useState } from 'react'
+import $ from 'jquery'
 function Guide(props) {
   let { guideButton, leftVision, guideIndex, guideTitle, guideContent } = props
   const [liveID, setLiveID] = useState('')
   // 取得直播網址
-  const API_KEY = 'AIzaSyAz3DUfZIGUbtjyewe4PtALEyyAIZ19DTE'
-
-  const api = new YoutubeDataAPI(API_KEY)
-
-  api.searchAll(`Elfin 詹宜諺`, 1).then(function (result) {
-    setLiveID(result.items[0].id.videoId)
+  $.ajax({
+    url: 'http://localhost:3001/home/youtube',
+    method: 'GET',
+    dataType: 'string',
   })
+    .then(function (result) {
+      console.log('hi')
+      setLiveID(result)
+    })
+    .catch(function (err) {
+      console.log(err.responseText)
+      setLiveID(err.responseText)
+    })
+
   //
   let leftContent = [
     <iframe

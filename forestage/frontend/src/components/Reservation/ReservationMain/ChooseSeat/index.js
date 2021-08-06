@@ -171,7 +171,7 @@ function ChooseSeat(props) {
                   start: '1300px center',
                   end: '1800px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >
@@ -195,7 +195,7 @@ function ChooseSeat(props) {
               start: '1300px center',
               end: '1800px center',
               scrub: 1,
-              markers: true,
+              markers: false,
             },
           }}
         >

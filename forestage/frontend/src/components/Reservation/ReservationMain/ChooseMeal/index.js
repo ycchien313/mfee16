@@ -6,8 +6,8 @@ import MealsBig from './MealsBig/'
 import MealsSmall from './MealsSmall/'
 import { gsap } from 'gsap'
 import { Tween } from 'react-gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+// gsap.registerPlugin(ScrollTrigger)
 
 function ChooseMeal(props) {
   const { checkList, setCheckList, dishList, setDishList } = props
@@ -110,7 +110,7 @@ function ChooseMeal(props) {
                   start: '2000px center',
                   end: '2500px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >

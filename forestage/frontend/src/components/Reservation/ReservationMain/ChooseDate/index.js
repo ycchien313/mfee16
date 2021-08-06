@@ -63,7 +63,7 @@ function ChooseDate(props) {
                   start: '600px center',
                   end: '900px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >

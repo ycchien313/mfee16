@@ -4,7 +4,7 @@ function Guide(props) {
   let { guideButton, leftVision, guideIndex, guideTitle, guideContent } = props
   const [liveID, setLiveID] = useState('')
   // 取得直播網址
-  const API_KEY = 'AIzaSyA7Npb4e2rpovwMq30UbRFWop_cjiIDTiM'
+  const API_KEY = 'AIzaSyAz3DUfZIGUbtjyewe4PtALEyyAIZ19DTE'
 
   const api = new YoutubeDataAPI(API_KEY)
 
@@ -21,6 +21,7 @@ function Guide(props) {
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
+      autoPlay="1"
     ></iframe>,
 
     <figure>

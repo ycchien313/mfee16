@@ -32,7 +32,7 @@ function DeliveryOrder(props) {
     coupon_id: couponId,
     dishList: orderAll.dishList,
   }
-  console.log(data, 'aaa')
+  // console.log(data, 'aaa')
   // console.log(memberId, 'memberId')
 
   function change() {

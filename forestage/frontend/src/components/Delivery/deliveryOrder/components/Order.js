@@ -76,8 +76,9 @@ function Order(props) {
             />
             <input
               type="text"
-              placeholder="請輸入電話"
-              pattern="09\d{8}"
+              placeholder=""
+              // pattern="09\d{8}"
+              pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
               minLength="9"
               maxLength="10"
               value={inputTel}

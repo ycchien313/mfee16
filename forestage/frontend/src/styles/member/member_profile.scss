@@ -1,6 +1,17 @@
 .member-profile {
   @import '../common/global.scss';
 
+  @keyframes member-profile-fadein {
+    0% {
+      transform: translateY(-3%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   @keyframes slidein-main {
     0% {
       transform: translateY(-100%);
@@ -58,6 +69,12 @@
     display: flex;
     flex-direction: column;
     padding-right: 8.33vw;
+
+    opacity: 0;
+    animation-name: member-profile-fadein;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
   }
   @media screen and (max-width: 768px) {
     .right-side {
@@ -276,7 +293,6 @@
   .right-side .photo-mask {
     width: 12.5vw;
     height: 15.63vw;
-    border-radius: 0.52vw;
     background-color: #fff;
     opacity: 0;
     position: absolute;
@@ -321,6 +337,7 @@
     }
   }
   .right-side .name {
+    height: 24px;
     margin: 0.52vw 0 1.04vw 0;
     text-align: center;
     color: $primary-lightbrown;
@@ -401,7 +418,6 @@
   }
   .right-side .signin-info-container .table-container .info-row:nth-child(2) {
     margin: 5px 0;
-    padding-bottom: 15px;
   }
 
   /* 重設密碼、儲存按鈕樣式 */

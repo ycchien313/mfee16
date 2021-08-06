@@ -231,6 +231,30 @@ function PersonalInfo(props) {
     </>
   )
 
+  // 手機欄位 DOM
+  const mobileDom = (
+    <>
+      {toggleBtn ? (
+        <input name="mobile" type="text" value={profile.mobile} />
+      ) : (
+        <input
+          name="mobile"
+          type="tel"
+          value={profile.mobile}
+          placeholder="ex. 0911222333"
+          pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+          required
+          {...(toggleInput
+            ? { className: '', disabled: true }
+            : { className: 'active', disabled: false })}
+          onChange={(e) => {
+            setProfileFields(e)
+          }}
+        />
+      )}
+    </>
+  )
+
   // form 表單的內容
   const showProfile = (
     <>
@@ -324,42 +348,11 @@ function PersonalInfo(props) {
             </div>
             <div className="info-row">
               <div className="info-col">生日</div>
-              <div className="info-col">
-                {birthdayDom}
-                {/* <input
-                  name="birthday"
-                  type="text"
-                  value={profile.birthday}
-                  placeholder="ex. 1990.01.01"
-                  pattern="[0-9]{4}\.(0[1-9]|1[012])\.(0[1-9]|1[0-9]|2[0-9]|3[01])"
-                  required
-                  {...(toggleInput
-                    ? { className: '', disabled: true }
-                    : { className: 'active', disabled: false })}
-                  onChange={(e) => {
-                    setProfileFields(e)
-                  }}
-                /> */}
-              </div>
+              <div className="info-col">{birthdayDom}</div>
             </div>
             <div className="info-row">
               <div className="info-col">手機號碼</div>
-              <div className="info-col">
-                <input
-                  name="mobile"
-                  type="tel"
-                  value={profile.mobile}
-                  placeholder="ex. 0911222333"
-                  pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
-                  required
-                  {...(toggleInput
-                    ? { className: '', disabled: true }
-                    : { className: 'active', disabled: false })}
-                  onChange={(e) => {
-                    setProfileFields(e)
-                  }}
-                />
-              </div>
+              <div className="info-col">{mobileDom}</div>
             </div>
             <div className="info-row">
               <div className="info-col">地址</div>

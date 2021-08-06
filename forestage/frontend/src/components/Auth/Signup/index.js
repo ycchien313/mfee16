@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter, useHistory } from 'react-router'
 import '../../../styles/auth/signup.scss'
 import WelLogo from '../WelLogo'
 import AuthTitle from '../AuthTitle'
@@ -9,6 +10,7 @@ import AuthForm from '../AuthForm'
 
 function Signup(props) {
   const { signinScreen, setSigninScreen, setShowAuthModal } = props
+  const history = useHistory()
   const [errorMsg, setErrorMsg] = useState('')
 
   return (
@@ -23,6 +25,7 @@ function Signup(props) {
               className="cancel-btn orange-guide-button"
               onClick={() => {
                 setShowAuthModal(false)
+                props.match.url === '/member' && history.push('/')
               }}
             >
               <i className="cancel-btn-icon fas fa-times"></i>
@@ -57,4 +60,4 @@ function Signup(props) {
   )
 }
 
-export default Signup
+export default withRouter(Signup)

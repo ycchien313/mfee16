@@ -187,7 +187,7 @@ function AuthForm(props) {
 
           // 載入指示器及轉場
           await loading()
-          await transition('登入成功')
+          await transition('註冊成功')
 
           // 首頁則強制更新
           props.location.pathname === '/' && history.go(0)

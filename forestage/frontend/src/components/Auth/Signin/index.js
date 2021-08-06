@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { withRouter, useHistory } from 'react-router'
 import '../../../styles/auth/signin.scss'
 import WelLogo from '../WelLogo'
 import AuthTitle from '../AuthTitle'
@@ -9,6 +10,7 @@ import { Controls, PlayState, Tween } from 'react-gsap'
 
 function Signin(props) {
   const { signinScreen, setSigninScreen, setShowAuthModal } = props
+  const history = useHistory()
   const [errorMsg, setErrorMsg] = useState('')
 
   return (
@@ -23,6 +25,7 @@ function Signin(props) {
               className="cancel-btn orange-guide-button"
               onClick={() => {
                 setShowAuthModal(false)
+                props.match.url === '/member' && history.push('/')
               }}
             >
               <i className="cancel-btn-icon fas fa-times"></i>
@@ -57,4 +60,4 @@ function Signin(props) {
   )
 }
 
-export default Signin
+export default withRouter(Signin)

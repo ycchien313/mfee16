@@ -38,7 +38,7 @@ router.get('/checkout/coupon', async (req, res) => {
     res.send(memberCoupon);
 });
 
-// 尚未決定如何取得memberid?
+
 router.get('/checkout/memberInfo', async (req, res) => {
     let getMemberInfoSql = 'SELECT name, mobile FROM member WHERE member_id=?';
     let memberInfo = await db.connection.queryAsync(getMemberInfoSql, [
@@ -239,12 +239,41 @@ router.post('/checkout/send', async(req, res)=>{
 
 });
 
+// 修改訂位  
+router.get('/history', async(req, res)=>{
+
+    // 以 reservation_id 取得訂位資料
+    let getReservationInfoSql = 'SELECT date, name, mobile, attendance, total, note, seat_id, member_id, mcm_id FROM reservation WHERE reservation_id = ?'
+    let reservationInfo = await db.connection.queryAsync(getReservationInfoSql, [1]);
+
+    // 以 reservation_id 取得餐點資訊
+    let getReservationDishSql = 'SELECT COUNT(*), d.name, d.price, d.image_realistic FROM reservation_dish_mapping AS rdm ,dish AS d, reservation AS r WHERE rdm.reservation_id = r.reservation_id AND r.reservation_id = ? AND d.dish_id = rdm.dish_id GROUP BY rdm.dish_id'
+    
+    let reservationDish = await db.connection.queryAsync(getReservationDishSql, [1]);
+    const reservation = [reservationInfo, reservationDish]
+    res.json(reservation)
+
+}) 
+
+router.put('/update', async(req, res)=>{
+    let updateReservationSql = 'UPDATE reservation SET date = ?, name=?,mobile=?, attendance=?, total=?, note=?, seat_id=?, valid = 0 WHERE reservation_id = ?';
+
+    // 清除reservation_dish_mapping的內容
+    let clearDishSql = 'DELETE FROM reservation_dish_mapping WHERE reservation_id = 1'
+    // 重新新增reservation_dish_mapping的內容
+    let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`;
+    let insertDish = await db.connection.queryAsync(insertDishSql, [
+        newDishList,
+    ]);
+})
+
+
 router.get('/:date', async (req, res) => {
     let getRemainingSeatsSql =
         'SELECT s.name, s.seat_number-SUM(r.attendance) AS remainingSeats, s.seat_id FROM reservation r, seat s WHERE date=? AND s.seat_id = r.seat_id GROUP BY seat_id';
 
     let remainingSeats = await db.connection.queryAsync(getRemainingSeatsSql, [
-        req.params.date,
+        req.params.date
     ]);
 
     res.json(remainingSeats);

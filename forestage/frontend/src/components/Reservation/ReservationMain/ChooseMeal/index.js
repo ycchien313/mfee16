@@ -80,7 +80,6 @@ function ChooseMeal(props) {
       let initShowDishes = result.data.filter((dish) => {
         return dish.type === '主餐'
       })
-      // console.log(initShowDishes)
       setDishes(result.data)
       setShowDishes(initShowDishes)
     })
@@ -121,30 +120,29 @@ function ChooseMeal(props) {
             </Tween>
           </div>
         </div>
-        
-          {isTabletOrMobile ? (
-            <MealsSmall
-              dishes={dishes}
-              setDishes={setDishes}
-              showDishes={showDishes}
-              setShowDishes={setShowDishes}
-              checkList={checkList}
-              setCheckList={setCheckList}
-              dishCount={dishCount}
-              setDishCount={setDishCount}
-            />
-          ) : (
-            <MealsBig
-              dishes={dishes}
-              setDishes={setDishes}
-              showDishes={showDishes}
-              setShowDishes={setShowDishes}
-              checkList={checkList}
-              setCheckList={setCheckList}
-              dishCount={dishCount}
-              setDishCount={setDishCount}
-            />
-          )}
+        {isTabletOrMobile ? (
+          <MealsSmall
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishCount={dishCount}
+            setDishCount={setDishCount}
+          />
+        ) : (
+          <MealsBig
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishCount={dishCount}
+            setDishCount={setDishCount}
+          />
+        )}
       </section>
     </>
   )

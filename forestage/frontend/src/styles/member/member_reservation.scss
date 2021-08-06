@@ -291,7 +291,8 @@
     cursor: pointer;
     padding: 0 10px;
   }
-  .content-foot .cancel-resv-btn {
+  .content-foot .cancel-resv-btn,
+  .content-foot-md .cancel-resv-btn {
     color: $primary-lightbrown;
     background-color: unset;
     box-shadow: unset;

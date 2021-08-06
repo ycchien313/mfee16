@@ -14,6 +14,7 @@ function PersonalInfo(props) {
   const [toggleTextarea, setToggleTextarea] = useState(true)
   const [dataLoading, setDataLoading] = useState(false)
   const [didMount, setDidMount] = useState(true)
+  const [isUpdate, setIsUpdate] = useState(false)
   const [profile, setProfile] = useState({
     avatar: process.env.PUBLIC_URL + '/images/member/default-user.png',
     name: '',
@@ -145,6 +146,7 @@ function PersonalInfo(props) {
 
     // 傳到後端
     updateProfileServer(form)
+    setIsUpdate(true)
 
     // 載入器
     setDataLoading(true)
@@ -165,8 +167,9 @@ function PersonalInfo(props) {
       getMember()
       getProfileServer()
       setContentIsLoaded(true)
+      setIsUpdate(false)
     }
-  }, [memberId])
+  }, [memberId, isUpdate])
 
   const loading = (
     <>
@@ -215,7 +218,8 @@ function PersonalInfo(props) {
           name="birthday"
           type="date"
           value={profile.birthday.replaceAll('.', '-')}
-          // value="2020-01-01"
+          min="1990-01-01"
+          max="2019-12-31"
           {...(toggleInput
             ? { className: '', disabled: true }
             : { className: 'active', disabled: false })}

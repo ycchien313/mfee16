@@ -1,7 +1,8 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 
-function Reservation() {
-  return <></>
+function Reservation(props) {
+  return <>{console.log(props)}</>
 }
 
-export default Reservation
+export default withRouter(Reservation)

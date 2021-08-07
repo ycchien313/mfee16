@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import StyledLink from '../StyledLink'
+// import { Tween } from 'react-gsap'
+import { gsap } from 'gsap'
 
 function CheckList(props) {
   const history = useHistory()
@@ -28,7 +30,13 @@ function CheckList(props) {
 
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
-
+  useEffect(() => {
+    gsap.fromTo(
+      '.fa-check-circle.active',
+      { scaleX: 1.8, scaleY: 1.8, duration: 1, ease: 'power2.out' },
+      { scaleX: 1.2, scaleY: 1.2, duration: 0.5 }
+    )
+  }, [checkList])
   return (
     <>
       <div class={showClipboard ? clipboardActClass : clipboardDisActClass}>

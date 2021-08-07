@@ -1,6 +1,15 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 
 function Hero() {
+  const flyElfin = useRef(null)
+  useEffect(() => {
+    gsap.fromTo(
+      'img.elfin',
+      { y: -300, duration: 7, ease: 'bounce.out' },
+      { y: 0, duration: 3,  ease: 'bounce.out'}
+    )
+  }, [])
   return (
     <>
       <div className="hero-section reservation">
@@ -12,6 +21,7 @@ function Hero() {
             alt=""
           />
           <img
+            ref={flyElfin}
             className="elfin"
             src="http://localhost:3000/images/reservation/elfin-green.png"
             alt=""

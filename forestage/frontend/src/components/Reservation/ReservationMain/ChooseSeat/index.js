@@ -181,9 +181,11 @@ function ChooseSeat(props) {
             <h3 class="step two">選擇座位</h3>
             <Tween
               from={{
+                opacity: '0',
                 x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
@@ -205,9 +207,11 @@ function ChooseSeat(props) {
         </div>
         <Tween
           from={{
+            opacity: '0',
             x: '-10vw',
           }}
           to={{
+            opacity: '1',
             x: '0px',
             scrollTrigger: {
               trigger: '.square',

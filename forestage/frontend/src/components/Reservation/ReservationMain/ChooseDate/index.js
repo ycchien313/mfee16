@@ -6,7 +6,6 @@ import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
 import { Tween } from 'react-gsap'
 
-
 function ChooseDate(props) {
   const {
     remainingSeat,
@@ -19,7 +18,7 @@ function ChooseDate(props) {
     checkList,
     dateFromHome,
     reservationHistory,
-    dataFromMember
+    dataFromMember,
   } = props
 
   const [singerCalendar, setSingerCalendar] = useState([])
@@ -56,9 +55,11 @@ function ChooseDate(props) {
             <h3 className="step">選擇日期</h3>
             <Tween
               from={{
-                x: '-300px',
+                opacity: '0',
+                x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',

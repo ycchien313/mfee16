@@ -128,9 +128,11 @@ function ChooseMeal(props) {
             <h3 className="step">選擇餐點</h3>
             <Tween
               from={{
+                opacity: '0',
                 x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',

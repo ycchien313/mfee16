@@ -51,7 +51,11 @@ function FourthScreen(props) {
         method: 'POST',
         dataType: 'json',
         data: { memberId: memberId },
-      }).then(Swal.fire('投票成功', '即將更新票數', 'success'))
+      }).then(
+        Swal.fire('投票成功', '即將更新票數', 'success').then(
+          Swal.fire('hi', 'test', 'info')
+        )
+      )
     } else {
       Swal.fire('鍵入失敗', '請選擇歌手', 'error')
     }

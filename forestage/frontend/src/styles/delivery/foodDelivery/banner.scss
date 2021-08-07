@@ -233,7 +233,7 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      height: 45vh;
+      height: 30vh;
       top: -55vh;
       border-radius: 50px;
       background-clip: padding-box, border-box;
@@ -463,8 +463,8 @@
 
     .h1.title {
       position: relative;
-      top: -420px;
-      // top: -90vw;
+      // top: -420px;
+      top: -90vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -480,7 +480,8 @@
     .top-wave .elfin {
       width: 60px;
       position: absolute;
-      top: -390px;
+      // top: -390px;
+      top: -85vw;
       z-index: 5;
     }
 

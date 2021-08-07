@@ -41,6 +41,13 @@ function Map(props) {
                 className="takeoutInput add"
                 defaultValue={address.dist}
                 placeholder="請輸入地區"
+                onChange={(e) => {
+                  let newAddress = {
+                    ...address,
+                    dist: e.target.value,
+                  }
+                  setAddress(newAddress)
+                }}
               />
             </div>
             <input
@@ -666,6 +673,13 @@ function Map(props) {
                 defaultValue={address.dist}
                 className="takeoutInput add"
                 placeholder="請輸入地區"
+                onChange={(e) => {
+                  let newAddress = {
+                    ...address,
+                    dist: e.target.value,
+                  }
+                  setAddress(newAddress)
+                }}
               />
             </div>
             <input

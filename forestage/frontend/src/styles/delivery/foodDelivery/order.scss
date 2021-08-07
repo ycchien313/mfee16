@@ -428,9 +428,11 @@
       center top no-repeat;
     background-size: contain;
   }
-
+  .category-bg{
+    
+    padding: 10px;
+  }
   .category-innertext {
-    padding: 10px 0 0 10px;
     color: #333333;
   }
 
@@ -517,13 +519,13 @@
       background-repeat: no-repeat;
       background-position: center left;
       height: calc(10vw + 100px);
-      //
+      cursor: pointer;
       width: 80px;
     }
     .Mobile-div {
       width: 35vw;
       margin-left: 20px;
-      margin-top: 10px;
+      margin-top: 30px;
     }
     .menuMobile .menu {
       top: 15vw;

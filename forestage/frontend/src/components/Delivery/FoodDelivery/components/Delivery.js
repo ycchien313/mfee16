@@ -32,7 +32,7 @@ function Delivery(props) {
   const [address, setAddress] = useState({
     city: '桃園市',
     dist: '',
-    road: '輸入您的地址',
+    road: '',
   })
 
   const [img, setImg] = useState([])

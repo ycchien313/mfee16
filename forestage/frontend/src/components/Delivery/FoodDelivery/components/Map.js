@@ -40,7 +40,7 @@ function Map(props) {
                 type="text"
                 className="takeoutInput add"
                 defaultValue={address.dist}
-                // placeholder
+                placeholder="請輸入地區"
               />
             </div>
             <input
@@ -54,7 +54,7 @@ function Map(props) {
                 }
                 setAddress(newAddress)
               }}
-              // placeholder
+              placeholder="請輸入地址"
             />
             <div className="order-time">
               <div className="date">
@@ -665,7 +665,7 @@ function Map(props) {
                 type="text"
                 defaultValue={address.dist}
                 className="takeoutInput add"
-                // placeholder
+                placeholder="請輸入地區"
               />
             </div>
             <input
@@ -679,7 +679,7 @@ function Map(props) {
                 }
                 setAddress(newAddress)
               }}
-              // placeholder
+              placeholder="請輸入地址"
             />
             <div className="order-time">
               <div className="date">

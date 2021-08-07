@@ -220,6 +220,7 @@ function Main(props) {
       window.sessionStorage.setItem('seatInfo', JSON.stringify(seatInfo))
     }
   }, [remainingSeat, seatCount, seatInfo])
+  
   useEffect(() => {
     // 若從我的訂位紀錄來，則先修改欲存入session中資料
     // 只抓第一次 待加location條件

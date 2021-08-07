@@ -18,7 +18,8 @@ function CalendarBig(props) {
     setSeatCount,
     seatCount,
     dateFromHome,
-    reservationHistory
+    reservationHistory,
+    dataFromMember,
   } = props
 
   return (
@@ -57,6 +58,7 @@ function CalendarBig(props) {
                   seatCount={seatCount}
                   dateFromHome={dateFromHome}
                   reservationHistory={reservationHistory}
+                  dataFromMember={dataFromMember}
                 />
               )
             }
@@ -81,7 +83,7 @@ function CalendarBig(props) {
                   seatCount={seatCount}
                   dateFromHome={dateFromHome}
                   reservationHistory={reservationHistory}
-
+                  dataFromMember={dataFromMember}
                 />
               )
             }

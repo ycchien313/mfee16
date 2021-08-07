@@ -252,10 +252,8 @@ router.get('/history', async(req, res)=>{
     // 取得座位名稱價格
     let getSeatNameSql = `SELECT name, minimum_order FROM seat WHERE seat_id=${reservationInfo[0].seat_id}`
     let seatName = await db.connection.queryAsync(getSeatNameSql);
-    // console.log("seatName:", seatName)
     // 取得歌手資料
-    // console.log("reservationInfo[0].date:", reservationInfo[0].date)
-    // let getSingerInfoSql = `SELECT s.name, s.picture FROM singer AS s, singer_calendar AS sc WHERE sc.date="2021-08-07" AND sc.singer_id = s.singer_id` 
+
     let getSingerInfoSql = 'SELECT s.name, s.picture FROM singer AS s, singer_calendar AS sc WHERE sc.date=? AND sc.singer_id = s.singer_id' 
     let singerInfo = await db.connection.queryAsync(getSingerInfoSql,[reservationInfo[0].date]);
     // console.log("singerInfo:", singerInfo)
@@ -270,16 +268,42 @@ router.get('/history', async(req, res)=>{
 
 }) 
 
+
+
 router.put('/update', async(req, res)=>{
     console.log("下面")
     let updateReservationSql = `UPDATE reservation SET date=?, seat_id=?, attendance=?, name=?, mobile=?, total=?, note=?, member_id=?, mcm_id=?, status=? WHERE reservation_id=${req.body.reservationId}`;
-    // let insertResData = req.body.insertResData
-    let insertResData = Object.values(req.body.insertResData)
-    console.log(insertResData,"insertResData")
-    let updateReservation = await db.connection.queryAsync(updateReservationSql,[insertResData]);
-    console.log(updateReservation)
-    // let updateReservation = await db.connection.queryAsync(updateReservationSql, )
 
+    let insertResData = Object.values(req.body.insertResData);
+    const {
+        date,
+        seat_id,
+        attendance,
+        name,
+        mobile,
+        total,
+        note,
+        member_id,
+        mcm_id,
+        status,
+    } = req.body.insertResData;
+    console.log(insertResData, 'insertResData');
+
+    let updateReservation = await db.connection.queryAsync(
+        updateReservationSql,
+        [
+            date,
+            seat_id,
+            attendance,
+            name,
+            mobile,
+            total,
+            note,
+            member_id,
+            mcm_id,
+            status,
+        ]
+    );
 
     // 清除reservation_dish_mapping的內容
     let clearDishSql = 'DELETE FROM reservation_dish_mapping WHERE reservation_id = ?'
@@ -302,7 +326,7 @@ router.put('/update', async(req, res)=>{
     let newDishList = [];
     dishList.forEach((v) => {
         for (let i = 0; i < v[0]; i++) {
-            newDishList.push([reservation.insertId, v[1]]);
+            newDishList.push([req.body.reservationId, v[1]]);
         }
     });
     let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`;

@@ -24,20 +24,27 @@ function ReservationPage(props) {
   ) {
     dateFromHome = props.location.state.select
     if (props.history.location.state.prevPath === '/home') {
+      // 避免返回首頁再進入訂位頁時仍選擇前一個歌手
+      // 從home每次進來先清空
       sessionStorage.clear()
       console.log(props.location.state.prevPath)
     }
   }
-  // 從訂位頁送來資料
+
+
+  // 從我的訂位頁送來資料
   if (
     props.location.state !== undefined &&
     props.location.state.prevPath === '/member/reservation'
   ) {
     dataFromMember.reservationId = props.location.state.reservationId
     dataFromMember.prevPath = props.location.state.prevPath
-    // if (props.history.location.state.prevPath === '/reservation') {
-    //   sessionStorage.clear()
-    // }
+    if (props.history.location.state.prevPath === '/member/reservation') {
+
+      // 從MEMBER來每次進來先清空
+      sessionStorage.clear()
+      console.log(props.location.state.prevPath)
+    }
   }
   // 視窗關閉時移除sessionStorage
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 function SeatsBar(props) {
   const [didMount, setDidMount] = useState(false)
-  const { seatInfo, remainingSeat, seatCount } = props
+  const { seatInfo, remainingSeat, seatCount} = props
 
   const rockBar = useRef(null)
   const middleBar = useRef(null)
@@ -18,7 +18,7 @@ function SeatsBar(props) {
     setDidMount(true)
 
     leftSeat.current.style.display = 'none'
-    console.log(leftSeat.current.style.display, 'didmount style')
+
   }, [])
 
   useEffect(() => {

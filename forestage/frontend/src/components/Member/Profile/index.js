@@ -1,8 +1,9 @@
 import React from 'react'
+import Header from '../../Header'
 import Banner from '../Common/Banner'
 import Main from './Main/'
 import Footer from '../../Footer/'
-import Header from '../../Header'
+import CustomerService from '../Common/CustomerService'
 
 function Profile(props) {
   const { pagename } = props
@@ -15,6 +16,7 @@ function Profile(props) {
       <Banner pagename={pagename} />
       <Main pagename={pagename} />
       <Footer />
+      <CustomerService />
     </>
   )
 }

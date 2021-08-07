@@ -1,0 +1,342 @@
+.member-customer-service {
+  @import '../common/global.scss';
+
+  /* 滑動樣式 */
+  .dialog-box::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+  }
+
+  .dialog-box::-webkit-scrollbar-track {
+    // background: #e4eded; /* color of the tracking area */
+  }
+
+  .dialog-box::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* color of the scroll thumb */
+    border-radius: 25px; /* roundness of the scroll thumb */
+    /* creates padding around scroll thumb */
+  }
+
+  width: 460px;
+  height: 615px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+
+  /* 左側對話框 */
+  .chat-dialog-box-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: $primary-lightgray;
+    border-radius: 20px;
+    box-shadow: $box-shadow;
+
+    .dialog-box {
+      overflow: auto;
+    }
+
+    /***** 共同部分 *****/
+    /* 對話列 */
+    .admin-row,
+    .customer-row {
+      display: flex;
+      padding: 10px 10px 15px 10px;
+    }
+    /* 頭像 */
+    .avatar-box {
+      .avatar {
+        width: 50px;
+      }
+    }
+    /* 訊息 */
+    .message-box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+
+      .content-box {
+        min-height: 30px;
+        border-radius: 15px;
+        padding: 12px 20px;
+        margin-bottom: 5px;
+        background-color: #fff;
+        box-shadow: 0px 8px 10px 0px #dde8dd;
+
+        .content {
+          color: $secondary-green;
+          font-family: 'Microsoft JhengHei', '黑體', 'Helvetica', 'Arial',
+            sans-serif;
+        }
+      }
+
+      .time {
+        color: #9c9c9c;
+      }
+    }
+    /***** 共同部分 *****/
+
+    /* 顧客 */
+    .customer-row {
+      justify-content: flex-end;
+
+      .message-box {
+        align-items: flex-end;
+
+        .content-box {
+          text-align: right;
+        }
+      }
+    }
+
+    /* 回覆列 */
+    .reply-box {
+      height: 60px;
+      border-top: 2px solid #fff;
+      padding: 5px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+
+      /* 包覆 input 欄位 */
+      .content-box {
+        width: calc(100% - 60px);
+
+        /* input 欄位 */
+        .content {
+          width: 100%;
+          border-radius: 25px;
+          border: none;
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+
+      /* 傳送按鈕 */
+      .submit {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  /* 右側客服按鈕 */
+  .chat-button-container {
+    width: 70px;
+    align-self: flex-end;
+    margin: 5px;
+
+    .chat-button {
+      margin: 0;
+      img {
+        width: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  //   .btn {
+  //     cursor: pointer;
+  //     position: fixed;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: center;
+  //     align-items: center;
+  //     right: 10px;
+  //     bottom: 10px;
+  //     width: 80px;
+  //     height: 80px;
+  //     border: none;
+  //     background: white;
+  //   }
+  //   .btn h4 {
+  //     font-weight: 200;
+  //     font-family: Maru;
+  //     margin: 0;
+  //     color: #a1957d;
+  //   }
+  //   .btn figure {
+  //     width: 50px;
+  //     height: 50px;
+  //     overflow: hidden;
+  //     margin: 0;
+  //   }
+  //   .btn figure img {
+  //     width: 100%;
+  //     height: 100%;
+  //   }
+  //   .target {
+  //     /* 背景 */
+  //     background: #e4eded;
+  //     position: fixed;
+  //     width: 250px;
+  //     height: 300px;
+  //     bottom: 0;
+  //     right: 100px;
+  //     transition: 0.5s;
+  //     transform: translateY(0px);
+  //     border-radius: 20px;
+  //     box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
+  //     /* 內容設定 */
+  //     display: flex;
+  //     flex-direction: column;
+  //   }
+  //   .hide {
+  //     transform: translateY(350px);
+  //   }
+
+  //   /* 彈出式視窗 */
+  //   .target .content {
+  //     padding-top: 20px;
+  //     overflow: auto;
+  //     height: 80%;
+  //     border-bottom: 1px solid white;
+  //     padding: 10px;
+  //   }
+  //   /* 通用設定 */
+
+  //   .message {
+  //     word-break: break-all;
+  //   }
+  //   /* 我的 */
+  //   .mine {
+  //     /* flex-direction: column; */
+  //     display: flex;
+  //     flex-direction: row-reverse;
+  //     justify-content: space-around;
+  //     position: relative;
+  //     margin: 15px 0 15px 0;
+  //   }
+  //   .mine .avatar {
+  //     display: flex;
+  //     justify-content: flex-start;
+  //   }
+  //   .mine .avatar figure {
+  //     top: 0;
+  //     width: 40px;
+  //     height: 40px;
+  //     overflow: hidden;
+  //     border-radius: 50%;
+  //     margin: 0 5px 0 10px;
+  //   }
+  //   .mine .avatar figure img {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: cover;
+  //   }
+  //   .mine .message {
+  //     font-family: 'Noto Sans TC', sans-serif;
+  //     background: white;
+  //     width: 60%;
+  //     color: #b2d297;
+  //     padding: 5px;
+  //     border-radius: 5px 0 5px 5px;
+  //     top: 0;
+  //     right: 20px;
+  //   }
+  //   /* 對方的 */
+  //   .admin {
+  //     /* flex-direction: column; */
+  //     display: flex;
+  //     justify-content: space-around;
+  //     position: relative;
+  //     margin: 15px 0 15px 0;
+  //   }
+  //   .admin .avatar {
+  //     display: flex;
+  //     justify-content: flex-start;
+  //   }
+  //   .admin .avatar figure {
+  //     top: 0;
+  //     width: 40px;
+  //     height: 40px;
+  //     overflow: hidden;
+  //     border-radius: 50%;
+  //     margin: 0 0 0 10px;
+  //   }
+  //   .admin .avatar figure img {
+  //     width: 100%;
+  //     height: 100%;
+  //     object-fit: cover;
+  //   }
+  //   .admin .message {
+  //     font-family: 'Noto Sans TC', sans-serif;
+  //     /* position: absolute; */
+  //     background: white;
+  //     width: 60%;
+  //     color: #b2d297;
+  //     padding: 5px;
+  //     border-radius: 0 5px 5px 5px;
+  //     top: 0;
+  //     right: 20px;
+  //   }
+  //   /* 輸入區 */
+
+  //   .inputSide {
+  //     display: flex;
+  //     height: 20%;
+  //     align-items: center;
+  //     justify-content: space-around;
+  //   }
+  //   .inputSide input {
+  //     width: 100%;
+  //     border: none;
+  //     height: 25px;
+  //     border-radius: 25px;
+  //     word-break: break-all;
+  //     padding-left: 10px;
+  //     outline: none;
+  //   }
+  //   .inputSide input:focus {
+  //     box-shadow: 0 0 0 1px #a1957d;
+  //   }
+  //   .submit {
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     cursor: pointer;
+  //     border: none;
+  //     background: #f5b54d;
+  //     width: 30px;
+  //     height: 30px;
+  //     border-radius: 50%;
+  //     transition: 0.3s;
+  //     box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
+  //   }
+  //   .submit:active {
+  //     box-shadow: none;
+  //   }
+  //   .submit i {
+  //     color: white;
+  //   }
+
+  //   /* 關閉按鈕 */
+  //   .close {
+  //     z-index: 1;
+  //     position: absolute;
+  //     top: -20px;
+  //     right: -10px;
+  //     cursor: pointer;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     border: none;
+  //     width: 40px;
+  //     height: 40px;
+  //     border-radius: 50%;
+  //     background: #a1957d;
+  //   }
+  //   .close i {
+  //     color: white;
+  //     font-size: 20px;
+  //   }
+}

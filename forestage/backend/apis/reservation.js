@@ -53,15 +53,15 @@ router.post('/checkout/send', async(req, res)=>{
     console.log("上面")
 
     let insertResData = req.body.insertResData
-    console.log("insertResData:",insertResData)
+    // console.log("insertResData:",insertResData)
     let resDate = insertResData.date
-    console.log("resDate:",resDate)
+    // console.log("resDate:",resDate)
 
     let resTotal = insertResData.total
-    console.log("resTotal:",resTotal)
+    // console.log("resTotal:",resTotal)
 
     let resAttendance = insertResData.attendance
-    console.log("resAttendance:",resAttendance)
+    // console.log("resAttendance:",resAttendance)
 
     insertResData = Object.values(insertResData)
     let insertReservationSql = 'INSERT INTO reservation (date, seat_id, attendance, name, mobile, total, note, member_id, mcm_id, status,create_time) VALUES (?,NOW())'
@@ -103,9 +103,9 @@ router.post('/checkout/send', async(req, res)=>{
 
 
     let getMemberInfo = `SELECT email, mobile FROM member WHERE member_id = ?`
-    console.log(req.body.insertResData.member_id)
+    // console.log(req.body.insertResData.member_id)
     let memberInfo = await db.connection.queryAsync(getMemberInfo,[req.body.insertResData.member_id])
-    console.log(memberInfo[0].name)
+    // console.log(memberInfo[0].name)
     let memberEmail = memberInfo[0].email
     
     // console.log(memberInfo,"memberinfo")
@@ -272,15 +272,10 @@ router.get('/history', async(req, res)=>{
 
 router.put('/update', async(req, res)=>{
     console.log("下面")
-    let updateReservationSql = 'UPDATE reservation SET date = ?, seat_id=?, attendance=?, name=?,mobile=?, total=?, note=?,member_id=?,mcm_id=?, status = ? WHERE reservation_id = ?';
-    let insertResData = req.body.insertResData
-    insertResData = Object.values(insertResData)
+    let updateReservationSql = `UPDATE reservation SET date=?, seat_id=?, attendance=?, name=?, mobile=?, total=?, note=?, member_id=?, mcm_id=?, status=? WHERE reservation_id=${req.body.reservationId}`;
+    // let insertResData = req.body.insertResData
+    let insertResData = Object.values(req.body.insertResData)
     console.log(insertResData,"insertResData")
-
-    insertResData.push(req.body.reservationId)
-    console.log(insertResData,"insertResData")
-    
-    
     let updateReservation = await db.connection.queryAsync(updateReservationSql,[insertResData]);
     console.log(updateReservation)
     // let updateReservation = await db.connection.queryAsync(updateReservationSql, )

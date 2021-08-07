@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import RecentReservationDetailModal from './RecentReservationDetailModal'
@@ -7,6 +7,7 @@ import RecentReservationCancelModal from './RecentReservationCancelModal'
 
 function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
+  // const history = useHistory()
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [didMount, setDidMount] = useState(true)
   const [orders, setOrders] = useState([])
@@ -82,7 +83,7 @@ function RecentReservation(props) {
               to={{
                 pathname: '/reservation',
                 state: {
-                  prePath: '/member/reservation',
+                  prevPath: '/member/reservation',
                   reservationId: v.reservation_id,
                 },
               }}

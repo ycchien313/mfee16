@@ -103,7 +103,7 @@ function ThirdScreen(props) {
     <div id="thirdScreen">
       <div className="green-bg-right">
         <img
-          src="http://localhost:3000/images/home/green-background-right.svg"
+          src="http://localhost:3000/images/home/slogan-bg-right.png"
           alt=""
         />
       </div>

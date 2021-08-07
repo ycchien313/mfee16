@@ -10,11 +10,19 @@ import { Tween } from 'react-gsap'
 // gsap.registerPlugin(ScrollTrigger)
 
 function ChooseMeal(props) {
-  const { checkList, setCheckList, dishList, setDishList } = props
+  const {
+    checkList,
+    setCheckList,
+    dishList,
+    setDishList,
+    reservationHistory,
+    dataFromMember,
+  } = props
   const [dishes, setDishes] = useState([])
   const [showDishes, setShowDishes] = useState([])
   const [didMount, setDidMount] = useState(false)
   const [dishCount, setDishCount] = useState({})
+  const [fromHistory, setFromHistory] = useState(true)
 
   // 檢查storage是否有此筆資料
   const checkDishCount = Boolean(window.sessionStorage.getItem('dishCount'))
@@ -27,6 +35,7 @@ function ChooseMeal(props) {
 
   useEffect(() => {
     setDidMount(true)
+    getDishes()
   }, [])
 
   // 建立餐點物件
@@ -86,8 +95,27 @@ function ChooseMeal(props) {
   }
 
   useEffect(() => {
-    getDishes()
-  }, [])
+    // 待加上location條件
+    // 將歷史訂單餐點數量
+    if (
+      didMount &&
+      fromHistory &&
+      dataFromMember.prevPath === '/member/reservation'
+    ) {
+      let newDishCount = { ...dishCount }
+      reservationHistory.reservationDish.forEach((item) => {
+        newDishCount[item.dish_id] = item.dishAmount
+      })
+      setDishCount(newDishCount)
+      console.log(reservationHistory, 'res dish')
+
+      // setDishCount(newDishCount)
+      setFromHistory(false)
+    }
+  }, [reservationHistory])
+
+  // useEffect(() => {
+  // }, [])
   return (
     <>
       <section className="choose-meal">

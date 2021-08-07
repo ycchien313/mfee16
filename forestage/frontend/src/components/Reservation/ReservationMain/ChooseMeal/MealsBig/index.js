@@ -14,6 +14,7 @@ function MealsBig(props) {
     setCheckList,
     dishCount,
     setDishCount,
+    dataFromMember,
   } = props
 
   const [mealType, setMealType] = useState('main')

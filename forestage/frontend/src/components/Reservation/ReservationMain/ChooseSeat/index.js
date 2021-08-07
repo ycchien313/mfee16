@@ -12,10 +12,13 @@ function ChooseSeat(props) {
     checkList,
     setCheckList,
     remainingSeat,
+    reservationHistory,
+    dataFromMember,
   } = props
 
   const [didMount, setDidMount] = useState(false)
   const [attendance, setAttendance] = useState({})
+  const [fromHistory, setFromHistory] = useState(true)
 
   const barInfo = useRef(null)
   // 判斷sessionStorage中是否有此資料
@@ -77,6 +80,22 @@ function ChooseSeat(props) {
       })
     }
   }, [attendance])
+
+  useEffect(() => {
+    // 待加上location條件
+    // 將歷史訂單訂位人數帶入
+    if (
+      didMount &&
+      fromHistory &&
+      dataFromMember.prevPath === '/member/reservation'
+    ) {
+      let newAttendance = { ...attendance }
+      newAttendance[reservationHistory.reservationInfo.seat_id] =
+        reservationHistory.reservationInfo.attendance
+      setAttendance(newAttendance)
+      setFromHistory(false)
+    }
+  }, [reservationHistory])
 
   // 減號按鈕
   function minusAttendance(seatId) {

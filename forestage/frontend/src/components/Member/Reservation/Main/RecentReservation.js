@@ -190,7 +190,18 @@ function RecentReservation(props) {
                       </div>
 
                       {/* 手機版按鈕列 ←→ 電腦版按鈕列 */}
-                      {isDesktopOrMobile ? btnRowMdDom : btnRowDom}
+                      <Link
+              to={{
+                pathname: '/reservation',
+                state: {
+                  prevPath: '/member/reservation',
+                  reservationId: v.reservation_id,
+                },
+              }}
+              className="update-resv-btn orange-guide-button"
+            >
+              修改訂位內容
+            </Link>
                     </div>
                   </div>
                 </>

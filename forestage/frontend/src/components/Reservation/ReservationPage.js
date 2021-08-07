@@ -15,13 +15,29 @@ gsap.registerPlugin(ScrollTrigger)
 
 function ReservationPage(props) {
   const [showAuthModal, setShowAuthModal] = useState(false)
+  let dataFromMember = { reservationId: 0, prevPath: '' }
   let dateFromHome = {}
-  if (props.location.state !== undefined) {
+  // 從首頁送來資料
+  if (
+    props.location.state !== undefined &&
+    props.location.state.prevPath === '/home'
+  ) {
     dateFromHome = props.location.state.select
     if (props.history.location.state.prevPath === '/home') {
       sessionStorage.clear()
       console.log(props.location.state.prevPath)
     }
+  }
+  // 從訂位頁送來資料
+  if (
+    props.location.state !== undefined &&
+    props.location.state.prevPath === '/member/reservation'
+  ) {
+    dataFromMember.reservationId = props.location.state.reservationId
+    dataFromMember.prevPath = props.location.state.prevPath
+    // if (props.history.location.state.prevPath === '/reservation') {
+    //   sessionStorage.clear()
+    // }
   }
   // 視窗關閉時移除sessionStorage
   useEffect(() => {
@@ -54,6 +70,7 @@ function ReservationPage(props) {
         showAuthModal={showAuthModal}
         setShowAuthModal={setShowAuthModal}
         dateFromHome={dateFromHome}
+        dataFromMember={dataFromMember}
       />
       <div className="res-footer">
         <Footer />

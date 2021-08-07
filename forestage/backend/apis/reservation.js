@@ -50,6 +50,8 @@ router.get('/checkout/memberInfo', async (req, res) => {
 });
 
 router.post('/checkout/send', async(req, res)=>{
+    console.log("上面")
+
     let insertResData = req.body.insertResData
     console.log("insertResData:",insertResData)
     let resDate = insertResData.date
@@ -244,27 +246,75 @@ router.get('/history', async(req, res)=>{
 
     // 以 reservation_id 取得訂位資料
     let getReservationInfoSql = 'SELECT date, name, mobile, attendance, total, note, seat_id, member_id, mcm_id FROM reservation WHERE reservation_id = ?'
-    let reservationInfo = await db.connection.queryAsync(getReservationInfoSql, [1]);
+    let reservationInfo = await db.connection.queryAsync(getReservationInfoSql, [req.query.reservationId]);
+    // console.log(reservationInfo)
+
+    // 取得座位名稱價格
+    let getSeatNameSql = `SELECT name, minimum_order FROM seat WHERE seat_id=${reservationInfo[0].seat_id}`
+    let seatName = await db.connection.queryAsync(getSeatNameSql);
+    // console.log("seatName:", seatName)
+    // 取得歌手資料
+    // console.log("reservationInfo[0].date:", reservationInfo[0].date)
+    // let getSingerInfoSql = `SELECT s.name, s.picture FROM singer AS s, singer_calendar AS sc WHERE sc.date="2021-08-07" AND sc.singer_id = s.singer_id` 
+    let getSingerInfoSql = 'SELECT s.name, s.picture FROM singer AS s, singer_calendar AS sc WHERE sc.date=? AND sc.singer_id = s.singer_id' 
+    let singerInfo = await db.connection.queryAsync(getSingerInfoSql,[reservationInfo[0].date]);
+    // console.log("singerInfo:", singerInfo)
 
     // 以 reservation_id 取得餐點資訊
-    let getReservationDishSql = 'SELECT COUNT(*), d.name, d.price, d.image_realistic FROM reservation_dish_mapping AS rdm ,dish AS d, reservation AS r WHERE rdm.reservation_id = r.reservation_id AND r.reservation_id = ? AND d.dish_id = rdm.dish_id GROUP BY rdm.dish_id'
+    let getReservationDishSql = 'SELECT COUNT(*) AS dishAmount, d.dish_id, d.name, d.price, d.image_realistic FROM reservation_dish_mapping AS rdm ,dish AS d, reservation AS r WHERE rdm.reservation_id = r.reservation_id AND r.reservation_id = ? AND d.dish_id = rdm.dish_id GROUP BY rdm.dish_id'
     
-    let reservationDish = await db.connection.queryAsync(getReservationDishSql, [1]);
-    const reservation = [reservationInfo, reservationDish]
+    let reservationDish = await db.connection.queryAsync(getReservationDishSql, [req.query.reservationId]);
+    const reservation = {reservationInfo, reservationDish, singerInfo, seatName}
+    // console.log(reservationDish, "res Dish")
     res.json(reservation)
 
 }) 
 
 router.put('/update', async(req, res)=>{
-    let updateReservationSql = 'UPDATE reservation SET date = ?, name=?,mobile=?, attendance=?, total=?, note=?, seat_id=?, valid = 0 WHERE reservation_id = ?';
+    console.log("下面")
+    let updateReservationSql = 'UPDATE reservation SET date = ?, seat_id=?, attendance=?, name=?,mobile=?, total=?, note=?,member_id=?,mcm_id=?, status = ? WHERE reservation_id = ?';
+    let insertResData = req.body.insertResData
+    insertResData = Object.values(insertResData)
+    console.log(insertResData,"insertResData")
+
+    insertResData.push(req.body.reservationId)
+    console.log(insertResData,"insertResData")
+    
+    
+    let updateReservation = await db.connection.queryAsync(updateReservationSql,[insertResData]);
+    console.log(updateReservation)
+    // let updateReservation = await db.connection.queryAsync(updateReservationSql, )
+
 
     // 清除reservation_dish_mapping的內容
-    let clearDishSql = 'DELETE FROM reservation_dish_mapping WHERE reservation_id = 1'
+    let clearDishSql = 'DELETE FROM reservation_dish_mapping WHERE reservation_id = ?'
+    let deleteDish = await db.connection.queryAsync(clearDishSql, [req.body.reservationId])
+    console.log(deleteDish)
     // 重新新增reservation_dish_mapping的內容
+    // 處理餐點陣列
+    let dishList = req.body.dishList;
+    // 找出數量>0的餐點
+    dishList = dishList.filter((v) => {
+        return v[1] > 0;
+    });
+
+    // 組成新陣列[數量, id]
+    dishList = dishList.map((v, i) => {
+        return [v[1], v[5]];
+    });
+
+    // 建立insert陣列 [reservation_id,dish_id]
+    let newDishList = [];
+    dishList.forEach((v) => {
+        for (let i = 0; i < v[0]; i++) {
+            newDishList.push([reservation.insertId, v[1]]);
+        }
+    });
     let insertDishSql = `INSERT INTO reservation_dish_mapping (reservation_id, dish_id) VALUES ?`;
     let insertDish = await db.connection.queryAsync(insertDishSql, [
         newDishList,
     ]);
+    console.log(insertDish)
 })
 
 

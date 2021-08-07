@@ -4,18 +4,31 @@ import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
 
 function ReservationPerson(props) {
-  const { insertResData, setInsertResData, dishList, memberId, setMemberId } = props
+  const { insertResData, setInsertResData, dishList, memberId, setMemberId,reservationId } = props
   // const [memberId, setMemberId] = useState(0)
   function insertReservation() {
-    axios({
-      method: 'post',
-      url: 'http://localhost:3001/reservation/checkout/send',
-      data: {
-        dishList,
-        insertResData,
-        // memberId,
-      },
-    })
+    console.log(reservationId,"res id")
+    if(reservationId === 0){
+      axios({
+        method: 'post',
+        url: 'http://localhost:3001/reservation/checkout/send',
+        data: {
+          dishList,
+          insertResData,
+          // memberId,
+        },
+      })
+    }else{
+      axios({
+        method: 'put',
+        url: 'http://localhost:3001/reservation/update',
+        data: {
+          dishList,
+          insertResData,
+          reservationId,
+        },
+      })
+    }
   }
 
   function getMemberId() {

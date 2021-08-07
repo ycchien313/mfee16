@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+
 import StyledLink from '../StyledLink'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -11,8 +12,10 @@ import ChooseMeal from './ChooseMeal'
 import CheckList from './CheckList'
 
 function Main(props) {
+  const history = useHistory()
+
   // const { checkList, setCheckList } = props
-  const { showAuthModal, setShowAuthModal, dateFromHome} = props
+  const { showAuthModal, setShowAuthModal, dateFromHome, dataFromMember } = props
   const [seatInfo, setSeatInfo] = useState([])
   const [remainingSeat, setRemainingSeat] = useState([])
   const [seatCount, setSeatCount] = useState([])
@@ -35,9 +38,12 @@ function Main(props) {
     seat: false,
     minOrder: false,
   })
+  const [fromHistory, setFromHistory] = useState(true)
+  const [reservationHistory, setReservationHistory] = useState({})
 
   const target = useRef(null)
 
+  // 確認sessionstorage是否有該資料
   const checkRemainingSeat = Boolean(sessionStorage.getItem('remainingSeat'))
   const checkSeatCount = Boolean(sessionStorage.getItem('seatCount'))
   const checkCheckList = Boolean(sessionStorage.getItem('checkList'))
@@ -83,6 +89,7 @@ function Main(props) {
     })
   }
 
+  // 檢查資料是否齊全
   function checkIfDataOk() {
     let newCheckData = { ...checkData }
     checkList.chosenDate !== ''
@@ -106,11 +113,49 @@ function Main(props) {
     }
   }
 
+  // 取得歷史訂位資料
+  function getReservation() {
+    axios
+      .get('http://localhost:3001/reservation/history', {
+        params: {
+          reservationId: dataFromMember.reservationId,
+        },
+      })
+      .then(function (result) {
+        console.log(result.data)
+        let reservationInfo = result.data.reservationInfo[0]
+        let seatName = result.data.seatName[0]
+        let singerInfo = result.data.singerInfo[0]
+        let reservationDish = result.data.reservationDish
+        let gotReservationHistory = {
+          reservationInfo,
+          reservationDish,
+          seatName,
+          singerInfo,
+        }
+        setReservationHistory(gotReservationHistory)
+        console.log(reservationInfo)
+        // 修改欲存入session中checklist
+        let newCheckList = { ...checkList }
+        newCheckList.attendance = reservationInfo.attendance
+        newCheckList.chosenDate = reservationInfo.date
+        newCheckList.seatId = reservationInfo.seat_id
+        newCheckList.total = reservationInfo.total
+        newCheckList.seatArea = seatName.name
+        newCheckList.singer = singerInfo.name
+        newCheckList.singerPic = singerInfo.picture
+        newCheckList.minOrder =
+          seatName.minimum_order * reservationInfo.attendance
+        console.log(newCheckList)
+        setFromHistory(false)
+
+        setCheckList(newCheckList)
+        window.sessionStorage.setItem('checkList', JSON.stringify(newCheckList))
+      })
+  }
+
   useEffect(() => {
     setDidMount(true)
-    // axios.get('http://127.0.0.1:3001/reservation/seat').then((result) => {
-    //   setSeatInfo(result.data)
-    // })
 
     // 將sessionStorage狀態存入狀態
     checkRemainingSeat &&
@@ -170,35 +215,21 @@ function Main(props) {
         'remainingSeat',
         JSON.stringify(remainingSeat)
       )
-      window.sessionStorage.setItem('checkList', JSON.stringify(checkList))
+      // window.sessionStorage.setItem('checkList', JSON.stringify(checkList))
       window.sessionStorage.setItem('seatCount', JSON.stringify(seatCount))
       window.sessionStorage.setItem('seatInfo', JSON.stringify(seatInfo))
     }
-  }, [remainingSeat, seatCount, checkList, seatInfo])
-
-  // 計算各區剩餘座位數量
-  // function getSeatCount() {
-  //   let newObj = {}
-  //   for (let i = 0; i < seatInfo.length; i++) {
-  //     const foundRemainSeats = remainingSeat.find((item) => {
-  //       return item.seat_id === seatInfo[i].seat_id
-  //     })
-
-  //     let totalSeats = foundRemainSeats
-  //       ? foundRemainSeats.remainingSeats
-  //       : seatInfo[i].totalSeats
-
-  //     // let newId = seatInfo[i].seat_id
-  //     newObj[seatInfo[i].seat_id] = totalSeats
-  //     setSeatCount(newObj)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (didMount) {
-  //     getSeatCount()
-  //   }
-  // }, [remainingSeat])
+  }, [remainingSeat, seatCount, seatInfo])
+  useEffect(() => {
+    // 若從我的訂位紀錄來，則先修改欲存入session中資料
+    // 只抓第一次 待加location條件
+    if (fromHistory &&  dataFromMember.prevPath === '/member/reservation') {
+      getReservation()
+    }
+    if (didMount) {
+      window.sessionStorage.setItem('checkList', JSON.stringify(checkList))
+    }
+  }, [checkList])
 
   return (
     <>
@@ -233,6 +264,8 @@ function Main(props) {
               checkList={checkList}
               setSeatInfo={setSeatInfo}
               dateFromHome={dateFromHome}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
             <ChooseSeat
               seatInfo={seatInfo}
@@ -242,12 +275,16 @@ function Main(props) {
               setCheckList={setCheckList}
               remainingSeat={remainingSeat}
               setRemainingSeat={setRemainingSeat}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
             <ChooseMeal
               checkList={checkList}
               setCheckList={setCheckList}
               dishList={dishList}
               setDishList={setDishList}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
           </article>
           <aside class="aside-list">
@@ -264,6 +301,8 @@ function Main(props) {
               checkData={checkData}
               setCheckData={setCheckData}
               handleSubmit={handleSubmit}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
           </aside>
         </div>
@@ -273,10 +312,11 @@ function Main(props) {
         <StyledLink
           onClick={(e) => {
             handleSubmit(e)
+            history.push()
           }}
           to={{
             pathname: '/reservation/checkout',
-            state: { checkList, dishList },
+            state: { checkList, dishList, reservationHistory },
           }}
         >
           <button className="pink-guide-button bottom">

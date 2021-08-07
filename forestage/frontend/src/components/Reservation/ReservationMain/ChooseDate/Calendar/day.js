@@ -16,9 +16,11 @@ function Day(props) {
     setSeatInfo,
     seatCount,
     dateFromHome,
+    reservationHistory,
   } = props
 
   const [didMount, setDidMount] = useState(false)
+  const [fromHistory, setFromHistory] = useState(true)
 
   // 取月份+日期
   let newDate = [...date]
@@ -30,7 +32,7 @@ function Day(props) {
   function getSeatCount() {
     let newObj = {}
     for (let i = 0; i < seatInfo.length; i++) {
-      console.log('seatInfo', seatInfo)
+      // console.log('seatInfo', seatInfo)
       const foundRemainSeats = remainingSeat.find((item) => {
         return item.seat_id === seatInfo[i].seat_id
       })
@@ -104,7 +106,7 @@ function Day(props) {
   }, [activeDate])
 
   useEffect(() => {
-    // 從歌手頁傳來資料
+    // 從首頁傳來資料
     if (date === dateFromHome.date) {
       // 歌手active樣式
       $(day.current).addClass('active')
@@ -138,6 +140,28 @@ function Day(props) {
       setSeatInfo(result.data)
     })
   }, [])
+  useEffect(() => {
+    // 將訂位紀錄設為active狀態
+    // 待加上location條件
+    if (didMount && fromHistory) {
+      if (date === reservationHistory.reservationInfo.date) {
+        // 歌手active樣式
+        $(day.current).addClass('active')
+        $(day.current).siblings().removeClass('active')
+        $(day.current).parent().siblings().find('.day').removeClass('active')
+        //前一頁返回時維持選取
+        setActiveDate(dateFromHome.date)
+        // 長條圖
+        // let url = `http://localhost:3001/reservation/${dateFromHome.date}`
+        // console.log('url:', url)
+        getRemainingSeat(dateFromHome.date)
+
+        // 帶入checkList
+        // updateCheckList(dateFromHome.date, dateFromHome.singer)
+        setFromHistory(false)
+      }
+    }
+  }, [reservationHistory])
 
   return (
     <>

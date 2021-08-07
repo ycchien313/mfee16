@@ -15,10 +15,10 @@ function Aside(props) {
   // 計算 Aside 高度
   const calcAsideHeight = () => {
     // 瀏覽器高度
-    const browserH = document.body.offsetHeight
-    const bannerH = document.querySelector('.banner').clientHeight
-    const asideH = browserH - bannerH
-    return asideH
+    // const browserH = document.body.offsetHeight
+    // const bannerH = document.querySelector('.banner').clientHeight
+    // const asideH = browserH - bannerH
+    // return asideH
   }
 
   function controlSvgColor() {

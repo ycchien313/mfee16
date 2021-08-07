@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import StyledLink from '../StyledLink'
@@ -19,15 +19,15 @@ function CheckList(props) {
     checkData,
     setCheckData,
     handleSubmit,
+    reservationHistory,
+    dataFromMember,
   } = props
 
   const clipboardDisActClass = 'clipboard disactive'
   const clipboardActClass = 'clipboard'
 
-
   let iconClass = 'fas fa-check-circle'
   let activeIconClass = 'fas fa-check-circle active'
-
 
   return (
     <>
@@ -150,7 +150,7 @@ function CheckList(props) {
           }}
           to={{
             pathname: '/reservation/checkout',
-            state: { checkList, dishList },
+            state: { checkList, dishList, reservationHistory, dataFromMember },
           }}
         >
           <button class="pink-guide-button">

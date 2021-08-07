@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../../styles/comment/view.scss'
 
-function View(props) {
+function Myview(props) {
   const {
     boom2,
     setBoom2,
@@ -157,7 +157,7 @@ function View(props) {
                 <div class="titleleft">
                   <div class="memberimg">
                     <img
-                      src={`http://127.0.0.1:3001/members/${boomArticle.avatar}`}
+                      src={`http://localhost:3001/members/${memberavatar}`}
                       alt=""
                     ></img>
                   </div>
@@ -315,4 +315,4 @@ function View(props) {
     </>
   )
 }
-export default View
+export default Myview

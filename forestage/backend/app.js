@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 const authApi = require("./apis/auth");
+app.use(express.static('public'));
+
 const commentApi = require("./apis/comment");
 const deliveryApi = require("./apis/delivery");
 const dishApi = require("./apis/dish");
@@ -20,11 +22,6 @@ require('dotenv').config();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors());
-
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
 app.use(cors());
 app.use("/auth", authApi);
 app.use("/comment", commentApi);

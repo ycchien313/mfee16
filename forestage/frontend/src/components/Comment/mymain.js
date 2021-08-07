@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import $ from 'jquery'
-import View from './view'
+import Myview from './myview'
 import Create from './create'
 import Myarticle from './myArticle'
 import Footer from '../Footer/index'
@@ -576,7 +576,7 @@ function Main(props) {
         />
       )}
       {boom2 && (
-        <View
+        <Myview
           id="vieww"
           // className="vieww"
           boom2={boom2}
@@ -585,6 +585,7 @@ function Main(props) {
           setArticle={setArticle}
           boomArticle={boomArticle}
           setBoomArticle={setBoomArticle}
+         
           // setArticleLikesId={setArticleLikesId}
           // likes={likes}
           // setLikes={setLikes}

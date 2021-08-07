@@ -713,6 +713,9 @@
     margin-left: -32px;
   }
   .articleimgsize {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0.5vw;
     overflow: hidden;
     border-radius: 50%;
@@ -721,9 +724,10 @@
     flex-shrink: 0;
   }
   .articleimgsize img {
+    
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
   .article{
     width: 900px;

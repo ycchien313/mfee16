@@ -9,6 +9,7 @@ function MapArticle(props) {
   const {
     article1,
     article,
+    avatar,
     setArticle,
     // likes,
     normallike,
@@ -50,6 +51,7 @@ function MapArticle(props) {
 
   useEffect(() => {
     setLikeCount(article1.likes)
+    console.log(article1)
   }, [])
   return (
     <>
@@ -63,7 +65,7 @@ function MapArticle(props) {
         <figrue class="articleimgsize">
           <img
             class="commentimg"
-            src="http://localhost:3000/images/comment/back.png"
+            src={`http://127.0.0.1:3001${article1.image}`}
             alt=""
           ></img>
         </figrue>

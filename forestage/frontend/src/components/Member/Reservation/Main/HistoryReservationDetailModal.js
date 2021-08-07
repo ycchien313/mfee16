@@ -68,7 +68,7 @@ function ReservationDetailModal(props) {
 
   useEffect(() => {
     if (didMount === false) {
-      console.log(reservationId)
+      // console.log(reservationId)
       // 取得後端資料
       const fetchData = async () => {
         const order = await fetchDetailReservation()

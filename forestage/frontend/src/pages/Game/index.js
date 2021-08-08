@@ -266,90 +266,90 @@ function Game() {
   ) : (
     <>
       <Header />
-      <main className="music-main">
-        <div className="wrapper">
-          <div className="title">
-            <span className="h2 elfin">Elfin</span>
-            <span className="h2 test-title">音樂測驗</span>
+      <main classNameName="music-main">
+        <div classNameName="wrapper">
+          <div classNameName="title">
+            <span classNameName="h2 elfin">Elfin</span>
+            <span classNameName="h2 test-title">音樂測驗</span>
             <audio
               id="music-target"
               src={'http://localhost:3000/images/game/' + music}
               controls="controls"
             ></audio>
           </div>
-          <h4 className="sub-title h4">
+          <h4 classNameName="sub-title h4">
             回答以下的問題，找出你最Match的音樂歌手，完成遊戲後還可以拿到折價券哦！
           </h4>
-          <div className="game-bg">
-            <div className="numbers">
+          <div classNameName="game-bg">
+            <div classNameName="numbers">
               <div
-                className={
+                classNameName={
                   questionNumber <= 5
                     ? 'test-number-circle active'
                     : 'test-number-circle '
                 }
               >
-                <span className="test-number h2">1</span>
+                <span classNameName="test-number h2">1</span>
               </div>
-              <div className="line"></div>
+              <div classNameName="line"></div>
               <div
-                className={
+                classNameName={
                   questionNumber >= 2
                     ? 'test-number-circle active'
                     : 'test-number-circle '
                 }
               >
-                <span className="test-number h2">2</span>
+                <span classNameName="test-number h2">2</span>
               </div>
-              <div className="line"></div>
+              <div classNameName="line"></div>
               <div
-                className={
+                classNameName={
                   questionNumber >= 3
                     ? 'test-number-circle active'
                     : 'test-number-circle '
                 }
               >
-                <span className="test-number h2">3</span>
+                <span classNameName="test-number h2">3</span>
               </div>
-              <div className="line"></div>
+              <div classNameName="line"></div>
               <div
-                className={
+                classNameName={
                   questionNumber >= 4
                     ? 'test-number-circle active'
                     : 'test-number-circle '
                 }
               >
-                <span className="test-number h2">4</span>
+                <span classNameName="test-number h2">4</span>
               </div>
-              <div className="line"></div>
+              <div classNameName="line"></div>
               <div
-                className={
+                classNameName={
                   questionNumber >= 5
                     ? 'test-number-circle active'
                     : 'test-number-circle '
                 }
               >
-                <span className="test-number h2">5</span>
+                <span classNameName="test-number h2">5</span>
               </div>
             </div>
-            <div className="question">
-              <div className="elfin-avatar"></div>
-              <div className="question-box">
-                <div className="triangle"></div>
-                <div className="box h4">{question}</div>
+            <div classNameName="question">
+              <div classNameName="elfin-avatar"></div>
+              <div classNameName="question-box">
+                <div classNameName="triangle"></div>
+                <div classNameName="box h4">{question}</div>
               </div>
             </div>
             <button
-              className="play-button"
+              classNameName="play-button"
               onClick={() => {
                 playMusic()
               }}
             >
-              <div className="play"></div>
+              <div classNameName="play"></div>
             </button>
-            <div className="answers">
+            <div classNameName="answers">
               <div
-                className="answer h4"
+                classNameName="answer h4"
                 onClick={() => {
                   saveAnswerA()
                 }}
@@ -357,7 +357,7 @@ function Game() {
                 {answerA.text}
               </div>
               <div
-                className="answer h4"
+                classNameName="answer h4"
                 onClick={() => {
                   saveAnswerB()
                 }}
@@ -365,7 +365,7 @@ function Game() {
                 {answerB.text}
               </div>
               <div
-                className="answer h4"
+                classNameName="answer h4"
                 onClick={() => {
                   saveAnswerC()
                 }}
@@ -375,17 +375,17 @@ function Game() {
             </div>
             {questionNumber < 5 ? (
               <div
-                className="guide-button orange next h4"
+                classNameName="guide-button orange next h4"
                 onClick={() => {
                   questionNumber < 5 && setQuestionNumber(questionNumber + 1)
                 }}
               >
                 {questionNumber < 5 ? '下一題' : '看結果'}
-                <div className="icon"></div>
+                <div classNameName="icon"></div>
               </div>
             ) : (
               <button
-                className="guide-button orange next h4"
+                classNameName="guide-button orange next h4"
                 onClick={() => {
                   setGoResult(true)
                 }}

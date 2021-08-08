@@ -69,36 +69,36 @@ function GameResult(props) {
   return (
     <>
       <Header />
-      <main class="music-main">
-        <div class="wrapper">
-          <div class="title">
-            <span class="h2 elfin"></span>
-            <span class="h2 test-title"></span>
+      <main className="music-main">
+        <div className="wrapper">
+          <div className="title">
+            <span className="h2 elfin"></span>
+            <span className="h2 test-title"></span>
           </div>
-          <h4 class="sub-title h4"></h4>
-          <div class="game-bg">
-            <div class="question">
-              <div class="elfin-avatar"></div>
-              <div class="question-box">
-                <div class="triangle"></div>
-                <div class="box h4">你的音樂類型是…</div>
+          <h4 className="sub-title h4"></h4>
+          <div className="game-bg">
+            <div className="question">
+              <div className="elfin-avatar"></div>
+              <div className="question-box">
+                <div className="triangle"></div>
+                <div className="box h4">你的音樂類型是…</div>
               </div>
             </div>
-            <div class="result-card">
-              <h2 class="main-title">{result[0]}</h2>
-              <figure class="style-pic">
+            <div className="result-card">
+              <h2 className="main-title">{result[0]}</h2>
+              <figure className="style-pic">
                 <img
                   src={'http://localhost:3000/images/game/' + result[1]}
                   alt=""
                 />
               </figure>
-              <h4 class="recommend">推薦歌手</h4>
-              <h3 class="singer-name">{result[2]}</h3>
-              <p class="style-text">{result[3]}</p>
+              <h4 className="recommend">推薦歌手</h4>
+              <h3 className="singer-name">{result[2]}</h3>
+              <p className="style-text">{result[3]}</p>
             </div>
-            <div class="button-group">
+            <div className="button-group">
               <div
-                class="again-button"
+                className="again-button"
                 onClick={() => {
                   setQuestionNumber(1)
                   setGoResult(false)
@@ -110,7 +110,7 @@ function GameResult(props) {
                 />
               </div>
               <div
-                class="guide-button orange h4 get-coupon"
+                className="guide-button orange h4 get-coupon"
                 onClick={function () {
                   getCoupon()
                   const CheckDataSwal = withReactContent(Swal)
@@ -126,9 +126,9 @@ function GameResult(props) {
                 領折價券
               </div>
               <Link to={{ pathname: '/' }}>
-                <div class="guide-button orange next h4">
+                <div className="guide-button orange next h4">
                   去投票
-                  <div class="icon"></div>
+                  <div className="icon"></div>
                 </div>
               </Link>
             </div>

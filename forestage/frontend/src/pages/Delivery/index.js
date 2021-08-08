@@ -3,6 +3,7 @@ import '../../styles/delivery/foodDelivery/order.scss'
 import '../../styles/delivery/foodDelivery/banner.scss'
 import Delivery from '../../components/Delivery/FoodDelivery/components/Delivery'
 import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 import $ from 'jquery'
 
 function Del() {
@@ -37,6 +38,7 @@ function Del() {
     <>
       <Header />
       <Delivery memberId={memberId} authToken={authToken} />
+      <Footer />
     </>
   )
 }

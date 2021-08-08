@@ -163,7 +163,7 @@
       background: $secondary-lightyellow;
       filter: drop-shadow(0px 3px 6px rgba(50, 50, 50, 0.5));
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/plus-solid.svg');
-      background-position: 60% 30%;
+      background-position: 60% 0%;
       background-repeat: no-repeat;
       cursor: pointer;
     }
@@ -178,7 +178,7 @@
       filter: drop-shadow(0px 3px 6px rgba(50, 50, 50, 0.5));
       background-image: url('http://localhost:3000/images/delivery/FoodDelivery/minus-solid.svg');
       background-repeat: no-repeat;
-      background-position: 40% 0.4vh;
+      background-position: 40% 70%;
       cursor: pointer;
     }
   }

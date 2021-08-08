@@ -234,7 +234,7 @@
       left: 50%;
       transform: translateX(-50%);
       height: 40vh;
-      top: -55vh;
+      top: -50vh;
       border-radius: 50px;
       background-clip: padding-box, border-box;
       background-origin: padding-box, border-box;
@@ -259,7 +259,7 @@
       }
 
       position: absolute;
-      padding: 0 0 0 40px;
+      padding: 10vw 0 0 10vw;
       margin: auto 0;
 
       .order-time {
@@ -464,7 +464,7 @@
     .h1.title {
       position: relative;
       // top: -420px;
-      top: -90vw;
+      top: -150vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -478,10 +478,10 @@
     }
 
     .top-wave .elfin {
-      width: 60px;
+      width: 50px;
       position: absolute;
       // top: -390px;
-      top: -85vw;
+      top: -140vw;
       z-index: 5;
     }
 

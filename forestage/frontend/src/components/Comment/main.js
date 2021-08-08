@@ -713,6 +713,8 @@ function Main(props) {
           setBoomArticle={setBoomArticle}
           setInsertArticle={setInsertArticle}
           insertArticle={insertArticle}
+          showAuthModal={showAuthModal}
+          setShowAuthModal={setShowAuthModal}
           // setArticleLikesId={setArticleLikesId}
           // likes={likes}
           // setLikes={setLikes}

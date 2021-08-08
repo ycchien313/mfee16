@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, '../', 'public', 'comment'));
     },
     filename: (req, file, cb) => {
-        console.log(file,"topfile")
+        // console.log(file,"topfile")
         const ext = file.mimetype.split('/')[1];
         cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
     },
@@ -43,7 +43,7 @@ router.get("/16", async (req, res) => {
 router.get("/mycomment/16", async (req, res) => {
 
     // console.log("上面")
-    console.log(req.query.member_id,"ID")
+    // console.log(req.query.member_id,"ID")
     let myCommentAll = await db.connection.queryAsync('SELECT * FROM article WHERE member_id=? ORDER BY article_id DESC',[req.query.member_id]);
     // res.json(result)
     res.send(myCommentAll)
@@ -97,7 +97,7 @@ router.put("/articleNotGood", async (req, res) => {
 // });
 //新增文章&優惠券
 router.post("/createarticle",async (req, res) => {
-    console.log(req.body,"cc")
+    // console.log(req.body,"cc")
     let insertData = Object.values(req.body.insertArticle)
     // insertData[3]=`/public/comment/${req.file.filename}`
     // console.log(insertData,"新增")
@@ -154,7 +154,7 @@ router.get("/article/:message", async (req, res) => {
 });
 //尋找登入會員頭像
 router.get("/memberavatar/:member_id",async(req,res)=>{
-    console.log(req.params,"123")
+    // console.log(req.params,"123")
     let commentMemberAvatar= await db.connection.queryAsync('SELECT avatar FROM member WHERE member_id =?',[req.params.member_id])
     res.send(commentMemberAvatar)
 });
@@ -173,8 +173,8 @@ router.get("/:tag", async (req, res) => {
 });
 // 點擊標籤的相關文章
 router.get("/mycomment/:tag", async (req, res) => {
-    console.log(req.query.member_id,"tag的member_id")
-    console.log(req.params.tag,"tag的tag_id")
+    // console.log(req.query.member_id,"tag的member_id")
+    // console.log(req.params.tag,"tag的tag_id")
     let myCommentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id AND member_id=? ORDER BY article_id DESC',[req.params.tag,req.query.member_id]);
     // res.json(result)
     res.send(myCommentArticle)

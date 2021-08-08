@@ -75,23 +75,26 @@ function MapArticle(props) {
           <p>{article1.content}</p>
         </div>
         <div class="star">
-        <div class="starsize">
-
-          <div class="star-ratings-sprite">
-            <span
-              class="star-ratings-sprite-rating"
-              style={{
-                width: `${(article1.recommendation_index / 5) * 100}%`,
-              }}
-            ></span>
+          <div class="starsize">
+            <div class="star-ratings-sprite">
+              <span
+                class="star-ratings-sprite-rating"
+                style={{
+                  width: `${(article1.recommendation_index / 5) * 100}%`,
+                }}
+              ></span>
+            </div>
           </div>
-        </div>
 
           <div class="share">
-            <img
-              src="http://localhost:3000/images/comment/share.svg"
-              alt=""
-            ></img>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=localhost:3000/comment/${article1}`}
+            >
+              <img
+                src="http://localhost:3000/images/comment/share.svg"
+                alt=""
+              ></img>
+            </a>
             <img
               src="http://localhost:3000/images/comment/message.svg"
               alt=""
@@ -117,7 +120,6 @@ function MapArticle(props) {
           </div>
         </div>
       </div>
-      
     </>
   )
 }

@@ -86,6 +86,7 @@ function Create(props) {
       //   console.log('bbbbb')
     })
   }
+
   function setArticleTag(tagId) {
     let newArticle = { ...insertArticle }
     newArticle.tag_id = tagId
@@ -566,8 +567,9 @@ function Create(props) {
                 class="orange-guide-button buttontext"
                 onClick={() => {
                   insertArticlefn()
-                  setBoom(false)
                   setAlreadyinsert(true)
+              
+                  setBoom(false)
                 }}
               >
                 送出

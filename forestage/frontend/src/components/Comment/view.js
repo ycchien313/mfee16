@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../../styles/comment/view.scss'
-
+import Auth from '../Auth/'
 function View(props) {
   const {
     boom2,
@@ -15,6 +15,8 @@ function View(props) {
     getLikes,
     insertArticle,
     setInsertArticle,
+    showAuthModal,
+    setShowAuthModal,
     // getMycomment,
     // getMemberId,
     // addLikes,
@@ -30,6 +32,7 @@ function View(props) {
     member_id: 0,
     article_id: boomArticle.article_id,
   })
+  let ifloginn = Boolean(localStorage.getItem('authToken'))
 
   let likeClass = 'fas like fa-heart size cursor'
   let normallike = 'fas fa-heart size cursor'
@@ -264,11 +267,18 @@ function View(props) {
                 <button
                   class="send cursor"
                   onClick={() => {
-                    if (insertMessage.message !== '') {
+                    if(ifloginn && insertMessage.message !== ''){
                       insertMessagefn()
+                    }else if(ifloginn === false){
+                      setShowAuthModal(true)
                     }
+                    // if (insertMessage.message !== '') {
+                    //   insertMessagefn()
+                    // }
                     getMessage()
                     cleanMessage()
+                    
+                
                   }}
                 ></button>
               </div>
@@ -312,6 +322,12 @@ function View(props) {
           </div>
         </div>
       </div>
+      {showAuthModal && (
+        <Auth
+          showAuthModal={showAuthModal}
+          setShowAuthModal={setShowAuthModal}
+        />
+      )}
     </>
   )
 }

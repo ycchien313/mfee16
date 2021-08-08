@@ -271,7 +271,6 @@ router.get('/history', async(req, res)=>{
 
 
 router.put('/update', async(req, res)=>{
-    console.log("下面")
     let updateReservationSql = `UPDATE reservation SET date=?, seat_id=?, attendance=?, name=?, mobile=?, total=?, note=?, member_id=?, mcm_id=?, status=? WHERE reservation_id=${req.body.reservationId}`;
 
     let insertResData = Object.values(req.body.insertResData);

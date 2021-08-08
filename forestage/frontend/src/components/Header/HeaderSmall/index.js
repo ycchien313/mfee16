@@ -4,7 +4,7 @@ import DownMenu from './DownMenu'
 import HeaderAuth from '../HeaderAuth'
 import { CSSTransition } from 'react-transition-group'
 import HeaderSmallCart from './HeaderSmallCart'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import $ from 'jquery'
 
 function HeaderSmall(props) {
@@ -39,7 +39,7 @@ function HeaderSmall(props) {
     <>
       <div className="wrapper">
         <div className="small-header">
-          <Link to={{ pathname: '/' }}>
+          <Link to="/#">
             <div className="logo"></div>
           </Link>
           <div className="menu-right">
@@ -75,7 +75,9 @@ function HeaderSmall(props) {
               <div className="cart-small-total">
                 <h3>合計: ${totalPrice}</h3>
                 <div className="cart-small-submit">
-                  <button className="button-orange">下一步</button>
+                  <Link to="/delivery#">
+                    <button className="button-orange">下一步</button>
+                  </Link>
                 </div>
               </div>
             </div>

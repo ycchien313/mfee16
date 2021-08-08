@@ -3,7 +3,7 @@ import '../../styles/header/headerBig.scss'
 import $ from 'jquery'
 import HeaderBigCart from './HeaderBigCart'
 import HeaderAuth from './HeaderAuth'
-import { Link } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 function HeaderBig(props) {
   let { cartList } = props
   const [totalPrice, setTotalPrice] = useState(0)
@@ -44,7 +44,7 @@ function HeaderBig(props) {
       <div className="main-header">
         <div className="header-container">
           <a href="#/" className="logo">
-            <Link to={{ pathname: '/' }} style={{ width: '100%' }}>
+            <Link to="/#" style={{ width: '100%' }}>
               <img src="http://localhost:3000/images/header/LOGO.svg" alt="" />
             </Link>
           </a>
@@ -52,10 +52,7 @@ function HeaderBig(props) {
           <nav className="header-nav">
             <ul className="header-nav-ul">
               <li>
-                <Link
-                  to={{ pathname: '/reservation' }}
-                  style={{ padding: '0' }}
-                >
+                <Link to="/reservation#" style={{ padding: '0' }}>
                   <a href="#/" className="h4">
                     線上訂位
                   </a>
@@ -63,15 +60,14 @@ function HeaderBig(props) {
               </li>
               <li className="slide-down">
                 <a href="#/" className="h4">
-                  餐點介紹
+                  餐廳介紹
                 </a>
-
                 <ul className="header-slide-menu">
                   <li className="top-border-radius">
-                    <Link to={{ pathname: '/singer' }}>歌手介紹</Link>
+                    <Link to="/singer#">歌手介紹</Link>
                   </li>
                   <li className="bottom-border-radius">
-                    <Link to={{ pathname: '/dish' }}>餐廳介紹</Link>
+                    <Link to="/dish#">餐點介紹</Link>
                   </li>
                 </ul>
               </li>
@@ -81,10 +77,10 @@ function HeaderBig(props) {
                 </a>
                 <ul className="header-slide-menu">
                   <li className="top-border-radius">
-                    <Link to={{ pathname: '/comment' }}>檢視文章</Link>
+                    <Link to="/comment#">檢視文章</Link>
                   </li>
                   <li className="bottom-border-radius">
-                    <Link to={{ pathname: '/comment' }}>我的評論</Link>
+                    <Link to="/comment/myComment#">我的評論</Link>
                   </li>
                 </ul>
               </li>
@@ -94,13 +90,13 @@ function HeaderBig(props) {
                 </a>
                 <ul className="header-slide-menu">
                   <li className="top-border-radius">
-                    <Link to={{ pathname: '/' }}>Live直播</Link>
+                    <Link to="/#secondScreen">Live直播</Link>
                   </li>
                   <li>
-                    <Link to={{ pathname: '/' }}>歌手投票</Link>
+                    <Link to="/#fourthScreen">歌手投票</Link>
                   </li>
                   <li className="bottom-border-radius">
-                    <Link to={{ pathname: '/game' }}>小遊戲</Link>
+                    <Link to="/game#">小遊戲</Link>
                   </li>
                 </ul>
               </li>
@@ -110,24 +106,22 @@ function HeaderBig(props) {
                 </a>
                 <ul className="header-slide-menu">
                   <li className="top-border-radius">
-                    <Link to={{ pathname: '/member' }}>會員資料</Link>
+                    <Link to="/member#">會員資料</Link>
                   </li>
                   <li>
-                    <Link to={{ pathname: '/member/reservation' }}>
-                      我的訂位
-                    </Link>
+                    <Link to="/member/reservation#">我的訂位</Link>
                   </li>
                   <li>
-                    <Link to={{ pathname: '/member/delivery' }}>外送訂單</Link>
+                    <Link to="/member/delivery#">外送訂單</Link>
                   </li>
                   <li className="bottom-border-radius">
-                    <Link to={{ pathname: '/member/coupon' }}>折價卷</Link>
+                    <Link to="/member/coupon#">折價卷</Link>
                   </li>
                 </ul>
               </li>
               <li className="cart-div">
                 <div>
-                  <Link to={{ pathname: '/delivery' }} style={{ padding: '0' }}>
+                  <Link to="/delivery#" style={{ padding: '0' }}>
                     <a href="#/" className="header-cart h4">
                       外送訂餐
                     </a>
@@ -170,7 +164,7 @@ function HeaderBig(props) {
         </div>
         <div className="cart-submit">
           <h4 className="cart-total">合計: ${totalPrice}</h4>
-          <Link to={{ pathname: '/delivery' }}>
+          <Link to="/delivery#">
             <button className="button-orange">下一步</button>
           </Link>
         </div>

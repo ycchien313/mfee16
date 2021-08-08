@@ -6,8 +6,8 @@ function Hero() {
   useEffect(() => {
     gsap.fromTo(
       'img.elfin',
-      { y: -300, duration: 7, ease: 'bounce.out' },
-      { y: 0, duration: 3,  ease: 'bounce.out'}
+      { y: -300, duration: 4, ease: 'bounce.out' },
+      { y: 0, duration: 2,  ease: 'bounce.out'}
     )
   }, [])
   return (

@@ -1,126 +1,97 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import '../../../../styles/member/member_customer_service.scss'
+import DialogBoxCustomer from './ChatDialogBox/DialogBoxCustomer'
+import DialogBoxAdmin from './ChatDialogBox/DialogBoxAdmin'
+import ChatButton from './ChatButton'
 
 function CustomerService() {
+  const [isShowDialogBox, setIsShowDialogBox] = useState(false)
+  const [ws, setWs] = useState(null)
+  const [didMount, setDidMount] = useState(true)
+  const [memberId, setMemberId] = useState(null)
+  const [memberEmail, setMemberEmail] = useState(null)
+  const [memberAvatar, setMemberAvatar] = useState(null)
+  const employees = ['ycchien313@gmail.com', 'chien313jay@gmail.com']
+
+  const fetchMemberId = async () => {
+    const token = localStorage.getItem('authToken')
+    const response = await axios.get('http://localhost:3001/auth/me', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        authorization: `Bearer ${token}`,
+      },
+    })
+    const data = response.data
+    const resMemberId = data.memberId
+
+    setMemberId(resMemberId)
+  }
+
+  const fetchMemberEmail = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/member/email/${memberId}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json; charset=utf-8',
+        },
+      }
+    )
+    const data = response.data
+    const resMemberEmail = data.data[0].email
+    setMemberEmail(resMemberEmail)
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchMemberId()
+    }
+
+    fetchData()
+    setDidMount(false)
+  }, [])
+
+  useEffect(() => {
+    if (didMount === false) {
+      const fetchData = async () => {
+        await fetchMemberEmail()
+      }
+
+      fetchData()
+    }
+  }, [memberId])
+
   return (
     <>
-      {/* <div class="target hide">
-        <div class="content">
-          <button class="close">
-            <i class="fas fa-times"></i>
-          </button>
-          <div class="mine">
-            <div class="avatar">
-              <figure>
-                <img src="./img/苦主.png" alt="" />
-              </figure>
-            </div>
-            <div class="message">拎喇阿勒</div>
-          </div>
-          <div class="admin">
-            <div class="avatar">
-              <figure>
-                <img src="./img/admin.png" alt="" />
-              </figure>
-            </div>
-            <div class="message">?</div>
-          </div>
-          <div class="mine">
-            <div class="avatar">
-              <figure>
-                <img src="./img/苦主.png" alt="" />
-              </figure>
-            </div>
-            <div class="message">Lorem, ipsum dolor.</div>
-          </div>
-          <div class="mine">
-            <div class="avatar">
-              <figure>
-                <img src="./img/苦主.png" alt="" />
-              </figure>
-            </div>
-            <div class="message">Lorem, ipsum dolor.</div>
-          </div>
-        </div>
-        <div class="inputSide">
-          <div class="input">
-            <input type="text" placeholder="寫點什麼..." />
-          </div>
-          <button class="submit">
-            <i class="fas fa-paper-plane"></i>
-          </button>
-        </div>
-      </div>
-      
-       */}
-
       <div className="member-customer-service">
         {/* 線上客服對話框 */}
-        <div className="chat-dialog-box-container">
-          <div className="dialog-box">
-            <div className="admin-row ">
-              <div className="avatar-box">
-                <img
-                  className="avatar"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/customer_service_btn.png'
-                  }
-                  alt=""
-                ></img>
-                {/* <span className="name">管理員</span> */}
-              </div>
-              <div className="message-box">
-                <div className="content-box">
-                  <span className="content">
-                    您好，請問有什麼需要服務的嗎?您好，請問有什麼需要服務的嗎?您好，請問有什麼需要服務的嗎?
-                  </span>
-                </div>
-                <span className="time">12:10:50</span>
-              </div>
-            </div>
-            <div className="customer-row">
-              <div className="message-box">
-                <div className="content-box">
-                  <span className="content">請問餐廳的營業時間是甚麼時候?</span>
-                </div>
-                <span className="time">12:11:30</span>
-              </div>
-              <div className="avatar-box">
-                <img
-                  className="avatar"
-                  src={
-                    process.env.PUBLIC_URL +
-                    '/images/member/customer_service_btn.png'
-                  }
-                  alt=""
-                ></img>
-                {/* <span className="name">鄒安琪</span> */}
-              </div>
-            </div>
-          </div>
-          <div className="reply-box">
-            <div class="content-box">
-              <input class="content" type="text" placeholder="寫點什麼..." />
-            </div>
-            <button class="submit orange-guide-button">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </div>
-        </div>
+        {employees.includes(memberEmail) ? (
+          <DialogBoxAdmin
+            isShowDialogBox={isShowDialogBox}
+            ws={ws}
+            memberAvatar={memberAvatar}
+          />
+        ) : (
+          <DialogBoxCustomer
+            isShowDialogBox={isShowDialogBox}
+            ws={ws}
+            memberId={memberId}
+            memberEmail={memberEmail}
+            memberAvatar={memberAvatar}
+            setMemberAvatar={setMemberAvatar}
+            employees={employees}
+          />
+        )}
 
         {/* 線上客服按鈕 */}
-        <div className="chat-button-container">
-          <figure className="chat-button">
-            <img
-              src={
-                process.env.PUBLIC_URL +
-                '/images/member/customer_service_btn.png'
-              }
-              alt=""
-            />
-          </figure>
-        </div>
+        <ChatButton
+          isShowDialogBox={isShowDialogBox}
+          setIsShowDialogBox={setIsShowDialogBox}
+          ws={ws}
+          setWs={setWs}
+        />
       </div>
     </>
   )

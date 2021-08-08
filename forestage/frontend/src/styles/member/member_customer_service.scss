@@ -16,17 +16,17 @@
     /* creates padding around scroll thumb */
   }
 
-  width: 460px;
-  height: 615px;
   position: fixed;
   bottom: 0;
   right: 0;
   z-index: 999;
   display: flex;
+  justify-content: flex-end;
 
   /* 左側對話框 */
   .chat-dialog-box-container {
-    width: 100%;
+    width: 460px;
+    height: 615px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -54,7 +54,7 @@
     }
     /* 訊息 */
     .message-box {
-      width: 100%;
+      // width: 100%;
       display: flex;
       flex-direction: column;
       padding: 0 10px;
@@ -130,12 +130,22 @@
 
   /* 右側客服按鈕 */
   .chat-button-container {
-    width: 70px;
+    width: 80px;
     align-self: flex-end;
     margin: 5px;
 
+    h4 {
+      font-size: 16px;
+      font-weight: 200;
+      font-family: $zh-tw-maru;
+      margin: 5px 0;
+      color: #a1957d;
+      text-align: center;
+    }
+
     .chat-button {
       margin: 0;
+      text-align: center;
       img {
         width: 60px;
         border-radius: 50%;

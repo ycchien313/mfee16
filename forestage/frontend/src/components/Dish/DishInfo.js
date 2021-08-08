@@ -46,13 +46,15 @@ function DishInfo(props) {
 
   return (
     <>
-      <div class="food-title h2">{dishInfo.length > 0 && dishInfo[1].type}</div>
-      <div class="introduction-all">
-        <div class="pizza food-m">
-          <div class="introduction">
-            <div class="imgb">
+      <div className="food-title h2">
+        {dishInfo.length > 0 && dishInfo[1].type}
+      </div>
+      <div className="introduction-all">
+        <div className="pizza food-m">
+          <div className="introduction">
+            <div className="imgb">
               <img
-                class="img"
+                className="img"
                 src={
                   dishInfo.length > 0 &&
                   defaulDomain + dishInfo[1].image_realistic
@@ -60,10 +62,12 @@ function DishInfo(props) {
                 alt=""
               />
             </div>
-            <div class="introduction-text">
-              <div class="introduction-title">
-                <div class="h3">{dishInfo.length > 0 && dishInfo[1].name}</div>
-                <div class="assess h4">
+            <div className="introduction-text">
+              <div className="introduction-title">
+                <div className="h3">
+                  {dishInfo.length > 0 && dishInfo[1].name}
+                </div>
+                <div className="assess h4">
                   <div className="star">
                     <div className="empty_star">★★★★★</div>
                     <div
@@ -78,22 +82,24 @@ function DishInfo(props) {
                   <h4> ({likeArray.length > 0 && likeArray[1].reviewer})</h4>
                 </div>
               </div>
-              <div class="link-top"></div>
-              <div class="price h4">
+              <div className="link-top"></div>
+              <div className="price h4">
                 ${dishInfo.length > 0 && dishInfo[1].price}元
               </div>
-              <div class="introduction-content h5">
+              <div className="introduction-content h5">
                 {dishInfo.length > 0 && dishInfo[1].introduction}
               </div>
             </div>
           </div>
         </div>
-        <div class="subway food-m">
-          <div class="introduction">
-            <div class="introduction-text">
-              <div class="introduction-title">
-                <div class="h3">{dishInfo.length > 0 && dishInfo[0].name}</div>
-                <div class="assess h4">
+        <div className="subway food-m">
+          <div className="introduction">
+            <div className="introduction-text">
+              <div className="introduction-title">
+                <div className="h3">
+                  {dishInfo.length > 0 && dishInfo[0].name}
+                </div>
+                <div className="assess h4">
                   <div className="star">
                     <div className="empty_star">★★★★★</div>
                     <div
@@ -108,18 +114,18 @@ function DishInfo(props) {
                   <h4> ({likeArray.length > 0 && likeArray[0].reviewer})</h4>
                 </div>
               </div>
-              <div class="link-top"></div>
-              <div class="price h4">
+              <div className="link-top"></div>
+              <div className="price h4">
                 {' '}
                 ${dishInfo.length > 0 && dishInfo[0].price}元
               </div>
-              <div class="introduction-content h5">
+              <div className="introduction-content h5">
                 {dishInfo.length > 0 && dishInfo[0].introduction}
               </div>
             </div>
-            <div class="imgb">
+            <div className="imgb">
               <img
-                class="img"
+                className="img"
                 src={
                   dishInfo.length > 0 &&
                   defaulDomain + dishInfo[0].image_realistic
@@ -129,11 +135,11 @@ function DishInfo(props) {
             </div>
           </div>
         </div>
-        <div class="bbqpork food-m">
-          <div class="introduction">
-            <div class="imgb">
+        <div className="bbqpork food-m">
+          <div className="introduction">
+            <div className="imgb">
               <img
-                class="img"
+                className="img"
                 src={
                   dishInfo.length > 0 &&
                   defaulDomain + dishInfo[2].image_realistic
@@ -141,10 +147,12 @@ function DishInfo(props) {
                 alt=""
               />
             </div>
-            <div class="introduction-text">
-              <div class="introduction-title">
-                <div class="h3">{dishInfo.length > 0 && dishInfo[2].name}</div>
-                <div class="assess h4">
+            <div className="introduction-text">
+              <div className="introduction-title">
+                <div className="h3">
+                  {dishInfo.length > 0 && dishInfo[2].name}
+                </div>
+                <div className="assess h4">
                   <div className="star">
                     <div className="empty_star">★★★★★</div>
                     <div
@@ -159,12 +167,12 @@ function DishInfo(props) {
                   <h4> ({likeArray.length > 0 && likeArray[2].reviewer})</h4>
                 </div>
               </div>
-              <div class="link-top"></div>
-              <div class="price h4">
+              <div className="link-top"></div>
+              <div className="price h4">
                 {' '}
                 ${dishInfo.length > 0 && dishInfo[2].price}元
               </div>
-              <div class="introduction-content h5">
+              <div className="introduction-content h5">
                 {dishInfo.length > 0 && dishInfo[2].introduction}
               </div>
             </div>

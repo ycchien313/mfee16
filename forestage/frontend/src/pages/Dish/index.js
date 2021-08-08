@@ -40,24 +40,24 @@ function Dish() {
     <>
       <Header />
       <div id="dish">
-        <div class="hero-section">
-          <div class="top-wave">
-            <h1 class="h1 title">餐廳介紹</h1>
-            <h3 class="h3 title">餐點介紹</h3>
+        <div className="hero-section">
+          <div className="top-wave">
+            <h1 className="h1 title">餐廳介紹</h1>
+            <h3 className="h3 title">餐點介紹</h3>
             <img
-              class="wave-1"
+              className="wave-1"
               src="http://localhost:3000/images/dish/top-wave.svg"
               alt=""
             />
             <img
-              class="elfin"
+              className="elfin"
               src="http://localhost:3000/images/dish/elfin-green.png"
               alt=""
             />
           </div>
-          <div class="slogan">
-            <div class="bottom-wave"></div>
-            <div class="h2 title">預約一個音樂ｘ美食ｘ森林的美好夜晚。</div>
+          <div className="slogan">
+            <div className="bottom-wave"></div>
+            <div className="h2 title">預約一個音樂ｘ美食ｘ森林的美好夜晚。</div>
           </div>
         </div>
         <main>
@@ -115,15 +115,15 @@ function Dish() {
               </ul>
             </div>
             <DishInfo dishInfo={dishInfo} style={style} tag={tag} />
-            <div class="btn">
-              <div class="guide-button orange">
+            <div className="btn">
+              <div className="guide-button orange">
                 去投票
                 <img
                   src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
                   alt=""
                 />
               </div>
-              <div class="guide-button pink">
+              <div className="guide-button pink">
                 線上訂位
                 <img
                   src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"

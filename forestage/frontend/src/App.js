@@ -6,6 +6,7 @@ import Comment from './pages/Comment'
 import Delivery from './pages/Delivery'
 import Dish from './pages/Dish'
 import Game from './pages/Game'
+import GameResult from './components/Game/GameResult'
 import Home from './pages/Home'
 import Member from './pages/Member'
 import Reservation from './pages/Reservation'
@@ -33,9 +34,13 @@ function App() {
           <Route path="/dish/">
             <Dish />
           </Route>
-          <Route path="/game/">
-            <Game />
+          <Route path="/game/result" component={GameResult}>
+            {/* <GameResult /> */}
           </Route>
+          <Route path="/game/" component={Game}>
+            {/* <Game /> */}
+          </Route>
+
           <Route path="/member/">
             <Member />
           </Route>

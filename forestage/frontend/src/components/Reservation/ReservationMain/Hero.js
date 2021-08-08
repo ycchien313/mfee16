@@ -5,7 +5,7 @@ function Hero() {
   const flyElfin = useRef(null)
   useEffect(() => {
     gsap.fromTo(
-      'img.elfin',
+      flyElfin.current,
       { y: -300, duration: 4, ease: 'bounce.out' },
       { y: 0, duration: 2,  ease: 'bounce.out'}
     )

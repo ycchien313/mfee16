@@ -1,4 +1,5 @@
 import React from 'react'
+import { Reveal, Tween } from 'react-gsap'
 
 function MainMealBox(props) {
   const { id, name, price, image_realistic, dishCount, setDishCount } = props

@@ -4,12 +4,13 @@ const db = require('../utils/db')
 const multer = require('multer');
 const path = require('path');
 const download = require('image-downloader');
+const fs = require('fs')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, path.join(__dirname, '../', 'public', 'comment'));
     },
     filename: (req, file, cb) => {
-        console.log(file,"topfile")
+        // console.log(file,"topfile")
         const ext = file.mimetype.split('/')[1];
         cb(null, `${file.fieldname}-${Date.now()}.${ext}`);
     },
@@ -33,15 +34,16 @@ const upload = multer({
 
 //顯示所有文章
 router.get("/16", async (req, res) => {
-    let commentAll = await db.connection.queryAsync('SELECT * FROM article ORDER BY article_id DESC');
+    let commentAll = await db.connection.queryAsync('SELECT * FROM article,member WHERE article.member_id=member.member_id ORDER BY article_id DESC');
     // res.json(result)
     res.send(commentAll)
 });
+
 //顯示我的評論所有文章
 router.get("/mycomment/16", async (req, res) => {
 
     // console.log("上面")
-    console.log(req.query.member_id,"ID")
+    // console.log(req.query.member_id,"ID")
     let myCommentAll = await db.connection.queryAsync('SELECT * FROM article WHERE member_id=? ORDER BY article_id DESC',[req.query.member_id]);
     // res.json(result)
     res.send(myCommentAll)
@@ -58,6 +60,7 @@ router.get("/message", async (req, res) => {
     // res.json(result)
     res.send(commentAllMessage)
 });
+
 //標籤
 router.get("/tag", async (req, res) => {
     let commentTag = await db.connection.queryAsync('SELECT * FROM tag ORDER BY tag_id DESC');
@@ -94,15 +97,24 @@ router.put("/articleNotGood", async (req, res) => {
 // });
 //新增文章&優惠券
 router.post("/createarticle",async (req, res) => {
-    console.log(req.body,"cc")
+    // console.log(req.body,"cc")
     let insertData = Object.values(req.body.insertArticle)
     // insertData[3]=`/public/comment/${req.file.filename}`
-    console.log(insertData)
-    console.log(insertData[3])
+    // console.log(insertData,"新增")
+    // console.log(insertData[3],"新增1")
     // let imgUrl= insertData[3].split("blob:")[1]
     let imgUrl= insertData[3]
-    console.log(imgUrl)
-    
+    // console.log(imgUrl,"新增3")
+    let imageName = Date.now() + '.png'
+  let path = '../backend/public/comments/' + imageName
+  let base64 = imgUrl.replace(/^data:image\/\w+;base64,/, "")
+  let dataBuffer = new Buffer(base64, 'base64')
+  fs.writeFile(path,dataBuffer, (err) => {
+    if(err){
+      console.log(err)
+    }
+  });
+  insertData[3] = `/comments\/${imageName}`
     // const options = {
     //   url: imgUrl,
     //   dest: '/public/comment'
@@ -140,18 +152,29 @@ router.get("/article/:message", async (req, res) => {
     // res.json(result)
     res.send(commentMessage)
 });
+//尋找登入會員頭像
+router.get("/memberavatar/:member_id",async(req,res)=>{
+    // console.log(req.params,"123")
+    let commentMemberAvatar= await db.connection.queryAsync('SELECT avatar FROM member WHERE member_id =?',[req.params.member_id])
+    res.send(commentMemberAvatar)
+});
 
-
-// 點擊標籤的相關文章
+// // 點擊標籤的相關文章
+// router.get("/:tag", async (req, res) => {
+//     let commentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id ORDER BY article_id DESC',[req.params.tag]);
+//     // res.json(result)
+//     res.send(commentArticle)
+// });
+// 點擊標籤的相關文章NEW
 router.get("/:tag", async (req, res) => {
-    let commentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id ORDER BY article_id DESC',[req.params.tag]);
+    let commentArticle = await db.connection.queryAsync('SELECT * FROM article,tag,member WHERE article.tag_id=? AND article.tag_id=tag.tag_id AND article.member_id=member.member_id ORDER BY article_id DESC',[req.params.tag]);
     // res.json(result)
     res.send(commentArticle)
 });
 // 點擊標籤的相關文章
 router.get("/mycomment/:tag", async (req, res) => {
-    console.log(req.query.member_id,"tag的member_id")
-    console.log(req.params.tag,"tag的tag_id")
+    // console.log(req.query.member_id,"tag的member_id")
+    // console.log(req.params.tag,"tag的tag_id")
     let myCommentArticle = await db.connection.queryAsync('SELECT * FROM article,tag WHERE article.tag_id=? AND article.tag_id=tag.tag_id AND member_id=? ORDER BY article_id DESC',[req.params.tag,req.query.member_id]);
     // res.json(result)
     res.send(myCommentArticle)

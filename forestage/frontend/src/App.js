@@ -9,6 +9,7 @@ import Delivery from './pages/Delivery'
 import DeliveryOrder from '../src/components/Delivery/deliveryOrder'
 import Dish from './pages/Dish'
 import Game from './pages/Game'
+import GameResult from './components/Game/GameResult'
 import Home from './pages/Home'
 import Member from './pages/Member'
 import Reservation from './pages/Reservation'
@@ -49,7 +50,7 @@ function App() {
           {/* <Route path="/auth/">
           <Auth />
         </Route> */}
-        <Route path="/comment/myComment">
+          <Route path="/comment/myComment">
             <Mycomment />
           </Route>
           <Route path="/comment/">
@@ -67,11 +68,14 @@ function App() {
           <Route path="/dish/">
             <Dish />
           </Route>
-          <Route path="/game/">
-            <Game />
-          </Route>
           <Route path="/singer/">
             <Singer />
+          </Route>
+          <Route path="/game/result" component={GameResult}>
+            {/* <GameResult /> */}
+          </Route>
+          <Route path="/game/" component={Game}>
+            {/* <Game /> */}
           </Route>
           <Route path="/member/">
             <Member />

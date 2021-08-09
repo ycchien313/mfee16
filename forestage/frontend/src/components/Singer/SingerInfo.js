@@ -67,25 +67,25 @@ function SingerInfo(props) {
 
   return (
     <>
-      <div class="singer-title h2">
+      <div className="singer-title h2">
         {singerInfo.length > 0 && singerInfo[0].type}歌手
       </div>
-      <div class="introduction-all">
-        <div class="band">
+      <div className="introduction-all">
+        <div className="band">
           <img
-            class="singerimg"
+            className="singerimg"
             src={singerInfo.length > 0 && defaulDomain + singerInfo[0].picture}
             alt=""
           />
         </div>
-        <div class="introduction-text1">
-          <div class="introduction">
-            <div class="introduction-title">
-              <div class="h3">
+        <div className="introduction-text1">
+          <div className="introduction">
+            <div className="introduction-title">
+              <div className="h3">
                 {singerInfo.length > 0 && singerInfo[0].name}
               </div>
             </div>
-            <div class="assess h4">
+            <div className="assess h4">
               <div className="star">
                 <div className="empty_star">★★★★★</div>
                 <div
@@ -100,18 +100,18 @@ function SingerInfo(props) {
               <h4> ({likeArray.length > 0 && likeArray[0].reviewer})</h4>
             </div>
           </div>
-          <div class="link-top"></div>
-          <div class="introduction-content">
+          <div className="link-top"></div>
+          <div className="introduction-content">
             {singerInfo.length > 0 && singerInfo[0].introduction}
           </div>
         </div>
       </div>
-      <div class="comment">
-        <div class="comment-bar">
-          <div class="left-btn">
-            <img class="btn-l" src="/Header/images/btn-left.svg" alt="" />
+      <div className="comment">
+        <div className="comment-bar">
+          <div className="left-btn">
+            <img className="btn-l" src="/Header/images/btn-left.svg" alt="" />
           </div>
-          <ul class="comment-content">
+          <ul className="comment-content">
             {cardInfo.length > 0 &&
               cardInfo[0].map(function (value, index) {
                 return (
@@ -125,27 +125,27 @@ function SingerInfo(props) {
                 )
               })}
           </ul>
-          <div class="right-btn">
-            <img class="btn-r" src="/Header/images/btn-right.svg" alt="" />
+          <div className="right-btn">
+            <img className="btn-r" src="/Header/images/btn-right.svg" alt="" />
           </div>
         </div>
       </div>
-      <div class="introduction-all">
-        <div class="band">
+      <div className="introduction-all">
+        <div className="band">
           <img
-            class="singerimg"
+            className="singerimg"
             src={singerInfo.length > 0 && defaulDomain + singerInfo[1].picture}
             alt=""
           />
         </div>
-        <div class="introduction-text1">
-          <div class="introduction">
-            <div class="introduction-title">
-              <div class="h3">
+        <div className="introduction-text1">
+          <div className="introduction">
+            <div className="introduction-title">
+              <div className="h3">
                 {singerInfo.length > 0 && singerInfo[1].name}
               </div>
             </div>
-            <div class="assess h4">
+            <div className="assess h4">
               <div className="star">
                 <div className="empty_star">★★★★★</div>
                 <div
@@ -161,18 +161,18 @@ function SingerInfo(props) {
               <h4> ({likeArray.length > 0 && likeArray[1].reviewer})</h4>
             </div>
           </div>
-          <div class="link-top"></div>
-          <div class="introduction-content">
+          <div className="link-top"></div>
+          <div className="introduction-content">
             {singerInfo.length > 0 && singerInfo[1].introduction}
           </div>
         </div>
       </div>
-      <div class="comment">
-        <div class="comment-bar">
-          <div class="left-btn">
-            <img class="btn-l" src="/Header/images/btn-left.svg" alt="" />
+      <div className="comment">
+        <div className="comment-bar">
+          <div className="left-btn">
+            <img className="btn-l" src="/Header/images/btn-left.svg" alt="" />
           </div>
-          <ul class="comment-content">
+          <ul className="comment-content">
             {cardInfo.length > 0 &&
               cardInfo[1].map(function (value, index) {
                 return (
@@ -186,8 +186,8 @@ function SingerInfo(props) {
                 )
               })}
           </ul>
-          <div class="right-btn">
-            <img class="btn-r" src="/Header/images/btn-right.svg" alt="" />
+          <div className="right-btn">
+            <img className="btn-r" src="/Header/images/btn-right.svg" alt="" />
           </div>
         </div>
       </div>

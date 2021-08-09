@@ -12,7 +12,7 @@ function SixthScreen() {
       </div>
       <div class="green-bg-left">
         <img
-          src="http://localhost:3000/images/home/green-background-left.svg"
+          src="http://localhost:3000/images/home/slogan-bg-left.png"
           alt=""
         />
       </div>

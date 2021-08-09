@@ -124,6 +124,42 @@
     justify-content: space-between;
     margin: 0;
   }
+  @media screen and (max-width: 768px) {
+    .food .tag {
+      margin-top: 30vh;
+      margin-bottom: 10vh;
+    }
+    .food .tag .tag-ul {
+      margin: 0 auto;
+      position: relative;
+
+      width: 100%;
+      justify-content: space-around;
+    }
+    .food .tag .tag-ul li {
+      width: 20vw;
+      height: 10vh;
+      align-self: flex-end;
+    }
+    .food .tag .tag-ul li .dish-tag {
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+    .food .tag .tag-ul li .dish-tag img {
+      width: 100%;
+      cursor: pointer;
+    }
+    .food .tag .tag-ul li .title-text {
+      left: 50%;
+      top: 50%;
+      transform: translateX(-20%);
+      // font-size: 16px;
+    }
+    .food-title {
+      display: none;
+    }
+  }
 
   .dish {
     position: relative;
@@ -187,13 +223,86 @@
     display: flex;
     align-items: center;
   }
-
+  .page-change {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .food {
+      margin: 0;
+    }
+    .introduction-all {
+      // border: 1px solid blue;
+      // display: flex;
+      // width: 300vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-bg {
+      display: flex;
+      width: 300vw;
+      margin-bottom: 10vh;
+    }
+    .food-m {
+      // border: 1px solid red;
+      width: 100%;
+      margin: 0;
+      position: relative;
+      transition: 0.3s;
+    }
+    .introduction {
+      flex-direction: column;
+      // border: 1px solid blue;
+      flex-shrink: 0;
+      height: 100%;
+      width: 100% !important;
+      position: relative;
+    }
+    .reverse {
+      flex-direction: column-reverse;
+    }
+    .imgb {
+      width: 80%;
+    }
+  }
   .introduction-title {
     align-items: center;
     font-family: $zh-tw-maru;
     justify-content: space-between;
     display: flex;
     line-height: 2;
+  }
+  @media screen and (max-width: 768px) {
+    .introduction-title {
+      flex-direction: column;
+    }
+    .introduction-text {
+      width: 70vw !important;
+    }
+    .price {
+      text-align: center;
+      font-size: 16px;
+    }
+    .page-change {
+      display: block;
+      position: absolute;
+      height: 100%;
+      z-index: 5;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .next {
+      right: 0;
+    }
+    .next:active {
+      background: linear-gradient(to right, white, #eee);
+    }
+    .prev:active {
+      background: linear-gradient(to left, white, #eee);
+    }
+    i {
+      color: #333;
+    }
   }
   .assess {
     display: flex;
@@ -273,6 +382,12 @@
     width: 100%;
     height: 150px;
     justify-content: flex-end;
+  }
+  @media screen and(max-width:768px) {
+    .btn {
+      margin: 0 30px 0 30px;
+      justify-content: space-around;
+    }
   }
 
   .top-wave {

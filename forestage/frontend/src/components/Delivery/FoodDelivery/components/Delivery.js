@@ -32,7 +32,7 @@ function Delivery(props) {
   const [address, setAddress] = useState({
     city: '桃園市',
     dist: '',
-    road: '輸入您的地址',
+    road: '',
   })
 
   const [img, setImg] = useState([])
@@ -118,7 +118,7 @@ function Delivery(props) {
       // cart，轉成陣列
       const cart = JSON.parse(localStorage.getItem('cart'))
       // console.log(cart, 'cart')
-      if (cart !== undefined) {
+      if (cart !== undefined && null) {
         cart.forEach((v, i) => {
           // console.log('v:', v)
           for (let i = 0; i < dishes.length; i++) {

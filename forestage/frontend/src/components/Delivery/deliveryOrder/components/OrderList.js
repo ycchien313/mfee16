@@ -12,7 +12,7 @@ function OrderList(props) {
     setMcmId,
   } = props
   const { img, name, counts, subTotal, fulltime } = orderAll
-  console.log('subTotal', subTotal)
+  // console.log('subTotal', subTotal)
   const [couponName, setCouponName] = useState('')
   const [couponPrice, setCouponPrice] = useState(0)
   const [mount, setMount] = useState(true)
@@ -68,6 +68,7 @@ function OrderList(props) {
                 <div className="dish">
                   <figure className="dish-pic">
                     <img
+                      className="dish-pic-img"
                       src={'http://localhost:3000/images/common/food/' + img[i]}
                       alt=""
                     />

@@ -15,7 +15,12 @@ function CommentCard(props) {
   }
 
   let path = 'http://localhost:3001'
-  let fullPath = path + img
+  let fullPath = null
+  if (img.includes('http')) {
+    fullPath = img
+  } else {
+    fullPath = path + img
+  }
 
   //
   let card = (

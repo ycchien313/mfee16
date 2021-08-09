@@ -6,8 +6,26 @@ const { query } = require("express");
 let current = moment().format("YYYY-MM-DD");
 let beginWeek = moment().startOf("isoWeek").format("YYYY-MM-DD");
 let endWeek = moment().endOf("isoWeek").format("YYYY-MM-DD");
+// 取得直播影片id
+const { YoutubeDataAPI } = require("youtube-v3-api");
+const API_KEY = process.env.API_KEY;
 
-// let getCalendarSql = 'SELECT sc.date, s.name, s.picture FROM singer_calendar AS sc, singer AS s WHERE DATEDIFF(sc.date, CURDATE())>=0 AND s.singer_id=sc.singer_id ORDER BY sc.date LIMIT 10' 蕙伃的
+const api = new YoutubeDataAPI(API_KEY);
+
+api.searchAll(`Elfin 詹宜諺`, 1)
+    .then(function (result) {
+        // for (let i = 0; i < result.items.length; i++) {
+        //     console.log(result.items[i].snippet);
+        // }
+        router.get("/youtube", function (req, res, next) {
+            let queryResult = result.items[0].id.videoId;
+            res.send(queryResult);
+        });
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
+//
 
 // 取得本日表演者資訊
 router.get("/singer_today", async function (req, res, next) {
@@ -38,7 +56,7 @@ router.get("/member_state/:memberId", async function (req, res, next) {
 // 取得評論資料
 router.get("/comment/:id", async function (req, res, next) {
     let queryResult = await db.connection.queryAsync(
-        `SELECT m.name as name, a.author as nickname, t.name as singer, a.title as title, a.content as content, m.avatar as img, a.recommendation_index as likes FROM article as a INNER JOIN tag as t ON a.tag_id = t.tag_id INNER JOIN member as m ON a.member_id = m.member_id where t.tag_id = ? order by likes desc`,
+        `SELECT m.name as name, a.author as nickname, t.name as singer, a.title as title, a.content as content, m.avatar as img, a.recommendation_index as likes FROM article as a INNER JOIN tag as t ON a.tag_id = t.tag_id INNER JOIN member as m ON a.member_id = m.member_id where t.tag_id = ? order by likes desc limit 5`,
         req.params.id
     );
     res.send(queryResult);
@@ -117,5 +135,11 @@ router.post("/update_candidate/:candidateId", async function (req, res, next) {
     );
     console.log(req.body.memberId);
 });
-
+// 投票成功獲得折價券
+router.post("/vote_success/:memberId", async function (req, res, next) {
+    let queryResult = await db.connection.queryAsync(
+        `insert into member_coupon_mapping(member_id,coupon_id,valid) values(?,6,1)`,
+        req.params.memberId
+    );
+});
 module.exports = router;

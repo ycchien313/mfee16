@@ -8,9 +8,10 @@ const homeApi = require('./apis/home');
 const memberApi = require('./apis/member');
 const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
+const gameApi = require('./apis/game');
 const db = require('./utils/db');
 const connection = db.connection;
-const cors = require('cors');
+const cors = require("cors");
 const port = 3001;
 require('dotenv').config();
 
@@ -20,7 +21,7 @@ app.use(cors());
 
 app.use(express.static('public'));
 
-app.use(cors())
+app.use(cors());
 app.use('/auth', authApi);
 app.use('/comment', commentApi);
 app.use('/delivery', deliveryApi);
@@ -29,6 +30,7 @@ app.use('/home', homeApi);
 app.use('/member', memberApi);
 app.use('/reservation', reservationApi);
 app.use('/singer', singerApi);
+app.use('/game', gameApi);
 
 app.get('/', (req, res) => {
     console.log('URL:', req.url);
@@ -42,5 +44,5 @@ app.use((req, res, next) => {
 
 app.listen(port, () => {
     console.log(`請連線至 http://127.0.0.1:${port}`);
-    connection.connect();   
+    connection.connect();
 });

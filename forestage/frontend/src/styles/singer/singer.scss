@@ -118,6 +118,19 @@
     opacity: 0.5;
     position: relative;
     transition: 0.2s;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 768px) {
+    .music-tag {
+      width: 20vw;
+      display: flex;
+      justify-content: center;
+      // align-items: center;
+    }
+    .music-tag img {
+      width: 100% !important;
+      object-fit: cover;
+    }
   }
   .music-tag.active {
     opacity: 1;
@@ -129,6 +142,17 @@
     align-items: center;
     justify-content: space-between;
   }
+  @media screen and(max-width:768px) {
+    .singer .tag {
+    }
+
+    .singer .tag .tag-ul {
+      margin-top: 60vh;
+      width: 100%;
+      height: 10vh;
+      justify-content: space-around;
+    }
+  }
   .singer .tag .music-style {
     position: relative;
   }
@@ -137,6 +161,12 @@
     right: 2vw;
     top: 2.5vw;
     font-family: $zh-tw-maru;
+  }
+  @media screen and (max-width: 768px) {
+    .singer .tag .title-text {
+      left: 50%;
+      top: 50%;
+    }
   }
   .singer .tag .rock .rock-tag {
     width: 8.4958vw;
@@ -157,14 +187,28 @@
     position: relative;
     bottom: 50px;
   }
+  @media screen and (max-width: 768px) {
+    .singer-title {
+      display: none;
+    }
+  }
   .band {
     width: 31.5104vw;
     flex-shrink: 0;
   }
+  @media screen and (max-width: 768px) {
+    .band {
+      width: 100%;
+      height: 50vh;
+      margin: 15vh 0 8vh 0;
+      overflow: hidden;
+    }
+  }
   .singerimg {
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    height: 340px;
+    // height: 50vh;
     object-position: 0% 17%;
   }
   .singer .introduction-all {
@@ -173,6 +217,11 @@
     align-items: center;
     margin-bottom: -30px;
   }
+  @media screen and (max-width: 768px) {
+    .introduction-all {
+      flex-direction: column;
+    }
+  }
   .introduction {
     width: 48vw;
     display: flex;
@@ -180,6 +229,13 @@
     justify-content: space-between;
     line-height: 2;
     align-items: center;
+  }
+  @media screen and (max-width: 768px) {
+    .introduction {
+      justify-content: space-around;
+      // flex-shrink: 0;
+      width: 100%;
+    }
   }
   .link-top {
     width: 100%;
@@ -197,6 +253,19 @@
     box-shadow: 0 3px 6px rgba(50, 50, 50, 0.5),
       10px 10px 0 10px $secondary-green;
   }
+  @media screen and (max-width: 768px) {
+    .introduction-text1 {
+      left: 0;
+      border-radius: 15px;
+      height: 50vh;
+      box-shadow: 0 3px 6px rgba(50, 50, 50, 0.5),
+        5px 5px 0 5px $secondary-green;
+    }
+    .singer .introduction-content {
+      line-height: 3rem;
+      padding: 0 10px 0 10px;
+    }
+  }
   .introduction-text2 {
     height: 250px;
     background-color: #ffffff;
@@ -212,12 +281,17 @@
   .introduction-title {
     color: #333333;
   }
+  @media screen and (max-width: 768px) {
+    .introduction-title .h3 {
+      font-size: 18px;
+    }
+  }
   .assess {
     display: flex;
     align-items: center;
     justify-content: center;
     color: #a1957d;
-
+    align-items: center;
     h4 {
       margin: 0;
     }
@@ -265,16 +339,26 @@
   }
   .comment-content {
     height: 344px;
-    // padding: 50px 0;
-    // white-space: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-
-    // border: 1px solid black;
     display: flex;
   }
+  @media screen and (max-width: 768px) {
+    .comment-content {
+      // border: 1px solid red;
+    }
+    .comment-content .card-li {
+      width: 45vw;
+      // border: 1px solid blue;
+      flex-shrink: 0;
+    }
+    .card-li .comment-text {
+      // width: 50vw;
+      width: 100%;
+    }
+  }
   .comment-content::-webkit-scrollbar {
-    display: none;
+    // display: none;
   }
   .card-li {
     width: 30vw;
@@ -294,6 +378,12 @@
     margin-top: 6px;
     font-family: $zh-tw-noto;
     color: #a1957d;
+    line-height: 1.5rem;
+  }
+  @media screen and(max-width:768px) {
+    .com-content {
+      line-height: 2.5rem;
+    }
   }
   .star {
     position: relative;
@@ -347,6 +437,11 @@
     height: 150px;
     justify-content: flex-end;
   }
+  @media screen and (max-width: 768px) {
+    .btn {
+      justify-content: space-around;
+    }
+  }
 
   .top-wave {
     max-width: 100vw;
@@ -395,6 +490,11 @@
     top: 2.91vw;
     font-family: $zh-tw-maru;
     color: white;
+  }
+  @media screen and(max-width:768px) {
+    .slogan .h2.title {
+      top: 10vh !important;
+    }
   }
 
   @media screen and (max-width: 1400px) and (min-width: 1200px) {

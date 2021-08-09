@@ -1,0 +1,333 @@
+:root {
+  --primary-lightpink: #fee0dc;
+  --primary-lightgreen: #b2d297;
+  --primary-lightgray: #e4eded;
+  --primary-lightbrown: #a1957d;
+  --secondary-lightyellow: #fded82;
+  --secondary-green: #97bc78;
+  --secondary-green-dark: #5e7c60;
+  --accent-red: #fc5c75;
+  --accent-orange: #f5b54d;
+  --zh-tw-maru: 'A-OTF Maru Folk Pro', sans-serif;
+  --zh-tw-noto: 'Noto Sans TC', sans-serif;
+  --en-itim: 'Itim', cursive;
+  --en-open-sans: 'Open Sans', sans-serif;
+}
+.music-main {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url(http://localhost:3000/fonts/landing_1-02.png);
+  min-height: 100vh;
+
+  /* width: 100vw; */
+  background-size: cover;
+}
+.wrapper {
+  margin-left: 16.66vw;
+  margin-right: 16.66vw;
+  padding-bottom: 3vw;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+}
+.music-main .title {
+  padding-top: 110px;
+}
+
+.music-main .title span.elfin {
+  font-family: var(--en-itim);
+  color: var(--primary-lightbrown);
+}
+
+.music-main .title span.test-title {
+  font-family: var(--zh-tw-maru);
+  color: var(--primary-lightbrown);
+}
+
+.music-main .sub-title {
+  color: var(--accent-red);
+  font-family: var(--zh-tw-maru);
+  margin-top: 10px;
+}
+
+.game-bg {
+  /* height: 65vh; */
+  background-color: rgba(178, 210, 151, 0.9);
+  border-radius: 2.6vw;
+  padding: 2vw 3vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .game-bg {
+    padding: 20px 15px;
+  }
+}
+
+.numbers {
+  display: flex;
+}
+.numbers .test-number-circle {
+  width: 2.86vw;
+  height: 2.86vw;
+  border-radius: 50%;
+  border: 0.26vw solid var(--primary-lightgray);
+  text-align: center;
+  line-height: 2.86vw;
+  font-family: var(--en-open-sans);
+  color: var(--primary-lightgray);
+}
+
+@media screen and (max-width: 768px) {
+  .numbers .test-number-circle {
+    width: 6vw;
+    height: 6vw;
+    border: 3px solid var(--primary-lightgray);
+    line-height: 6vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .numbers .test-number-circle {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--primary-lightgray);
+    line-height: 40px;
+  }
+}
+
+.numbers .test-number-circle.active {
+  background: var(--accent-orange);
+  color: white;
+}
+.numbers .line {
+  border-top: 0.26vw solid var(--primary-lightgray);
+  width: 3.8vw;
+  position: relative;
+  top: 1.43vw;
+}
+
+@media screen and (max-width: 768px) {
+  .numbers .line {
+    border-top: 3px solid var(--primary-lightgray);
+    width: 3.8vw;
+    top: 4vw;
+  }
+}
+@media screen and (max-width: 500px) {
+  .numbers .line {
+    border-top: 3px solid var(--primary-lightgray);
+    width: 3.8vw;
+    top: 20px;
+  }
+}
+.question {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 2vw 0;
+}
+.question .elfin-avatar {
+  background: url(http://localhost:3000/images/game/elfinavatar.png);
+  width: 6vw;
+  height: 6vw;
+  background-size: 100% 100%;
+}
+
+.question .question-box {
+  display: flex;
+  align-items: center;
+}
+
+.question .question-box .triangle {
+  background: url(http://localhost:3000/images/game/triangle.svg);
+  width: 2.6vw;
+  height: 1.45vw;
+}
+@media screen and (max-width: 1200px) {
+  .question .question-box .triangle {
+    display: none;
+  }
+}
+
+.question .question-box .box {
+  width: 46vw;
+  border-radius: 1.3vw;
+  background: white;
+  color: var(--primary-lightbrown);
+  font-family: var(--zh-tw-maru);
+  line-height: 4.68vw;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 768px) {
+  .question .question-box {
+    width: 100%;
+  }
+  .question .question-box .box {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+  }
+  .question .elfin-avatar {
+    display: none;
+  }
+}
+
+.play-button {
+  width: 9.27vw;
+  height: 9.27vw;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vw;
+  border: 3px solid var(--primary-lightbrown);
+  cursor: pointer;
+  box-shadow: 0 3px 6px rgba(50, 50, 50, 0.5);
+  transition: 0.2s;
+}
+
+.play-button:hover {
+  box-shadow: none;
+}
+
+.play {
+  background: url(http://localhost:3000/images/game/play.svg) no-repeat;
+  width: 3.64vw;
+  height: 4.21vw;
+  background-size: cover;
+  margin-left: 1vw;
+}
+
+@media screen and (max-width: 768px) {
+  .play-button {
+    width: 120px;
+    height: 120px;
+    margin-top: 25px;
+  }
+  .play-button .play {
+    width: 46px;
+    height: 54px;
+    margin-left: 10px;
+  }
+}
+
+.answers {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 2vw 0;
+}
+
+.answer {
+  width: 15.62vw;
+  height: 3.125vw;
+  background: white;
+  border-radius: 0.78vw;
+  text-align: center;
+  line-height: 3.125vw;
+  box-shadow: 0 3px 6px rgba(50, 50, 50, 0.5);
+  cursor: pointer;
+  transition: 0.2s;
+  font-family: var(--zh-tw-noto);
+  color: var(--primary-lightbrown);
+}
+
+.answer.active {
+  box-shadow: none;
+  box-sizing: border-box;
+  border: 3px solid var(--primary-lightbrown);
+}
+
+@media screen and (max-width: 768px) {
+  .answers {
+    flex-direction: column;
+  }
+  .answer {
+    width: 100%;
+    height: 40px;
+    margin: 12.5px auto;
+    line-height: 40px;
+  }
+}
+
+.answer:hover {
+  box-shadow: none;
+}
+
+.game-bg .next {
+  /* width: 7.81vw; */
+  /* height: 2.6vw; */
+  line-height: 2.6vw;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: flex-end;
+}
+
+.game-bg .next .icon {
+  background: url(http://localhost:3000/images/game/arrow-circle-right-solid.svg)
+    no-repeat;
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+}
+
+@media screen and (max-width: 768px) {
+  .game-bg .next {
+    width: 112px;
+    height: 37px;
+    line-height: 2.6vw;
+    padding: 0 10px;
+    display: flex;
+    align-self: center;
+  }
+  .game-bg .next .icon {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+  h1,
+  .h1 {
+    font-size: 1.67rem;
+  }
+  h2,
+  .h2 {
+    font-size: 1.5rem;
+  }
+  h3,
+  .h3 {
+    font-size: 1.33rem;
+  }
+  h4,
+  .h4 {
+    font-size: 1.17rem;
+  }
+  p,
+  .p {
+    font-size: 1rem;
+  }
+  span,
+  .span {
+    font-size: 1rem;
+  }
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import $ from 'jquery'
 import moment from 'moment'
 import { Animated } from 'react-animated-css'
+import { Tween } from 'react-gsap'
 
 function Map(props) {
   const { address, setAddress, setFee, date, setDate, time, setTime } = props
@@ -128,34 +129,41 @@ function Map(props) {
               <h3 className="banner-text">請選擇你的位置 !</h3>
             </div>
           </Animated>
-          <Animated
+          {/* <Animated
             animationIn="bounceInLeft"
             animationOut="fadeOut"
             isVisible={true}
+          > */}
+          {/* <Controls playState={PlayState.stop}> */}
+          <svg
+            version="1.1"
+            id="pic_1"
+            xmlns="http://www.w3.org/2000/svg"
+            x="0px"
+            y="0px"
+            viewBox="0 0 943.09 841.89"
+            className="Taoyuan"
           >
-            <svg
-              version="1.1"
-              id="pic_1"
-              xmlns="http://www.w3.org/2000/svg"
-              x="0px"
-              y="0px"
-              viewBox="0 0 943.09 841.89"
-              className="Taoyuan"
+            <defs>
+              <linearGradient
+                id="myGradient"
+                x1="0%"
+                y1="0%"
+                x2="0%"
+                y2="100%"
+                spreadMethod="pad"
+              >
+                <stop offset="0%" stopColor="#f5b54d" stopOpacity="1" />
+                <stop offset="50%" stopColor="#f1bd69" stopOpacity="1" />
+                <stop offset="100%" stopColor="#ebcc9c" stopOpacity="1" />
+              </linearGradient>
+            </defs>
+            <Tween
+              from={{ scale: 0.8 }}
+              stagger={{ from: 'center', amount: 1, grid: [3, 3] }}
+              duration={1.7}
+              ease="elastic.out(2, 0.5)"
             >
-              <defs>
-                <linearGradient
-                  id="myGradient"
-                  x1="0%"
-                  y1="0%"
-                  x2="0%"
-                  y2="100%"
-                  spreadMethod="pad"
-                >
-                  <stop offset="0%" stopColor="#f5b54d" stopOpacity="1" />
-                  <stop offset="50%" stopColor="#f1bd69" stopOpacity="1" />
-                  <stop offset="100%" stopColor="#ebcc9c" stopOpacity="1" />
-                </linearGradient>
-              </defs>
               <path
                 className="st0"
                 d="M221.21,356.04c1.13-1.7,2.64-2.87,4.62-3.41C225.29,354.72,223.61,355.96,221.21,356.04z"
@@ -666,8 +674,10 @@ function Map(props) {
               <text className="svg-text" x="650" y="550">
                 復興區
               </text>
-            </svg>
-          </Animated>
+            </Tween>
+          </svg>
+          {/* </Controls> */}
+          {/* </Animated> */}
         </div>
       </div>
       <div className="right-div">

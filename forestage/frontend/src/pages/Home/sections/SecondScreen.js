@@ -11,7 +11,7 @@ function SecondScreen(props) {
   const [guideIndex, setGuideIndex] = useState(0)
   const [guideTitle, setGuideTitle] = useState('在線上即時看精彩的音樂表演')
   const [guideContent, setGuideContent] = useState([])
-
+  const [guideURL, setGuideURL] = useState()
   // component Did mount
   useEffect(() => {
     // hover
@@ -47,7 +47,26 @@ function SecondScreen(props) {
     ])
   }, [singerName, singerDate])
 
-  //
+  const [liveID, setLiveID] = useState('')
+  // 取得直播網址
+
+  useEffect(() => {
+    $.ajax({
+      url: 'http://localhost:3001/home/youtube',
+      method: 'GET',
+      dataType: 'string',
+    })
+      .then(function (result) {
+        console.log('hi')
+        setLiveID(result)
+        setGuideURL(`http://youtu.be/`)
+      })
+      .catch(function (err) {
+        console.log(err.responseText)
+        setLiveID(err.responseText)
+        setGuideURL(`http://youtu.be/`)
+      })
+  }, [])
 
   let SecondScreen = (
     <div id="secondScreen">
@@ -66,6 +85,7 @@ function SecondScreen(props) {
                     `演出時間：　${singerDate} 18:00`,
                   ])
                   setGuideTitle('在線上即時看精彩的音樂表演')
+                  setGuideURL(`https://youtu.be/${liveID}`)
                 }}
               >
                 <div className="li-inner">
@@ -88,6 +108,7 @@ function SecondScreen(props) {
                   setGuideIndex(1)
                   setGuideContent(['有喜歡的歌手嗎?', '馬上前往投票吧!'])
                   setGuideTitle('參與我們的投票活動，決定出你喜歡的表演者吧!')
+                  setGuideURL('/#fourthScreen')
                 }}
               >
                 <div className="li-inner">
@@ -109,6 +130,7 @@ function SecondScreen(props) {
                   setGuideIndex(2)
                   setGuideContent(['對投票沒想法嗎?', '來場小測驗吧!'])
                   setGuideTitle('透過音樂測驗得出你喜愛的音樂種類及推薦歌手')
+                  setGuideURL('http://localhost:3000/game')
                 }}
               >
                 <div className="li-inner">
@@ -130,6 +152,7 @@ function SecondScreen(props) {
                   setGuideIndex(3)
                   setGuideContent(['座位有限', '立即來場讓你難忘的音樂盛宴吧'])
                   setGuideTitle('立即線上訂位')
+                  setGuideURL('http://localhost:3000/reservation')
                 }}
               >
                 <div className="li-inner">
@@ -144,7 +167,19 @@ function SecondScreen(props) {
           </li>
           <li>
             <div className="guide-li">
-              <button>
+              <button
+                onClick={() => {
+                  setGuideButton('我要評論')
+                  setLeftVision('/images/home/Video-comment.mp4')
+                  setGuideIndex(4)
+                  setGuideContent([
+                    '哪個表演者或餐點的印象令你難忘嗎?',
+                    '你的建議與肯定是我們進步的最大動力',
+                  ])
+                  setGuideTitle('留下你的寶貴評論')
+                  setGuideURL('http://localhost:3000/comment')
+                }}
+              >
                 <div className="li-inner">
                   <img
                     src="http://localhost:3000/images/home/guideSVG/forum.svg"
@@ -157,7 +192,19 @@ function SecondScreen(props) {
           </li>
           <li>
             <div className="guide-li">
-              <button>
+              <button
+                onClick={() => {
+                  setGuideButton('立即訂餐')
+                  setLeftVision('/images/home/Video-delivery.mp4')
+                  setGuideIndex(4)
+                  setGuideContent([
+                    '沒辦法到場同樂?',
+                    '透過外送平台與現場直播也能一起同樂',
+                  ])
+                  setGuideTitle('餐點外送平台')
+                  setGuideURL('http://localhost:3000/delivery')
+                }}
+              >
                 <div className="li-inner">
                   <img
                     src="http://localhost:3000/images/home/guideSVG/delivery.svg"
@@ -176,6 +223,8 @@ function SecondScreen(props) {
         guideIndex={guideIndex}
         guideTitle={guideTitle}
         guideContent={guideContent}
+        guideURL={guideURL}
+        liveID={liveID}
       />
     </div>
   )

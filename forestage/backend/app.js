@@ -10,7 +10,7 @@ const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
 const db = require('./utils/db');
 const connection = db.connection;
-const cors = require('cors');
+const cors = require("cors");
 const port = 3001;
 require('dotenv').config();
 

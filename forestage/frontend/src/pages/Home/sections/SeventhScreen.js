@@ -290,10 +290,17 @@ function SeventhScreen(props) {
               })}
           </ul>
         </div>
-        <button className="button-red">
-          <h4 className="btn-innerText">下一步</h4>
-          <i className="fas fa-arrow-circle-right"></i>
-        </button>
+        <Link
+          to={{
+            pathname: '/reservation/',
+            state: { select, prevPath: '/home' },
+          }}
+        >
+          <button className="button-red">
+            <h4 className="btn-innerText">下一步</h4>
+            <i className="fas fa-arrow-circle-right"></i>
+          </button>
+        </Link>
       </div>
     </div>
   )

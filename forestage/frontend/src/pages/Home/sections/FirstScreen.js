@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
-import gsap from 'gsap'
-
+import Aos from 'aos'
 function FirstScreen(props) {
+  useEffect(() => {
+    Aos.init({ duration: 1500 })
+  }, [])
   let { singerName, singerImg, singerDate } = props
   let domain = 'http://localhost:3000/images/common/'
   const [test, setTest] = useState('test')
-  let GsapTarget = useRef(null)
+
   // console.log(GsapTarget)
-  useEffect(() => {
-    gsap.to(GsapTarget, { x: 0, opacity: 1 })
-  }, [])
   let FirstScreen = (
     <div id="firstScreen">
       <div className="mask"></div>
@@ -47,12 +46,7 @@ function FirstScreen(props) {
 
       <div className="card">
         <div className="cardTitle h2">近期歌手</div>
-        <div
-          className="cardBody"
-          ref={(element) => {
-            GsapTarget = element
-          }}
-        >
+        <div className="cardBody" data-aos="flip-down">
           <figure className="singer">
             <img src={domain + singerImg} alt="" />
           </figure>

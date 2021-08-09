@@ -182,16 +182,19 @@
   .main-tag {
     width: 8.4958vw;
     filter: drop-shadow(rgba(50, 50, 50, 0.5) 0px 3px 6px);
+    cursor: pointer;
   }
 
   .with-tag {
     width: 8.4958vw;
     filter: drop-shadow(rgba(50, 50, 50, 0.5) 0px 3px 6px);
+    cursor: pointer;
   }
 
   .dessert-tag {
     width: 8.4958vw;
     filter: drop-shadow(rgba(50, 50, 50, 0.5) 0px 3px 6px);
+    cursor: pointer;
   }
 
   .food-title {
@@ -266,6 +269,7 @@
   }
   .introduction-title {
     align-items: center;
+    height: 50px;
     font-family: $zh-tw-maru;
     justify-content: space-between;
     display: flex;
@@ -304,6 +308,7 @@
       color: #333;
     }
   }
+
   .assess {
     display: flex;
     align-items: center;
@@ -321,13 +326,39 @@
   }
   .full_star {
     align-items: center;
-    width: 67%; /*調整寬度可變更星等*/
     position: absolute;
     left: 0;
     top: 0;
     white-space: nowrap;
     overflow: hidden;
     color: #fded82; /*前景星星顏色*/
+  }
+
+  @media screen and (max-width: 768px) {
+    .assess {
+      display: flex;
+      align-items: center;
+      margin-top: -21px;
+    }
+    .star {
+      position: relative;
+      align-items: center;
+      display: inline-block;
+      color: rgb(238, 232, 232); /*背景星星顏色*/
+      overflow: hidden;
+      font-size: 1px; /*調整字體大小可放大縮小星星*/
+      text-shadow: 0px 1px 0 #999;
+      margin-right: 8px;
+    }
+    .full_star {
+      align-items: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      color: #fded82; /*前景星星顏色*/
+    }
   }
 
   .introduction-content {
@@ -337,12 +368,20 @@
   .introduction-text {
     padding: 1.8323vw;
   }
+
   .link-top {
     width: 100%;
     height: 1px;
     border-top: solid #5e7c60 2px;
   }
-
+  @media screen and (max-width: 768px) {
+    .link-top {
+      width: 100%;
+      height: 1px;
+      border-top: solid #5e7c60 2px;
+      margin-top: 3px;
+    }
+  }
   .price {
     color: #5e7c60;
   }
@@ -374,7 +413,6 @@
     width: 59.375vw;
     display: flex;
     flex-shrink: 0;
-    justify-content: space-between;
     line-height: 2;
   }
   .btn {
@@ -385,7 +423,6 @@
   }
   @media screen and(max-width:768px) {
     .btn {
-      margin: 0 30px 0 30px;
       justify-content: space-around;
     }
   }
@@ -514,5 +551,8 @@
     justify-content: center;
     align-items: center; */
     }
+  }
+  .link {
+    text-decoration: none;
   }
 }

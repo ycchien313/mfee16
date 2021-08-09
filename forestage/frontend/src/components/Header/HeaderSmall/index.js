@@ -16,7 +16,7 @@ function HeaderSmall() {
             <HeaderAuth />
             <div className="cart">
               <div className="icon"></div>
-              <div className="circle">12</div>
+              <div className="circle"></div>
             </div>
             <div
               className="burger-menu"

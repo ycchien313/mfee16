@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import '../../styles/game/style.scss'
+
 import '../../styles/game/musicTest.scss'
 import $ from 'jquery'
 import { Link } from 'react-router-dom'
 import Header from '../../components/Header'
 import GameResult from '../../components/Game/GameResult'
-
+import Swal from 'sweetalert2'
 function Game() {
+  const [loading, setLoading] = useState(false)
   const [goResult, setGoResult] = useState(false)
   const [answer, setAnswer] = useState([0, 0, 0, 0, 0])
   const [questionNumber, setQuestionNumber] = useState(1)
   const [question, setQuestion] = useState('')
   const [result, setResult] = useState([])
+  const [buttonCheck, setButtonCheck] = useState(0)
   const [musicList, setMusicList] = useState([
     'r or l (mp3cut.net).mp3',
     'li (mp3cut.net).mp3',
@@ -56,18 +58,21 @@ function Game() {
     let newAnswer = [...answer]
     newAnswer[questionNumber - 1] = answerA.value
     setAnswer(newAnswer)
+    setButtonCheck(1)
     // setAnswer
   }
   function saveAnswerB() {
     let newAnswer = [...answer]
     newAnswer[questionNumber - 1] = answerB.value
     setAnswer(newAnswer)
+    setButtonCheck(2)
     // setAnswer
   }
   function saveAnswerC() {
     let newAnswer = [...answer]
     newAnswer[questionNumber - 1] = answerC.value
     setAnswer(newAnswer)
+    setButtonCheck(3)
     // setAnswer
   }
   // 找答案數量
@@ -231,11 +236,14 @@ function Game() {
         break
     }
   }, [style])
+
   useEffect(() => {
     setMusic(musicList[questionNumber - 1])
+    setButtonCheck(0)
   }, [questionNumber])
 
   useEffect(() => {
+    setLoading(true)
     $('.answer').on('click', function () {
       $(this).addClass('active')
       $(this).siblings().removeClass('active')
@@ -266,136 +274,143 @@ function Game() {
   ) : (
     <>
       <Header />
-      <main classNameName="music-main">
-        <div classNameName="wrapper">
-          <div classNameName="title">
-            <span classNameName="h2 elfin">Elfin</span>
-            <span classNameName="h2 test-title">音樂測驗</span>
-            <audio
-              id="music-target"
-              src={'http://localhost:3000/images/game/' + music}
-              controls="controls"
-            ></audio>
-          </div>
-          <h4 classNameName="sub-title h4">
-            回答以下的問題，找出你最Match的音樂歌手，完成遊戲後還可以拿到折價券哦！
-          </h4>
-          <div classNameName="game-bg">
-            <div classNameName="numbers">
-              <div
-                classNameName={
-                  questionNumber <= 5
-                    ? 'test-number-circle active'
-                    : 'test-number-circle '
-                }
-              >
-                <span classNameName="test-number h2">1</span>
-              </div>
-              <div classNameName="line"></div>
-              <div
-                classNameName={
-                  questionNumber >= 2
-                    ? 'test-number-circle active'
-                    : 'test-number-circle '
-                }
-              >
-                <span classNameName="test-number h2">2</span>
-              </div>
-              <div classNameName="line"></div>
-              <div
-                classNameName={
-                  questionNumber >= 3
-                    ? 'test-number-circle active'
-                    : 'test-number-circle '
-                }
-              >
-                <span classNameName="test-number h2">3</span>
-              </div>
-              <div classNameName="line"></div>
-              <div
-                classNameName={
-                  questionNumber >= 4
-                    ? 'test-number-circle active'
-                    : 'test-number-circle '
-                }
-              >
-                <span classNameName="test-number h2">4</span>
-              </div>
-              <div classNameName="line"></div>
-              <div
-                classNameName={
-                  questionNumber >= 5
-                    ? 'test-number-circle active'
-                    : 'test-number-circle '
-                }
-              >
-                <span classNameName="test-number h2">5</span>
-              </div>
+      <div className="musicTest">
+        <main className="music-main">
+          <div className="wrapper">
+            <div className="title">
+              <span className="h2 elfin">Elfin</span>
+              <span className="h2 test-title">音樂測驗</span>
+              <audio
+                id="music-target"
+                src={'http://localhost:3000/images/game/' + music}
+                controls="controls"
+              ></audio>
             </div>
-            <div classNameName="question">
-              <div classNameName="elfin-avatar"></div>
-              <div classNameName="question-box">
-                <div classNameName="triangle"></div>
-                <div classNameName="box h4">{question}</div>
+            <h4 className="sub-title h4">
+              回答以下的問題，找出你最Match的音樂歌手，完成遊戲後還可以拿到折價券哦！
+            </h4>
+            <div className="game-bg">
+              <div className="numbers">
+                <div
+                  className={
+                    questionNumber <= 5
+                      ? 'test-number-circle active'
+                      : 'test-number-circle '
+                  }
+                >
+                  <span className="test-number h2">1</span>
+                </div>
+                <div className="line"></div>
+                <div
+                  className={
+                    questionNumber >= 2
+                      ? 'test-number-circle active'
+                      : 'test-number-circle '
+                  }
+                >
+                  <span className="test-number h2">2</span>
+                </div>
+                <div className="line"></div>
+                <div
+                  className={
+                    questionNumber >= 3
+                      ? 'test-number-circle active'
+                      : 'test-number-circle '
+                  }
+                >
+                  <span className="test-number h2">3</span>
+                </div>
+                <div className="line"></div>
+                <div
+                  className={
+                    questionNumber >= 4
+                      ? 'test-number-circle active'
+                      : 'test-number-circle '
+                  }
+                >
+                  <span className="test-number h2">4</span>
+                </div>
+                <div className="line"></div>
+                <div
+                  className={
+                    questionNumber >= 5
+                      ? 'test-number-circle active'
+                      : 'test-number-circle '
+                  }
+                >
+                  <span className="test-number h2">5</span>
+                </div>
               </div>
-            </div>
-            <button
-              classNameName="play-button"
-              onClick={() => {
-                playMusic()
-              }}
-            >
-              <div classNameName="play"></div>
-            </button>
-            <div classNameName="answers">
-              <div
-                classNameName="answer h4"
-                onClick={() => {
-                  saveAnswerA()
-                }}
-              >
-                {answerA.text}
+              <div className="question">
+                <div className="elfin-avatar"></div>
+                <div className="question-box">
+                  <div className="triangle"></div>
+                  <div className="box h4">{question}</div>
+                </div>
               </div>
-              <div
-                classNameName="answer h4"
-                onClick={() => {
-                  saveAnswerB()
-                }}
-              >
-                {answerB.text}
-              </div>
-              <div
-                classNameName="answer h4"
-                onClick={() => {
-                  saveAnswerC()
-                }}
-              >
-                {answerC.text}
-              </div>
-            </div>
-            {questionNumber < 5 ? (
-              <div
-                classNameName="guide-button orange next h4"
-                onClick={() => {
-                  questionNumber < 5 && setQuestionNumber(questionNumber + 1)
-                }}
-              >
-                {questionNumber < 5 ? '下一題' : '看結果'}
-                <div classNameName="icon"></div>
-              </div>
-            ) : (
               <button
-                classNameName="guide-button orange next h4"
+                className="play-button"
                 onClick={() => {
-                  setGoResult(true)
+                  playMusic()
                 }}
               >
-                前往結果
+                <div className="play"></div>
               </button>
-            )}
+              <div className="answers">
+                <div
+                  className="answer h4"
+                  onClick={() => {
+                    saveAnswerA()
+                  }}
+                >
+                  {answerA.text}
+                </div>
+                <div
+                  className="answer h4"
+                  onClick={() => {
+                    saveAnswerB()
+                  }}
+                >
+                  {answerB.text}
+                </div>
+                <div
+                  className="answer h4"
+                  onClick={() => {
+                    saveAnswerC()
+                  }}
+                >
+                  {answerC.text}
+                </div>
+              </div>
+              {questionNumber < 5 ? (
+                <button
+                  className="guide-button orange next h4"
+                  onClick={() => {
+                    if (buttonCheck == 0) {
+                      Swal.fire('請選擇一個答案喔')
+                    } else {
+                      questionNumber < 5 &&
+                        setQuestionNumber(questionNumber + 1)
+                    }
+                  }}
+                >
+                  {questionNumber < 5 ? '下一題' : '看結果'}
+                  <div className="icon"></div>
+                </button>
+              ) : (
+                <button
+                  className="guide-button orange next h4"
+                  onClick={() => {
+                    setGoResult(true)
+                  }}
+                >
+                  前往結果<div className="icon"></div>
+                </button>
+              )}
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </>
   )
 }

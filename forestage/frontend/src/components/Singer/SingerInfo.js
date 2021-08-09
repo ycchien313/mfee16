@@ -3,6 +3,7 @@ import Card from './Card'
 import $ from 'jquery'
 import { logDOM } from '@testing-library/react'
 import axios from 'axios'
+import AOS from 'aos'
 
 function SingerInfo(props) {
   let { singerInfo, style, tag } = props
@@ -51,6 +52,7 @@ function SingerInfo(props) {
 
   useEffect(() => {
     setLoading(true)
+    AOS.init()
   }, [])
   useEffect(() => {
     if (loading === true) {
@@ -67,6 +69,11 @@ function SingerInfo(props) {
 
   return (
     <>
+      <link
+        href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+        rel="stylesheet"
+      ></link>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
       <div className="singer-title h2">
         {singerInfo.length > 0 && singerInfo[0].type}歌手
       </div>
@@ -78,7 +85,12 @@ function SingerInfo(props) {
             alt=""
           />
         </div>
-        <div className="introduction-text1">
+        <div
+          data-aos="fade-left"
+          data-aos-offset="300"
+          // data-aos-easing="ease-in-sine"
+          className="introduction-text1"
+        >
           <div className="introduction">
             <div className="introduction-title">
               <div className="h3">
@@ -130,15 +142,13 @@ function SingerInfo(props) {
           </div>
         </div>
       </div>
-      <div className="introduction-all">
-        <div className="band">
-          <img
-            className="singerimg"
-            src={singerInfo.length > 0 && defaulDomain + singerInfo[1].picture}
-            alt=""
-          />
-        </div>
-        <div className="introduction-text1">
+      <div className="introduction-all reverse">
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          // data-aos-easing="ease-in-sine"
+          className="introduction-text2"
+        >
           <div className="introduction">
             <div className="introduction-title">
               <div className="h3">
@@ -165,6 +175,13 @@ function SingerInfo(props) {
           <div className="introduction-content">
             {singerInfo.length > 0 && singerInfo[1].introduction}
           </div>
+        </div>
+        <div className="band">
+          <img
+            className="singerimg"
+            src={singerInfo.length > 0 && defaulDomain + singerInfo[1].picture}
+            alt=""
+          />
         </div>
       </div>
       <div className="comment">

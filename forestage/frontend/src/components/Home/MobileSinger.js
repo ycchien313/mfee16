@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import $ from 'jquery'
 function MobileSinger(props) {
-  const [lastWidth, setLastWidth] = useState(0)
+  let { name, introduction, img, mobileTargetId, setMobileTargetId } = props
   // 往前
   useEffect(() => {
     function slide() {
@@ -32,20 +32,47 @@ function MobileSinger(props) {
       slide()
     })
   }, [])
-  // 往後
-  useEffect(() => {}, [])
 
+  const [singerIndex, setSingerIndex] = useState(0)
+  useEffect(() => {
+    setMobileTargetId(singer[singerIndex])
+  }, [singerIndex])
+  let singer = [15, 14, 11, 12, 10, 13]
   let next = useRef()
   let last = useRef()
-  let slideSide = useRef()
-  let { name, introduction, img } = props
 
+  function nextSinger() {
+    if (singerIndex == singer.length - 1) {
+      setSingerIndex(0)
+    } else {
+      setSingerIndex(singerIndex + 1)
+    }
+  }
+  function prevSinger() {
+    if (singerIndex <= 0) {
+      setSingerIndex(singer.length - 1)
+    } else {
+      setSingerIndex(singerIndex - 1)
+    }
+  }
   return (
     <>
-      <button className="mobile-last change" ref={last}>
+      <button
+        className="mobile-last change"
+        ref={last}
+        onClick={() => {
+          prevSinger()
+        }}
+      >
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button className="mobile-next change" ref={next}>
+      <button
+        className="mobile-next change"
+        ref={next}
+        onClick={() => {
+          nextSinger()
+        }}
+      >
         <i class="fas fa-chevron-right"></i>
       </button>
       <div className="mobile-singer">

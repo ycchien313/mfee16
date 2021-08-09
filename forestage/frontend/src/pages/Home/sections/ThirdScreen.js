@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import $ from 'jquery'
 import CommentCard from '../../../components/Home/CommentCard'
+import MobileComment from '../../../components/Home/MobileComment'
 import MobileSinger from '../../../components/Home/MobileSinger'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
 import { Link } from 'react-router-dom'
 
 function ThirdScreen(props) {
+  const [loading, setLoading] = useState(false)
   // 歌手資訊轉場
   const [transitionState, setTransitionState] = useState(false)
   // CDA,CDU
@@ -24,7 +26,25 @@ function ThirdScreen(props) {
   const [singerInfo, setSingerInfo] = useState()
   const [singerImg, setSingerImg] = useState()
   const [mobileInfo, setMobileInfo] = useState([])
+
+  // 手機板評論區資料
+  const [mobileTargetId, setMobileTargetId] = useState(15)
+  const [mobileComment, setMobileComment] = useState([])
+
+  useEffect(() => {
+    if (loading === true) {
+      $.ajax({
+        url: `http://localhost:3001/home/comment/${mobileTargetId}`,
+        method: 'GET',
+        dataType: 'JSON',
+      }).then(function (result) {
+        setMobileComment(result)
+      })
+    }
+  }, [mobileTargetId])
+
   useState(() => {
+    setLoading(true)
     $.ajax({
       url: 'http://localhost:3001/home/singer_all',
       method: 'GET',
@@ -247,13 +267,20 @@ function ThirdScreen(props) {
                   name={value.name}
                   introduction={value.introduction}
                   img={value.picture}
+                  mobileTargetId={mobileTargetId}
+                  setMobileTargetId={setMobileTargetId}
                 />
               )
             })}
         </div>
       </div>
-      <button className="button-orange mobile-btn">
-        <h4 className="btn-innerText">撰寫評論</h4>
+      <button
+        className="button-orange mobile-btn"
+        onClick={() => {
+          document.location.href = '/singer'
+        }}
+      >
+        <h4 className="btn-innerText">看更多</h4>
         <i className="fas fa-arrow-circle-right"></i>
       </button>
       <div className="audienceComment">
@@ -273,6 +300,24 @@ function ThirdScreen(props) {
                 />
               )
             })}
+          </ul>
+        </div>
+        <div className="mobile-comment-side">
+          <ul className="mobile-comment-ul">
+            {mobileComment.length > 0 &&
+              mobileComment.map(function (value, index) {
+                return (
+                  <MobileComment
+                    key={index}
+                    name={value.name}
+                    singer={value.singer}
+                    title={value.title}
+                    nickname={value.nickname}
+                    img={value.img}
+                    likes={value.likes}
+                  />
+                )
+              })}
           </ul>
         </div>
         <button className="button-orange seeMore">

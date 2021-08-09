@@ -752,10 +752,12 @@ button {
     justify-content: flex-start;
     margin-bottom: 45px;
   }
+  .mobile-comment-side {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
     .commentSide {
-      display: flex;
-      overflow: unset;
+      display: none;
     }
     .commentSide::-webkit-scrollbar {
       width: 12px; /* width of the entire scrollbar */
@@ -786,6 +788,14 @@ button {
     }
     .commentSide .btn-innerText {
       left: 10px;
+    }
+    .mobile-comment-side {
+      display: block;
+      overflow: auto;
+      margin-bottom: 5vh;
+    }
+    .mobile-comment-ul {
+      display: flex;
     }
   }
 
@@ -823,6 +833,7 @@ button {
   .userImg {
     width: 60px;
     height: 60px;
+    border-radius: 50%;
     overflow: hidden;
   }
   .userImg img {
@@ -942,6 +953,9 @@ button {
       padding: 0;
       width: 6vw;
     }
+    .change i {
+      color: #333;
+    }
     .mobile-btn {
       display: flex;
       margin: 0 auto;
@@ -952,7 +966,7 @@ button {
       left: 0;
       height: 100%;
       border: none;
-      background: linear-gradient(to left, white, rgb(230, 230, 230));
+      background: linear-gradient(to left, white, #eee);
       border-radius: 5px;
       z-index: 2;
     }
@@ -962,7 +976,7 @@ button {
       top: 0;
       height: 100%;
       border: none;
-      background: linear-gradient(to right, white, rgb(230, 230, 230));
+      background: linear-gradient(to right, white, #eee);
       border-radius: 5px;
       z-index: 2;
     }

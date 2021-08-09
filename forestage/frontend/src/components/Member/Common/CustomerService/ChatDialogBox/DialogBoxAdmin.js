@@ -34,7 +34,7 @@ function DialogBoxAdmin(props) {
         <div className="avatar-box">
           <img
             className="avatar"
-            src={process.env.PUBLIC_URL + '/images/member/default-user.png'}
+            // src={process.env.PUBLIC_URL + '/images/member/default-user.png'}
             // src={memberAvatar}
             alt=""
           ></img>

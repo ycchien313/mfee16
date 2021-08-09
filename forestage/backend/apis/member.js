@@ -150,7 +150,7 @@ router.get('/delivery/history/:memberId', async (req, res) => {
     const sql =
         'SELECT `member_id`, `delivery_id`, `delivery_time`, `status` ' +
         'FROM `delivery` ' +
-        'WHERE member_id = ? AND (delivery_time < NOW() OR status = "已取消") ' +
+        'WHERE member_id = ? AND (delivery_time < CURDATE() OR status = "已取消") ' +
         'ORDER BY delivery_time';
     await conn
         .queryAsync(sql, memberId)
@@ -212,7 +212,7 @@ router.get('/delivery/recent/:memberId', async (req, res, next) => {
             'JOIN dish ' +
             'ON delivery_dish_mapping.dish_id = dish.dish_id) AS dishToDDM ' +
             'ON delivery.delivery_id = dishToDDM.delivery_id ' +
-            'WHERE member_id = ? AND delivery_time > NOW() AND status <> "已取消" ' +
+            'WHERE member_id = ? AND delivery_time < CURDATE() AND status <> "已取消" ' +
             'GROUP BY dish_id, delivery_id ' +
             'ORDER BY delivery_time';
         const dbDelivery = await conn.queryAsync(sql, [memberId]);
@@ -333,7 +333,7 @@ router.get('/reservation/history/:memberId?', async (req, res) => {
     const sql =
         'SELECT `member_id`, `reservation_id`, `date`, `status` ' +
         'FROM `reservation` ' +
-        'WHERE member_id = ? AND (date < NOW() OR status = "已取消") ' +
+        'WHERE member_id = ? AND (date < CURDATE() OR status = "已取消") ' +
         'ORDER BY date';
     await conn
         .queryAsync(sql, memberId)
@@ -367,7 +367,7 @@ router.get(
         const sql =
             'SELECT `member_id`, RES.`reservation_id`, `status`, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, `attendance`, RES.name, `mobile`, `note`, dish.dish_id, dish.name AS dish_name, COUNT(RDM.dish_id) AS dish_count, SUM(dish.price) AS dish_price, `total` ' +
             'FROM `reservation` AS RES, singer_calendar, singer, seat, reservation_dish_mapping AS RDM, dish ' +
-            'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id AND RES.date > NOW() GROUP BY RDM.dish_id';
+            'WHERE member_id = ? AND RES.reservation_id = ? AND RES.reservation_id = RDM.reservation_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.seat_id = seat.seat_id AND RDM.dish_id = dish.dish_id AND RES.date >= CURDATE() GROUP BY RDM.dish_id';
         await conn
             .queryAsync(sql, [memberId, reservationId])
             .then((result) => {
@@ -412,14 +412,14 @@ router.get('/reservation/recent/:memberId', async (req, res) => {
         sql =
             'SELECT res.member_id, reservation_id, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
             'FROM reservation AS RES, seat, singer_calendar, singer ' +
-            'WHERE res.member_id = ? AND RES.seat_id = seat.seat_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.date > NOW() AND status <> "已取消" ORDER BY date';
+            'WHERE res.member_id = ? AND RES.seat_id = seat.seat_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.date >= CURDATE() AND status <> "已取消" ORDER BY date';
         dbReservation = await conn.queryAsync(sql, memberId);
 
         // 執行 SQL，查詢近期(今天以後)會員訂位的餐點數量資料
         sql =
             'SELECT RES.reservation_id, COUNT(dish_id) AS dish_count ' +
             'FROM reservation AS RES, `reservation_dish_mapping` AS RDM ' +
-            'WHERE RDM.reservation_id = RES.reservation_id AND RES.member_id = ? AND RES.date > NOW() AND status <> "已取消" GROUP BY RES.reservation_id';
+            'WHERE RDM.reservation_id = RES.reservation_id AND RES.member_id = ? AND RES.date >= CURDATE() AND status <> "已取消" GROUP BY RES.reservation_id';
         dbReservationDish = await conn.queryAsync(sql, memberId);
 
         // 將得到數量跟要傳 dbReservation 合併

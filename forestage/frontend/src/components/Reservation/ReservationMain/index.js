@@ -69,6 +69,7 @@ function Main(props) {
     }
   }
 
+  // 驗證訂位資料 Swal 
   function fireCheckDataAlert() {
     const CheckDataSwal = withReactContent(Swal)
     let html = ''
@@ -113,7 +114,7 @@ function Main(props) {
     }
   }
 
-  // 取得歷史訂位資料
+  // 取得欲修改之訂位資料
   function getReservation() {
     axios
       .get('http://localhost:3001/reservation/history', {
@@ -169,14 +170,13 @@ function Main(props) {
 
     // 將sessionStorage中seatCount的key轉回int(ID)後，存入狀態
     if (checkSeatCount) {
-      // console.log(seatInfo, 'sinfo')
       let newSeatCount = JSON.parse(sessionStorage.getItem('seatCount'))
       let keyArr = Object.keys(newSeatCount)
       let newObj = {}
       keyArr.forEach((v) => {
         newObj[+v] = newSeatCount[v]
       })
-      // console.log(newObj)
+
       setSeatCount(newObj)
     }
   }, [])
@@ -223,7 +223,7 @@ function Main(props) {
   
   useEffect(() => {
     // 若從我的訂位紀錄來，則先修改欲存入session中資料
-    // 只抓第一次 待加location條件
+    // 只抓第一次
     if (fromHistory &&  dataFromMember.prevPath === '/member/reservation') {
       getReservation()
     }

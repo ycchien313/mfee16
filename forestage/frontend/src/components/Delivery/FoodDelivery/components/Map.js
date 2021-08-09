@@ -6,11 +6,23 @@ import { Animated } from 'react-animated-css'
 import { Tween, SplitChars } from 'react-gsap'
 
 function Map(props) {
-  const { address, setAddress, addFee, setFee, date, setDate, time, setTime } =
-    props
-
+  const { address, setAddress, setFee, date, setDate, time, setTime } = props
+  const [distOptions, setDistOptions] = useState([
+    { dist: '中壢區', fee: '300' },
+    { dist: '觀音區', fee: '400' },
+    { dist: '中壢區', fee: '400' },
+    { dist: '楊梅區', fee: '400' },
+    { dist: '蘆竹區', fee: '400' },
+    { dist: '桃園區', fee: '400' },
+    { dist: '新屋區', fee: '400' },
+    { dist: '八德區', fee: '400' },
+    { dist: '平鎮區', fee: '400' },
+    { dist: '龜山區', fee: '450' },
+    { dist: '龍潭區', fee: '450' },
+    { dist: '大溪區', fee: '450' },
+    { dist: '復興區', fee: '600' },
+  ])
   const [min, setMin] = useState('')
-  const [selectedOption, setSelectOption] = useState('')
 
   function setAddressDist(e) {
     let newAddress = {
@@ -57,15 +69,13 @@ function Map(props) {
               />
               <select
                 type="text"
-                defaultValue={address.dist}
                 className="takeoutInput add"
-                id="selectAdd"
+                id="selectAddw"
                 placeholder="請輸入地區"
                 onChange={(e) => {
                   setFee(e.target.value)
                   setMin(e.target.value)
-                  //
-                  let addAddress = document.getElementById('selectAdd')
+                  let addAddress = document.getElementById('selectAddw')
                   let index = addAddress.selectedIndex
                   let MapAdd = addAddress.options[index].text
                   let newAddress = {
@@ -75,20 +85,17 @@ function Map(props) {
                   setAddress(newAddress)
                 }}
               >
-                <option value="">請選擇區域</option>
-                <option value="300">中壢區</option>
-                <option value="400">觀音區</option>
-                <option value="400">楊梅區</option>
-                <option value="400">大園區</option>
-                <option value="400">蘆竹區</option>
-                <option value="400">桃園區</option>
-                <option value="400">新屋區</option>
-                <option value="400">八德區</option>
-                <option value="400">平鎮區</option>
-                <option value="450">龜山區</option>
-                <option value="450">龍潭區</option>
-                <option value="450">大溪區</option>
-                <option value="600">復興區</option>
+                {distOptions.map((v, i) => {
+                  return address.dist === v.dist ? (
+                    <option key={i} value={v.fee} selected>
+                      {v.dist}
+                    </option>
+                  ) : (
+                    <option key={i} value={v.fee}>
+                      {v.dist}
+                    </option>
+                  )
+                })}
               </select>
             </div>
             <input
@@ -732,19 +739,19 @@ function Map(props) {
               />
               <select
                 type="text"
-                defaultValue={address.dist}
+                // defaultValue={address.dist}
                 className="takeoutInput add"
                 id="selectAddw"
                 placeholder="請輸入地區"
                 onChange={(e) => {
                   setFee(e.target.value)
                   setMin(e.target.value)
-                  //
+                  //   //
                   let addAddress = document.getElementById('selectAddw')
                   let index = addAddress.selectedIndex
                   let MapAdd = addAddress.options[index].text
-                  console.log(MapAdd, 'MapAdd')
-                  console.log(index, 'index')
+                  // console.log(MapAdd, 'MapAdd')
+                  // console.log(index, 'index')
                   let newAddress = {
                     ...address,
                     dist: MapAdd,
@@ -752,20 +759,30 @@ function Map(props) {
                   setAddress(newAddress)
                 }}
               >
-                <option value="">請選擇區域</option>
-                <option value="300">中壢區</option>
-                <option value="400">觀音區</option>
-                <option value="400">楊梅區</option>
-                <option value="400">大園區</option>
-                <option value="400">蘆竹區</option>
-                <option value="400">桃園區</option>
-                <option value="400">新屋區</option>
-                <option value="400">八德區</option>
-                <option value="400">平鎮區</option>
-                <option value="450">龜山區</option>
-                <option value="450">龍潭區</option>
-                <option value="450">大溪區</option>
-                <option value="600">復興區</option>
+                {distOptions.map((v, i) => {
+                  return address.dist === v.dist ? (
+                    <option key={i} value={v.fee} selected>
+                      {v.dist}
+                    </option>
+                  ) : (
+                    <option key={i} value={v.fee}>
+                      {v.dist}
+                    </option>
+                  )
+                })}
+                {/* if (address.dist === v.dist) {
+                    return (
+                      <option key={i} value={v.fee} selected>
+                        {v.dist}
+                      </option>
+                    )
+                  } else {
+                    return (
+                      <option key={i} value={v.fee}>
+                        {v.dist}
+                      </option>
+                    )
+                  } */}
               </select>
             </div>
             <input

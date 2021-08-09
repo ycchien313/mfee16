@@ -31,7 +31,7 @@ function Delivery(props) {
   // console.log('dishes', dishes)
   const [address, setAddress] = useState({
     city: '桃園市',
-    dist: '',
+    dist: '中壢區',
     road: '',
   })
 

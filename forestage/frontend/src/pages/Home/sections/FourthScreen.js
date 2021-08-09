@@ -3,6 +3,7 @@ import VoteCandidates from '../../../components/Home/VoteCandidates'
 import MobileVoteCandidate from '../../../components/Home/MobileVoteCandidate'
 import $ from 'jquery'
 import Swal from 'sweetalert2'
+import gsap from 'gsap'
 //
 
 function FourthScreen(props) {
@@ -52,14 +53,23 @@ function FourthScreen(props) {
         dataType: 'json',
         data: { memberId: memberId },
       }).then(
-        Swal.fire('投票成功', '即將更新票數', 'success').then(
-          Swal.fire('hi', 'test', 'info')
-        )
+        Swal.fire('投票成功', '即將更新票數', 'success').then(function () {
+          voteSuccess()
+        })
       )
     } else {
       Swal.fire('鍵入失敗', '請選擇歌手', 'error')
     }
   }
+  // 投票成功獲得折價券
+  function voteSuccess() {
+    $.ajax({
+      url: `http://localhost:3001/home/vote_success/${memberId}`,
+      method: 'POST',
+      dataType: 'json',
+    }).then(Swal.fire('恭喜獲得折價券', '感謝您參與歌手投票', 'success'))
+  }
+
   // 即時同步投票結果
   function VoteCountUpdate() {
     let countsClone = [...counts]
@@ -81,6 +91,19 @@ function FourthScreen(props) {
         setVoteState(result[0].vote_valid)
       })
   }, [counts])
+  // gsap
+  useEffect(() => {
+    let voteBGHPosition = $('.voteBG').offset().top
+    $(window).on('scroll', function () {
+      let nowPosition = $(this).scrollTop()
+      let voteBGHeight = voteBGHPosition - nowPosition
+      if (nowPosition >= voteBGHeight) {
+        setTimeout(() => {
+          gsap.to('.voteBG', { y: 0, opacity: 1 })
+        }, 500)
+      }
+    })
+  }, [])
   let fourthScreen = (
     <div id="fourthScreen">
       <div className="titleArea">

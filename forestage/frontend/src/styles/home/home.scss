@@ -511,15 +511,17 @@ button {
   }
   .liveIcon {
     cursor: pointer;
-    position: sticky;
+    position: fixed;
     text-decoration: none;
-    top: 0;
-    left: 13.88vw;
+    bottom: 5vh;
+    right: 1vw;
+    // left: 13.88vw;
     width: 100px;
     height: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 5;
   }
   @media screen and (max-width: 768px) {
     .liveIcon {
@@ -726,6 +728,9 @@ button {
     overflow: auto;
     padding: 10px;
     margin-bottom: 15px;
+    transform: translateX(100px);
+    opacity: 0;
+    transition: 0.3;
   }
   .commentSide::-webkit-scrollbar {
     width: 12px;
@@ -1092,6 +1097,9 @@ button {
     width: 85vw;
     margin: 0 auto;
     position: relative;
+    transition: 0.3s;
+    opacity: 0;
+    transform: translateY(100px);
     // border: 1px solid red;
   }
   .voteArea ul {
@@ -1130,12 +1138,13 @@ button {
     border-radius: 50%;
     overflow: hidden;
     // box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
-    transform: rotate(-3deg);
+    // transform: rotate(-3deg);
     transition: 0.3s;
-    border: 0.3vw solid transparent;
+    // box-sizing: border-box;
   }
   .candidates-border.active {
-    border: 0.3vw solid $accent-red;
+    // box-sizing: border-box;
+    border: 0.5vw solid $accent-red;
   }
   .candidates figure img {
     width: 100%;
@@ -1862,5 +1871,27 @@ button {
   }
   .mobile-vote-li.active h4 {
     color: white;
+  }
+  .desktop-live {
+    background: white;
+    box-shadow: 0px 3px 6px rgba(50, 50, 50, 0.5);
+    border-radius: 15px;
+    width: 400px;
+    height: 250px;
+    position: fixed;
+    bottom: 0;
+    right: 11vw;
+    z-index: 10;
+    transition: 0.3s;
+    transform: translateY(100%);
+    overflow: hidden;
+  }
+  .desktop-live.active {
+    transform: translateY(0%);
+  }
+  @media screen and (max-width: 768px) {
+    .desktop-live {
+      display: none;
+    }
   }
 }

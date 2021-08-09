@@ -4,6 +4,7 @@ import CommentCard from '../../../components/Home/CommentCard'
 import MobileSinger from '../../../components/Home/MobileSinger'
 import { CSSTransition } from 'react-transition-group'
 import gsap from 'gsap'
+import { Link } from 'react-router-dom'
 
 function ThirdScreen(props) {
   // 歌手資訊轉場
@@ -69,6 +70,31 @@ function ThirdScreen(props) {
     })
   }, [])
 
+  // gsap
+  useEffect(() => {
+    let singerPosition = $('.singerInfo').offset().top
+    let commentPosition = $('.commentSide').offset().top
+    // 滑動事件與處理函式
+    console.log(commentPosition)
+    $(window).on('scroll', function () {
+      let nowPosition = $(this).scrollTop()
+      let singerHeight = singerPosition - nowPosition
+      let commentHeight = commentPosition - nowPosition
+      // 歌手處GSAP
+
+      if (nowPosition >= singerHeight) {
+        setTimeout(() => {
+          gsap.to('.singerInfo', { x: 0, opacity: 1 })
+        }, 500)
+      }
+      if (nowPosition >= commentHeight) {
+        setTimeout(() => {
+          gsap.to('.commentSide', { x: 0, opacity: 1 })
+        }, 500)
+      }
+    })
+  }, [])
+
   // 取得歌手詳情
   useEffect(() => {
     $.ajax({
@@ -81,7 +107,6 @@ function ThirdScreen(props) {
         setSingerName(result.name)
         setSingerInfo(result.introduction)
         setSingerImg(result.picture)
-        gsap.to('.singerInfo', { x: 0, opacity: 1 })
       }, 300)
     })
   }, [singerId])
@@ -98,6 +123,13 @@ function ThirdScreen(props) {
   }, [targetId])
   let fullPath = 'http://localhost:3000/images/common/' + singerImg
 
+  // 點擊展開直播
+  useEffect(() => {
+    $('.liveIcon').on('click', function () {
+      $('.desktop-live').toggleClass('active')
+    })
+  }, [])
+
   //主要頁面
   let ThirdScreen = (
     <div id="thirdScreen">
@@ -113,17 +145,8 @@ function ThirdScreen(props) {
           alt=""
           className="liveIconImg"
         />
-        <div className="iconAside">
-          <h3 className="h3">直播中</h3>
-          <img
-            src="http://localhost:3000/images/home/iconPlay.png"
-            alt=""
-            className="iconPlay"
-          />
-        </div>
       </div>
       <h2 className="h2">駐唱歌手</h2>
-
       <div className="singerInfo">
         <CSSTransition
           in={transitionState}
@@ -145,10 +168,13 @@ function ThirdScreen(props) {
               <p>{singerInfo}</p>
             </div>
           </CSSTransition>
-          <button className="button-orange">
-            <h4 className="btn-innerText">看更多</h4>
-            <i className="fas fa-arrow-circle-right"></i>
-          </button>
+          <Link to={{ pathname: '/singer' }}>
+            <button className="button-orange">
+              <h4 className="btn-innerText">看更多</h4>
+              <i className="fas fa-arrow-circle-right"></i>
+            </button>
+          </Link>
+
           <div className="singerSelect">
             <ul>
               <li>

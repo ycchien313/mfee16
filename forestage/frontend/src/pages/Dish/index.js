@@ -1,76 +1,41 @@
 import React, { useState, useEffect } from 'react'
-import $ from 'jquery'
+import $, { ajax } from 'jquery'
 import '../../styles/dish/dish.scss'
-import Food from '../../components/Dish/Food'
-import FoodMiddle from '../../components/Dish/FoodMiddle'
+import DishInfo from '../../components/Dish/DishInfo'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-
 function Dish() {
   // 存取api
-  const [dishState, setDishState] = useState('主餐')
-  const [content, setContent] = useState([])
-  const [main, setMain] = useState([])
-  const [sub, setSub] = useState([])
-  const [dessert, setDessert] = useState([])
-  useEffect(function () {
-    $.ajax({
-      url: `http://localhost:3001/dish/data`,
-      method: 'GET',
-      dataType: 'json',
-    }).then(function (result) {
-      setSub(result)
-      setContent(result)
-      console.log(result)
-    })
-  }, [])
-
-  let mainContent = []
-  let subContent = []
-  let dessertContent = []
-  if (content.length > 0) {
-    for (let i = 0; i < content.length; i++) {
-      if (content[i].type === '主餐') {
-        mainContent.push(content[i])
-      } else if (content[i].type === '附餐') {
-        subContent.push(content[i])
-      } else {
-        dessertContent.push(content[i])
-      }
-    }
-  }
-
-  console.log('main:', mainContent)
-  console.log('sub:', subContent)
-  console.log('dessert:', dessertContent)
-  let mapArr = []
-  switch (dishState) {
-    case '主餐':
-      mapArr = mainContent
-      break
-    case '附餐':
-      mapArr = subContent
-      break
-    case '甜點':
-      mapArr = dessertContent
-      break
-    default:
-      break
-  }
-
-  // 給勳哥思考如何使用
-  // mainContent : subContent : dessertContent
-
-  useEffect(function () {}, [dishState])
+  const [style, setStyle] = useState('主餐')
+  const [tag, setTag] = useState([2, 1, 3])
+  const [dishInfo, setDishInfo] = useState([])
   // 將api匯入至state
+
+  useEffect(() => {
+    $.ajax({
+      url: `http://localhost:3001/dish/data/${style}`,
+      method: `get`,
+      dataType: `json`,
+    }).then(function (result) {
+      let dishInfoClone = []
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].type === style) {
+          dishInfoClone.push(result[i])
+        }
+      }
+      setDishInfo(dishInfoClone)
+    })
+  }, [style])
   useEffect(() => {
     $('.dish-tag').on('click', function () {
       $(this).addClass('active')
       $(this).closest('li').siblings().find('.dish-tag').removeClass('active')
     })
+    let newTag = tag
+    console.log('newTag : ', newTag)
+    setTag(newTag)
   }, [])
   //
-
   return (
     <>
       <Header />
@@ -103,7 +68,8 @@ function Dish() {
                   <div
                     className="main-dish dish-tag active"
                     onClick={() => {
-                      setDishState('主餐')
+                      setStyle('主餐')
+                      setTag([2, 1, 3])
                     }}
                   >
                     <img
@@ -118,7 +84,8 @@ function Dish() {
                   <div
                     className="with-dish dish-tag"
                     onClick={() => {
-                      setDishState('附餐')
+                      setStyle('附餐')
+                      setTag([4, 5, 6])
                     }}
                   >
                     <img
@@ -133,7 +100,8 @@ function Dish() {
                   <div
                     className="dessert-dish dish-tag"
                     onClick={() => {
-                      setDishState('甜點')
+                      setStyle('甜點')
+                      setTag([7, 8, 9])
                     }}
                   >
                     <img
@@ -146,47 +114,21 @@ function Dish() {
                 </li>
               </ul>
             </div>
-            <div className="food-title h2">{dishState}</div>
-            <div className="introduction-all">
-              {mapArr.map(function (value, index) {
-                if (index % 2 == 0) {
-                  return (
-                    <Food
-                      key={index}
-                      name={value.name}
-                      price={value.price}
-                      introduction={value.introduction}
-                      image_realistic={value.image_realistic}
-                    />
-                  )
-                }
-                if (index % 2 != 0) {
-                  return (
-                    <FoodMiddle
-                      key={index}
-                      image_realistic={value.image_realistic}
-                      name={value.name}
-                      price={value.price}
-                      introduction={value.introduction}
-                    />
-                  )
-                }
-              })}
-            </div>
+            <DishInfo dishInfo={dishInfo} style={style} tag={tag} />
             <div className="btn">
               <div className="guide-button orange">
-                線上訂位
+                去投票
                 <img
-                  src="http://localhost:3000/images/dish/arrow-circle-right-solid.svg"
+                  src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
                   alt=""
-                ></img>
+                />
               </div>
               <div className="guide-button pink">
-                外送訂餐
+                線上訂位
                 <img
-                  src="http://localhost:3000/images/dish/arrow-circle-right-solid.svg"
+                  src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
                   alt=""
-                ></img>
+                />
               </div>
             </div>
           </div>
@@ -196,5 +138,4 @@ function Dish() {
     </>
   )
 }
-
 export default Dish

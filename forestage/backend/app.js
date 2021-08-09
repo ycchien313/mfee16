@@ -8,6 +8,7 @@ const homeApi = require('./apis/home');
 const memberApi = require('./apis/member');
 const reservationApi = require('./apis/reservation');
 const singerApi = require('./apis/singer');
+const gameApi = require('./apis/game');
 const db = require('./utils/db');
 const connection = db.connection;
 const cors = require("cors");
@@ -29,6 +30,7 @@ app.use('/home', homeApi);
 app.use('/member', memberApi);
 app.use('/reservation', reservationApi);
 app.use('/singer', singerApi);
+app.use('/game', gameApi);
 
 app.get('/', (req, res) => {
     console.log('URL:', req.url);

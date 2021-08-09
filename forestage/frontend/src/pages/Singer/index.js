@@ -40,90 +40,90 @@ function Singer() {
     <>
       <Header />
       <div className="singer">
-        <div class="hero-section">
-          <div class="top-wave">
-            <h1 class="h1 title">餐廳介紹</h1>
-            <h3 class="h3 title">歌手介紹</h3>
+        <div className="hero-section">
+          <div className="top-wave">
+            <h1 className="h1 title">餐廳介紹</h1>
+            <h3 className="h3 title">歌手介紹</h3>
             <img
-              class="wave-1"
+              className="wave-1"
               src="http://localhost:3000/images/singer/top-wave.svg"
               alt=""
             />
             <img
-              class="elfin"
+              className="elfin"
               src="http://localhost:3000/images/singer/elfin-green.png"
               alt=""
             />
           </div>
-          <div class="slogan">
-            <div class="bottom-wave"></div>
-            <div class="h2 title">預約一個音樂ｘ美食ｘ森林的美好夜晚。</div>
+          <div className="slogan">
+            <div className="bottom-wave"></div>
+            <div className="h2 title">預約一個音樂ｘ美食ｘ森林的美好夜晚。</div>
           </div>
         </div>
         <main>
-          <div class="singer">
-            <div class="tag">
-              <ul class="tag-ul">
+          <div className="singer">
+            <div className="tag">
+              <ul className="tag-ul">
                 <li>
                   <div
-                    class="rock music-tag active"
+                    className="rock music-tag active"
                     onClick={function () {
                       setStyle('搖滾')
                       setTag([15, 14])
                     }}
                   >
                     <img
-                      class="rock-tag "
+                      className="rock-tag "
                       src="http://localhost:3000/images/singer/rock.svg"
                       alt=""
                     />
-                    <span class="title-text">搖滾</span>
+                    <span className="title-text">搖滾</span>
                   </div>
                 </li>
                 <li>
                   <div
-                    class="jazz music-tag"
+                    className="jazz music-tag"
                     onClick={function () {
                       setStyle('爵士')
                       setTag([11, 12])
                     }}
                   >
                     <img
-                      class="jazz-tag"
+                      className="jazz-tag"
                       src="http://localhost:3000/images/singer/jazz.svg"
                       alt=""
                     />
-                    <span class="title-text">爵士</span>
+                    <span className="title-text">爵士</span>
                   </div>
                 </li>
                 <li>
                   <div
-                    class="lyrical music-tag"
+                    className="lyrical music-tag"
                     onClick={function () {
                       setStyle('抒情')
                       setTag([10, 12])
                     }}
                   >
                     <img
-                      class="lyrical-tag"
+                      className="lyrical-tag"
                       src="http://localhost:3000/images/singer/lyrical.svg"
                       alt=""
                     />
-                    <span class="title-text">抒情</span>
+                    <span className="title-text">抒情</span>
                   </div>
                 </li>
               </ul>
             </div>
             <SingerInfo singerInfo={singerInfo} style={style} tag={tag} />
-            <div class="btn">
-              <div class="guide-button orange">
+            <div className="btn">
+              <div className="guide-button orange">
                 去投票
                 <img
                   src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
                   alt=""
                 />
               </div>
-              <div class="guide-button pink">
+              <div className="guide-button pink">
                 線上訂位
                 <img
                   src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"

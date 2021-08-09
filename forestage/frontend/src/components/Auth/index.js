@@ -10,7 +10,6 @@ function Auth(props) {
   const history = useHistory()
   const { showAuthModal, setShowAuthModal } = props
   const [signinScreen, setSigninScreen] = useState(true) // true: Signin，false: Signup
-
   // 關閉卷軸
   const closeScroll = () => {
     document.documentElement.style.overflowY = 'hidden'

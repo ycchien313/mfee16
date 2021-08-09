@@ -139,6 +139,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 1s ease;
+  }
+
+  .sub-border:hover .sub,
+  .sub-border:focus .sub {
+    transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -webkit-transform: scale(1.4);
   }
 
   .button-group {
@@ -428,8 +436,7 @@
       center top no-repeat;
     background-size: contain;
   }
-  .category-bg{
-    
+  .category-bg {
     padding: 10px;
   }
   .category-innertext {

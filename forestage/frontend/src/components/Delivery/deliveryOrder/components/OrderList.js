@@ -68,6 +68,7 @@ function OrderList(props) {
                 <div className="dish">
                   <figure className="dish-pic">
                     <img
+                      className="dish-pic-img"
                       src={'http://localhost:3000/images/common/food/' + img[i]}
                       alt=""
                     />

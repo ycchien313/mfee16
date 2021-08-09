@@ -5,6 +5,7 @@ import CalendarSmall from './CalendarSmall'
 import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
 import { Tween } from 'react-gsap'
+import { HashLink as Link } from 'react-router-hash-link'
 
 function ChooseDate(props) {
   const {
@@ -49,7 +50,7 @@ function ChooseDate(props) {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
-      <section className="choose-date">
+      <section className="choose-date" id="chooseDate">
         <div className="steps">
           <div className="active">
             <h3 className="step">選擇日期</h3>
@@ -122,12 +123,14 @@ function ChooseDate(props) {
         </div>
       </section>
       {/* 滑鼠滾輪 */}
-      <div className="center-con">
-        <div className="cta">
-          <div className="down-arrow primera next "></div>
-          <div className="down-arrow segunda next "></div>
+      <Link smooth to="#chooseSeat">
+        <div className="center-con" id="toSeat">
+          <div className="cta">
+            <div className="down-arrow primera next "></div>
+            <div className="down-arrow segunda next "></div>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

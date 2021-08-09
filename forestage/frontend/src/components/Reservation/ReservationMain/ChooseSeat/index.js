@@ -3,6 +3,7 @@ import $ from 'jquery'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Tween } from 'react-gsap'
+import { HashLink as Link } from 'react-router-hash-link'
 
 function ChooseSeat(props) {
   const {
@@ -173,7 +174,7 @@ function ChooseSeat(props) {
 
   return (
     <>
-      <section class="choose-seat">
+      <section class="choose-seat" id="chooseSeat">
         <div class="steps">
           <h3 class="step one">選擇日期</h3>
           <div class="arrow"></div>
@@ -189,8 +190,8 @@ function ChooseSeat(props) {
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
-                  start: '1300px center',
-                  end: '1800px center',
+                  start: '1100px center',
+                  end: '1600px center',
                   scrub: 1,
                   markers: false,
                 },
@@ -215,8 +216,8 @@ function ChooseSeat(props) {
             x: '0px',
             scrollTrigger: {
               trigger: '.square',
-              start: '1300px center',
-              end: '1800px center',
+              start: '1100px center',
+              end: '1600px center',
               scrub: 1,
               markers: false,
             },
@@ -396,12 +397,14 @@ function ChooseSeat(props) {
         </Tween>
       </section>
       {/* 滑鼠滾輪 */}
-      <div class="center-con">
-        <div class="cta">
-          <div class="down-arrow primera next "></div>
-          <div class="down-arrow segunda next "></div>
+      <Link smooth to="#chooseMeal">
+        <div class="center-con" id="toMeal">
+          <div class="cta">
+            <div class="down-arrow primera next "></div>
+            <div class="down-arrow segunda next "></div>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

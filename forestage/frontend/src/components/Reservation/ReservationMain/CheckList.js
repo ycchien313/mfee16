@@ -33,7 +33,7 @@ function CheckList(props) {
   useEffect(() => {
     gsap.fromTo(
       '.fa-check-circle.active',
-      { scaleX: 1.8, scaleY: 1.8, duration: 1, ease: 'bounce.out' },
+      { scaleX: 1.5, scaleY: 1.5, duration: 1, ease: 'power.out' },
       { scaleX: 1.2, scaleY: 1.2, duration: 0.5 }
     )
   }, [checkList])

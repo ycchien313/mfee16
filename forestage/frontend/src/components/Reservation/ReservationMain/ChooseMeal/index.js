@@ -118,7 +118,7 @@ function ChooseMeal(props) {
   // }, [])
   return (
     <>
-      <section className="choose-meal">
+      <section className="choose-meal" id="chooseMeal">
         <div className="steps">
           <h3 className="step">選擇日期</h3>
           <div className="arrow"></div>

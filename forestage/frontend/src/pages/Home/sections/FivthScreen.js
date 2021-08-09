@@ -9,7 +9,12 @@ function FivethScreen(props) {
         <br />
         來一場音樂遊戲吧!
       </h2>
-      <div class="music-game">
+      <div
+        class="music-game"
+        onClick={() => {
+          document.location.href = 'http://localhost:3000/game'
+        }}
+      >
         <figure>
           <img src="http://localhost:3000/images/home/piano.jpeg" alt="" />
         </figure>

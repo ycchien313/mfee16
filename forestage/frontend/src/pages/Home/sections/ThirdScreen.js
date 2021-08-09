@@ -125,7 +125,7 @@ function ThirdScreen(props) {
 
   // 點擊展開直播
   useEffect(() => {
-    $('.liveIcon').on('click', function () {
+    $('.liveIcon').on('dblclick', function () {
       $('.desktop-live').toggleClass('active')
     })
   }, [])

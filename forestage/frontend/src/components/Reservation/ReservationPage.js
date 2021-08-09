@@ -42,11 +42,14 @@ function ReservationPage(props) {
     if (props.history.location.state.prevPath === '/member/reservation') {
       // 從MEMBER來每次進來先清空
       sessionStorage.clear()
+      window.sessionStorage.setItem(
+        'reservationId',
+        `${props.location.state.reservationId}`
+      )
       console.log(props.location.state.prevPath)
     }
   }
-  // 點擊瀏覽器上一頁的彈出視窗狀態
-  const [finishStatus, setfinishStatus] = useState(false)
+  // 點擊瀏覽器上一頁清除session
   useEffect(() => {
     // 偵測上下頁動作
     return history.listen((location) => {
@@ -61,27 +64,8 @@ function ReservationPage(props) {
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
           // 上一頁時清除session
-          // if (
-          //   props.location.state !== undefined &&
-          //   props.location.state.prevPath === '/member/reservation'
-          // ) { // 如果是從修改訂來就不動作
-          // } else {
-          //   sessionStorage.clear()
-          // }
-          console.log('上一頁的動作')
-          if (!finishStatus) {
-            if (window.confirm('您尚未完成訂位，確定要返回取消嗎？')) {
-              setfinishStatus(true)
-              // 確認返回上一頁則清除session訂位資料
-              sessionStorage.clear()
-              history.push()
-            } else {
-              history.push('/reservation')
-
-              // window.history.pushState(null, null, window.location.pathname)
-              setfinishStatus(false)
-            }
-          }
+          sessionStorage.clear()
+          // console.log('上一頁的動作')
         }
       }
     })

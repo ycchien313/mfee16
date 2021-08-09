@@ -32,8 +32,11 @@ function CheckoutPage(props) {
   })
   const [fromHistory, setFromHistory] = useState(true)
   let reservationId = 0
-  if (props.location.state !== undefined) {
-    reservationId = props.location.state.dataFromMember.reservationId
+  // if (props.location.state !== undefined) {
+  //   reservationId = props.location.state.dataFromMember.reservationId
+  // }
+  if (Boolean(sessionStorage.getItem('reservationId'))){
+    reservationId = parseInt(sessionStorage.getItem('reservationId'))
   }
 
   const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))

@@ -32,12 +32,12 @@ function DialogBoxAdmin(props) {
           <span className="time">{moment().format('HH:mm:ss')}</span>
         </div>
         <div className="avatar-box">
-          <img
+          {/* <img
             className="avatar"
             // src={process.env.PUBLIC_URL + '/images/member/default-user.png'}
-            // src={memberAvatar}
+            src={memberAvatar}
             alt=""
-          ></img>
+          ></img> */}
         </div>
       </div>
     )

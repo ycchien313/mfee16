@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { SwitchTransition, CSSTransition } from 'react-transition-group'
+
 import axios from 'axios'
 import '../../../../styles/member/member_customer_service.scss'
 import DialogBoxCustomer from './ChatDialogBox/DialogBoxCustomer'
@@ -66,24 +68,34 @@ function CustomerService() {
   return (
     <>
       <div className="member-customer-service">
-        {/* 線上客服對話框 */}
-        {employees.includes(memberEmail) ? (
-          <DialogBoxAdmin
-            isShowDialogBox={isShowDialogBox}
-            ws={ws}
-            memberAvatar={memberAvatar}
-          />
-        ) : (
-          <DialogBoxCustomer
-            isShowDialogBox={isShowDialogBox}
-            ws={ws}
-            memberId={memberId}
-            memberEmail={memberEmail}
-            memberAvatar={memberAvatar}
-            setMemberAvatar={setMemberAvatar}
-            employees={employees}
-          />
-        )}
+        <SwitchTransition>
+          <CSSTransition
+            key={isShowDialogBox}
+            addEndListener={(node, done) => {
+              node.addEventListener('transitionend', done, false)
+            }}
+            classNames="slide"
+          >
+            {/* 線上客服對話框 */}
+            {employees.includes(memberEmail) ? (
+              <DialogBoxAdmin
+                isShowDialogBox={isShowDialogBox}
+                ws={ws}
+                memberAvatar={memberAvatar}
+              />
+            ) : (
+              <DialogBoxCustomer
+                isShowDialogBox={isShowDialogBox}
+                ws={ws}
+                memberId={memberId}
+                memberEmail={memberEmail}
+                memberAvatar={memberAvatar}
+                setMemberAvatar={setMemberAvatar}
+                employees={employees}
+              />
+            )}
+          </CSSTransition>
+        </SwitchTransition>
 
         {/* 線上客服按鈕 */}
         <ChatButton

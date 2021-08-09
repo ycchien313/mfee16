@@ -1,6 +1,27 @@
 .member-customer-service {
   @import '../common/global.scss';
 
+  .slide-enter {
+    transform: translateY(615px);
+  }
+  .slide-enter-active {
+    transform: translateY(0);
+    transition: 0.5s;
+  }
+  .slide-enter-done {
+    transform: translateY(0);
+  }
+  .slide-exit {
+    transform: translateY(0);
+  }
+  .slide-exit-active {
+    transform: translateY(615px);
+    transition: 0.5s;
+  }
+  // .slide-exit-done {
+  //   transform: translateY(615px);
+  // }
+
   /* 滑動樣式 */
   .dialog-box::-webkit-scrollbar {
     width: 12px; /* width of the entire scrollbar */
@@ -23,6 +44,10 @@
   display: flex;
   justify-content: flex-end;
 
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
   /* 左側對話框 */
   .chat-dialog-box-container {
     width: 460px;
@@ -34,6 +59,11 @@
     background-color: $primary-lightgray;
     border-radius: 20px;
     box-shadow: $box-shadow;
+
+    @media screen and (max-width: 768px) {
+      width: 375px;
+      height: 525px;
+    }
 
     .dialog-box {
       overflow: auto;
@@ -54,7 +84,6 @@
     }
     /* 訊息 */
     .message-box {
-      // width: 100%;
       display: flex;
       flex-direction: column;
       padding: 0 10px;

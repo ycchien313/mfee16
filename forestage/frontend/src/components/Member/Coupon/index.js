@@ -3,6 +3,7 @@ import Header from '../../Header'
 import Banner from '../Common/Banner'
 import Main from './Main'
 import Footer from '../../Footer'
+import CustomerService from '../Common/CustomerService'
 
 function Coupon(props) {
   const { pagename } = props
@@ -13,6 +14,7 @@ function Coupon(props) {
       <Banner pagename={pagename} />
       <Main pagename={pagename} />
       <Footer />
+      <CustomerService />
     </>
   )
 }

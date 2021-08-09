@@ -30,6 +30,10 @@
 }
 .titleee {
   width: 45vw;
+  margin-bottom: 5px;
+}
+.redtext{
+  color: $accent-red;
 }
 .titleee::placeholder {
   color: $primary-lightbrown;

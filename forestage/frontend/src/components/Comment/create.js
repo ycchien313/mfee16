@@ -26,7 +26,7 @@ function Create(props) {
     setInsertArticle,
     // articleTag
   } = props
-  const [boom3,setBoom3]=useState(false)
+  const [boom3, setBoom3] = useState(false)
   // const [content, setContent] = useState('123')
   // const [star, setStar] = useState(0)
   // const [insertArticle, setInsertArticle] = useState({
@@ -201,6 +201,7 @@ function Create(props) {
                 setTitle(e)
               }}
             ></input>
+            <div>字數限制{insertArticle.title.length}/50</div>
             <h4>匿名名稱：</h4>
             <input
               placeholder="請輸入您的匿名名稱"
@@ -212,6 +213,8 @@ function Create(props) {
                 setAuthor(e)
               }}
             ></input>
+            <div>字數限制{insertArticle.author.length}/30</div>
+
             <div>
               <h4>選擇標籤：</h4>
               <select
@@ -511,6 +514,8 @@ function Create(props) {
                 getContent(e)
               }}
             ></textarea>
+            <div>字數限制{insertArticle.content.length}/1000</div>
+
             <h4>上傳圖片：</h4>
 
             <form
@@ -544,6 +549,7 @@ function Create(props) {
                   alt="這裡將顯示您圖片"
                 ></img>
               </div>
+              <div>{insertArticle.image.length}</div>
             </form>
 
             {/* <button type="submit">123</button> */}
@@ -568,7 +574,7 @@ function Create(props) {
                 onClick={() => {
                   insertArticlefn()
                   setAlreadyinsert(true)
-              
+
                   setBoom(false)
                 }}
               >
@@ -621,7 +627,7 @@ function Create(props) {
           setArticle={setArticle}
           // boomArticle={boomArticle}
           // setBoomArticle={setBoomArticle}
-    
+
           setInsertArticle={setInsertArticle}
           insertArticle={insertArticle}
           // setArticleLikesId={setArticleLikesId}

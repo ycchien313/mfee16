@@ -115,8 +115,8 @@ function Day(props) {
       $(day.current).parent().siblings().find('.day').removeClass('active')
       //前一頁返回時維持選取
       setActiveDate(dateFromHome.date)
+      
       // 長條圖
-
       getRemainingSeat(dateFromHome.date)
 
       // 帶入checkList

@@ -28,7 +28,7 @@ function ReservationPage(props) {
       // 避免返回首頁再進入訂位頁時仍選擇前一個歌手
       // 從home每次進來先清空
       sessionStorage.clear()
-      console.log(props.location.state.prevPath)
+      // console.log(props.location.state.prevPath)
     }
   }
 
@@ -46,7 +46,7 @@ function ReservationPage(props) {
         'reservationId',
         `${props.location.state.reservationId}`
       )
-      console.log(props.location.state.prevPath)
+      // console.log(props.location.state.prevPath)
     }
   }
   // 點擊瀏覽器上一頁清除session

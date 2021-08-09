@@ -32,9 +32,8 @@ function CheckoutPage(props) {
   })
   const [fromHistory, setFromHistory] = useState(true)
   let reservationId = 0
-  // if (props.location.state !== undefined) {
-  //   reservationId = props.location.state.dataFromMember.reservationId
-  // }
+
+  // 從session取得reservationId
   if (Boolean(sessionStorage.getItem('reservationId'))){
     reservationId = parseInt(sessionStorage.getItem('reservationId'))
   }
@@ -68,16 +67,6 @@ function CheckoutPage(props) {
     setDidMount(true)
     window.scrollTo(0, 0)
 
-    // 將歷史訂位人資料帶入
-    // 加入判斷條件?
-    // if (props.location.state !== undefined) {
-    //   let newInsertResData = { ...insertResData }
-    //   newInsertResData.name =
-    //     props.location.state.reservationHistory.reservationInfo.name
-    //   newInsertResData.mobile =
-    //     props.location.state.reservationHistory.reservationInfo.mobile
-    //   setInsertResData(newInsertResData)
-    // }
 
     if (props.location.state !== undefined) {
       setDishList(props.location.state.dishList)

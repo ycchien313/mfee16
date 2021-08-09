@@ -139,13 +139,8 @@ function ThirdScreen(props) {
           alt=""
         />
       </div>
-      <div className="liveIcon" id="drag-target">
-        <img
-          src="http://localhost:3000/images/home/liveIcon.svg"
-          alt=""
-          className="liveIconImg"
-        />
-      </div>
+      <div className="liveIcon" id="drag-target"></div>
+
       <h2 className="h2">駐唱歌手</h2>
       <div className="singerInfo">
         <CSSTransition

@@ -522,6 +522,9 @@ button {
     flex-direction: column;
     align-items: center;
     z-index: 5;
+    background: url('http://localhost:3000/images/home/liveIcon.svg') center
+      center no-repeat;
+    background-size: contain;
   }
   @media screen and (max-width: 768px) {
     .liveIcon {

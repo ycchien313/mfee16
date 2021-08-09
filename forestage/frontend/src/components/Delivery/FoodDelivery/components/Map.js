@@ -6,9 +6,11 @@ import { Animated } from 'react-animated-css'
 import { Tween, SplitChars } from 'react-gsap'
 
 function Map(props) {
-  const { address, setAddress, setFee, date, setDate, time, setTime } = props
+  const { address, setAddress, addFee, setFee, date, setDate, time, setTime } =
+    props
 
   const [min, setMin] = useState('')
+  const [selectedOption, setSelectOption] = useState('')
 
   function setAddressDist(e) {
     let newAddress = {
@@ -17,7 +19,10 @@ function Map(props) {
     }
     setAddress(newAddress)
   }
+  //
+  // function setMapArea() {}
 
+  //
   $('.mapFee').on('click', function () {
     let getTarget = $(this).data('fee')
     setMin(getTarget)
@@ -50,19 +55,41 @@ function Map(props) {
                 className="input-disable"
                 disabled
               />
-              <input
+              <select
                 type="text"
-                className="takeoutInput add"
                 defaultValue={address.dist}
+                className="takeoutInput add"
+                id="selectAdd"
                 placeholder="請輸入地區"
                 onChange={(e) => {
+                  setFee(e.target.value)
+                  setMin(e.target.value)
+                  //
+                  let addAddress = document.getElementById('selectAdd')
+                  let index = addAddress.selectedIndex
+                  let MapAdd = addAddress.options[index].text
                   let newAddress = {
                     ...address,
-                    dist: e.target.value,
+                    dist: MapAdd,
                   }
                   setAddress(newAddress)
                 }}
-              />
+              >
+                <option value="">請選擇區域</option>
+                <option value="300">中壢區</option>
+                <option value="400">觀音區</option>
+                <option value="400">楊梅區</option>
+                <option value="400">大園區</option>
+                <option value="400">蘆竹區</option>
+                <option value="400">桃園區</option>
+                <option value="400">新屋區</option>
+                <option value="400">八德區</option>
+                <option value="400">平鎮區</option>
+                <option value="450">龜山區</option>
+                <option value="450">龍潭區</option>
+                <option value="450">大溪區</option>
+                <option value="600">復興區</option>
+              </select>
             </div>
             <input
               type="text"
@@ -703,19 +730,43 @@ function Map(props) {
                 className="input-disable"
                 disabled
               />
-              <input
+              <select
                 type="text"
                 defaultValue={address.dist}
                 className="takeoutInput add"
+                id="selectAddw"
                 placeholder="請輸入地區"
                 onChange={(e) => {
+                  setFee(e.target.value)
+                  setMin(e.target.value)
+                  //
+                  let addAddress = document.getElementById('selectAddw')
+                  let index = addAddress.selectedIndex
+                  let MapAdd = addAddress.options[index].text
+                  console.log(MapAdd, 'MapAdd')
+                  console.log(index, 'index')
                   let newAddress = {
                     ...address,
-                    dist: e.target.value,
+                    dist: MapAdd,
                   }
                   setAddress(newAddress)
                 }}
-              />
+              >
+                <option value="">請選擇區域</option>
+                <option value="300">中壢區</option>
+                <option value="400">觀音區</option>
+                <option value="400">楊梅區</option>
+                <option value="400">大園區</option>
+                <option value="400">蘆竹區</option>
+                <option value="400">桃園區</option>
+                <option value="400">新屋區</option>
+                <option value="400">八德區</option>
+                <option value="400">平鎮區</option>
+                <option value="450">龜山區</option>
+                <option value="450">龍潭區</option>
+                <option value="450">大溪區</option>
+                <option value="600">復興區</option>
+              </select>
             </div>
             <input
               type="text"

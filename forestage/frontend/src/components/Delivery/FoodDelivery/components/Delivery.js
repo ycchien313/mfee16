@@ -146,6 +146,7 @@ function Delivery(props) {
             address={address}
             setAddress={setAddress}
             setFee={setFee}
+            addFee={addFee}
             time={time}
             setTime={setTime}
             date={date}

@@ -1,6 +1,9 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import Aos from 'aos'
 function FivethScreen(props) {
+  useEffect(() => {
+    Aos.init({ duration: 200 })
+  }, [])
   let content = (
     <div id="fivthScreen">
       <div class="points"></div>
@@ -14,6 +17,7 @@ function FivethScreen(props) {
         onClick={() => {
           document.location.href = 'http://localhost:3000/game'
         }}
+        data-aos="zoom-in"
       >
         <figure>
           <img src="http://localhost:3000/images/home/piano.jpeg" alt="" />

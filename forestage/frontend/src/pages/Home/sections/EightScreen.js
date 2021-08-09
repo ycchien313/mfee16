@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import $ from 'jquery'
 import Dish from '../../../components/Home/Dish'
 import { Link } from 'react-router-dom'
+import Aos from 'aos'
+import 'aos/dist/aos.css'
 function EightScreen(props) {
   // 預設狀態
   const [dish, setDish] = useState()
@@ -59,7 +61,9 @@ function EightScreen(props) {
       setTargetDish(newDishClone)
     }
   }, [dishState])
-
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
   let content = (
     <div id="eighthScreen">
       <h2>外送訂餐</h2>
@@ -98,7 +102,7 @@ function EightScreen(props) {
         </ul>
       </div>
       <div className="delivery">
-        <ul>
+        <ul data-aos="fade-left">
           {targetDish.length > 0 &&
             targetDish.map(function (value, index) {
               return (

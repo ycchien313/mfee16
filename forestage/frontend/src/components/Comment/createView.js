@@ -64,7 +64,7 @@ function Createview(props) {
                 <div class="titleleft">
                   <div class="memberimg">
                     <img
-                      src={`http://localhost:3001/members/${memberavatar}`}
+                      src={`http://localhost:3001${memberavatar}`}
                       alt=""
                     ></img>
                   </div>
@@ -110,7 +110,7 @@ function Createview(props) {
               </div>
               <div class="sharegroup">
                 <img
-                  class="cursor"
+                  class="cursor nonedis"
                   src="http://localhost:3000/images/comment/share.svg"
                   alt=""
                 ></img>

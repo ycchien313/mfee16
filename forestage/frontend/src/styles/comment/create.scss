@@ -29,8 +29,9 @@
   margin: 0 0 0.5vw 0;
 }
 .titleee {
-  width: 45vw;
+  width: 60vw;
   margin-bottom: 5px;
+  font-size: 12px;
 }
 .redtext{
   color: $accent-red;
@@ -301,6 +302,11 @@ width: 25%;
 width: 25%;
 // margin-bottom: 5px;
 // margin-left: 0px;
+  }
+  .starss{
+    width: 18vw;
+    display: flex;
+    justify-content: space-around;
   }
 }
 }

@@ -87,6 +87,7 @@ function MapArticle(props) {
 
           <div class="share">
             <img
+            class="nonedis"
               src="http://localhost:3000/images/comment/share.svg"
               alt=""
             ></img>

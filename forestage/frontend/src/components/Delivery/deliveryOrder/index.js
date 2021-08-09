@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../../../styles/delivery/deliveryOrder/takeout_check.scss'
 import DeliveryOrder from './components/DeliveryOrder'
 import Header from '../../../components/Header'
+import Footer from '../../../components/Footer'
 import $ from 'jquery'
 
 function Index(props) {
@@ -62,6 +63,7 @@ function Index(props) {
         memberId={memberId}
         authToken={authToken}
       />
+      <Footer />
     </>
   )
 }

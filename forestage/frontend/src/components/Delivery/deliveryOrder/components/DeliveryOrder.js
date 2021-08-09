@@ -32,7 +32,7 @@ function DeliveryOrder(props) {
     coupon_id: couponId,
     dishList: orderAll.dishList,
   }
-  console.log(data, 'aaa')
+  // console.log(data, 'aaa')
   // console.log(memberId, 'memberId')
 
   function change() {
@@ -136,6 +136,7 @@ function DeliveryOrder(props) {
               setCouponId={setCouponId}
               setMcmId={setMcmId}
             />
+            {/* <form> */}
             <Order
               inputText={inputText}
               setInputText={setInputText}
@@ -189,7 +190,7 @@ function DeliveryOrder(props) {
                       })
                     }}
                   >
-                    確認送出
+                    確認選項
                     <img
                       src={
                         'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
@@ -208,7 +209,7 @@ function DeliveryOrder(props) {
                       })
                     }}
                   >
-                    確認送出
+                    確認登入
                     <img
                       src={
                         'http://localhost:3000/images/delivery/deliveryOrder/arrow-circle-right-solid.svg'
@@ -231,7 +232,6 @@ function DeliveryOrder(props) {
                           allowEscapeKey: false,
                           allowOutsideClick: false,
                         })
-                        // console.log('click')
                       }
                     }
                   >
@@ -246,6 +246,7 @@ function DeliveryOrder(props) {
                 )}
               </div>
             </div>
+            {/* </form> */}
           </div>
         </div>
       </div>

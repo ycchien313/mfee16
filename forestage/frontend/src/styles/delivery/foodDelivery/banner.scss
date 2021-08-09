@@ -233,8 +233,8 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      height: 45vh;
-      top: -55vh;
+      height: 40vh;
+      top: -50vh;
       border-radius: 50px;
       background-clip: padding-box, border-box;
       background-origin: padding-box, border-box;
@@ -259,7 +259,7 @@
       }
 
       position: absolute;
-      padding: 0 0 0 40px;
+      padding: 10vw 0 0 10vw;
       margin: auto 0;
 
       .order-time {
@@ -374,6 +374,7 @@
       right: 8vw;
       top: 2vw;
     }
+    
   }
 
   /* -- */
@@ -463,8 +464,8 @@
 
     .h1.title {
       position: relative;
-      top: -420px;
-      // top: -90vw;
+      // top: -420px;
+      top: -150vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -478,9 +479,10 @@
     }
 
     .top-wave .elfin {
-      width: 60px;
+      width: 50px;
       position: absolute;
-      top: -390px;
+      // top: -390px;
+      top: -140vw;
       z-index: 5;
     }
 
@@ -502,35 +504,45 @@
     &:hover {
       fill: #f1bd69;
       // fill: url(#myGradient);
-      transition: 0.5s;
+      transition: 0.7s;
     }
   }
   .st0 {
     fill: #c1d8ab;
   }
   .st2 {
-    fill: #aecc94;
+    // fill: #aecc94;
+    fill: #aecc94e8;
   }
 
   .st3 {
-    fill: #94b776;
+    // fill: #94b776;
+    fill: #94b776e8;
   }
 
   .st4 {
-    fill: #95b777;
+    // fill: #95b777;
+    fill: #95b777e8;
   }
 
   .st5 {
-    fill: #86b557;
+    // fill: #86b557;
+    fill: #86b557e8;
   }
 
   .st6 {
-    fill: #95b778;
+    // fill: #95b778;
+    fill: #95b778e8;
   }
 
   .st7 {
-    fill: #c9dfb4;
+    // fill: #c9dfb4;
+    fill: #c9dfb4e8;
   }
+}
+.mpaFee {
+  width: '33.33%',
+  // height: '33.33%',
 }
 
 .mapFee.active {

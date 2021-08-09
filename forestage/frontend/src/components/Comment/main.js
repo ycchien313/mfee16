@@ -163,33 +163,13 @@ function Main(props) {
     getMemberId()
     // getLikes(articleLikesId)
   }, [])
-  useEffect(() => {
-    let url = ``
-    setDidmount(true)
-    // console.log(tag)
-    tag.forEach((v) => {
-      // console.log(selectTag)
-      if (v.name === selectTag) {
-        console.log(v.tag_id)
-        url = `http://localhost:3001/comment/${v.tag_id}`
-        console.log(url)
-        setTagId(v.tag_id)
-      }
-    })
-    getTagArticle()
-  }, [selectTag])
 
-  useEffect(() => {
-    if (didmount) {
-      getTagName()
-    }
-  }, [selectTag])
   function getTagArticle() {
     let url = `http://localhost:3001/comment/${selectTag}`
     console.log(selectTag)
     axios.get(url).then((result) => {
       setArticle(result.data)
-      // console.log(result.data)
+      console.log(result.data[0],"圖片")
     })
   }
   useEffect(() => {
@@ -252,13 +232,7 @@ function Main(props) {
   // }, [])
   //   aside顯示相關文章
   let selectURL = ''
-  useEffect(() => {
-    // console.log(tag)
-    // console.log(selectTag)
-    selectURL = `http://localhost:3001/comment/${selectTag}`
-    // console.log(url)
-    getAsideArticle()
-  }, [selectTag])
+
   function getAsideArticle() {
     axios.get(selectURL).then((result) => {
       setArticle(result.data)
@@ -276,6 +250,29 @@ function Main(props) {
       }
     }
   }
+  useEffect(() => {
+    if (didmount) {
+      getTagName()
+    }
+    let url = ``
+    setDidmount(true)
+    // console.log(tag)
+    tag.forEach((v) => {
+      // console.log(selectTag)
+      if (v.name === selectTag) {
+        console.log(v.tag_id)
+        url = `http://localhost:3001/comment/${v.tag_id}`
+        console.log(url)
+        setTagId(v.tag_id)
+      }
+    })
+    // console.log(tag)
+    // console.log(selectTag)
+    selectURL = `http://localhost:3001/comment/${selectTag}`
+    // console.log(url)
+    getAsideArticle()
+    getTagArticle()
+  }, [selectTag])
   //   const [tag, setTag] = useState({})
   //   function getTag() {
   //     axios.get('http://127.0.0.1:3001/comment/tag').then((result) => {
@@ -690,6 +687,8 @@ function Main(props) {
           asideTag={asideTag}
           boom={boom}
           setBoom={setBoom}
+          boom2={boom2}
+          setBoom2={setBoom2}
           tag={tag}
           selectTag={selectTag}
           setSelectTag={setSelectTag}
@@ -712,6 +711,10 @@ function Main(props) {
           setArticle={setArticle}
           boomArticle={boomArticle}
           setBoomArticle={setBoomArticle}
+          setInsertArticle={setInsertArticle}
+          insertArticle={insertArticle}
+          showAuthModal={showAuthModal}
+          setShowAuthModal={setShowAuthModal}
           // setArticleLikesId={setArticleLikesId}
           // likes={likes}
           // setLikes={setLikes}

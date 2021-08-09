@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import '../../styles/comment/view.scss'
-import Auth from '../Auth/'
-function View(props) {
+
+function Myview(props) {
   const {
     boom2,
     setBoom2,
@@ -15,8 +15,6 @@ function View(props) {
     getLikes,
     insertArticle,
     setInsertArticle,
-    showAuthModal,
-    setShowAuthModal,
     // getMycomment,
     // getMemberId,
     // addLikes,
@@ -32,7 +30,6 @@ function View(props) {
     member_id: 0,
     article_id: boomArticle.article_id,
   })
-  let ifloginn = Boolean(localStorage.getItem('authToken'))
 
   let likeClass = 'fas like fa-heart size cursor'
   let normallike = 'fas fa-heart size cursor'
@@ -160,7 +157,7 @@ function View(props) {
                 <div class="titleleft">
                   <div class="memberimg">
                     <img
-                      src={`http://127.0.0.1:3001/members/${boomArticle.avatar}`}
+                      src={`http://localhost:3001/members/${memberavatar}`}
                       alt=""
                     ></img>
                   </div>
@@ -267,18 +264,11 @@ function View(props) {
                 <button
                   class="send cursor"
                   onClick={() => {
-                    if(ifloginn && insertMessage.message !== ''){
+                    if (insertMessage.message !== '') {
                       insertMessagefn()
-                    }else if(ifloginn === false){
-                      setShowAuthModal(true)
                     }
-                    // if (insertMessage.message !== '') {
-                    //   insertMessagefn()
-                    // }
                     getMessage()
                     cleanMessage()
-                    
-                
                   }}
                 ></button>
               </div>
@@ -322,13 +312,7 @@ function View(props) {
           </div>
         </div>
       </div>
-      {showAuthModal && (
-        <Auth
-          showAuthModal={showAuthModal}
-          setShowAuthModal={setShowAuthModal}
-        />
-      )}
     </>
   )
 }
-export default View
+export default Myview

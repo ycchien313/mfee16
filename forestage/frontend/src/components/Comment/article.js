@@ -27,6 +27,7 @@ function Article(props) {
               <Map
                 key={v.article_id}
                 article1={v}
+                avatar={v.avatar}
                 article={article}
                 setArticle={setArticle}
                 normallike={normallike}

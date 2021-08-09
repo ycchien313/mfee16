@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use(express.static('public'));
 
-app.use(cors())
+app.use(cors());
 app.use('/auth', authApi);
 app.use('/comment', commentApi);
 app.use('/delivery', deliveryApi);
@@ -42,5 +42,5 @@ app.use((req, res, next) => {
 
 app.listen(port, () => {
     console.log(`請連線至 http://127.0.0.1:${port}`);
-    connection.connect();   
+    connection.connect();
 });

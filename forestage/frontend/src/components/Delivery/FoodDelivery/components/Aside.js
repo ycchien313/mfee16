@@ -159,8 +159,8 @@ function Aside(props) {
               <input
                 type="button"
                 defaultValue="送出訂單"
-                className="OrderGet"
-                // className="pink-guide-button"
+                // className="OrderGet "
+                className="pink-guide-button"
                 field=""
               />
             </Link>

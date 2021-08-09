@@ -6,15 +6,23 @@ import MealsBig from './MealsBig/'
 import MealsSmall from './MealsSmall/'
 import { gsap } from 'gsap'
 import { Tween } from 'react-gsap'
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+// gsap.registerPlugin(ScrollTrigger)
 
 function ChooseMeal(props) {
-  const { checkList, setCheckList, dishList, setDishList } = props
+  const {
+    checkList,
+    setCheckList,
+    dishList,
+    setDishList,
+    reservationHistory,
+    dataFromMember,
+  } = props
   const [dishes, setDishes] = useState([])
   const [showDishes, setShowDishes] = useState([])
   const [didMount, setDidMount] = useState(false)
   const [dishCount, setDishCount] = useState({})
+  const [fromHistory, setFromHistory] = useState(true)
 
   // 檢查storage是否有此筆資料
   const checkDishCount = Boolean(window.sessionStorage.getItem('dishCount'))
@@ -27,6 +35,7 @@ function ChooseMeal(props) {
 
   useEffect(() => {
     setDidMount(true)
+    getDishes()
   }, [])
 
   // 建立餐點物件
@@ -80,18 +89,36 @@ function ChooseMeal(props) {
       let initShowDishes = result.data.filter((dish) => {
         return dish.type === '主餐'
       })
-      // console.log(initShowDishes)
       setDishes(result.data)
       setShowDishes(initShowDishes)
     })
   }
 
   useEffect(() => {
-    getDishes()
-  }, [])
+    // 待加上location條件
+    // 將歷史訂單餐點數量
+    if (
+      didMount &&
+      fromHistory &&
+      dataFromMember.prevPath === '/member/reservation'
+    ) {
+      let newDishCount = { ...dishCount }
+      reservationHistory.reservationDish.forEach((item) => {
+        newDishCount[item.dish_id] = item.dishAmount
+      })
+      setDishCount(newDishCount)
+      console.log(reservationHistory, 'res dish')
+
+      // setDishCount(newDishCount)
+      setFromHistory(false)
+    }
+  }, [reservationHistory])
+
+  // useEffect(() => {
+  // }, [])
   return (
     <>
-      <section className="choose-meal">
+      <section className="choose-meal" id="chooseMeal">
         <div className="steps">
           <h3 className="step">選擇日期</h3>
           <div className="arrow"></div>
@@ -101,16 +128,18 @@ function ChooseMeal(props) {
             <h3 className="step">選擇餐點</h3>
             <Tween
               from={{
-                x: '-20vw',
+                opacity: '0',
+                x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
-                  start: '2200px center',
-                  end: '2700px center',
+                  start: '2000px center',
+                  end: '2500px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >
@@ -121,30 +150,29 @@ function ChooseMeal(props) {
             </Tween>
           </div>
         </div>
-        
-          {isTabletOrMobile ? (
-            <MealsSmall
-              dishes={dishes}
-              setDishes={setDishes}
-              showDishes={showDishes}
-              setShowDishes={setShowDishes}
-              checkList={checkList}
-              setCheckList={setCheckList}
-              dishCount={dishCount}
-              setDishCount={setDishCount}
-            />
-          ) : (
-            <MealsBig
-              dishes={dishes}
-              setDishes={setDishes}
-              showDishes={showDishes}
-              setShowDishes={setShowDishes}
-              checkList={checkList}
-              setCheckList={setCheckList}
-              dishCount={dishCount}
-              setDishCount={setDishCount}
-            />
-          )}
+        {isTabletOrMobile ? (
+          <MealsSmall
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishCount={dishCount}
+            setDishCount={setDishCount}
+          />
+        ) : (
+          <MealsBig
+            dishes={dishes}
+            setDishes={setDishes}
+            showDishes={showDishes}
+            setShowDishes={setShowDishes}
+            checkList={checkList}
+            setCheckList={setCheckList}
+            dishCount={dishCount}
+            setDishCount={setDishCount}
+          />
+        )}
       </section>
     </>
   )

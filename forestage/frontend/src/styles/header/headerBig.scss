@@ -3,7 +3,7 @@
 .main-header {
   position: fixed;
   width: 100%;
-  z-index: 100;
+  z-index: 1000;
   transition: 0.2s;
 }
 
@@ -65,6 +65,7 @@
   text-decoration: none;
   font-size: calc(1rem + 0.2vw);
   transition: 0.2s;
+  width: 100%;
 }
 .main-header .header-nav .slide-down:hover ul.header-slide-menu {
   opacity: 1;

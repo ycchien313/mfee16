@@ -4,23 +4,44 @@ import withReactContent from 'sweetalert2-react-content'
 import axios from 'axios'
 
 function ReservationPerson(props) {
-  const { insertResData, setInsertResData, dishList, memberId, setMemberId } = props
-  // const [memberId, setMemberId] = useState(0)
-  function insertReservation() {
-    axios({
-      method: 'post',
-      url: 'http://localhost:3001/reservation/checkout/send',
-      data: {
-        dishList,
-        insertResData,
-        // memberId,
-      },
-    })
-  }
+  const {
+    insertResData,
+    setInsertResData,
+    dishList,
+    memberId,
+    setMemberId,
+    reservationId,
+  } = props
 
+  // 新增或是修改訂單
+  function insertReservation() {
+    // 新增訂單 
+    if (reservationId === 0) {
+      axios({
+        method: 'post',
+        url: 'http://localhost:3001/reservation/checkout/send',
+        data: {
+          dishList,
+          insertResData,
+        },
+      })
+
+      // 修改訂單
+    } else {
+      axios({
+        method: 'put',
+        url: 'http://localhost:3001/reservation/update',
+        data: {
+          dishList,
+          insertResData,
+          reservationId,
+        },
+      })
+    }
+  }
+  // 傳送token已取得memberId
   function getMemberId() {
     let authToken = window.localStorage.getItem('authToken')
-    // console.log('auth', authToken)
     axios
       .get('http://localhost:3001/auth/me', {
         method: 'get',
@@ -37,7 +58,6 @@ function ReservationPerson(props) {
   }
   // 取得會員資料，自動帶入input內
   function getMemberInfo() {
-
     axios
       .get('http://localhost:3001/reservation/checkout/memberInfo', {
         method: 'get',

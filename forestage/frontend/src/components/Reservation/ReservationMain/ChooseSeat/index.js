@@ -3,6 +3,7 @@ import $ from 'jquery'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Tween } from 'react-gsap'
+import { HashLink as Link } from 'react-router-hash-link'
 
 function ChooseSeat(props) {
   const {
@@ -12,10 +13,13 @@ function ChooseSeat(props) {
     checkList,
     setCheckList,
     remainingSeat,
+    reservationHistory,
+    dataFromMember,
   } = props
 
   const [didMount, setDidMount] = useState(false)
   const [attendance, setAttendance] = useState({})
+  const [fromHistory, setFromHistory] = useState(true)
 
   const barInfo = useRef(null)
   // 判斷sessionStorage中是否有此資料
@@ -77,6 +81,22 @@ function ChooseSeat(props) {
       })
     }
   }, [attendance])
+
+  useEffect(() => {
+    // 待加上location條件
+    // 將歷史訂單訂位人數帶入
+    if (
+      didMount &&
+      fromHistory &&
+      dataFromMember.prevPath === '/member/reservation'
+    ) {
+      let newAttendance = { ...attendance }
+      newAttendance[reservationHistory.reservationInfo.seat_id] =
+        reservationHistory.reservationInfo.attendance
+      setAttendance(newAttendance)
+      setFromHistory(false)
+    }
+  }, [reservationHistory])
 
   // 減號按鈕
   function minusAttendance(seatId) {
@@ -154,7 +174,7 @@ function ChooseSeat(props) {
 
   return (
     <>
-      <section class="choose-seat">
+      <section class="choose-seat" id="chooseSeat">
         <div class="steps">
           <h3 class="step one">選擇日期</h3>
           <div class="arrow"></div>
@@ -162,16 +182,18 @@ function ChooseSeat(props) {
             <h3 class="step two">選擇座位</h3>
             <Tween
               from={{
-                x: '-30vw',
+                opacity: '0',
+                x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
-                  start: '1300px center',
-                  end: '1800px center',
+                  start: '1100px center',
+                  end: '1600px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >
@@ -186,16 +208,18 @@ function ChooseSeat(props) {
         </div>
         <Tween
           from={{
-            x: '-30vw',
+            opacity: '0',
+            x: '-10vw',
           }}
           to={{
+            opacity: '1',
             x: '0px',
             scrollTrigger: {
               trigger: '.square',
-              start: '1300px center',
-              end: '1800px center',
+              start: '1100px center',
+              end: '1600px center',
               scrub: 1,
-              markers: true,
+              markers: false,
             },
           }}
         >
@@ -373,12 +397,14 @@ function ChooseSeat(props) {
         </Tween>
       </section>
       {/* 滑鼠滾輪 */}
-      <div class="center-con">
-        <div class="cta">
-          <div class="down-arrow primera next "></div>
-          <div class="down-arrow segunda next "></div>
+      <Link smooth to="#chooseMeal">
+        <div class="center-con" id="toMeal">
+          <div class="cta">
+            <div class="down-arrow primera next "></div>
+            <div class="down-arrow segunda next "></div>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

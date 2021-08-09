@@ -5,7 +5,7 @@ import CalendarSmall from './CalendarSmall'
 import SeatsBar from './SeatsBar'
 import { useMediaQuery } from 'react-responsive'
 import { Tween } from 'react-gsap'
-
+import { HashLink as Link } from 'react-router-hash-link'
 
 function ChooseDate(props) {
   const {
@@ -18,6 +18,8 @@ function ChooseDate(props) {
     setCheckList,
     checkList,
     dateFromHome,
+    reservationHistory,
+    dataFromMember,
   } = props
 
   const [singerCalendar, setSingerCalendar] = useState([])
@@ -48,22 +50,24 @@ function ChooseDate(props) {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   return (
     <>
-      <section className="choose-date">
+      <section className="choose-date" id="chooseDate">
         <div className="steps">
           <div className="active">
             <h3 className="step">選擇日期</h3>
             <Tween
               from={{
-                x: '-300px',
+                opacity: '0',
+                x: '-10vw',
               }}
               to={{
+                opacity: '1',
                 x: '0px',
                 scrollTrigger: {
                   trigger: '.square',
                   start: '600px center',
                   end: '900px center',
                   scrub: 1,
-                  markers: true,
+                  markers: false,
                 },
               }}
             >
@@ -91,6 +95,8 @@ function ChooseDate(props) {
               seatInfo={seatInfo}
               seatCount={seatCount}
               dateFromHome={dateFromHome}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
           ) : (
             <CalendarBig
@@ -104,6 +110,8 @@ function ChooseDate(props) {
               seatInfo={seatInfo}
               seatCount={seatCount}
               dateFromHome={dateFromHome}
+              reservationHistory={reservationHistory}
+              dataFromMember={dataFromMember}
             />
           )}
           <SeatsBar
@@ -115,12 +123,14 @@ function ChooseDate(props) {
         </div>
       </section>
       {/* 滑鼠滾輪 */}
-      <div className="center-con">
-        <div className="cta">
-          <div className="down-arrow primera next "></div>
-          <div className="down-arrow segunda next "></div>
+      <Link smooth to="#chooseSeat">
+        <div className="center-con" id="toSeat">
+          <div className="cta">
+            <div className="down-arrow primera next "></div>
+            <div className="down-arrow segunda next "></div>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   )
 }

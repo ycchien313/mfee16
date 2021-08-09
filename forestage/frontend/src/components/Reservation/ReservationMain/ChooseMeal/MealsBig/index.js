@@ -14,6 +14,7 @@ function MealsBig(props) {
     setCheckList,
     dishCount,
     setDishCount,
+    dataFromMember,
   } = props
 
   const [mealType, setMealType] = useState('main')
@@ -92,16 +93,16 @@ function MealsBig(props) {
     <>
       <Tween
         from={{
-          x: '-30vw',
+          x: '-10vw',
         }}
         to={{
           x: '0px',
           scrollTrigger: {
             trigger: '.square',
-            start: '2300px center',
-            end: '2800px center',
+            start: '2000px center',
+            end: '2500px center',
             scrub: 1,
-            markers: true,
+            markers: false,
           },
         }}
       >

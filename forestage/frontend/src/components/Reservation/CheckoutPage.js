@@ -10,6 +10,8 @@ import Footer from '../Footer/'
 // import Footer from '../../components/Footer'
 
 function CheckoutPage(props) {
+  // const { reservationHistory } = props.location.state
+  // console.log(props.location.state.reservationHistory, 'checkout page')
   const history = useHistory()
   // const { checkList, setCheckList, test } = props
   const [dishList, setDishList] = useState([])
@@ -28,6 +30,13 @@ function CheckoutPage(props) {
     mcm_id: 0,
     status: '未完成',
   })
+  const [fromHistory, setFromHistory] = useState(true)
+  let reservationId = 0
+
+  // 從session取得reservationId
+  if (Boolean(sessionStorage.getItem('reservationId'))){
+    reservationId = parseInt(sessionStorage.getItem('reservationId'))
+  }
 
   const checkInsertResData = Boolean(sessionStorage.getItem('insertResData'))
   // 載入時取得會員id
@@ -50,6 +59,7 @@ function CheckoutPage(props) {
         newInsertResData.attendance = checkList.attendance
         newInsertResData.total = checkList.total
         newInsertResData.member_id = result.data.memberId
+
         setInsertResData(newInsertResData)
       })
   }
@@ -57,18 +67,32 @@ function CheckoutPage(props) {
     setDidMount(true)
     window.scrollTo(0, 0)
 
-    // 如果沒有從訂位頁面得到props.location，則導回訂位頁面
+
     if (props.location.state !== undefined) {
       setDishList(props.location.state.dishList)
       setCheckList(props.location.state.checkList)
     } else {
+      // 如果沒有從訂位頁面得到props.location，則導回訂位頁面
       history.push('/reservation')
     }
 
+    // 如果已經拜訪過此頁，則讀取session storage資訊
     checkInsertResData &&
       setInsertResData(
         JSON.parse(window.sessionStorage.getItem('insertResData'))
       )
+
+    if (
+      props.location.state !== undefined &&
+      props.location.state.dataFromMember.prevPath === '/member/reservation'
+    ) {
+      let newInsertResData = { ...insertResData }
+      newInsertResData.name =
+        props.location.state.reservationHistory.reservationInfo.name
+      newInsertResData.mobile =
+        props.location.state.reservationHistory.reservationInfo.mobile
+      setInsertResData(newInsertResData)
+    }
   }, [])
 
   useEffect(() => {
@@ -97,6 +121,7 @@ function CheckoutPage(props) {
         setInsertResData={setInsertResData}
         memberId={memberId}
         setMemberId={setMemberId}
+        reservationId={reservationId}
       />
       <Footer />
     </>

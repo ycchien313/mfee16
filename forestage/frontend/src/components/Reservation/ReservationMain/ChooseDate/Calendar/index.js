@@ -18,22 +18,26 @@ function CalendarBig(props) {
     setSeatCount,
     seatCount,
     dateFromHome,
+    reservationHistory,
+    dataFromMember,
   } = props
 
   return (
     <>
       <Tween
         from={{
-          x: '-300px',
+          opacity: '0',
+          x: '-10vw',
         }}
         to={{
+          opacity: '1',
           x: '0px',
           scrollTrigger: {
             trigger: '.square',
-            start: '600px center',
+            start: '700px center',
             end: '900px center',
             scrub: 1,
-            markers: true,
+            markers: false,
           },
         }}
       >
@@ -55,6 +59,8 @@ function CalendarBig(props) {
                   setSeatInfo={setSeatInfo}
                   seatCount={seatCount}
                   dateFromHome={dateFromHome}
+                  reservationHistory={reservationHistory}
+                  dataFromMember={dataFromMember}
                 />
               )
             }
@@ -78,6 +84,8 @@ function CalendarBig(props) {
                   setSeatCount={setSeatCount}
                   seatCount={seatCount}
                   dateFromHome={dateFromHome}
+                  reservationHistory={reservationHistory}
+                  dataFromMember={dataFromMember}
                 />
               )
             }

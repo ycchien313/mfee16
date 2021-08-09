@@ -576,6 +576,8 @@
     left: -2.6vw;
     transition: 0.5s;
     flex-shrink: 0;
+    border-radius: 40px 0 0 40px;
+
 
   }
   .middle-bar-end {
@@ -597,6 +599,8 @@
     left: -5.2vw;
     transition: 0.5s;
     flex-shrink: 0;
+    border-radius: 40px 0 0 40px;
+
 
   }
   .back-bar-end {
@@ -1326,6 +1330,7 @@
   }
 }
 
+
 // footer
 .res-footer{
   margin-top: -100px;
@@ -1359,4 +1364,30 @@
   .span {
     font-size: 1rem;
   }
+}
+/* table */
+
+
+.reservation.table-bg {
+  width: 100%;
+  background: url(http://localhost:3000/images/reservation/table-bg.png);
+  background-size: cover;
+  height: 22vw;
+  position: relative;
+  bottom: 8vw;
+}
+
+.swal2-confirm {
+  background: $secondary-green;
+  color: white;
+  font-family: $zh-tw-noto;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  height: 35px;
+  width: 70px;
+  cursor: pointer;
+}
+.swal2-confirm:active {
+  background: darken($secondary-green, 10%);
 }

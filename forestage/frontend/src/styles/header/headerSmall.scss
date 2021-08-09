@@ -13,7 +13,7 @@
     position: fixed;
     left: 0px;
     width: 100%;
-    z-index: 100;
+    z-index: 1000;
   }
   .logo {
     width: 67px;
@@ -87,7 +87,7 @@
     background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     width: calc(100% - 20px);
-    z-index: 10;
+    z-index: 999;
     transition: 0.5s;
     font-family: $zh-tw-noto;
   }

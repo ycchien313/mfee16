@@ -211,6 +211,7 @@
     position: absolute;
     top: 22.97vw;
     left: 80.35vw;
+    z-index: 10;
   }
 
   .OrderGet {
@@ -231,6 +232,8 @@
     background-size: contain;
     top: 30vw;
     left: 2vw;
+    
+
     &:hover {
       box-shadow: none;
     }

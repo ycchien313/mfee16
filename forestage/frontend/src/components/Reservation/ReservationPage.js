@@ -61,13 +61,13 @@ function ReservationPage(props) {
         } else {
           setLocationKeys((keys) => [location.key, ...keys])
           // 上一頁時清除session
-          if (
-            props.location.state !== undefined &&
-            props.location.state.prevPath === '/member/reservation'
-          ) { // 如果是從修改訂來就不動作
-          } else {
-            sessionStorage.clear()
-          }
+          // if (
+          //   props.location.state !== undefined &&
+          //   props.location.state.prevPath === '/member/reservation'
+          // ) { // 如果是從修改訂來就不動作
+          // } else {
+          //   sessionStorage.clear()
+          // }
           console.log('上一頁的動作')
           if (!finishStatus) {
             if (window.confirm('您尚未完成訂位，確定要返回取消嗎？')) {

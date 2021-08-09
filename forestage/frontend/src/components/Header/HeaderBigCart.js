@@ -10,8 +10,8 @@ function HeaderBigCart(props) {
       </figure>
       <div className="cart-info">
         <h4 className="cart-info-name">{name}</h4>
-        <h4 className="cart-info-price">{price}</h4>
-        <h4 className="cart-info-count">{count}</h4>
+        <h4 className="cart-info-price">${price}</h4>
+        <h4 className="cart-info-count">{count}份</h4>
       </div>
     </div>
   )

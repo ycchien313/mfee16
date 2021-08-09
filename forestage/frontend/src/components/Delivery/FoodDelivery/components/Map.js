@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import $ from 'jquery'
 import moment from 'moment'
 import { Animated } from 'react-animated-css'
-import { Tween } from 'react-gsap'
+
+import { Tween, SplitChars } from 'react-gsap'
 
 function Map(props) {
   const { address, setAddress, setFee, date, setDate, time, setTime } = props
@@ -27,7 +28,18 @@ function Map(props) {
   return (
     <>
       <div className="top-wave">
-        <h1 className="h1 title">外送頁面</h1>
+        <h1 className="h1 title">
+          {/* <Tween from={{ x: '200px' }} stagger={0.1}>
+            <SplitChars
+              wrapper={
+                <div style={{ display: 'inline-block', fontSize: '40px' }} />
+              }
+            > */}
+          外送頁面
+          {/* </SplitChars>
+          </Tween> */}
+        </h1>
+
         <div className="mobile-takeout">
           <div className="mobile-takeoutDiv">
             <h3>請輸入您要外送的地址</h3>
@@ -162,7 +174,7 @@ function Map(props) {
               from={{ scale: 0.8 }}
               stagger={{ from: 'center', amount: 1, grid: [3, 3] }}
               duration={1.7}
-              ease="elastic.out(2, 0.5)"
+              ease="elastic.out(1.7, 0.5)"
             >
               <path
                 className="st0"

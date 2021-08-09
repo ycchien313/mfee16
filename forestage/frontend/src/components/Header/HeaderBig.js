@@ -4,6 +4,7 @@ import $ from 'jquery'
 import HeaderBigCart from './HeaderBigCart'
 import HeaderAuth from './HeaderAuth'
 import { Link } from 'react-router-dom'
+
 function HeaderBig(props) {
   let { cartList } = props
   const [totalPrice, setTotalPrice] = useState(0)

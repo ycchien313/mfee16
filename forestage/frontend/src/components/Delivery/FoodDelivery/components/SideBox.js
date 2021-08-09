@@ -1,4 +1,5 @@
 import React from 'react'
+import { Reveal, Tween } from 'react-gsap'
 
 function SideBox(props) {
   const {

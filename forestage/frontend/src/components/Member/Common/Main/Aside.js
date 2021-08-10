@@ -102,6 +102,12 @@ function Aside(props) {
     setContentIsLoaded(false)
   }, [asideHeight, contentIsLoaded])
 
+  useLayoutEffect(() => {
+    return () => {
+      window.removeEventListener('resize', calcAsideHeight)
+    }
+  }, [asideHeight, contentIsLoaded])
+
   return (
     <>
       <div className="aside">

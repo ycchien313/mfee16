@@ -16,9 +16,8 @@ function SeatsBar(props) {
 
   useEffect(() => {
     setDidMount(true)
-
+    // 一開始隱藏剩餘座位
     leftSeat.current.style.display = 'none'
-
   }, [])
 
   useEffect(() => {

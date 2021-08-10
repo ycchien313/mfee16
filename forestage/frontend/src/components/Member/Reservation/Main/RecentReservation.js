@@ -116,9 +116,18 @@ function RecentReservation(props) {
             >
               取消訂位
             </button>
-            <button className="update-resv-btn orange-guide-button">
+            <Link
+              to={{
+                pathname: '/reservation',
+                state: {
+                  prevPath: '/member/reservation',
+                  reservationId: v.reservation_id,
+                },
+              }}
+              className="update-resv-btn orange-guide-button"
+            >
               修改訂位內容
-            </button>
+            </Link>
           </div>
         </div>
       </>

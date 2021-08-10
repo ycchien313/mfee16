@@ -4,6 +4,8 @@ import '../../styles/dish/dish.scss'
 import DishInfo from '../../components/Dish/DishInfo'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import { HashLink as Link } from 'react-router-hash-link'
+
 function Dish() {
   // 存取api
   const [style, setStyle] = useState('主餐')
@@ -116,20 +118,24 @@ function Dish() {
             </div>
             <DishInfo dishInfo={dishInfo} style={style} tag={tag} />
             <div className="btn">
-              <div className="guide-button orange">
-                去投票
-                <img
-                  src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
-                  alt=""
-                />
-              </div>
-              <div className="guide-button pink">
-                線上訂位
-                <img
-                  src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
-                  alt=""
-                />
-              </div>
+              <Link className="link" to="/#fourthScreen">
+                <div className="guide-button orange">
+                  去投票
+                  <img
+                    src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
+                    alt=""
+                  />
+                </div>
+              </Link>
+              <Link className="link" to="/reservation">
+                <div className="guide-button pink">
+                  線上訂位
+                  <img
+                    src="http://localhost:3000/images/singer/arrow-circle-right-solid.svg"
+                    alt=""
+                  />
+                </div>
+              </Link>
             </div>
           </div>
         </main>

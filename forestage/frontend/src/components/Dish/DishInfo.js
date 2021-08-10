@@ -4,6 +4,7 @@ import $ from 'jquery'
 import { logDOM } from '@testing-library/react'
 // import '../../styles/singer/singer.scss'
 import axios from 'axios'
+import AOS from 'aos'
 
 function DishInfo(props) {
   let { dishInfo, style, tag } = props
@@ -32,6 +33,7 @@ function DishInfo(props) {
 
   useEffect(() => {
     setLoading(true)
+    AOS.init()
   }, [])
   useEffect(() => {
     if (loading === true) {
@@ -73,6 +75,11 @@ function DishInfo(props) {
   }, [])
   return (
     <>
+      <link
+        href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+        rel="stylesheet"
+      ></link>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
       <div class="food-title h2">{dishInfo.length > 0 && dishInfo[1].type}</div>
       <div class="introduction-all">
         <div className="slide-bg">
@@ -83,7 +90,7 @@ function DishInfo(props) {
             <i class="fas fa-chevron-right"></i>
           </button>
           <div class="pizza food-m">
-            <div class="introduction">
+            <div data-aos="fade-right" class="introduction">
               <div class="imgb">
                 <img
                   class="img"
@@ -125,7 +132,7 @@ function DishInfo(props) {
               </div>
             </div>
           </div>
-          <div class="subway food-m">
+          <div data-aos="fade-left" class="subway food-m">
             <div class="introduction reverse">
               <div class="introduction-text">
                 <div class="introduction-title">
@@ -169,7 +176,7 @@ function DishInfo(props) {
               </div>
             </div>
           </div>
-          <div class="bbqpork food-m">
+          <div data-aos="fade-right" class="bbqpork food-m">
             <div class="introduction">
               <div class="imgb">
                 <img

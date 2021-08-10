@@ -343,14 +343,18 @@
     .content-foot-md .btns-container {
       flex-grow: 0.1;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-evenly;
+    }
+    .content-foot-md .update-resv-btn {
+      text-decoration: none;
     }
     .content-foot-md .guide-button {
       width: fit-content;
       height: 28px;
-      min-height: 28px;
+      line-height: 28px;
       font-size: 12px;
       border-radius: 5px;
+      padding: 0 10px;
       cursor: pointer;
     }
   }

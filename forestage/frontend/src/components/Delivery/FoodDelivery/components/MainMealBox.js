@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Reveal, Tween } from 'react-gsap'
+import Aos from 'aos'
 
 function MainMealBox(props) {
   const { id, name, price, image_realistic, dishCount, setDishCount } = props
@@ -20,9 +21,12 @@ function MainMealBox(props) {
     setDishCount(newDishCount)
   }
   // console.log(dishCount)
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
   return (
     <>
-      <div className="MainMealBox">
+      <div className="MainMealBox" data-aos="flip-down">
         <figure className="sub-border">
           <img
             src={'http://localhost:3000/images/common/food/' + image_realistic}

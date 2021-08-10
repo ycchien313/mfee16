@@ -5,6 +5,7 @@ import Delivery from '../../components/Delivery/FoodDelivery/components/Delivery
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import $ from 'jquery'
+import 'aos/dist/aos.css'
 
 function Del() {
   const [authToken, setAuthToken] = useState()

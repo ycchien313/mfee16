@@ -424,14 +424,14 @@ router.get('/reservation/recent/:memberId', async (req, res) => {
 
         // 將得到數量跟要傳 dbReservation 合併
         for (let i = 0; i < dbReservation.length; i++) {
-            for (let j = i; j < dbReservation.length; j++) {
+            for (let j = 0; j < dbReservation.length; j++) {
                 if (
                     dbReservation[i].reservation_id ===
-                    dbReservationDish[i].reservation_id
+                    dbReservationDish[j].reservation_id
                 ) {
                     dbReservation[i] = {
                         ...dbReservation[i],
-                        dish_count: dbReservationDish[i].dish_count,
+                        dish_count: dbReservationDish[j].dish_count,
                     };
                     j = dbReservation.length;
                 }

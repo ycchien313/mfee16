@@ -23,6 +23,7 @@ function Aside(props) {
     setAsideHeight(asideH)
 
     window.removeEventListener('resize', calcAsideHeight)
+    console.log('remove event')
   }
 
   function controlSvgColor() {
@@ -95,7 +96,7 @@ function Aside(props) {
   useLayoutEffect(() => {
     //畫面 render 後設定高度
     calcAsideHeight()
-
+    console.log('add event')
     //設定瀏覽器改變大小後的高度
     window.addEventListener('resize', calcAsideHeight)
 

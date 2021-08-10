@@ -309,12 +309,12 @@
 .messagenum{
     position: absolute;
     top: 2vw;
-    right: 4.5vw;
+    right: 7.2vw;
 }
 .likenum{
     position: absolute;
     top: 1.9vw;
-    right: 0.1vw;
+    right: 1.1vw;
 }
 @media screen and (max-width:500px){
     .peoplesay1{
@@ -431,12 +431,14 @@
     }
     .messagenum{
 top: 3vw;
-right: 3vw;
+right: 6vw;
     }
     .likenum{
 top: 2.7vw;
-right: -5.5vw;
+right: -3.5vw;
     }
 }
-
+.nonedis{
+    display: none;
+}
 }

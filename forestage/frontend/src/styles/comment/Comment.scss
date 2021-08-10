@@ -483,6 +483,7 @@
     }
     .editor h4 {
       margin: 0;
+     
     }
     .editor p {
       height: 15px;
@@ -610,6 +611,12 @@
     }
     .article h4 {
       width: 170px;
+      height: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -697,7 +704,7 @@
     font-size: 12px;
     position: absolute;
     // bottom: 0vw;
-    right: 1.5vw;
+    right: 2vw;
     // z-index: 100;
   }
   .pagebutton {
@@ -784,5 +791,7 @@
     cursor: pointer;
     z-index: 10;
   }
-
+  .nonedis{
+    display: none;
+}
 }

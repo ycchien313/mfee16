@@ -87,8 +87,8 @@ function MapArticle(props) {
           </div>
 
           <div class="share">
-            <a
-              href={`https://www.facebook.com/sharer/sharer.php?u=localhost:3000/comment/${article1}`}
+            <a class="nonedis"
+              href={`https://www.facebook.com/sharer/sharer.php?u=http://125.228.48.135/comment/${article1}`}
             >
               <img
                 src="http://localhost:3000/images/comment/share.svg"

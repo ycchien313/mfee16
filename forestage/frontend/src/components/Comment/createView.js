@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react'
 import '../../styles/comment/view.scss'
 
 function Createview(props) {
+  const [memberavatar, setMemberAvatar] = useState('')
+
   const {
     boom3,
     setBoom3,
@@ -24,7 +26,18 @@ function Createview(props) {
           authorization: `Bearer ${authToken}`,
         },
       })
-      .then((result) => {})
+      .then((result) => {
+        axios
+          .get(
+            `http://localhost:3001/comment/memberavatar/${result.data.memberId}`
+          )
+          .then((result) => {
+            // setMessageNum(result.data.length)
+            console.log(result.data)
+            setMemberAvatar(result.data[0].avatar)
+            // setMemberId(result.data)
+          })
+      })
   }
   useEffect(() => {
     getMemberId()
@@ -51,7 +64,7 @@ function Createview(props) {
                 <div class="titleleft">
                   <div class="memberimg">
                     <img
-                      src="http://localhost:3000/images/comment/Logo.png"
+                      src={`http://localhost:3001${memberavatar}`}
                       alt=""
                     ></img>
                   </div>
@@ -97,7 +110,7 @@ function Createview(props) {
               </div>
               <div class="sharegroup">
                 <img
-                  class="cursor"
+                  class="cursor nonedis"
                   src="http://localhost:3000/images/comment/share.svg"
                   alt=""
                 ></img>
@@ -109,7 +122,7 @@ function Createview(props) {
                 ></img>
 
                 <i
-                class="fas fa-heart size cursor"
+                  class="fas fa-heart size cursor"
                   src="http://localhost:3000/images/comment/heart.svg"
                   alt=""
                   onClick={(e) => {

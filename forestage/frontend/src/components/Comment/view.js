@@ -26,7 +26,7 @@ function View(props) {
   const [message, setMessage] = useState([])
   const [likeCount, setLikeCount] = useState(boomArticle.likes)
   const [likes, setLikes] = useState(true)
-  const [memberavatar, setMemberAvatar] = useState("")
+  const [memberavatar, setMemberAvatar] = useState('')
   const [insertMessage, setInsertMessage] = useState({
     message: '',
     member_id: 0,
@@ -160,7 +160,7 @@ function View(props) {
                 <div class="titleleft">
                   <div class="memberimg">
                     <img
-                      src={`http://127.0.0.1:3001/members/${boomArticle.avatar}`}
+                      src={`http://127.0.0.1:3001${boomArticle.avatar}`}
                       alt=""
                     ></img>
                   </div>
@@ -207,7 +207,7 @@ function View(props) {
               </div>
               <div class="sharegroup">
                 <img
-                  class="cursor"
+                  class="cursor nonedis"
                   src="http://localhost:3000/images/comment/share.svg"
                   alt=""
                 ></img>
@@ -249,10 +249,7 @@ function View(props) {
             </div>
             <div class="peoplesay1">
               <div class="sayimg2">
-                <img
-                  src={`http://localhost:3001/members/${memberavatar}`}
-                  alt=""
-                ></img>
+                <img src={`http://localhost:3001${memberavatar}`} alt=""></img>
               </div>
               <div class="whatusay">
                 <input
@@ -267,9 +264,9 @@ function View(props) {
                 <button
                   class="send cursor"
                   onClick={() => {
-                    if(ifloginn && insertMessage.message !== ''){
+                    if (ifloginn && insertMessage.message !== '') {
                       insertMessagefn()
-                    }else if(ifloginn === false){
+                    } else if (ifloginn === false) {
                       setShowAuthModal(true)
                     }
                     // if (insertMessage.message !== '') {
@@ -277,8 +274,6 @@ function View(props) {
                     // }
                     getMessage()
                     cleanMessage()
-                    
-                
                   }}
                 ></button>
               </div>
@@ -289,7 +284,7 @@ function View(props) {
                   <div class="peoplesay">
                     <div class="sayimg">
                       <img
-                        src={`http://127.0.0.1:3001/members/${v.avatar}`}
+                        src={`http://127.0.0.1:3001${v.avatar}`}
                         alt=""
                       ></img>
                     </div>
@@ -297,7 +292,7 @@ function View(props) {
                       <div class="rwdsay">
                         <div class="sayimg1">
                           <img
-                            src={`http://127.0.0.1:3001/members/${v.avatar}`}
+                            src={`http://127.0.0.1:3001${v.avatar}`}
                             alt=""
                           ></img>
                         </div>

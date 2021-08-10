@@ -119,7 +119,7 @@ function Delivery(props) {
       // cart，轉成陣列
       const cart = JSON.parse(localStorage.getItem('cart'))
       // console.log(cart, 'cart')
-      if (cart !== undefined && null) {
+      if (cart !== undefined && cart !== null) {
         cart.forEach((v, i) => {
           // console.log('v:', v)
           for (let i = 0; i < dishes.length; i++) {

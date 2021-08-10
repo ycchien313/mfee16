@@ -10,7 +10,7 @@ function Map(props) {
   const [distOptions, setDistOptions] = useState([
     { dist: '中壢區', fee: '300' },
     { dist: '觀音區', fee: '400' },
-    { dist: '中壢區', fee: '400' },
+    { dist: '大園區', fee: '400' },
     { dist: '楊梅區', fee: '400' },
     { dist: '蘆竹區', fee: '400' },
     { dist: '桃園區', fee: '400' },

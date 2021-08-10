@@ -1,58 +1,7 @@
 .musicTestResult {
   @import '../common/global.scss';
   @import '../common/normalize.scss';
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: 400;
-  }
-  h1,
-  .h1 {
-    font-size: calc(1rem + 1.25vw);
-  }
-  h2,
-  .h2 {
-    font-size: calc(1rem + 0.85vw);
-  }
-  h3,
-  .h3 {
-    font-size: calc(1rem + 0.45vw);
-  }
-  h4,
-  .h4 {
-    font-size: calc(1rem + 0.2vw);
-  }
-  p,
-  span {
-    font-size: 1rem;
-  }
-  input,
-  .input {
-    height: 2rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #ffffff73;
-    font-size: 16px;
-    padding: 8px 0 8px 10px;
-    box-sizing: border-box;
-  }
-  .guide-button {
-    width: 150px;
-    height: 50px;
-    border: none;
-    border-radius: 25px;
-    font-size: 20px;
-    font-family: $zh-tw-noto;
-    color: #ffffff;
-    /* padding: ; */
-    box-shadow: rgba(50, 50, 50, 0.5) 0px 3px 6px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 1px 0 21px;
-  }
+
   .guide-button:active {
     box-shadow: none;
   }
@@ -88,7 +37,7 @@
     /* width: 100vw; */
     background-size: cover;
   }
-  .wrapper {
+  .wrapper-m {
     margin-left: 16.66vw;
     margin-right: 16.66vw;
     padding-bottom: 3vw;
@@ -107,7 +56,7 @@
   .link {
     text-decoration: none;
   }
-  .music-main .title {
+  .music-main .title1 {
     padding-top: 110px;
   }
 

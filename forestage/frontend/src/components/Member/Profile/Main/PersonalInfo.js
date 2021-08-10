@@ -58,7 +58,7 @@ function PersonalInfo(props) {
       const status = data.status
       const avatar = () => {
         if (data.data[0].avatar !== null) {
-          return data.data[0].avatar.substring(0, 4) === 'http'
+          return data.data[0].avatar.includes('http')
             ? data.data[0].avatar
             : `http://127.0.0.1:3001/${data.data[0].avatar}`
         }

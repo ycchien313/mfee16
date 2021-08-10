@@ -50,7 +50,7 @@ router.get('/checkout/memberInfo', async (req, res) => {
 });
 
 router.post('/checkout/send', async(req, res)=>{
-    console.log("上面")
+    // console.log("上面")
 
     let insertResData = req.body.insertResData
     // console.log("insertResData:",insertResData)
@@ -332,7 +332,7 @@ router.put('/update', async(req, res)=>{
     let insertDish = await db.connection.queryAsync(insertDishSql, [
         newDishList,
     ]);
-    console.log(insertDish)
+    // console.log(insertDish)
 })
 
 

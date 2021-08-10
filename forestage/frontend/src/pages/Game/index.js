@@ -105,19 +105,19 @@ function Game() {
   function getQ() {
     switch (questionNumber) {
       case 1:
-        setQuestion('你覺得做什麼事適合聽這首歌呢')
+        setQuestion('你覺得做什麼事適合聽這首歌呢?')
         break
       case 2:
-        setQuestion('這首歌令你想到什麼')
+        setQuestion('這首歌令你想到什麼?')
         break
       case 3:
-        setQuestion('你喜歡哪首歌3')
+        setQuestion('這首歌讓你想做什麼?')
         break
       case 4:
-        setQuestion('哪首歌令你感到開心4')
+        setQuestion('這首歌適合哪種酒?')
         break
       case 5:
-        setQuestion('哪首歌令你感到開心5')
+        setQuestion('這首歌讓你覺得?')
         break
       default:
         break
@@ -133,22 +133,22 @@ function Game() {
         setAnswerA(newAnsA)
         break
       case 2:
-        newAnsA.text = '胡'
+        newAnsA.text = '湖畔'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
       case 3:
-        newAnsA.text = '3-A'
+        newAnsA.text = '散步'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
       case 4:
-        newAnsA.text = '4-A'
+        newAnsA.text = '紅酒'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
       case 5:
-        newAnsA.text = '5-A'
+        newAnsA.text = '放鬆'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
@@ -165,22 +165,22 @@ function Game() {
         setAnswerB(newAnsB)
         break
       case 2:
-        newAnsB.text = '2-B'
+        newAnsB.text = '小鳥'
         newAnsB.value = 2
         setAnswerB(newAnsB)
         break
       case 3:
-        newAnsB.text = '3-B'
+        newAnsB.text = '跑步'
         newAnsB.value = 2
         setAnswerB(newAnsB)
         break
       case 4:
-        newAnsB.text = '4-B'
+        newAnsB.text = '摩西多'
         newAnsB.value = 2
         setAnswerB(newAnsB)
         break
       case 5:
-        newAnsB.text = '5-B'
+        newAnsB.text = '低潮'
         newAnsB.value = 2
         setAnswerB(newAnsB)
         break
@@ -197,22 +197,22 @@ function Game() {
         setAnswerC(newAnsC)
         break
       case 2:
-        newAnsC.text = '2-C'
+        newAnsC.text = '微風'
         newAnsC.value = 3
         setAnswerC(newAnsC)
         break
       case 3:
-        newAnsC.text = '3-C'
+        newAnsC.text = '兜風'
         newAnsC.value = 3
         setAnswerC(newAnsC)
         break
       case 4:
-        newAnsC.text = '4-C'
+        newAnsC.text = '威士忌'
         newAnsC.value = 3
         setAnswerC(newAnsC)
         break
       case 5:
-        newAnsC.text = '5-C'
+        newAnsC.text = '難過'
         newAnsC.value = 3
         setAnswerC(newAnsC)
         break

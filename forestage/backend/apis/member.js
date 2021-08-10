@@ -212,7 +212,7 @@ router.get('/delivery/recent/:memberId', async (req, res, next) => {
             'JOIN dish ' +
             'ON delivery_dish_mapping.dish_id = dish.dish_id) AS dishToDDM ' +
             'ON delivery.delivery_id = dishToDDM.delivery_id ' +
-            'WHERE member_id = ? AND delivery_time < CURDATE() AND status <> "已取消" ' +
+            'WHERE member_id = ? AND delivery_time >= CURDATE() AND status <> "已取消" ' +
             'GROUP BY dish_id, delivery_id ' +
             'ORDER BY delivery_time';
         const dbDelivery = await conn.queryAsync(sql, [memberId]);

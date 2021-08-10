@@ -92,485 +92,481 @@
       left: 25%;
     }
   }
-}
+  /* main */
+  .container-big {
+    margin-left: 8.33vw;
+    margin-right: 8.33vw;
+  }
+  /* res-check共用 */
+  .res-check hr {
+    border-top: 1px solid $primary-lightbrown;
+    border-bottom: none;
+    width: 100%;
+    margin: 0;
+  }
 
-/* main */
-.container-big {
-  margin-left: 8.33vw;
-  margin-right: 8.33vw;
-}
-/* res-check共用 */
-.res-check hr {
-  border-top: 1px solid $primary-lightbrown;
-  border-bottom: none;
-  width: 100%;
-  margin: 0;
-}
+  .res-check h3 {
+    margin-bottom: 1.14vw;
+    color: $secondary-green-dark;
+    font-weight: 700;
+  }
 
-.res-check h3 {
-  margin-bottom: 1.14vw;
-  color: $secondary-green-dark;
-  font-weight: 700;
-}
+  .res-check .h4 {
+    color: $primary-lightbrown;
+  }
 
-.res-check .h4 {
-  color: $primary-lightbrown;
-}
-
-/* bread crumb */
-.bread-crumb {
-  margin-top: 2.08vw;
-  margin-bottom: 2.65vw;
-  display: block;
-  width: 100%;
-  color: $secondary-green;
-  font-family: $zh-tw-noto;
-}
-
-.bread-crumb a:nth-child(1) {
-  color: #ccc;
-  text-decoration: none;
-}
-
-.bread-crumb a:nth-child(2) {
-  color: $secondary-green;
-  text-decoration: none;
-}
-
-@media screen and (max-width: 768px) {
+  /* bread crumb */
   .bread-crumb {
-    display: none;
+    margin-top: 2.08vw;
+    margin-bottom: 2.65vw;
+    display: block;
+    width: 100%;
+    color: $secondary-green;
+    font-family: $zh-tw-noto;
   }
-}
 
-/* 訂位內容 */
-.res-content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.res-content .content {
-  display: flex;
-  margin-top: 2.65vw;
-  margin-bottom: 3.7vw;
-}
-
-.res-content .singer-pic {
-  width: 13.02vw;
-  height: 13.02vw;
-  margin: 0 2.24vw 0 0;
-}
-
-.res-content .singer-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.res-content .name {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  margin-right: 1.04vw;
-}
-
-.res-content .detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
-
-.res-content .date {
-  color: $accent-red;
-}
-.res-content .text {
-  display: flex;
-}
-
-@media screen and (max-width: 768px) {
-  .res-content h3 {
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 19px;
+  .bread-crumb a:nth-child(1) {
+    color: #ccc;
+    text-decoration: none;
   }
-  .res-content hr {
-    margin-bottom: 35px;
+
+  .bread-crumb a:nth-child(2) {
+    color: $secondary-green;
+    text-decoration: none;
   }
-  .res-content .content {
+
+  @media screen and (max-width: 768px) {
+    .bread-crumb {
+      display: none;
+    }
+  }
+
+  /* 訂位內容 */
+  .res-content {
+    display: flex;
     flex-direction: column;
-    align-items: center;
+    width: 100%;
   }
+
+  .res-content .content {
+    display: flex;
+    margin-top: 2.65vw;
+    margin-bottom: 3.7vw;
+  }
+
   .res-content .singer-pic {
-    width: 250px;
-    height: 250px;
-    margin-bottom: 20px;
-  }
-  .res-content .h4 {
-    margin: 15px 0;
-  }
-}
-
-/* 餐點內容 */
-.dish-content .content {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 2.65vw;
-  margin-bottom: 3.7vw;
-}
-
-.dish-content .name {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2.6vw;
-}
-
-.dish-content .name .h4 {
-  color: $secondary-green-dark;
-}
-
-.dish-content .dish-name {
-  width: 50.26vw;
-}
-
-.dish-content .detail {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.61vw;
-}
-
-.dish-content .detail .dish {
-  display: flex;
-  align-items: center;
-}
-
-.dish-content .dish-pic {
-  width: 6.25vw;
-  height: 4.17vw;
-  margin: 0 9.37vw 0 0;
-}
-
-.dish-content .detail .dish-name {
-  width: 33.5vw;
-}
-
-.dish-content .dish-pic img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.price-count {
-  width: 38.17vw;
-  display: flex;
-  margin-top: 3.07vw;
-  align-self: flex-end;
-}
-
-.price-count-name {
-  display: flex;
-  flex-direction: column;
-  width: 17.34vw;
-}
-.price-count-name span {
-  margin-bottom: 0.83vw;
-  line-height: 2rem;
-}
-
-.price-count-detail {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 20.83vw;
-}
-
-.price-count-detail div {
-  margin-bottom: 0.83vw;
-  line-height: 2rem;
-}
-
-.price-count-detail div:nth-child(1) {
-  margin-bottom: 0.42vw;
-}
-
-.price-count-detail select {
-  margin-bottom: 0.42vw;
-  padding: 0.52vw 0 0.52vw 10px;
-  width: 25.83vw;
-  font-size: calc(1rem + 0.2vw);
-  border-radius: 5px;
-  border: 1px solid $primary-lightbrown;
-}
-
-.price-count-detail select:focus {
-  outline: 1px solid $primary-lightbrown;
-}
-
-.price-count-detail select option {
-  height: 2rem;
-  font-size: calc(1rem + 0.2vw);
-
-}
-
-.price-count-detail .total span:nth-child(1) {
-  color: $secondary-green-dark;
-}
-
-.price-count-detail .discount span:nth-child(1) {
-  color: $accent-red;
-}
-
-.price-count-detail .discount span:nth-child(1) {
-  color: $accent-red;
-}
-.price-count-detail select option:disabled {
-  color: #ccc;
-  font-style:italic;
-}
-
-@media screen and (max-width: 768px) {
-  .dish-content h3 {
-    margin: 50px 0 19px 0;
-    text-align: center;
+    width: 13.02vw;
+    height: 13.02vw;
+    margin: 0 2.24vw 0 0;
   }
 
+  .res-content .singer-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .res-content .name {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right: 1.04vw;
+  }
+
+  .res-content .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .res-content .date {
+    color: $accent-red;
+  }
+  .res-content .text {
+    display: flex;
+  }
+
+  @media screen and (max-width: 768px) {
+    .res-content h3 {
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 19px;
+    }
+    .res-content hr {
+      margin-bottom: 35px;
+    }
+    .res-content .content {
+      flex-direction: column;
+      align-items: center;
+    }
+    .res-content .singer-pic {
+      width: 250px;
+      height: 250px;
+      margin-bottom: 20px;
+    }
+    .res-content .h4 {
+      margin: 15px 0;
+    }
+  }
+
+  /* 餐點內容 */
   .dish-content .content {
-    box-sizing: border-box;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .dish-content hr.top {
-    margin-bottom: 19px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 2.65vw;
+    margin-bottom: 3.7vw;
   }
 
   .dish-content .name {
-    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.6vw;
   }
 
-  .dish-content .name .dish-name {
-    width: 33.5vw;
+  .dish-content .name .h4 {
+    color: $secondary-green-dark;
+  }
+
+  .dish-content .dish-name {
+    width: 50.26vw;
+  }
+
+  .dish-content .detail {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.61vw;
+  }
+
+  .dish-content .detail .dish {
+    display: flex;
+    align-items: center;
   }
 
   .dish-content .dish-pic {
-    display: none;
+    width: 6.25vw;
+    height: 4.17vw;
+    margin: 0 9.37vw 0 0;
   }
-  .dish-content .detail {
-    margin-bottom: 23px;
+
+  .dish-content .detail .dish-name {
+    width: 33.5vw;
   }
-  .price-count {
-    display: flex;
+
+  .dish-content .dish-pic img {
     width: 100%;
-    justify-content: space-between;
-    align-self: unset;
+    height: 100%;
+    object-fit: cover;
   }
-  .price-count-detail div {
-    margin-bottom: 0;
+
+  .price-count {
+    width: 38.17vw;
+    display: flex;
+    margin-top: 3.07vw;
+    align-self: flex-end;
   }
-  .price-count-detail select {
-    width: 200px;
-  }
-  .price-count .after-discount {
-    white-space: nowrap;
+
+  .price-count-name {
+    display: flex;
+    flex-direction: column;
+    width: 17.34vw;
   }
   .price-count-name span {
-    line-height: 2.5rem;
+    margin-bottom: 0.83vw;
+    line-height: 2rem;
   }
-  .price-count-detail .total {
-    line-height: 2.5rem;
-  }
-  .price-count-detail select {
-    height: 2.5rem;
-    margin-top: 2px;
-    margin-bottom: 10px;
-  }
-  .price-count-detail .discount {
-    margin-top: -2px;
-    margin-bottom: 10px;
-  }
-  .price-count-detail select option {
-    font-size: 1.17rem;
-  
-  }
-  // .price-count-detail select{
-  //   font-size:5px;
-  
-  // }
-}
 
-/* 訂位人資料 */
-.res-person .head{
-  display: flex;
-  align-items: center;
-}
-.res-person .head button{
-  background: $accent-orange;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  box-shadow: $box-shadow;
-  margin-left: 20px;
-  color: white;
-  font-family: $zh-tw-noto;
-  cursor: pointer;
-  &:active{
-    box-shadow: none;
-  }
-}
-@media screen and (max-width:768px){
-  .res-person .head{
-    // display: flex;
+  .price-count-detail {
+    display: flex;
+    flex-direction: column;
     align-items: flex-end;
-    // margin-bottom: 20px;
+    width: 20.83vw;
   }
-  .res-person .head button{
-    margin-bottom: 10px;
 
+  .price-count-detail div {
+    margin-bottom: 0.83vw;
+    line-height: 2rem;
   }
-}
-.res-person .content {
-  display: flex;
-  margin-top: 2.65vw;
-  /* margin-bottom: 3.7vw; */
-}
 
-.res-person .title {
-  display: flex;
-  flex-direction: column;
-  margin-right: 6.25vw;
-}
-.res-person .title span {
-  margin-bottom: 0.83vw;
-  line-height: 2rem;
-}
+  .price-count-detail div:nth-child(1) {
+    margin-bottom: 0.42vw;
+  }
 
-.res-person .detail {
-  display: flex;
-  flex-direction: column;
-}
+  .price-count-detail select {
+    margin-bottom: 0.42vw;
+    padding: 0.52vw 0 0.52vw 10px;
+    width: 25.83vw;
+    font-size: calc(1rem + 0.2vw);
+    border-radius: 5px;
+    border: 1px solid $primary-lightbrown;
+  }
 
-.res-person .detail input {
-  margin-bottom: 0.83vw;
-  width: 18.38vw;
-}
+  .price-count-detail select:focus {
+    outline: 1px solid $primary-lightbrown;
+  }
 
-.res-person .detail textarea {
-  width: 36.77vw;
-  height: 5.36vw;
-}
+  .price-count-detail select option {
+    height: 2rem;
+    font-size: calc(1rem + 0.2vw);
+  }
 
-@media screen and (max-width: 768px) {
+  .price-count-detail .total span:nth-child(1) {
+    color: $secondary-green-dark;
+  }
+
+  .price-count-detail .discount span:nth-child(1) {
+    color: $accent-red;
+  }
+
+  .price-count-detail .discount span:nth-child(1) {
+    color: $accent-red;
+  }
+  .price-count-detail select option:disabled {
+    color: #ccc;
+    font-style: italic;
+  }
+
+  @media screen and (max-width: 768px) {
+    .dish-content h3 {
+      margin: 50px 0 19px 0;
+      text-align: center;
+    }
+
+    .dish-content .content {
+      box-sizing: border-box;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .dish-content hr.top {
+      margin-bottom: 19px;
+    }
+
+    .dish-content .name {
+      margin-bottom: 30px;
+    }
+
+    .dish-content .name .dish-name {
+      width: 33.5vw;
+    }
+
+    .dish-content .dish-pic {
+      display: none;
+    }
+    .dish-content .detail {
+      margin-bottom: 23px;
+    }
+    .price-count {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-self: unset;
+    }
+    .price-count-detail div {
+      margin-bottom: 0;
+    }
+    .price-count-detail select {
+      width: 200px;
+    }
+    .price-count .after-discount {
+      white-space: nowrap;
+    }
+    .price-count-name span {
+      line-height: 2.5rem;
+    }
+    .price-count-detail .total {
+      line-height: 2.5rem;
+    }
+    .price-count-detail select {
+      height: 2.5rem;
+      margin-top: 2px;
+      margin-bottom: 10px;
+    }
+    .price-count-detail .discount {
+      margin-top: -2px;
+      margin-bottom: 10px;
+    }
+    .price-count-detail select option {
+      font-size: 1.17rem;
+    }
+    // .price-count-detail select{
+    //   font-size:5px;
+
+    // }
+  }
+
+  /* 訂位人資料 */
+  .res-person .head {
+    display: flex;
+    align-items: center;
+  }
+  .res-person .head button {
+    background: $accent-orange;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: $box-shadow;
+    margin-left: 20px;
+    color: white;
+    font-family: $zh-tw-noto;
+    cursor: pointer;
+    &:active {
+      box-shadow: none;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .res-person .head {
+      // display: flex;
+      align-items: flex-end;
+      // margin-bottom: 20px;
+    }
+    .res-person .head button {
+      margin-bottom: 10px;
+    }
+  }
   .res-person .content {
-    justify-content: space-between;
+    display: flex;
+    margin-top: 2.65vw;
+    /* margin-bottom: 3.7vw; */
   }
-  .res-person h3 {
-    margin: 50px 0 19px 0;
-    text-align: center;
+
+  .res-person .title {
+    display: flex;
+    flex-direction: column;
+    margin-right: 6.25vw;
   }
   .res-person .title span {
     margin-bottom: 0.83vw;
-    line-height: 2.5rem;
+    line-height: 2rem;
   }
+
   .res-person .detail {
-    width: 80%;
+    display: flex;
+    flex-direction: column;
   }
+
   .res-person .detail input {
-    margin-top: 0.83vw;
     margin-bottom: 0.83vw;
-    width: 100%;
+    width: 18.38vw;
   }
+
   .res-person .detail textarea {
-    margin-top: 0.83vw;
-    margin-bottom: 0.83vw;
-    width: 100%;
-    height: 100px;
+    width: 36.77vw;
+    height: 5.36vw;
   }
-}
 
-/* 確認按鈕與訊息 */
-.check {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-.info-text {
-  margin-top: 15px;
-  color: $accent-red;
-}
-.buttons {
-  display: flex;
-  margin-top: 2.08vw;
-  margin-bottom: 5.2vw;
-}
-.buttons .back {
-  margin-right: 1.87vw;
-  background: $primary-lightbrown;
-}
-.buttons .back:active {
-  background: darken($primary-lightbrown, 10%);
-}
-.check .guide-button {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px;
-}
+  @media screen and (max-width: 768px) {
+    .res-person .content {
+      justify-content: space-between;
+    }
+    .res-person h3 {
+      margin: 50px 0 19px 0;
+      text-align: center;
+    }
+    .res-person .title span {
+      margin-bottom: 0.83vw;
+      line-height: 2.5rem;
+    }
+    .res-person .detail {
+      width: 80%;
+    }
+    .res-person .detail input {
+      margin-top: 0.83vw;
+      margin-bottom: 0.83vw;
+      width: 100%;
+    }
+    .res-person .detail textarea {
+      margin-top: 0.83vw;
+      margin-bottom: 0.83vw;
+      width: 100%;
+      height: 100px;
+    }
+  }
 
-.check .guide-button img {
-  filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.3));
-}
-
-@media screen and (max-width: 768px) {
+  /* 確認按鈕與訊息 */
   .check {
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
   }
-  .check .guide-button {
-    width: 110px;
-    height: 32px;
-    font-size: 14px;
-    margin: 6px 0 6px 0;
-    justify-content: space-between;
-  }
-  .check .guide-button img {
-    height: 20px;
-    width: 20px;
+  .info-text {
+    margin-top: 15px;
+    color: $accent-red;
   }
   .buttons {
     display: flex;
-    width: 100%;
-    justify-content: space-between;
+    margin-top: 2.08vw;
+    margin-bottom: 5.2vw;
   }
-}
+  .buttons .back {
+    margin-right: 1.87vw;
+    background: $primary-lightbrown;
+  }
+  .buttons .back:active {
+    background: darken($primary-lightbrown, 10%);
+  }
+  .check .guide-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+  }
 
-@media screen and (max-width: 768px) {
-  html {
-    font-size: 12px;
+  .check .guide-button img {
+    filter: drop-shadow(0px 3px 3px rgba(50, 50, 50, 0.3));
   }
-  h1,
-  .h1 {
-    font-size: 1.67rem;
+
+  @media screen and (max-width: 768px) {
+    .check {
+      align-items: start;
+    }
+    .check .guide-button {
+      width: 110px;
+      height: 32px;
+      font-size: 14px;
+      margin: 6px 0 6px 0;
+      justify-content: space-between;
+    }
+    .check .guide-button img {
+      height: 20px;
+      width: 20px;
+    }
+    .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
   }
-  h2,
-  .h2 {
-    font-size: 1.5rem;
-  }
-  h3,
-  .h3 {
-    font-size: 1.33rem;
-  }
-  h4,
-  .h4 {
-    font-size: 1.17rem;
-  }
-  p,
-  .p {
-    font-size: 1rem;
-  }
-  span,
-  .span {
-    font-size: 1rem;
+
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 12px;
+    }
+    h1,
+    .h1 {
+      font-size: 1.67rem;
+    }
+    h2,
+    .h2 {
+      font-size: 1.5rem;
+    }
+    h3,
+    .h3 {
+      font-size: 1.33rem;
+    }
+    h4,
+    .h4 {
+      font-size: 1.17rem;
+    }
+    p,
+    .p {
+      font-size: 1rem;
+    }
+    span,
+    .span {
+      font-size: 1rem;
+    }
   }
 }

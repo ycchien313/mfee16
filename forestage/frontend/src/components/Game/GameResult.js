@@ -71,8 +71,8 @@ function GameResult(props) {
       <Header />
       <div className="musicTestResult">
         <main className="music-main">
-          <div className="wrapper">
-            <div className="title">
+          <div className="wrapper-m">
+            <div className="title1">
               <span className="h2 elfin"></span>
               <span className="h2 test-title"></span>
             </div>

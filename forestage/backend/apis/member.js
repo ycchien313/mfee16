@@ -410,9 +410,9 @@ router.get('/reservation/recent/:memberId', async (req, res) => {
     try {
         // 執行 SQL，查詢近期(今天以後)會員的所有訂位資料
         sql =
-            'SELECT res.member_id, reservation_id, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
+            'SELECT RES.member_id, RES.reservation_id, DATE_FORMAT(RES.date, "%Y/%m/%d") AS date, singer.name AS singer_name, seat.name AS seat_name, attendance, total ' +
             'FROM reservation AS RES, seat, singer_calendar, singer ' +
-            'WHERE res.member_id = ? AND RES.seat_id = seat.seat_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.date >= CURDATE() AND status <> "已取消" ORDER BY date';
+            'WHERE RES.member_id = ? AND RES.seat_id = seat.seat_id AND RES.date = singer_calendar.date AND singer_calendar.singer_id = singer.singer_id AND RES.date >= CURDATE() AND status <> "已取消" ORDER BY date';
         dbReservation = await conn.queryAsync(sql, memberId);
 
         // 執行 SQL，查詢近期(今天以後)會員訂位的餐點數量資料

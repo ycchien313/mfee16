@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { withRouter } from 'react-router-dom'
-import { HashLink as Link } from 'react-router-hash-link' 
+import { HashLink as Link } from 'react-router-hash-link'
 import '../../../../styles/member/aside.scss'
 
 function Aside(props) {

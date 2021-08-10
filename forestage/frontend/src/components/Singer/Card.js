@@ -9,10 +9,7 @@ function Card(props) {
         <div className="comment-text">
           <div className="user-com">
             <div className="user">
-              <img
-                className="userhead"
-                src="http://localhost:3000/images/singer/Group 885.png"
-              />
+              <img className="userhead" src={`http://localhost:3001${img}`} />
               <p>{name}</p>
             </div>
             <div className="com-singer">

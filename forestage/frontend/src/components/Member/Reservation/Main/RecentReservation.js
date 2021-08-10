@@ -4,6 +4,8 @@ import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import RecentReservationDetailModal from './RecentReservationDetailModal'
 import RecentReservationCancelModal from './RecentReservationCancelModal'
+import aos from 'aos'
+import 'aos/dist/aos.css'
 
 function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
@@ -45,6 +47,7 @@ function RecentReservation(props) {
   }
 
   useEffect(() => {
+    aos.init()
     setDidMount(false)
   }, [])
 
@@ -182,7 +185,7 @@ function RecentReservation(props) {
             orders.map((v, i) => {
               return (
                 <>
-                  <div className="recent-content" key={i}>
+                  <div className="recent-content" key={i} data-aos="fade-right">
                     <div className="content-container">
                       <div className="content-head">
                         <h4 className="content-head-title">

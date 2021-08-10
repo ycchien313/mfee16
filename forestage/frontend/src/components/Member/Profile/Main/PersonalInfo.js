@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import axios from 'axios'
 // import aos from 'aos'
+// import 'aos/dist/aos.css'
+
 import AuthContext from '../../../Auth/AuthContext'
 
 function PersonalInfo(props) {
@@ -158,7 +160,6 @@ function PersonalInfo(props) {
 
   // componentDidMount
   useEffect(() => {
-    // aos.init()
     getMember()
     setDidMount(false)
   }, [])

@@ -7,7 +7,21 @@ import { Tween, SplitChars } from 'react-gsap'
 
 function Map(props) {
   const { address, setAddress, setFee, date, setDate, time, setTime } = props
-
+  const [distOptions, setDistOptions] = useState([
+    { dist: '中壢區', fee: '300' },
+    { dist: '觀音區', fee: '400' },
+    { dist: '中壢區', fee: '400' },
+    { dist: '楊梅區', fee: '400' },
+    { dist: '蘆竹區', fee: '400' },
+    { dist: '桃園區', fee: '400' },
+    { dist: '新屋區', fee: '400' },
+    { dist: '八德區', fee: '400' },
+    { dist: '平鎮區', fee: '400' },
+    { dist: '龜山區', fee: '450' },
+    { dist: '龍潭區', fee: '450' },
+    { dist: '大溪區', fee: '450' },
+    { dist: '復興區', fee: '600' },
+  ])
   const [min, setMin] = useState('')
 
   function setAddressDist(e) {
@@ -17,7 +31,10 @@ function Map(props) {
     }
     setAddress(newAddress)
   }
+  //
+  // function setMapArea() {}
 
+  //
   $('.mapFee').on('click', function () {
     let getTarget = $(this).data('fee')
     setMin(getTarget)
@@ -50,19 +67,36 @@ function Map(props) {
                 className="input-disable"
                 disabled
               />
-              <input
+              <select
                 type="text"
                 className="takeoutInput add"
-                defaultValue={address.dist}
+                id="selectAddw"
                 placeholder="請輸入地區"
                 onChange={(e) => {
+                  setFee(e.target.value)
+                  setMin(e.target.value)
+                  let addAddress = document.getElementById('selectAddw')
+                  let index = addAddress.selectedIndex
+                  let MapAdd = addAddress.options[index].text
                   let newAddress = {
                     ...address,
-                    dist: e.target.value,
+                    dist: MapAdd,
                   }
                   setAddress(newAddress)
                 }}
-              />
+              >
+                {distOptions.map((v, i) => {
+                  return address.dist === v.dist ? (
+                    <option key={i} value={v.fee} selected>
+                      {v.dist}
+                    </option>
+                  ) : (
+                    <option key={i} value={v.fee}>
+                      {v.dist}
+                    </option>
+                  )
+                })}
+              </select>
             </div>
             <input
               type="text"
@@ -703,19 +737,53 @@ function Map(props) {
                 className="input-disable"
                 disabled
               />
-              <input
+              <select
                 type="text"
-                defaultValue={address.dist}
+                // defaultValue={address.dist}
                 className="takeoutInput add"
+                id="selectAddw"
                 placeholder="請輸入地區"
                 onChange={(e) => {
+                  setFee(e.target.value)
+                  setMin(e.target.value)
+                  //   //
+                  let addAddress = document.getElementById('selectAddw')
+                  let index = addAddress.selectedIndex
+                  let MapAdd = addAddress.options[index].text
+                  // console.log(MapAdd, 'MapAdd')
+                  // console.log(index, 'index')
                   let newAddress = {
                     ...address,
-                    dist: e.target.value,
+                    dist: MapAdd,
                   }
                   setAddress(newAddress)
                 }}
-              />
+              >
+                {distOptions.map((v, i) => {
+                  return address.dist === v.dist ? (
+                    <option key={i} value={v.fee} selected>
+                      {v.dist}
+                    </option>
+                  ) : (
+                    <option key={i} value={v.fee}>
+                      {v.dist}
+                    </option>
+                  )
+                })}
+                {/* if (address.dist === v.dist) {
+                    return (
+                      <option key={i} value={v.fee} selected>
+                        {v.dist}
+                      </option>
+                    )
+                  } else {
+                    return (
+                      <option key={i} value={v.fee}>
+                        {v.dist}
+                      </option>
+                    )
+                  } */}
+              </select>
             </div>
             <input
               type="text"

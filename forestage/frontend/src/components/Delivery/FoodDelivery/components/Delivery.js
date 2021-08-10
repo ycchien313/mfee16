@@ -19,7 +19,7 @@ function Delivery(props) {
   const [main, inputMain] = useState([])
   const [side, inputSide] = useState([])
   const [dessert, inputDessert] = useState([])
-  const [counts, setCounts] = useState(Array(3).fill(0))
+  // const [counts, setCounts] = useState(Array(3).fill(0))
   // console.log("count:",counts)
   const [dishCount, setDishCount] = useState({})
   // console.log('dishCount:', dishCount)
@@ -31,7 +31,7 @@ function Delivery(props) {
   // console.log('dishes', dishes)
   const [address, setAddress] = useState({
     city: '桃園市',
-    dist: '',
+    dist: '中壢區',
     road: '',
   })
 
@@ -41,6 +41,7 @@ function Delivery(props) {
   const [subTotal, setSubTotal] = useState([])
   // console.log('sub', subTotal)
   const [name, setName] = useState([])
+  const [counts, setCounts] = useState([])
 
   //彈出
 
@@ -145,6 +146,7 @@ function Delivery(props) {
             address={address}
             setAddress={setAddress}
             setFee={setFee}
+            addFee={addFee}
             time={time}
             setTime={setTime}
             date={date}
@@ -298,6 +300,8 @@ function Delivery(props) {
             setName={setName}
             data={date}
             time={time}
+            counts={counts}
+            setCounts={setCounts}
           />
         </div>
         <div className="mobile-out">

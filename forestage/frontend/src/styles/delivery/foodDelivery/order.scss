@@ -211,16 +211,20 @@
     position: absolute;
     top: 22.97vw;
     left: 80.35vw;
+    z-index: 10;
   }
 
   .OrderGet {
     cursor: pointer;
-    width: 11.5vw;
-    height: 8vh;
+    // width: 11.5vw;
+    width: 180px;
+    height: 50px;
+    // height: 8vh;
     border: none;
     border-radius: 25px;
     color: #fff;
-    font-size: 1.5vw;
+    // font-size: 1.5vw;
+    font-size: 20px;
     background: $accent-red;
     padding: 10px 21px 13px 0px;
     box-shadow: $box-shadow;
@@ -231,6 +235,7 @@
     background-size: contain;
     top: 30vw;
     left: 2vw;
+
     &:hover {
       box-shadow: none;
     }

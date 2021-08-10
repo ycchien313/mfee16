@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
 import '../../styles/game/musicTest.scss'
 import $ from 'jquery'
 import { Link } from 'react-router-dom'
@@ -106,10 +105,10 @@ function Game() {
   function getQ() {
     switch (questionNumber) {
       case 1:
-        setQuestion('你喜歡哪首歌1')
+        setQuestion('你覺得做什麼事適合聽這首歌呢')
         break
       case 2:
-        setQuestion('哪首歌令你感到開心2')
+        setQuestion('這首歌令你想到什麼')
         break
       case 3:
         setQuestion('你喜歡哪首歌3')
@@ -129,12 +128,12 @@ function Game() {
     const newAnsA = { ...answerA }
     switch (questionNumber) {
       case 1:
-        newAnsA.text = '1-A'
+        newAnsA.text = '用餐時'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
       case 2:
-        newAnsA.text = '2-A'
+        newAnsA.text = '胡'
         newAnsA.value = 1
         setAnswerA(newAnsA)
         break
@@ -161,7 +160,7 @@ function Game() {
     const newAnsB = { ...answerB }
     switch (questionNumber) {
       case 1:
-        newAnsB.text = '1-B'
+        newAnsB.text = '洗澡時'
         newAnsB.value = 2
         setAnswerB(newAnsB)
         break
@@ -193,7 +192,7 @@ function Game() {
     const newAnsC = { ...answerC }
     switch (questionNumber) {
       case 1:
-        newAnsC.text = '1-C'
+        newAnsC.text = '開車時'
         newAnsC.value = 3
         setAnswerC(newAnsC)
         break

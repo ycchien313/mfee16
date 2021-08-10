@@ -1,6 +1,17 @@
 .member-reservation {
   @import '../common/global.scss';
 
+  @keyframes member-reservation-fadein {
+    0% {
+      transform: translateY(-3%);
+      opacity: 0;
+    }
+    100% {
+      transform: traslateY(0);
+      opacity: 1;
+    }
+  }
+
   /********** 主畫面 **********/
   .main {
     width: 100%;
@@ -26,6 +37,12 @@
     display: flex;
     flex-direction: column;
     padding-right: 8.33vw;
+
+    opacity: 0;
+    animation-name: member-reservation-fadein;
+    animation-duration: 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
   }
   /* 增加部分 */
   @media screen and (max-width: 768px) {
@@ -160,7 +177,8 @@
     }
 
     .no-data-link::after {
-      animation: pulse 1.5s 1s infinite;
+      opacity: 0;
+      animation: pulse 1.5s 0.5s infinite;
     }
   }
 
@@ -282,9 +300,13 @@
     display: flex;
     justify-content: space-evenly;
   }
+  .content-foot .update-resv-btn {
+    text-decoration: none;
+  }
   .content-foot .guide-button {
     width: fit-content;
     height: 2.3vw;
+    line-height: 2.3vw;
     min-height: 28px;
     font-size: 16px;
     border-radius: 5px;
@@ -292,7 +314,7 @@
     padding: 0 10px;
   }
   .content-foot .cancel-resv-btn,
-  .content-foot-md .cancel-resv-btn  {
+  .content-foot-md .cancel-resv-btn {
     color: $primary-lightbrown;
     background-color: unset;
     box-shadow: unset;

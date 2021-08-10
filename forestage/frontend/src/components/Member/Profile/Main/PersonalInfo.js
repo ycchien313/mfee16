@@ -14,6 +14,7 @@ function PersonalInfo(props) {
   const [toggleTextarea, setToggleTextarea] = useState(true)
   const [dataLoading, setDataLoading] = useState(false)
   const [didMount, setDidMount] = useState(true)
+  const [isUpdate, setIsUpdate] = useState(false)
   const [profile, setProfile] = useState({
     avatar: process.env.PUBLIC_URL + '/images/member/default-user.png',
     name: '',
@@ -145,6 +146,7 @@ function PersonalInfo(props) {
 
     // 傳到後端
     updateProfileServer(form)
+    setIsUpdate(true)
 
     // 載入器
     setDataLoading(true)
@@ -165,8 +167,9 @@ function PersonalInfo(props) {
       getMember()
       getProfileServer()
       setContentIsLoaded(true)
+      setIsUpdate(false)
     }
-  }, [memberId])
+  }, [memberId, isUpdate])
 
   const loading = (
     <>
@@ -215,7 +218,32 @@ function PersonalInfo(props) {
           name="birthday"
           type="date"
           value={profile.birthday.replaceAll('.', '-')}
-          // value="2020-01-01"
+          min="1990-01-01"
+          max="2019-12-31"
+          {...(toggleInput
+            ? { className: '', disabled: true }
+            : { className: 'active', disabled: false })}
+          onChange={(e) => {
+            setProfileFields(e)
+          }}
+        />
+      )}
+    </>
+  )
+
+  // 手機欄位 DOM
+  const mobileDom = (
+    <>
+      {toggleBtn ? (
+        <input name="mobile" type="text" value={profile.mobile} />
+      ) : (
+        <input
+          name="mobile"
+          type="tel"
+          value={profile.mobile}
+          placeholder="ex. 0911222333"
+          pattern="([0-9]{4}-[0-9]{3}-[0-9]{3})|([0-9]{4}[0-9]{3}[0-9]{3})"
+          required
           {...(toggleInput
             ? { className: '', disabled: true }
             : { className: 'active', disabled: false })}
@@ -320,42 +348,11 @@ function PersonalInfo(props) {
             </div>
             <div className="info-row">
               <div className="info-col">生日</div>
-              <div className="info-col">
-                {birthdayDom}
-                {/* <input
-                  name="birthday"
-                  type="text"
-                  value={profile.birthday}
-                  placeholder="ex. 1990.01.01"
-                  pattern="[0-9]{4}\.(0[1-9]|1[012])\.(0[1-9]|1[0-9]|2[0-9]|3[01])"
-                  required
-                  {...(toggleInput
-                    ? { className: '', disabled: true }
-                    : { className: 'active', disabled: false })}
-                  onChange={(e) => {
-                    setProfileFields(e)
-                  }}
-                /> */}
-              </div>
+              <div className="info-col">{birthdayDom}</div>
             </div>
             <div className="info-row">
               <div className="info-col">手機號碼</div>
-              <div className="info-col">
-                <input
-                  name="mobile"
-                  type="tel"
-                  value={profile.mobile}
-                  placeholder="ex. 0911222333"
-                  pattern="([0]{1}[9]{1}[0-9]{4}[0-9]{4})"
-                  required
-                  {...(toggleInput
-                    ? { className: '', disabled: true }
-                    : { className: 'active', disabled: false })}
-                  onChange={(e) => {
-                    setProfileFields(e)
-                  }}
-                />
-              </div>
+              <div className="info-col">{mobileDom}</div>
             </div>
             <div className="info-row">
               <div className="info-col">地址</div>

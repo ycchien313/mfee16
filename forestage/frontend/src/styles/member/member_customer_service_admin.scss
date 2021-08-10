@@ -1,0 +1,27 @@
+.member-customer-service-admin {
+
+  /* 左側對話框 */
+  .chat-dialog-box-container {
+    /* 管理員 */
+    .admin-row {
+      flex-direction: row-reverse;
+
+      .message-box {
+        align-items: flex-end;
+
+        .content-box {
+          text-align: right;
+        }
+      }
+    }
+
+    /* 顧客 */
+    .customer-row {
+      flex-direction: row-reverse;
+
+      .message-box {
+        align-items: flex-start;
+      }
+    }
+  }
+}

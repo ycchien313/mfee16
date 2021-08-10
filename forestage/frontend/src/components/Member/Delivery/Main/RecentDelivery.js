@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import RecentDeliveryCancelModal from './RecentDeliveryCancelModal'
+import HistoryDeliveryDetailModal from './HistoryDeliveryDetailModal'
 
 function RecentDelivery(props) {
   const { memberId, setContentIsLoaded } = props
@@ -21,6 +22,7 @@ function RecentDelivery(props) {
   ])
 
   // bootstrap modal 開啟關閉用
+  const [show, setShow] = useState(false)
   const [showCancelModal, setShowCancelModal] = useState(false)
   const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const handleClose = () => {
@@ -30,7 +32,7 @@ function RecentDelivery(props) {
   const handleShow = (modalName) => {
     setBootstrapCdnLoad(true)
     setTimeout(() => {
-      setShowCancelModal(true)
+      modalName === 'detail' ? setShow(true) : setShowCancelModal(true)
     }, 20)
   }
 
@@ -158,11 +160,19 @@ function RecentDelivery(props) {
       {/* bootstrap CDN */}
       {bootstrapCdnLoad && bootstrapCdn}
 
+      {/* 詳細訂單視窗 */}
+      <HistoryDeliveryDetailModal
+        show={show}
+        handleClose={handleClose}
+        memberId={memberId}
+        deliveryId={deliveryId}
+      />
       {/* 取消訂單視窗 */}
       <RecentDeliveryCancelModal
         showCancelModal={showCancelModal}
         handleClose={handleClose}
         memberId={memberId}
+        orders={orders}
         deliveryId={deliveryId}
       />
 
@@ -177,7 +187,13 @@ function RecentDelivery(props) {
                         訂單編號 #{v.deliveryId}
                       </h4>
                       <div className="detail-container">
-                        <i className="fas fa-eye"></i>
+                        <i
+                          className="fas fa-eye"
+                          onClick={() => {
+                            setDeliveryId(v.deliveryId)
+                            handleShow('detail')
+                          }}
+                        ></i>
                       </div>
                     </div>
                     <div className="content-body">
@@ -222,7 +238,7 @@ function RecentDelivery(props) {
                           className="cancel-resv-btn guide-button"
                           onClick={() => {
                             setDeliveryId(v.deliveryId)
-                            handleShow()
+                            handleShow('cancel')
                           }}
                         >
                           取消訂單
@@ -233,11 +249,17 @@ function RecentDelivery(props) {
                     {/* 手機版按鈕列 */}
                     <div className="content-foot-md">
                       <div className="msgbox-container">
-                        <p>共{calcDishCountTotal(v.dishes)}件餐點</p>
-                        <p>合計金額: {v.total}元</p>
+                        <p>共 {calcDishCountTotal(v.dishes)} 件餐點</p>
+                        <p>合計金額：{v.total} 元</p>
                       </div>
                       <div className="btns-container">
-                        <button className="cancel-resv-btn guide-button">
+                        <button
+                          className="cancel-resv-btn guide-button"
+                          onClick={() => {
+                            setDeliveryId(v.deliveryId)
+                            handleShow('cancel')
+                          }}
+                        >
                           取消訂單
                         </button>
                       </div>

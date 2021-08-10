@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import axios from 'axios'
 import RecentReservationDetailModal from './RecentReservationDetailModal'
@@ -7,6 +7,7 @@ import RecentReservationCancelModal from './RecentReservationCancelModal'
 
 function RecentReservation(props) {
   const { memberId, setContentIsLoaded } = props
+  // const history = useHistory()
   const isDesktopOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
   const [didMount, setDidMount] = useState(true)
   const [orders, setOrders] = useState([])
@@ -20,7 +21,6 @@ function RecentReservation(props) {
     setShow(false)
     setShowCancelModal(false)
     setBootstrapCdnLoad(false)
-
   }
   const handleShow = (modalName) => {
     setBootstrapCdnLoad(true)
@@ -65,43 +65,65 @@ function RecentReservation(props) {
   }, [memberId, didMount])
 
   // 電腦版按鈕列
-  const btnRowDom = (
-    <>
-      <div className="content-foot">
-        <div className="btns-container">
-          <button
-            className="guide-button cancel-resv-btn"
-            onClick={() => {
-              handleShow('cancel')
-            }}
-          >
-            取消訂位
-          </button>
-          <button className="update-resv-btn orange-guide-button">
-            修改訂位內容
-          </button>
+  const btnRowDom = (v) => {
+    return (
+      <>
+        <div className="content-foot">
+          <div className="btns-container">
+            <button
+              className="cancel-resv-btn guide-button"
+              onClick={() => {
+                setReservationId(v.reservation_id)
+                handleShow('cancel')
+              }}
+            >
+              取消訂位
+            </button>
+            <Link
+              to={{
+                pathname: '/reservation',
+                state: {
+                  prevPath: '/member/reservation',
+                  reservationId: v.reservation_id,
+                },
+              }}
+              className="update-resv-btn orange-guide-button"
+            >
+              修改訂位內容
+            </Link>
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 
   // 手機版按鈕列
-  const btnRowMdDom = (
-    <>
-      <div className="content-foot-md">
-        <div className="msgbox-container">
-          <p>共6件餐點</p>
-          <p>合計金額: 2000元</p>
+  const btnRowMdDom = (v) => {
+    return (
+      <>
+        <div className="content-foot-md">
+          <div className="msgbox-container">
+            <p>共 {v.dish_count} 件餐點</p>
+            <p>合計金額: {v.total} 元</p>
+          </div>
+          <div className="btns-container">
+            <button
+              className="cancel-resv-btn guide-button"
+              onClick={() => {
+                setReservationId(v.reservation_id)
+                handleShow('cancel')
+              }}
+            >
+              取消訂位
+            </button>
+            <button className="update-resv-btn orange-guide-button">
+              修改訂位內容
+            </button>
+          </div>
         </div>
-        <div className="btns-container">
-          <button className="cancel-resv-btn guide-button">取消訂位</button>
-          <button className="update-resv-btn orange-guide-button">
-            修改訂位內容
-          </button>
-        </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 
   // 沒有資料時的 DOM
   const noDataDom = (
@@ -142,6 +164,7 @@ function RecentReservation(props) {
         showCancelModal={showCancelModal}
         handleClose={handleClose}
         memberId={memberId}
+        orders={orders}
         reservationId={reservationId}
       />
 
@@ -190,18 +213,7 @@ function RecentReservation(props) {
                       </div>
 
                       {/* 手機版按鈕列 ←→ 電腦版按鈕列 */}
-                      <Link
-              to={{
-                pathname: '/reservation',
-                state: {
-                  prevPath: '/member/reservation',
-                  reservationId: v.reservation_id,
-                },
-              }}
-              className="update-resv-btn orange-guide-button"
-            >
-              修改訂位內容
-            </Link>
+                      {isDesktopOrMobile ? btnRowMdDom(v) : btnRowDom(v)}
                     </div>
                   </div>
                 </>

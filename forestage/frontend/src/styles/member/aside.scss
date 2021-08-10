@@ -1,6 +1,17 @@
 .aside {
   @import '../../styles/common/global.scss';
 
+  @keyframes aside-nav-fadein {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
   /********** 左側：導覽列 *********/
   .left-side {
     position: absolute;
@@ -32,6 +43,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+
+    opacity: 0;
+    animation-name: aside-nav-fadein;
+    animation-duration: 0.3s;
+    animation-delay: 0.8s;
+    animation-fill-mode: forwards;
   }
   .left-side .nav .nav-row a,
   .left-side .nav .nav-row .nav-content {
@@ -111,6 +128,12 @@
       color: $primary-lightbrown;
       font-family: $zh-tw-maru;
       transition: 0.2s;
+
+      opacity: 0;
+      animation-name: aside-nav-fadein;
+      animation-duration: 0.3s;
+      animation-delay: 0.8s;
+      animation-fill-mode: forwards;
     }
     .nav-md h4:hover,
     .nav-md .active {

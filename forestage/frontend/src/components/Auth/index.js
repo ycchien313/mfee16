@@ -34,15 +34,17 @@ function Auth(props) {
     <>
       <div
         className="auth"
-        onClick={(e) => {
+        onMouseDown={(e) => {
           const url = props.match.url
 
           if (e.target.className === 'auth') {
+            // 會員專區則導回首頁
+            if (url === '/member' || url === '/member/') {
+              history.push('/')
+            }
+
             // 關閉彈出視窗
             setShowAuthModal(false)
-
-            // 會員專區則導回首頁
-            url === '/member' && history.push('/')
           }
         }}
       >

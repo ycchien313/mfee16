@@ -7,7 +7,7 @@ const getToken = (token) => {
 
 const setToken = (data) => {
     return jwt.sign(data, process.env.JWT_SECRET, {
-        expiresIn: '1h',
+        expiresIn: '24h',
     });
 };
 

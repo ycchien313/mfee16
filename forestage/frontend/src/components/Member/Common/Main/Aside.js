@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
+import { withRouter } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import '../../../../styles/member/aside.scss'
 
 function Aside(props) {
@@ -15,10 +16,13 @@ function Aside(props) {
   // 計算 Aside 高度
   const calcAsideHeight = () => {
     // 瀏覽器高度
-    // const browserH = document.body.offsetHeight
-    // const bannerH = document.querySelector('.banner').clientHeight
-    // const asideH = browserH - bannerH
-    // return asideH
+    const browserH = document.body.offsetHeight
+    const bannerH = document.querySelector('.banner').clientHeight
+    const asideH = browserH - bannerH
+
+    setAsideHeight(asideH)
+
+    window.removeEventListener('resize', calcAsideHeight)
   }
 
   function controlSvgColor() {
@@ -84,21 +88,16 @@ function Aside(props) {
     })
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     controlSvgColor()
-
-    // 設定 aside 高度
-    setAsideHeight(calcAsideHeight())
   }, [])
 
-  useEffect(() => {
-    // 設定 aside 高度
-    window.addEventListener('resize', () => {
-      setAsideHeight(calcAsideHeight())
-    })
+  useLayoutEffect(() => {
+    //畫面 render 後設定高度
+    calcAsideHeight()
 
-    // 內容有變化 → 重設高度
-    setAsideHeight(calcAsideHeight())
+    //設定瀏覽器改變大小後的高度
+    window.addEventListener('resize', calcAsideHeight)
 
     setContentIsLoaded(false)
   }, [asideHeight, contentIsLoaded])
@@ -114,7 +113,7 @@ function Aside(props) {
                 return (
                   <div key={i} className="nav-row">
                     <Link
-                      to={v.href}
+                      smooth to={`${v.href}#`}
                       className={
                         pagename === v.title
                           ? 'nav-content active'

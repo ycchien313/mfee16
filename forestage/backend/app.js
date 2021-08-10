@@ -42,7 +42,35 @@ app.use((req, res, next) => {
     res.sendStatus(404);
 });
 
-app.listen(port, () => {
-    console.log(`請連線至 http://127.0.0.1:${port}`);
-    connection.connect();
+const server = require('http')
+    .Server(app)
+    .listen(port, () => {
+        console.log(`請連線至 http://127.0.0.1:${port}`);
+        connection.connect();
+    });
+
+//將啟動的 Server 送給 socket.io 處理
+const socket = require('socket.io');
+const io = socket(server);
+
+//監聽 Server 連線後的所有事件，並捕捉事件 socket 執行
+io.on('connection', (socket) => {
+    //經過連線後在 console 中印出訊息
+    console.log('WebSocket 連線成功');
+
+    //監聽透過 connection 傳進來的事件
+    socket.on('getMessage', (message) => {
+        //回傳 message 給發送訊息的 Client
+        socket.emit('getMessage', message);
+    });
+
+    /*回傳給所有連結著的 client*/
+    socket.on('getMessageAll', (message) => {
+        io.sockets.emit('getMessageAll', message);
+    });
+
+    /*回傳給除了發送者外所有連結著的 client*/
+    socket.on('getMessageLess', (message) => {
+        socket.broadcast.emit('getMessageLess', message);
+    });
 });

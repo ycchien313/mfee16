@@ -4,10 +4,6 @@
   /********** 右側：麵包屑 *********/
   margin: 2.08vw 0 1.82vw 3vw;
 
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-
   .breadcrumb-list {
     font-family: $zh-tw-noto;
     margin: 0;

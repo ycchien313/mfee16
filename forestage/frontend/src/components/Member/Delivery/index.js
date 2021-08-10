@@ -3,6 +3,7 @@ import Header from '../../Header/'
 import Banner from '../Common/Banner'
 import Main from './Main/'
 import Footer from '../../Footer'
+import CustomerService from '../Common/CustomerService'
 
 function Delivery(props) {
   const { pagename } = props
@@ -15,6 +16,7 @@ function Delivery(props) {
       <Banner pagename={pagename} />
       <Main pagename={pagename} />
       <Footer />
+      <CustomerService />
     </>
   )
 }

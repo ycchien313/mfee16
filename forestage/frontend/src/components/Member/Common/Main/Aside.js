@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 import '../../../../styles/member/aside.scss'
 
 function Aside(props) {
@@ -112,7 +113,8 @@ function Aside(props) {
                 return (
                   <div key={i} className="nav-row">
                     <Link
-                      to={v.href}
+                      smooth
+                      to={`${v.href}#`}
                       className={
                         pagename === v.title
                           ? 'nav-content active'
@@ -144,7 +146,7 @@ function Aside(props) {
             {linkData.map((v, i) => {
               return (
                 <li key={i}>
-                  <Link to={v.href} className="nav-content">
+                  <Link smooth to={`${v.href}#`} className="nav-content">
                     <h4 {...(pagename === v.title && { className: 'active' })}>
                       {v.title}
                     </h4>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Reveal, Tween } from 'react-gsap'
+import Aos from 'aos'
 
 function DessertBox(props) {
   const {
@@ -33,10 +34,12 @@ function DessertBox(props) {
     newDishCount[id] += 1
     setDishCount(newDishCount)
   }
-
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
   return (
     <>
-      <div className="DessertBox">
+      <div className="DessertBox" data-aos="flip-down">
         <figure className="sub-border">
           <img
             src={'http://localhost:3000/images/common/food/' + image_realistic}

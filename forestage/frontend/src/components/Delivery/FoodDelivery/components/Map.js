@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import $ from 'jquery'
 import moment from 'moment'
 import { Animated } from 'react-animated-css'
+import Aos from 'aos'
 
 import { Tween, SplitChars } from 'react-gsap'
 
@@ -42,6 +43,9 @@ function Map(props) {
     $(this).siblings().removeClass('active')
     setFee(getTarget)
   })
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+  }, [])
   return (
     <>
       <div className="top-wave">
@@ -727,7 +731,7 @@ function Map(props) {
         </div>
       </div>
       <div className="right-div">
-        <div className="takeout">
+        <div className="takeout" data-aos="flip-down">
           <div className="takeoutDiv">
             <h3>請輸入您要外送的地址</h3>
             <div className="Area">

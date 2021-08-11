@@ -156,7 +156,7 @@ function AuthSocial(props) {
         Swal.fire({
           icon: 'info',
           title:
-            '提醒：請記得至<a href="https://127.0.0.1/member/profile" style="text-decoration: none; color:#f5b54d";>會員專區</a>修改密碼',
+            '提醒：請記得至<a href="http://127.0.0.1/member/profile" style="text-decoration: none; color:#f5b54d";>會員專區</a>修改密碼',
           text: `第一次 ${social} 登入，密碼為 elfin`,
           confirmButtonColor: '#97bc78',
         })

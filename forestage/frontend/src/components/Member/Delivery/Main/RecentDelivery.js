@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import AOS from 'aos'
 import RecentDeliveryCancelModal from './RecentDeliveryCancelModal'
 import HistoryDeliveryDetailModal from './HistoryDeliveryDetailModal'
 
@@ -26,6 +27,7 @@ function RecentDelivery(props) {
   const [showCancelModal, setShowCancelModal] = useState(false)
   const [bootstrapCdnLoad, setBootstrapCdnLoad] = useState(false)
   const handleClose = () => {
+    setShow(false)
     setShowCancelModal(false)
     setBootstrapCdnLoad(false)
   }
@@ -114,6 +116,7 @@ function RecentDelivery(props) {
   }
 
   useEffect(() => {
+    AOS.init()
     setDidMount(false)
   }, [])
 
@@ -181,7 +184,11 @@ function RecentDelivery(props) {
             orders.map((v, i) => {
               return (
                 <div className="recent-content">
-                  <div className="content-container" key={i}>
+                  <div
+                    className="content-container"
+                    key={i}
+                    data-aos="fade-right"
+                  >
                     <div className="content-head">
                       <h4 className="content-head-title">
                         訂單編號 #{v.deliveryId}

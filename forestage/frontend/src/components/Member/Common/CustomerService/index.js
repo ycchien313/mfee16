@@ -46,6 +46,28 @@ function CustomerService() {
     setMemberEmail(resMemberEmail)
   }
 
+  // 線上客服拖曳程式
+  const chatBtnDrag = (e) => {
+    // Math.max 為超出範圍限制用
+    let left = Math.max(e.clientX - 45, 10) + 'px'
+    let right = Math.max(document.body.clientWidth - e.clientX - 45, 0) + 'px'
+    let memberCustomerService = document.querySelector(
+      '.member-customer-service'
+    )
+
+    // 讓左側對話框不會超出範圍，並更改對話框方向
+    if (e.clientX < 560) {
+      memberCustomerService.style.flexDirection = 'row-reverse'
+      right = 'auto'
+    } else {
+      memberCustomerService.style.flexDirection = 'row'
+      left = 'auto'
+    }
+
+    memberCustomerService.style.right = right
+    memberCustomerService.style.left = left
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       await fetchMemberId()
@@ -67,7 +89,10 @@ function CustomerService() {
 
   return (
     <>
-      <div className="member-customer-service">
+      <div
+        className="member-customer-service"
+        onDragEnd={(e) => chatBtnDrag(e)}
+      >
         <SwitchTransition>
           <CSSTransition
             key={isShowDialogBox}

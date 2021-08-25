@@ -21,8 +21,6 @@ function Aside(props) {
     const asideH = browserH - bannerH
 
     setAsideHeight(asideH)
-
-    window.removeEventListener('resize', calcAsideHeight)
   }
 
   function controlSvgColor() {
